@@ -1,2 +1,2 @@
-# learning-materils
+# Learning Materials
 A repository of learning materials.
