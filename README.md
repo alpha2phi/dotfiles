@@ -1,2 +1,2 @@
-# Learning Materials
-A repository of learning materials.
+# dotfiles
+Configuration dot files.
