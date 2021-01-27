@@ -30,6 +30,7 @@
 
 ;; Emacs customizations
 (setq confirm-kill-emacs                  'y-or-n-p
+      custom-file                         "~/.config/emacs/.custom.el"
       use-package-always-ensure          t)
 
 ;; Backups enabled, use nil to disable
@@ -63,6 +64,10 @@
 (global-linum-mode t)               ;; Enable line numbers globally
 
 (show-paren-mode 1)
+
+;; Need to load custom file to avoid being overwritten
+;; more at https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Customizations.html
+(load custom-file)
 
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
