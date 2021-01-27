@@ -28,6 +28,10 @@
 (prefer-coding-system        'utf-8)   ; with sugar on top
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
+;; Emacs customizations
+(setq confirm-kill-emacs                  'y-or-n-p
+      use-package-always-ensure          t)
+
 ;; Backups enabled, use nil to disable
 (setq
  history-length                     1000
@@ -59,7 +63,6 @@
 (global-linum-mode t)               ;; Enable line numbers globally
 
 (show-paren-mode 1)
-
 
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
