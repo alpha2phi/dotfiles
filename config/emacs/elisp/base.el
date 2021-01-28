@@ -30,7 +30,9 @@
 
 ;; Emacs customizations
 (setq confirm-kill-emacs                  'y-or-n-p
-      custom-file                         "~/.config/emacs/.custom.el"
+      visible-bell                        nil
+      ring-bell-function                  'ignore
+      custom-file                         "~/.config/emacs/custom.el"
       use-package-always-ensure          t)
 
 ;; Backups enabled, use nil to disable
@@ -44,21 +46,21 @@
  backup-directory-alist            `((".*" . ,(concat temp-dir "/backup/")))
  auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/auto-save-list/") t)))
 
-;; Installs packages
-;; myPackages contains a list of package names
-(defvar myPackages
-  '(better-defaults                 ;; Set up some better Emacs defaults
-    material-theme                  ;; Theme
-    evil                            ;; Theme
-    )
-  )
+; ;; Installs packages
+; ;; myPackages contains a list of package names
+; (defvar myPackages
+;   '(better-defaults                 ;; Set up some better Emacs defaults
+;     material-theme                  ;; Theme
+;     evil                            ;; Theme
+;     )
+;   )
 
-;; Scans the list in myPackages
-;; If the package listed is not already installed, install it
-(mapc #'(lambda (package)
-          (unless (package-installed-p package)
-            (package-install package)))
-      myPackages)
+; ;; Scans the list in myPackages
+; ;; If the package listed is not already installed, install it
+; (mapc #'(lambda (package)
+;           (unless (package-installed-p package)
+;             (package-install package)))
+;       myPackages)
 
 (setq inhibit-startup-message t)    ;; Hide the startup message
 (global-linum-mode t)               ;; Enable line numbers globally
