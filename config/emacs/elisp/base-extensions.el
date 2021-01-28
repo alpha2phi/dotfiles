@@ -1,4 +1,4 @@
-(use-package better-defaults)
+; (use-package better-defaults)
 
 (use-package evil
   :defer .1
@@ -32,5 +32,10 @@
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers nil)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
+
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status)))
+
 
 (provide 'base-extensions)

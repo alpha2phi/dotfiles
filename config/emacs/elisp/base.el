@@ -33,6 +33,8 @@
       visible-bell                        nil
       ring-bell-function                  'ignore
       custom-file                         "~/.config/emacs/custom.el"
+      inhibit-startup-message            t
+      global-linum-mode                  t
       use-package-always-ensure          t)
 
 ;; Backups enabled, use nil to disable
@@ -62,8 +64,13 @@
 ;             (package-install package)))
 ;       myPackages)
 
-(setq inhibit-startup-message t)    ;; Hide the startup message
-(global-linum-mode t)               ;; Enable line numbers globally
+
+;; Disable toolbar & menubar
+(menu-bar-mode -1)
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (  fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
 
 (show-paren-mode 1)
 
