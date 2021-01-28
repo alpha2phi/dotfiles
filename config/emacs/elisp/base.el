@@ -49,23 +49,6 @@
  backup-directory-alist            `((".*" . ,(concat temp-dir "/backup/")))
  auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/auto-save-list/") t)))
 
-; ;; Installs packages
-; ;; myPackages contains a list of package names
-; (defvar myPackages
-;   '(better-defaults                 ;; Set up some better Emacs defaults
-;     material-theme                  ;; Theme
-;     evil                            ;; Theme
-;     )
-;   )
-
-; ;; Scans the list in myPackages
-; ;; If the package listed is not already installed, install it
-; (mapc #'(lambda (package)
-;           (unless (package-installed-p package)
-;             (package-install package)))
-;       myPackages)
-
-
 ;; Disable toolbar & menubar
 (menu-bar-mode -1)
 (when (fboundp 'tool-bar-mode)

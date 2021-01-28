@@ -1,6 +1,6 @@
-; (use-package better-defaults)
-
 (use-package helpful)
+
+(use-package command-log-mode)
 
 (use-package evil
   :defer .1
