@@ -34,8 +34,9 @@
       ring-bell-function                  'ignore
       custom-file                         "~/.config/emacs/custom.el"
       inhibit-startup-message            t
-      global-linum-mode                  t
       use-package-always-ensure          t)
+
+(global-linum-mode t)
 
 ;; Backups enabled, use nil to disable
 (setq

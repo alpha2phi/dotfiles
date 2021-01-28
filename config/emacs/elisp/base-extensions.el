@@ -1,5 +1,7 @@
 ; (use-package better-defaults)
 
+(use-package helpful)
+
 (use-package evil
   :defer .1
   :init
@@ -36,6 +38,5 @@
 (use-package magit
   :ensure t
   :bind (("C-x g" . magit-status)))
-
 
 (provide 'base-extensions)
