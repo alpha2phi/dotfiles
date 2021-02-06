@@ -20,6 +20,9 @@ return require('packer').startup(function()
   use { 'tjdevries/nlua.nvim' }
 
 
+  -- Vim dispatch
+  use { 'tpope/vim-dispatch' }
+
   -- Fugitive for Git
   use { 'tpope/vim-fugitive' }
 
