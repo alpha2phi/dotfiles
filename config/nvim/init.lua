@@ -4,7 +4,7 @@ vim.g.mapleader = ' '
 local fn = vim.fn
 local execute = vim.api.nvim_command
 
--- Sensible default
+-- Sensible defaults
 require('settings')
 
 -- Auto install packer.nvim if not exists
@@ -31,5 +31,3 @@ require('config')
 --require('config.colorscheme')  -- color scheme
 --require('config.completion')   -- completion
 --require('config.fugitive')     -- fugitive
-
-
