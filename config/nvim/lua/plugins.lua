@@ -19,12 +19,16 @@ return require('packer').startup(function()
   -- Lua development
   use { 'tjdevries/nlua.nvim' }
 
-
-  -- Vim dispatch
-  use { 'tpope/vim-dispatch' }
-
+  -- Better syntax
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
+  
   -- Fugitive for Git
+  use { 'tpope/vim-dispatch' }
   use { 'tpope/vim-fugitive' }
+
+
+  -- Note taking
+  use { 'oberblastmeister/neuron.nvim' }
 
 end)
 
