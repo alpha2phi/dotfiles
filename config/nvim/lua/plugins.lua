@@ -7,10 +7,9 @@ return require('packer').startup(function()
   use { 'sainnhe/gruvbox-material' }
 
   -- Fuzzy finder
-  use {
-      'nvim-telescope/telescope.nvim',
-      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-  }
+  use { 'nvim-lua/plenary.nvim' }
+  use { 'nvim-lua/popup.nvim' }
+  use { 'nvim-telescope/telescope.nvim' }
 
   -- LSP and completion
   use { 'neovim/nvim-lspconfig' }
@@ -28,7 +27,13 @@ return require('packer').startup(function()
 
 
   -- Note taking
-  use { 'oberblastmeister/neuron.nvim' }
+  -- use { 'oberblastmeister/neuron.nvim' }
+  use { 'junegunn/fzf.vim' }
+  use { 'fiatjaf/neuron.vim' }
+
+
+  -- Embed in browser
+  use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 
 end)
 
