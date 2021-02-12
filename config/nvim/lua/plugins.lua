@@ -19,7 +19,7 @@ return require('packer').startup(function()
   use { 'tjdevries/nlua.nvim' }
 
   -- Better syntax
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
+  -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
   
   -- Fugitive for Git
   use { 'tpope/vim-dispatch' }
@@ -28,9 +28,12 @@ return require('packer').startup(function()
 
   -- Note taking
   -- use { 'oberblastmeister/neuron.nvim' }
-  use { 'junegunn/fzf.vim' }
-  use { 'fiatjaf/neuron.vim' }
+  -- use {'junegunn/fzf', run = '-> fzf#install()' }
+  -- use {'junegunn/fzf.vim'}
+  -- use { 'fiatjaf/neuron.vim' }
 
+  -- Code action light bulb
+  use { 'kosayoda/nvim-lightbulb' }
 
   -- Embed in browser
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
