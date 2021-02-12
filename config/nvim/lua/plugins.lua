@@ -38,5 +38,11 @@ return require('packer').startup(function()
   -- Embed in browser
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 
+  -- OSC 52 yank
+  use { 'ojroques/vim-oscyank' }
+
+  --Better terminal
+  use { 'knikvdp/neomux' }
+
 end)
 
