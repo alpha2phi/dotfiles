@@ -41,8 +41,20 @@ return require('packer').startup(function()
   -- OSC 52 yank
   use { 'ojroques/vim-oscyank' }
 
+  -- Jupyter Vim
+  use { 'jupyter-vim/jupyter-vim' }
+
+  -- Scratch pad
+  use { 'metakirby5/codi.vim' }
+
+  -- Slime
+  use { 'jpalardy/vim-slime' }
+
+  -- Latex
+  use { 'lervag/vimtex' }
+
   --Better terminal
-  use { 'knikvdp/neomux' }
+  --use { 'nikvdp/neomux' }
 
 end)
 

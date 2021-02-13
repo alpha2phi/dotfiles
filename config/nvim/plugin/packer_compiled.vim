@@ -32,6 +32,10 @@ local function try_loadstring(s, component, name)
 end
 
 _G.packer_plugins = {
+  ["codi.vim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/codi.vim"
+  },
   ["completion-nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/completion-nvim"
@@ -44,9 +48,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/gruvbox-material"
   },
-  neomux = {
+  ["jupyter-vim"] = {
     loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/neomux"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/jupyter-vim"
   },
   ["nlua.nvim"] = {
     loaded = true,
@@ -87,6 +91,14 @@ _G.packer_plugins = {
   ["vim-oscyank"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-oscyank"
+  },
+  ["vim-slime"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-slime"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vimtex"
   }
 }
 
