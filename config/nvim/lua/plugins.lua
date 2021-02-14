@@ -53,6 +53,15 @@ return require('packer').startup(function()
   -- Latex
   use { 'lervag/vimtex' }
 
+  -- Floaterm
+  use { 'voldikss/vim-floaterm' }
+
+  -- Neoterm
+  use { 'kassio/neoterm' }
+
+  -- NeoFormat
+  use { 'sbdchd/neoformat' }
+
   --Better terminal
   --use { 'nikvdp/neomux' }
 
