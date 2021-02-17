@@ -16,13 +16,8 @@
   (package-install 'use-package))
 (require 'use-package)
 
-;; Define private and temp directories
-; (defconst private-dir  (expand-file-name "private" user-emacs-directory))
-; (defconst temp-dir (format "%s/cache" private-dir)  "elisp temp directories")
-
 ;; Emacs customizations
 (setq custom-file                        "~/.config/emacs/custom.el"
-      ; inhibit-startup-message          t
       use-package-always-ensure          t)
 
 (show-paren-mode 1)
