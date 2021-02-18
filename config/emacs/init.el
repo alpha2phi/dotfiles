@@ -8,4 +8,11 @@
 (require 'theme)
 
 ;; Evil mode
-(require 'evil)
+(require 'vim)
+
+;; Completion
+(require 'completion)
+
+;; Splash screen
+(require 'splash)
+

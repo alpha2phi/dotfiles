@@ -23,6 +23,7 @@
 (setq custom-file                        alpha2phi/custom-file
       make-backup-files                  nil
       display-line-numbers-type          'relative
+      ; inhibit-startup-message            t
       use-package-always-ensure          t)
 
 ;; Keep buffers automatically up to date

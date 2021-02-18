@@ -5,4 +5,4 @@
   :config
   (evil-mode 1))
 
-(provide 'evil)
+(provide 'vim)
