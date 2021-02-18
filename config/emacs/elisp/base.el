@@ -19,6 +19,9 @@
   (package-install 'use-package))
 (require 'use-package)
 
+; (defconst private-dir  (expand-file-name "private" user-emacs-directory))
+; (defconst temp-dir (format "%s/cache" private-dir) "elisp temp directories")
+
 ;; Emacs customizations
 (setq custom-file                        alpha2phi/custom-file
       make-backup-files                  nil
