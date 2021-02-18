@@ -3,7 +3,6 @@
 (use-package all-the-icons)
 
 (use-package dashboard
-  :ensure t
   :config
   (setq show-week-agenda-p t)
   (setq dashboard-items '((recents . 15) (agenda . 5)))

@@ -16,6 +16,9 @@
 ;; Project management
 (require 'workspace)
 
+;; Git using Magit
+(require 'vcs)
+
 ;; Splash screen
 (require 'splash)
 
