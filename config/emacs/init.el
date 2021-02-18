@@ -13,6 +13,9 @@
 ;; Completion
 (require 'completion)
 
+;; Project management
+; (require 'project)
+
 ;; Splash screen
-(require 'splash)
+; (require 'splash)
 
