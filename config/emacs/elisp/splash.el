@@ -1,16 +1,16 @@
 ;; Dependencies
 (use-package page-break-lines)
 (use-package all-the-icons)
-(use-package recentf
-  :config
-  (setq recentf-save-file (recentf-expand-file-name "~/.config/emacs/private/cache/recentf"))
-  (recentf-mode 1))
-
 
 (use-package dashboard
-  :defer 0
+  :ensure t
   :config
-  (dashboard-setup-startup-hook))
+  (setq show-week-agenda-p t)
+  (setq dashboard-items '((recents . 15) (agenda . 5)))
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-startup-banner 3)
+  (dashboard-setup-startup-hook)
+  )
 
 (provide 'splash)
-

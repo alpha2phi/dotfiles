@@ -3,7 +3,7 @@
 (set-face-attribute 'default nil :height alpha2phi/default-font-size)
 
 ;; Custom file
-(defvar alpha2phi/custom-file "~/.config/emacs/custom.el")
+(defvar alpha2phi/custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 ;; Package repositories
 (require 'package)
@@ -26,7 +26,7 @@
 (setq custom-file                        alpha2phi/custom-file
       make-backup-files                  nil
       display-line-numbers-type          'relative
-      ; inhibit-startup-message            t
+      inhibit-startup-message            t
       use-package-always-ensure          t)
 
 ;; Keep buffers automatically up to date
