@@ -11,7 +11,7 @@
   :bind
   ("M-x" . counsel-M-x)
   ("C-x C-m" . counsel-M-x)
-  ("C-x C-f" . counsel-find-file)
+  ("C-x C-f" . counsel-file-jump)
   ("C-x c k" . counsel-yank-pop))
 
 (use-package company
