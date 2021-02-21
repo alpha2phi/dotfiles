@@ -40,6 +40,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
   },
+  ["galaxyline.nvim"] = {
+    config = { "\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15statusline\frequire\0" },
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
+  },
   ["gruvbox-material"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/gruvbox-material"
@@ -123,6 +128,8 @@ _G.packer_plugins = {
   }
 }
 
+-- Config for: galaxyline.nvim
+try_loadstring("\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15statusline\frequire\0", "config", "galaxyline.nvim")
 END
 
 catch

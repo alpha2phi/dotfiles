@@ -13,7 +13,7 @@ nmap <leader>fss :<C-u>SessionSave<CR>
 nmap <leader>fsl :<C-u>SessionLoad<CR>
 
  let g:dashboard_custom_shortcut={
-      \ 'last_session'       : '<Leader> f s l',
+      \ 'last_session'       : '<Leader> fs l',
       \ 'find_history'       : '<Leader> f h',
       \ 'find_file'          : '<Leader> f f',
       \ 'new_file'           : '<Leader> f n',
