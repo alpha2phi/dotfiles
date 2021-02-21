@@ -3,8 +3,19 @@ return require('packer').startup(function()
   -- Packer can manage itself as an optional plugin
   use {'wbthomason/packer.nvim', opt = true}
 
+  -- Development
+  use { 'tpope/vim-dispatch' }
+  use { 'tpope/vim-fugitive' }
+  use { 'tpope/vim-surround' }
+  use { 'tpope/vim-commentary' }
+  use { 'wellle/targets.vim' }
+  use { 'easymotion/vim-easymotion'}
+
   -- Color scheme
   use { 'sainnhe/gruvbox-material' }
+
+  -- Testing
+  use { 'vim-test/vim-test' }
 
   -- Fuzzy finder
   use { 'nvim-lua/plenary.nvim' }
@@ -19,51 +30,48 @@ return require('packer').startup(function()
   use { 'tjdevries/nlua.nvim' }
 
   -- Better syntax
-  -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
+  use { 'nvim-treesitter/playground' }
   
-  -- Fugitive for Git
-  use { 'tpope/vim-dispatch' }
-  use { 'tpope/vim-fugitive' }
-
 
   -- Note taking
   -- use { 'oberblastmeister/neuron.nvim' }
-  -- use {'junegunn/fzf', run = '-> fzf#install()' }
-  -- use {'junegunn/fzf.vim'}
+  -- use { 'junegunn/fzf', run = '-> fzf#install()' }
+  -- use { 'junegunn/fzf.vim'}
   -- use { 'fiatjaf/neuron.vim' }
 
   -- Code action light bulb
-  use { 'kosayoda/nvim-lightbulb' }
+  -- use { 'kosayoda/nvim-lightbulb' }
 
   -- Embed in browser
-  use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
+  -- use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 
   -- OSC 52 yank
-  use { 'ojroques/vim-oscyank' }
+  -- use { 'ojroques/vim-oscyank' }
 
   -- Jupyter Vim
-  use { 'jupyter-vim/jupyter-vim' }
+   --use { 'jupyter-vim/jupyter-vim' }
 
   -- Scratch pad
-  use { 'metakirby5/codi.vim' }
+  -- use { 'metakirby5/codi.vim' }
 
   -- Slime
-  use { 'jpalardy/vim-slime' }
+  -- use { 'jpalardy/vim-slime' }
 
   -- Latex
-  use { 'lervag/vimtex' }
+  -- use { 'lervag/vimtex' }
 
   -- Floaterm
-  use { 'voldikss/vim-floaterm' }
+  -- use { 'voldikss/vim-floaterm' }
 
   -- Neoterm
-  use { 'kassio/neoterm' }
+  -- use { 'kassio/neoterm' }
 
   -- NeoFormat
-  use { 'sbdchd/neoformat' }
+  -- use { 'sbdchd/neoformat' }
 
-  --Better terminal
-  --use { 'nikvdp/neomux' }
+  -- Better terminal
+  -- use { 'nikvdp/neomux' }
 
 end)
 

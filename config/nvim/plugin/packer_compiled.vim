@@ -32,41 +32,34 @@ local function try_loadstring(s, component, name)
 end
 
 _G.packer_plugins = {
-  ["codi.vim"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/codi.vim"
-  },
   ["completion-nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/completion-nvim"
-  },
-  firenvim = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/firenvim"
   },
   ["gruvbox-material"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/gruvbox-material"
   },
-  ["jupyter-vim"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/jupyter-vim"
-  },
   ["nlua.nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nlua.nvim"
-  },
-  ["nvim-lightbulb"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-lightbulb"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+  },
   ["packer.nvim"] = {
     loaded = false,
+    needs_bufread = false,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/opt/packer.nvim"
+  },
+  playground = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -76,9 +69,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
+  ["targets.vim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/targets.vim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["vim-commentary"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
   ["vim-dispatch"] = {
     loaded = true,
@@ -88,17 +89,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
-  ["vim-oscyank"] = {
+  ["vim-surround"] = {
     loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-oscyank"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-surround"
   },
-  ["vim-slime"] = {
+  ["vim-test"] = {
     loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-slime"
-  },
-  vimtex = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vimtex"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-test"
   }
 }
 
