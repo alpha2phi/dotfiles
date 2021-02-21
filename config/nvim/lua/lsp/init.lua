@@ -49,7 +49,7 @@ end
 
 
 local nvim_lsp = require('lspconfig')
-require'snippets'.use_suggested_mappings()
+-- require'snippets'.use_suggested_mappings() -- for snippets.vim
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Code actions
@@ -72,29 +72,29 @@ capabilities.textDocument.codeAction = {
 }
 
 -- Snippets
-capabilities.textDocument.completion.completionItem.snippetSupport = true;
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true;
 
 -- LSPs
 local servers = { "pyright", "rust_analyzer", "gopls", "tsserver" }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup { 
+        capabilities = capabilities;
         on_attach = on_attach;
         init_options = {
             onlyAnalyzeProjectsWithOpenFiles = true,
             suggestFromUnimportedLibraries = false,
             closingLabels = true,
         };
-        capabilities = capabilities;
     }
 end
 
 -- Lua LSP. NOTE: This replaces the calls where you would have before done `require('nvim_lsp').sumneko_lua.setup()`
 require('nlua.lsp.nvim').setup(require('lspconfig'), {
+    capabilities = capabilities;
     on_attach = on_attach;
     init_options = {
         onlyAnalyzeProjectsWithOpenFiles = true,
         suggestFromUnimportedLibraries = false,
         closingLabels = true,
     };
-    capabilities = capabilities;
 })

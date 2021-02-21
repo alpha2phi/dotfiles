@@ -27,7 +27,9 @@ return require('packer').startup(function()
   use { 'nvim-lua/completion-nvim' }
 
   -- Snippets
-  use { 'norcalli/snippets.nvim' }
+  use { 'honza/vim-snippets' }
+  use { 'SirVer/ultisnips' }
+  -- use { 'norcalli/snippets.nvim' }
 
   -- Lua development
   use { 'tjdevries/nlua.nvim' }
