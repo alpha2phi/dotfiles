@@ -49,7 +49,7 @@ end
 
 
 local nvim_lsp = require('lspconfig')
-require'snippets'.use_suggested_mappings() -- for snippets.vim
+require'snippets'.use_suggested_mappings(true) -- for snippets.vim
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Code actions

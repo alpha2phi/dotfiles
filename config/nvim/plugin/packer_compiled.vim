@@ -49,6 +49,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/gruvbox-material"
   },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+  },
   ["nlua.nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nlua.nvim"
@@ -56,6 +60,10 @@ _G.packer_plugins = {
   ["nvim-dap"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap"
+  },
+  ["nvim-dap-python"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap-python"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -98,9 +106,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/targets.vim"
   },
+  ["telescope-dap.nvim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
+  },
+  ["telescope-snippets.nvim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-snippets.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ultisnips = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/ultisnips"
   },
   ["vim-commentary"] = {
     loaded = true,
@@ -117,6 +137,10 @@ _G.packer_plugins = {
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+  },
+  ["vim-snippets"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-snippets"
   },
   ["vim-surround"] = {
     loaded = true,

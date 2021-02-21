@@ -27,11 +27,13 @@ return require('packer').startup(function()
     -- LSP and completion
     use { 'neovim/nvim-lspconfig' }
     use { 'nvim-lua/completion-nvim' }
+    -- use { 'glepnir/lspsaga.nvim' }
 
     -- Snippets
-    -- use { 'honza/vim-snippets' }
-    -- use { 'SirVer/ultisnips' }
+    use { 'honza/vim-snippets' }
+    use { 'SirVer/ultisnips' }
     use { 'norcalli/snippets.nvim' }
+    use { 'nvim-telescope/telescope-snippets.nvim' }
 
     -- Lua development
     use { 'tjdevries/nlua.nvim' }
@@ -50,10 +52,10 @@ return require('packer').startup(function()
         config = function() require'statusline' end,
     }
 
-
     -- DAP
     use { 'mfussenegger/nvim-dap' }
-
+    use { 'nvim-telescope/telescope-dap.nvim' }
+    use { 'mfussenegger/nvim-dap-python' } -- Python
 
 
     -- Note taking

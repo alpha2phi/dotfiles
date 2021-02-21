@@ -1,3 +1,9 @@
+lua << EOF
+require('telescope').setup{
+    require('telescope').load_extension('snippets')
+}
+EOF
+
 " Find files using Telescope command-line sugar.
 nnoremap <silent> <leader>ff :DashboardFindFile<CR>
 nnoremap <silent> <leader>fg :Telescope live_grep<cr>
