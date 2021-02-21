@@ -26,6 +26,9 @@ return require('packer').startup(function()
   use { 'neovim/nvim-lspconfig' }
   use { 'nvim-lua/completion-nvim' }
 
+  -- Snippets
+  use { 'norcalli/snippets.nvim' }
+
   -- Lua development
   use { 'tjdevries/nlua.nvim' }
 

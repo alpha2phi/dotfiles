@@ -23,6 +23,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<leader>lrf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     buf_set_keymap('n', '<leader>ld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
     buf_set_keymap('n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    buf_set_keymap('n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
     -- Set some keybinds conditional on server capabilities
     if client.resolved_capabilities.document_formatting then
@@ -47,14 +48,53 @@ local on_attach = function(client, bufnr)
 end
 
 
--- LSPs
 local nvim_lsp = require('lspconfig')
+require'snippets'.use_suggested_mappings()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+-- Code actions
+capabilities.textDocument.codeAction = {
+  dynamicRegistration = false;
+      codeActionLiteralSupport = {
+          codeActionKind = {
+              valueSet = {
+                 "",
+                 "quickfix",
+                 "refactor",
+                 "refactor.extract",
+                 "refactor.inline",
+                 "refactor.rewrite",
+                 "source",
+                 "source.organizeImports",
+              };
+          };
+      };
+}
+
+-- Snippets
+capabilities.textDocument.completion.completionItem.snippetSupport = true;
+
+-- LSPs
 local servers = { "pyright", "rust_analyzer", "gopls", "tsserver" }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
+    nvim_lsp[lsp].setup { 
+        on_attach = on_attach;
+        init_options = {
+            onlyAnalyzeProjectsWithOpenFiles = true,
+            suggestFromUnimportedLibraries = false,
+            closingLabels = true,
+        };
+        capabilities = capabilities;
+    }
 end
 
 -- Lua LSP. NOTE: This replaces the calls where you would have before done `require('nvim_lsp').sumneko_lua.setup()`
 require('nlua.lsp.nvim').setup(require('lspconfig'), {
-  on_attach = on_attach,
+    on_attach = on_attach;
+    init_options = {
+        onlyAnalyzeProjectsWithOpenFiles = true,
+        suggestFromUnimportedLibraries = false,
+        closingLabels = true,
+    };
+    capabilities = capabilities;
 })
