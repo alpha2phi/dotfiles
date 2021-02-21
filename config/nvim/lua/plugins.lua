@@ -12,7 +12,9 @@ return require('packer').startup(function()
   use { 'easymotion/vim-easymotion'}
 
   -- Color scheme
+  use { 'kyazdani42/nvim-web-devicons' }
   use { 'sainnhe/gruvbox-material' }
+  use { 'joshdick/onedark.vim'}
 
   -- Testing
   use { 'vim-test/vim-test' }
@@ -27,9 +29,9 @@ return require('packer').startup(function()
   use { 'nvim-lua/completion-nvim' }
 
   -- Snippets
-  use { 'honza/vim-snippets' }
-  use { 'SirVer/ultisnips' }
-  -- use { 'norcalli/snippets.nvim' }
+  -- use { 'honza/vim-snippets' }
+  -- use { 'SirVer/ultisnips' }
+  use { 'norcalli/snippets.nvim' }
 
   -- Lua development
   use { 'tjdevries/nlua.nvim' }
@@ -37,7 +39,14 @@ return require('packer').startup(function()
   -- Better syntax
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
   use { 'nvim-treesitter/playground' }
-  
+ 
+  -- Dashboard
+  use { 'glepnir/dashboard-nvim' }
+
+  -- DAP
+  use { 'mfussenegger/nvim-dap' }
+
+
 
   -- Note taking
   -- use { 'oberblastmeister/neuron.nvim' }

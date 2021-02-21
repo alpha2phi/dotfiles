@@ -49,7 +49,7 @@ end
 
 
 local nvim_lsp = require('lspconfig')
--- require'snippets'.use_suggested_mappings() -- for snippets.vim
+require'snippets'.use_suggested_mappings() -- for snippets.vim
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Code actions
@@ -72,7 +72,7 @@ capabilities.textDocument.codeAction = {
 }
 
 -- Snippets
--- capabilities.textDocument.completion.completionItem.snippetSupport = true;
+capabilities.textDocument.completion.completionItem.snippetSupport = true;
 
 -- LSPs
 local servers = { "pyright", "rust_analyzer", "gopls", "tsserver" }
