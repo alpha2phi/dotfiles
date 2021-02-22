@@ -21,8 +21,11 @@ require('plugins')
 -- Key mappings
 require('keymappings')
 
--- Setup Lua language server using submodule
+-- LSP
 require('lsp')
+
+-- DAP
+require('debug')
 
 -- Another option is to groups configuration in one folder
 require('config')
