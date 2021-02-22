@@ -25,7 +25,7 @@ require('keymappings')
 require('lsp')
 
 -- DAP
-require('debug')
+require('dbg')
 
 -- Another option is to groups configuration in one folder
 require('config')
