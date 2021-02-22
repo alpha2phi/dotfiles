@@ -22,7 +22,7 @@ require('plugins')
 require('keymappings')
 
 -- LSP
-require('lsp')
+require('lang')
 
 -- DAP
 require('dbg')

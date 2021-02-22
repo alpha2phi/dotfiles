@@ -57,6 +57,9 @@ return require('packer').startup(function()
     use { 'nvim-telescope/telescope-dap.nvim' }
     use { 'mfussenegger/nvim-dap-python' } -- Python
 
+    -- Project
+    use { 'nvim-telescope/telescope-project.nvim' }
+
 
     -- Note taking
     -- use { 'oberblastmeister/neuron.nvim' }
