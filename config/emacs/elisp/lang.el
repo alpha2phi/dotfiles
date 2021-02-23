@@ -6,16 +6,10 @@
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook (
-         (python-mode . lsp-deferred)
+  :hook ((python-mode . lsp-deferred)
          (go-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred))
-
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
