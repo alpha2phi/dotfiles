@@ -22,3 +22,9 @@
 ;; Splash screen
 (require 'splash)
 
+;; LSP
+(require 'lang)   ;; base extensions
+(require 'lang-python')
+
+;; Key mappings
+(require 'keymappings)
