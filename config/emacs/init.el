@@ -1,3 +1,5 @@
+;;; Initialization file
+
 ;; elisp files
 (add-to-list 'load-path (concat user-emacs-directory "elisp"))
 
@@ -24,7 +26,7 @@
 
 ;; LSP
 (require 'lang)   ;; base extensions
-(require 'lang-python')
+; (require 'lang-python)
 
 ;; Key mappings
 (require 'keymappings)
