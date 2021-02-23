@@ -8,7 +8,7 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook (
          (python-mode . lsp-deferred)
-         ; (python-mode . lsp)
+         (go-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred))
   ; :commands (lsp))

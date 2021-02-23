@@ -31,6 +31,7 @@
 ;; LSP
 (require 'lang)   ;; base extensions
 (require 'lang-python)
+(require 'lang-go)
 
 ;; Key mappings
 (require 'keymappings)
