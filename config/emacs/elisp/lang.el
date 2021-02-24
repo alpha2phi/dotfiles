@@ -8,6 +8,7 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook ((python-mode . lsp-deferred)
          (go-mode . lsp-deferred)
+         (rust-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred))
 
@@ -27,11 +28,12 @@
 
 (use-package yasnippet
   :commands yas-minor-mode
-  :hook (go-mode . yas-minor-mode))
+  :hook (
+         (go-mode . yas-minor-mode)
+         (python-mode . yas-minor-mode)
+         ))
 
-;;lsp-ui-doc-enable is false because I don't like the popover that shows up on the right
-
-(setq lsp-ui-doc-enable nil
+(setq lsp-ui-doc-enable t
       lsp-ui-peek-enable t
       lsp-ui-sideline-enable t
       lsp-ui-imenu-enable t

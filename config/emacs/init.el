@@ -32,6 +32,7 @@
 (require 'lang)   ;; base extensions
 (require 'lang-python)
 (require 'lang-go)
+(require 'lang-rust)
 
 ;; Key mappings
 (require 'keymappings)
