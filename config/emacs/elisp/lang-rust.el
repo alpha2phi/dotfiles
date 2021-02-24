@@ -1,7 +1,8 @@
 (use-package toml-mode)
 
 (use-package rust-mode
-  :hook ((before-save . lsp-format-buffer)
+  :hook ((rust-mode . lsp-deferred)
+         (before-save . lsp-format-buffer)
          (before-save . lsp-organize-imports)))
 
 ;; Add keybindings for interacting with Cargo
