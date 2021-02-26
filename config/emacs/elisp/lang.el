@@ -52,6 +52,9 @@
   ;; Set up Node debugging
   (require 'dap-node)
   (dap-node-setup) ;; Automatically installs Node debug adapter if needed
+  (require 'dap-go)
+  (dap-go-setup)
+  (require 'dap-hydra)
 
   ;; Bind `C-c l d` to `dap-hydra` for easy access
   (general-define-key
