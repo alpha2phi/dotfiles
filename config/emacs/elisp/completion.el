@@ -37,9 +37,9 @@
 
 (use-package ivy-posframe
   :config
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-  (when (display-graphic-p) (ivy-posframe-mode)))
-
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center))))
+  ; (when (display-graphic-p) (ivy-posframe-mode)))
+(ivy-posframe-mode 1)
 
 (use-package which-key
   :defer 0
