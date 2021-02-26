@@ -11,6 +11,7 @@
     "tt" '(counsel-load-theme :which-key "choose theme")
     "p"  '(:ignore p :which-key "toggles")
     "pp" '(counsel-projectile-switch-project :which-key "choose project")
+    "pc" '(projectile-command-map :which-key "choose action")
     ))
 
 (provide 'keymappings)

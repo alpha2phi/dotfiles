@@ -10,6 +10,7 @@
 (use-package counsel
   :bind
   ("M-x" . counsel-M-x)
+  ; ("M-y" . counsel-yank-pop)
   ("C-x C-m" . counsel-M-x)
   ("C-x C-f" . counsel-fzf)
   ("C-x c k" . counsel-yank-pop))
@@ -33,6 +34,12 @@
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
+
+(use-package ivy-posframe
+  :config
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+  (when (display-graphic-p) (ivy-posframe-mode)))
+
 
 (use-package which-key
   :defer 0
