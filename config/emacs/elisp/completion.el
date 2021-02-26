@@ -15,13 +15,24 @@
   ("C-x c k" . counsel-yank-pop))
 
 (use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
   :config
       (add-hook 'after-init-hook 'global-company-mode)
       (setq company-tooltip-align-annotations t)
       (setq company-minimum-prefix-length 1)
   :bind (:map company-active-map
       ("C-n" . company-select-next-or-abort)
-      ("C-p" . company-select-previous-or-abort)))
+      ("C-p" . company-select-previous-or-abort)
+      ("<tab>" . company-complete-selection))
+      (:map lsp-mode-map
+         ("<tab>" . company-indent-or-complete-common))
+      :custom
+        (company-minimum-prefix-length 1)
+        (company-idle-delay 0.0))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 (use-package which-key
   :defer 0

@@ -4,7 +4,6 @@
                         (lsp-deferred))))
 
 (use-package python-mode
-  :ensure t
   :hook (python-mode . lsp-deferred)
   :custom
   ;; NOTE: Set these if Python 3 is called "python3" on your system!
