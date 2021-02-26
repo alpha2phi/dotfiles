@@ -33,6 +33,7 @@
 (require 'lang-python)
 (require 'lang-go)
 (require 'lang-rust)
+(require 'lang-typescript)
 
 ;; Key mappings
 (require 'keymappings)
