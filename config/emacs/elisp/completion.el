@@ -11,14 +11,17 @@
   :bind
   ("M-x" . counsel-M-x)
   ("C-x C-m" . counsel-M-x)
-  ("C-x C-f" . counsel-file-jump)
+  ("C-x C-f" . counsel-fzf)
   ("C-x c k" . counsel-yank-pop))
 
 (use-package company
   :config
-  (add-hook 'after-init-hook 'global-company-mode)
-  (setq company-tooltip-align-annotations t)
-  (setq company-minimum-prefix-length 1))
+      (add-hook 'after-init-hook 'global-company-mode)
+      (setq company-tooltip-align-annotations t)
+      (setq company-minimum-prefix-length 1)
+  :bind (:map company-active-map
+      ("C-n" . company-select-next-or-abort)
+      ("C-p" . company-select-previous-or-abort)))
 
 (use-package which-key
   :defer 0
