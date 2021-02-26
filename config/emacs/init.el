@@ -28,6 +28,9 @@
 ;; Splash screen
 (require 'splash)
 
+;; Key mappings
+(require 'keymappings)
+
 ;; LSP
 (require 'lang)   ;; base extensions
 (require 'lang-python)
@@ -35,5 +38,3 @@
 (require 'lang-rust)
 (require 'lang-typescript)
 
-;; Key mappings
-(require 'keymappings)

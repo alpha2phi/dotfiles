@@ -13,8 +13,8 @@
 (use-package counsel-projectile
   :defer 0
   :after projectile
-  :bind
-  ("C-SPC" . counsel-projectile-switch-project)
+  ; :bind
+  ; ("C-SPC" . counsel-projectile-switch-project)
   :config
   (counsel-projectile-mode))
 
