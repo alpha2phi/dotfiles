@@ -55,6 +55,8 @@
   (require 'dap-go)
   (dap-go-setup)
   (require 'dap-hydra)
+  (require 'dap-gdb-lldb)
+  (dap-gdb-lldb-setup)
 
   ;; Bind `C-c l d` to `dap-hydra` for easy access
   (general-define-key
