@@ -35,11 +35,11 @@
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
-(use-package ivy-posframe
-  :config
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-  (ivy-posframe-mode 1))
-  ; (when (display-graphic-p) (ivy-posframe-mode)))
+; (use-package ivy-posframe
+;   :config
+;   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+;   (ivy-posframe-mode 1))
+;   ; (when (display-graphic-p) (ivy-posframe-mode)))
 
 (use-package which-key
   :defer 0
