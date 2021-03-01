@@ -149,6 +149,10 @@ _G.packer_plugins = {
   ["vim-test"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-test"
+  },
+  vimspector = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vimspector"
   }
 }
 
