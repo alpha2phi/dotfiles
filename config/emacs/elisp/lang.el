@@ -57,6 +57,7 @@
   (require 'dap-hydra)
   (require 'dap-gdb-lldb)
   (dap-gdb-lldb-setup)
+  ; (setq dap-lldb-debug-program '("/usr/local/Cellar/llvm/11.1.0/bin/lldb-vscode")))
 
   ;; Bind `C-c l d` to `dap-hydra` for easy access
   (general-define-key

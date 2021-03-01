@@ -106,6 +106,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
   },
+  ["telescope-project.nvim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-project.nvim"
+  },
   ["telescope-snippets.nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-snippets.nvim"
