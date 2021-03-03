@@ -9,3 +9,8 @@ nmap <leader>vi <Plug>VimspectorBalloonEval
 xmap <leader>vi <Plug>VimspectorBalloonEval
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-go', 'CodeLLDB', 'vscode-node-debug2' ]
 
+" Integration with telescope.nvim
+nmap <leader>vc :lua require('telescope').extensions.vimspector.configurations()<CR>
+
+
+

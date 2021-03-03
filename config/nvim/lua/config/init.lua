@@ -5,5 +5,6 @@ require('config.treesitter')
 require('config.devicon')
 require('config.project')
 require('config.snippets')
+require('config.telescope')
 
 --require('config.slime')

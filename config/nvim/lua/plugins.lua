@@ -59,6 +59,13 @@ return require('packer').startup(function()
 
     -- Debugging
     use { 'puremourning/vimspector' }
+    use { 'nvim-telescope/telescope-vimspector.nvim' }
+
+    -- Telescope fzf
+    use { 'nvim-telescope/telescope-fzy-native.nvim' }
+
+    -- Project mgmt
+    use { 'vim-ctrlspace/vim-ctrlspace' }
 
     -- Project
     use { 'nvim-telescope/telescope-project.nvim' }

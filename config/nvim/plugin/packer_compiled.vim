@@ -106,6 +106,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
   },
+  ["telescope-fzy-native.nvim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
+  },
   ["telescope-project.nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-project.nvim"
@@ -113,6 +117,10 @@ _G.packer_plugins = {
   ["telescope-snippets.nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-snippets.nvim"
+  },
+  ["telescope-vimspector.nvim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-vimspector.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
