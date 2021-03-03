@@ -8,6 +8,7 @@ nnoremap <silent> <leader>fc :DashboardChangeColorscheme<CR>
 nnoremap <silent> <leader>fw :DashboardFindWord<CR>
 nnoremap <silent> <leader>fm :DashboardJumpMark<CR>
 nnoremap <silent> <leader>fn :DashboardNewFile<CR>
+nnoremap <silent> <leader>fp :Telescope project<CR>
 
 nnoremap <silent> <leader>fd :lua require('config.telescope').search_dotfiles()<CR>
 
