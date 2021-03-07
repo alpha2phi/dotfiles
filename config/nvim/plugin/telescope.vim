@@ -12,6 +12,8 @@ nnoremap <silent> <leader>fp :Telescope project<CR>
 
 nnoremap <silent> <leader>fd :lua require('config.telescope').search_dotfiles()<CR>
 
+nnoremap <silent> <leader>fx :lua require('config.telescope').switch_projects()<CR>
+
 nmap <leader>fss :<C-u>SessionSave<CR>
 nmap <leader>fsl :<C-u>SessionLoad<CR>
 

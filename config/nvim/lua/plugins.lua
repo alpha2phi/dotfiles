@@ -69,6 +69,7 @@ return require('packer').startup(function()
 
     -- Project
     use { 'nvim-telescope/telescope-project.nvim' }
+    use { 'airblade/vim-rooter' }
 
 
     -- Note taking

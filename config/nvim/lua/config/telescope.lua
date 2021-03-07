@@ -15,6 +15,13 @@ M.search_dotfiles = function()
     })
 end
 
+M.switch_projects = function() 
+    require("telescope.builtin").find_files ({
+        prompt_title = "< Switch Project >",
+        cwd = "$HOME/workspace/development/",
+    })
+end
+
 M.git_branches = function() 
     require("telescope.builtin").git_branches({
         attach_mappings = function(prompt_bufnr, map) 
