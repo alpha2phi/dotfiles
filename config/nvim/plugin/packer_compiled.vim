@@ -134,9 +134,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
-  ["vim-ctrlspace"] = {
+  ["vim-dadbod"] = {
     loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-ctrlspace"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-dadbod"
+  },
+  ["vim-dadbod-ui"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-dadbod-ui"
   },
   ["vim-dispatch"] = {
     loaded = true,
@@ -149,6 +153,14 @@ _G.packer_plugins = {
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+  },
+  ["vim-projectionist"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-projectionist"
+  },
+  ["vim-rooter"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-rooter"
   },
   ["vim-snippets"] = {
     loaded = true,

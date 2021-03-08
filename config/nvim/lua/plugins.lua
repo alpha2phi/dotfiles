@@ -65,11 +65,16 @@ return require('packer').startup(function()
     use { 'nvim-telescope/telescope-fzy-native.nvim' }
 
     -- Project mgmt
-    use { 'vim-ctrlspace/vim-ctrlspace' }
+    -- use { 'vim-ctrlspace/vim-ctrlspace' }
 
     -- Project
     use { 'nvim-telescope/telescope-project.nvim' }
     use { 'airblade/vim-rooter' }
+    use { 'tpope/vim-projectionist' }
+
+    -- Database
+    use { 'tpope/vim-dadbod' }
+    use { 'kristijanhusak/vim-dadbod-ui' }
 
 
     -- Note taking
