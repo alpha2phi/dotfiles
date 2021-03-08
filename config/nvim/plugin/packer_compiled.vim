@@ -146,6 +146,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-dispatch"
   },
+  ["vim-dispatch-neovim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-dispatch-neovim"
+  },
   ["vim-easymotion"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-easymotion"
