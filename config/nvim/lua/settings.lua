@@ -19,7 +19,7 @@ utils.opt('o', 'splitright', true)
 utils.opt('o', 'wildmode', 'list:longest')
 utils.opt('w', 'number', true)
 utils.opt('w', 'relativenumber', true)
-utils.opt('w', 'nofoldenable', 'off')
+-- utils.opt('w', 'nofoldenable', 'off')
 utils.opt('o', 'clipboard','unnamed,unnamedplus')
 
 -- Highlight on yank
