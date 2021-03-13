@@ -91,6 +91,7 @@ return require('packer').startup(function()
     use { 'tpope/vim-dadbod' }
     -- use { 'tpope/vim-dotenv' }
     use { 'kristijanhusak/vim-dadbod-ui' }
+    use { 'kristijanhusak/vim-dadbod-completion' }
 
 
     -- Note taking

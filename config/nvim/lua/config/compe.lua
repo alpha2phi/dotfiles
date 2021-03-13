@@ -19,6 +19,7 @@ require'compe'.setup {
     max_kind_width = 1000;
     max_menu_width = 1000000;
     documentation = true;
+    vim_dadbod_completion = true;
 
 
     source = {

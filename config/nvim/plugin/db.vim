@@ -4,3 +4,5 @@ nnoremap <silent> <leader>dr :DBUIRenameBuffer<CR>
 nnoremap <silent> <leader>dl :DBUILastQueryInfo<CR>
 
 let g:db_ui_save_location = '~/.config/db_ui'
+
+autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
