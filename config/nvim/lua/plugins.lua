@@ -37,8 +37,7 @@ return require('packer').startup(function()
     -- Better LSP experience
     -- use { 'glepnir/lspsaga.nvim' }
     -- use { 'kosayoda/nvim-lightbulb' }
-
-
+    use { 'sbdchd/neoformat' }
 
     -- Snippets
     use { 'honza/vim-snippets' }
@@ -118,9 +117,6 @@ return require('packer').startup(function()
 
     -- Neoterm
     -- use { 'kassio/neoterm' }
-
-    -- NeoFormat
-    -- use { 'sbdchd/neoformat' }
 
     -- Better terminal
     -- use { 'nikvdp/neomux' }
