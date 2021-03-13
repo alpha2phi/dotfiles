@@ -40,9 +40,11 @@ return require('packer').startup(function()
     use { 'sbdchd/neoformat' }
 
     -- Snippets
-    use { 'honza/vim-snippets' }
-    use { 'SirVer/ultisnips' }
-    -- use { 'hrsh7th/vim-vsnip' }
+    -- use { 'honza/vim-snippets' }
+    -- use { 'SirVer/ultisnips' }
+    use { 'hrsh7th/vim-vsnip' }
+    use { 'cstrap/python-snippets' }
+    use { 'golang/vscode-go' }
     -- use { 'norcalli/snippets.nvim' }
     -- use { 'nvim-telescope/telescope-snippets.nvim' }
 
