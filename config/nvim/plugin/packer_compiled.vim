@@ -57,14 +57,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
-  ["nvim-dap"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap"
-  },
-  ["nvim-dap-python"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap-python"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
@@ -106,10 +98,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/targets.vim"
   },
-  ["telescope-dap.nvim"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
-  },
   ["telescope-fzy-native.nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
@@ -145,10 +133,6 @@ _G.packer_plugins = {
   ["vim-dispatch-neovim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-dispatch-neovim"
-  },
-  ["vim-dotenv"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-dotenv"
   },
   ["vim-easymotion"] = {
     loaded = true,
