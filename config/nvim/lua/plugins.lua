@@ -26,12 +26,19 @@ return require('packer').startup(function()
     use { 'nvim-lua/popup.nvim' }
     use { 'nvim-telescope/telescope.nvim' }
 
-    -- LSP and completion
+    -- LSP config
     use { 'neovim/nvim-lspconfig' }
+
+   
+    -- NOTE: Use either one of this
     use { 'hrsh7th/nvim-compe' }
-    -- use { 'glepnir/lspsaga.nvim' }
-    
     -- use { 'nvim-lua/completion-nvim' }
+
+    -- Better LSP experience
+    -- use { 'glepnir/lspsaga.nvim' }
+    -- use { 'kosayoda/nvim-lightbulb' }
+
+
 
     -- Snippets
     use { 'honza/vim-snippets' }
@@ -87,9 +94,6 @@ return require('packer').startup(function()
     -- use { 'junegunn/fzf', run = '-> fzf#install()' }
     -- use { 'junegunn/fzf.vim'}
     -- use { 'fiatjaf/neuron.vim' }
-
-    -- Code action light bulb
-    -- use { 'kosayoda/nvim-lightbulb' }
 
     -- Embed in browser
     -- use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
