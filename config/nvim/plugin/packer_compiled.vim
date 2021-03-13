@@ -98,10 +98,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
-  ["snippets.nvim"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/snippets.nvim"
-  },
   ["targets.vim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/targets.vim"
@@ -117,10 +113,6 @@ _G.packer_plugins = {
   ["telescope-project.nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-project.nvim"
-  },
-  ["telescope-snippets.nvim"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-snippets.nvim"
   },
   ["telescope-vimspector.nvim"] = {
     loaded = true,

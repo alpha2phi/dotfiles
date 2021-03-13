@@ -3,8 +3,10 @@ require('config.fugitive')
 require('config.treesitter')
 require('config.devicon')
 require('config.project')
-require('config.snippets')
 require('config.telescope')
+
+-- snippets.nvim
+-- require('config.snippets')
 
 -- nvim-compe
 require('config.compe')
