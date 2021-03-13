@@ -40,10 +40,10 @@ return require('packer').startup(function()
     use { 'sbdchd/neoformat' }
 
     -- Snippets
-    use { 'honza/vim-snippets' }
-    use { 'SirVer/ultisnips' }
-    use { 'norcalli/snippets.nvim' }
-    use { 'nvim-telescope/telescope-snippets.nvim' }
+    -- use { 'honza/vim-snippets' }
+    -- use { 'SirVer/ultisnips' }
+    -- use { 'norcalli/snippets.nvim' }
+    -- use { 'nvim-telescope/telescope-snippets.nvim' }
 
     -- Lua development
     use { 'tjdevries/nlua.nvim' }
