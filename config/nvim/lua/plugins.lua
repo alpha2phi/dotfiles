@@ -28,7 +28,7 @@ return require('packer').startup(function()
 
     -- LSP and completion
     use { 'neovim/nvim-lspconfig' }
-    use { 'nvim-lua/completion-nvim' }
+    -- use { 'nvim-lua/completion-nvim' }
     -- use { 'glepnir/lspsaga.nvim' }
 
     -- Snippets

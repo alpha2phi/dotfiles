@@ -71,7 +71,7 @@ capabilities.textDocument.codeAction = {
       };
 }
 
--- Snippets
+-- Snippets for completion-nvim
 capabilities.textDocument.completion.completionItem.snippetSupport = true;
 
 -- LSPs
