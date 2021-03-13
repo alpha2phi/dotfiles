@@ -7,7 +7,7 @@ require('config.snippets')
 require('config.telescope')
 
 -- nvim-compe
- require('config.compe')
+require('config.compe')
 
 -- completion-nvim
 -- require('config.completion')
