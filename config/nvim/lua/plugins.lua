@@ -41,8 +41,8 @@ return require('packer').startup(function()
 
     -- Snippets
     use { 'honza/vim-snippets' }
-    use { 'hrsh7th/vim-vsnip' }
-    -- use { 'SirVer/ultisnips' }
+    use { 'SirVer/ultisnips' }
+    -- use { 'hrsh7th/vim-vsnip' }
     -- use { 'norcalli/snippets.nvim' }
     -- use { 'nvim-telescope/telescope-snippets.nvim' }
 
