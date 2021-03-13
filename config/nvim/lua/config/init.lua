@@ -6,7 +6,10 @@ require('config.project')
 require('config.snippets')
 require('config.telescope')
 
--- completin-nvim
+-- nvim-compe
+ require('config.compe')
+
+-- completion-nvim
 -- require('config.completion')
 
 --require('config.slime')

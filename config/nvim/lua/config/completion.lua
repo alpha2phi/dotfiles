@@ -1,3 +1,5 @@
+-- Configuration for completion-nvim
+
 local utils = require('utils')
 
 utils.opt('o', 'completeopt', 'menuone,noinsert,noselect')

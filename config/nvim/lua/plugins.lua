@@ -28,8 +28,10 @@ return require('packer').startup(function()
 
     -- LSP and completion
     use { 'neovim/nvim-lspconfig' }
-    -- use { 'nvim-lua/completion-nvim' }
+    use { 'hrsh7th/nvim-compe' }
     -- use { 'glepnir/lspsaga.nvim' }
+    
+    -- use { 'nvim-lua/completion-nvim' }
 
     -- Snippets
     use { 'honza/vim-snippets' }

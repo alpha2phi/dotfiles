@@ -1,3 +1,6 @@
+-- Configuration for completion-nvim
+
+
 local on_attach = function(client, bufnr)
     require('completion').on_attach()
 

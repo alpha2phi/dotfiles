@@ -32,10 +32,6 @@ local function try_loadstring(s, component, name)
 end
 
 _G.packer_plugins = {
-  ["completion-nvim"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/completion-nvim"
-  },
   ["dashboard-nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
@@ -52,6 +48,10 @@ _G.packer_plugins = {
   ["nlua.nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nlua.nvim"
+  },
+  ["nvim-compe"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
   ["nvim-dap"] = {
     loaded = true,
