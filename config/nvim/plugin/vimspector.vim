@@ -11,6 +11,3 @@ let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-go', 'CodeLLDB', 'vscode
 
 " Integration with telescope.nvim
 nmap <leader>vc :lua require('telescope').extensions.vimspector.configurations()<CR>
-
-
-

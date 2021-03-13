@@ -65,10 +65,10 @@ return require('packer').startup(function()
         config = function() require'statusline' end,
     }
 
-    -- DAP
-    use { 'mfussenegger/nvim-dap' }
-    use { 'nvim-telescope/telescope-dap.nvim' }
-    use { 'mfussenegger/nvim-dap-python' } -- Python
+    -- -- DAP
+    -- use { 'mfussenegger/nvim-dap' }
+    -- use { 'nvim-telescope/telescope-dap.nvim' }
+    -- use { 'mfussenegger/nvim-dap-python' } -- Python
 
     -- Debugging
     use { 'puremourning/vimspector' }
@@ -87,7 +87,7 @@ return require('packer').startup(function()
 
     -- Database
     use { 'tpope/vim-dadbod' }
-    use { 'tpope/vim-dotenv' }
+    -- use { 'tpope/vim-dotenv' }
     use { 'kristijanhusak/vim-dadbod-ui' }
 
 
