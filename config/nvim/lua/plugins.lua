@@ -44,6 +44,8 @@ return require('packer').startup(function()
     -- use { 'SirVer/ultisnips' }
     use { 'hrsh7th/vim-vsnip' }
     use { 'cstrap/python-snippets' }
+    use { 'ylcnfrht/vscode-python-snippet-pack' }
+    use { 'xabikos/vscode-javascript' }
     use { 'golang/vscode-go' }
     -- use { 'norcalli/snippets.nvim' }
     -- use { 'nvim-telescope/telescope-snippets.nvim' }
@@ -52,8 +54,8 @@ return require('packer').startup(function()
     use { 'tjdevries/nlua.nvim' }
 
     -- Better syntax
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
-    use { 'nvim-treesitter/playground' }
+    -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
+    -- use { 'nvim-treesitter/playground' }
 
     -- Dashboard
     use { 'glepnir/dashboard-nvim' }

@@ -1,15 +1,17 @@
 require('config.colorscheme')
 require('config.fugitive')
-require('config.treesitter')
 require('config.devicon')
 require('config.project')
 require('config.telescope')
 
--- snippets.nvim
--- require('config.snippets')
-
 -- nvim-compe
 require('config.compe')
+
+-- treesitter
+-- require('config.treesitter')
+
+-- snippets.nvim
+-- require('config.snippets')
 
 -- completion-nvim
 -- require('config.completion')
