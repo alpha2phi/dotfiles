@@ -1,1 +1,1 @@
-let g:CtrlSpaceDefaultMappingKey = "<C-space> "
+" let g:CtrlSpaceDefaultMappingKey = "<C-space> "
