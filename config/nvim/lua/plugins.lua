@@ -26,23 +26,38 @@ return require('packer').startup(function()
     use { 'nvim-lua/popup.nvim' }
     use { 'nvim-telescope/telescope.nvim' }
 
-    -- LSP and completion
+    -- LSP config
     use { 'neovim/nvim-lspconfig' }
-    use { 'nvim-lua/completion-nvim' }
-    -- use { 'glepnir/lspsaga.nvim' }
+
+   
+    -- NOTE: Use either one of this
+    use { 'hrsh7th/nvim-compe' }
+    -- use { 'nvim-lua/completion-nvim' }
+
+    -- Better LSP experience
+    use { 'glepnir/lspsaga.nvim' }
+    use { 'onsails/lspkind-nvim' }
+    use { 'sbdchd/neoformat' }
+    use { 'kosayoda/nvim-lightbulb' }
 
     -- Snippets
-    use { 'honza/vim-snippets' }
-    use { 'SirVer/ultisnips' }
-    use { 'norcalli/snippets.nvim' }
-    use { 'nvim-telescope/telescope-snippets.nvim' }
+    -- use { 'honza/vim-snippets' }
+    -- use { 'SirVer/ultisnips' }
+    use { 'hrsh7th/vim-vsnip' }
+    use { 'cstrap/python-snippets' }
+    use { 'ylcnfrht/vscode-python-snippet-pack' }
+    use { 'xabikos/vscode-javascript' }
+    use { 'golang/vscode-go' }
+    use { 'rust-lang/vscode-rust' }
+    -- use { 'norcalli/snippets.nvim' }
+    -- use { 'nvim-telescope/telescope-snippets.nvim' }
 
     -- Lua development
     use { 'tjdevries/nlua.nvim' }
 
     -- Better syntax
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
-    use { 'nvim-treesitter/playground' }
+    -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
+    -- use { 'nvim-treesitter/playground' }
 
     -- Dashboard
     use { 'glepnir/dashboard-nvim' }
@@ -54,10 +69,10 @@ return require('packer').startup(function()
         config = function() require'statusline' end,
     }
 
-    -- DAP
-    use { 'mfussenegger/nvim-dap' }
-    use { 'nvim-telescope/telescope-dap.nvim' }
-    use { 'mfussenegger/nvim-dap-python' } -- Python
+    -- -- DAP
+    -- use { 'mfussenegger/nvim-dap' }
+    -- use { 'nvim-telescope/telescope-dap.nvim' }
+    -- use { 'mfussenegger/nvim-dap-python' } -- Python
 
     -- Debugging
     use { 'puremourning/vimspector' }
@@ -76,18 +91,18 @@ return require('packer').startup(function()
 
     -- Database
     use { 'tpope/vim-dadbod' }
-    use { 'tpope/vim-dotenv' }
+    -- use { 'tpope/vim-dotenv' }
     use { 'kristijanhusak/vim-dadbod-ui' }
+    use { 'kristijanhusak/vim-dadbod-completion' }
 
+    -- Markdown
+    use { 'npxbr/glow.nvim', run = ':GlowInstall' }
 
     -- Note taking
     -- use { 'oberblastmeister/neuron.nvim' }
     -- use { 'junegunn/fzf', run = '-> fzf#install()' }
     -- use { 'junegunn/fzf.vim'}
     -- use { 'fiatjaf/neuron.vim' }
-
-    -- Code action light bulb
-    -- use { 'kosayoda/nvim-lightbulb' }
 
     -- Embed in browser
     -- use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
@@ -112,9 +127,6 @@ return require('packer').startup(function()
 
     -- Neoterm
     -- use { 'kassio/neoterm' }
-
-    -- NeoFormat
-    -- use { 'sbdchd/neoformat' }
 
     -- Better terminal
     -- use { 'nikvdp/neomux' }

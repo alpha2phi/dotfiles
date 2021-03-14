@@ -1,3 +1,5 @@
+-- Configuration for completion-nvim
+
 local utils = require('utils')
 
 utils.opt('o', 'completeopt', 'menuone,noinsert,noselect')
@@ -12,3 +14,9 @@ vim.g.completion_enable_auto_popup = 1
 -- <Tab> to navigate the completion menu
 utils.map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
 utils.map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
+
+ vim.api.nvim_command([[
+augroup AuCompletion
+autocmd BufEnter * lua require'completion'.on_attach()
+augroup END 
+]])
