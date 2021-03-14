@@ -47,6 +47,7 @@ return require('packer').startup(function()
     use { 'ylcnfrht/vscode-python-snippet-pack' }
     use { 'xabikos/vscode-javascript' }
     use { 'golang/vscode-go' }
+    use { 'rust-lang/vscode-rust' }
     -- use { 'norcalli/snippets.nvim' }
     -- use { 'nvim-telescope/telescope-snippets.nvim' }
 
