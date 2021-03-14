@@ -1,6 +1,7 @@
 local utils = require('utils')
 
 utils.map('n', '<Leader>gs', '<cmd>Gstatus<CR>')
+utils.map('n', '<Leader>gp', '<cmd>Git push<CR>')
 utils.map('n', '<Leader>gb', '<cmd>GBranches<CR>')
 utils.map('n', '<Leader>gf', '<cmd>Fit fetch --all<CR>')
 utils.map('n', '<Leader>grum', '<cmd>Git rebase upstream/master<CR>')  
