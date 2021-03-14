@@ -36,9 +36,9 @@ return require('packer').startup(function()
 
     -- Better LSP experience
     use { 'glepnir/lspsaga.nvim' }
-    use { 'kosayoda/nvim-lightbulb' }
     use { 'onsails/lspkind-nvim' }
     use { 'sbdchd/neoformat' }
+    -- use { 'kosayoda/nvim-lightbulb' }
 
     -- Snippets
     -- use { 'honza/vim-snippets' }
