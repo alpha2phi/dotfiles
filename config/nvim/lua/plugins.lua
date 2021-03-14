@@ -38,7 +38,7 @@ return require('packer').startup(function()
     use { 'glepnir/lspsaga.nvim' }
     use { 'onsails/lspkind-nvim' }
     use { 'sbdchd/neoformat' }
-    use { 'kosayoda/nvim-lightbulb' }
+    -- use { 'kosayoda/nvim-lightbulb' }
 
     -- Snippets
     -- use { 'honza/vim-snippets' }
