@@ -1,1 +1,1 @@
-nnoremap <silent> <Space> :WhichKey '<Space>'<CR>
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
