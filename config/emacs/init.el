@@ -22,6 +22,9 @@
 ;; Project management
 (require 'workspace)
 
+;; Organize
+(require 'organize)
+
 ;; Git using Magit
 (require 'vcs)
 
