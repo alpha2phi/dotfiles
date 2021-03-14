@@ -35,7 +35,7 @@ return require('packer').startup(function()
     -- use { 'nvim-lua/completion-nvim' }
 
     -- Better LSP experience
-    -- use { 'glepnir/lspsaga.nvim' }
+    use { 'glepnir/lspsaga.nvim' }
     -- use { 'kosayoda/nvim-lightbulb' }
     use { 'sbdchd/neoformat' }
 
@@ -94,6 +94,8 @@ return require('packer').startup(function()
     use { 'kristijanhusak/vim-dadbod-ui' }
     use { 'kristijanhusak/vim-dadbod-completion' }
 
+    -- Markdown
+    use { 'npxbr/glow.nvim', run = ':GlowInstall' }
 
     -- Note taking
     -- use { 'oberblastmeister/neuron.nvim' }
