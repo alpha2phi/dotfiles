@@ -11,7 +11,7 @@ return require('packer').startup(function()
     use { 'wellle/targets.vim' }
     use { 'easymotion/vim-easymotion'}
     use { 'radenling/vim-dispatch-neovim' }
-
+    use { 'liuchengxu/vim-which-key' }
 
     -- Color scheme
     use { 'kyazdani42/nvim-web-devicons' }
