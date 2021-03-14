@@ -7,6 +7,13 @@ require('config.telescope')
 -- nvim-compe
 require('config.compe')
 
+-- lspkind-nvim
+require('config.lspkind')
+
+-- nvim-lightbulb
+require('config.lightbulb')
+
+
 -- treesitter
 -- require('config.treesitter')
 
@@ -16,4 +23,5 @@ require('config.compe')
 -- completion-nvim
 -- require('config.completion')
 
+-- vim-slime
 --require('config.slime')

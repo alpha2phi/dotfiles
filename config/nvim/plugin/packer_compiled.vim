@@ -49,6 +49,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/gruvbox-material"
   },
+  ["lspkind-nvim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/lspkind-nvim"
+  },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+  },
   neoformat = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/neoformat"
