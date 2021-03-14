@@ -74,8 +74,17 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Code actions
 capabilities.textDocument.codeAction = {
-    dynamicRegistration = true
-    -- dynamicRegistration = false,
+    -- dynamicRegistration = true
+    dynamicRegistration = false,
+    codeActionLiteralSupport = {
+        codeActionKind = {
+            valueSet = (function()
+                local res = vim.tbl_values(vim.lsp.protocol.CodeActionKind)
+                table.sort(res)
+                return res
+            end)()
+        }
+    }
     -- codeActionLiteralSupport = {
     --     codeActionKind = {
     --         valueSet = {
@@ -94,7 +103,7 @@ local servers = {"pyright", "rust_analyzer", "gopls", "tsserver"}
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         capabilities = capabilities,
-        on_attach = on_attach,
+        on_attach = on_attach
         -- init_options = {
         --     onlyAnalyzeProjectsWithOpenFiles = true,
         --     suggestFromUnimportedLibraries = false,

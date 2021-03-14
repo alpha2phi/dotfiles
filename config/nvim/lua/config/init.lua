@@ -10,6 +10,10 @@ require('config.compe')
 -- lspkind-nvim
 require('config.lspkind')
 
+-- nvim-lightbulb
+require('config.lightbulb')
+
+
 -- treesitter
 -- require('config.treesitter')
 
