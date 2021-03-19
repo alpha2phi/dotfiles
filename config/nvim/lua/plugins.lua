@@ -39,6 +39,7 @@ return require('packer').startup(function()
     use { 'onsails/lspkind-nvim' }
     use { 'sbdchd/neoformat' }
     use { 'RRethy/vim-illuminate' }
+    use { 'p00f/nvim-ts-rainbow' }
     -- use { 'kosayoda/nvim-lightbulb' }
 
     -- Snippets
@@ -57,8 +58,8 @@ return require('packer').startup(function()
     use { 'tjdevries/nlua.nvim' }
 
     -- Better syntax
-    -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
-    -- use { 'nvim-treesitter/playground' }
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
+    use { 'nvim-treesitter/playground' }
 
     -- Dashboard
     use { 'glepnir/dashboard-nvim' }
@@ -98,6 +99,10 @@ return require('packer').startup(function()
 
     -- Markdown
     use { 'npxbr/glow.nvim', run = ':GlowInstall' }
+
+
+    -- Development settings
+    use { 'editorconfig/editorconfig-vim' }
 
     -- Note taking
     -- use { 'oberblastmeister/neuron.nvim' }

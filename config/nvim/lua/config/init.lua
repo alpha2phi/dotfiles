@@ -13,9 +13,8 @@ require('config.lspkind')
 -- nvim-lightbulb
 -- require('config.lightbulb')
 
-
 -- treesitter
--- require('config.treesitter')
+require('config.treesitter')
 
 -- snippets.nvim
 -- require('config.snippets')
