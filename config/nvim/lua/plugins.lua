@@ -10,6 +10,7 @@ return require('packer').startup(function()
     use { 'tpope/vim-commentary' }
     use { 'wellle/targets.vim' }
     use { 'easymotion/vim-easymotion'}
+    -- use { 'phaazon/hop.nvim'}
     use { 'radenling/vim-dispatch-neovim' }
     use { 'liuchengxu/vim-which-key' }
 
