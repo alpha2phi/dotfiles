@@ -13,6 +13,13 @@ return require('packer').startup(function()
     use { 'wellle/targets.vim' }
     use { 'easymotion/vim-easymotion'}
     use { 'liuchengxu/vim-which-key' }
+    use { 'norcalli/nvim-colorizer.lua' }
+    use { 'lewis6991/gitsigns.nvim',   
+        config = function() 
+            require('gitsigns').setup()
+        end
+    }
+    -- use { 'mhinz/vim-signify'}
     -- use { 'radenling/vim-dispatch-neovim' }
     -- use { 'phaazon/hop.nvim'}
 
@@ -23,7 +30,7 @@ return require('packer').startup(function()
 
     -- Testing
     use { 'vim-test/vim-test' }
-    use { "rcarriga/vim-ultest", run = ":UpdateRemotePlugins" }
+    -- use { "rcarriga/vim-ultest", run = ":UpdateRemotePlugins" }
 
     -- Fuzzy finder
     use { 'nvim-lua/plenary.nvim' }
@@ -114,9 +121,6 @@ return require('packer').startup(function()
     -- Development settings
     use { 'editorconfig/editorconfig-vim' }
 
-
-    -- Development
-    use { 'norcalli/nvim-colorizer.lua' }
 
     -- Note taking
     -- use { 'oberblastmeister/neuron.nvim' }
