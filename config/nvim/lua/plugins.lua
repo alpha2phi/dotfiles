@@ -10,9 +10,9 @@ return require('packer').startup(function()
     use { 'tpope/vim-commentary' }
     use { 'wellle/targets.vim' }
     use { 'easymotion/vim-easymotion'}
-    -- use { 'phaazon/hop.nvim'}
     use { 'radenling/vim-dispatch-neovim' }
     use { 'liuchengxu/vim-which-key' }
+    -- use { 'phaazon/hop.nvim'}
 
     -- Color scheme
     use { 'kyazdani42/nvim-web-devicons' }
@@ -41,18 +41,20 @@ return require('packer').startup(function()
     use { 'onsails/lspkind-nvim' }
     use { 'sbdchd/neoformat' }
     use { 'p00f/nvim-ts-rainbow' }
+    use { 'gennaro-tedesco/nvim-peekup' }
+    -- use { 'beauwilliams/focus.nvim' }
     -- use { 'RRethy/vim-illuminate' }
     -- use { 'kosayoda/nvim-lightbulb' }
 
     -- Snippets
-    -- use { 'honza/vim-snippets' }
-    -- use { 'SirVer/ultisnips' }
     use { 'hrsh7th/vim-vsnip' }
     use { 'cstrap/python-snippets' }
     use { 'ylcnfrht/vscode-python-snippet-pack' }
     use { 'xabikos/vscode-javascript' }
     use { 'golang/vscode-go' }
     use { 'rust-lang/vscode-rust' }
+    -- use { 'honza/vim-snippets' }
+    -- use { 'SirVer/ultisnips' }
     -- use { 'norcalli/snippets.nvim' }
     -- use { 'nvim-telescope/telescope-snippets.nvim' }
 
@@ -102,7 +104,6 @@ return require('packer').startup(function()
     -- Markdown
     use { 'npxbr/glow.nvim', run = ':GlowInstall' }
     use { 'mzlogin/vim-markdown-toc' }
-
 
     -- Development settings
     use { 'editorconfig/editorconfig-vim' }

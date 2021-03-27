@@ -40,6 +40,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/editorconfig-vim"
   },
+  ["focus.nvim"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/focus.nvim"
+  },
   ["galaxyline.nvim"] = {
     config = { "\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15statusline\frequire\0" },
     loaded = true,
@@ -76,6 +80,10 @@ _G.packer_plugins = {
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+  },
+  ["nvim-peekup"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-peekup"
   },
   ["nvim-treesitter"] = {
     loaded = true,
