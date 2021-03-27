@@ -19,6 +19,11 @@ return require('packer').startup(function()
             require('gitsigns').setup()
         end
     }
+    use { 'TimUntersberger/neogit',
+        config = function()
+            require('neogit').setup()
+        end
+    }
     -- use { 'mhinz/vim-signify'}
     -- use { 'radenling/vim-dispatch-neovim' }
     -- use { 'phaazon/hop.nvim'}
