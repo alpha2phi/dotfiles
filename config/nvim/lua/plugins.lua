@@ -42,6 +42,7 @@ return require('packer').startup(function()
     use { 'sbdchd/neoformat' }
     use { 'p00f/nvim-ts-rainbow' }
     use { 'gennaro-tedesco/nvim-peekup' }
+    use { 'ray-x/lsp_signature.nvim' }
     -- use { 'beauwilliams/focus.nvim' }
     -- use { 'RRethy/vim-illuminate' }
     -- use { 'kosayoda/nvim-lightbulb' }
@@ -97,9 +98,9 @@ return require('packer').startup(function()
 
     -- Database
     use { 'tpope/vim-dadbod' }
-    -- use { 'tpope/vim-dotenv' }
     use { 'kristijanhusak/vim-dadbod-ui' }
     use { 'kristijanhusak/vim-dadbod-completion' }
+    -- use { 'tpope/vim-dotenv' }
 
     -- Markdown
     use { 'npxbr/glow.nvim', run = ':GlowInstall' }
@@ -107,6 +108,10 @@ return require('packer').startup(function()
 
     -- Development settings
     use { 'editorconfig/editorconfig-vim' }
+
+
+    -- Development
+    use { 'norcalli/nvim-colorizer.lua' }
 
     -- Note taking
     -- use { 'oberblastmeister/neuron.nvim' }
