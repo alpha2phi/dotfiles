@@ -10,9 +10,6 @@ require('config.compe')
 -- lspkind-nvim
 require('config.lspkind')
 
--- lsp_signature
-require('config.lspsignature')
-
 -- nvim-colorizer
 require('config.colorizer')
 
