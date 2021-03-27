@@ -8,10 +8,12 @@ return require('packer').startup(function()
     use { 'tpope/vim-fugitive' }
     use { 'tpope/vim-surround' }
     use { 'tpope/vim-commentary' }
+    use { 'tpope/vim-rhubarb' }
+    use { 'tpope/vim-unimpaired' }
     use { 'wellle/targets.vim' }
     use { 'easymotion/vim-easymotion'}
-    use { 'radenling/vim-dispatch-neovim' }
     use { 'liuchengxu/vim-which-key' }
+    -- use { 'radenling/vim-dispatch-neovim' }
     -- use { 'phaazon/hop.nvim'}
 
     -- Color scheme
@@ -43,6 +45,8 @@ return require('packer').startup(function()
     use { 'p00f/nvim-ts-rainbow' }
     use { 'gennaro-tedesco/nvim-peekup' }
     use { 'ray-x/lsp_signature.nvim' }
+    -- use { 'lukas-reineke/indent-blankline.nvim' }
+    -- use { 'Yggdroot/indentLine' }
     -- use { 'beauwilliams/focus.nvim' }
     -- use { 'RRethy/vim-illuminate' }
     -- use { 'kosayoda/nvim-lightbulb' }
