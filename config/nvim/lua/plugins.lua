@@ -23,6 +23,7 @@ return require('packer').startup(function()
 
     -- Testing
     use { 'vim-test/vim-test' }
+    use { "rcarriga/vim-ultest", run = ":UpdateRemotePlugins" }
 
     -- Fuzzy finder
     use { 'nvim-lua/plenary.nvim' }

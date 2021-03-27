@@ -19,17 +19,23 @@ utils.opt('o', 'splitright', true)
 utils.opt('o', 'wildmode', 'list:longest')
 utils.opt('w', 'number', true)
 utils.opt('w', 'relativenumber', true)
--- utils.opt('w', 'nofoldenable', 'off')
 utils.opt('o', 'clipboard','unnamed,unnamedplus')
+-- utils.opt('w', 'nofoldenable', 'off')
 
 -- Highlight on yank
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 
 vim.api.nvim_command([[
 augroup auto_spellcheck
-  autocmd BufNewFile,BufRead *.md setlocal spell
-  autocmd BufNewFile,BufRead *.org setfiletype markdown
-  autocmd BufNewFile,BufRead *.org setlocal spell
+    autocmd BufNewFile,BufRead *.md setlocal spell
+    autocmd BufNewFile,BufRead *.org setfiletype markdown
+    autocmd BufNewFile,BufRead *.org setlocal spell
 augroup END
 ]])
 
+vim.api.nvim_command([[
+augroup auto_term
+  autocmd TermOpen * setlocal nonumber norelativenumber
+  autocmd TermOpen * startinsert
+augroup END
+]])

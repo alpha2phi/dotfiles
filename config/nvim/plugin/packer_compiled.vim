@@ -166,10 +166,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-dispatch"
   },
-  ["vim-dispatch-neovim"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-dispatch-neovim"
-  },
   ["vim-easymotion"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-easymotion"
@@ -186,6 +182,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-projectionist"
   },
+  ["vim-rhubarb"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-rhubarb"
+  },
   ["vim-rooter"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-rooter"
@@ -197,6 +197,10 @@ _G.packer_plugins = {
   ["vim-test"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-test"
+  },
+  ["vim-unimpaired"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-unimpaired"
   },
   ["vim-vsnip"] = {
     loaded = true,
