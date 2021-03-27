@@ -77,10 +77,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
-  ["nvim-lspinstall"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
-  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
@@ -169,10 +165,6 @@ _G.packer_plugins = {
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-fugitive"
-  },
-  ["vim-illuminate"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-illuminate"
   },
   ["vim-markdown-toc"] = {
     loaded = true,
