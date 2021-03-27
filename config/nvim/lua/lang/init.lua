@@ -1,7 +1,7 @@
 local on_attach = function(client, bufnr)
 
     -- require('completion').on_attach()
-    require 'illuminate'.on_attach(client)
+    -- require 'illuminate'.on_attach(client)
 
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)

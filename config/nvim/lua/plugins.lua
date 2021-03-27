@@ -29,6 +29,7 @@ return require('packer').startup(function()
 
     -- LSP config
     use { 'neovim/nvim-lspconfig' }
+    use { 'kabouzeid/nvim-lspinstall'}
 
    
     -- NOTE: Use either one of this
@@ -39,8 +40,8 @@ return require('packer').startup(function()
     use { 'glepnir/lspsaga.nvim' }
     use { 'onsails/lspkind-nvim' }
     use { 'sbdchd/neoformat' }
-    use { 'RRethy/vim-illuminate' }
     use { 'p00f/nvim-ts-rainbow' }
+    -- use { 'RRethy/vim-illuminate' }
     -- use { 'kosayoda/nvim-lightbulb' }
 
     -- Snippets
@@ -100,6 +101,7 @@ return require('packer').startup(function()
 
     -- Markdown
     use { 'npxbr/glow.nvim', run = ':GlowInstall' }
+    use { 'mzlogin/vim-markdown-toc' }
 
 
     -- Development settings
