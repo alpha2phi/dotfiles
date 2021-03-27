@@ -92,6 +92,7 @@ return require('packer').startup(function()
         branch = 'main',
         config = function() require'statusline' end,
     }
+    use { 'romgrk/barbar.nvim' }
 
     -- -- DAP
     -- use { 'mfussenegger/nvim-dap' }
