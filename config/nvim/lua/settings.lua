@@ -1,10 +1,14 @@
 local utils = require('utils')
 
 local cmd = vim.cmd
+local o = vim.o
 local indent = 4
 
 cmd 'syntax enable'
 cmd 'filetype plugin indent on'
+
+o.termguicolors = true
+
 utils.opt('b', 'expandtab', true)
 utils.opt('b', 'shiftwidth', indent)
 utils.opt('b', 'smartindent', true)
@@ -20,7 +24,6 @@ utils.opt('o', 'wildmode', 'list:longest')
 utils.opt('w', 'number', true)
 utils.opt('w', 'relativenumber', true)
 utils.opt('o', 'clipboard', 'unnamed,unnamedplus')
--- utils.opt('w', 'nofoldenable', 'off')
 
 -- Highlight on yank
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
@@ -46,5 +49,3 @@ augroup auto_term
     autocmd TermOpen * startinsert
 augroup END
 ]])
-
-
