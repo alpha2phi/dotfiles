@@ -11,7 +11,7 @@ utils.opt('b', 'smartindent', true)
 utils.opt('b', 'tabstop', indent)
 utils.opt('o', 'hidden', true)
 utils.opt('o', 'ignorecase', true)
-utils.opt('o', 'scrolloff', 4 )
+utils.opt('o', 'scrolloff', 4)
 utils.opt('o', 'shiftround', true)
 utils.opt('o', 'smartcase', true)
 utils.opt('o', 'splitbelow', true)
@@ -19,11 +19,18 @@ utils.opt('o', 'splitright', true)
 utils.opt('o', 'wildmode', 'list:longest')
 utils.opt('w', 'number', true)
 utils.opt('w', 'relativenumber', true)
-utils.opt('o', 'clipboard','unnamed,unnamedplus')
+utils.opt('o', 'clipboard', 'unnamed,unnamedplus')
 -- utils.opt('w', 'nofoldenable', 'off')
 
 -- Highlight on yank
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
+
+-- Auto format
+auto_groups = {}
+auto_cmds = {}
+auto_cmds[0] = "BufWritePre * undojoin | Neoformat"
+auto_groups['auto_fmt'] = auto_cmds
+utils.create_augroups(auto_groups)
 
 vim.api.nvim_command([[
 augroup auto_spellcheck
@@ -35,7 +42,9 @@ augroup END
 
 vim.api.nvim_command([[
 augroup auto_term
-  autocmd TermOpen * setlocal nonumber norelativenumber
-  autocmd TermOpen * startinsert
+    autocmd TermOpen * setlocal nonumber norelativenumber
+    autocmd TermOpen * startinsert
 augroup END
 ]])
+
+
