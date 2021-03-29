@@ -42,6 +42,15 @@ return require('packer').startup(function()
     use { 'nvim-lua/popup.nvim' }
     use { 'nvim-telescope/telescope.nvim' }
 
+
+    use {
+        'nvim-telescope/telescope-frecency.nvim',
+        requires = {'tami5/sql.nvim' },
+        config = function()
+            require('telescope').load_extension('frecency')
+        end
+    }
+
     -- LSP config
     use { 'neovim/nvim-lspconfig' }
     -- use { 'kabouzeid/nvim-lspinstall'}
