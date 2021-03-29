@@ -11,6 +11,7 @@ require('telescope').setup{
 -- require('telescope').load_extension('snippets')
 require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('arecibo')
+require('telescope').load_extension('media_files')
 
 
 local actions = require('telescope.actions')

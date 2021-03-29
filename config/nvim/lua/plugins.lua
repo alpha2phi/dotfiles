@@ -52,6 +52,9 @@ return require('packer').startup(function()
         'nvim-telescope/telescope-arecibo.nvim',
         rocks = {"openssl", "lua-http-parser"}
     }
+    use { 'nvim-telescope/telescope-symbols.nvim'}
+    use { 'nvim-telescope/telescope-media-files.nvim' }
+    use { 'nvim-telescope/telescope-packer.nvim ' }
 
     -- LSP config
     use { 'neovim/nvim-lspconfig' }
