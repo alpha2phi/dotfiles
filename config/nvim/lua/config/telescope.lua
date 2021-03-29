@@ -1,8 +1,17 @@
--- require('telescope').setup{
---     require('telescope').load_extension('snippets')
--- }
-
+require('telescope').setup{
+    extensions = {
+        arecibo = {
+            ["selected_engine"]   = 'google',
+            ["url_open_command"]  = 'open',
+            ["show_http_headers"] = false,
+            ["show_domain_icons"] = false,
+        }
+    }
+}
+-- require('telescope').load_extension('snippets')
 require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('arecibo')
+
 
 local actions = require('telescope.actions')
 

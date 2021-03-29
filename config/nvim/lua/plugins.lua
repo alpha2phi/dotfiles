@@ -37,18 +37,20 @@ return require('packer').startup(function()
     use { 'vim-test/vim-test' }
     -- use { "rcarriga/vim-ultest", run = ":UpdateRemotePlugins" }
 
-    -- Fuzzy finder
+    -- Telescope
     use { 'nvim-lua/plenary.nvim' }
     use { 'nvim-lua/popup.nvim' }
     use { 'nvim-telescope/telescope.nvim' }
-
-
     use {
         'nvim-telescope/telescope-frecency.nvim',
         requires = {'tami5/sql.nvim' },
         config = function()
             require('telescope').load_extension('frecency')
         end
+    }
+    use {
+        'nvim-telescope/telescope-arecibo.nvim',
+        rocks = {"openssl", "lua-http-parser"}
     }
 
     -- LSP config

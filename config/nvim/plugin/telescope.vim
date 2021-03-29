@@ -10,10 +10,9 @@ nnoremap <silent> <leader>fm :DashboardJumpMark<CR>
 nnoremap <silent> <leader>fn :DashboardNewFile<CR>
 nnoremap <silent> <leader>fp :Telescope project<CR>
 nnoremap <silent> <leader>fr :Telescope frecency<CR>
-nnoremap <silent> <leader>fq :q<CR>
 
+nnoremap <silent> <leader>fa :lua require('telescope').extensions.arecibo.websearch()<CR>
 nnoremap <silent> <leader>fd :lua require('config.telescope').search_dotfiles()<CR>
-
 nnoremap <silent> <leader>fx :lua require('config.telescope').switch_projects()<CR>
 
 nmap <leader>fss :<C-u>SessionSave<CR>
