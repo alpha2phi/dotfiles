@@ -29,23 +29,26 @@ utils.opt('o', 'clipboard', 'unnamed,unnamedplus')
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 
 -- Auto format
-auto_groups = {}
-auto_cmds = {}
-auto_cmds[0] = "BufWritePre * undojoin | Neoformat"
-auto_groups['auto_fmt'] = auto_cmds
-utils.create_augroups(auto_groups)
+vim.api.nvim_exec([[
+augroup auto_fmt
+    autocmd!
+    autocmd BufWritePre * undojoin | Neoformat
+aug END
+]], false)
 
-vim.api.nvim_command([[
+vim.api.nvim_exec([[
 augroup auto_spellcheck
+    autocmd!
     autocmd BufNewFile,BufRead *.md setlocal spell
     autocmd BufNewFile,BufRead *.org setfiletype markdown
     autocmd BufNewFile,BufRead *.org setlocal spell
 augroup END
-]])
+]], false)
 
-vim.api.nvim_command([[
+vim.api.nvim_exec([[
 augroup auto_term
+    autocmd!
     autocmd TermOpen * setlocal nonumber norelativenumber
     autocmd TermOpen * startinsert
 augroup END
-]])
+]], false)

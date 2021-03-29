@@ -4,74 +4,71 @@ return require('packer').startup(function()
     use {'wbthomason/packer.nvim', opt = true}
 
     -- Development
-    use { 'tpope/vim-dispatch' }
-    use { 'tpope/vim-fugitive' }
-    use { 'tpope/vim-surround' }
-    use { 'tpope/vim-commentary' }
-    use { 'tpope/vim-rhubarb' }
-    use { 'tpope/vim-unimpaired' }
-    use { 'wellle/targets.vim' }
-    use { 'easymotion/vim-easymotion'}
-    use { 'liuchengxu/vim-which-key' }
-    use { 'norcalli/nvim-colorizer.lua' }
-    use { 'lewis6991/gitsigns.nvim',   
-        config = function() 
-            require('gitsigns').setup()
-        end
+    use {'tpope/vim-dispatch'}
+    use {'tpope/vim-fugitive'}
+    use {'tpope/vim-surround'}
+    use {'tpope/vim-commentary'}
+    use {'tpope/vim-rhubarb'}
+    use {'tpope/vim-unimpaired'}
+    use {'wellle/targets.vim'}
+    use {'easymotion/vim-easymotion'}
+    use {'liuchengxu/vim-which-key'}
+    use {'norcalli/nvim-colorizer.lua'}
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function() require('gitsigns').setup() end
     }
-    use { 'TimUntersberger/neogit',
-        config = function()
-            require('neogit').setup()
-        end
+    use {
+        'TimUntersberger/neogit',
+        config = function() require('neogit').setup() end
     }
     -- use { 'mhinz/vim-signify'}
     -- use { 'radenling/vim-dispatch-neovim' }
     -- use { 'phaazon/hop.nvim'}
 
     -- Color scheme
-    use { 'kyazdani42/nvim-web-devicons' }
-    use { 'sainnhe/gruvbox-material' }
-    use { 'joshdick/onedark.vim'}
+    use {'kyazdani42/nvim-web-devicons'}
+    use {'sainnhe/gruvbox-material'}
+    use {'joshdick/onedark.vim'}
 
     -- Testing
-    use { 'vim-test/vim-test' }
+    use {'vim-test/vim-test'}
     -- use { "rcarriga/vim-ultest", run = ":UpdateRemotePlugins" }
 
     -- Telescope
-    use { 'nvim-lua/plenary.nvim' }
-    use { 'nvim-lua/popup.nvim' }
-    use { 'nvim-telescope/telescope.nvim' }
+    use {'nvim-lua/plenary.nvim'}
+    use {'nvim-lua/popup.nvim'}
+    use {'nvim-telescope/telescope.nvim'}
     use {
         'nvim-telescope/telescope-frecency.nvim',
-        requires = {'tami5/sql.nvim' },
+        requires = {'tami5/sql.nvim'},
         config = function()
             require('telescope').load_extension('frecency')
         end
     }
-    use {
-        'nvim-telescope/telescope-arecibo.nvim',
-        rocks = {"openssl", "lua-http-parser"}
-    }
-    use { 'nvim-telescope/telescope-symbols.nvim'}
-    use { 'nvim-telescope/telescope-media-files.nvim' }
-    use { 'nvim-telescope/telescope-packer.nvim ' }
+    use {'nvim-telescope/telescope-symbols.nvim'}
+    -- use {
+    --     'nvim-telescope/telescope-arecibo.nvim',
+    --     rocks = {"openssl", "lua-http-parser"}
+    -- }
+    -- use { 'nvim-telescope/telescope-media-files.nvim' }
+    -- use { 'nvim-telescope/telescope-packer.nvim ' }
 
     -- LSP config
-    use { 'neovim/nvim-lspconfig' }
+    use {'neovim/nvim-lspconfig'}
     -- use { 'kabouzeid/nvim-lspinstall'}
 
-   
     -- NOTE: Use either one of this
-    use { 'hrsh7th/nvim-compe' }
+    use {'hrsh7th/nvim-compe'}
     -- use { 'nvim-lua/completion-nvim' }
 
     -- Better LSP experience
-    use { 'glepnir/lspsaga.nvim' }
-    use { 'onsails/lspkind-nvim' }
-    use { 'sbdchd/neoformat' }
-    use { 'p00f/nvim-ts-rainbow' }
-    use { 'gennaro-tedesco/nvim-peekup' }
-    use { 'ray-x/lsp_signature.nvim' }
+    use {'glepnir/lspsaga.nvim'}
+    use {'onsails/lspkind-nvim'}
+    use {'sbdchd/neoformat'}
+    use {'p00f/nvim-ts-rainbow'}
+    use {'gennaro-tedesco/nvim-peekup'}
+    use {'ray-x/lsp_signature.nvim'}
     -- use { 'lukas-reineke/indent-blankline.nvim' }
     -- use { 'Yggdroot/indentLine' }
     -- use { 'beauwilliams/focus.nvim' }
@@ -79,74 +76,75 @@ return require('packer').startup(function()
     -- use { 'kosayoda/nvim-lightbulb' }
 
     -- Snippets
-    use { 'hrsh7th/vim-vsnip' }
-    use { 'cstrap/python-snippets' }
-    use { 'ylcnfrht/vscode-python-snippet-pack' }
-    use { 'xabikos/vscode-javascript' }
-    use { 'golang/vscode-go' }
-    use { 'rust-lang/vscode-rust' }
+    use {'hrsh7th/vim-vsnip'}
+    use {'cstrap/python-snippets'}
+    use {'ylcnfrht/vscode-python-snippet-pack'}
+    use {'xabikos/vscode-javascript'}
+    use {'golang/vscode-go'}
+    use {'rust-lang/vscode-rust'}
     -- use { 'honza/vim-snippets' }
     -- use { 'SirVer/ultisnips' }
     -- use { 'norcalli/snippets.nvim' }
     -- use { 'nvim-telescope/telescope-snippets.nvim' }
 
     -- Lua development
-    use { 'tjdevries/nlua.nvim' }
+    use {'tjdevries/nlua.nvim'}
 
     -- Better syntax
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } 
-    use { 'nvim-treesitter/playground' }
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {'nvim-treesitter/playground'}
 
     -- Dashboard
-    use { 'glepnir/dashboard-nvim' }
+    use {'glepnir/dashboard-nvim'}
 
     -- Status line
     use {
         'glepnir/galaxyline.nvim',
         branch = 'main',
-        config = function() require'statusline' end,
+        config = function() require 'statusline' end
     }
     -- use { 'romgrk/barbar.nvim' }
+
+    -- Debugging
+    use {'puremourning/vimspector'}
+    use {'nvim-telescope/telescope-vimspector.nvim'}
+
+    -- Telescope fzf
+    use {'nvim-telescope/telescope-fzy-native.nvim'}
+
+    -- Project
+    use {'nvim-telescope/telescope-project.nvim'}
+    use {'airblade/vim-rooter'}
+    use {'tpope/vim-projectionist'}
+
+    -- Database
+    use {'tpope/vim-dadbod'}
+    use {'kristijanhusak/vim-dadbod-ui'}
+    use {'kristijanhusak/vim-dadbod-completion'}
+    -- use { 'tpope/vim-dotenv' }
+
+    -- Markdown
+    use {'npxbr/glow.nvim', run = ':GlowInstall'}
+    use {'mzlogin/vim-markdown-toc'}
+
+    -- Development settings
+    use {'editorconfig/editorconfig-vim'}
+
+    -- Note taking
+    use {'vimwiki/vimwiki'}
+
+    -- use { 'oberblastmeister/neuron.nvim' }
+    -- use { 'junegunn/fzf', run = '-> fzf#install()' }
+    -- use { 'junegunn/fzf.vim'}
+    -- use { 'fiatjaf/neuron.vim' }
 
     -- -- DAP
     -- use { 'mfussenegger/nvim-dap' }
     -- use { 'nvim-telescope/telescope-dap.nvim' }
     -- use { 'mfussenegger/nvim-dap-python' } -- Python
 
-    -- Debugging
-    use { 'puremourning/vimspector' }
-    use { 'nvim-telescope/telescope-vimspector.nvim' }
-
-    -- Telescope fzf
-    use { 'nvim-telescope/telescope-fzy-native.nvim' }
-
     -- Project mgmt
     -- use { 'vim-ctrlspace/vim-ctrlspace' }
-
-    -- Project
-    use { 'nvim-telescope/telescope-project.nvim' }
-    use { 'airblade/vim-rooter' }
-    use { 'tpope/vim-projectionist' }
-
-    -- Database
-    use { 'tpope/vim-dadbod' }
-    use { 'kristijanhusak/vim-dadbod-ui' }
-    use { 'kristijanhusak/vim-dadbod-completion' }
-    -- use { 'tpope/vim-dotenv' }
-
-    -- Markdown
-    use { 'npxbr/glow.nvim', run = ':GlowInstall' }
-    use { 'mzlogin/vim-markdown-toc' }
-
-    -- Development settings
-    use { 'editorconfig/editorconfig-vim' }
-
-
-    -- Note taking
-    -- use { 'oberblastmeister/neuron.nvim' }
-    -- use { 'junegunn/fzf', run = '-> fzf#install()' }
-    -- use { 'junegunn/fzf.vim'}
-    -- use { 'fiatjaf/neuron.vim' }
 
     -- Embed in browser
     -- use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
@@ -155,7 +153,7 @@ return require('packer').startup(function()
     -- use { 'ojroques/vim-oscyank' }
 
     -- Jupyter Vim
-    --use { 'jupyter-vim/jupyter-vim' }
+    -- use { 'jupyter-vim/jupyter-vim' }
 
     -- Scratch pad
     -- use { 'metakirby5/codi.vim' }
