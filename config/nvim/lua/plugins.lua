@@ -126,12 +126,15 @@ return require('packer').startup(function()
     -- Markdown
     use {'npxbr/glow.nvim', run = ':GlowInstall'}
     use {'mzlogin/vim-markdown-toc'}
+    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
 
     -- Development settings
     use {'editorconfig/editorconfig-vim'}
 
     -- Note taking
     use {'vimwiki/vimwiki'}
+    use {'vuciv/vim-bujo'}
+    use {'freitass/todo.txt-vim'}
 
     -- use { 'oberblastmeister/neuron.nvim' }
     -- use { 'junegunn/fzf', run = '-> fzf#install()' }
@@ -174,4 +177,3 @@ return require('packer').startup(function()
     -- use { 'nikvdp/neomux' }
 
 end)
-
