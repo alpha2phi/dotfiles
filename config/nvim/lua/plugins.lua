@@ -135,6 +135,7 @@ return require('packer').startup(function()
     use {'vimwiki/vimwiki'}
     use {'vuciv/vim-bujo'}
     use {'freitass/todo.txt-vim'}
+    use {'oberblastmeister/neuron.nvim', branch = 'unstable'}
 
     -- use { 'oberblastmeister/neuron.nvim' }
     -- use { 'junegunn/fzf', run = '-> fzf#install()' }
