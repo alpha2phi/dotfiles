@@ -135,6 +135,7 @@ return require('packer').startup(function()
     use {'vimwiki/vimwiki', branch = 'dev'}
     use {'blindFS/vim-taskwarrior'}
     use {'tools-life/taskwiki'}
+    use {'powerman/vim-plugin-AnsiEsc'}
 
     -- use {'vuciv/vim-bujo'}
     -- use {'freitass/todo.txt-vim'}
