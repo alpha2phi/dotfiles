@@ -132,10 +132,13 @@ return require('packer').startup(function()
     use {'editorconfig/editorconfig-vim'}
 
     -- Note taking
-    use {'vimwiki/vimwiki'}
-    use {'vuciv/vim-bujo'}
-    use {'freitass/todo.txt-vim'}
-    use {'oberblastmeister/neuron.nvim', branch = 'unstable'}
+    use {'vimwiki/vimwiki', branch = 'dev'}
+    use {'blindFS/vim-taskwarrior'}
+    use {'tools-life/taskwiki'}
+
+    -- use {'vuciv/vim-bujo'}
+    -- use {'freitass/todo.txt-vim'}
+    -- use {'oberblastmeister/neuron.nvim', branch = 'unstable'}
 
     -- use { 'oberblastmeister/neuron.nvim' }
     -- use { 'junegunn/fzf', run = '-> fzf#install()' }
