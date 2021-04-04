@@ -52,3 +52,14 @@ augroup auto_term
     autocmd TermOpen * startinsert
 augroup END
 ]], false)
+
+vim.api.nvim_exec([[
+    fun! TrimWhitespace()
+        let l:save = winsaveview()
+        keeppatterns %s/\s\+$//e
+        call winrestview(l:save)
+    endfun
+
+    autocmd BufWritePre * :call TrimWhitespace()
+]], false)
+

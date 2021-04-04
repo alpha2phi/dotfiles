@@ -69,6 +69,8 @@ return require('packer').startup(function()
     use {'p00f/nvim-ts-rainbow'}
     use {'gennaro-tedesco/nvim-peekup'}
     use {'ray-x/lsp_signature.nvim'}
+    use {'szw/vim-maximizer'}
+
     -- use { 'lukas-reineke/indent-blankline.nvim' }
     -- use { 'Yggdroot/indentLine' }
     -- use { 'beauwilliams/focus.nvim' }
