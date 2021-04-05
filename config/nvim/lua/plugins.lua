@@ -70,6 +70,7 @@ return require('packer').startup(function()
     use {'gennaro-tedesco/nvim-peekup'}
     use {'ray-x/lsp_signature.nvim'}
     use {'szw/vim-maximizer'}
+    use {'dyng/ctrlsf.vim'}
 
     -- use { 'lukas-reineke/indent-blankline.nvim' }
     -- use { 'Yggdroot/indentLine' }
