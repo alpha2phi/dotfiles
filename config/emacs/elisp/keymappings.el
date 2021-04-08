@@ -14,6 +14,7 @@
     "pc" '(projectile-command-map :which-key "choose action")
     "f"  '(:ignore t :which-key "find")
     "ff" '(counsel-fzf :which-key "fuzzy find")
+    "fb" '(switch-to-buffer :which-key "switch buffer")
     "fx" '(counsel-M-x :which-key "M-x")
     "g"  '(:ignore t :which-key "git")
     "gs" '(magit-status :which-key "git status")
@@ -26,4 +27,3 @@
     ))
 
 (provide 'keymappings)
-
