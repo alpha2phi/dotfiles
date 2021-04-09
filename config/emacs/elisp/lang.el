@@ -22,8 +22,7 @@
 
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
-(use-package company-lsp
-  :commands company-lsp)
+; (use-package company-lsp :commands company-lsp)
 
 ;;Optional - provides snippet support.
 

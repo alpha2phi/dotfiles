@@ -4,19 +4,17 @@
 ;; All org mode configurations should be here
 
 ;;; Code:
-
-
 (defun alpha2phi/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
   (visual-line-mode 1))
+
 
 (defun alpha2phi/org-font-setup ()
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")))))))
-
 
 (use-package org
   :pin org
@@ -42,9 +40,15 @@
 		(org-level-6 . 1.1)
 		(org-level-7 . 1.1)
 		(org-level-8 . 1.1)))
-(set-face-attribute (car face) nil :weight 'regular :height (cdr face)))
-)
+(set-face-attribute (car face) nil :weight 'regular :height (cdr face))))
 
+(defun alpha2phi/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(use-package visual-fill-column
+  :hook (org-mode . alpha2phi/org-mode-visual-fill))
 
 (org-babel-do-load-languages
  'org-babel-load-languages '((python . t)))
