@@ -1,3 +1,6 @@
+;;; base.el --- Base configuration
+;;; Commentary: Set up base configuration
+
 ;; Set default font size
 (defvar alpha2phi/default-font-size 160)
 (set-face-attribute 'default nil :height alpha2phi/default-font-size)
