@@ -1,9 +1,9 @@
-* dotfiles
+# dotfiles
 
-** Neovim
+## Neovim
 My Neovim configuration. To get started, read my [Medium article](https://alpha2phi.medium.com/neovim-init-lua-e80f4f136030).
 
 
-** Emacs
+## Emacs
 My Emacs configuration. To get started, read my [Medium article](https://alpha2phi.medium.com/emacs-beginner-configuration-9578dbe71d03)
 
