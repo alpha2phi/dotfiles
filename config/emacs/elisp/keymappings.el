@@ -24,6 +24,7 @@
     "ff" '(counsel-fzf :which-key "fuzzy find")
     "fb" '(switch-to-buffer :which-key "switch buffer")
     "fx" '(counsel-M-x :which-key "M-x")
+    "fd" '(treemacs :which-key "treemacs")
 
     "g"  '(:ignore t :which-key "git")
     "gs" '(magit-status :which-key "git status")
@@ -47,6 +48,12 @@
     "oa" '(org-agenda :which-key "org agenda")
     "ot" '(counsel-org-tag :which-key "org tag")
     "ose" '(org-set-effort :which-key "org set effort")
+    "oc" '(org-capture :which-key "org capture")
+
+    "s"  '(:ignore t :which-key "system")
+    "st" '(eshell :which-key "eshell")
+    "sb" '(split-window-below :which-key "split window below")
+    "sr" '(split-window-right :which-key "split window right")
 
     ))
 

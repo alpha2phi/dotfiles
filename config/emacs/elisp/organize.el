@@ -95,8 +95,11 @@
 (use-package visual-fill-column
   :hook (org-mode . alpha2phi/org-mode-visual-fill))
 
+;;  org-babel configuration
 (org-babel-do-load-languages
- 'org-babel-load-languages '((python . t)))
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (python . t)))
 
 
 (provide 'organize)
