@@ -50,4 +50,8 @@
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; helpful package
+(use-package helpful)
+
+
 (provide 'base)

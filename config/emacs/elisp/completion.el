@@ -1,3 +1,8 @@
+;;; completion.el --- Completion settings
+;;; Commentary:
+;;;    Completion settings
+
+;;; Code:
 (use-package ivy
   :bind
   ("C-x s" . swiper)
@@ -49,3 +54,4 @@
   (setq which-key-idle-delay 1))
 
 (provide 'completion)
+;;; completion.el ends here
