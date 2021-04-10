@@ -51,7 +51,32 @@
   (setq org-agenda-files
       '("~/workspace/personal/myself/notes/my_notes.org"
 	"~/workspace/personal/myself/notes/my_notes_1.org"))
-  
+
+ (setq org-todo-keywords
+    '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+      (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+
+ ;;(setq org-refile-targets
+       ;;'(("Archive.org" :maxlevel . 1)
+	 ;;("Tasks.org" :maxlevel . 1)))
+
+ ;; Save Org buffers after refiling!
+ (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+ (setq org-tag-alist
+    '((:startgroup)
+       ; Put mutually exclusive tags here
+       (:endgroup)
+       ("@errand" . ?E)
+       ("@home" . ?H)
+       ("@work" . ?W)
+       ("agenda" . ?a)
+       ("planning" . ?p)
+       ("publish" . ?P)
+       ("batch" . ?b)
+       ("note" . ?n)
+       ("idea" . ?i)))
+ 
   (alpha2phi/org-font-setup)
 )
 

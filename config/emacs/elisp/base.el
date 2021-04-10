@@ -53,5 +53,7 @@
 ;; helpful package
 (use-package helpful)
 
+;; command log
+(use-package command-log-mode)
 
 (provide 'base)

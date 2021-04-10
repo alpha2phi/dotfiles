@@ -35,12 +35,18 @@
     "dr" '(dap-ui-repl :which-key "repl")
     "du" '(dap-ui-mode :which-key "ui")
 
+    "h"  '(:ignore t :which-key "helpful")
     "hv" '(helpful-variable :which-key "helpful variable")
     "hC" '(helpful-callable :which-key "helpful callable")
     "hk" '(helpful-key :which-key "helpful key")
     "hp" '(helpful-at-point :which-key "helpful at point")
     "hf" '(helpful-function :which-key "helpful function")
     "hc" '(helpful-command :which-key "helpful command")
+
+    "o"  '(:ignore t :which-key "org mode")
+    "oa" '(org-agenda :which-key "org agenda")
+    "ot" '(counsel-org-tag :which-key "org tag")
+    "ose" '(org-set-effort :which-key "org set effort")
 
     ))
 
