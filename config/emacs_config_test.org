@@ -1,0 +1,39 @@
+* Emacs Configuration Testing
+
+#+begin_src  python :results output
+print("testing")
+#+end_src
+
+#+RESULTS:
+: testing
+
+
+ #+begin_src python :results value
+return 100
+ #+end_src
+
+ #+RESULTS:
+ : 100
+ 
+ 
+#+begin_src emacs-lisp :results value
+42
+#+end_src
+
+#+RESULTS:
+: 42
+
+#+begin_src shell :results output
+echo "shell scripts"
+#+end_src
+
+#+RESULTS:
+: shell scripts
+
+
+#+begin_src python :results output
+print("org capture template")
+#+end_src
+
+#+RESULTS:
+: org capture template

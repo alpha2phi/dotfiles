@@ -71,6 +71,7 @@ return require('packer').startup(function()
     use {'ray-x/lsp_signature.nvim'}
     use {'szw/vim-maximizer'}
     use {'dyng/ctrlsf.vim'}
+    use {'wellle/context.vim'}
 
     -- use { 'lukas-reineke/indent-blankline.nvim' }
     -- use { 'Yggdroot/indentLine' }

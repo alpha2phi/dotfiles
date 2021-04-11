@@ -1,6 +1,8 @@
 ;;; base.el --- Base configuration
-;;; Commentary: Set up base configuration
+;;; Commentary:
+;; Set up base configuration
 
+;;; Code:
 ;; Set default font size
 (defvar alpha2phi/default-font-size 160)
 (set-face-attribute 'default nil :height alpha2phi/default-font-size)
@@ -56,4 +58,9 @@
 ;; command log
 (use-package command-log-mode)
 
+;; rainbow delimiters
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 (provide 'base)
+;;; base.el ends here

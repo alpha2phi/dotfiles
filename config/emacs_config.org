@@ -1,2 +1,18 @@
 * Emacs Configuration
+
+#+begin_src  python :results output
+print("testing")
+#+end_src
+
+#+RESULTS:
+: testing
+
+
+ #+begin_src python :results value
+return 100
+ #+end_src
+
+ #+RESULTS:
+ : 100
  
+
