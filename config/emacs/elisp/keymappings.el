@@ -49,6 +49,7 @@
     "ot" '(counsel-org-tag :which-key "org tag")
     "ose" '(org-set-effort :which-key "org set effort")
     "oc" '(org-capture :which-key "org capture")
+    "obt" '(org-babel-tangel :which-key "org babel tangel")
 
     "s"  '(:ignore t :which-key "system")
     "st" '(eshell :which-key "eshell")
