@@ -76,7 +76,7 @@
        ("batch" . ?b)
        ("note" . ?n)
        ("idea" . ?i)))
- 
+
   (alpha2phi/org-font-setup)
 )
 
@@ -94,6 +94,8 @@
 
 (use-package visual-fill-column
   :hook (org-mode . alpha2phi/org-mode-visual-fill))
+
+
 
 ;;  org-babel configuration
 (org-babel-do-load-languages
@@ -113,13 +115,14 @@
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun alpha2phi/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/workspace/development/alpha2phi/dotfiles/config/emacs/emacs_config.org"))
+                      (expand-file-name "~/workspace/development/alpha2phi/dotfiles/config/emacs_config.org"))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'alpha2phi/org-babel-tangle-config)))
 
+(push '("conf-unix" . conf-unix) org-src-lang-modes)
 
 (provide 'organize)
 ;;; organize.el ends here

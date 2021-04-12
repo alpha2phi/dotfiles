@@ -25,8 +25,10 @@
     "fb" '(switch-to-buffer :which-key "switch buffer")
     "fx" '(counsel-M-x :which-key "M-x")
     "ft" '(treemacs :which-key "treemacs")
-    "ft" '(dired :which-key "dired")
+    "fd" '(dired :which-key "dired")
     "fr" '(revert-buffer :which-key "revert-buffer")
+    "fs" '(save-buffer :which-key "save-buffer")
+    "fm" '(imenu :which-key "imenu")
 
     "g"  '(:ignore t :which-key "git")
     "gs" '(magit-status :which-key "git status")

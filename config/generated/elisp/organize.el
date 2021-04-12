@@ -113,7 +113,7 @@
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun alpha2phi/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/workspace/development/alpha2phi/dotfiles/config/emacs/emacs_config.org"))
+                      (expand-file-name "~/workspace/development/alpha2phi/dotfiles/config/emacs_config.org"))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
@@ -121,5 +121,5 @@
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'alpha2phi/org-babel-tangle-config)))
 
 
-(provide 'organize)
+(Provide 'organize)
 ;;; organize.el ends here
