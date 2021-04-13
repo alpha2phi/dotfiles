@@ -1,8 +1,7 @@
 -- Configuration for completion-nvim
-
 local utils = require('utils')
 
-utils.opt('o', 'completeopt', 'menuone,noinsert,noselect')
+vim.o.completeopt = 'menuone,noinsert,noselect'
 vim.cmd [[set shortmess+=c]]
 vim.g.completion_confirm_key = ""
 vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
@@ -15,8 +14,8 @@ vim.g.completion_enable_auto_popup = 1
 utils.map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
 utils.map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
 
- vim.api.nvim_command([[
+vim.api.nvim_command([[
 augroup AuCompletion
 autocmd BufEnter * lua require'completion'.on_attach()
-augroup END 
+augroup END
 ]])
