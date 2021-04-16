@@ -5,6 +5,7 @@
 
 ;;; Code:
 (defun alpha2phi/org-mode-setup ()
+  "Org mode setup."
   (org-indent-mode)
   (variable-pitch-mode 1)
   (visual-line-mode 1))
@@ -12,6 +13,7 @@
 
 ;; Replace list hyphen with dot
 (defun alpha2phi/org-font-setup ()
+  "Font setup."
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
 			     (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
@@ -95,8 +97,6 @@
 (use-package visual-fill-column
   :hook (org-mode . alpha2phi/org-mode-visual-fill))
 
-
-
 ;;  org-babel configuration
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -114,6 +114,7 @@
 
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun alpha2phi/org-babel-tangle-config ()
+  "Auto tangle."
   (when (string-equal (buffer-file-name)
                       (expand-file-name "~/workspace/development/alpha2phi/dotfiles/config/emacs_config.org"))
     ;; Dynamic scoping to the rescue
@@ -123,6 +124,12 @@
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'alpha2phi/org-babel-tangle-config)))
 
 (push '("conf-unix" . conf-unix) org-src-lang-modes)
+
+;; No numbering when export
+(setq org-export-with-section-numbers nil)
+
+;; Always use begin_example
+(setq org-babel-min-lines-for-block-output 0)
 
 (provide 'organize)
 ;;; organize.el ends here
