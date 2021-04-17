@@ -97,11 +97,18 @@
 (use-package visual-fill-column
   :hook (org-mode . alpha2phi/org-mode-visual-fill))
 
+
+(setq org-plantuml-jar-path
+      (expand-file-name "~/workspace/software/plantuml/plantuml.jar"))
+
+(setq plantuml-default-exec-mode 'jar)
+
 ;;  org-babel configuration
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
    (shell . t)
+   (plantuml . t)
    (python . t)))
 
 (setq org-confirm-babel-evaluate nil)
@@ -124,6 +131,7 @@
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'alpha2phi/org-babel-tangle-config)))
 
 (push '("conf-unix" . conf-unix) org-src-lang-modes)
+(push '("plantuml" . plantuml) org-src-lang-modes)
 
 ;; No numbering when export
 (setq org-export-with-section-numbers nil)
