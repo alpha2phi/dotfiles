@@ -71,8 +71,9 @@ return require('packer').startup(function()
     use {'ray-x/lsp_signature.nvim'}
     use {'szw/vim-maximizer'}
     use {'dyng/ctrlsf.vim'}
-    use {'wellle/context.vim'}
+    use {'dbeniamine/cheat.sh-vim'}
 
+    -- use {'wellle/context.vim'}
     -- use { 'lukas-reineke/indent-blankline.nvim' }
     -- use { 'Yggdroot/indentLine' }
     -- use { 'beauwilliams/focus.nvim' }
@@ -86,6 +87,7 @@ return require('packer').startup(function()
     use {'xabikos/vscode-javascript'}
     use {'golang/vscode-go'}
     use {'rust-lang/vscode-rust'}
+
     -- use { 'honza/vim-snippets' }
     -- use { 'SirVer/ultisnips' }
     -- use { 'norcalli/snippets.nvim' }
