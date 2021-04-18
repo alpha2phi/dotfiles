@@ -24,6 +24,8 @@ o.splitright = true
 o.wildmode = 'list:longest'
 wo.number = true
 wo.relativenumber = true
+wo.scrolloff = 8
+wo.cursorline = true
 o.clipboard = 'unnamed,unnamedplus'
 
 -- Highlight on yank
