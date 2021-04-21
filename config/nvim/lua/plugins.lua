@@ -22,6 +22,7 @@ return require('packer').startup(function()
         'TimUntersberger/neogit',
         config = function() require('neogit').setup() end
     }
+    use {'christoomey/vim-tmux-navigator'}
     -- use { 'mhinz/vim-signify'}
     -- use { 'radenling/vim-dispatch-neovim' }
     -- use { 'phaazon/hop.nvim'}
