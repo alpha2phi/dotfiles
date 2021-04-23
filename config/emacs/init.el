@@ -40,3 +40,4 @@
 (require 'lang-go)
 (require 'lang-rust)
 (require 'lang-typescript)
+;;; init.el ends here
