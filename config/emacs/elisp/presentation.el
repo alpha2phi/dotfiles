@@ -5,9 +5,13 @@
 
 ;;; Code:
 
-;;; org-tree-slide
 (use-package org-tree-slide
   :custom
+  (org-tree-slide-slide-in-effect t)
+  (org-tree-slide-activate-message "Presentation started!")
+  (org-tree-slide-deactivate-message "Presentation finished!")
+  (org-tree-slide-header t)
+  (org-tree-slide-breadcrumbs " > ")
   (org-image-actual-width nil))
 
 
