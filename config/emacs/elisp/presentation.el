@@ -12,6 +12,7 @@
   (org-tree-slide-deactivate-message "Presentation finished!")
   (org-tree-slide-header t)
   (org-tree-slide-breadcrumbs " > ")
+  (org-tree-slide-skip-outline-level 0)
   (org-image-actual-width nil))
 
 
