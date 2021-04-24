@@ -5,12 +5,12 @@
 #+export_select_tags: export
 #+export_exclude_tags: noexport
 #+html_link_up:
-#+html_link_home
+#+html_link_home:
 #+startup: beamer
 #+latex_class: beamer
 #+latex_class_options: [bigger]
 #+beamer_frame_level: 2
-:#+startup: inlineimages
+#+startup: inlineimages
 
 * Simple Slide
 ** A slide using Emacs
@@ -32,7 +32,7 @@
 **  The beauty of nature
 ** A walk in the jungle 
 #+ATTR_HTML: :width 600
-[[file://Users/mengwangk/Downloads/nature.jpeg]]
+[[file:~/Downloads/nature.jpeg]]
 
 * Slide with Code Block
     #+begin_src python :results output
