@@ -1,0 +1,40 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
+#+options: num:nil p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:t title:t toc:t todo:t |:t
+#+title: presentation
+#+date: <2021-04-24 Sat>
+#+author: al(key-chord-define evil-normal-state-map "jk" 'evil-force-normal-state)
+(key-chord-define evil-visual-state-map "jk" 'evil-change-to-previous-state)
+(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+(key-chord-define evil-replace-state-map "jk" 'evil-normal-state)pha2phi
+#+email: alpha2phi@gmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 27.1 (Org mode 9.3)
+
+* Simple Slide
+** A slide using Emacs
+** Additional bullet point 1
+** Additional bullet point 2
+** Additional bullet point 3
+** Additional bullet point 4
+* A More Complex Slide
+** 1st point
+*** Sub level
+*** Another level
+** 2nd point
+*** Sub level
+*** Another level
+** 3nd point 
+*** org mode means not having to remember \LaTeX commands.
+*** Emacs is superb!
+* Slide with Image
+**  The beauty of nature
+** A walk in the jungle 
+
+#+ATTR_HTML: :width 600 :height 400
+[[file://Users/mengwangk/Downloads/nature.jpeg]]
+
