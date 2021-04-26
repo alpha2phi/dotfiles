@@ -150,6 +150,7 @@ return require('packer').startup(function()
     -- Presentation
     use {'junegunn/goyo.vim'}
     use {'junegunn/limelight.vim'}
+    use {'sotte/presenting.vim'}
 
     -- use {'vuciv/vim-bujo'}
     -- use {'freitass/todo.txt-vim'}
