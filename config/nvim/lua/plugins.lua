@@ -23,8 +23,8 @@ return require('packer').startup(function()
         'TimUntersberger/neogit',
         config = function() require('neogit').setup() end
     }
-    use {'christoomey/vim-tmux-navigator'}
     use {'unblevable/quick-scope'}
+    -- use {'christoomey/vim-tmux-navigator'}
     -- use { 'mhinz/vim-signify'}
     -- use { 'radenling/vim-dispatch-neovim' }
     -- use { 'phaazon/hop.nvim'}
@@ -75,8 +75,9 @@ return require('packer').startup(function()
     use {'szw/vim-maximizer'}
     use {'dyng/ctrlsf.vim'}
     use {'dbeniamine/cheat.sh-vim'}
+    use {'kevinhwang91/nvim-bqf'}
 
-    -- use {'wellle/context.vim'}
+    -- use { 'wellle/context.vim'}
     -- use { 'lukas-reineke/indent-blankline.nvim' }
     -- use { 'Yggdroot/indentLine' }
     -- use { 'beauwilliams/focus.nvim' }
