@@ -24,6 +24,7 @@ return require('packer').startup(function()
         config = function() require('neogit').setup() end
     }
     use {'christoomey/vim-tmux-navigator'}
+    use {'unblevable/quick-scope'}
     -- use { 'mhinz/vim-signify'}
     -- use { 'radenling/vim-dispatch-neovim' }
     -- use { 'phaazon/hop.nvim'}
@@ -144,6 +145,10 @@ return require('packer').startup(function()
     use {'blindFS/vim-taskwarrior'}
     use {'tools-life/taskwiki'}
     use {'powerman/vim-plugin-AnsiEsc'}
+
+    -- Presentation
+    use {'junegunn/goyo.vim'}
+    use {'junegunn/limelight.vim'}
 
     -- use {'vuciv/vim-bujo'}
     -- use {'freitass/todo.txt-vim'}
