@@ -142,10 +142,10 @@ return require('packer').startup(function()
     use {'editorconfig/editorconfig-vim'}
 
     -- Note taking
-    use {'vimwiki/vimwiki', branch = 'dev'}
-    use {'blindFS/vim-taskwarrior'}
-    use {'tools-life/taskwiki'}
-    use {'powerman/vim-plugin-AnsiEsc'}
+    -- use {'vimwiki/vimwiki', branch = 'dev'}
+    -- use {'blindFS/vim-taskwarrior'}
+    -- use {'tools-life/taskwiki'}
+    -- use {'powerman/vim-plugin-AnsiEsc'}
 
     -- Presentation
     use {'junegunn/goyo.vim'}
