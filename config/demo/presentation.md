@@ -1,10 +1,12 @@
 # Vim/Neovim Presentation
-### maintainer: Stefan Otte
+### alpha2phi
 
+#### How to use Vim/Neovim for presentation
+#### All content in Markdown
 
-#### a presentation tool
-#### for vim
-
+							┌──────────────────────────────┐
+							│you can type your content here│
+							└──────────────────────────────┘
 <!--
   Comments are removed. They must be
   in the form of an HTML comment tag.
@@ -118,9 +120,3 @@ endfunction
 
 ### Thanks!
 
-# After the End
-
-
-### You're still here? It's over.
-### Go home!
-### Go.
