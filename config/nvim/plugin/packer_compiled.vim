@@ -101,17 +101,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/glow.nvim"
   },
-  ["goyo.vim"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/goyo.vim"
-  },
   ["gruvbox-material"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/gruvbox-material"
-  },
-  ["limelight.vim"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/limelight.vim"
   },
   ["lsp_signature.nvim"] = {
     loaded = true,
@@ -275,6 +267,14 @@ _G.packer_plugins = {
   ["vim-maximizer"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-maximizer"
+  },
+  ["vim-pandoc"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-pandoc"
+  },
+  ["vim-pandoc-syntax"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
   },
   ["vim-projectionist"] = {
     loaded = true,

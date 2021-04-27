@@ -148,9 +148,11 @@ return require('packer').startup(function()
     -- use {'powerman/vim-plugin-AnsiEsc'}
 
     -- Presentation
-    use {'junegunn/goyo.vim'}
-    use {'junegunn/limelight.vim'}
     use {'sotte/presenting.vim'}
+    use {'vim-pandoc/vim-pandoc'}
+    use {'vim-pandoc/vim-pandoc-syntax'}
+    -- use {'junegunn/goyo.vim'}
+    -- use {'junegunn/limelight.vim'}
 
     -- use {'vuciv/vim-bujo'}
     -- use {'freitass/todo.txt-vim'}
