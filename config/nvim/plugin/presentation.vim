@@ -10,4 +10,7 @@ augroup presentation
     " ASCII art
     au Filetype markdown nnoremap <buffer> <F12> :.!toilet -w 200 -f term -F border<CR>
 
+    au Filetype markdown nnoremap <buffer> <F8> :.!toilet -w 200 -f small<CR>
+    au Filetype markdown nnoremap <buffer> <F9> :.!toilet -w 200 -f standard<CR>
+
 augroup end

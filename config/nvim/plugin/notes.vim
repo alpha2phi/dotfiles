@@ -5,6 +5,9 @@
 
 nnoremap <silent> <leader>wp <Cmd>Glow<CR>
 
+let g:pad#dir = "~/workspace/personal/myself/notes/"
+let g:pad#local_dir = "notes"
+
 
 " lua << EOF
 " require('neuron').setup {
