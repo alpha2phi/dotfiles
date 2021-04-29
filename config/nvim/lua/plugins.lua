@@ -142,8 +142,9 @@ return require('packer').startup(function()
     use {'editorconfig/editorconfig-vim'}
 
     -- Note taking
-    use {'fmoralesc/vim-pad'}
     use {'dhruvasagar/vim-table-mode'}
+    use {'dhruvasagar/vim-dotoo'}
+    -- use {'fmoralesc/vim-pad'}
     -- use {'vimwiki/vimwiki', branch = 'dev'}
     -- use {'blindFS/vim-taskwarrior'}
     -- use {'tools-life/taskwiki'}
@@ -153,7 +154,7 @@ return require('packer').startup(function()
     use {'sotte/presenting.vim'}
     use {'vim-pandoc/vim-pandoc'}
     use {'vim-pandoc/vim-pandoc-syntax'}
-    use {'vim-pandoc/vim-pandoc-after'}
+    -- use {'vim-pandoc/vim-pandoc-after'}
     -- use {'junegunn/goyo.vim'}
     -- use {'junegunn/limelight.vim'}
 
