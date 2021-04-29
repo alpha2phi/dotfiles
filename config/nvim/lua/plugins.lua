@@ -158,6 +158,9 @@ return require('packer').startup(function()
     -- use {'junegunn/goyo.vim'}
     -- use {'junegunn/limelight.vim'}
 
+    -- Development workflow
+    use {'voldikss/vim-browser-search'}
+
     -- use {'vuciv/vim-bujo'}
     -- use {'freitass/todo.txt-vim'}
     -- use {'oberblastmeister/neuron.nvim', branch = 'unstable'}
