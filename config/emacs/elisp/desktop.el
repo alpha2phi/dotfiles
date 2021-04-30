@@ -19,7 +19,6 @@
   (eaf-bind-key take_photo "p" eaf-camera-keybinding)
   (eaf-bind-key nil "M-q" eaf-browser-keybinding)) 
 
-
 (defun adviser-find-file (orig-fn file &rest args)
   (let ((fn (if (commandp 'eaf-open) 'eaf-open orig-fn)))
     (pcase (file-name-extension file)
