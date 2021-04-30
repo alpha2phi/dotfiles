@@ -20,5 +20,13 @@
   (eaf-bind-key nil "M-q" eaf-browser-keybinding)) 
 
 
+(defun adviser-find-file (orig-fn file &rest args)
+  (let ((fn (if (commandp 'eaf-open) 'eaf-open orig-fn)))
+    (pcase (file-name-extension file)
+      ("pdf"  (apply fn file nil))
+      ("epub" (apply fn file nil))
+      (_      (apply orig-fn file args)))))
+(advice-add #'find-file :around #'adviser-find-file)
+
 (provide 'desktop)
 ;;; desktop.el ends here
