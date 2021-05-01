@@ -142,9 +142,9 @@ return require('packer').startup(function()
     use {'editorconfig/editorconfig-vim'}
 
     -- Note taking
-    use {'dhruvasagar/vim-table-mode'}
-    use {'dhruvasagar/vim-dotoo'}
     use {'gyim/vim-boxdraw'}
+    -- use {'dhruvasagar/vim-dotoo'}
+    -- use {'dhruvasagar/vim-table-mode'}
     -- use {'fmoralesc/vim-pad'}
     -- use {'vimwiki/vimwiki', branch = 'dev'}
     -- use {'blindFS/vim-taskwarrior'}
