@@ -1,3 +1,5 @@
+require('telescope').load_extension('fzf')
+
 require('telescope').setup {
     find_command = {
         'rg', '--no-heading', '--with-filename', '--line-number', '--column',
@@ -13,10 +15,14 @@ require('telescope').setup {
             ["url_open_command"] = 'open',
             ["show_http_headers"] = false,
             ["show_domain_icons"] = false
+        },
+        fzf = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
+            case_mode = "smart_case"
         }
     }
 }
-require('telescope').load_extension('fzy_native')
 -- require('telescope').load_extension('snippets')
 -- require('telescope').load_extension('arecibo')
 -- require('telescope').load_extension('media_files')

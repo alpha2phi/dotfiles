@@ -120,7 +120,7 @@ return require('packer').startup(function()
     use {'nvim-telescope/telescope-vimspector.nvim'}
 
     -- Telescope fzf
-    use {'nvim-telescope/telescope-fzy-native.nvim'}
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
     -- Project
     use {'nvim-telescope/telescope-project.nvim'}
