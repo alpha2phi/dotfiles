@@ -24,6 +24,9 @@ return require('packer').startup(function()
         config = function() require('neogit').setup() end
     }
     use {'unblevable/quick-scope'}
+    use {'kevinhwang91/rnvimr'}
+    -- use {'francoiscabrol/ranger.vim'}
+    -- use {'rbgrouleff/bclose.vim'}
     -- use {'christoomey/vim-tmux-navigator'}
     -- use { 'mhinz/vim-signify'}
     -- use { 'radenling/vim-dispatch-neovim' }
