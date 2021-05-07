@@ -149,6 +149,7 @@ return require('packer').startup(function()
     use {'preservim/vim-pencil'}
     use {'junegunn/goyo.vim'}
     use {'junegunn/limelight.vim'}
+    use {'preservim/vim-colors-pencil'}
     -- use {'dhruvasagar/vim-dotoo'}
     -- use {'dhruvasagar/vim-table-mode'}
     -- use {'fmoralesc/vim-pad'}

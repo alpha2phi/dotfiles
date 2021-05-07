@@ -16,7 +16,7 @@ utils.map('t', '<C-k>', '<C-\\><C-n><C-w>k')
 utils.map('t', '<C-l>', '<C-\\><C-n><C-w>l')
 utils.map('t', 'jk', '<C-\\><C-n>')
 
-utils.map('n', '<Leader>bc', '<Cmd>bd<CR>')
+utils.map('n', '<Leader>bd', '<Cmd>bd<CR>')
 utils.map('n', '<Leader>bn', '<Cmd>bn<CR>')
 utils.map('n', '<Leader>bp', '<Cmd>bp<CR>')
 utils.map('n', '<Leader>bl', '<Cmd>ls<CR>')
