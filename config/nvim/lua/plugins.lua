@@ -144,8 +144,11 @@ return require('packer').startup(function()
     -- Development settings
     use {'editorconfig/editorconfig-vim'}
 
-    -- Note taking
+    -- Writing and note taking
     use {'gyim/vim-boxdraw'}
+    use {'preservim/vim-pencil'}
+    use {'junegunn/goyo.vim'}
+    use {'junegunn/limelight.vim'}
     -- use {'dhruvasagar/vim-dotoo'}
     -- use {'dhruvasagar/vim-table-mode'}
     -- use {'fmoralesc/vim-pad'}
@@ -159,11 +162,13 @@ return require('packer').startup(function()
     use {'vim-pandoc/vim-pandoc'}
     use {'vim-pandoc/vim-pandoc-syntax'}
     -- use {'vim-pandoc/vim-pandoc-after'}
-    -- use {'junegunn/goyo.vim'}
-    -- use {'junegunn/limelight.vim'}
 
     -- Development workflow
     use {'voldikss/vim-browser-search'}
+
+    -- Testing
+    use {'FooSoft/vim-argwrap'}
+    use {'preservim/vimux'}
 
     -- use {'vuciv/vim-bujo'}
     -- use {'freitass/todo.txt-vim'}
