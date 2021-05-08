@@ -24,7 +24,8 @@ return require('packer').startup(function()
         config = function() require('neogit').setup() end
     }
     use {'unblevable/quick-scope'}
-    use {'kevinhwang91/rnvimr'}
+    use {'voldikss/vim-floaterm'}
+    -- use {'kevinhwang91/rnvimr'}
     -- use {'francoiscabrol/ranger.vim'}
     -- use {'rbgrouleff/bclose.vim'}
     -- use {'christoomey/vim-tmux-navigator'}
@@ -150,7 +151,7 @@ return require('packer').startup(function()
     use {'junegunn/goyo.vim'}
     use {'junegunn/limelight.vim'}
     use {'preservim/vim-colors-pencil'}
-    -- use {'dhruvasagar/vim-dotoo'}
+    use {'dhruvasagar/vim-dotoo'}
     -- use {'dhruvasagar/vim-table-mode'}
     -- use {'fmoralesc/vim-pad'}
     -- use {'vimwiki/vimwiki', branch = 'dev'}
@@ -205,9 +206,6 @@ return require('packer').startup(function()
 
     -- Latex
     -- use { 'lervag/vimtex' }
-
-    -- Floaterm
-    -- use { 'voldikss/vim-floaterm' }
 
     -- Neoterm
     -- use { 'kassio/neoterm' }
