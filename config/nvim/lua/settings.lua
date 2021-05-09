@@ -9,27 +9,28 @@ local indent = 4
 cmd 'syntax enable'
 cmd 'filetype plugin indent on'
 
-o.termguicolors = true
-bo.expandtab = true
 bo.shiftwidth = indent
-bo.smartindent = true
 bo.tabstop = indent
+bo.softtabstop = indent
+o.termguicolors = true
 o.hidden = true
 o.ignorecase = true
 o.scrolloff = 4
-o.shiftround = true
-o.smartcase = true
 o.splitbelow = true
 o.splitright = true
 o.wildmode = 'list:longest'
+o.clipboard = 'unnamed,unnamedplus'
 wo.number = true
 wo.relativenumber = true
 wo.scrolloff = 8
 wo.cursorline = true
-o.clipboard = 'unnamed,unnamedplus'
+
+cmd [[
+set expandtab smarttab shiftround autoindent smartindent smartcase
+]]
 
 -- Highlight on yank
-vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
+cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 
 -- Auto format
 vim.api.nvim_exec([[

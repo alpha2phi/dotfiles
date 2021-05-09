@@ -1,4 +1,5 @@
 nnoremap <silent> <Leader>np <Cmd>Glow<CR>
+nnoremap <silent> <Leader>ne <Cmd>FloatermNew \nvim ~/workspace/persona/myself/notes/notes.md<CR>
 
 " VimWiki
 " let g:vimwiki_list = [{ 'path': '~/workspace/personal/myself/notes', 'syntax':'markdown', 'ext': '.md' }]
