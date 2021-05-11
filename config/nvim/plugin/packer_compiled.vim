@@ -211,6 +211,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/sql.nvim"
   },
+  tabular = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/tabular"
+  },
   ["targets.vim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/targets.vim"
@@ -239,10 +243,6 @@ _G.packer_plugins = {
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope.nvim"
-  },
-  ["vim-argwrap"] = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-argwrap"
   },
   ["vim-boxdraw"] = {
     loaded = true,
@@ -291,6 +291,10 @@ _G.packer_plugins = {
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+  },
+  ["vim-markdown"] = {
+    loaded = true,
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-markdown"
   },
   ["vim-markdown-toc"] = {
     loaded = true,
@@ -351,10 +355,6 @@ _G.packer_plugins = {
   vimspector = {
     loaded = true,
     path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vimspector"
-  },
-  vimux = {
-    loaded = true,
-    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vimux"
   },
   ["vscode-go"] = {
     loaded = true,

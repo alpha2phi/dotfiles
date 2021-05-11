@@ -141,17 +141,19 @@ return require('packer').startup(function()
     use {'npxbr/glow.nvim', run = ':GlowInstall'}
     use {'mzlogin/vim-markdown-toc'}
     use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+    -- use {'godlygeek/tabular'}
+    -- use {'plasticboy/vim-markdown'}
 
     -- Development settings
     use {'editorconfig/editorconfig-vim'}
 
     -- Writing and note taking
-    use {'gyim/vim-boxdraw'}
-    use {'preservim/vim-pencil'}
-    use {'junegunn/goyo.vim'}
-    use {'junegunn/limelight.vim'}
-    use {'preservim/vim-colors-pencil'}
-    use {'dhruvasagar/vim-dotoo'}
+    -- use {'gyim/vim-boxdraw'}
+    -- use {'preservim/vim-pencil'}
+    -- use {'junegunn/goyo.vim'}
+    -- use {'junegunn/limelight.vim'}
+    -- use {'preservim/vim-colors-pencil'}
+    -- use {'dhruvasagar/vim-dotoo'}
     -- use {'dhruvasagar/vim-table-mode'}
     -- use {'fmoralesc/vim-pad'}
     -- use {'vimwiki/vimwiki', branch = 'dev'}
@@ -169,8 +171,8 @@ return require('packer').startup(function()
     use {'voldikss/vim-browser-search'}
 
     -- Testing
-    use {'FooSoft/vim-argwrap'}
-    use {'preservim/vimux'}
+    -- use {'FooSoft/vim-argwrap'}
+    -- use {'preservim/vimux'}
 
     -- use {'vuciv/vim-bujo'}
     -- use {'freitass/todo.txt-vim'}
