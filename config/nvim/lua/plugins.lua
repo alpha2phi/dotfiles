@@ -132,20 +132,20 @@ return require('packer').startup(function()
     use {'tpope/vim-projectionist'}
 
     -- Database
-    use {'tpope/vim-dadbod'}
-    use {'kristijanhusak/vim-dadbod-ui'}
-    use {'kristijanhusak/vim-dadbod-completion'}
+    -- use {'tpope/vim-dadbod'}
+    -- use {'kristijanhusak/vim-dadbod-ui'}
+    -- use {'kristijanhusak/vim-dadbod-completion'}
     -- use { 'tpope/vim-dotenv' }
 
     -- Markdown
-    use {'npxbr/glow.nvim', run = ':GlowInstall'}
-    use {'mzlogin/vim-markdown-toc'}
-    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+    -- use {'npxbr/glow.nvim', run = ':GlowInstall'}
+    -- use {'mzlogin/vim-markdown-toc'}
+    -- use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
     -- use {'godlygeek/tabular'}
     -- use {'plasticboy/vim-markdown'}
 
     -- Development settings
-    use {'editorconfig/editorconfig-vim'}
+    -- use {'editorconfig/editorconfig-vim'}
 
     -- Writing and note taking
     -- use {'gyim/vim-boxdraw'}
@@ -162,9 +162,9 @@ return require('packer').startup(function()
     -- use {'powerman/vim-plugin-AnsiEsc'}
 
     -- Presentation
-    use {'sotte/presenting.vim'}
-    use {'vim-pandoc/vim-pandoc'}
-    use {'vim-pandoc/vim-pandoc-syntax'}
+    -- use {'sotte/presenting.vim'}
+    -- use {'vim-pandoc/vim-pandoc'}
+    -- use {'vim-pandoc/vim-pandoc-syntax'}
     -- use {'vim-pandoc/vim-pandoc-after'}
 
     -- Development workflow
