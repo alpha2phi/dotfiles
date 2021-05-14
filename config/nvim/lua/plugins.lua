@@ -14,7 +14,6 @@ return require('packer').startup(function()
     use {'wellle/targets.vim'}
     use {'easymotion/vim-easymotion'}
     use {'liuchengxu/vim-which-key'}
-    use {'norcalli/nvim-colorizer.lua'}
     use {
         'lewis6991/gitsigns.nvim',
         config = function() require('gitsigns').setup() end
@@ -25,6 +24,7 @@ return require('packer').startup(function()
     }
     use {'unblevable/quick-scope'}
     use {'voldikss/vim-floaterm'}
+    -- use {'norcalli/nvim-colorizer.lua'}
     -- use {'kevinhwang91/rnvimr'}
     -- use {'francoiscabrol/ranger.vim'}
     -- use {'rbgrouleff/bclose.vim'}
@@ -36,7 +36,7 @@ return require('packer').startup(function()
     -- Color scheme
     use {'kyazdani42/nvim-web-devicons'}
     use {'sainnhe/gruvbox-material'}
-    use {'joshdick/onedark.vim'}
+    -- use {'joshdick/onedark.vim'}
 
     -- Testing
     use {'vim-test/vim-test'}

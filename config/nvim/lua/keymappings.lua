@@ -8,6 +8,8 @@ utils.map('n', '<Leader>fsf', '<Cmd>w<CR>')
 utils.map('n', '<Leader>fv', '<Cmd>15Vex<CR>')
 utils.map('n', '<Leader>rr', '!!$SHELL<CR>')
 utils.map('n', '<C-w><C-o>', ':MaximizerToggle!<CR>')
+utils.map('n', '<Leader>dsv', ':source %<CR>')
+utils.map('n', '<Leader>dsl', ':luafile %<CR>')
 
 utils.map('t', '<C-w><C-o>', '<C-\\><C-n> :MaximizerToggle!<CR>')
 utils.map('t', '<C-h>', '<C-\\><C-n><C-w>h')
