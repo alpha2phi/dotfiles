@@ -54,6 +54,7 @@ return require('packer').startup(function()
         end
     }
     use {'nvim-telescope/telescope-symbols.nvim'}
+    use {'nvim-telescope/telescope-github.nvim'}
     -- use {
     --     'nvim-telescope/telescope-arecibo.nvim',
     --     rocks = {"openssl", "lua-http-parser"}
