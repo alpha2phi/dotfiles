@@ -11,3 +11,14 @@ augroup pythondebug
 augroup END
 ]], false)
 
+vim.api.nvim_exec([[
+augroup rustdebug
+  autocmd!
+
+  autocmd FileType rust map <buffer> <Leader>dr :update<CR>:Cargo run<CR>
+  autocmd FileType rust map <buffer> <Leader>dd :update<CR>:RustRun<CR>
+  autocmd FileType rust packadd termdebug
+
+augroup END
+]], false)
+
