@@ -130,7 +130,7 @@ return require('packer').startup(function()
     -- Project
     use {'nvim-telescope/telescope-project.nvim'}
     use {'airblade/vim-rooter'}
-    use {'tpope/vim-projectionist'}
+    -- use {'tpope/vim-projectionist'}
 
     -- Database
     -- use {'tpope/vim-dadbod'}

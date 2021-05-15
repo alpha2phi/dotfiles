@@ -10,14 +10,14 @@ require('config.compe')
 -- lspkind-nvim
 require('config.lspkind')
 
+-- treesitter
+require('config.treesitter')
+
 -- nvim-colorizer
-require('config.colorizer')
+-- require('config.colorizer')
 
 -- nvim-lightbulb
 -- require('config.lightbulb')
-
--- treesitter
-require('config.treesitter')
 
 -- snippets.nvim
 -- require('config.snippets')
@@ -26,4 +26,4 @@ require('config.treesitter')
 -- require('config.completion')
 
 -- vim-slime
---require('config.slime')
+-- require('config.slime')

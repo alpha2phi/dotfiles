@@ -36,7 +36,7 @@ cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 vim.api.nvim_exec([[
 augroup auto_fmt
     autocmd!
-    autocmd BufWritePre *.py,*.lua undojoin | Neoformat
+    autocmd BufWritePre *.py,*.lua try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 aug END
 ]], false)
 
