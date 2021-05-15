@@ -91,6 +91,7 @@ return require('packer').startup(function()
 
     -- Snippets
     use {'hrsh7th/vim-vsnip'}
+    use {'rafamadriz/friendly-snippets'}
     use {'cstrap/python-snippets'}
     use {'ylcnfrht/vscode-python-snippet-pack'}
     use {'xabikos/vscode-javascript'}
