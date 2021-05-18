@@ -81,7 +81,7 @@ return require('packer').startup(function()
     use {'dbeniamine/cheat.sh-vim'}
     use {'kevinhwang91/nvim-bqf'}
     use {'junegunn/vim-peekaboo'}
-    -- use {'pechorin/any-jump.vim'}
+    use {'pechorin/any-jump.vim'}
     -- use {'gennaro-tedesco/nvim-peekup'}
     -- use {'wellle/context.vim'}
     -- use {'lukas-reineke/indent-blankline.nvim' }
