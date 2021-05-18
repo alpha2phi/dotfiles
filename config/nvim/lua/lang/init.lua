@@ -105,7 +105,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true;
 -- LSPs
 -- require'lspinstall'.setup()
 -- local servers = require'lspinstall'.installed_servers()
-local servers = {"pyright", "rust_analyzer", "gopls", "tsserver"}
+local servers = {"pyright", "rust_analyzer", "gopls", "tsserver", "vimls"}
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         capabilities = capabilities,

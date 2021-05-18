@@ -81,13 +81,14 @@ return require('packer').startup(function()
     use {'dbeniamine/cheat.sh-vim'}
     use {'kevinhwang91/nvim-bqf'}
     use {'junegunn/vim-peekaboo'}
+    -- use {'pechorin/any-jump.vim'}
     -- use {'gennaro-tedesco/nvim-peekup'}
-    -- use { 'wellle/context.vim'}
-    -- use { 'lukas-reineke/indent-blankline.nvim' }
-    -- use { 'Yggdroot/indentLine' }
-    -- use { 'beauwilliams/focus.nvim' }
-    -- use { 'RRethy/vim-illuminate' }
-    -- use { 'kosayoda/nvim-lightbulb' }
+    -- use {'wellle/context.vim'}
+    -- use {'lukas-reineke/indent-blankline.nvim' }
+    -- use {'Yggdroot/indentLine' }
+    -- use {'beauwilliams/focus.nvim' }
+    -- use {'RRethy/vim-illuminate' }
+    -- use {'kosayoda/nvim-lightbulb' }
 
     -- Snippets
     use {'hrsh7th/vim-vsnip'}
