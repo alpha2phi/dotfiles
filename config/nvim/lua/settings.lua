@@ -20,6 +20,7 @@ o.splitbelow = true
 o.splitright = true
 o.wildmode = 'list:longest'
 o.clipboard = 'unnamed,unnamedplus'
+o.timeoutlen = 500
 wo.number = true
 wo.relativenumber = true
 wo.scrolloff = 8

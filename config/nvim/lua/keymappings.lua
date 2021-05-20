@@ -46,5 +46,7 @@ nnoremap <silent> <M-down> <C-w>-
 
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
+nnoremap <Leader>pd :let &runtimepath.=','.escape(expand('%:p:h'), '\,')
+
 ]], false)
 
