@@ -18,9 +18,9 @@ o.ignorecase = true
 o.scrolloff = 4
 o.splitbelow = true
 o.splitright = true
-o.wildmode = 'list:longest'
 o.clipboard = 'unnamed,unnamedplus'
 o.timeoutlen = 500
+o.updatetime = 300
 wo.number = true
 wo.relativenumber = true
 wo.scrolloff = 8
@@ -28,6 +28,16 @@ wo.cursorline = true
 
 cmd [[
 set expandtab smarttab shiftround autoindent smartindent smartcase
+set path+=**
+set wildmode=longest,list,full
+set wildmenu
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=**/coverage/*
+set wildignore+=**/node_modules/*
+set wildignore+=**/android/*
+set wildignore+=**/ios/*
+set wildignore+=**/.git/*
 ]]
 
 -- Highlight on yank

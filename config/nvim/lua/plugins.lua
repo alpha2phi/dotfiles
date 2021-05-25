@@ -107,6 +107,7 @@ return require('packer').startup(function()
     -- Lua development
     -- use {'tjdevries/nlua.nvim'}
     use {'folke/lua-dev.nvim'}
+    use {'simrat39/symbols-outline.nvim'}
 
     -- Plugin development
     use {'thinca/vim-themis'}
@@ -229,3 +230,4 @@ return require('packer').startup(function()
     -- use {'nikvdp/neomux' }
 
 end)
+
