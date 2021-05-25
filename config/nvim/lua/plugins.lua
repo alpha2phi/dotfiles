@@ -24,6 +24,7 @@ return require('packer').startup(function()
     }
     use {'unblevable/quick-scope'}
     use {'voldikss/vim-floaterm'}
+    use {'jiangmiao/auto-pairs'}
     -- use {'norcalli/nvim-colorizer.lua'}
     -- use {'kevinhwang91/rnvimr'}
     -- use {'francoiscabrol/ranger.vim'}
@@ -104,7 +105,8 @@ return require('packer').startup(function()
     -- use { 'nvim-telescope/telescope-snippets.nvim' }
 
     -- Lua development
-    use {'tjdevries/nlua.nvim'}
+    -- use {'tjdevries/nlua.nvim'}
+    use {'folke/lua-dev.nvim'}
 
     -- Plugin development
     use {'thinca/vim-themis'}

@@ -1,9 +1,10 @@
+USER = vim.fn.expand('$USER')
+
+-- Language specific key mappings
 require('lang.keymappings')
 
 local on_attach = function(client, bufnr)
 
-    -- require('completion').on_attach()
-    -- require 'illuminate'.on_attach(client)
     require'lsp_signature'.on_attach(client)
 
     local function buf_set_keymap(...)
@@ -74,12 +75,9 @@ end
 local nvim_lsp = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
--- require'snippets'.use_suggested_mappings(true) -- for snippets.vim
-
 -- Code actions
 capabilities.textDocument.codeAction = {
-    -- dynamicRegistration = true
-    dynamicRegistration = false,
+    dynamicRegistration = true,
     codeActionLiteralSupport = {
         codeActionKind = {
             valueSet = (function()
@@ -89,42 +87,60 @@ capabilities.textDocument.codeAction = {
             end)()
         }
     }
-    -- codeActionLiteralSupport = {
-    --     codeActionKind = {
-    --         valueSet = {
-    --             "", "quickfix", "refactor", "refactor.extract",
-    --             "refactor.inline", "refactor.rewrite", "source",
-    --             "source.organizeImports"
-    --         }
-    --     }
-    -- }
 }
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true;
 
 -- LSPs
--- require'lspinstall'.setup()
--- local servers = require'lspinstall'.installed_servers()
 local servers = {"pyright", "rust_analyzer", "gopls", "tsserver", "vimls"}
 for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-        capabilities = capabilities,
-        on_attach = on_attach
-        -- init_options = {
-        --     onlyAnalyzeProjectsWithOpenFiles = true,
-        --     suggestFromUnimportedLibraries = false,
-        --     closingLabels = true,
-        -- };
-    }
+    nvim_lsp[lsp].setup {capabilities = capabilities, on_attach = on_attach}
 end
 
--- Lua LSP. NOTE: This replaces the calls where you would have before done `require('nvim_lsp').sumneko_lua.setup()`
-require('nlua.lsp.nvim').setup(require('lspconfig'), {
-    capabilities = capabilities,
-    on_attach = on_attach
-    -- init_options = {
-    --     onlyAnalyzeProjectsWithOpenFiles = true,
-    --     suggestFromUnimportedLibraries = false,
-    --     closingLabels = true
-    -- }
+-- Lua LSP
+local sumneko_root_path = ""
+local sumneko_binary = ""
+
+if vim.fn.has("mac") == 1 then
+    sumneko_root_path = "/Users/" .. USER .. "/.config/nvim/lua-language-server"
+    sumneko_binary = "/Users/" .. USER ..
+                         "/.config/nvim/lua-language-server/bin/macOS/lua-language-server"
+elseif vim.fn.has("unix") == 1 then
+    sumneko_root_path = "/home/" .. USER .. "/.config/nvim/lua-language-server"
+    sumneko_binary = "/home/" .. USER ..
+                         "/.config/nvim/lua-language-server/bin/Linux/lua-language-server"
+else
+    print("Unsupported system for sumneko")
+end
+
+-- lua-dev.nvim
+local luadev = require("lua-dev").setup({
+    library = {vimruntime = true, types = true, plugins = true},
+    lspconfig = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+        settings = {
+            Lua = {
+                runtime = {
+                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                    version = 'LuaJIT',
+                    -- Setup your lua path
+                    path = vim.split(package.path, ';')
+                },
+                diagnostics = {
+                    -- Get the language server to recognize the `vim` global
+                    globals = {'vim'}
+                },
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    library = {
+                        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+                    }
+                }
+            }
+        }
+    }
 })
+nvim_lsp.sumneko_lua.setup(luadev)
