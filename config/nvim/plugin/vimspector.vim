@@ -1,3 +1,8 @@
+fun! GotoWindow(id)
+    call win_gotoid(a:id)
+    MaximizerToggle
+endfun
+
 let g:vimspector_enable_mappings = 'HUMAN'
 
 nmap <leader>vl :call vimspector#Launch()<CR>
@@ -11,3 +16,12 @@ let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-go', 'CodeLLDB', 'vscode
 
 " Integration with telescope.nvim
 nmap <leader>vc :lua require('telescope').extensions.vimspector.configurations()<CR>
+
+" Inspection
+nnoremap <leader>vtv :MaximizerToggle!<CR>
+nnoremap <leader>vgc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>vgt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>vgv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>vgw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>vgs :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>vgo :call GotoWindow(g:vimspector_session_windows.output)<CR>
