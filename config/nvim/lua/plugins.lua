@@ -105,9 +105,12 @@ return require('packer').startup(function()
     -- use { 'nvim-telescope/telescope-snippets.nvim' }
 
     -- Lua development
-    -- use {'tjdevries/nlua.nvim'}
     use {'folke/lua-dev.nvim'}
     use {'simrat39/symbols-outline.nvim'}
+    use {'rafcamlet/nvim-luapad'}
+    -- use {'tjdevries/nlua.nvim'}
+    -- use {'metakirby5/codi.vim'}
+    -- use {'bfredl/nvim-luadev'}
 
     -- Plugin development
     use {'thinca/vim-themis'}
