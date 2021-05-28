@@ -47,6 +47,8 @@ local on_attach = function(client, bufnr)
                    '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
     buf_set_keymap('n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>',
                    opts)
+    buf_set_keymap('n', '<leader>lss',
+                   '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
 
     -- Set some keybinds conditional on server capabilities
     if client.resolved_capabilities.document_formatting then
