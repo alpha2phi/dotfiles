@@ -13,7 +13,6 @@ return require('packer').startup(function()
     use {'tpope/vim-vinegar'}
     use {'wellle/targets.vim'}
     use {'easymotion/vim-easymotion'}
-    use {'liuchengxu/vim-which-key'}
     use {
         'lewis6991/gitsigns.nvim',
         config = function() require('gitsigns').setup() end
@@ -25,6 +24,11 @@ return require('packer').startup(function()
     use {'unblevable/quick-scope'}
     use {'voldikss/vim-floaterm'}
     use {'jiangmiao/auto-pairs'}
+    use {
+        "folke/which-key.nvim",
+        config = function() require("which-key").setup {} end
+    }
+    -- use {'liuchengxu/vim-which-key'}
     -- use {'norcalli/nvim-colorizer.lua'}
     -- use {'kevinhwang91/rnvimr'}
     -- use {'francoiscabrol/ranger.vim'}
@@ -37,6 +41,7 @@ return require('packer').startup(function()
     -- Color scheme
     use {'kyazdani42/nvim-web-devicons'}
     use {'sainnhe/gruvbox-material'}
+    use {'folke/tokyonight.nvim'}
     -- use {'joshdick/onedark.vim'}
 
     -- Testing
@@ -81,8 +86,13 @@ return require('packer').startup(function()
     use {'dyng/ctrlsf.vim'}
     use {'dbeniamine/cheat.sh-vim'}
     use {'kevinhwang91/nvim-bqf'}
-    use {'junegunn/vim-peekaboo'}
     use {'pechorin/any-jump.vim'}
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function() require("trouble").setup {} end
+    }
+    -- use {'junegunn/vim-peekaboo'}
     -- use {'gennaro-tedesco/nvim-peekup'}
     -- use {'wellle/context.vim'}
     -- use {'lukas-reineke/indent-blankline.nvim' }
