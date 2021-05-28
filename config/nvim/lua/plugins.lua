@@ -87,11 +87,11 @@ return require('packer').startup(function()
     use {'dbeniamine/cheat.sh-vim'}
     use {'kevinhwang91/nvim-bqf'}
     use {'pechorin/any-jump.vim'}
-    use {
-        "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-        config = function() require("trouble").setup {} end
-    }
+    -- use {
+    --     "folke/trouble.nvim",
+    --     requires = "kyazdani42/nvim-web-devicons",
+    --     config = function() require("trouble").setup {} end
+    -- }
     -- use {'junegunn/vim-peekaboo'}
     -- use {'gennaro-tedesco/nvim-peekup'}
     -- use {'wellle/context.vim'}
