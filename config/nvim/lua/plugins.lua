@@ -11,6 +11,7 @@ return require('packer').startup(function()
     use {'tpope/vim-rhubarb'}
     use {'tpope/vim-unimpaired'}
     use {'tpope/vim-vinegar'}
+    use {'tpope/vim-sleuth'}
     use {'wellle/targets.vim'}
     use {'easymotion/vim-easymotion'}
     use {

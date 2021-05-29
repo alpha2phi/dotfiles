@@ -24,6 +24,11 @@ utils.map('n', '<Leader>bn', '<Cmd>bn<CR>')
 utils.map('n', '<Leader>bp', '<Cmd>bp<CR>')
 utils.map('n', '<Leader>bl', '<Cmd>ls<CR>')
 
+utils.map('n', '<Leader>qf', '<Cmd>copen<CR>')
+utils.map('n', '<Leader>qc', '<Cmd>cclose<CR>')
+utils.map('n', '<Leader>qn', '<Cmd>cnext<CR>')
+utils.map('n', '<Leader>qp', '<Cmd>cprev<CR>')
+
 vim.api.nvim_exec([[
 
 cnoreabbrev W! w!

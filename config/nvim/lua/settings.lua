@@ -57,9 +57,6 @@ augroup auto_spellcheck
     autocmd BufNewFile,BufRead *.md setlocal spell
     autocmd BufNewFile,BufRead *.org setfiletype markdown
     autocmd BufNewFile,BufRead *.org setlocal spell
-    autocmd BufNewFile,BufRead *.html setlocal ts=2 sw=2 expandtab
-    autocmd BufNewFile,BufRead *.js setlocal ts=2 sw=2 expandtab
-    autocmd BufNewFile,BufRead *.json setlocal syntax=off expandtab
 augroup END
 ]], false)
 
