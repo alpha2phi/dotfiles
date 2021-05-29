@@ -86,8 +86,9 @@ return require('packer').startup(function()
     use {'szw/vim-maximizer'}
     use {'dyng/ctrlsf.vim'}
     use {'dbeniamine/cheat.sh-vim'}
-    use {'kevinhwang91/nvim-bqf'}
     use {'pechorin/any-jump.vim'}
+    use {'kshenoy/vim-signature'}
+    -- use {'kevinhwang91/nvim-bqf'}
     -- use {
     --     "folke/trouble.nvim",
     --     requires = "kyazdani42/nvim-web-devicons",
@@ -119,6 +120,7 @@ return require('packer').startup(function()
     use {'folke/lua-dev.nvim'}
     use {'simrat39/symbols-outline.nvim'}
     use {'rafcamlet/nvim-luapad'}
+    use {'~/workspace/development/alpha2phi/alpha.nvim'}
     -- use {'tjdevries/nlua.nvim'}
     -- use {'metakirby5/codi.vim'}
     -- use {'bfredl/nvim-luadev'}
