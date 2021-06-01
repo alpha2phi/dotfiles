@@ -22,6 +22,7 @@ utils.map('n', '<Leader>bd', '<Cmd>bd<CR>')
 utils.map('n', '<Leader>ba', '<Cmd>%bd|e#<CR>')
 utils.map('n', '<Leader>bn', '<Cmd>bn<CR>')
 utils.map('n', '<Leader>bp', '<Cmd>bp<CR>')
+utils.map('n', '<Leader>bq', '<Cmd>q<CR>')
 utils.map('n', '<Leader>bl', '<Cmd>ls<CR>')
 
 utils.map('n', '<Leader>qf', '<Cmd>copen<CR>')
