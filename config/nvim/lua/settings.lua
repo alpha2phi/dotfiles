@@ -22,6 +22,7 @@ o.clipboard = 'unnamed,unnamedplus'
 o.timeoutlen = 500
 o.updatetime = 300
 o.inccommand = "split"
+o.cmdheight = 2
 wo.number = true
 wo.relativenumber = true
 wo.scrolloff = 8
