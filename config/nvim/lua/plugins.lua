@@ -160,6 +160,7 @@ return require('packer').startup(function()
     -- Development workflow
     use {'voldikss/vim-browser-search'}
     use {'kkoomen/vim-doge', run = '-> doge#install()'}
+    use {'chrisbra/unicode.vim'}
 
     -- Rust
     use {'rust-lang/rust.vim'}
