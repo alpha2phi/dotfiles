@@ -30,6 +30,8 @@ utils.map('n', '<Leader>qc', '<Cmd>cclose<CR>')
 utils.map('n', '<Leader>qn', '<Cmd>cnext<CR>')
 utils.map('n', '<Leader>qp', '<Cmd>cprev<CR>')
 utils.map('n', '<Leader>qz', '<Cmd>cex []<CR>')
+utils.map('n', '<Leader>qh', 'q:')
+utils.map('n', '<Leader>qs', 'q/')
 
 vim.api.nvim_exec([[
 
