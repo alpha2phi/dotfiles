@@ -42,7 +42,8 @@ return require('packer').startup(function()
     -- Color scheme
     use {'kyazdani42/nvim-web-devicons'}
     use {'sainnhe/gruvbox-material'}
-    use {'folke/tokyonight.nvim'}
+    use {'sainnhe/edge'}
+    -- use {'folke/tokyonight.nvim'}
     -- use {'joshdick/onedark.vim'}
 
     -- Testing
