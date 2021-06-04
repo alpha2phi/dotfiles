@@ -89,7 +89,7 @@ return require('packer').startup(function()
     use {'dbeniamine/cheat.sh-vim'}
     use {'pechorin/any-jump.vim'}
     use {'kshenoy/vim-signature'}
-    -- use {'kevinhwang91/nvim-bqf'}
+    use {'kevinhwang91/nvim-bqf'}
     -- use {
     --     "folke/trouble.nvim",
     --     requires = "kyazdani42/nvim-web-devicons",
