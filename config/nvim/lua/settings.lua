@@ -70,20 +70,6 @@ augroup auto_term
 augroup END
 ]], false)
 
--- vim.api.nvim_exec([[
--- hi ActiveWindow guibg=#17252c
--- hi InactiveWindow guibg=#0D1B22
-
--- augroup WindowManagement
---     autocmd!
---     autocmd WinEnter * call Handle_Win_Enter()
--- augroup END
-
--- function! Handle_Win_Enter()
---     setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
--- endfunction
--- ]], false)
-
 vim.api.nvim_exec([[
     fun! TrimWhitespace()
         let l:save = winsaveview()
