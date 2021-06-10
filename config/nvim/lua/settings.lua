@@ -4,7 +4,7 @@ local cmd = vim.cmd
 local o = vim.o
 local wo = vim.wo
 local bo = vim.bo
-local indent = 4
+local indent = 2
 
 cmd 'syntax enable'
 cmd 'filetype plugin indent on'
@@ -22,7 +22,7 @@ o.clipboard = 'unnamed,unnamedplus'
 o.timeoutlen = 500
 o.updatetime = 300
 o.inccommand = "split"
-o.cmdheight = 2
+o.cmdheight = 3
 wo.number = true
 wo.relativenumber = true
 wo.scrolloff = 8

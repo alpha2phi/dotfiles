@@ -3,16 +3,20 @@ fun! GotoWindow(id)
     MaximizerToggle
 endfun
 
-let g:vimspector_enable_mappings = 'HUMAN'
+" let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_install_gadgets = [ 'debugger-for-chrome', 'vscode-node-debug2' ]
 
-nmap <leader>vl :call vimspector#Launch()<CR>
-nmap <leader>vr :VimspectorReset<CR>
-nmap <leader>ve :VimspectorEval
-nmap <leader>vw :VimspectorWatch
-nmap <leader>vo :VimspectorShowOutput
-nmap <leader>vi <Plug>VimspectorBalloonEval
-xmap <leader>vi <Plug>VimspectorBalloonEval
-let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-go', 'CodeLLDB', 'vscode-node-debug2' ]
+nmap <leader>d<leader> <Plug>VimspectorContinue<CR>
+nmap <leader>d<esc> <Plug>VimspectorStop<CR>
+nmap <leader>d<c-CR> <Plug>VimSpectorRestart<CR>
+nmap <leader>d<backspace> <Plug>VimspectorPause<CR>
+nmap <leader>tb <Plug>VimspectorToggleBreakpoint<CR>
+nmap <leader>tBc <Plug>VimspectorToggleConditionalBreakpoint<CR>
+nmap <leader>tBf <Plug>VimspectorAddFunctionalBreakpoint<CR>
+nmap <leader>dl <Plug>VimspectorStepOver<CR>
+nmap <leader>dj <Plug>VimspectorStepInto<CR>
+nmap <leader>dk <Plug>VimspectorStepOut<CR>
+nmap <leader>d<CR> <Plug>VimSpectorRunToCursor<CR>
 
 " Integration with telescope.nvim
 nmap <leader>vc :lua require('telescope').extensions.vimspector.configurations()<CR>

@@ -8,3 +8,4 @@ require'snippets'.snippets = {
     uname = function() return vim.loop.os_uname().sysname end;
   };
 }
+

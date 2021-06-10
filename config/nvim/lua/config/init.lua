@@ -17,7 +17,7 @@ require('config.treesitter')
 -- require('config.colorizer')
 
 -- nvim-lightbulb
--- require('config.lightbulb')
+require('config.lightbulb')
 
 -- snippets.nvim
 -- require('config.snippets')

@@ -29,7 +29,14 @@ require'compe'.setup {
         tags = true,
         snippets_nvim = true,
         treesitter = true,
-        vim_dadbod_completion = true
+        tabnine = {
+            max_line = 1000,
+            max_num_results = 3,
+            priority = 5000,
+            sort = false,
+            show_prediction_strength = false,
+            ignore = '[(]'
+        },
     }
 }
 

@@ -1,6 +1,3 @@
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('gh')
-
 require('telescope').setup {
     find_command = {
         'rg', '--no-heading', '--with-filename', '--line-number', '--column',
@@ -11,12 +8,12 @@ require('telescope').setup {
     grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
     extensions = {
-        arecibo = {
-            ["selected_engine"] = 'google',
-            ["url_open_command"] = 'open',
-            ["show_http_headers"] = false,
-            ["show_domain_icons"] = false
-        },
+        -- arecibo = {
+        --     ["selected_engine"] = 'google',
+        --     ["url_open_command"] = 'open',
+        --     ["show_http_headers"] = false,
+        --     ["show_domain_icons"] = false
+        -- },
         fzf = {
             override_generic_sorter = false,
             override_file_sorter = true,
@@ -24,6 +21,12 @@ require('telescope').setup {
         }
     }
 }
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('gh')
+require('telescope').load_extension('node_modules')
+require('telescope').load_extension('session-lens')
+require('telescope').load_extension('vim_bookmarks')
+require('telescope').load_extension('ultisnips')
 -- require('telescope').load_extension('snippets')
 -- require('telescope').load_extension('arecibo')
 -- require('telescope').load_extension('media_files')
@@ -36,7 +39,7 @@ M.search_dotfiles = function()
     require("telescope.builtin").find_files(
         {
             prompt_title = "< VimRC >",
-            cwd = "$HOME/workspace/development/alpha2phi/dotfiles/"
+            cwd = "$HOME/.config/nvim/"
         })
 end
 
@@ -44,7 +47,7 @@ M.switch_projects = function()
     require("telescope.builtin").find_files(
         {
             prompt_title = "< Switch Project >",
-            cwd = "$HOME/workspace/development/"
+            cwd = "$HOME/.local/git/"
         })
 end
 
