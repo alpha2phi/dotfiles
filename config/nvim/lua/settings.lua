@@ -43,7 +43,8 @@ set wildignore+=**/.git/*
 ]]
 
 -- Highlight on yank
-cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
+-- cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
+cmd 'au TextYankPost * silent! lua vim.highlight.on_yank()'
 
 -- Auto format
 vim.api.nvim_exec([[
