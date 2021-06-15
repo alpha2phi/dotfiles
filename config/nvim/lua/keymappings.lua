@@ -61,4 +61,7 @@ nnoremap <Leader>pd :let &runtimepath.=','.escape(expand('%:p:h'), '\,')
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+nnoremap <Leader>es :call tts#Speak()<CR>
+vnoremap <Leader>es :call tts#Speak(1)<CR>
+
 ]], false)
