@@ -3,6 +3,13 @@ return require('packer').startup(function()
     -- Packer can manage itself as an optional plugin
     use {'wbthomason/packer.nvim', opt = true}
 
+    -- Config
+    use {
+        'dstein64/vim-startuptime',
+        cmd = 'StartupTime',
+        config = [[vim.g.startuptime_tries = 10]]
+    }
+
     -- Development
     use {'tpope/vim-dispatch'}
     use {'tpope/vim-fugitive'}
@@ -155,6 +162,13 @@ return require('packer').startup(function()
     use {'puremourning/vimspector'}
     use {'nvim-telescope/telescope-vimspector.nvim'}
 
+    -- DAP
+    use {'mfussenegger/nvim-dap'}
+    use {'nvim-telescope/telescope-dap.nvim'}
+    use {'mfussenegger/nvim-dap-python'} -- Python
+    use {'theHamsta/nvim-dap-virtual-text'}
+    use {'rcarriga/nvim-dap-ui'}
+
     -- Telescope fzf
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
@@ -219,11 +233,6 @@ return require('packer').startup(function()
     -- use {'junegunn/fzf', run = '-> fzf#install()' }
     -- use {'junegunn/fzf.vim'}
     -- use {'fiatjaf/neuron.vim' }
-
-    -- DAP
-    use {'mfussenegger/nvim-dap'}
-    use {'nvim-telescope/telescope-dap.nvim'}
-    use {'mfussenegger/nvim-dap-python'} -- Python
 
     -- Project mgmt
     -- use {'vim-ctrlspace/vim-ctrlspace' }
