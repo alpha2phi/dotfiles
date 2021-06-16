@@ -30,7 +30,7 @@ require('lang')
 require('config')
 
 -- DAP
--- require('dbg')
+require('dbg')
 
 -- OR you can invoke them individually here
 -- require('config.colorscheme')  -- color scheme
