@@ -42,7 +42,8 @@ return require('packer').startup(function()
     -- Color scheme
     use {'kyazdani42/nvim-web-devicons'}
     use {'sainnhe/gruvbox-material'}
-    use {'sainnhe/edge'}
+    use {'NLKNguyen/papercolor-theme'}
+    -- use {'sainnhe/edge'}
     -- use {'folke/tokyonight.nvim'}
     -- use {'joshdick/onedark.vim'}
 
@@ -216,10 +217,10 @@ return require('packer').startup(function()
     -- use {'junegunn/fzf.vim'}
     -- use {'fiatjaf/neuron.vim' }
 
-    -- -- DAP
-    -- use {'mfussenegger/nvim-dap' }
-    -- use {'nvim-telescope/telescope-dap.nvim' }
-    -- use {'mfussenegger/nvim-dap-python' } -- Python
+    -- DAP
+    use {'mfussenegger/nvim-dap'}
+    use {'nvim-telescope/telescope-dap.nvim'}
+    use {'mfussenegger/nvim-dap-python'} -- Python
 
     -- Project mgmt
     -- use {'vim-ctrlspace/vim-ctrlspace' }
