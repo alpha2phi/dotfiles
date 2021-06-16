@@ -4,6 +4,9 @@ require('telescope').load_extension('dap')
 -- nvim-dap-virtual-text. Show virtual text for current frame
 vim.g.dap_virtual_text = true
 
+-- nvim-dap-ui
+require("dapui").setup()
+
 -- languages
 require('dbg.python')
 require('dbg.rust')
@@ -35,3 +38,7 @@ utils.map('n', '<leader>dv',
           '<cmd>lua require"telescope".extensions.dap.variables{}<CR>')
 utils.map('n', '<leader>df',
           '<cmd>lua require"telescope".extensions.dap.frames{}<CR>')
+
+-- nvim-dap-ui
+utils.map('n', '<leader>dui', '<cmd>lua require(dapui).toggle()CR>')
+
