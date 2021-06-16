@@ -91,12 +91,15 @@ return require('packer').startup(function()
     use {'pechorin/any-jump.vim'}
     use {'kshenoy/vim-signature'}
     use {'kevinhwang91/nvim-bqf'}
-    -- use {'TaDaa/vimade'}
+    use {
+        "folke/trouble.nvim",
+        config = function() require("trouble").setup {} end
+    }
     -- use {
-    --     "folke/trouble.nvim",
-    --     requires = "kyazdani42/nvim-web-devicons",
-    --     config = function() require("trouble").setup {} end
+    --     "folke/todo-comments.nvim",
+    --     config = function() require("todo-comments").setup {} end
     -- }
+    -- use {'TaDaa/vimade'}
     -- use {'junegunn/vim-peekaboo'}
     -- use {'gennaro-tedesco/nvim-peekup'}
     -- use {'wellle/context.vim'}
@@ -250,4 +253,3 @@ return require('packer').startup(function()
     -- use {'nikvdp/neomux' }
 
 end)
-

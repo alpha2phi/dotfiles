@@ -6,7 +6,7 @@ require('dbg.typescript')
 
 local utils = require('utils')
 
-utils.map('n', '<leader>dc', '<cmd>lua require"dap".continue()<CR>')
+utils.map('n', '<leader>dct', '<cmd>lua require"dap".continue()<CR>')
 utils.map('n', '<leader>dsv', '<cmd>lua require"dap".step_over()<CR>')
 utils.map('n', '<leader>dsi', '<cmd>lua require"dap".step_into()<CR>')
 utils.map('n', '<leader>dso', '<cmd>lua require"dap".step_out()<CR>')
