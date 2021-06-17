@@ -56,7 +56,7 @@ return require('packer').startup(function()
 
     -- Testing
     use {'vim-test/vim-test'}
-    -- use { "rcarriga/vim-ultest", run = ":UpdateRemotePlugins" }
+    use {'rcarriga/vim-ultest', run = ":UpdateRemotePlugins"}
 
     -- Telescope
     use {'nvim-lua/plenary.nvim'}
