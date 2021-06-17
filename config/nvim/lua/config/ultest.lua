@@ -1,5 +1,5 @@
 vim.g.ultest_use_pty = 1
-
+print("------- ultest")
 local M = {}
 
 function M.post()

@@ -13,9 +13,6 @@ vim.g.dap_virtual_text = true
 -- nvim-dap-ui
 require("dapui").setup()
 
--- vim-ultest
-vim.g.ultest_use_pty = 1
-
 -- languages
 require('dbg.python')
 require('dbg.rust')

@@ -55,8 +55,13 @@ return require('packer').startup(function()
     -- use {'joshdick/onedark.vim'}
 
     -- Testing
-    use {'vim-test/vim-test'}
-    use {'rcarriga/vim-ultest', run = ":UpdateRemotePlugins"}
+    use {
+        "rcarriga/vim-ultest",
+        config = "require('config.ultest').post()",
+        run = ":UpdateRemotePlugins",
+        requires = {"vim-test/vim-test"}
+    }
+    -- use {'vim-test/vim-test'}
 
     -- Telescope
     use {'nvim-lua/plenary.nvim'}
