@@ -11,7 +11,7 @@ require("dapui").setup()
 require('dbg.python')
 require('dbg.rust')
 require('dbg.go')
-require('dbg.typescript')
+require('dbg.node')
 
 -- nvim-dap
 vim.fn.sign_define('DapBreakpoint',
