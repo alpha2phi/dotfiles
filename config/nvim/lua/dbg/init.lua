@@ -1,9 +1,3 @@
--- nvim-dap
-vim.fn.sign_define('DapBreakpoint',
-                   {text = '🟥', texthl = '', linehl = '', numhl = ''})
-vim.fn.sign_define('DapStopped',
-                   {text = '⭐️', texthl = '', linehl = '', numhl = ''})
-
 -- telescope-dap
 require('telescope').load_extension('dap')
 
@@ -18,6 +12,12 @@ require('dbg.python')
 require('dbg.rust')
 require('dbg.go')
 require('dbg.typescript')
+
+-- nvim-dap
+vim.fn.sign_define('DapBreakpoint',
+                   {text = '🟥', texthl = '', linehl = '', numhl = ''})
+vim.fn.sign_define('DapStopped',
+                   {text = '⭐️', texthl = '', linehl = '', numhl = ''})
 
 local utils = require('utils')
 
