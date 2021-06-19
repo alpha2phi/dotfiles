@@ -13,7 +13,7 @@ local icons = {
         Modified = "",
         Remove = ""
     },
-    git = "",
+    git = "", --"",
     mode = {
         c = "🅒",
         i = "🅘",

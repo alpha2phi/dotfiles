@@ -12,6 +12,10 @@
         use {'tpope/vim-unimpaired'}
         use {'tpope/vim-vinegar'}
         use {'tpope/vim-sleuth'}
+        use {'tpope/vim-repeat'}
+        use {'guns/sexp'}
+        use {'tpope/vim-sexp-mappings-for-regular-people'}
+
         use {'wellle/targets.vim'}
         use {'easymotion/vim-easymotion'}
         use {
@@ -81,8 +85,8 @@
     use {'rhysd/reply.vim', cmd = [['Repl', 'ReplAuto']]}
     use {'diepm/vim-rest-console'}
     use {'kosayoda/nvim-lightbulb'}
-    use {'preservim/tagbar'}
-    -- use {'liuchengxu/vista.vim'}
+    -- use {'preservim/tagbar'}
+    use {'liuchengxu/vista.vim'}
     use {'ms-jpq/chadtree', branch = 'chad', run = 'python3 -m chadtree deps'}
 
     -- Color

@@ -46,7 +46,7 @@ local function save_profiles(threshold)
   _G._packer.profile_output = results
 end
 
-time("Luarocks path setup", true)
+time([[Luarocks path setup]], true)
 local package_path_str = "/Users/joehannes/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/joehannes/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/joehannes/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/joehannes/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
 local install_cpath_pattern = "/Users/joehannes/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
@@ -57,8 +57,8 @@ if not string.find(package.cpath, install_cpath_pattern, 1, true) then
   package.cpath = package.cpath .. ';' .. install_cpath_pattern
 end
 
-time("Luarocks path setup", false)
-time("try_loadstring definition", true)
+time([[Luarocks path setup]], false)
+time([[try_loadstring definition]], true)
 local function try_loadstring(s, component, name)
   local success, result = pcall(loadstring(s))
   if not success then
@@ -69,8 +69,8 @@ local function try_loadstring(s, component, name)
   return result
 end
 
-time("try_loadstring definition", false)
-time("Defining packer_plugins", true)
+time([[try_loadstring definition]], false)
+time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["Dusk-til-Dawn.nvim"] = {
     loaded = true,
@@ -146,7 +146,7 @@ _G.packer_plugins = {
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
   },
   ["gitsigns.nvim"] = {
-    config = { "\27LJ\2\nÕ\n\0\0\5\0\24\0\0276\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\14\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\0035\4\f\0=\4\r\3=\3\15\0025\3\16\0005\4\17\0=\4\18\0035\4\19\0=\4\20\3=\3\21\0025\3\22\0=\3\23\2B\0\2\1K\0\1\0\16watch_index\1\0\1\rinterval\3è\a\fkeymaps\tn [h\1\2\1\0H&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'\texpr\2\tn ]h\1\2\1\0H&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'\texpr\2\1\0\n\17n <leader>hb4<cmd>lua require\"gitsigns\".blame_line(true)<CR>\to ih::<C-U>lua require\"gitsigns.actions\".select_hunk()<CR>\vbuffer\2\tx ih::<C-U>lua require\"gitsigns.actions\".select_hunk()<CR>\17n <leader>hp2<cmd>lua require\"gitsigns\".preview_hunk()<CR>\17n <leader>hR2<cmd>lua require\"gitsigns\".reset_buffer()<CR>\17n <leader>hr0<cmd>lua require\"gitsigns\".reset_hunk()<CR>\fnoremap\2\17n <leader>hu5<cmd>lua require\"gitsigns\".undo_stage_hunk()<CR>\17n <leader>hs0<cmd>lua require\"gitsigns\".stage_hunk()<CR>\nsigns\1\0\a\vlinehl\1\22use_internal_diff\2\nnumhl\1\23use_decoration_api\2\20update_debounce\3d\18sign_priority\3\6\23current_line_blame\1\17changedelete\1\0\4\ttext\6~\vlinehl\21GitSignsChangeLn\nnumhl\21GitSignsChangeNr\ahl\19GitSignsChange\14topdelete\1\0\4\ttext\bâ€¾\vlinehl\21GitSignsDeleteLn\nnumhl\21GitSignsDeleteNr\ahl\19GitSignsDelete\vdelete\1\0\4\ttext\6_\vlinehl\21GitSignsDeleteLn\nnumhl\21GitSignsDeleteNr\ahl\19GitSignsDelete\vchange\1\0\4\ttext\bâ”‚\vlinehl\21GitSignsChangeLn\nnumhl\21GitSignsChangeNr\ahl\19GitSignsChange\badd\1\0\0\1\0\4\ttext\bâ”‚\vlinehl\18GitSignsAddLn\nnumhl\18GitSignsAddNr\ahl\16GitSignsAdd\nsetup\rgitsigns\frequire\0" },
+    config = { "\27LJ\2\nÕ\n\0\0\5\0\24\0\0276\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\14\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\0035\4\f\0=\4\r\3=\3\15\0025\3\16\0005\4\17\0=\4\18\0035\4\19\0=\4\20\3=\3\21\0025\3\22\0=\3\23\2B\0\2\1K\0\1\0\16watch_index\1\0\1\rinterval\3è\a\fkeymaps\tn [h\1\2\1\0H&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'\texpr\2\tn ]h\1\2\1\0H&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'\texpr\2\1\0\n\vbuffer\2\17n <leader>hr0<cmd>lua require\"gitsigns\".reset_hunk()<CR>\17n <leader>hs0<cmd>lua require\"gitsigns\".stage_hunk()<CR>\17n <leader>hu5<cmd>lua require\"gitsigns\".undo_stage_hunk()<CR>\tx ih::<C-U>lua require\"gitsigns.actions\".select_hunk()<CR>\fnoremap\2\to ih::<C-U>lua require\"gitsigns.actions\".select_hunk()<CR>\17n <leader>hb4<cmd>lua require\"gitsigns\".blame_line(true)<CR>\17n <leader>hp2<cmd>lua require\"gitsigns\".preview_hunk()<CR>\17n <leader>hR2<cmd>lua require\"gitsigns\".reset_buffer()<CR>\nsigns\1\0\a\23use_decoration_api\2\20update_debounce\3d\18sign_priority\3\6\23current_line_blame\1\22use_internal_diff\2\vlinehl\1\nnumhl\1\17changedelete\1\0\4\ttext\6~\ahl\19GitSignsChange\nnumhl\21GitSignsChangeNr\vlinehl\21GitSignsChangeLn\14topdelete\1\0\4\ttext\bâ€¾\ahl\19GitSignsDelete\nnumhl\21GitSignsDeleteNr\vlinehl\21GitSignsDeleteLn\vdelete\1\0\4\ttext\6_\ahl\19GitSignsDelete\nnumhl\21GitSignsDeleteNr\vlinehl\21GitSignsDeleteLn\vchange\1\0\4\ttext\bâ”‚\ahl\19GitSignsChange\nnumhl\21GitSignsChangeNr\vlinehl\21GitSignsChangeLn\badd\1\0\0\1\0\4\ttext\bâ”‚\ahl\16GitSignsAdd\nnumhl\18GitSignsAddNr\vlinehl\18GitSignsAddLn\nsetup\rgitsigns\frequire\0" },
     loaded = true,
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
@@ -159,7 +159,7 @@ _G.packer_plugins = {
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/gruvbox-material"
   },
   ["indent-guides.nvim"] = {
-    config = { "\27LJ\2\nØ\1\0\0\4\0\t\0\0166\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\b\0B\0\1\1K\0\1\0\25indent_guides_enable\15odd_colors\1\0\2\abg\f#e7e7fc\afg\f#e7e7fc\16even_colors\1\0\1\22indent_guide_size\3\4\1\0\2\abg\f#d3d3e7\afg\f#d3d3e7\nsetup\18indent_guides\frequireØ\1\0\0\4\0\t\0\0166\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\b\0B\0\1\1K\0\1\0\25indent_guides_enable\15odd_colors\1\0\2\abg\f#3b314d\afg\f#3b314d\16even_colors\1\0\1\22indent_guide_size\3\4\1\0\2\abg\f#444155\afg\f#444155\nsetup\18indent_guides\frequireK\1\0\4\0\5\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0003\2\3\0003\3\4\0B\0\3\2B\0\1\1K\0\1\0\0\0\ftimeMan\18Dusk-til-Dawn\frequire\0" },
+    config = { "\27LJ\2\nØ\1\0\0\4\0\t\0\0166\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\b\0B\0\1\1K\0\1\0\25indent_guides_enable\15odd_colors\1\0\2\afg\f#e7e7fc\abg\f#e7e7fc\16even_colors\1\0\1\22indent_guide_size\3\4\1\0\2\afg\f#d3d3e7\abg\f#d3d3e7\nsetup\18indent_guides\frequireØ\1\0\0\4\0\t\0\0166\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\b\0B\0\1\1K\0\1\0\25indent_guides_enable\15odd_colors\1\0\2\afg\f#3b314d\abg\f#3b314d\16even_colors\1\0\1\22indent_guide_size\3\4\1\0\2\afg\f#444155\abg\f#444155\nsetup\18indent_guides\frequireK\1\0\4\0\5\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0003\2\3\0003\3\4\0B\0\3\2B\0\1\1K\0\1\0\0\0\ftimeMan\18Dusk-til-Dawn\frequire\0" },
     loaded = true,
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/indent-guides.nvim"
   },
@@ -268,9 +268,13 @@ _G.packer_plugins = {
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/opt/reply.vim"
   },
   ["session-lens"] = {
-    config = { "\27LJ\2\nx\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\15theme_conf\1\0\1\vborder\1\1\0\2\17shorten_path\1\14previewer\2\nsetup\17session-lens\frequire\0" },
+    config = { "\27LJ\2\nx\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\15theme_conf\1\0\1\vborder\1\1\0\2\14previewer\2\17shorten_path\1\nsetup\17session-lens\frequire\0" },
     loaded = true,
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/session-lens"
+  },
+  sexp = {
+    loaded = true,
+    path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/sexp"
   },
   sonokai = {
     loaded = true,
@@ -283,10 +287,6 @@ _G.packer_plugins = {
   ["symbols-outline.nvim"] = {
     loaded = true,
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim"
-  },
-  tagbar = {
-    loaded = true,
-    path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/tagbar"
   },
   ["targets.vim"] = {
     loaded = true,
@@ -409,6 +409,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/vim-monokai-tasty"
   },
+  ["vim-repeat"] = {
+    loaded = true,
+    path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/vim-repeat"
+  },
   ["vim-rest-console"] = {
     loaded = true,
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/vim-rest-console"
@@ -420,6 +424,10 @@ _G.packer_plugins = {
   ["vim-rooter"] = {
     loaded = true,
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/vim-rooter"
+  },
+  ["vim-sexp-mappings-for-regular-people"] = {
+    loaded = true,
+    path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/vim-sexp-mappings-for-regular-people"
   },
   ["vim-signature"] = {
     loaded = true,
@@ -473,6 +481,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/vimspector"
   },
+  ["vista.vim"] = {
+    loaded = true,
+    path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/vista.vim"
+  },
   ["vscode-go"] = {
     loaded = true,
     path = "/Users/joehannes/.local/share/nvim/site/pack/packer/start/vscode-go"
@@ -496,40 +508,40 @@ _G.packer_plugins = {
   }
 }
 
-time("Defining packer_plugins", false)
--- Config for: session-lens
-time("Config for session-lens", true)
-try_loadstring("\27LJ\2\nx\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\15theme_conf\1\0\1\vborder\1\1\0\2\17shorten_path\1\14previewer\2\nsetup\17session-lens\frequire\0", "config", "session-lens")
-time("Config for session-lens", false)
--- Config for: neogit
-time("Config for neogit", true)
-try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vneogit\frequire\0", "config", "neogit")
-time("Config for neogit", false)
--- Config for: which-key.nvim
-time("Config for which-key.nvim", true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0", "config", "which-key.nvim")
-time("Config for which-key.nvim", false)
--- Config for: galaxyline.nvim
-time("Config for galaxyline.nvim", true)
-try_loadstring("\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15statusline\frequire\0", "config", "galaxyline.nvim")
-time("Config for galaxyline.nvim", false)
+time([[Defining packer_plugins]], false)
 -- Config for: indent-guides.nvim
-time("Config for indent-guides.nvim", true)
-try_loadstring("\27LJ\2\nØ\1\0\0\4\0\t\0\0166\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\b\0B\0\1\1K\0\1\0\25indent_guides_enable\15odd_colors\1\0\2\abg\f#e7e7fc\afg\f#e7e7fc\16even_colors\1\0\1\22indent_guide_size\3\4\1\0\2\abg\f#d3d3e7\afg\f#d3d3e7\nsetup\18indent_guides\frequireØ\1\0\0\4\0\t\0\0166\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\b\0B\0\1\1K\0\1\0\25indent_guides_enable\15odd_colors\1\0\2\abg\f#3b314d\afg\f#3b314d\16even_colors\1\0\1\22indent_guide_size\3\4\1\0\2\abg\f#444155\afg\f#444155\nsetup\18indent_guides\frequireK\1\0\4\0\5\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0003\2\3\0003\3\4\0B\0\3\2B\0\1\1K\0\1\0\0\0\ftimeMan\18Dusk-til-Dawn\frequire\0", "config", "indent-guides.nvim")
-time("Config for indent-guides.nvim", false)
--- Config for: gitsigns.nvim
-time("Config for gitsigns.nvim", true)
-try_loadstring("\27LJ\2\nÕ\n\0\0\5\0\24\0\0276\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\14\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\0035\4\f\0=\4\r\3=\3\15\0025\3\16\0005\4\17\0=\4\18\0035\4\19\0=\4\20\3=\3\21\0025\3\22\0=\3\23\2B\0\2\1K\0\1\0\16watch_index\1\0\1\rinterval\3è\a\fkeymaps\tn [h\1\2\1\0H&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'\texpr\2\tn ]h\1\2\1\0H&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'\texpr\2\1\0\n\17n <leader>hb4<cmd>lua require\"gitsigns\".blame_line(true)<CR>\to ih::<C-U>lua require\"gitsigns.actions\".select_hunk()<CR>\vbuffer\2\tx ih::<C-U>lua require\"gitsigns.actions\".select_hunk()<CR>\17n <leader>hp2<cmd>lua require\"gitsigns\".preview_hunk()<CR>\17n <leader>hR2<cmd>lua require\"gitsigns\".reset_buffer()<CR>\17n <leader>hr0<cmd>lua require\"gitsigns\".reset_hunk()<CR>\fnoremap\2\17n <leader>hu5<cmd>lua require\"gitsigns\".undo_stage_hunk()<CR>\17n <leader>hs0<cmd>lua require\"gitsigns\".stage_hunk()<CR>\nsigns\1\0\a\vlinehl\1\22use_internal_diff\2\nnumhl\1\23use_decoration_api\2\20update_debounce\3d\18sign_priority\3\6\23current_line_blame\1\17changedelete\1\0\4\ttext\6~\vlinehl\21GitSignsChangeLn\nnumhl\21GitSignsChangeNr\ahl\19GitSignsChange\14topdelete\1\0\4\ttext\bâ€¾\vlinehl\21GitSignsDeleteLn\nnumhl\21GitSignsDeleteNr\ahl\19GitSignsDelete\vdelete\1\0\4\ttext\6_\vlinehl\21GitSignsDeleteLn\nnumhl\21GitSignsDeleteNr\ahl\19GitSignsDelete\vchange\1\0\4\ttext\bâ”‚\vlinehl\21GitSignsChangeLn\nnumhl\21GitSignsChangeNr\ahl\19GitSignsChange\badd\1\0\0\1\0\4\ttext\bâ”‚\vlinehl\18GitSignsAddLn\nnumhl\18GitSignsAddNr\ahl\16GitSignsAdd\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
-time("Config for gitsigns.nvim", false)
+time([[Config for indent-guides.nvim]], true)
+try_loadstring("\27LJ\2\nØ\1\0\0\4\0\t\0\0166\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\b\0B\0\1\1K\0\1\0\25indent_guides_enable\15odd_colors\1\0\2\afg\f#e7e7fc\abg\f#e7e7fc\16even_colors\1\0\1\22indent_guide_size\3\4\1\0\2\afg\f#d3d3e7\abg\f#d3d3e7\nsetup\18indent_guides\frequireØ\1\0\0\4\0\t\0\0166\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\b\0B\0\1\1K\0\1\0\25indent_guides_enable\15odd_colors\1\0\2\afg\f#3b314d\abg\f#3b314d\16even_colors\1\0\1\22indent_guide_size\3\4\1\0\2\afg\f#444155\abg\f#444155\nsetup\18indent_guides\frequireK\1\0\4\0\5\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0003\2\3\0003\3\4\0B\0\3\2B\0\1\1K\0\1\0\0\0\ftimeMan\18Dusk-til-Dawn\frequire\0", "config", "indent-guides.nvim")
+time([[Config for indent-guides.nvim]], false)
+-- Config for: neogit
+time([[Config for neogit]], true)
+try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vneogit\frequire\0", "config", "neogit")
+time([[Config for neogit]], false)
+-- Config for: which-key.nvim
+time([[Config for which-key.nvim]], true)
+try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0", "config", "which-key.nvim")
+time([[Config for which-key.nvim]], false)
+-- Config for: galaxyline.nvim
+time([[Config for galaxyline.nvim]], true)
+try_loadstring("\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15statusline\frequire\0", "config", "galaxyline.nvim")
+time([[Config for galaxyline.nvim]], false)
 -- Config for: telescope-frecency.nvim
-time("Config for telescope-frecency.nvim", true)
+time([[Config for telescope-frecency.nvim]], true)
 try_loadstring("\27LJ\2\nM\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\rfrecency\19load_extension\14telescope\frequire\0", "config", "telescope-frecency.nvim")
-time("Config for telescope-frecency.nvim", false)
+time([[Config for telescope-frecency.nvim]], false)
+-- Config for: session-lens
+time([[Config for session-lens]], true)
+try_loadstring("\27LJ\2\nx\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\15theme_conf\1\0\1\vborder\1\1\0\2\14previewer\2\17shorten_path\1\nsetup\17session-lens\frequire\0", "config", "session-lens")
+time([[Config for session-lens]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\nÕ\n\0\0\5\0\24\0\0276\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\14\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\0035\4\f\0=\4\r\3=\3\15\0025\3\16\0005\4\17\0=\4\18\0035\4\19\0=\4\20\3=\3\21\0025\3\22\0=\3\23\2B\0\2\1K\0\1\0\16watch_index\1\0\1\rinterval\3è\a\fkeymaps\tn [h\1\2\1\0H&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'\texpr\2\tn ]h\1\2\1\0H&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'\texpr\2\1\0\n\vbuffer\2\17n <leader>hr0<cmd>lua require\"gitsigns\".reset_hunk()<CR>\17n <leader>hs0<cmd>lua require\"gitsigns\".stage_hunk()<CR>\17n <leader>hu5<cmd>lua require\"gitsigns\".undo_stage_hunk()<CR>\tx ih::<C-U>lua require\"gitsigns.actions\".select_hunk()<CR>\fnoremap\2\to ih::<C-U>lua require\"gitsigns.actions\".select_hunk()<CR>\17n <leader>hb4<cmd>lua require\"gitsigns\".blame_line(true)<CR>\17n <leader>hp2<cmd>lua require\"gitsigns\".preview_hunk()<CR>\17n <leader>hR2<cmd>lua require\"gitsigns\".reset_buffer()<CR>\nsigns\1\0\a\23use_decoration_api\2\20update_debounce\3d\18sign_priority\3\6\23current_line_blame\1\22use_internal_diff\2\vlinehl\1\nnumhl\1\17changedelete\1\0\4\ttext\6~\ahl\19GitSignsChange\nnumhl\21GitSignsChangeNr\vlinehl\21GitSignsChangeLn\14topdelete\1\0\4\ttext\bâ€¾\ahl\19GitSignsDelete\nnumhl\21GitSignsDeleteNr\vlinehl\21GitSignsDeleteLn\vdelete\1\0\4\ttext\6_\ahl\19GitSignsDelete\nnumhl\21GitSignsDeleteNr\vlinehl\21GitSignsDeleteLn\vchange\1\0\4\ttext\bâ”‚\ahl\19GitSignsChange\nnumhl\21GitSignsChangeNr\vlinehl\21GitSignsChangeLn\badd\1\0\0\1\0\4\ttext\bâ”‚\ahl\16GitSignsAdd\nnumhl\18GitSignsAddNr\vlinehl\18GitSignsAddLn\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 
 -- Command lazy-loads
-time("Defining lazy-load commands", true)
+time([[Defining lazy-load commands]], true)
 vim.cmd [[command! -nargs=* -range -bang -complete=file 'Repl', 'ReplAuto' lua require("packer.load")({'reply.vim'}, { cmd = "'Repl', 'ReplAuto'", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
-time("Defining lazy-load commands", false)
+time([[Defining lazy-load commands]], false)
 
 if should_profile then save_profiles() end
 

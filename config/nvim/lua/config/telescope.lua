@@ -31,6 +31,23 @@ require('telescope').load_extension('ultisnips')
 -- require('telescope').load_extension('arecibo')
 -- require('telescope').load_extension('media_files')
 
+local bookmark_actions = require('telescope').extensions.vim_bookmarks.actions
+require('telescope').extensions.vim_bookmarks.all {
+    attach_mappings = function(_, map) 
+        map('n', 'dd', bookmark_actions.delete_selected_or_at_cursor)
+
+        return true
+    end
+}
+require('telescope').extensions.vim_bookmarks.current_file {
+    attach_mappings = function(_, map) 
+        map('n', 'dd', bookmark_actions.delete_selected_or_at_cursor)
+
+        return true
+    end
+}
+
+
 local actions = require('telescope.actions')
 
 local M = {}

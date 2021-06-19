@@ -6,7 +6,6 @@ let g:bookmark_no_default_key_mappings = 1
 
 nmap <leader>tm <Plug>BookmarkToggle
 nmap <leader>tMa <Plug>BookmarkAnnotate
-nmap <leader>fm :CocCommand fzf-preview.Bookmarks<cr>
 nmap ]m <Plug>BookmarkNext
 nmap [m <Plug>BookmarkPrev
 nmap <leader>xm <Plug>BookmarkClearAll
