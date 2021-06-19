@@ -12,6 +12,7 @@ require('dbg.python')
 require('dbg.rust')
 require('dbg.go')
 require('dbg.node')
+require('dbg.lua')
 
 -- nvim-dap
 vim.fn.sign_define('DapBreakpoint',

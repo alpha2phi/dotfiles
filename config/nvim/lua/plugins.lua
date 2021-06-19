@@ -174,6 +174,7 @@ return require('packer').startup(function()
     use {'theHamsta/nvim-dap-virtual-text'}
     use {'rcarriga/nvim-dap-ui'}
     use {'Pocco81/DAPInstall.nvim'}
+    use {'jbyuki/one-small-step-for-vimkind'}
 
     -- Telescope fzf
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
