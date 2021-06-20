@@ -27,7 +27,9 @@ return require('packer').startup(function()
     }
     use {
         'TimUntersberger/neogit',
-        config = function() require('neogit').setup({integration = {diffview=true}}) end
+        config = function()
+            require('neogit').setup {integrations = {diffview = true}}
+        end
     }
     use {'sindrets/diffview.nvim'}
     use {'unblevable/quick-scope'}
