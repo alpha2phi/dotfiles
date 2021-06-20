@@ -36,6 +36,7 @@ return require('packer').startup(function()
         "folke/which-key.nvim",
         config = function() require("which-key").setup {} end
     }
+    use {'chrisbra/NrrwRgn'}
     -- use {'liuchengxu/vim-which-key'}
     -- use {'norcalli/nvim-colorizer.lua'}
     -- use {'kevinhwang91/rnvimr'}
@@ -107,6 +108,7 @@ return require('packer').startup(function()
         "folke/trouble.nvim",
         config = function() require("trouble").setup {} end
     }
+    -- use {'nvim-lua/lsp-status.nvim'}
     -- use {
     --     "folke/todo-comments.nvim",
     --     config = function() require("todo-comments").setup {} end
@@ -138,15 +140,16 @@ return require('packer').startup(function()
     use {'folke/lua-dev.nvim'}
     use {'simrat39/symbols-outline.nvim'}
     use {'rafcamlet/nvim-luapad'}
+    use {'thinca/vim-themis'}
+    use {'tpope/vim-scriptease'}
+    use {'junegunn/vader.vim'}
+    use {'milisims/nvim-luaref'}
     use {'~/workspace/development/alpha2phi/alpha.nvim'}
     -- use {'tjdevries/nlua.nvim'}
     -- use {'metakirby5/codi.vim'}
     -- use {'bfredl/nvim-luadev'}
 
     -- Plugin development
-    use {'thinca/vim-themis'}
-    use {'tpope/vim-scriptease'}
-    use {'junegunn/vader.vim'}
 
     -- Better syntax
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
