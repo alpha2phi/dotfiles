@@ -80,6 +80,8 @@ return require('packer').startup(function()
     }
     use {'nvim-telescope/telescope-symbols.nvim'}
     use {'nvim-telescope/telescope-github.nvim'}
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+
     -- use {
     --     'nvim-telescope/telescope-arecibo.nvim',
     --     rocks = {"openssl", "lua-http-parser"}
@@ -181,9 +183,6 @@ return require('packer').startup(function()
     use {'rcarriga/nvim-dap-ui'}
     use {'Pocco81/DAPInstall.nvim'}
     use {'jbyuki/one-small-step-for-vimkind'}
-
-    -- Telescope fzf
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
     -- Project
     use {'nvim-telescope/telescope-project.nvim'}

@@ -47,8 +47,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/mengwangk/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/mengwangk/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/mengwangk/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/mengwangk/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/mengwangk/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/Users/mengwangk/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/mengwangk/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/mengwangk/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/mengwangk/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/mengwangk/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -74,334 +74,334 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["DAPInstall.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim"
   },
   NrrwRgn = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/NrrwRgn"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/NrrwRgn"
   },
   ["alpha.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/alpha.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/alpha.nvim"
   },
   ["any-jump.vim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/any-jump.vim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/any-jump.vim"
   },
   ["auto-pairs"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/auto-pairs"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/auto-pairs"
   },
   ["cheat.sh-vim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/cheat.sh-vim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/cheat.sh-vim"
   },
   ["ctrlsf.vim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/ctrlsf.vim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/ctrlsf.vim"
   },
   ["dashboard-nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
   },
   ["diffview.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/diffview.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/diffview.nvim"
   },
   ["friendly-snippets"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/friendly-snippets"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/friendly-snippets"
   },
   ["galaxyline.nvim"] = {
     config = { "\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15statusline\frequire\0" },
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
   },
   ["gitsigns.nvim"] = {
     config = { "\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0" },
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
   ["gruvbox-material"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/gruvbox-material"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/gruvbox-material"
   },
   ["lsp_signature.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim"
   },
   ["lspkind-nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/lspkind-nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/lspkind-nvim"
   },
   ["lspsaga.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
   },
   ["lua-dev.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/lua-dev.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/lua-dev.nvim"
   },
   neoformat = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/neoformat"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/neoformat"
   },
   neogit = {
     config = { "\27LJ\2\n]\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\17integrations\1\0\0\1\0\1\rdiffview\2\nsetup\vneogit\frequire\0" },
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/neogit"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/neogit"
   },
   ["nvim-bqf"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-bqf"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-bqf"
   },
   ["nvim-compe"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-compe"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
   ["nvim-dap"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap"
   },
   ["nvim-dap-python"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap-python"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap-python"
   },
   ["nvim-dap-ui"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap-ui"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap-ui"
   },
   ["nvim-dap-virtual-text"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
   ["nvim-luapad"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-luapad"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-luapad"
   },
   ["nvim-luaref"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-luaref"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-luaref"
   },
   ["nvim-treesitter"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
   },
   ["nvim-ts-rainbow"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
   },
   ["one-small-step-for-vimkind"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/one-small-step-for-vimkind"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/one-small-step-for-vimkind"
   },
   ["packer.nvim"] = {
     loaded = false,
     needs_bufread = false,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/opt/packer.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/opt/packer.nvim"
   },
   ["papercolor-theme"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/papercolor-theme"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/papercolor-theme"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/plenary.nvim"
   },
   ["popup.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/popup.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
   ["python-snippets"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/python-snippets"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/python-snippets"
   },
   ["quick-scope"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/quick-scope"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/quick-scope"
   },
   ["rust.vim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/rust.vim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/rust.vim"
   },
   ["sql.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/sql.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/sql.nvim"
   },
   ["symbols-outline.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim"
   },
   ["targets.vim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/targets.vim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/targets.vim"
   },
   ["telescope-dap.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
   },
   ["telescope-frecency.nvim"] = {
     config = { "\27LJ\2\nM\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\rfrecency\19load_extension\14telescope\frequire\0" },
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-frecency.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-frecency.nvim"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
   },
   ["telescope-github.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-github.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-github.nvim"
   },
   ["telescope-project.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-project.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-project.nvim"
   },
   ["telescope-symbols.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-symbols.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-symbols.nvim"
   },
   ["telescope-vimspector.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-vimspector.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope-vimspector.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
   ["trouble.nvim"] = {
     config = { "\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0" },
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/trouble.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/trouble.nvim"
   },
   ["unicode.vim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/unicode.vim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/unicode.vim"
   },
   ["vader.vim"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vader.vim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vader.vim"
   },
   ["vim-browser-search"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-browser-search"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-browser-search"
   },
   ["vim-commentary"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-commentary"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
   ["vim-dispatch"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-dispatch"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-dispatch"
   },
   ["vim-doge"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-doge"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-doge"
   },
   ["vim-easymotion"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-easymotion"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-easymotion"
   },
   ["vim-floaterm"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-floaterm"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-floaterm"
   },
   ["vim-fugitive"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
   ["vim-maximizer"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-maximizer"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-maximizer"
   },
   ["vim-rhubarb"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-rhubarb"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-rhubarb"
   },
   ["vim-rooter"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-rooter"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-rooter"
   },
   ["vim-scriptease"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-scriptease"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-scriptease"
   },
   ["vim-signature"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-signature"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-signature"
   },
   ["vim-sleuth"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-sleuth"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-sleuth"
   },
   ["vim-startuptime"] = {
     commands = { "StartupTime" },
     config = { "vim.g.startuptime_tries = 10" },
     loaded = false,
     needs_bufread = false,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/opt/vim-startuptime"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/opt/vim-startuptime"
   },
   ["vim-surround"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-surround"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-surround"
   },
   ["vim-test"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-test"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-test"
   },
   ["vim-themis"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-themis"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-themis"
   },
   ["vim-ultest"] = {
     config = { "require('config.ultest').post()" },
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-ultest"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-ultest"
   },
   ["vim-unimpaired"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-unimpaired"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-unimpaired"
   },
   ["vim-vinegar"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-vinegar"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-vinegar"
   },
   ["vim-vsnip"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vim-vsnip"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vim-vsnip"
   },
   vimspector = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vimspector"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vimspector"
   },
   ["vscode-go"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vscode-go"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vscode-go"
   },
   ["vscode-javascript"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vscode-javascript"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vscode-javascript"
   },
   ["vscode-python-snippet-pack"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vscode-python-snippet-pack"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vscode-python-snippet-pack"
   },
   ["vscode-rust"] = {
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/vscode-rust"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/vscode-rust"
   },
   ["which-key.nvim"] = {
     config = { "\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0" },
     loaded = true,
-    path = "/home/mengwangk/.local/share/nvim/site/pack/packer/start/which-key.nvim"
+    path = "/Users/mengwangk/.local/share/nvim/site/pack/packer/start/which-key.nvim"
   }
 }
 
@@ -410,30 +410,30 @@ time([[Defining packer_plugins]], false)
 time([[Config for neogit]], true)
 try_loadstring("\27LJ\2\n]\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\17integrations\1\0\0\1\0\1\rdiffview\2\nsetup\vneogit\frequire\0", "config", "neogit")
 time([[Config for neogit]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
--- Config for: vim-ultest
-time([[Config for vim-ultest]], true)
-require('config.ultest').post()
-time([[Config for vim-ultest]], false)
--- Config for: which-key.nvim
-time([[Config for which-key.nvim]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0", "config", "which-key.nvim")
-time([[Config for which-key.nvim]], false)
--- Config for: trouble.nvim
-time([[Config for trouble.nvim]], true)
-try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
-time([[Config for trouble.nvim]], false)
--- Config for: galaxyline.nvim
-time([[Config for galaxyline.nvim]], true)
-try_loadstring("\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15statusline\frequire\0", "config", "galaxyline.nvim")
-time([[Config for galaxyline.nvim]], false)
 -- Config for: telescope-frecency.nvim
 time([[Config for telescope-frecency.nvim]], true)
 try_loadstring("\27LJ\2\nM\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\rfrecency\19load_extension\14telescope\frequire\0", "config", "telescope-frecency.nvim")
 time([[Config for telescope-frecency.nvim]], false)
+-- Config for: which-key.nvim
+time([[Config for which-key.nvim]], true)
+try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0", "config", "which-key.nvim")
+time([[Config for which-key.nvim]], false)
+-- Config for: galaxyline.nvim
+time([[Config for galaxyline.nvim]], true)
+try_loadstring("\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15statusline\frequire\0", "config", "galaxyline.nvim")
+time([[Config for galaxyline.nvim]], false)
+-- Config for: vim-ultest
+time([[Config for vim-ultest]], true)
+require('config.ultest').post()
+time([[Config for vim-ultest]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
+time([[Config for trouble.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
