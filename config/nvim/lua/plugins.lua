@@ -113,6 +113,7 @@ return require('packer').startup(function()
         "folke/trouble.nvim",
         config = function() require("trouble").setup {} end
     }
+    use {'tjdevries/astronauta.nvim'}
     -- use {'nvim-lua/lsp-status.nvim'}
     -- use {
     --     "folke/todo-comments.nvim",
