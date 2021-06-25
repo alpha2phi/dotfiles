@@ -1,1 +1,0 @@
-/Users/joehannes/.local/git/joehannes-os/neovim-lua-config/config/nvim/init.lua

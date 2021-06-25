@@ -1,6 +1,6 @@
 local gl = require("galaxyline")
 local gls = gl.section
-gl.short_line_list = {"LuaTree", "vista", "dbui"}
+gl.short_line_list = {"LuaTree", "CHADTree", "symbols_outline"}
 local i = require("statusline.icons")
 local c = require("statusline.colors")
 local u = require("statusline.utils")
@@ -87,7 +87,7 @@ gls.left[6] = {
 gls.left[7] = {
     DiagnosticError = {
         provider = diagnosticError,
-        icon = " " .. i.bullet,
+        icon = " " .. i.diagnostic.error,
         highlight = {c.Color('error'), c.Color('act1')}
     }
 }
@@ -95,7 +95,7 @@ gls.left[7] = {
 gls.left[8] = {
     DiagnosticWarn = {
         provider = diagnosticWarn,
-        icon = " " .. i.bullet,
+        icon = " " .. i.diagnostic.warn,
         highlight = {c.Color('warning'), c.Color('act1')}
     }
 }
@@ -103,7 +103,7 @@ gls.left[8] = {
 gls.left[9] = {
     DiagnosticInfo = {
         provider = diagnosticInfo,
-        icon = " " .. i.bullet,
+        icon = " " .. i.diagnostic.info,
         highlight = {c.Color('info'), c.Color('act1')}
     }
 }
@@ -126,11 +126,10 @@ gls.left[11] = {
 gls.left[12] = {
     GitBranch = {
         provider = gitBranch,
-        icon = "Git-", --" " .. i.git .. " ",
+        icon = "  " .. i.git .. " ",
         condition = u.buffer_not_empty,
     }
 }
---[[
 gls.left[13] = {
     DiffAdd = {
         provider = diffAdd,
@@ -155,15 +154,14 @@ gls.left[15] = {
         highlight = {c.Color('red'), c.Color('purple')}
     }
 }
---]]
-gls.left[13] = {
+gls.left[16] = {
     GitSeperator = {
         provider = gitSeperator,
-        condition = u.buffer_not_empty,
+        condition = u.buffer_not_empty
     }
 }
 
-gls.left[14] = {
+gls.left[17] = {
     Space = {
         provider = space,
         highlight = {c.Color('blue'), c.Color('purple')}
