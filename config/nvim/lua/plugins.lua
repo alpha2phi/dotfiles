@@ -69,7 +69,7 @@
         config = function() require("which-key").setup {} end
     }
     -- use {'liuchengxu/vim-which-key'}
-    -- use {'norcalli/nvim-colorizer.lua'}
+    use {'norcalli/nvim-colorizer.lua'}
     -- use {'kevinhwang91/rnvimr'}
     -- use {'francoiscabrol/ranger.vim'}
     use {'lokaltog/neoranger'}
@@ -190,7 +190,7 @@
     -- }
     -- use {'junegunn/vim-peekaboo'}
     -- use {'gennaro-tedesco/nvim-peekup'}
-    -- use {'wellle/context.vim'}
+    use {'wellle/context.vim'}
     -- use {'lukas-reineke/indent-blankline.nvim' }
     -- use {'Yggdroot/indentLine' }
     -- use {'beauwilliams/focus.nvim' }
@@ -312,7 +312,14 @@
 
     -- use {'vuciv/vim-bujo'}
     -- use {'freitass/todo.txt-vim'}
-    use {'oberblastmeister/neuron.nvim', branch = 'unstable'}
+    use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+        require("todo-comments").setup {}
+    end
+    }
+    use {'oberblastmeister/neuron.nvim', branch = 'unstable', run = 'nix-env -if https://github.com/srid/neuron/archive/master.tar.gz' }
 
     -- use {'oberblastmeister/neuron.nvim' }
     -- use {'junegunn/fzf', run = '-> fzf#install()' }
