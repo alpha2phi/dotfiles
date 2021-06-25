@@ -4,6 +4,7 @@ local cmd = vim.cmd
 local o = vim.o
 local wo = vim.wo
 local bo = vim.bo
+local g = vim.g
 local indent = 2
 
 cmd 'syntax enable'
@@ -55,7 +56,6 @@ set nocompatible
 set hidden
 set encoding=utf-8
 set cmdheight=1
-" You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=200
 set shortmess+=c
 set signcolumn=yes
@@ -92,10 +92,6 @@ augroup auto_term
     autocmd TermOpen * setlocal nonumber norelativenumber
     autocmd TermOpen * startinsert
 augroup END
-]], false)
-
-vim.api.nvim_exec([[
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" endif
 ]], false)
 
 vim.api.nvim_exec([[

@@ -1,6 +1,6 @@
 local gl = require("galaxyline")
 local gls = gl.section
-gl.short_line_list = {"LuaTree", "vista", "dbui"}
+gl.short_line_list = {"LuaTree", "CHADTree", "symbols_outline"}
 local i = require("statusline.icons")
 local c = require("statusline.colors")
 local u = require("statusline.utils")
@@ -126,7 +126,7 @@ gls.left[11] = {
 gls.left[12] = {
     GitBranch = {
         provider = gitBranch,
-        icon = " " .. i.git .. " ", --"", 
+        icon = "  " .. i.git .. " ",
         condition = u.buffer_not_empty,
     }
 }
@@ -157,7 +157,7 @@ gls.left[15] = {
 gls.left[16] = {
     GitSeperator = {
         provider = gitSeperator,
-        condition = u.buffer_not_empty,
+        condition = u.buffer_not_empty
     }
 }
 

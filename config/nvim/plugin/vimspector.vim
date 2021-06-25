@@ -22,10 +22,9 @@ nmap <leader>d<CR> <Plug>VimSpectorRunToCursor<CR>
 nmap <leader>vc :lua require('telescope').extensions.vimspector.configurations()<CR>
 
 " Inspection
-nnoremap <leader>vtv :MaximizerToggle!<CR>
-nnoremap <leader>vgc :call GotoWindow(g:vimspector_session_windows.code)<CR>
-nnoremap <leader>vgt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
-nnoremap <leader>vgv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
-nnoremap <leader>vgw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
-nnoremap <leader>vgs :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
-nnoremap <leader>vgo :call GotoWindow(g:vimspector_session_windows.output)<CR>
+nnoremap <leader>dgc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>dgt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>dgv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>dgw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>dgs :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>dgo :call GotoWindow(g:vimspector_session_windows.output)<CR>

@@ -9,17 +9,6 @@ utils.map('i', 'jk', '<Esc>') -- jk to escape
 
 vim.api.nvim_exec([[
 
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
-
 vmap < <gv
 vmap > >gv
 
@@ -32,10 +21,6 @@ nnoremap <silent> <leader>H :call WinMove('h')<CR>
 nnoremap <silent> <leader>J :call WinMove('j')<CR>
 nnoremap <silent> <leader>K :call WinMove('k')<CR>
 nnoremap <silent> <leader>L :call WinMove('l')<CR>
-
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
-nnoremap <Leader>pd :let &runtimepath.=','.escape(expand('%:p:h'), '\,')
 
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
