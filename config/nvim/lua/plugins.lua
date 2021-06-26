@@ -40,6 +40,7 @@ return require('packer').startup(function()
         config = function() require("which-key").setup {} end
     }
     use {'chrisbra/NrrwRgn'}
+    use {'tamago324/lir.nvim'}
     -- use {'liuchengxu/vim-which-key'}
     -- use {'norcalli/nvim-colorizer.lua'}
     -- use {'kevinhwang91/rnvimr'}

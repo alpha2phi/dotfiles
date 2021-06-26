@@ -5,7 +5,7 @@ utils.map('i', 'jk', '<Esc>') -- jk to escape
 utils.map('n', '<Leader>tt', '<Cmd>15sp +term<CR>')
 utils.map('n', '<Leader>fq', '<Cmd>q<CR>')
 utils.map('n', '<Leader>fsf', '<Cmd>w<CR>')
-utils.map('n', '<Leader>fv', '<Cmd>15Vex<CR>')
+utils.map('n', '<Leader>fv', '<Cmd>lefta 20vsp .<CR>')
 utils.map('n', '<Leader>rr', '!!$SHELL<CR>')
 utils.map('n', '<C-w><C-o>', ':MaximizerToggle!<CR>')
 -- utils.map('n', '<Leader>dsv', ':source %<CR>')
