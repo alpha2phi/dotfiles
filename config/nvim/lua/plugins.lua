@@ -41,6 +41,7 @@ return require('packer').startup(function()
     }
     use {'chrisbra/NrrwRgn'}
     use {'tamago324/lir.nvim'}
+    -- use {'tpope/vim-characterize'}
     -- use {'liuchengxu/vim-which-key'}
     -- use {'norcalli/nvim-colorizer.lua'}
     -- use {'kevinhwang91/rnvimr'}
