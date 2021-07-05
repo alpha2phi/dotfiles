@@ -161,6 +161,7 @@ return require('packer').startup(function()
 
     -- Better syntax
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {'nvim-treesitter/nvim-treesitter-textobjects'}
     -- use {'nvim-treesitter/playground'}
 
     -- Dashboard
