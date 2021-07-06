@@ -200,6 +200,7 @@ return require('packer').startup(function()
 
     -- Rust
     use {'rust-lang/rust.vim'}
+    -- use {'simrat39/rust-tools.nvim'}
 
     -- Database
     -- use {'tpope/vim-dadbod'}
