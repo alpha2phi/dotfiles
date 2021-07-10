@@ -3,6 +3,41 @@ local G = require("global")
 
 local Git = {}
 
+-- Show git information in virtual text for current line like GitLens
+function Git.blameVirtText()
+    local _ft = vim.fn.expand('%:h:t') -- get the current file extension
+    if _ft == '' then -- if we are in a scratch buffer or unknown filetype
+        return
+    end
+    if _ft == 'bin' then -- if we are in api.m's terminal window
+        return
+    end
+    local currFile = vim.fn.expand('%')
+    if not vim.fn.filereadable(currFile) then return end
+    api.nvim_buf_clear_namespace(0, 2, 0, -1) -- clear out virtual text from namespace 2 (the namespace we will set later)
+    local line = api.nvim_win_get_cursor(0)
+    local blame = vim.fn.system(string.format('git blame -c -L %d,%d %s', line[1], line[1], currFile))
+    local hash = vim.split(blame, '%s')[1]
+    local cmd = string.format("git show %s ", hash) .. "--format=' : %an | %ar | %s'"
+    if hash == '00000000' then
+        text = 'Not Committed Yet'
+    else
+        text = vim.fn.system(cmd)
+        text = vim.split(text, '\n')[1]
+        if text:find("fatal") then
+            -- if the call to git show fails
+            text = 'Not Committed Yet'
+        end
+    end
+    -- set virtual text for namespace 2 with the content from git and assign it to the higlight group 'GitLens'
+    api.nvim_buf_set_virtual_text(0, 2, line[1] - 1, {{text, 'GitLens'}}, {})
+end
+
+--- Clearing out the virtual text
+function Git.clearBlameVirtText()
+    api.nvim_buf_clear_namespace(0, 2, 0, -1)
+end
+
 local function get_dir_contains(path, dirname)
     -- return parent path for specified entry (either file or directory)
     local function pathname(path)

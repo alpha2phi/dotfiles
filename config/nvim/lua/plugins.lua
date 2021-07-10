@@ -4,27 +4,22 @@ return require('packer').startup(function()
 
     -- Development
     use {'tpope/vim-dispatch'}
-    use {'tpope/vim-fugitive'}
-    use {'tpope/vim-surround'}
+    -- use {'tpope/vim-fugitive'}
+    -- use {'tpope/vim-surround'}
     use {'tpope/vim-commentary'}
-    use {'tpope/vim-rhubarb'}
+    use {'machakann/vim-sandwich'}
+    -- use {'tpope/vim-rhubarb'}
     use {'tpope/vim-unimpaired'}
-    use {'tpope/vim-vinegar'}
+    -- use {'tpope/vim-vinegar'}
     use {'tpope/vim-sleuth'}
     use {'tpope/vim-repeat'}
-    use {'guns/sexp'}
-    use {'tpope/vim-sexp-mappings-for-regular-people'}
+    -- somehow packer fails to install guns/sexp ... so I'm disabling it for now
+    -- use {'guns/sexp'}
+    -- use {'tpope/vim-sexp-mappings-for-regular-people'}
+    use {'brooth/far.vim'}
 
     use {'wellle/targets.vim'}
     use {'easymotion/vim-easymotion'}
-    use {
-        'lewis6991/gitsigns.nvim',
-        requires = { 'nvim-lua/plenary.nvim' }
-    }
-    use {
-        'TimUntersberger/neogit',
-        config = function() require('neogit').setup() end
-    }
     use {'unblevable/quick-scope'}
     use {'voldikss/vim-floaterm'}
     use {'jiangmiao/auto-pairs'}
@@ -50,39 +45,64 @@ return require('packer').startup(function()
     use {'ms-jpq/chadtree', branch = 'chad', run = 'python3 -m chadtree deps'}
 
     -- Color
-    use {"th3whit3wolf/Dusk-til-Dawn.nvim"}
+    use {
+        "th3whit3wolf/Dusk-til-Dawn.nvim",
+        branch="main",
+        setup = function()
+            vim.g.dusk_til_dawn_light_theme = "edge"
+            vim.g.dusk_til_dawn_dark_theme = "sonokai"
+            vim.g_dusk_til_dawn_morning = 7
+            vim.g.dusk_til_dawn_night = 18
+        end
+    }
     use {
         "glepnir/indent-guides.nvim",
-        branch = "main"
+        branch = "main",
+        config = function()
+            require("Dusk-til-Dawn").timeMan(
+                function()
+                    require('indent_guides').setup({
+                        even_colors = {fg = "#d3d3e7", bg = "#d3d3e7"},
+                        odd_colors = {fg = "#e7e7fc", bg = "#e7e7fc"},
+                        indent_guide_size = 4
+                    })
+                    require('indent_guides').indent_guides_enable()
+                end,
+                function()
+                require('indent_guides').setup({
+                    even_colors = {fg = "#444155", bg = "#444155"},
+                    odd_colors = {fg = "#3b314d", bg = "#3b314d"},
+                    indent_guide_size = 4
+                })
+                require('indent_guides').indent_guides_enable()
+                end
+            )()
+        end
     }
     use {'kyazdani42/nvim-web-devicons'}
-    use {'sainnhe/gruvbox-material'}
-    use {'patstockwell/vim-monokai-tasty'}
-    use {'tanvirtin/monokai.nvim'}
     use {'NLKNguyen/papercolor-theme'}
-    use {'folke/tokyonight.nvim'}
-    use {'joshdick/onedark.vim'}
     use {'sainnhe/sonokai'}
     use {'sainnhe/everforest'}
     use {'sainnhe/edge'}
+    use {'rafamadriz/neon'}
 
     -- Testing
     -- use {'vim-test/vim-test'}
     -- use { "rcarriga/vim-ultest", run = ":UpdateRemotePlugins" }
 
     -- Telescope
-    -- use {'nvim-lua/plenary.nvim'}
+    use {'nvim-lua/plenary.nvim'}
     use {'ludovicchabant/vim-gutentags'}
     use {'nvim-lua/popup.nvim'}
     use {'nvim-telescope/telescope.nvim'}
     use {'fhill2/telescope-ultisnips.nvim'}
-    use {
-        'nvim-telescope/telescope-frecency.nvim',
-        requires = {'tami5/sql.nvim'},
-        config = function()
-            require('telescope').load_extension('frecency')
-        end
-    }
+    -- use {
+    --     'nvim-telescope/telescope-frecency.nvim',
+    --     requires = {'tami5/sql.nvim'},
+    --     config = function()
+    --         require('telescope').load_extension('frecency')
+    --     end
+    -- }
     use {'nvim-telescope/telescope-symbols.nvim'}
     use {'nvim-telescope/telescope-github.nvim'}
     -- use {
@@ -109,6 +129,7 @@ return require('packer').startup(function()
 
     -- LSP config
     use {'neovim/nvim-lspconfig'}
+    use {'ray-x/navigator.lua', requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}}
     -- use { 'kabouzeid/nvim-lspinstall'}
 
     -- Completion
@@ -155,7 +176,6 @@ return require('packer').startup(function()
 
     -- Lua development
     use {'folke/lua-dev.nvim'}
-    use {'simrat39/symbols-outline.nvim'}
     use {'rafcamlet/nvim-luapad'}
     -- use {'~/workspace/development/alpha2phi/alpha.nvim'}
     -- use {'tjdevries/nlua.nvim'}
@@ -176,12 +196,14 @@ return require('packer').startup(function()
 
     -- Better syntax
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {'nvim-treesitter/nvim-treesitter-refactor'}
     -- use {'nvim-treesitter/playground'}
 
     -- UI/UX ... Dashboard, tabline...
     -- use {'glepnir/dashboard-nvim'}
     use {'zefei/vim-wintabs'}
     use {'zefei/vim-wintabs-powerline'}
+    use {'simrat39/symbols-outline.nvim'}
 
     -- Status line
     use {
@@ -245,6 +267,55 @@ return require('packer').startup(function()
     -- use {'tools-life/taskwiki'}
     -- use {'powerman/vim-plugin-AnsiEsc'}
 
+    -- Git stuff
+    use {
+        'lewis6991/gitsigns.nvim',
+        requires = { 'nvim-lua/plenary.nvim' },
+        config = function() require('gitsigns').setup({
+            signs = {
+                add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+                change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+                delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+                topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+                changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+            },
+            numhl = false,
+            linehl = false,
+            keymaps = {
+                -- Default keymap options
+                noremap = true,
+                buffer = true,
+
+                ['n ]h'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+                ['n [h'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+
+                ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+                ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+                ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+                ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+                ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+                ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+
+                -- Text objects
+                ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+                ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+            },
+            watch_index = {
+                interval = 1000
+            },
+            current_line_blame = false,
+            sign_priority = 6,
+            update_debounce = 100,
+            status_formatter = nil, -- Use default
+            use_decoration_api = true,
+            use_internal_diff = true,  -- If luajit is present
+        }) end
+    }
+    use {
+        'TimUntersberger/neogit',
+        config = function() require('neogit').setup() end
+    }
+
     -- Presentation
     -- use {'sotte/presenting.vim'}
     -- use {'vim-pandoc/vim-pandoc'}
@@ -264,7 +335,7 @@ return require('packer').startup(function()
         require("todo-comments").setup {}
     end
     }
-    use {'oberblastmeister/neuron.nvim', branch = 'unstable', run = 'nix-env -if https://github.com/srid/neuron/archive/master.tar.gz' }
+    -- use {'oberblastmeister/neuron.nvim', branch = 'unstable', run = 'nix-env -if https://github.com/srid/neuron/archive/master.tar.gz' }
 
     -- use {'oberblastmeister/neuron.nvim' }
     -- use {'junegunn/fzf', run = '-> fzf#install()' }
@@ -289,7 +360,7 @@ return require('packer').startup(function()
     -- use {'jupyter-vim/jupyter-vim' }
 
     -- Scratch pad
-    use {'metakirby5/codi.vim' }
+    -- use {'metakirby5/codi.vim' }
 
     -- Slime
     -- use {'jpalardy/vim-slime' }

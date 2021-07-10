@@ -31,7 +31,3 @@ require('config')
 -- DAP
 -- require('dbg')
 
--- OR you can invoke them individually here
--- require('config.colorscheme')  -- color scheme
--- require('config.completion')   -- completion
--- require('config.fugitive')     -- fugitive

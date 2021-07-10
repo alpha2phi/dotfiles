@@ -30,7 +30,7 @@ nnoremap <silent> <leader>fghi :Telescope gh issues<cr>
 nnoremap <silent> <leader>fghpr :Telescope gh pull_request<cr>
 nnoremap <silent> <leader>fn :Telescope node_modules list<cr>
 nnoremap <silent> <leader>fp :Telescope project<CR>
-nnoremap <silent> <leader>ff :Telescope frecency<CR>
+" nnoremap <silent> <leader>ff :Telescope frecency<CR>
 nnoremap <silent> <leader>fy :Telescope symbols<CR>
 nnoremap <silent> <leader>fS :SearchSession
 nnoremap <silent> <leader>fMp :Telescope vim_bookmarks all<CR>

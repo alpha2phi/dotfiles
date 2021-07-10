@@ -1,4 +1,5 @@
 local utils = {}
+utils.Git = require'utils.git'
 
 local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 

@@ -1,15 +1,15 @@
-require('config.codicons')
 require('config.colorscheme')
-require('config.fugitive')
+-- require('config.fugitive')
 require('config.devicon')
 require('config.project')
 require('config.telescope')
 require('config.symbols_outline')
-require('config.git_signs')
-require('config.indent_guides')
 
 -- nvim-compe
 require('config.compe')
+
+-- lsp navigator & config via navigator
+require('navigator').setup()
 
 -- lspkind-nvim
 require('config.lspkind')

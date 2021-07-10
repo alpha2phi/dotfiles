@@ -1,6 +1,6 @@
 local gl = require("galaxyline")
 local gls = gl.section
-gl.short_line_list = {"LuaTree", "CHADTree", "symbols_outline"}
+gl.short_line_list = {"LuaTree", "CHADTREE", "OUTLINE"}
 local i = require("statusline.icons")
 local c = require("statusline.colors")
 local u = require("statusline.utils")

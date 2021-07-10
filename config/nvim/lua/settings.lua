@@ -30,6 +30,7 @@ wo.scrolloff = 8
 wo.cursorline = true
 
 cmd [[
+set colorcolumn=80,100,120
 set expandtab smarttab shiftround autoindent smartindent smartcase
 set path+=**
 set wildmode=longest,list,full
@@ -73,8 +74,19 @@ cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 vim.api.nvim_exec([[
 augroup auto_fmt
     autocmd!
-    autocmd BufWritePre *.clj,*.cljc,*.cljs,*.js,*.jsx,*.ts,*.tsx,*.lua try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
+    autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.lua try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
+    autocmd BufWritePre *.clj,*.cljc,*.cljs CljFmt
 aug END
+]], false)
+
+-- Git Blame Virtual
+vim.api.nvim_exec([[
+augroup auto_blame
+  autocmd!
+  autocmd CursorHold * lua require'utils'.Git.blameVirtText()
+  autocmd CursorMoved * lua require'utils'.Git.clearBlameVirtText()
+  autocmd CursorMovedI * lua require'utils'.Git.clearBlameVirtText()
+augroup END
 ]], false)
 
 vim.api.nvim_exec([[

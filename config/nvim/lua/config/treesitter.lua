@@ -10,5 +10,13 @@ require'nvim-treesitter.configs'.setup {
   rainbow = {
     enable = true,
     extended_mode = true
-  }
+  },
+  refactor = {
+    smart_rename = {
+      enable = true,
+      keymaps = {
+        smart_rename = "grr",
+      },
+    },
+  },
 }

@@ -1,1 +1,1 @@
-let g:doge_mapping = "<Leader>dg"
+let g:doge_mapping = "<leader>D"

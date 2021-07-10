@@ -1,4 +1,4 @@
-local d2d = require("Dusk-til-Dawn")
+local d2d = require("dusk-til-dawn")
 
 M = {}
 
