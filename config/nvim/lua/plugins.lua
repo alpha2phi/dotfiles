@@ -153,6 +153,7 @@ return require('packer').startup(function()
     use {'folke/lua-dev.nvim'}
     use {'simrat39/symbols-outline.nvim'}
     use {'~/workspace/development/alpha2phi/alpha.nvim'}
+    -- use {'nanotee/nvim-lua-guide'}
     -- use {'rafcamlet/nvim-luapad'}
     -- use {'thinca/vim-themis'}
     -- use {'tpope/vim-scriptease'}
