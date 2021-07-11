@@ -36,11 +36,15 @@ return require('packer').startup(function()
     use {'voldikss/vim-floaterm'}
     use {'jiangmiao/auto-pairs'}
     use {
-        "folke/which-key.nvim",
+        'folke/which-key.nvim',
         config = function() require("which-key").setup {} end
     }
     use {'chrisbra/NrrwRgn'}
     use {'tamago324/lir.nvim'}
+    use {
+        'windwp/nvim-spectre',
+        config = function() require("config.spectre") end
+    }
     -- use {'tpope/vim-characterize'}
     -- use {'liuchengxu/vim-which-key'}
     -- use {'norcalli/nvim-colorizer.lua'}
@@ -132,13 +136,14 @@ return require('packer').startup(function()
     -- use {'kosayoda/nvim-lightbulb' }
 
     -- Snippets
-    use {'hrsh7th/vim-vsnip'}
-    use {'rafamadriz/friendly-snippets'}
-    use {'cstrap/python-snippets'}
-    use {'ylcnfrht/vscode-python-snippet-pack'}
-    use {'xabikos/vscode-javascript'}
-    use {'golang/vscode-go'}
-    use {'rust-lang/vscode-rust'}
+    use {
+        'hrsh7th/vim-vsnip',
+        requires = {
+            'rafamadriz/friendly-snippets', 'cstrap/python-snippets',
+            'ylcnfrht/vscode-python-snippet-pack', 'xabikos/vscode-javascript',
+            'golang/vscode-go', 'rust-lang/vscode-rust'
+        }
+    }
     -- use { 'honza/vim-snippets' }
     -- use { 'SirVer/ultisnips' }
     -- use { 'norcalli/snippets.nvim' }
@@ -147,12 +152,12 @@ return require('packer').startup(function()
     -- Lua development
     use {'folke/lua-dev.nvim'}
     use {'simrat39/symbols-outline.nvim'}
-    use {'rafcamlet/nvim-luapad'}
-    use {'thinca/vim-themis'}
-    use {'tpope/vim-scriptease'}
-    use {'junegunn/vader.vim'}
-    use {'milisims/nvim-luaref'}
     use {'~/workspace/development/alpha2phi/alpha.nvim'}
+    -- use {'rafcamlet/nvim-luapad'}
+    -- use {'thinca/vim-themis'}
+    -- use {'tpope/vim-scriptease'}
+    -- use {'junegunn/vader.vim'}
+    -- use {'milisims/nvim-luaref'}
     -- use {'tjdevries/nlua.nvim'}
     -- use {'metakirby5/codi.vim'}
     -- use {'bfredl/nvim-luadev'}
@@ -166,6 +171,7 @@ return require('packer').startup(function()
 
     -- Dashboard
     use {'glepnir/dashboard-nvim'}
+    -- use {'thaerkh/vim-workspace'}
 
     -- Status line
     use {
