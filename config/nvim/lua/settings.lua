@@ -16,6 +16,7 @@ o.termguicolors = true
 o.hidden = true
 o.ignorecase = true
 o.scrolloff = 8
+-- o.sidescrolloff = 999
 o.splitbelow = true
 o.splitright = true
 o.clipboard = 'unnamed,unnamedplus'
