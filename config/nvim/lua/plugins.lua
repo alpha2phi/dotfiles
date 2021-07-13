@@ -119,6 +119,13 @@ return require('packer').startup(function()
         "folke/trouble.nvim",
         config = function() require("trouble").setup {} end
     }
+
+    -- use {
+    --     'ray-x/navigator.lua',
+    --     requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
+    --     config = function() require("navigator").setup {} end
+    -- }
+
     -- use {'tjdevries/astronauta.nvim'}
     -- use {'nvim-lua/lsp-status.nvim'}
     -- use {
