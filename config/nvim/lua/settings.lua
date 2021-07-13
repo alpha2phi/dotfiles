@@ -14,6 +14,7 @@ bo.tabstop = indent
 bo.softtabstop = indent
 o.termguicolors = true
 o.hidden = true
+o.breakident = true
 o.ignorecase = true
 o.scrolloff = 8
 -- o.sidescrolloff = 999
