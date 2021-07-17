@@ -176,7 +176,7 @@ return require('packer').startup(function()
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use {'nvim-treesitter/nvim-treesitter-textobjects'}
     use {'nvim-treesitter/playground'}
-    use {'nvim-treesitter/nvim-treesitter-refactor'}
+    -- use {'nvim-treesitter/nvim-treesitter-refactor'}
 
     -- Dashboard
     use {'glepnir/dashboard-nvim'}
