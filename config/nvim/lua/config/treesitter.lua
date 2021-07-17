@@ -69,6 +69,7 @@ require'nvim-treesitter.configs'.setup {
                 ["<leader>pc"] = "@class.outer"
             }
         },
+        context_commentstring = {enable = false}
         -- refactor = {
         --     highlight_definitions = {enable = true},
         --     highlight_current_scope = {enable = true},
@@ -88,5 +89,5 @@ require'nvim-treesitter.configs'.setup {
         --         }
         --     }
         -- }
-    -- }
+    }
 }
