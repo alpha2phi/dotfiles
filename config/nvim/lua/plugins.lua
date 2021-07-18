@@ -45,6 +45,10 @@ return require('packer').startup(function()
         'windwp/nvim-spectre',
         config = function() require("config.spectre") end
     }
+    -- use {
+    --     "akinsho/nvim-toggleterm.lua",
+    --     config = function() require("toggleterm").setup {} end
+    -- }
     -- use {'tpope/vim-characterize'}
     -- use {'liuchengxu/vim-which-key'}
     -- use {'norcalli/nvim-colorizer.lua'}
@@ -160,6 +164,7 @@ return require('packer').startup(function()
     use {'folke/lua-dev.nvim'}
     use {'simrat39/symbols-outline.nvim'}
     use {'~/workspace/development/alpha2phi/alpha.nvim'}
+    -- use {'bryall/contextprint.nvim'}
     -- use {'nanotee/nvim-lua-guide'}
     -- use {'rafcamlet/nvim-luapad'}
     -- use {'thinca/vim-themis'}
