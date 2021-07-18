@@ -3,12 +3,12 @@ return require('packer').startup(function()
     -- Packer can manage itself as an optional plugin
     use {'wbthomason/packer.nvim', opt = true}
 
-    -- Config
-    use {
-        'dstein64/vim-startuptime',
-        cmd = 'StartupTime',
-        config = [[vim.g.startuptime_tries = 10]]
-    }
+    -- -- Config
+    -- use {
+    --     'dstein64/vim-startuptime',
+    --     cmd = 'StartupTime',
+    --     config = [[vim.g.startuptime_tries = 10]]
+    -- }
 
     -- Development
     use {'tpope/vim-dispatch'}
@@ -182,6 +182,22 @@ return require('packer').startup(function()
     use {'nvim-treesitter/nvim-treesitter-textobjects'}
     use {'nvim-treesitter/playground'}
     use {'JoosepAlviste/nvim-ts-context-commentstring'}
+    use {
+        'romgrk/nvim-treesitter-context',
+        config = function()
+            require('treesitter-context.config').setup {enable = true}
+        end
+    }
+    use {
+        "windwp/nvim-ts-autotag",
+        config = function()
+            require("nvim-ts-autotag").setup({enable = true})
+        end
+    }
+    -- use {
+    --     "folke/twilight.nvim",
+    --     config = function() require("twilight").setup {} end
+    -- }
     -- use {'nvim-treesitter/nvim-treesitter-refactor'}
 
     -- Dashboard
@@ -217,7 +233,7 @@ return require('packer').startup(function()
     -- Development workflow
     use {'voldikss/vim-browser-search'}
     use {'kkoomen/vim-doge', run = '-> doge#install()'}
-    use {'chrisbra/unicode.vim'}
+    -- use {'chrisbra/unicode.vim'}
 
     -- Rust
     use {'rust-lang/rust.vim'}
