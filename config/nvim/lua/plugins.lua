@@ -46,6 +46,10 @@ return require('packer').startup(function()
         config = function() require("config.spectre") end
     }
     -- use {
+    --     'ruifm/gitlinker.nvim',
+    --     config = function() require("gitlinker").setup() end
+    -- }
+    -- use {
     --     "akinsho/nvim-toggleterm.lua",
     --     config = function() require("toggleterm").setup {} end
     -- }

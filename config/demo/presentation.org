@@ -25,14 +25,14 @@
 ** 2nd point
 *** Sub level
 *** Another level
-** 3nd point 
+** 3nd point
 *** org mode means not having to remember \LaTeX commands.
 *** Emacs is superb!
 * Slide with Image
 **  The beauty of nature
-** A walk in the jungle 
+** A walk in the jungle
 #+ATTR_HTML: :width 600
-[[file:~/Downloads/nature.jpeg]]
+[[file:nature.jpeg]]
 
 * Slide with Code Block
     #+begin_src python :results output
