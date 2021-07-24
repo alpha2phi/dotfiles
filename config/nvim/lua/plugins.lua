@@ -127,6 +127,13 @@ return require('packer').startup(function()
         "folke/trouble.nvim",
         config = function() require("trouble").setup {} end
     }
+    use {
+      "mfussenegger/nvim-ts-hint-textobject",
+      config = function()
+        vim.cmd [[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]]
+        vim.cmd [[vnoremap <silent> m :lua require('tsht').nodes()<CR>]]
+      end,
+    }
 
     -- use {
     --     'ray-x/navigator.lua',
