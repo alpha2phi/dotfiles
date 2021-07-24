@@ -167,7 +167,7 @@ return require('packer').startup(function()
     -- Lua development
     use {'folke/lua-dev.nvim'}
     use {'simrat39/symbols-outline.nvim'}
-    use {'~/workspace/development/alpha2phi/alpha.nvim'}
+    use {'~/workspace/dev/alpha2phi/alpha.nvim'}
     -- use {'bryall/contextprint.nvim'}
     -- use {'nanotee/nvim-lua-guide'}
     -- use {'rafcamlet/nvim-luapad'}

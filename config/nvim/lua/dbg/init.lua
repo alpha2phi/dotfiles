@@ -5,7 +5,7 @@ require('telescope').load_extension('dap')
 vim.g.dap_virtual_text = true
 
 -- nvim-dap-ui
-require("dapui").setup()
+require("dapui").setup({})
 
 -- languages
 require('dbg.python')
