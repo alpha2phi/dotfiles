@@ -22,6 +22,8 @@ return require('packer').startup(function()
     use {'tpope/vim-sleuth'}
     use {'wellle/targets.vim'}
     use {'phaazon/hop.nvim'}
+    -- TODO: Try out
+    -- use {'ggandor/lightspeed.nvim'}
     -- use {'easymotion/vim-easymotion'}
     use {
         'lewis6991/gitsigns.nvim',
@@ -160,7 +162,6 @@ return require('packer').startup(function()
     --     config = function() require("navigator").setup {} end
     -- }
 
-    -- use {'tjdevries/astronauta.nvim'}
     -- use {'nvim-lua/lsp-status.nvim'}
     -- use {
     --     "folke/todo-comments.nvim",
@@ -269,6 +270,8 @@ return require('packer').startup(function()
     -- Development workflow
     use {'voldikss/vim-browser-search'}
     use {'kkoomen/vim-doge', run = '-> doge#install()'}
+
+    use {'jbyuki/instant.nvim'}
     -- use {'chrisbra/unicode.vim'}
 
     -- Rust
