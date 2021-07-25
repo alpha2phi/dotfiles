@@ -1,1 +1,1 @@
-nmap s <Plug>(easymotion-overwin-f)
+" nmap s <Plug>(easymotion-overwin-f)

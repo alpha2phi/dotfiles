@@ -20,7 +20,8 @@ return require('packer').startup(function()
     use {'tpope/vim-vinegar'}
     use {'tpope/vim-sleuth'}
     use {'wellle/targets.vim'}
-    use {'easymotion/vim-easymotion'}
+    use {'phaazon/hop.nvim'}
+    -- use {'easymotion/vim-easymotion'}
     use {
         'lewis6991/gitsigns.nvim',
         config = function() require('gitsigns').setup() end
@@ -62,7 +63,6 @@ return require('packer').startup(function()
     -- use {'christoomey/vim-tmux-navigator'}
     -- use {'mhinz/vim-signify'}
     -- use {'radenling/vim-dispatch-neovim' }
-    -- use {'phaazon/hop.nvim'}
 
     -- Color scheme
     use {'kyazdani42/nvim-web-devicons'}
