@@ -105,6 +105,8 @@ return require('packer').startup(function()
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
     use {"nvim-telescope/telescope-hop.nvim"}
 
+    -- TODO: to try
+    -- use {'camspiers/snap'}
     -- use {
     --     'nvim-telescope/telescope-arecibo.nvim',
     --     rocks = {"openssl", "lua-http-parser"}
