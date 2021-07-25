@@ -3,6 +3,7 @@ return require('packer').startup(function()
     -- Packer can manage itself as an optional plugin
     use {'wbthomason/packer.nvim', opt = true}
 
+    -- TODO - Fine tune the performance
     -- -- Config
     -- use {
     --     'dstein64/vim-startuptime',
@@ -46,10 +47,10 @@ return require('packer').startup(function()
         'windwp/nvim-spectre',
         config = function() require("config.spectre") end
     }
-    -- use {
-    --     'ruifm/gitlinker.nvim',
-    --     config = function() require("gitlinker").setup() end
-    -- }
+    use {
+        'ruifm/gitlinker.nvim',
+        config = function() require("gitlinker").setup() end
+    }
     -- use {
     --     "akinsho/nvim-toggleterm.lua",
     --     config = function() require("toggleterm").setup {} end
@@ -128,13 +129,17 @@ return require('packer').startup(function()
         config = function() require("trouble").setup {} end
     }
     use {
-      "mfussenegger/nvim-ts-hint-textobject",
-      config = function()
-        vim.cmd [[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]]
-        vim.cmd [[vnoremap <silent> m :lua require('tsht').nodes()<CR>]]
-      end,
+        "mfussenegger/nvim-ts-hint-textobject",
+        config = function()
+            vim.cmd [[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]]
+            vim.cmd [[vnoremap <silent> m :lua require('tsht').nodes()<CR>]]
+        end
     }
-
+    use {
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function() require("todo-comments").setup {} end
+    }
     -- use {
     --     'ray-x/navigator.lua',
     --     requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
