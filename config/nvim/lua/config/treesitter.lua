@@ -90,5 +90,12 @@ require'nvim-treesitter.configs'.setup {
         --     }
         -- }
     },
-    context_commentstring = {enable = true}
+    context_commentstring = {enable = true},
+    textsubjects = {
+        enable = true,
+        keymaps = {
+            ['.'] = 'textsubjects-smart',
+            [';'] = 'textsubjects-container-outer'
+        }
+    }
 }

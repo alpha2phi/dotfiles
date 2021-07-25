@@ -51,6 +51,7 @@ return require('packer').startup(function()
         'ruifm/gitlinker.nvim',
         config = function() require("gitlinker").setup() end
     }
+    -- use {'rhysd/committia.vim'}
     -- use {
     --     "akinsho/nvim-toggleterm.lua",
     --     config = function() require("toggleterm").setup {} end
@@ -140,6 +141,7 @@ return require('packer').startup(function()
         requires = "nvim-lua/plenary.nvim",
         config = function() require("todo-comments").setup {} end
     }
+    use {'RRethy/nvim-treesitter-textsubjects'}
     -- use {
     --     'ray-x/navigator.lua',
     --     requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
