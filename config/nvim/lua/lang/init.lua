@@ -108,15 +108,29 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- dynamicRegistration = false
 -- }
 
-capabilities.textDocument.completion.completionItem.snippetSupport = true;
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {"documentation", "detail", "additionalTextEdits"}
 }
 
 -- LSPs
-local servers = {"pyright", "rust_analyzer", "gopls", "tsserver", "vimls"}
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {capabilities = capabilities, on_attach = on_attach}
+local servers = {
+    pyright = {},
+    rust_analyzer = {},
+    gopls = {},
+    tsserver = {},
+    vimls = {}
+}
+for server, config in pairs(servers) do
+    nvim_lsp[server].setup(vim.tbl_deep_extend("force", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = {debounce_text_changes = 150}
+    }, config))
+    local cfg = nvim_lsp[server]
+    -- if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
+    --     util.error(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
+    -- end
 end
 
 -- Lua LSP
