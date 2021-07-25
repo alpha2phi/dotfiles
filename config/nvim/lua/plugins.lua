@@ -51,6 +51,12 @@ return require('packer').startup(function()
         'ruifm/gitlinker.nvim',
         config = function() require("gitlinker").setup() end
     }
+    use({
+        "folke/persistence.nvim",
+        event = "BufReadPre",
+        module = "persistence",
+        config = function() require("persistence").setup() end
+    })
     -- use {'rhysd/committia.vim'}
     -- use {
     --     "akinsho/nvim-toggleterm.lua",
@@ -114,6 +120,7 @@ return require('packer').startup(function()
     -- use { 'nvim-lua/completion-nvim' }
 
     -- Better LSP experience
+    use {'tjdevries/astronauta.nvim'}
     use {'glepnir/lspsaga.nvim'}
     use {'onsails/lspkind-nvim'}
     use {'sbdchd/neoformat'}
