@@ -3,7 +3,7 @@ return require('packer').startup(function()
     -- Packer can manage itself as an optional plugin
     use {'wbthomason/packer.nvim', opt = true}
 
-    -- TODO - Fine tune the performance
+    -- TODO: - Fine tune the performance
     -- -- Config
     -- use {
     --     'dstein64/vim-startuptime',
@@ -282,6 +282,23 @@ return require('packer').startup(function()
     -- use {'editorconfig/editorconfig-vim'}
 
     -- Writing and note taking
+    -- TODO: To try out 
+    use {
+        "vhyrro/neorg",
+        config = function()
+            require('neorg').setup {
+                -- Tell Neorg what modules to load
+                load = {
+                    ["core.defaults"] = {}, -- Load all the default modules
+                    ["core.norg.concealer"] = {}, -- Allows for use of icons
+                    ["core.norg.dirman"] = { -- Manage your directories with Neorg
+                        config = {workspaces = {my_workspace = "~/neorg"}}
+                    }
+                }
+            }
+        end,
+        requires = "nvim-lua/plenary.nvim"
+    }
     -- use {'gyim/vim-boxdraw'}
     -- use {'preservim/vim-pencil'}
     -- use {'junegunn/goyo.vim'}
