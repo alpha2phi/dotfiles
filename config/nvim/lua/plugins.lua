@@ -150,6 +150,8 @@ return require('packer').startup(function()
         config = function() require("todo-comments").setup {} end
     }
     use {'RRethy/nvim-treesitter-textsubjects'}
+    -- TODO: to try out
+    use {'ThePrimeagen/refactoring.nvim'}
     -- use {
     --     'ray-x/navigator.lua',
     --     requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
