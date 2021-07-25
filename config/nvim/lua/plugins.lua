@@ -116,7 +116,7 @@ return require('packer').startup(function()
 
     -- LSP config
     use {'neovim/nvim-lspconfig'}
-    -- use { 'kabouzeid/nvim-lspinstall'}
+    -- use {'kabouzeid/nvim-lspinstall'}
 
     -- Completion - use either one of this
     use {'hrsh7th/nvim-compe'}
@@ -153,7 +153,7 @@ return require('packer').startup(function()
     }
     use {'RRethy/nvim-treesitter-textsubjects'}
     -- TODO: to try out
-    use {'ThePrimeagen/refactoring.nvim'}
+    -- use {'ThePrimeagen/refactoring.nvim'}
     -- use {
     --     'ray-x/navigator.lua',
     --     requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
@@ -240,6 +240,12 @@ return require('packer').startup(function()
         branch = 'main',
         config = function() require 'statusline' end
     }
+
+    use {
+        'akinsho/nvim-bufferline.lua',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function() require("bufferline").setup {} end
+    }
     -- use { 'romgrk/barbar.nvim' }
 
     -- Debugging
@@ -287,22 +293,28 @@ return require('packer').startup(function()
 
     -- Writing and note taking
     -- TODO: To try out 
-    use {
-        "vhyrro/neorg",
-        config = function()
-            require('neorg').setup {
-                -- Tell Neorg what modules to load
-                load = {
-                    ["core.defaults"] = {}, -- Load all the default modules
-                    ["core.norg.concealer"] = {}, -- Allows for use of icons
-                    ["core.norg.dirman"] = { -- Manage your directories with Neorg
-                        config = {workspaces = {my_workspace = "~/neorg"}}
-                    }
-                }
-            }
-        end,
-        requires = "nvim-lua/plenary.nvim"
-    }
+    -- use {
+    --     "vhyrro/neorg",
+    --     config = function()
+    --         require('neorg').setup {
+    --             -- Tell Neorg what modules to load
+    --             load = {
+    --                 ["core.defaults"] = {}, -- Load all the default modules
+    --                 ["core.norg.concealer"] = {}, -- Allows for use of icons
+    --                 ["core.norg.dirman"] = { -- Manage your directories with Neorg
+    --                     config = {workspaces = {my_workspace = "~/neorg"}}
+    --                 }
+    --             }
+    --         }
+    --     end,
+    --     requires = "nvim-lua/plenary.nvim"
+    -- }
+    -- use {
+    --     'kristijanhusak/orgmode.nvim',
+    --     config = function() require('orgmode').setup {} end
+    -- }
+    -- TODO: try out
+    -- use {'Pocco81/HighStr.nvim'}
     -- use {'gyim/vim-boxdraw'}
     -- use {'preservim/vim-pencil'}
     -- use {'junegunn/goyo.vim'}

@@ -81,32 +81,32 @@ local nvim_lsp = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Code actions
--- capabilities.textDocument.codeAction = {
--- FIX: Code actions not working
--- dynamicRegistration = true,
--- codeActionLiteralSupport = {
---     codeActionKind = {
---         valueSet = (function()
---             local res = vim.tbl_values(vim.lsp.protocol.CodeActionKind)
---             table.sort(res)
---             return res
---         end)()
---     }
--- }
+capabilities.textDocument.codeAction = {
+    -- FIX: Code actions not working
+    dynamicRegistration = true,
+    codeActionLiteralSupport = {
+        codeActionKind = {
+            valueSet = (function()
+                local res = vim.tbl_values(vim.lsp.protocol.CodeActionKind)
+                table.sort(res)
+                return res
+            end)()
+        }
+    }
 
--- codeActionLiteralSupport = {
---     codeActionKind = {
---         valueSet = {
---             "", "Empty", "QuickFix", "Refactor", "RefactorExtract",
---             "RefactorInline", "RefactorRewrite", "Source",
---             "SourceOrganizeImports", "quickfix", "refactor",
---             "refactor.extract", "refactor.inline", "refactor.rewrite",
---             "source", "source.organizeImports"
---         }
---     }
--- },
--- dynamicRegistration = false
--- }
+    -- codeActionLiteralSupport = {
+    --     codeActionKind = {
+    --         valueSet = {
+    --             "", "Empty", "QuickFix", "Refactor", "RefactorExtract",
+    --             "RefactorInline", "RefactorRewrite", "Source",
+    --             "SourceOrganizeImports", "quickfix", "refactor",
+    --             "refactor.extract", "refactor.inline", "refactor.rewrite",
+    --             "source", "source.organizeImports"
+    --         }
+    --     }
+    -- },
+    -- dynamicRegistration = false
+}
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
