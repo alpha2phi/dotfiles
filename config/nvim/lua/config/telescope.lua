@@ -1,5 +1,6 @@
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('gh')
+require('telescope').load_extension('hop')
 
 require('telescope').setup {
     find_command = {
@@ -22,6 +23,23 @@ require('telescope').setup {
             override_file_sorter = true,
             case_mode = "smart_case"
         }
+    },
+    defaults = {
+        mappings = {
+            i = {
+                ["<C-h>"] = require("telescope").extensions.hop.hop,
+                -- ["<C-h>"] = require("telescope").extensions.hop
+                --     .hop_toggle_selection,
+                ["<C-space>"] = function(prompt_bufnr)
+                    local opts = {
+                        callback = actions.toggle_selection,
+                        loop_callback = actions.send_selected_to_qflist
+                    }
+                    require("telescope").extensions.hop._hop_loop(prompt_bufnr,
+                                                                  opts)
+                end
+            }
+        }
     }
 }
 -- require('telescope').load_extension('snippets')
@@ -33,30 +51,27 @@ local actions = require('telescope.actions')
 local M = {}
 
 M.search_dotfiles = function()
-    require("telescope.builtin").find_files(
-        {
-            prompt_title = "< VimRC >",
-            cwd = "$HOME/workspace/development/alpha2phi/dotfiles/"
-        })
+    require("telescope.builtin").find_files({
+        prompt_title = "< VimRC >",
+        cwd = "$HOME/workspace/development/alpha2phi/dotfiles/"
+    })
 end
 
 M.switch_projects = function()
-    require("telescope.builtin").find_files(
-        {
-            prompt_title = "< Switch Project >",
-            cwd = "$HOME/workspace/development/"
-        })
+    require("telescope.builtin").find_files({
+        prompt_title = "< Switch Project >",
+        cwd = "$HOME/workspace/development/"
+    })
 end
 
 M.git_branches = function()
-    require("telescope.builtin").git_branches(
-        {
-            attach_mappings = function(prompt_bufnr, map)
-                map('i', '<c-d>', actions.git_delete_branch)
-                map('n', '<c-d>', actions.git_delete_branch)
-                return true
-            end
-        })
+    require("telescope.builtin").git_branches({
+        attach_mappings = function(prompt_bufnr, map)
+            map('i', '<c-d>', actions.git_delete_branch)
+            map('n', '<c-d>', actions.git_delete_branch)
+            return true
+        end
+    })
 end
 
 return M
