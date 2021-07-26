@@ -34,6 +34,9 @@ utils.map('n', '<Leader>qz', '<Cmd>cex []<CR>')
 utils.map('n', '<Leader>qh', 'q:')
 utils.map('n', '<Leader>qs', 'q/')
 
+-- Transparent background
+utils.map('n', '<Leader>xc', '<Cmd>hi Normal ctermbg=none guibg=none<CR>')
+
 -- utils.map('n', ';', ':')
 -- utils.map('v', ';', ':')
 
