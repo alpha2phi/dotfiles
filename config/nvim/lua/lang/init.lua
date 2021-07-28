@@ -121,6 +121,16 @@ local servers = {
     tsserver = {},
     vimls = {}
 }
+
+local null_ls = require("null-ls")
+local sources = {
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.diagnostics.write_good,
+    null_ls.builtins.code_actions.gitsigns,
+    null_ls.builtins.formatting.lua_format
+}
+null_ls.config({sources = sources})
+
 for server, config in pairs(servers) do
     nvim_lsp[server].setup(vim.tbl_deep_extend("force", {
         on_attach = on_attach,
@@ -128,9 +138,15 @@ for server, config in pairs(servers) do
         flags = {debounce_text_changes = 150}
     }, config))
     local cfg = nvim_lsp[server]
-    -- if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
-    --     util.error(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
-    -- end
+
+    null_ls.setup {
+        on_attach = on_attach,
+        sources = sources
+    }
+
+    if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
+        print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
+    end
 end
 
 -- Lua LSP

@@ -154,6 +154,21 @@ return require('packer').startup(function()
         config = function() require("todo-comments").setup {} end
     }
     use {'RRethy/nvim-treesitter-textsubjects'}
+    -- TODO: Further test
+    use {
+        'jose-elias-alvarez/null-ls.nvim'
+        -- config = function()
+        --     local null_ls = require("null-ls")
+        --     local sources = {
+        --         null_ls.builtins.formatting.prettier,
+        --         null_ls.builtins.diagnostics.write_good,
+        --         null_ls.builtins.code_actions.gitsigns,
+        --         null_ls.builtins.formatting.lua_format
+        --     }
+        --     null_ls.config({sources = sources})
+        --     require("lspconfig")["null-ls"].setup({})
+        -- end
+    }
     -- TODO: to try out
     -- use {'ThePrimeagen/refactoring.nvim'}
     -- use {
