@@ -80,7 +80,7 @@ vim.api.nvim_exec([[
         call winrestview(l:save)
     endfun
 
-    autocmd FileType go,rust,html,typescript,javascript,python autocmd BufWritePre <buffer> call TrimWhitespace()
+    autocmd FileType lua,go,rust,html,typescript,javascript,python autocmd BufWritePre <buffer> call TrimWhitespace()
 
 ]], false)
 
