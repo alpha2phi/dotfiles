@@ -286,12 +286,12 @@ return require('packer').startup(function()
     use {'voldikss/vim-browser-search'}
     use {'kkoomen/vim-doge', run = '-> doge#install()'}
 
-    use {'jbyuki/instant.nvim'}
+    -- use {'jbyuki/instant.nvim'}
     -- use {'chrisbra/unicode.vim'}
 
     -- Rust
     use {'rust-lang/rust.vim'}
-    -- use {'simrat39/rust-tools.nvim'}
+    use {'simrat39/rust-tools.nvim'}
 
     -- Database
     -- use {'tpope/vim-dadbod'}
@@ -310,7 +310,7 @@ return require('packer').startup(function()
     -- use {'editorconfig/editorconfig-vim'}
 
     -- Writing and note taking
-    -- TODO: To try out 
+    -- TODO: To try out
     -- use {
     --     "vhyrro/neorg",
     --     config = function()
