@@ -71,4 +71,18 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <Leader>es :call tts#Speak()<CR>
 vnoremap <Leader>es :call tts#Speak(1)<CR>
 
+nnoremap Y y$
+
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
+
 ]], false)
