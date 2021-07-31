@@ -75,6 +75,14 @@ local on_attach = function(client, bufnr)
         augroup END
         ]], false)
     end
+
+    if vim.lsp.codelens and client.resolved_capabilities['code_lens'] then
+        -- vim.cmd(string.format('au BufEnter,BufModifiedSet,InsertLeave <buffer=%d> lua vim.lsp.codelens.refresh()', bufnr))
+        api.nvim_buf_set_keymap(bufnr, "n", "<leader>cr",
+                                "<Cmd>lua vim.lsp.codelens.refresh()<CR>", opts)
+        api.nvim_buf_set_keymap(bufnr, "n", "<leader>ce",
+                                "<Cmd>lua vim.lsp.codelens.run()<CR>", opts)
+    end
 end
 
 local nvim_lsp = require('lspconfig')
@@ -139,10 +147,7 @@ for server, config in pairs(servers) do
     }, config))
     local cfg = nvim_lsp[server]
 
-    null_ls.setup {
-        on_attach = on_attach,
-        sources = sources
-    }
+    null_ls.setup {on_attach = on_attach, sources = sources}
 
     if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
         print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
