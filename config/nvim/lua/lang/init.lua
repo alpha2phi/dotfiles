@@ -77,11 +77,11 @@ local on_attach = function(client, bufnr)
     end
 
     if vim.lsp.codelens and client.resolved_capabilities['code_lens'] then
-        -- vim.cmd(string.format('au BufEnter,BufModifiedSet,InsertLeave <buffer=%d> lua vim.lsp.codelens.refresh()', bufnr))
-        api.nvim_buf_set_keymap(bufnr, "n", "<leader>cr",
-                                "<Cmd>lua vim.lsp.codelens.refresh()<CR>", opts)
-        api.nvim_buf_set_keymap(bufnr, "n", "<leader>ce",
-                                "<Cmd>lua vim.lsp.codelens.run()<CR>", opts)
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lcld",
+                                    "<Cmd>lua vim.lsp.codelens.refresh()<CR>",
+                                    opts)
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lclr",
+                                    "<Cmd>lua vim.lsp.codelens.run()<CR>", opts)
     end
 end
 
