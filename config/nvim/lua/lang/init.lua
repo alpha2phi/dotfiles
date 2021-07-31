@@ -125,7 +125,15 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 local servers = {
     pyright = {},
     rust_analyzer = {},
-    gopls = {},
+    gopls = {
+        experimentalPostfixCompletions = true,
+        codelenses = {
+            generate = true,
+            gc_details = true,
+            test = true,
+            tidy = true
+        }
+    },
     tsserver = {},
     vimls = {}
 }
@@ -143,8 +151,9 @@ for server, config in pairs(servers) do
     nvim_lsp[server].setup(vim.tbl_deep_extend("force", {
         on_attach = on_attach,
         capabilities = capabilities,
-        flags = {debounce_text_changes = 150}
-    }, config))
+        flags = {debounce_text_changes = 150},
+        init_options = config
+    }, {}))
     local cfg = nvim_lsp[server]
 
     null_ls.setup {on_attach = on_attach, sources = sources}
