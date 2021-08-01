@@ -38,7 +38,6 @@ return require('packer').startup(function()
     use {'sindrets/diffview.nvim'}
     use {'unblevable/quick-scope'}
     use {'voldikss/vim-floaterm'}
-    use {'jiangmiao/auto-pairs'}
     use {
         'folke/which-key.nvim',
         config = function() require("which-key").setup {} end
@@ -59,6 +58,7 @@ return require('packer').startup(function()
         module = "persistence",
         config = function() require("persistence").setup() end
     })
+    -- use {'jiangmiao/auto-pairs'}
     -- use {'rhysd/committia.vim'}
     -- use {
     --     "akinsho/nvim-toggleterm.lua",
