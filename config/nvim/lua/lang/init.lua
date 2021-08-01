@@ -20,9 +20,11 @@ local key_mappings = {
     {'n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>'},
     {'n', '<leader>lrf', '<cmd>lua vim.lsp.buf.references()<CR>'},
     {
-        'n', '<leader>ld',
+        'n', '<leader>lds',
         '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'
-    }, {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
+    }, {'n', '<leader>lde', '<cmd>lua vim.lsp.diagnostic.enable()<CR>'},
+    {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
+    {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
     {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
     {'n', '<leader>lss', '<cmd>lua vim.lsp.buf.document_symbol()<CR>'},
     {'n', '<leader>lsw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>'}
