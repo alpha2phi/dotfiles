@@ -20,9 +20,12 @@ vim.api.nvim_exec([[
 augroup rustdebug
   autocmd!
 
-  autocmd FileType rust map <buffer> <Leader>dr :update<CR>:Cargo run<CR>
-  autocmd FileType rust map <buffer> <Leader>dd :update<CR>:RustRun<CR>
+  autocmd FileType rust map <buffer> <Leader>lrc :update<CR>:Cargo run<CR>
+  autocmd FileType rust map <buffer> <Leader>lrr :update<CR>:RustRun<CR>
   autocmd FileType rust packadd termdebug
+
+  autocmd FileType rust map <buffer> <Leader>lra :update<CR>:RustRunnables<CR>
+  autocmd FileType rust map <buffer> <Leader>lrd :update<CR>:RustDebuggables<CR>
 
 augroup END
 ]], false)

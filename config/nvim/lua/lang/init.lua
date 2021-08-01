@@ -86,7 +86,7 @@ local function set_lsp_highlight(client, bufnr)
 
 end
 
-local on_attach = function(client, bufnr)
+local lsp_on_attach = function(client, bufnr)
     set_lsp_config(client, bufnr)
     set_lsp_highlight(client, bufnr)
 end
@@ -157,7 +157,7 @@ local servers = {
 
 for server, config in pairs(servers) do
     nvim_lsp[server].setup(vim.tbl_deep_extend("force", {
-        on_attach = on_attach,
+        on_attach = lsp_on_attach,
         capabilities = capabilities,
         flags = {debounce_text_changes = 150},
         init_options = config
@@ -172,16 +172,36 @@ for server, config in pairs(servers) do
 end
 
 -- rust-tools.nvim
-nvim_lsp.rust_analyzer.setup({
-    capabilities = capabilities,
-    on_attach = on_attach
-})
-
 local function setup_rust_tools()
     require('rust-tools').setup({
         autoSetHints = true,
         runnables = {use_telescope = true},
-        inlay_hints = {show_parameter_hints = true}
+        inlay_hints = {show_parameter_hints = true},
+        server = {
+            on_attach = lsp_on_attach,
+            capabilities = capabilities,
+            flags = {debounce_text_changes = 150}
+        },
+        settings = {
+            ["rust-analyzer"] = {
+                assist = {
+                    importGranularity = "module",
+                    importEnforceGranularity = true
+                },
+                cargo = {loadOutDirsFromCheck = true, allFeatures = true},
+                procMacro = {enable = true},
+                checkOnSave = {command = "clippy"},
+                experimental = {procAttrMacros = true},
+                hoverActions = {references = true},
+                inlayHints = {
+                    chainingHints = true,
+                    maxLength = 40,
+                    parameterHints = true,
+                    typeHints = true
+                },
+                lens = {methodReferences = true, references = true}
+            }
+        }
     })
     require('rust-tools-debug').setup()
 end
@@ -209,7 +229,7 @@ local luadev = require("lua-dev").setup({
     library = {vimruntime = true, types = true, plugins = true},
     lspconfig = {
         capabilities = capabilities,
-        on_attach = on_attach,
+        on_attach = lsp_on_attach,
         cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
         settings = {
             Lua = {
