@@ -26,6 +26,7 @@ local key_mappings = {
     {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
     {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
     {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
+    {'v', '<leader>lcr', '<cmd>lua vim.lsp.buf.range_code_action()<CR>'},
     {'n', '<leader>lss', '<cmd>lua vim.lsp.buf.document_symbol()<CR>'},
     {'n', '<leader>lsw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>'}
 }
@@ -288,7 +289,6 @@ vim.g.symbols_outline = {
     lsp_blacklist = {}
 }
 
--- LSP Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         virtual_text = true,
@@ -296,6 +296,13 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
         signs = true,
         update_in_insert = false
     })
+
+-- local on_references = vim.lsp.handlers["textDocument/references"]
+-- vim.lsp.handlers["textDocument/references"] =
+--     vim.lsp.with(on_references, {
+--         -- loclist = true,
+--         virtual_text = true
+--     })
 
 -- Send diagnostics to quickfix list
 do
