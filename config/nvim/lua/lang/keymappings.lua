@@ -26,6 +26,7 @@ augroup rustdebug
 
   autocmd FileType rust map <buffer> <Leader>lra :update<CR>:RustRunnables<CR>
   autocmd FileType rust map <buffer> <Leader>lrd :update<CR>:RustDebuggables<CR>
+  autocmd FileType rust map <buffer> <Leader>lrh :update<CR>:RustHoverActions<CR>
 
 augroup END
 ]], false)
