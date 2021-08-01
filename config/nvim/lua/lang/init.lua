@@ -124,7 +124,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -- LSPs
 local servers = {
     pyright = {},
-    rust_analyzer = {},
+    -- rust_analyzer = {},
     gopls = {
         experimentalPostfixCompletions = true,
         codelenses = {
@@ -162,6 +162,9 @@ for server, config in pairs(servers) do
         print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
     end
 end
+
+-- rust-tools.nvim
+require("rust-tools").setup({on_attach = on_attach, capabilities = capabilities})
 
 -- Lua LSP
 local sumneko_root_path = ""
