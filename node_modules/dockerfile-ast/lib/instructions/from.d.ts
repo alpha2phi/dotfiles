@@ -1,0 +1,57 @@
+import { TextDocument, Range } from 'vscode-languageserver-types';
+import { Dockerfile } from '../dockerfile';
+import { Flag } from '../flag';
+import { ModifiableInstruction } from '../modifiableInstruction';
+export declare class From extends ModifiableInstruction {
+    constructor(document: TextDocument, range: Range, dockerfile: Dockerfile, escapeChar: string, instruction: string, instructionRange: Range);
+    protected stopSearchingForFlags(argument: string): boolean;
+    getImage(): string | null;
+    /**
+     * Returns the name of the image that will be used as the base image.
+     *
+     * @return the base image's name, or null if unspecified
+     */
+    getImageName(): string | null;
+    /**
+     * Returns the range that covers the name of the image used by
+     * this instruction.
+     *
+     * @return the range of the name of this instruction's argument,
+     *         or null if no image has been specified
+     */
+    getImageNameRange(): Range | null;
+    /**
+     * Returns the range that covers the image argument of this
+     * instruction. This includes the tag or digest of the image if
+     * it has been specified by the instruction.
+     *
+     * @return the range of the image argument, or null if no image
+     *         has been specified
+     */
+    getImageRange(): Range | null;
+    getImageTag(): string | null;
+    /**
+     * Returns the range in the document that the tag of the base
+     * image encompasses.
+     *
+     * @return the base image's tag's range in the document, or null
+     *         if no tag has been specified
+     */
+    getImageTagRange(): Range | null;
+    getImageDigest(): string | null;
+    /**
+     * Returns the range in the document that the digest of the base
+     * image encompasses.
+     *
+     * @return the base image's digest's range in the document, or null
+     *         if no digest has been specified
+     */
+    getImageDigestRange(): Range | null;
+    private indexOf;
+    private lastIndexOf;
+    getRegistry(): string | null;
+    getRegistryRange(): Range | null;
+    getBuildStage(): string | null;
+    getBuildStageRange(): Range | null;
+    getPlatformFlag(): Flag | null;
+}

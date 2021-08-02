@@ -1,0 +1,23 @@
+{
+  "name": "@lspinstall/nvim",
+  "version": "1.0.0",
+  "description": "## Neovim configuration fork of apha2phi To get started, read my [Medium article](https://alpha2phi.medium.com/neovim-init-lua-e80f4f136030).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joehannes-os/neovim-lua-config.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joehannes-os/neovim-lua-config/issues"
+  },
+  "homepage": "https://github.com/joehannes-os/neovim-lua-config#readme",
+  "dependencies": {
+    "dockerfile-language-server-nodejs": "^0.4.1"
+  }
+}

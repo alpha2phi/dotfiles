@@ -1,0 +1,125 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* --------------------------------------------------------------------------------------------
+ * Copyright (c) Remy Suen. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ * ------------------------------------------------------------------------------------------ */
+const vscode_languageserver_types_1 = require("vscode-languageserver-types");
+const flagOption_1 = require("./flagOption");
+class Flag {
+    constructor(document, range, name, nameRange, value, valueRange) {
+        this.options = [];
+        this.range = range;
+        this.name = name;
+        this.nameRange = nameRange;
+        this.value = value;
+        this.valueRange = valueRange;
+        if (this.value !== null) {
+            let offset = document.offsetAt(valueRange.start);
+            let nameStart = -1;
+            let valueStart = -1;
+            let hasOptions = false;
+            for (let i = 0; i < value.length; i++) {
+                switch (value.charAt(i)) {
+                    case '=':
+                        hasOptions = true;
+                        if (valueStart === -1) {
+                            valueStart = i + 1;
+                            break;
+                        }
+                        break;
+                    case ',':
+                        this.options.push(this.createFlagOption(document, value, offset, nameStart, valueStart, i));
+                        nameStart = -1;
+                        valueStart = -1;
+                        break;
+                    default:
+                        if (nameStart === -1) {
+                            nameStart = i;
+                        }
+                        break;
+                }
+            }
+            if (hasOptions && nameStart !== -1) {
+                this.options.push(this.createFlagOption(document, value, offset, nameStart, valueStart, value.length));
+            }
+        }
+    }
+    createFlagOption(document, content, documentOffset, nameStart, valueStart, valueEnd) {
+        const optionRange = vscode_languageserver_types_1.Range.create(document.positionAt(documentOffset + nameStart), document.positionAt(documentOffset + valueEnd));
+        if (valueStart === -1) {
+            return new flagOption_1.FlagOption(optionRange, content.substring(nameStart, valueEnd), optionRange, null, null);
+        }
+        return new flagOption_1.FlagOption(optionRange, content.substring(nameStart, valueStart - 1), vscode_languageserver_types_1.Range.create(document.positionAt(documentOffset + nameStart), document.positionAt(documentOffset + valueStart - 1)), content.substring(valueStart, valueEnd), vscode_languageserver_types_1.Range.create(document.positionAt(documentOffset + valueStart), document.positionAt(documentOffset + valueEnd)));
+    }
+    toString() {
+        if (this.valueRange) {
+            return "--" + this.name + "=" + this.value;
+        }
+        return "--" + this.name;
+    }
+    /**
+     * Returns the range that encompasses this entire flag. This includes the
+     * -- prefix in the beginning to the last character of the flag's value (if
+     * it has been defined).
+     *
+     * @return the entire range of this flag
+     */
+    getRange() {
+        return this.range;
+    }
+    /**
+     * Returns the name of this flag. The name does not include the -- prefix.
+     * Thus, for HEALTHCHECK's --interval flag, interval is the flag's name and
+     * not --interval.
+     *
+     * @return this flag's name
+     */
+    getName() {
+        return this.name;
+    }
+    /**
+     * Returns the range that encompasses the flag's name
+     *
+     * @return the range containing the flag's name
+     */
+    getNameRange() {
+        return this.nameRange;
+    }
+    /**
+     * Returns the value that has been set to this flag. May be null if the
+     * flag is invalid and has no value set like a --start-period. If the flag
+     * is instead a --start-period= with an equals sign then the flag's value
+     * is the empty string.
+     *
+     * @return this flag's value if it has been defined, null otherwise
+     */
+    getValue() {
+        return this.value;
+    }
+    /**
+     * Returns the range that encompasses this flag's value. If no value has
+     * been set then null will be returned.
+     *
+     * @return the range containing this flag's value, or null if the flag
+     *         has no value defined
+     */
+    getValueRange() {
+        return this.valueRange;
+    }
+    getOption(name) {
+        for (const option of this.options) {
+            if (option.getName() === name) {
+                return option;
+            }
+        }
+        return null;
+    }
+    getOptions() {
+        return this.options;
+    }
+    hasOptions() {
+        return this.options.length > 0;
+    }
+}
+exports.Flag = Flag;

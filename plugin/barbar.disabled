@@ -1,0 +1,129 @@
+function! s:_ (name, ...)
+  let fg = ''
+  let bg = ''
+  let attr = ''
+
+  if type(a:1) == 3
+    let fg   = get(a:1, 0, '')
+    let bg   = get(a:1, 1, '')
+    let attr = get(a:1, 2, '')
+  else
+    let fg   = get(a:000, 0, '')
+    let bg   = get(a:000, 1, '')
+    let attr = get(a:000, 2, '')
+  end
+
+  let has_props = v:false
+
+  let cmd = 'hi! ' . a:name
+  if !empty(fg) && fg != 'none'
+    let cmd .= ' guifg=' . fg
+    let has_props = v:true
+  end
+  if !empty(bg) && bg != 'none'
+    let cmd .= ' guibg=' . bg
+    let has_props = v:true
+  end
+  if !empty(attr) && attr != 'none'
+    let cmd .= ' gui=' . attr
+    let has_props = v:true
+  end
+  execute 'hi! clear ' a:name
+  if has_props
+    execute cmd
+  end
+endfunc
+
+function! s:hi_all (arr)
+  for subarr in a:arr
+    call call('s:_', subarr)
+  endfor
+endfunc
+
+function! s:hi_link (arr)
+  for subarr in a:arr
+    let [target, copy] = subarr
+    hi! link target copy
+  endfor
+endfunc
+
+let fg_target = "purple"
+
+let fg_current  = 'lightgray'
+let fg_visible  = 'gray'
+let fg_inactive = '#FC5C94'
+
+let fg_modified  = "white"
+let fg_special  =  "#FC5C94"
+let fg_subtle  = '#FC5C94'
+
+let bg_current  = "purple"
+let bg_visible  = '#FC5C94'
+let bg_inactive = '#FC5C94'
+
+call s:hi_all([
+\ ['BufferCurrent',        fg_current,  bg_current],
+\ ['BufferCurrentIndex',   fg_special,  bg_current],
+\ ['BufferCurrentMod',     fg_modified, bg_current],
+\ ['BufferCurrentSign',    fg_special,  bg_current],
+\ ['BufferCurrentTarget',  fg_target,   bg_current,   'bold'],
+\ ['BufferVisible',        fg_visible,  bg_visible],
+\ ['BufferVisibleIndex',   fg_visible,  bg_visible],
+\ ['BufferVisibleMod',     fg_modified, bg_visible],
+\ ['BufferVisibleSign',    fg_visible,  bg_visible],
+\ ['BufferVisibleTarget',  fg_target,   bg_visible,   'bold'],
+\ ['BufferInactive',       fg_inactive, bg_inactive],
+\ ['BufferInactiveIndex',  fg_subtle,   bg_inactive],
+\ ['BufferInactiveMod',    fg_modified, bg_inactive],
+\ ['BufferInactiveSign',   fg_subtle,   bg_inactive],
+\ ['BufferInactiveTarget', fg_target,   bg_inactive,  'bold'],
+\ ['BufferTabpages',       fg_special,  bg_inactive, 'bold'],
+\ ['BufferTabpageFill',    fg_inactive, bg_inactive],
+\ ])
+
+call s:hi_link([
+\ ['BufferCurrentIcon',  'BufferCurrent'],
+\ ['BufferVisibleIcon',  'BufferVisible'],
+\ ['BufferInactiveIcon', 'BufferInactive'],
+\ ['BufferOffset',       'BufferTabpageFill'],
+\ ])
+
+let bufferline = get(g:, 'bufferline', {})
+
+let bufferline.animation = v:true
+let bufferline.auto_hide = v:true
+let bufferline.tabpages = v:true
+
+let bufferline.icon_separator_active = ""
+let bufferline.icon_separator_inactive = ""
+let bufferline.icon_close_tab = ''
+let bufferline.icon_close_tab_modified = '●'
+
+" Move to previous/next
+nnoremap <silent>   [b :BufferPrevious<CR>
+nnoremap <silent>   ]b :BufferNext<CR>
+
+" Re-order to previous/next
+nnoremap <silent>    <b :BufferMovePrevious<CR>
+nnoremap <silent>    >b :BufferMoveNext<CR>
+
+" Close buffer
+nnoremap <silent>    <Leader>bc :BufferClose<CR>
+
+" Wipeout buffer
+"                          :BufferWipeout<CR>
+
+" Close commands
+"                          :BufferCloseAllButCurrent<CR>
+"                          :BufferCloseBuffersLeft<CR>
+"                          :BufferCloseBuffersRight<CR>
+
+" Magic buffer-picking mode
+" nnoremap <silent> <C-s>    :BufferPick<CR>
+" Sort automatically by...
+" nnoremap <silent> <Space>bd :BufferOrderByDirectory<CR>
+" nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
+
+" Other:
+" :BarbarEnable - enables barbar (enabled by default)
+" :BarbarDisable - very bad command, should never be used

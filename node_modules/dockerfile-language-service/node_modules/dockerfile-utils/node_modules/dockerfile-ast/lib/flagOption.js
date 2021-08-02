@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class FlagOption {
+    constructor(range, name, nameRange, value, valueRange) {
+        this.range = range;
+        this.name = name;
+        this.nameRange = nameRange;
+        this.value = value;
+        this.valueRange = valueRange;
+    }
+    toString() {
+        if (this.valueRange !== null) {
+            return this.name + "=" + this.value;
+        }
+        return this.name;
+    }
+    getRange() {
+        return this.range;
+    }
+    getName() {
+        return this.name;
+    }
+    getNameRange() {
+        return this.nameRange;
+    }
+    getValue() {
+        return this.value;
+    }
+    getValueRange() {
+        return this.valueRange;
+    }
+}
+exports.FlagOption = FlagOption;
