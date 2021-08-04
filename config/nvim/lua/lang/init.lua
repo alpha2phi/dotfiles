@@ -103,6 +103,9 @@ local lsp_on_attach = function(client, bufnr)
     set_lsp_highlight(client, bufnr)
 end
 
+-- local function lsp_on_exit(client, bufnr) print("LSP exit") end
+-- local function lsp_on_init(client) print(vim.inspect(client)) end
+
 local nvim_lsp = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -145,13 +148,23 @@ capabilities.experimental.hoverActions = true
 local servers = {
     pyright = {},
     gopls = {
+        -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
         experimentalPostfixCompletions = true,
+        analyses = {unusedparams = true, unreachable = false},
         codelenses = {
             generate = true,
             gc_details = true,
             test = true,
             tidy = true
-        }
+        },
+        usePlaceholders = true,
+        completeUnimported = true,
+        staticcheck = true,
+        matcher = "fuzzy",
+        experimentalDiagnosticsDelay = "500ms",
+        symbolMatcher = "fuzzy",
+        gofumpt = true,
+        buildFlags = {"-tags", "integration"}
     },
     tsserver = {},
     vimls = {}
@@ -170,6 +183,8 @@ local servers = {
 for server, config in pairs(servers) do
     nvim_lsp[server].setup(vim.tbl_deep_extend("force", {
         on_attach = lsp_on_attach,
+        -- on_exit = lsp_on_exit,
+        -- on_init = lsp_on_init,
         capabilities = capabilities,
         flags = {debounce_text_changes = 150},
         init_options = config
