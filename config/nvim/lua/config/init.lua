@@ -15,7 +15,7 @@ require('config.lspkind')
 require('config.treesitter')
 
 -- lir
-require('config.lir')
+-- require('config.lir')
 
 -- nvim-colorizer
 -- require('config.colorizer')

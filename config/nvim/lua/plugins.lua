@@ -43,7 +43,8 @@ return require('packer').startup(function()
         config = function() require("which-key").setup {} end
     }
     use {'chrisbra/NrrwRgn'}
-    use {'tamago324/lir.nvim'}
+    -- use {'tamago324/lir.nvim'}
+    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
     use {
         'windwp/nvim-spectre',
         config = function() require("config.spectre") end
