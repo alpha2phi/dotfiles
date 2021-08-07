@@ -307,11 +307,11 @@ return require('packer').startup(function()
     -- use {'tpope/vim-dotenv' }
 
     -- Markdown
+    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+    use {'plasticboy/vim-markdown'}
     -- use {'npxbr/glow.nvim', run = ':GlowInstall'}
     -- use {'mzlogin/vim-markdown-toc'}
-    -- use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
     -- use {'godlygeek/tabular'}
-    -- use {'plasticboy/vim-markdown'}
 
     -- Development settings
     -- use {'editorconfig/editorconfig-vim'}
@@ -334,10 +334,15 @@ return require('packer').startup(function()
     --     end,
     --     requires = "nvim-lua/plenary.nvim"
     -- }
-    -- use {
-    --     'kristijanhusak/orgmode.nvim',
-    --     config = function() require('orgmode').setup {} end
-    -- }
+    use {
+        'kristijanhusak/orgmode.nvim',
+        config = function()
+            require('orgmode').setup {
+                org_agenda_files = {'~/workspace/dev/notes/**/*'},
+                org_default_notes_file = '~workspace/dev/notes/notes.org'
+            }
+        end
+    }
     -- TODO: try out
     -- use {'Pocco81/HighStr.nvim'}
     -- use {'gyim/vim-boxdraw'}
