@@ -43,7 +43,6 @@ return require('packer').startup(function()
         config = function() require("which-key").setup {} end
     }
     use {'chrisbra/NrrwRgn'}
-    -- use {'tamago324/lir.nvim'}
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
     use {
         'windwp/nvim-spectre',
@@ -59,6 +58,7 @@ return require('packer').startup(function()
         module = "persistence",
         config = function() require("persistence").setup() end
     })
+    -- use {'tamago324/lir.nvim'}
     -- use {'jiangmiao/auto-pairs'}
     -- use {'rhysd/committia.vim'}
     -- use {
@@ -310,6 +310,9 @@ return require('packer').startup(function()
     -- Rust
     use {'rust-lang/rust.vim'}
     use {'simrat39/rust-tools.nvim'}
+
+    -- Go
+    use {'ray-x/go.nvim', config = function() require('go').setup() end}
 
     -- Database
     -- use {'tpope/vim-dadbod'}
