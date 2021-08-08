@@ -267,7 +267,18 @@ return require('packer').startup(function()
     use {
         'akinsho/nvim-bufferline.lua',
         requires = 'kyazdani42/nvim-web-devicons',
-        config = function() require("bufferline").setup {} end
+        config = function()
+            require("bufferline").setup({
+                options = {
+                    numbers = "both",
+                    number_style = "superscript",
+                    diagnostics = "nvim_lsp",
+                    show_tab_indicators = true,
+                    show_buffer_close_icons = false,
+                    show_close_icon = false
+                }
+            })
+        end
     }
     -- use { 'romgrk/barbar.nvim' }
 
