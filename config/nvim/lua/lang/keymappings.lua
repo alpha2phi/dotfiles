@@ -13,6 +13,7 @@ augroup pythondebug
   autocmd FileType python map <buffer> <Leader>dp :update<CR>:exec '!python' shellescape(@%, 1)<CR>
   autocmd FileType python map <buffer> <Leader>dd :update<CR>:sp term://python -m pdb %<CR>
 
+  autocmd FileType python map <buffer> <Leader>lco :PyrightOrganizeImports<CR>
 augroup END
 ]], false)
 
