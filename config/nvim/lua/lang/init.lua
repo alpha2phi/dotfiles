@@ -323,9 +323,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 do
     local method = "textDocument/publishDiagnostics"
     local default_handler = vim.lsp.handlers[method]
-    vim.lsp.handlers[method] = function(err, method, result, client_id, bufnr,
+    vim.lsp.handlers[method] = function(err, meth, result, client_id, bufnr,
                                         config)
-        default_handler(err, method, result, client_id, bufnr, config)
+        default_handler(err, meth, result, client_id, bufnr, config)
         local diagnostics = vim.lsp.diagnostic.get_all()
         local qflist = {}
         for buf, diagnostic in pairs(diagnostics) do
