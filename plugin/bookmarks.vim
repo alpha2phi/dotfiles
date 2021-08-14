@@ -13,9 +13,9 @@ nmap <leader>wm <Plug>BookmarkSave ~/.config/nvim/bookmarks
 nmap <leader>lm <Plug>BookmarkLoad ~/.config/nvim/bookmarks
 
 if v:vim_did_enter
-  exec "normal \<Plug>BookmarkLoad ~/.config/nvim/bookmarks"
+  silent exec "normal \<Plug>BookmarkLoad ~/.config/nvim/bookmarks"
 else
- au VimEnter * exec "normal \<Plug>BookmarkLoad ~/.config/nvim/bookmarks"
+ au VimEnter * silent exec "normal \<Plug>BookmarkLoad ~/.config/nvim/bookmarks"
 endif
 
 au VimLeavePre * exec "normal \<Plug>BookmarkSave ~/.config/nvim/bookmarks"

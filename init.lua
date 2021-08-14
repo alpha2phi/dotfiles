@@ -5,6 +5,8 @@ vim.g.maplocalleader = ','
 local fn = vim.fn
 local execute = vim.api.nvim_command
 
+require('packer').reset()
+
 -- Sensible defaults
 require('settings')
 
@@ -14,11 +16,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
     execute 'packadd packer.nvim'
 end
-
-require('packer').reset()
-
-vim.cmd([[autocmd BufWritePost plugins.lua luafile ~/.config/nvim/init.lua]])
-vim.cmd([[autocmd BufWritePost plugins.lua PackerSync]])
 
 -- Install plugins
 require('plugins')
@@ -30,4 +27,6 @@ require('lang')
 
 require('statusline')
 
-vim.cmd([[autocmd VimEnter * WhichKey]])
+vim.cmd([[command! SoInit source ~/.config/nvim/init.lua | PackerCompile]])
+vim.cmd([[autocmd BufWritePost plugins.lua SoInit]])
+vim.cmd([[autocmd VimEnter * PackerCompile]])

@@ -20,7 +20,6 @@ o.clipboard = 'unnamed,unnamedplus'
 o.timeoutlen = 0
 o.updatetime = 300
 o.inccommand = "split"
-o.cmdheight = 3
 wo.number = true
 wo.relativenumber = true
 wo.scrolloff = 8
@@ -53,13 +52,14 @@ set noswapfile
 set nocompatible
 set hidden
 set encoding=utf-8
-set cmdheight=1
+set cmdheight=3
 set updatetime=200
 set shortmess+=c
 set signcolumn=yes
 set mouse=a mousemodel=popup
 set tabstop=2 softtabstop=0 shiftwidth=2
 set sessionoptions="globals,tabpages,winpos,winsize,blank,buffers,curdir,folds,help,options,terminal"
+set guioptions-=e
 ]]
 
 cmd 'let g:Powerline_symbols = "fancy"'

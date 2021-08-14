@@ -1,0 +1,13 @@
+let g:wintabs_ignored_filetypes = ['gitcommit', 'packer', 'qf', 'ranger', 'chadtree']
+let g:wintabs_switchbuf = 'useopen'
+
+map [b :TablineBufferPrevious<cr>
+map ]b :TablineBufferNext<cr>
+map <leader>bc :bp\|bd #<CR>
+map <leader>wc :tabclose<CR>
+
+nnoremap <leader>bn :enew<CR>
+nnoremap <leader>wn :tabnew<CR>
+nnoremap [w :tabprevious<cr>
+nnoremap ]w :tabnext<cr>
+
