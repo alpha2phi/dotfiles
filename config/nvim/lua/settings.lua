@@ -5,6 +5,7 @@ local o = vim.o
 local wo = vim.wo
 local bo = vim.bo
 local indent = 4
+local opt = vim.opt
 
 cmd 'syntax enable'
 cmd 'filetype plugin indent on'
@@ -84,3 +85,15 @@ vim.api.nvim_exec([[
 
 ]], false)
 
+-- Cool floating window popup menu for completion on command line
+opt.pumblend = 17
+
+opt.formatoptions = opt.formatoptions - "a" -- Auto formatting is BAD.
+- "t" -- Don't auto format my code. I got linters for that.
++ "c" -- In general, I like it when comments respect textwidth
++ "q" -- Allow formatting comments w/ gq
+- "o" -- O and o, don't continue comments
++ "r" -- But do continue when pressing enter.
++ "n" -- Indent past the formatlistpat, not underneath it.
++ "j" -- Auto-remove comments if possible.
+- "2" -- I'm not in gradeschool anymore
