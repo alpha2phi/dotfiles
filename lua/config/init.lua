@@ -6,10 +6,9 @@ require('config.devicon')
 require('config.trouble')
 require('config.telescope')
 require('config.symbols_outline')
-
+require('config.bufferline')
 -- nvim-compe
 require('config.compe')
-
 
 -- lspkind-nvim
 require('config.lspkind')

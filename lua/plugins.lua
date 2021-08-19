@@ -226,10 +226,11 @@ return require('packer').startup({function(use)
     -- use {'nvim-treesitter/playground'}
 
     -- UI/UX ... Dashboard, tabline...
+    use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
     -- use {'glepnir/dashboard-nvim'}
     -- use { 'romgrk/barbar.nvim' }
-    use {'zefei/vim-wintabs'}
-    use {'zefei/vim-wintabs-powerline'}
+    -- use {'zefei/vim-wintabs'}
+    -- use {'zefei/vim-wintabs-powerline'}
     -- use { 'kdheepak/tabline.nvim', config = function()
     --         require'tabline'.setup {
     --             -- Defaults configuration options

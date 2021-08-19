@@ -27,14 +27,14 @@ nest.applyKeymaps {
     { '<M-up>', '<C-w>7+' },
     { '<M-down>', '<C-w>7-' },
     { '[', {
-        { 'b', '<Cmd>WintabsPrevious<CR>' },
+        { 'b', '<Cmd>BufferLineCyclePrev<CR>' },
         { 'm', '<Cmd>BookmarkPrevious<CR>' },
         { 't', '<Cmd>FloatermPrev<CR>' },
         { 'w', '<Cmd>tabprevious<CR>' },
         { '<leader>', '<C-o>' },
     }},
     { ']', {
-        { 'b', '<Cmd>WintabsNext<CR>' },
+        { 'b', '<Cmd>BufferLineCycleNext<CR>' },
         { 'm', '<Cmd>BookmarkNext<CR>' },
         { 't', '<Cmd>FloatermNext<CR>' },
         { 'w', '<Cmd>tabnext<CR>' },
@@ -55,13 +55,11 @@ nest.applyKeymaps {
             { 'm', '<Cmd>SaveBookmarks<CR>' },
         }},
         { 'b', {
-            { 'o', '<Cmd>WintabsOnly)<CR>' },
-            { 'q', '<Cmd>WintabsClose<CR>' },
-            { 'u', '<Cmd>(WintabsUndo)<CR>' },
+            { 'q', ':bp|bd #<CR>' },
         }},
         { 'w', {
-            { 'o', '<Cmd>WintabsOnlyWindow<CR>' },
-            { 'q', '<Cmd>WintabsCloseWintab<CR>' },
+            { 'n', '<Cmd>tabnew<CR>' },
+            { 'q', '<Cmd>tabclose<CR>' },
         }},
         { 'f', {
             { '?', '<Cmd>Telescope Cheatsheet<CR>' },
