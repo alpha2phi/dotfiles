@@ -1,23 +1,6 @@
 let g:wintabs_ignored_filetypes = ['gitcommit', 'packer', 'qf', 'ranger', 'chadtree']
 let g:wintabs_switchbuf = 'useopen'
 
-command! Tabc WintabsCloseVimtab
-command! Tabo WintabsOnlyVimtabs
-
-map [b <Plug>(wintabs_previous)
-map ]b <Plug>(wintabs_next)
-map <leader>bc <Plug>(wintabs_close)
-map <leader>bu <Plug>(wintabs_undo)
-map <leader>bo <Plug>(wintabs_only)
-map <leader>wc <Plug>(wintabs_close_window)
-map <leader>wo <Plug>(wintabs_only_window)
-
-nnoremap <leader>bn :enew<CR>
-nnoremap <leader>wn :tabnew<CR>
-nnoremap <leader>wq :WintabsCloseVimtab<CR>
-nnoremap [w :tabprevious<cr>
-nnoremap ]w :tabnext<cr>
-
 let g:wintabs_powerline_arrow_left = "\u25b6"
 
 " Left pointing arrow, used as previous buffers indicator.

@@ -62,4 +62,3 @@ augroup colors_customization
   au ColorScheme * call s:setup_colors()
 augroup END
 
-call s:setup_colors()

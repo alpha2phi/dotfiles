@@ -20,6 +20,10 @@ end
 -- Install plugins
 require('plugins')
 require('config')
+
+execute 'PackerCompile'
+vim.cmd([[autocmd VimEnter * call wilder#setup()]])
+
 require('keymappings')
 require('lang')
 -- DAP
@@ -27,6 +31,40 @@ require('lang')
 
 require('statusline')
 
-vim.cmd([[command! SoInit source ~/.config/nvim/init.lua | PackerCompile]])
-vim.cmd([[autocmd BufWritePost plugins.lua SoInit]])
-vim.cmd([[autocmd VimEnter * PackerCompile]])
+vim.cmd([[autocmd BufWritePost plugins.lua "source ~/.config/nvim/init.lua"]])
+
+vim.cmd([[
+function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+    else
+        cclose
+    endif
+endfunction
+
+function! ToggleQuickLoc()
+    if empty(filter(getwininfo(), 'v:val.loclist'))
+        lopen
+    else
+        lclose
+    endif
+endfunction
+
+function! ToggleBackgroundLightness()
+    if &background ==# 'dark'
+        set background=light
+    else
+        set background=dark
+    endif
+endfunction
+
+if v:vim_did_enter
+    silent exec "BookmarkLoad ~/.config/nvim/bookmarks"
+    s:setup_colors()
+else
+    au VimEnter * silent exec "BookmarkLoad ~/.config/nvim/bookmarks | call s:setup_colors()"
+endif
+
+au VimLeavePre * exec "normal \<Plug>BookmarkSave ~/.config/nvim/bookmarks"
+]])
+

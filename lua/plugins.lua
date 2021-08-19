@@ -1,5 +1,12 @@
 return require('packer').startup({function(use)
     use {'wbthomason/packer.nvim'}
+    use { 'LionC/nest.nvim' }
+    use {
+      "AckslD/nvim-neoclip.lua",
+      config = function()
+          require('neoclip').setup()
+      end,
+    }
 
     -- Development
     use {'tpope/vim-dispatch'}
@@ -18,10 +25,8 @@ return require('packer').startup({function(use)
     use {'jiangmiao/auto-pairs'}
     use {'norcalli/nvim-colorizer.lua'}
     use {'lokaltog/neoranger'}
-    use {'rhysd/reply.vim', cmd = [['Repl', 'ReplAuto']]}
     use {'diepm/vim-rest-console'}
     use {'kosayoda/nvim-lightbulb'}
-    use {'ms-jpq/chadtree', branch = 'chad', run = 'python3 -m chadtree deps'}
     -- Color
     use {
         "th3whit3wolf/Dusk-til-Dawn.nvim",
