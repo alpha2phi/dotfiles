@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/joehannes-os/neovim-lua-config#readme",
   "dependencies": {
+    "diagnostic-languageserver": "^1.13.0",
     "dockerfile-language-server-nodejs": "^0.4.1"
   }
 }

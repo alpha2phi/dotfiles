@@ -15,8 +15,8 @@ return require('packer').startup({function(use)
     use {'tpope/vim-unimpaired'}
     use {'tpope/vim-sleuth'}
     use {'tpope/vim-repeat'}
-    use {'guns/vim-sexp'}
-    use {'tpope/vim-sexp-mappings-for-regular-people'}
+    -- use {'guns/vim-sexp'}
+    -- use {'tpope/vim-sexp-mappings-for-regular-people'}
     use {'gelguy/wilder.nvim'}
     use {'wellle/targets.vim'}
     use {'easymotion/vim-easymotion'}

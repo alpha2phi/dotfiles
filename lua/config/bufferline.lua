@@ -1,7 +1,7 @@
 vim.opt.termguicolors = true
 require("bufferline").setup{
   options = {
-    numbers = "ordinal", -- "none" | "ordinal" | "buffer_id" | "both",
+    numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both",
     number_style = "none", -- "superscript" | "" | { "none", "subscript" }, -- buffer_id at index 1, ordinal at index 2
     mappings = true,  --| false,
     close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
@@ -69,7 +69,7 @@ require("bufferline").setup{
     separator_style = "slant", -- "slant"| "thick" | "thin" | { 'any', 'any' },
     enforce_regular_tabs = false, --| true,
     always_show_bufferline = true, --| false,
-    sort_by = 'tabs', --'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' |
+    sort_by = 'extension', --'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' |
     custom_areas = {
       right = function()
         local result = {}

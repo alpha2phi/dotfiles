@@ -31,7 +31,7 @@ require('telescope').setup {
 }
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('gh')
-require('telescope').load_extension('node_modules')
+-- require('telescope').load_extension('node_modules')
 require('telescope').load_extension('session-lens')
 require('telescope').load_extension('vim_bookmarks')
 require('telescope').load_extension('ultisnips')

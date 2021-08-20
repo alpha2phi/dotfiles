@@ -94,9 +94,69 @@ capabilities.textDocument.codeAction = {
 capabilities.textDocument.completion.completionItem.snippetSupport = true;
 
 -- LSPs
-local servers = {"pyright", "rust_analyzer", "gopls", "tsserver", "vimls", "clojure_lsp"}
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {capabilities = capabilities, on_attach = on_attach}
+local function setup_servers()
+  require'lspinstall'.setup()
+  local servers = require'lspinstall'.installed_servers()
+  for _, server in pairs(servers) do
+    if server == 'diagnosticls' then
+        nvim_lsp[server].setup{
+            capabilities = capabilities,
+            filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'css', 'json' },
+            init_options = {
+                filetypes = {
+                    javascript = 'eslint',
+                    typescript = 'eslint',
+                    javascriptreact = 'eslint',
+                    typescriptreact = 'eslint',
+                    css = 'eslint',
+                    json = 'eslint',
+                },
+                linters = {
+                    eslint = {
+                        sourceName = 'eslint',
+                        command = './node_modules/.bin/eslint',
+                        rootPatterns = {
+                            '.eslintrc.js',
+                            'package.json',
+                        },
+                        debounce = 100,
+                        args = {
+                            '--cache',
+                            '--stdin',
+                            '--stdin-filename',
+                            '%filepath',
+                            '--format',
+                            'json',
+                        },
+                        parseJson = {
+                            errorsRoot = '[0].messages',
+                            line = 'line',
+                            column = 'column',
+                            endLine = 'endLine',
+                            endColumn = 'endColumn',
+                            message = '${message} [${ruleId}]',
+                            security = 'severity',
+                        },
+                        securities = {
+                            [2] = 'error',
+                            [1] = 'warning',
+                        },
+                    },
+                },
+            },
+        }
+    else
+        nvim_lsp[server].setup{capabilities = capabilities, on_attach = on_attach}
+    end
+  end
+end
+
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require'lspinstall'.post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
 
 -- Lua LSP
@@ -151,7 +211,7 @@ nvim_lsp.sumneko_lua.setup(luadev)
 vim.g.symbols_outline = {
     highlight_hovered_item = true,
     show_guides = true,
-    auto_preview = false, -- experimental
+    auto_preview = true, -- experimental
     position = 'right',
     keymaps = {
         close = "<Esc>",
@@ -167,7 +227,7 @@ vim.g.symbols_outline = {
 -- LSP Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false,
+        virtual_text = true,
         underline = true,
         signs = true,
         update_in_insert = false
