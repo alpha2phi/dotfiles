@@ -52,12 +52,17 @@ return require('packer').startup(function()
         'ruifm/gitlinker.nvim',
         config = function() require("gitlinker").setup() end
     }
-    use({
+    use {
         "folke/persistence.nvim",
         event = "BufReadPre",
         module = "persistence",
         config = function() require("persistence").setup() end
-    })
+    }
+    use {
+        'windwp/nvim-autopairs',
+        after = 'nvim-compe',
+        config = function() require('nvim-autopairs').setup {} end
+    }
     -- use {'tamago324/lir.nvim'}
     -- use {'jiangmiao/auto-pairs'}
     -- use {'rhysd/committia.vim'}
