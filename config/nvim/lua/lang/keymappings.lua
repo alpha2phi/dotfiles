@@ -29,6 +29,9 @@ augroup rustdebug
   autocmd FileType rust map <buffer> <Leader>lrd :update<CR>:RustDebuggables<CR>
   autocmd FileType rust map <buffer> <Leader>lrh :update<CR>:RustHoverActions<CR>
 
+  autocmd FileType rust map <buffer> <Leader>lrx :update<CR>:sp term://cargo watch -s 'clear && cargo run -q'<CR>
+  autocmd FileType rust imap <buffer> <Leader>lrx <esc>:update<CR>:sp term://cargo watch -s 'clear && cargo run -q'<CR>
+
 augroup END
 ]], false)
 
