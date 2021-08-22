@@ -336,6 +336,10 @@ return require('packer').startup(function()
     -- use {'editorconfig/editorconfig-vim'}
 
     -- Writing and note taking
+    use {
+        'lewis6992/spellsitter.nvim',
+        config = function() require('spellsitter').setup() end
+    }
     -- TODO: To try out
     -- use {
     --     "vhyrro/neorg",
