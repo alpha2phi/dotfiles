@@ -60,7 +60,7 @@ return require('packer').startup(function()
     }
     use {
         'windwp/nvim-autopairs',
-        after = "nvim-compe",
+        -- after = "nvim-compe",
         run = 'make',
         config = function()
             require('nvim-autopairs').setup {
