@@ -1,1 +1,1 @@
-nmap s <cmd>HopChar1<CR>
+" nmap s <cmd>HopChar1<CR>

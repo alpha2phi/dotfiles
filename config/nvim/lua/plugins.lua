@@ -21,10 +21,10 @@ return require('packer').startup(function()
     use {'tpope/vim-vinegar'}
     use {'tpope/vim-sleuth'}
     use {'wellle/targets.vim'}
-    use {'phaazon/hop.nvim'}
+    -- use {'phaazon/hop.nvim'}
     -- TODO: Try out
     -- use {'ggandor/lightspeed.nvim'}
-    -- use {'easymotion/vim-easymotion'}
+    use {'easymotion/vim-easymotion'}
     use {
         'lewis6991/gitsigns.nvim',
         config = function() require('gitsigns').setup() end
@@ -61,6 +61,7 @@ return require('packer').startup(function()
     use {
         'windwp/nvim-autopairs',
         after = "nvim-compe",
+        run = 'make',
         config = function()
             require('nvim-autopairs').setup {
                 require("nvim-autopairs.completion.compe").setup({
@@ -345,7 +346,7 @@ return require('packer').startup(function()
 
     -- Writing and note taking
     use {
-        'lewis6992/spellsitter.nvim',
+        'lewis6991/spellsitter.nvim',
         config = function() require('spellsitter').setup() end
     }
     -- TODO: To try out
