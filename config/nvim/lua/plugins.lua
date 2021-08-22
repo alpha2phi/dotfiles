@@ -60,7 +60,16 @@ return require('packer').startup(function()
     }
     use {
         'windwp/nvim-autopairs',
-        config = function() require('nvim-autopairs').setup {} end
+        after = "nvim-compe",
+        config = function()
+            require('nvim-autopairs').setup {
+                require("nvim-autopairs.completion.compe").setup({
+                    map_cr = true,
+                    map_complete = true,
+                    auto_select = false
+                })
+            }
+        end
     }
     -- use {'tamago324/lir.nvim'}
     -- use {'jiangmiao/auto-pairs'}
