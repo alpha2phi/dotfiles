@@ -353,10 +353,10 @@ return require('packer').startup(function()
         "rcarriga/nvim-notify",
         config = function() vim.notify = require "notify" end
     }
-    -- use {
-    --     'edluffy/specs.nvim',
-    --     config = function() require('specs').setup {} end
-    -- }
+    use {
+        'edluffy/specs.nvim',
+        config = function() require('specs').setup {} end
+    }
 
     -- use {
     --     "vhyrro/neorg",
