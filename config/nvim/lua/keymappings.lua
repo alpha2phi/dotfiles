@@ -78,6 +78,9 @@ vnoremap <Leader>es :call tts#Speak(1)<CR>
 
 nnoremap Y y$
 
+nnoremap <S-h> :bp<CR>
+nnoremap <S-l> :bn<CR>
+
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
