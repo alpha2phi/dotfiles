@@ -349,7 +349,14 @@ return require('packer').startup(function()
         config = function() require('spellsitter').setup() end
     }
     -- TODO: To try out
-    use {'edluffy/specs.nvim'}
+    use {
+        "rcarriga/nvim-notify",
+        config = function() vim.notify = require "notify" end
+    }
+    -- use {
+    --     'edluffy/specs.nvim',
+    --     config = function() require('specs').setup {} end
+    -- }
 
     -- use {
     --     "vhyrro/neorg",
