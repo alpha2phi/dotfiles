@@ -22,7 +22,6 @@ return require('packer').startup(function()
     use {'tpope/vim-sleuth'}
     use {'wellle/targets.vim'}
     -- use {'phaazon/hop.nvim'}
-    -- TODO: Try out
     -- use {'ggandor/lightspeed.nvim'}
     use {'easymotion/vim-easymotion'}
     use {
@@ -350,6 +349,8 @@ return require('packer').startup(function()
         config = function() require('spellsitter').setup() end
     }
     -- TODO: To try out
+    use {'edluffy/specs.nvim'}
+
     -- use {
     --     "vhyrro/neorg",
     --     config = function()
@@ -366,16 +367,15 @@ return require('packer').startup(function()
     --     end,
     --     requires = "nvim-lua/plenary.nvim"
     -- }
-    use {
-        'kristijanhusak/orgmode.nvim',
-        config = function()
-            require('orgmode').setup {
-                org_agenda_files = {'~/workspace/dev/notes/**/*'},
-                org_default_notes_file = '~workspace/dev/notes/notes.org'
-            }
-        end
-    }
-    -- TODO: try out
+    -- use {
+    --     'kristijanhusak/orgmode.nvim',
+    --     config = function()
+    --         require('orgmode').setup {
+    --             org_agenda_files = {'~/workspace/dev/notes/**/*'},
+    --             org_default_notes_file = '~workspace/dev/notes/notes.org'
+    --         }
+    --     end
+    -- }
     -- use {'Pocco81/HighStr.nvim'}
     -- use {'gyim/vim-boxdraw'}
     -- use {'preservim/vim-pencil'}
