@@ -6,7 +6,7 @@ require('config.project')
 require('config.telescope')
 
 -- nvim-compe
-require('config.compe')
+-- require('config.compe')
 
 -- lspkind-nvim
 require('config.lspkind')

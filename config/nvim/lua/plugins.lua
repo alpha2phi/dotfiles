@@ -147,8 +147,9 @@ return require('packer').startup(function()
     -- Completion - use either one of this
     use {'hrsh7th/nvim-compe'}
     -- TODO: to try
+    use {'ms-jpq/coq_nvim', branch = 'coq'}
+    use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
     -- nvim-cmp, coq_nvim
-
     -- use { 'nvim-lua/completion-nvim' }
 
     -- Better LSP experience
