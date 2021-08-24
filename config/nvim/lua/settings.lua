@@ -64,6 +64,12 @@ augroup auto_spellcheck
     autocmd BufNewFile,BufRead *.org setfiletype markdown
     autocmd BufNewFile,BufRead *.org setlocal spell
 augroup END
+
+augroup auto_web
+    autocmd!
+    autocmd Filetype html setlocal ts=2 sw=2 expandtab
+    autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 noexpandtab
+augroup END
 ]], false)
 
 vim.api.nvim_exec([[

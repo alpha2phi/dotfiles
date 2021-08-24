@@ -59,7 +59,6 @@ return require('packer').startup(function()
     }
     use {
         'windwp/nvim-autopairs',
-        -- after = "nvim-compe",
         run = 'make',
         config = function()
             require('nvim-autopairs').setup {
@@ -71,6 +70,15 @@ return require('packer').startup(function()
             }
         end
     }
+    use {
+        'ojroques/nvim-lspfuzzy',
+        requires = {
+            {'junegunn/fzf'}, {'junegunn/fzf.vim'} -- to enable preview (optional)
+        },
+        config = function() require('lspfuzzy').setup {} end
+    }
+    use {'liuchengxu/vista.vim'}
+    -- use {'ms-jpq/chadtree', branch = 'chad', run = 'python3 -m chadtree deps'}
     -- use {'tamago324/lir.nvim'}
     -- use {'jiangmiao/auto-pairs'}
     -- use {'rhysd/committia.vim'}
@@ -92,6 +100,8 @@ return require('packer').startup(function()
     use {'kyazdani42/nvim-web-devicons'}
     use {'sainnhe/gruvbox-material'}
     use {'NLKNguyen/papercolor-theme'}
+    use {'folke/lsp-colors.nvim'}
+
     -- use {'sainnhe/edge'}
     -- use {'folke/tokyonight.nvim'}
     -- use {'joshdick/onedark.vim'}
@@ -136,6 +146,9 @@ return require('packer').startup(function()
 
     -- Completion - use either one of this
     use {'hrsh7th/nvim-compe'}
+    -- TODO: to try
+    -- nvim-cmp, coq_nvim
+
     -- use { 'nvim-lua/completion-nvim' }
 
     -- Better LSP experience
@@ -168,10 +181,10 @@ return require('packer').startup(function()
         config = function() require("todo-comments").setup {} end
     }
     use {'RRethy/nvim-treesitter-textsubjects'}
-    use {
-        'ThePrimeagen/refactoring.nvim',
-        config = function() require("config.refactoring") end
-    }
+    -- use {
+    --     'ThePrimeagen/refactoring.nvim',
+    --     config = function() require("config.refactoring") end
+    -- }
 
     -- TODO: Further test
     -- use {
