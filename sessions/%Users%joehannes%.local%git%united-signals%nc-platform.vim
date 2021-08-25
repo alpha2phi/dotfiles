@@ -6,9 +6,9 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +377 ~/.local/git/united-signals/nc-platform/resources/css/tailwind.css
-badd +33 ~/.local/git/united-signals/nc-platform/src/cljs/nc_platform/feature/data_model/view.cljs
-badd +12 ~/.local/git/united-signals/nc-platform/src/cljs/nc_platform/feature/common/video.cljs
+badd +413 ~/.local/git/united-signals/nc-platform/resources/css/tailwind.css
+badd +1 ~/.local/git/united-signals/nc-platform/src/cljs/nc_platform/feature/data_model/view.cljs
+badd +1 ~/.local/git/united-signals/nc-platform/src/cljs/nc_platform/feature/common/video.cljs
 argglobal
 %argdel
 edit ~/.local/git/united-signals/nc-platform/src/cljs/nc_platform/feature/data_model/view.cljs
@@ -34,7 +34,7 @@ set winwidth=1
 wincmd =
 argglobal
 balt ~/.local/git/united-signals/nc-platform/src/cljs/nc_platform/ui_component/layout.cljs
-let s:l = 33 - ((26 * winheight(0) + 30) / 60)
+let s:l = 33 - ((0 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -47,12 +47,12 @@ if &buftype ==# 'terminal'
   silent file ~/.local/git/united-signals/nc-platform/src/cljs/nc_platform/feature/common/video.cljs
 endif
 balt ~/.local/git/united-signals/nc-platform/src/cljs/nc_platform/feature/data_model/common/events.cljs
-let s:l = 12 - ((11 * winheight(0) + 30) / 60)
+let s:l = 1 - ((0 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
-normal! 09|
+keepjumps 1
+normal! 0
 wincmd w
 argglobal
 if bufexists("~/.local/git/united-signals/nc-platform/resources/css/tailwind.css") | buffer ~/.local/git/united-signals/nc-platform/resources/css/tailwind.css | else | edit ~/.local/git/united-signals/nc-platform/resources/css/tailwind.css | endif
@@ -60,13 +60,14 @@ if &buftype ==# 'terminal'
   silent file ~/.local/git/united-signals/nc-platform/resources/css/tailwind.css
 endif
 balt ~/.local/git/united-signals/nc-platform/src/cljs/nc_platform/feature/common/navigation.cljs
-let s:l = 380 - ((72 * winheight(0) + 30) / 60)
+let s:l = 413 - ((16 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 380
-normal! 049|
+keepjumps 413
+normal! 0
 wincmd w
+2wincmd w
 wincmd =
 if exists(':tcd') == 2 | tcd ~/.local/git/united-signals/nc-platform | endif
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
@@ -82,6 +83,7 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

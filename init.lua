@@ -1,35 +1,35 @@
 -- Map leader to space
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 local fn = vim.fn
 local execute = vim.api.nvim_command
 
-require('packer').reset()
+require("packer").reset()
 
 -- Sensible defaults
-require('settings')
+require("settings")
 
 -- Auto install packer.nvim if not exists
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-    execute 'packadd packer.nvim'
+	fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
+	execute("packadd packer.nvim")
 end
 
 -- Install plugins
-require('plugins')
-require('config')
+require("plugins")
+require("config")
 
-execute 'PackerCompile'
+execute("PackerCompile")
 vim.cmd([[autocmd VimEnter * call wilder#setup()]])
 
-require('keymappings')
-require('lang')
+require("keymappings")
+require("lang")
 -- DAP
 -- require('dbg')
 
-require('statusline')
+require("statusline")
 
 vim.cmd([[autocmd BufWritePost plugins.lua "source ~/.config/nvim/init.lua"]])
 
@@ -67,4 +67,3 @@ endif
 
 au VimLeavePre * exec "normal \<Plug>BookmarkSave ~/.config/nvim/bookmarks"
 ]])
-

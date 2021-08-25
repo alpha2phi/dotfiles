@@ -6,15 +6,10 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +238 ~/.local/git/inhouse/in-house-web/src/components/molecules/RateSlider/index.js
+badd +421 ~/.local/git/inhouse/in-house-web/src/components/organisms/Venue/MinkTab.js
 argglobal
 %argdel
-edit ~/.local/git/inhouse/in-house-web/src/components/molecules/RateSlider/index.js
-let s:save_splitbelow = &splitbelow
-let s:save_splitright = &splitright
-set splitbelow splitright
-let &splitbelow = s:save_splitbelow
-let &splitright = s:save_splitright
+edit ~/.local/git/inhouse/in-house-web/src/components/organisms/Venue/MinkTab.js
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -23,14 +18,13 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-balt ~/.local/git/inhouse/in-house-web/src/components/organisms/Venue/RateTab.js
-let s:l = 183 - ((14 * winheight(0) + 29) / 58)
+balt ~/.local/git/inhouse/in-house-web/src/components/organisms/Venue/openCardStyle.js
+let s:l = 421 - ((34 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 183
-normal! 0
-if exists(':tcd') == 2 | tcd ~/.local/git/inhouse/in-house-web | endif
+keepjumps 421
+normal! 023|
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
@@ -44,7 +38,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :
