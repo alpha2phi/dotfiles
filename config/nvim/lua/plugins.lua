@@ -100,7 +100,8 @@ return require('packer').startup(function()
         "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", 'hrsh7th/cmp-vsnip',
-            'quangnguyen30192/cmp-nvim-ultisnips', 'hrsh7th/cmp-nvim-lua'
+            'quangnguyen30192/cmp-nvim-ultisnips', 'hrsh7th/cmp-nvim-lua',
+            'octaltree/cmp-look'
         }
     }
     -- use {'hrsh7th/nvim-compe'}
@@ -118,6 +119,7 @@ return require('packer').startup(function()
     use {'glepnir/lspsaga.nvim'}
     use {
         'onsails/lspkind-nvim',
+        after = "cmp",
         config = function() require('lspkind').init() end
     }
     use {'sbdchd/neoformat'}
@@ -148,17 +150,16 @@ return require('packer').startup(function()
     use {'RRethy/nvim-treesitter-textsubjects'}
 
     -- Snippets
-    use {
-        'hrsh7th/vim-vsnip',
-        requires = {
-            'rafamadriz/friendly-snippets', 'cstrap/python-snippets',
-            'ylcnfrht/vscode-python-snippet-pack', 'xabikos/vscode-javascript',
-            'golang/vscode-go', 'rust-lang/vscode-rust'
-        }
-    }
+    -- use {
+    --     'hrsh7th/vim-vsnip',
+    --     requires = {
+    --         'rafamadriz/friendly-snippets', 'cstrap/python-snippets',
+    --         'ylcnfrht/vscode-python-snippet-pack', 'xabikos/vscode-javascript',
+    --         'golang/vscode-go', 'rust-lang/vscode-rust'
+    --     }
+    -- }
     use {'honza/vim-snippets'}
     use {'SirVer/ultisnips'}
-    use {'nvim-telescope/telescope-snippets.nvim'}
 
     -- Lua development
     use {'folke/lua-dev.nvim'}
@@ -465,4 +466,5 @@ return require('packer').startup(function()
     --     'norcalli/snippets.nvim',
     --     config = function() require("config.snippets") end
     -- }
+    -- use {'nvim-telescope/telescope-snippets.nvim'}
 end)
