@@ -5,14 +5,17 @@ require('config.devicon')
 require('config.project')
 require('config.telescope')
 
--- nvim-compe
--- require('config.compe')
-
--- lspkind-nvim
-require('config.lspkind')
-
 -- treesitter
 require('config.treesitter')
+
+-- lspkind-nvim
+-- require('config.lspkind')
+
+-- nvim-cmp
+--
+
+-- nvim-compe
+-- require('config.compe')
 
 -- lir
 -- require('config.lir')

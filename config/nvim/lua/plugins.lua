@@ -3,14 +3,6 @@ return require('packer').startup(function()
     -- Packer can manage itself as an optional plugin
     use {'wbthomason/packer.nvim', opt = true}
 
-    -- TODO: - Fine tune the performance
-    -- -- Config
-    -- use {
-    --     'dstein64/vim-startuptime',
-    --     cmd = 'StartupTime',
-    --     config = [[vim.g.startuptime_tries = 10]]
-    -- }
-
     -- Development
     use {'tpope/vim-dispatch'}
     use {'tpope/vim-fugitive'}
@@ -21,8 +13,6 @@ return require('packer').startup(function()
     use {'tpope/vim-vinegar'}
     use {'tpope/vim-sleuth'}
     use {'wellle/targets.vim'}
-    -- use {'phaazon/hop.nvim'}
-    -- use {'ggandor/lightspeed.nvim'}
     use {'easymotion/vim-easymotion'}
     use {
         'lewis6991/gitsigns.nvim',
@@ -62,10 +52,10 @@ return require('packer').startup(function()
         run = 'make',
         config = function()
             require('nvim-autopairs').setup {
-                require("nvim-autopairs.completion.compe").setup({
+                require("nvim-autopairs.completion.cmp").setup({
                     map_cr = true,
                     map_complete = true,
-                    auto_select = false
+                    auto_select = true
                 })
             }
         end
@@ -78,33 +68,12 @@ return require('packer').startup(function()
         config = function() require('lspfuzzy').setup {} end
     }
     use {'liuchengxu/vista.vim'}
-    -- use {'ms-jpq/chadtree', branch = 'chad', run = 'python3 -m chadtree deps'}
-    -- use {'tamago324/lir.nvim'}
-    -- use {'jiangmiao/auto-pairs'}
-    -- use {'rhysd/committia.vim'}
-    -- use {
-    --     "akinsho/nvim-toggleterm.lua",
-    --     config = function() require("toggleterm").setup {} end
-    -- }
-    -- use {'tpope/vim-characterize'}
-    -- use {'liuchengxu/vim-which-key'}
-    -- use {'norcalli/nvim-colorizer.lua'}
-    -- use {'kevinhwang91/rnvimr'}
-    -- use {'francoiscabrol/ranger.vim'}
-    -- use {'rbgrouleff/bclose.vim'}
-    -- use {'christoomey/vim-tmux-navigator'}
-    -- use {'mhinz/vim-signify'}
-    -- use {'radenling/vim-dispatch-neovim' }
 
     -- Color scheme
     use {'kyazdani42/nvim-web-devicons'}
     use {'sainnhe/gruvbox-material'}
     use {'NLKNguyen/papercolor-theme'}
     use {'folke/lsp-colors.nvim'}
-
-    -- use {'sainnhe/edge'}
-    -- use {'folke/tokyonight.nvim'}
-    -- use {'joshdick/onedark.vim'}
 
     -- Testing
     use {
@@ -113,7 +82,6 @@ return require('packer').startup(function()
         run = ":UpdateRemotePlugins",
         requires = {"vim-test/vim-test"}
     }
-    -- use {'vim-test/vim-test'}
 
     -- Telescope
     use {'nvim-lua/plenary.nvim'}
@@ -131,36 +99,29 @@ return require('packer').startup(function()
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
     use {"nvim-telescope/telescope-hop.nvim"}
 
-    -- TODO: to try
-    -- use {'camspiers/snap'}
-    -- use {
-    --     'nvim-telescope/telescope-arecibo.nvim',
-    --     rocks = {"openssl", "lua-http-parser"}
-    -- }
-    -- use { 'nvim-telescope/telescope-media-files.nvim' }
-    -- use { 'nvim-telescope/telescope-packer.nvim ' }
-
     -- LSP config
     use {'neovim/nvim-lspconfig'}
     -- use {'kabouzeid/nvim-lspinstall'}
 
     -- Completion - use either one of this
-    use {'hrsh7th/nvim-compe'}
-    -- TODO: to try
-    use {
-        'ms-jpq/coq_nvim',
-        branch = 'coq',
-        event = "VimEnter",
-        config = 'vim.cmd[[COQnow]]'
-    }
-    use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
-    -- nvim-cmp, coq_nvim
+    use {"hrsh7th/nvim-cmp", requires = {"hrsh7th/cmp-buffer"}}
+    -- use {'hrsh7th/nvim-compe'}
+    -- use {
+    --     'ms-jpq/coq_nvim',
+    --     branch = 'coq',
+    --     event = "VimEnter",
+    --     config = 'vim.cmd[[COQnow]]'
+    -- }
+    -- use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
     -- use { 'nvim-lua/completion-nvim' }
 
     -- Better LSP experience
     use {'tjdevries/astronauta.nvim'}
     use {'glepnir/lspsaga.nvim'}
-    use {'onsails/lspkind-nvim'}
+    use {
+        'onsails/lspkind-nvim',
+        config = function() require('lspkind').init() end
+    }
     use {'sbdchd/neoformat'}
     use {'p00f/nvim-ts-rainbow'}
     use {'ray-x/lsp_signature.nvim'}
@@ -187,47 +148,6 @@ return require('packer').startup(function()
         config = function() require("todo-comments").setup {} end
     }
     use {'RRethy/nvim-treesitter-textsubjects'}
-    -- use {
-    --     'ThePrimeagen/refactoring.nvim',
-    --     config = function() require("config.refactoring") end
-    -- }
-
-    -- TODO: Further test
-    -- use {
-    --     'jose-elias-alvarez/null-ls.nvim'
-    -- config = function()
-    --     local null_ls = require("null-ls")
-    --     local sources = {
-    --         null_ls.builtins.formatting.prettier,
-    --         null_ls.builtins.diagnostics.write_good,
-    --         null_ls.builtins.code_actions.gitsigns,
-    --         null_ls.builtins.formatting.lua_format
-    --     }
-    --     null_ls.config({sources = sources})
-    --     require("lspconfig")["null-ls"].setup({})
-    -- end
-    -- }
-    -- use {
-    --     'ray-x/navigator.lua',
-    --     requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
-    --     config = function() require("navigator").setup {} end
-    -- }
-
-    -- use {'nvim-lua/lsp-status.nvim'}
-    -- use {
-    --     "folke/todo-comments.nvim",
-    --     config = function() require("todo-comments").setup {} end
-    -- }
-    -- use {'TaDaa/vimade'}
-    -- use {'junegunn/vim-peekaboo'}
-    -- use {'gennaro-tedesco/nvim-peekup'}
-    -- use {'wellle/context.vim'}
-    -- use {'lukas-reineke/indent-blankline.nvim' }
-    -- use {'Yggdroot/indentLine' }
-    -- use {'beauwilliams/focus.nvim' }
-    -- use {'RRethy/vim-illuminate' }
-    -- use {'kosayoda/nvim-lightbulb' }
-
     -- Snippets
     use {
         'hrsh7th/vim-vsnip',
@@ -241,26 +161,11 @@ return require('packer').startup(function()
         'norcalli/snippets.nvim',
         config = function() require("config.snippets") end
     }
-    -- use { 'honza/vim-snippets' }
-    -- use { 'SirVer/ultisnips' }
-    -- use { 'nvim-telescope/telescope-snippets.nvim' }
 
     -- Lua development
     use {'folke/lua-dev.nvim'}
     use {'simrat39/symbols-outline.nvim'}
     use {'~/workspace/dev/alpha2phi/alpha.nvim'}
-    -- use {'bryall/contextprint.nvim'}
-    -- use {'nanotee/nvim-lua-guide'}
-    -- use {'rafcamlet/nvim-luapad'}
-    -- use {'thinca/vim-themis'}
-    -- use {'tpope/vim-scriptease'}
-    -- use {'junegunn/vader.vim'}
-    -- use {'milisims/nvim-luaref'}
-    -- use {'tjdevries/nlua.nvim'}
-    -- use {'metakirby5/codi.vim'}
-    -- use {'bfredl/nvim-luadev'}
-
-    -- Plugin development
 
     -- Better syntax
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
@@ -279,15 +184,9 @@ return require('packer').startup(function()
             require("nvim-ts-autotag").setup({enable = true})
         end
     }
-    -- use {
-    --     "folke/twilight.nvim",
-    --     config = function() require("twilight").setup {} end
-    -- }
-    -- use {'nvim-treesitter/nvim-treesitter-refactor'}
 
     -- Dashboard
     use {'glepnir/dashboard-nvim'}
-    -- use {'thaerkh/vim-workspace'}
 
     -- Status line
     use {
@@ -303,7 +202,6 @@ return require('packer').startup(function()
             require("bufferline").setup({
                 options = {
                     numbers = "both",
-                    number_style = "superscript",
                     diagnostics = "nvim_lsp",
                     show_tab_indicators = true,
                     show_buffer_close_icons = false,
@@ -312,7 +210,6 @@ return require('packer').startup(function()
             })
         end
     }
-    -- use { 'romgrk/barbar.nvim' }
 
     -- Debugging
     use {'puremourning/vimspector'}
@@ -330,14 +227,10 @@ return require('packer').startup(function()
     -- Project
     use {'nvim-telescope/telescope-project.nvim'}
     use {'airblade/vim-rooter'}
-    -- use {'tpope/vim-projectionist'}
 
     -- Development workflow
     use {'voldikss/vim-browser-search'}
     use {'kkoomen/vim-doge', run = '-> doge#install()'}
-
-    -- use {'jbyuki/instant.nvim'}
-    -- use {'chrisbra/unicode.vim'}
 
     -- Rust
     use {'rust-lang/rust.vim'}
@@ -346,53 +239,27 @@ return require('packer').startup(function()
     -- Go
     use {'ray-x/go.nvim', config = function() require('go').setup() end}
 
-    -- Database
-    -- use {'tpope/vim-dadbod'}
-    -- use {'kristijanhusak/vim-dadbod-ui'}
-    -- use {'kristijanhusak/vim-dadbod-completion'}
-    -- use {'tpope/vim-dotenv' }
-
     -- Markdown
     use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
     use {'plasticboy/vim-markdown'}
-    -- use {'npxbr/glow.nvim', run = ':GlowInstall'}
-    -- use {'mzlogin/vim-markdown-toc'}
-    -- use {'godlygeek/tabular'}
-
-    -- Development settings
-    -- use {'editorconfig/editorconfig-vim'}
 
     -- Writing and note taking
+    -- TODO: Try out
     use {
-        'lewis6991/spellsitter.nvim',
-        config = function() require('spellsitter').setup() end
+        "vhyrro/neorg",
+        config = function()
+            require('neorg').setup {
+                load = {
+                    ["core.defaults"] = {}, -- Load all the default modules
+                    ["core.norg.concealer"] = {}, -- Allows for use of icons
+                    ["core.norg.dirman"] = { -- Manage your directories with Neorg
+                        config = {workspaces = {my_workspace = "~/neorg"}}
+                    }
+                }
+            }
+        end,
+        requires = "nvim-lua/plenary.nvim"
     }
-    -- TODO: To try out
-    use {
-        "rcarriga/nvim-notify",
-        config = function() vim.notify = require "notify" end
-    }
-    use {
-        'edluffy/specs.nvim',
-        config = function() require('specs').setup {} end
-    }
-
-    -- use {
-    --     "vhyrro/neorg",
-    --     config = function()
-    --         require('neorg').setup {
-    --             -- Tell Neorg what modules to load
-    --             load = {
-    --                 ["core.defaults"] = {}, -- Load all the default modules
-    --                 ["core.norg.concealer"] = {}, -- Allows for use of icons
-    --                 ["core.norg.dirman"] = { -- Manage your directories with Neorg
-    --                     config = {workspaces = {my_workspace = "~/neorg"}}
-    --                 }
-    --             }
-    --         }
-    --     end,
-    --     requires = "nvim-lua/plenary.nvim"
-    -- }
     -- use {
     --     'kristijanhusak/orgmode.nvim',
     --     config = function()
@@ -462,4 +329,139 @@ return require('packer').startup(function()
     -- Better terminal
     -- use {'nikvdp/neomux' }
 
+    -- use {
+    --     'dstein64/vim-startuptime',
+    --     cmd = 'StartupTime',
+    --     config = [[vim.g.startuptime_tries = 10]]
+    -- }
+
+    -- use {
+    --     "rcarriga/nvim-notify",
+    --     config = function() vim.notify = require "notify" end
+    -- }
+    -- use {
+    --     'edluffy/specs.nvim',
+    --     config = function() require('specs').setup {} end
+    -- }
+
+    -- use {'phaazon/hop.nvim'}
+    -- use {'ggandor/lightspeed.nvim'}
+
+    -- use {'ms-jpq/chadtree', branch = 'chad', run = 'python3 -m chadtree deps'}
+    -- use {'tamago324/lir.nvim'}
+    -- use {'jiangmiao/auto-pairs'}
+    -- use {'rhysd/committia.vim'}
+    -- use {
+    --     "akinsho/nvim-toggleterm.lua",
+    --     config = function() require("toggleterm").setup {} end
+    -- }
+    -- use {'tpope/vim-characterize'}
+    -- use {'liuchengxu/vim-which-key'}
+    -- use {'norcalli/nvim-colorizer.lua'}
+    -- use {'kevinhwang91/rnvimr'}
+    -- use {'francoiscabrol/ranger.vim'}
+    -- use {'rbgrouleff/bclose.vim'}
+    -- use {'christoomey/vim-tmux-navigator'}
+    -- use {'mhinz/vim-signify'}
+    -- use {'radenling/vim-dispatch-neovim' }
+
+    -- use {'thaerkh/vim-workspace'}
+
+    -- use {'sainnhe/edge'}
+    -- use {'folke/tokyonight.nvim'}
+    -- use {'joshdick/onedark.vim'}
+
+    -- use {'camspiers/snap'}
+    -- use {
+    --     'nvim-telescope/telescope-arecibo.nvim',
+    --     rocks = {"openssl", "lua-http-parser"}
+    -- }
+    -- use { 'nvim-telescope/telescope-media-files.nvim' }
+    -- use { 'nvim-telescope/telescope-packer.nvim ' }
+
+    -- use {
+    --     'lewis6991/spellsitter.nvim',
+    --     config = function() require('spellsitter').setup() end
+    -- }
+
+    -- use {'npxbr/glow.nvim', run = ':GlowInstall'}
+    -- use {'mzlogin/vim-markdown-toc'}
+    -- use {'godlygeek/tabular'}
+
+    -- Development settings
+    -- use {'editorconfig/editorconfig-vim'}
+
+    -- Database
+    -- use {'tpope/vim-dadbod'}
+    -- use {'kristijanhusak/vim-dadbod-ui'}
+    -- use {'kristijanhusak/vim-dadbod-completion'}
+    -- use {'tpope/vim-dotenv' }
+
+    -- use {'tpope/vim-projectionist'}
+
+    -- use {'jbyuki/instant.nvim'}
+    -- use {'chrisbra/unicode.vim'}
+
+    -- use { 'romgrk/barbar.nvim' }
+
+    -- use {
+    --     'ThePrimeagen/refactoring.nvim',
+    --     config = function() require("config.refactoring") end
+    -- }
+    -- use {
+    --     'jose-elias-alvarez/null-ls.nvim'
+    -- config = function()
+    --     local null_ls = require("null-ls")
+    --     local sources = {
+    --         null_ls.builtins.formatting.prettier,
+    --         null_ls.builtins.diagnostics.write_good,
+    --         null_ls.builtins.code_actions.gitsigns,
+    --         null_ls.builtins.formatting.lua_format
+    --     }
+    --     null_ls.config({sources = sources})
+    --     require("lspconfig")["null-ls"].setup({})
+    -- end
+    -- }
+    -- use {
+    --     'ray-x/navigator.lua',
+    --     requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
+    --     config = function() require("navigator").setup {} end
+    -- }
+
+    -- use {'nvim-lua/lsp-status.nvim'}
+    -- use {
+    --     "folke/todo-comments.nvim",
+    --     config = function() require("todo-comments").setup {} end
+    -- }
+    -- use {'TaDaa/vimade'}
+    -- use {'junegunn/vim-peekaboo'}
+    -- use {'gennaro-tedesco/nvim-peekup'}
+    -- use {'wellle/context.vim'}
+    -- use {'lukas-reineke/indent-blankline.nvim' }
+    -- use {'Yggdroot/indentLine' }
+    -- use {'beauwilliams/focus.nvim' }
+    -- use {'RRethy/vim-illuminate' }
+    -- use {'kosayoda/nvim-lightbulb' }
+
+    -- use { 'honza/vim-snippets' }
+    -- use { 'SirVer/ultisnips' }
+    -- use { 'nvim-telescope/telescope-snippets.nvim' }
+
+    -- Plugin development
+    -- use {'bryall/contextprint.nvim'}
+    -- use {'nanotee/nvim-lua-guide'}
+    -- use {'rafcamlet/nvim-luapad'}
+    -- use {'thinca/vim-themis'}
+    -- use {'tpope/vim-scriptease'}
+    -- use {'junegunn/vader.vim'}
+    -- use {'milisims/nvim-luaref'}
+    -- use {'tjdevries/nlua.nvim'}
+    -- use {'metakirby5/codi.vim'}
+    -- use {'bfredl/nvim-luadev'}
+
+    -- use {
+    --     "folke/twilight.nvim",
+    --     config = function() require("twilight").setup {} end
+    -- }
+    -- use {'nvim-treesitter/nvim-treesitter-refactor'}
 end)

@@ -179,10 +179,11 @@ local servers = {
 --     null_ls.builtins.formatting.lua_format
 -- }
 -- null_ls.config({sources = sources})
-local coq = require("coq")
+-- local coq = require("coq")
 for server, config in pairs(servers) do
 
-    nvim_lsp[server].setup(coq.lsp_ensure_capabilities(
+    nvim_lsp[server].setup(
+           --coq.lsp_ensure_capabilities(
                                vim.tbl_deep_extend("force", {
             on_attach = lsp_on_attach,
             -- on_exit = lsp_on_exit,
@@ -190,7 +191,8 @@ for server, config in pairs(servers) do
             capabilities = capabilities,
             flags = {debounce_text_changes = 150},
             init_options = config
-        }, {})))
+        }, {}))
+        -- )
 
     local cfg = nvim_lsp[server]
     -- null_ls.setup {on_attach = on_attach, sources = sources}
