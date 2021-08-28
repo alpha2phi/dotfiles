@@ -159,10 +159,6 @@ return require('packer').startup(function()
     use {'honza/vim-snippets'}
     use {'SirVer/ultisnips'}
     use {'nvim-telescope/telescope-snippets.nvim'}
-    -- use {
-    --     'norcalli/snippets.nvim',
-    --     config = function() require("config.snippets") end
-    -- }
 
     -- Lua development
     use {'folke/lua-dev.nvim'}
@@ -462,4 +458,11 @@ return require('packer').startup(function()
     --     config = function() require("twilight").setup {} end
     -- }
     -- use {'nvim-treesitter/nvim-treesitter-refactor'}
+
+    -- Snippets
+    -- use {'L3MON4D3/LuaSnip'}
+    -- use {
+    --     'norcalli/snippets.nvim',
+    --     config = function() require("config.snippets") end
+    -- }
 end)
