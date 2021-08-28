@@ -69,9 +69,8 @@ cmp.setup {
     snippet = {expand = function(args) vim.fn["UltiSnips#Anon"](args.body) end},
     sources = {
         {name = 'buffer'}, {name = 'nvim_lsp'}, {name = "ultisnips"},
-        {name = "nvim_lua"}, {name = "look"}, {name = "path"},
-        {name = 'cmp_tabnine'}, {name = "calc"}, {name = "spell"},
-        {name = "emoji"}
+        {name = "nvim_lua"}, {name = "look"}, {name = "path"}, {name = "calc"},
+        {name = "spell"}, {name = "emoji"}, {name = 'cmp_tabnine'}
     },
     completion = {completeopt = 'menu,menuone,noinsert'}
 }
