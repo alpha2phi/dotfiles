@@ -98,7 +98,10 @@ return require('packer').startup(function()
     -- Completion - use either one of this
     use {
         "hrsh7th/nvim-cmp",
-        requires = {"hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp"}
+        requires = {
+            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", 'hrsh7th/cmp-vsnip',
+            'quangnguyen30192/cmp-nvim-ultisnips'
+        }
     }
     -- use {'hrsh7th/nvim-compe'}
     -- use {
@@ -143,6 +146,7 @@ return require('packer').startup(function()
         config = function() require("todo-comments").setup {} end
     }
     use {'RRethy/nvim-treesitter-textsubjects'}
+
     -- Snippets
     use {
         'hrsh7th/vim-vsnip',
@@ -152,10 +156,13 @@ return require('packer').startup(function()
             'golang/vscode-go', 'rust-lang/vscode-rust'
         }
     }
-    use {
-        'norcalli/snippets.nvim',
-        config = function() require("config.snippets") end
-    }
+    use {'honza/vim-snippets'}
+    use {'SirVer/ultisnips'}
+    use {'nvim-telescope/telescope-snippets.nvim'}
+    -- use {
+    --     'norcalli/snippets.nvim',
+    --     config = function() require("config.snippets") end
+    -- }
 
     -- Lua development
     use {'folke/lua-dev.nvim'}
@@ -437,10 +444,6 @@ return require('packer').startup(function()
     -- use {'beauwilliams/focus.nvim' }
     -- use {'RRethy/vim-illuminate' }
     -- use {'kosayoda/nvim-lightbulb' }
-
-    -- use { 'honza/vim-snippets' }
-    -- use { 'SirVer/ultisnips' }
-    -- use { 'nvim-telescope/telescope-snippets.nvim' }
 
     -- Plugin development
     -- use {'bryall/contextprint.nvim'}
