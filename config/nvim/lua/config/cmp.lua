@@ -53,8 +53,8 @@ cmp.setup {
 
                 vim.fn.feedkeys(t("<C-n>"), "n")
             elseif check_back_space() then
-            else
                 vim.fn.feedkeys(t("<tab>"), "n")
+            else
                 fallback()
             end
         end, {"i", "s"}),
