@@ -101,8 +101,14 @@ return require('packer').startup(function()
         requires = {
             "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", 'hrsh7th/cmp-vsnip',
             'quangnguyen30192/cmp-nvim-ultisnips', 'hrsh7th/cmp-nvim-lua',
-            'octaltree/cmp-look'
+            'octaltree/cmp-look', 'hrsh7th/cmp-path', 'hrsh7th/cmp-calc',
+            'f3fora/cmp-spell'
         }
+    }
+    use {
+        'tzachar/cmp-tabnine',
+        run = './install.sh',
+        requires = 'hrsh7th/nvim-cmp'
     }
     -- use {'hrsh7th/nvim-compe'}
     -- use {
@@ -119,7 +125,6 @@ return require('packer').startup(function()
     use {'glepnir/lspsaga.nvim'}
     use {
         'onsails/lspkind-nvim',
-        after = "cmp",
         config = function() require('lspkind').init() end
     }
     use {'sbdchd/neoformat'}
