@@ -164,7 +164,15 @@ return require('packer').startup(function()
     --     }
     -- }
     use {'honza/vim-snippets'}
-    use {'SirVer/ultisnips'}
+    use {
+        'SirVer/ultisnips',
+        config = function()
+            vim.cmd [[
+                let g:UltiSnipsJumpForwardTrigger="<c-j>"
+                let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+            ]]
+        end
+    }
 
     -- Lua development
     use {'folke/lua-dev.nvim'}

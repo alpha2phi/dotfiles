@@ -58,7 +58,7 @@ cmp.setup {
                 fallback()
             end
         end, {"i", "s"}),
-        ["<S-tab>"] = cmp.mapping(function(fallback)
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
             if vim.fn.pumvisible() == 1 then
                 vim.fn.feedkeys(t("<C-p>"), "n")
             else
