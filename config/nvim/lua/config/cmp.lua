@@ -73,7 +73,7 @@ cmp.setup {
         {name = 'cmp_tabnine'}, {name = "calc"}, {name = "spell"},
         {name = "emoji"}
     },
-    completion = {completeopt = 'menu,menuone,noinsert'}
+    completion = {completeopt = 'menu,menuone,noinsert', autocomplete = false}
 }
 
 -- Autopairs
