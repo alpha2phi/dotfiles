@@ -12,7 +12,7 @@ require('config.treesitter')
 -- require('config.lspkind')
 
 -- nvim-cmp
---
+require('config.cmp')
 
 -- nvim-compe
 -- require('config.compe')
