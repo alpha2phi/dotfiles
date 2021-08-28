@@ -96,7 +96,10 @@ return require('packer').startup(function()
     -- use {'kabouzeid/nvim-lspinstall'}
 
     -- Completion - use either one of this
-    use {"hrsh7th/nvim-cmp", requires = {"hrsh7th/cmp-buffer"}}
+    use {
+        "hrsh7th/nvim-cmp",
+        requires = {"hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp"}
+    }
     -- use {'hrsh7th/nvim-compe'}
     -- use {
     --     'ms-jpq/coq_nvim',

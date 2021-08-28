@@ -13,7 +13,7 @@ cmp.setup {
         })
     },
 
-    sources = {{name = 'buffer'}},
+    sources = {{name = 'buffer'}, {name = 'nvim_lsp'}},
     completion = {completeopt = 'menu,menuone,noinsert'}
 }
 
