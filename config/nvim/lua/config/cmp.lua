@@ -32,16 +32,16 @@ cmp.setup {
 
                 vim.fn.feedkeys(t("<C-n>"), "n")
             elseif check_back_space() then
-                vim.fn.feedkeys(t("<tab>"), "n")
             else
+                vim.fn.feedkeys(t("<tab>"), "n")
                 fallback()
             end
         end, {"i", "s"})
     },
     snippet = {expand = function(args) vim.fn["UltiSnips#Anon"](args.body) end},
     sources = {
-        {name = 'buffer'}, {name = 'nvim_lsp'}, {name = "vsnip"},
-        {name = "ultisnips"}
+        {name = 'buffer'}, {name = 'nvim_lsp'}, -- {name = "vsnip"},
+        {name = "ultisnips"}, {name = "nvim_lua"}
     },
     completion = {completeopt = 'menu,menuone,noinsert'}
 }

@@ -100,7 +100,7 @@ return require('packer').startup(function()
         "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", 'hrsh7th/cmp-vsnip',
-            'quangnguyen30192/cmp-nvim-ultisnips'
+            'quangnguyen30192/cmp-nvim-ultisnips', 'hrsh7th/cmp-nvim-lua'
         }
     }
     -- use {'hrsh7th/nvim-compe'}
