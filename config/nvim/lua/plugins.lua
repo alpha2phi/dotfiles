@@ -99,7 +99,7 @@ return require('packer').startup(function()
     use {
         "hrsh7th/nvim-cmp",
         requires = {
-            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", 'hrsh7th/cmp-vsnip',
+            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp",
             'quangnguyen30192/cmp-nvim-ultisnips', 'hrsh7th/cmp-nvim-lua',
             'octaltree/cmp-look', 'hrsh7th/cmp-path', 'hrsh7th/cmp-calc',
             'f3fora/cmp-spell', 'hrsh7th/cmp-emoji'
@@ -234,7 +234,11 @@ return require('packer').startup(function()
 
     -- Development workflow
     use {'voldikss/vim-browser-search'}
-    use {'kkoomen/vim-doge', run = '-> doge#install()'}
+    use {
+        'kkoomen/vim-doge',
+        run = ':call doge#install()',
+        config = function() vim.g.doge_doc_standard_python = 'google' end
+    }
 
     -- Rust
     use {'rust-lang/rust.vim'}
