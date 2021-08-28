@@ -1,18 +1,18 @@
 require('config.colorscheme')
-require('config.fugitive')
-require('config.neogit')
 require('config.devicon')
 require('config.project')
 require('config.telescope')
+-- require('config.neogit')
+-- require('config.fugitive')
 
 -- treesitter
-require('config.treesitter')
+-- require('config.treesitter')
 
 -- lspkind-nvim
 -- require('config.lspkind')
 
 -- nvim-cmp
-require('config.cmp')
+-- require('config.cmp')
 
 -- nvim-compe
 -- require('config.compe')

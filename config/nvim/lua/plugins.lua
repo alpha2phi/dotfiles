@@ -5,7 +5,10 @@ return require('packer').startup(function()
 
     -- Development
     use {'tpope/vim-dispatch'}
-    use {'tpope/vim-fugitive'}
+    use {
+        'tpope/vim-fugitive',
+        config = function() require('config.fugitive') end
+    }
     use {'tpope/vim-surround'}
     use {'tpope/vim-commentary'}
     use {'tpope/vim-rhubarb'}
@@ -22,6 +25,7 @@ return require('packer').startup(function()
         'TimUntersberger/neogit',
         config = function()
             require('neogit').setup {integrations = {diffview = true}}
+            require('config.neogit')
         end
     }
     use {'sindrets/diffview.nvim'}
@@ -103,7 +107,8 @@ return require('packer').startup(function()
             'quangnguyen30192/cmp-nvim-ultisnips', 'hrsh7th/cmp-nvim-lua',
             'octaltree/cmp-look', 'hrsh7th/cmp-path', 'hrsh7th/cmp-calc',
             'f3fora/cmp-spell', 'hrsh7th/cmp-emoji'
-        }
+        },
+        config = function() require('config.cmp') end
     }
     use {
         'tzachar/cmp-tabnine',
@@ -180,7 +185,12 @@ return require('packer').startup(function()
     use {'~/workspace/dev/alpha2phi/alpha.nvim'}
 
     -- Better syntax
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        config = function() require('config.treesitter') end
+
+    }
     use {'nvim-treesitter/nvim-treesitter-textobjects'}
     use {'nvim-treesitter/playground'}
     use {'JoosepAlviste/nvim-ts-context-commentstring'}
