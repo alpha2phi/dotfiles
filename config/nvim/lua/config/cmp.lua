@@ -28,7 +28,8 @@ cmp.setup {
                 look = "[Look]",
                 path = "[Path]",
                 spell = "[Spell]",
-                calc = "[Calc]"
+                calc = "[Calc]",
+                emoji = "[Emoji]"
             })[entry.source.name]
             return vim_item
         end
@@ -65,7 +66,8 @@ cmp.setup {
     sources = {
         {name = 'buffer'}, {name = 'nvim_lsp'}, {name = "ultisnips"},
         {name = "nvim_lua"}, {name = "look"}, {name = "path"},
-        {name = 'cmp_tabnine'}, {name = "calc"}, {name = "spell"}
+        {name = 'cmp_tabnine'}, {name = "calc"}, {name = "spell"},
+        {name = "emoji"}
     },
     completion = {completeopt = 'menu,menuone,noinsert'}
 }
