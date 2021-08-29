@@ -36,7 +36,11 @@ return require('packer').startup(function()
         config = function() require("which-key").setup {} end
     }
     use {'chrisbra/NrrwRgn'}
-    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function() require("config.devicon") end
+    }
     use {
         'windwp/nvim-spectre',
         config = function() require("config.spectre") end
@@ -82,7 +86,10 @@ return require('packer').startup(function()
     -- Telescope
     use {'nvim-lua/plenary.nvim'}
     use {'nvim-lua/popup.nvim'}
-    use {'nvim-telescope/telescope.nvim'}
+    use {
+        'nvim-telescope/telescope.nvim',
+        config = function() require("config.telescope") end
+    }
     use {
         'nvim-telescope/telescope-frecency.nvim',
         requires = {'tami5/sql.nvim'},
@@ -247,7 +254,10 @@ return require('packer').startup(function()
     use {'jbyuki/one-small-step-for-vimkind'}
 
     -- Project
-    use {'nvim-telescope/telescope-project.nvim'}
+    use {
+        'nvim-telescope/telescope-project.nvim',
+        config = function() require("telescope.project") end
+    }
     use {'airblade/vim-rooter'}
 
     -- Development workflow
