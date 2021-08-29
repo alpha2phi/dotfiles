@@ -26,11 +26,11 @@ require('keymappings')
 -- LSP
 require('lang')
 
--- Another option is to groups configuration in one folder
-require('config')
-
 -- DAP
 require('dbg')
+
+-- Another option is to groups configuration in one folder
+-- require('config')
 
 -- OR you can invoke them individually here
 -- require('config.colorscheme')  -- color scheme

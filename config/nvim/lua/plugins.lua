@@ -88,7 +88,16 @@ return require('packer').startup(function()
     use {'nvim-lua/popup.nvim'}
     use {
         'nvim-telescope/telescope.nvim',
-        config = function() require("config.telescope") end
+        requires = {
+            'nvim-telescope/telescope-project.nvim',
+            'nvim-telescope/telescope-symbols.nvim',
+            'nvim-telescope/telescope-github.nvim',
+            'nvim-telescope/telescope-hop.nvim'
+        },
+        config = function()
+            require("config.telescope")
+            require("config.project")
+        end
     }
     use {
         'nvim-telescope/telescope-frecency.nvim',
@@ -97,10 +106,8 @@ return require('packer').startup(function()
             require('telescope').load_extension('frecency')
         end
     }
-    use {'nvim-telescope/telescope-symbols.nvim'}
-    use {'nvim-telescope/telescope-github.nvim'}
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
-    -- use {"nvim-telescope/telescope-hop.nvim"}
+    -- use {'airblade/vim-rooter'}
 
     -- LSP config
     use {'neovim/nvim-lspconfig'}
@@ -252,13 +259,6 @@ return require('packer').startup(function()
     use {'rcarriga/nvim-dap-ui'}
     use {'Pocco81/DAPInstall.nvim'}
     use {'jbyuki/one-small-step-for-vimkind'}
-
-    -- Project
-    use {
-        'nvim-telescope/telescope-project.nvim',
-        config = function() require("telescope.project") end
-    }
-    use {'airblade/vim-rooter'}
 
     -- Development workflow
     use {'voldikss/vim-browser-search'}
