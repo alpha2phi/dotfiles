@@ -178,6 +178,7 @@ return require('packer').startup(function()
     }
     use {'RRethy/nvim-treesitter-textsubjects'}
     use {'nacro90/numb.nvim', config = function() require('numb').setup() end}
+    use {'junegunn/vim-easy-align'}
 
     -- Snippets
     -- use {
@@ -291,8 +292,10 @@ return require('packer').startup(function()
         config = function() vim.notify = require "notify" end
     }
 
-    -- Writing and note taking
-    -- TODO: Try out
+    use {'dccsillag/magma-nvim', run = ':UpdateRemotePlugins'}
+    use {'jupyter-vim/jupyter-vim'}
+
+    -- TODO:
     use {
         "vhyrro/neorg",
         config = function()
@@ -308,6 +311,7 @@ return require('packer').startup(function()
         end,
         requires = "nvim-lua/plenary.nvim"
     }
+    -- Writing and note taking
     -- use {
     --     'kristijanhusak/orgmode.nvim',
     --     config = function()
