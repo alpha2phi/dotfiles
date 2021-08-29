@@ -26,7 +26,7 @@ require'nvim-treesitter.configs'.setup {
         select = {
             enable = true,
 
-            -- Automatically jump forward to textobj, similar to targets.vim 
+            -- Automatically jump forward to textobj, similar to targets.vim
             lookahead = true,
 
             keymaps = {
@@ -97,5 +97,6 @@ require'nvim-treesitter.configs'.setup {
             ['.'] = 'textsubjects-smart',
             [';'] = 'textsubjects-container-outer'
         }
-    }
+    },
+    matchup = {enable = true}
 }

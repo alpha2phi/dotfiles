@@ -107,6 +107,10 @@ return require('packer').startup(function()
         end
     }
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+    use {
+        "ahmedkhalf/project.nvim",
+        config = function() require("project_nvim").setup {} end
+    }
     -- use {'airblade/vim-rooter'}
 
     -- LSP config
@@ -155,6 +159,7 @@ return require('packer').startup(function()
     use {'pechorin/any-jump.vim'}
     use {'kshenoy/vim-signature'}
     use {'kevinhwang91/nvim-bqf'}
+    use {'andymass/vim-matchup'}
     use {
         "folke/trouble.nvim",
         config = function() require("trouble").setup {} end
@@ -172,6 +177,7 @@ return require('packer').startup(function()
         config = function() require("todo-comments").setup {} end
     }
     use {'RRethy/nvim-treesitter-textsubjects'}
+    use {'nacro90/numb.nvim', config = function() require('numb').setup() end}
 
     -- Snippets
     -- use {
@@ -279,6 +285,12 @@ return require('packer').startup(function()
     use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
     use {'plasticboy/vim-markdown'}
 
+    -- TODO: trying
+    use {
+        "rcarriga/nvim-notify",
+        config = function() vim.notify = require "notify" end
+    }
+
     -- Writing and note taking
     -- TODO: Try out
     use {
@@ -371,10 +383,6 @@ return require('packer').startup(function()
     --     config = [[vim.g.startuptime_tries = 10]]
     -- }
 
-    -- use {
-    --     "rcarriga/nvim-notify",
-    --     config = function() vim.notify = require "notify" end
-    -- }
     -- use {
     --     'edluffy/specs.nvim',
     --     config = function() require('specs').setup {} end
