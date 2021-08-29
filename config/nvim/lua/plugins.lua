@@ -292,7 +292,11 @@ return require('packer').startup(function()
         config = function() vim.notify = require "notify" end
     }
 
-    use {'dccsillag/magma-nvim', run = ':UpdateRemotePlugins'}
+    use {
+        'dccsillag/magma-nvim',
+        run = ':UpdateRemotePlugins',
+        config = function() require("config.magma") end
+    }
     use {'jupyter-vim/jupyter-vim'}
 
     -- TODO:
