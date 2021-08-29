@@ -70,7 +70,7 @@ cmp.setup {
     sources = {
         {name = 'buffer'}, {name = 'nvim_lsp'}, {name = "ultisnips"},
         {name = "nvim_lua"}, {name = "look"}, {name = "path"}, {name = "calc"},
-        {name = "spell"}, {name = "emoji"}, {name = 'cmp_tabnine'}
+        {name = "spell"}, {name = "emoji"} -- {name = 'cmp_tabnine'}
     },
     completion = {completeopt = 'menu,menuone,noinsert'}
 }
