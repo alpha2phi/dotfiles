@@ -32,5 +32,17 @@ wk.register({
         f = {"Telescope frames"},
         v = {"Telescope variables"}
     },
-    K = {name = "Cheatsheet"}
+    K = {name = "Cheatsheet"},
+    v = {name = "Vimspector"},
+    e = {name = "eSpeak"},
+    f = {name = "File & Telescope"},
+    g = {name = "Git"},
+    h = {name = "Git Signs"},
+    l = {name = "LSP"},
+    n = {name = "Floaterm, Narrow, Glow"},
+    p = {name = "Project, Treesitter, Lua"},
+    q = {name = "Quick fix"},
+    r = {name = "Shell run"},
+    t = {name = "Test"},
+    x = {name = "Treesitter & swap"}
 }, {prefix = "<leader>"})
