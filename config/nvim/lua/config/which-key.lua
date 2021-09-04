@@ -21,7 +21,6 @@ wk.register({
         r = {"Rename"},
         s = {"Signature help"},
         p = {"Preview definition"}
-
     },
     d = {
         name = "DAP",
