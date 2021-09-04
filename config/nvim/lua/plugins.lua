@@ -73,6 +73,7 @@ return require('packer').startup(function()
     use {'kyazdani42/nvim-web-devicons'}
     use {'sainnhe/gruvbox-material'}
     use {'NLKNguyen/papercolor-theme'}
+    use {'folke/tokyonight.nvim'}
     use {'folke/lsp-colors.nvim'}
 
     -- Testing
@@ -156,7 +157,7 @@ return require('packer').startup(function()
     use {'szw/vim-maximizer'}
     use {'dyng/ctrlsf.vim'}
     use {'dbeniamine/cheat.sh-vim'}
-    use {'pechorin/any-jump.vim'}
+    -- use {'pechorin/any-jump.vim'}
     use {'kshenoy/vim-signature'}
     use {'kevinhwang91/nvim-bqf'}
     use {'andymass/vim-matchup'}
@@ -420,7 +421,6 @@ return require('packer').startup(function()
     -- use {'thaerkh/vim-workspace'}
 
     -- use {'sainnhe/edge'}
-    -- use {'folke/tokyonight.nvim'}
     -- use {'joshdick/onedark.vim'}
 
     -- use {'camspiers/snap'}
