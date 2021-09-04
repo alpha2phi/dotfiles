@@ -33,7 +33,7 @@ return require('packer').startup(function()
     use {'voldikss/vim-floaterm'}
     use {
         'folke/which-key.nvim',
-        config = function() require("which-key").setup {} end
+        config = function() require("config.which-key") end
     }
     use {'chrisbra/NrrwRgn'}
     use {
