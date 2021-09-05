@@ -312,6 +312,7 @@ return require('packer').startup(function()
         config = function() require("config.magma") end
     }
     use {'jupyter-vim/jupyter-vim'}
+    use {'svermeulen/vim-yoink'}
 
     -- TODO:
     use {
