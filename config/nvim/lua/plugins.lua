@@ -53,7 +53,10 @@ return require('packer').startup(function()
         "folke/persistence.nvim",
         event = "BufReadPre",
         module = "persistence",
-        config = function() require("persistence").setup() end
+        config = function()
+            require("persistence").setup()
+            require("config.persistence")
+        end
     }
     use {
         'windwp/nvim-autopairs',
