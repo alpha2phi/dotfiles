@@ -52,12 +52,12 @@ cmd 'colorscheme gruvbox-material'
 cmd 'au TextYankPost * silent! lua vim.highlight.on_yank()'
 
 -- Auto format
-vim.api.nvim_exec([[
-augroup auto_fmt
-    autocmd!
-    autocmd BufWritePre *.py,*.lua,*.rs try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
-aug END
-]], false)
+-- vim.api.nvim_exec([[
+-- augroup auto_fmt
+--     autocmd!
+--     autocmd BufWritePre *.py,*.lua,*.rs try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
+-- aug END
+-- ]], false)
 
 vim.api.nvim_exec([[
 augroup auto_spellcheck
