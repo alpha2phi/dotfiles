@@ -174,6 +174,8 @@ local servers = {
     -- rust_analyzer = {},
 }
 
+-- local servers = require'lspinstall'.installed_servers()
+
 -- local null_ls = require("null-ls")
 -- local sources = {
 --     null_ls.builtins.formatting.prettier,
@@ -183,6 +185,7 @@ local servers = {
 -- }
 -- null_ls.config({sources = sources})
 -- local coq = require("coq")
+
 for server, config in pairs(servers) do
 
     nvim_lsp[server].setup( -- coq.lsp_ensure_capabilities(
