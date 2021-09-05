@@ -11,10 +11,10 @@ local key_mappings = {
     {'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>'},
     {'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>'},
     {'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>'},
-    {'n', '<leader>law', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
-    {'n', '<leader>lrw', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
+    {'n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
+    {'n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
     {
-        'n', '<leader>llw',
+        'n', '<leader>lwl',
         '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'
     }, {'n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
     {'n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>'},
