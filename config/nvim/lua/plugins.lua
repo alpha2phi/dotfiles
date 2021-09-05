@@ -180,6 +180,7 @@ return require('packer').startup(function()
     use {'RRethy/nvim-treesitter-textsubjects'}
     use {'nacro90/numb.nvim', config = function() require('numb').setup() end}
     use {'junegunn/vim-easy-align'}
+    use {'antoinemadec/FixCursorHold.nvim'}
 
     -- Snippets
     -- use {
@@ -236,8 +237,16 @@ return require('packer').startup(function()
     use {
         'glepnir/galaxyline.nvim',
         branch = 'main',
-        config = function() require 'statusline' end
+        config = function() require("config.galaxyline") end
     }
+    -- use {
+    --     'hoob3rt/lualine.nvim',
+    --     requires = {
+    --         'kyazdani42/nvim-web-devicons',
+    --         config = function() require("config.lualine") end,
+    --         opt = true
+    --     }
+    -- }
 
     use {
         'akinsho/nvim-bufferline.lua',
