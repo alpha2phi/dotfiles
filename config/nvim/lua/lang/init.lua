@@ -186,25 +186,56 @@ local servers = {
 -- null_ls.config({sources = sources})
 -- local coq = require("coq")
 
-for server, config in pairs(servers) do
+local function setup_servers(lsp_servers)
+    for server, config in pairs(lsp_servers) do
 
-    nvim_lsp[server].setup( -- coq.lsp_ensure_capabilities(
-    vim.tbl_deep_extend("force", {
-        on_attach = lsp_on_attach,
-        -- on_exit = lsp_on_exit,
-        -- on_init = lsp_on_init,
-        capabilities = capabilities,
-        flags = {debounce_text_changes = 150},
-        init_options = config
-    }, {}))
-    -- )
+        nvim_lsp[server].setup( -- coq.lsp_ensure_capabilities(
+        vim.tbl_deep_extend("force", {
+            on_attach = lsp_on_attach,
+            -- on_exit = lsp_on_exit,
+            -- on_init = lsp_on_init,
+            capabilities = capabilities,
+            flags = {debounce_text_changes = 150},
+            init_options = config
+        }, {}))
+        -- )
 
-    local cfg = nvim_lsp[server]
-    -- null_ls.setup {on_attach = on_attach, sources = sources}
-    if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
-        print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
+        local cfg = nvim_lsp[server]
+        if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
+            print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
+        end
     end
 end
+
+local function setup_null_ls()
+    nvim_lsp["null-ls"].setup(vim.tbl_deep_extend("force", {
+        on_attach = lsp_on_attach,
+        capabilities = capabilities,
+        flags = {debounce_text_changes = 150}
+    }, {}))
+
+    local cfg = nvim_lsp["null-ls"]
+    if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
+        print("null-ls" .. ": cmd not found: " .. vim.inspect(cfg.cmd))
+    end
+end
+
+local function configure_null_ls()
+    local null_ls = require("null-ls")
+    local sources = {
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.diagnostics.write_good,
+        null_ls.builtins.code_actions.gitsigns,
+        null_ls.builtins.formatting.lua_format,
+        null_ls.builtins.formatting.black, null_ls.builtins.diagnostics.flake8
+    }
+    null_ls.config({sources = sources})
+end
+
+setup_servers(servers)
+
+configure_null_ls()
+setup_null_ls()
 
 -- rust-tools.nvim
 local function setup_rust_tools()

@@ -116,7 +116,7 @@ return require('packer').startup(function()
 
     -- LSP config
     use {'neovim/nvim-lspconfig'}
-    use {'kabouzeid/nvim-lspinstall'}
+    -- use {'kabouzeid/nvim-lspinstall'}
 
     -- Completion - use either one of this
     use {
@@ -181,6 +181,11 @@ return require('packer').startup(function()
     use {'nacro90/numb.nvim', config = function() require('numb').setup() end}
     use {'junegunn/vim-easy-align'}
     use {'antoinemadec/FixCursorHold.nvim'}
+    use {
+        'jose-elias-alvarez/null-ls.nvim',
+        config = function() require("config.null-ls") end,
+        requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
+    }
 
     -- Snippets
     -- use {
@@ -468,20 +473,6 @@ return require('packer').startup(function()
     -- use {
     --     'ThePrimeagen/refactoring.nvim',
     --     config = function() require("config.refactoring") end
-    -- }
-    -- use {
-    --     'jose-elias-alvarez/null-ls.nvim'
-    -- config = function()
-    --     local null_ls = require("null-ls")
-    --     local sources = {
-    --         null_ls.builtins.formatting.prettier,
-    --         null_ls.builtins.diagnostics.write_good,
-    --         null_ls.builtins.code_actions.gitsigns,
-    --         null_ls.builtins.formatting.lua_format
-    --     }
-    --     null_ls.config({sources = sources})
-    --     require("lspconfig")["null-ls"].setup({})
-    -- end
     -- }
     -- use {
     --     'ray-x/navigator.lua',
