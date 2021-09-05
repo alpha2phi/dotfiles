@@ -48,7 +48,7 @@ wk.register({
     ["lc"] = {name = "Code action"},
     ["lcl"] = {name = "Code lens"},
     ["ld"] = {name = "Diagnostics"},
-    ["lr"] = {name = "References, rename"},
+    ["lr"] = {name = "References, rename, run"},
     ["ll"] = {name = "Location list"},
     ["lt"] = {name = "Type definition"},
     ["ls"] = {name = "Symbol"},
