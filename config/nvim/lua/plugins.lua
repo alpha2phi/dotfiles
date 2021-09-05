@@ -183,7 +183,6 @@ return require('packer').startup(function()
     use {'antoinemadec/FixCursorHold.nvim'}
     use {
         'jose-elias-alvarez/null-ls.nvim',
-        config = function() require("config.null-ls") end,
         requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
     }
 
