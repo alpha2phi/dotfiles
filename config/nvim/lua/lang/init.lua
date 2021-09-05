@@ -33,10 +33,10 @@ local key_mappings = {
 
 local alt_key_mappings = {
     {
-        "document_formatting", "n", "<leader>lf",
+        "document_formatting", "n", "<leader>lff",
         "<cmd>lua vim.lsp.buf.formatting()<CR>"
     }, {
-        "document_range_formatting", "n", "<leader>lf",
+        "document_range_formatting", "n", "<leader>lfr",
         "<cmd>lua vim.lsp.buf.range_formatting()<CR>"
     },
     {
@@ -218,7 +218,8 @@ local function configure_null_ls()
         null_ls.builtins.diagnostics.write_good,
         null_ls.builtins.code_actions.gitsigns,
         null_ls.builtins.formatting.lua_format,
-        null_ls.builtins.formatting.black, null_ls.builtins.diagnostics.flake8
+        null_ls.builtins.formatting.isort, null_ls.builtins.formatting.black,
+        null_ls.builtins.diagnostics.flake8
     }
     null_ls.config({sources = sources})
 end
