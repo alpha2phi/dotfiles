@@ -224,7 +224,6 @@ local function configure_null_ls()
 end
 
 setup_servers(servers)
-
 configure_null_ls()
 setup_null_ls()
 
