@@ -24,10 +24,10 @@ require('plugins')
 require('keymappings')
 
 -- LSP
-require('lang')
+require('config.lsp')
 
 -- DAP
-require('dbg')
+require('config.dap')
 
 -- Another option is to groups configuration in one folder
 -- require('config')

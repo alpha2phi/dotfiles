@@ -1,7 +1,7 @@
 USER = vim.fn.expand('$USER')
 
 -- Language specific key mappings
-require('lang.keymappings')
+require('config.lsp.keymappings')
 
 local key_mappings = {
     {'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>'},

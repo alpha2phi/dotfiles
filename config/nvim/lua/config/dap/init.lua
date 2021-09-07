@@ -8,11 +8,11 @@ vim.g.dap_virtual_text = true
 require("dapui").setup({})
 
 -- languages
-require('dbg.python')
-require('dbg.rust')
-require('dbg.go')
-require('dbg.node')
-require('dbg.lua')
+require('config.dap.python')
+require('config.dap.rust')
+require('config.dap.go')
+require('config.dap.node')
+require('config.dap.lua')
 
 -- nvim-dap
 vim.fn.sign_define('DapBreakpoint',
