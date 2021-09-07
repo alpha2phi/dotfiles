@@ -77,6 +77,7 @@ return require('packer').startup(function()
     use {'sainnhe/gruvbox-material'}
     use {'NLKNguyen/papercolor-theme'}
     use {'folke/tokyonight.nvim'}
+    use {'sainnhe/everforest'}
     use {'folke/lsp-colors.nvim'}
 
     -- Testing
@@ -316,6 +317,15 @@ return require('packer').startup(function()
     }
     use {'jupyter-vim/jupyter-vim'}
     use {'svermeulen/vim-yoink'}
+
+    use {
+        'ray-x/navigator.lua',
+        requires = {
+            'ray-x/guihua.lua',
+            run = 'cd lua/fzy && make',
+            config = function() require'navigator'.setup() end
+        }
+    }
 
     -- TODO:
     use {
