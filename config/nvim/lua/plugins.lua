@@ -315,17 +315,16 @@ return require('packer').startup(function()
         run = ':UpdateRemotePlugins',
         config = function() require("config.magma") end
     }
-    use {'jupyter-vim/jupyter-vim'}
-    use {'svermeulen/vim-yoink'}
-
-    use {
-        'ray-x/navigator.lua',
-        requires = {
-            'ray-x/guihua.lua',
-            run = 'cd lua/fzy && make',
-            config = function() require'navigator'.setup() end
-        }
-    }
+    -- use {'jupyter-vim/jupyter-vim'}
+    -- use {'svermeulen/vim-yoink'}
+    -- use {
+    --     'ray-x/navigator.lua',
+    --     requires = {
+    --         'ray-x/guihua.lua',
+    --         run = 'cd lua/fzy && make',
+    --         config = function() require'navigator'.setup() end
+    --     }
+    -- }
 
     -- TODO:
     use {
