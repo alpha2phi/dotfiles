@@ -159,8 +159,8 @@ return require('packer').startup(function()
     use {'p00f/nvim-ts-rainbow'}
     use {'ray-x/lsp_signature.nvim'}
     use {'szw/vim-maximizer'}
-    use {'dyng/ctrlsf.vim'}
-    use {'dbeniamine/cheat.sh-vim'}
+    -- use {'dyng/ctrlsf.vim'}
+    -- use {'dbeniamine/cheat.sh-vim'}
     -- use {'pechorin/any-jump.vim'}
     use {'kshenoy/vim-signature'}
     use {'kevinhwang91/nvim-bqf'}
