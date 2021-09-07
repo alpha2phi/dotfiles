@@ -1,5 +1,3 @@
-local utils = require('utils')
-
 local cmd = vim.cmd
 local o = vim.o
 local wo = vim.wo

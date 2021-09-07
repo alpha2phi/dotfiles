@@ -36,11 +36,7 @@ return require('packer').startup(function()
         config = function() require("config.which-key") end
     }
     use {'chrisbra/NrrwRgn'}
-    use {
-        'kyazdani42/nvim-tree.lua',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = function() require("config.devicon") end
-    }
+    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
     use {
         'windwp/nvim-spectre',
         config = function() require("config.spectre") end
@@ -73,7 +69,12 @@ return require('packer').startup(function()
     use {'liuchengxu/vista.vim'}
 
     -- Color scheme
-    use {'kyazdani42/nvim-web-devicons'}
+    use {
+        'kyazdani42/nvim-web-devicons',
+        config = function()
+            require('nvim-web-devicons').setup({default = true})
+        end
+    }
     use {'sainnhe/gruvbox-material'}
     use {'NLKNguyen/papercolor-theme'}
     use {'folke/tokyonight.nvim'}
@@ -95,9 +96,9 @@ return require('packer').startup(function()
         'nvim-telescope/telescope.nvim',
         requires = {
             'nvim-telescope/telescope-project.nvim',
-            'nvim-telescope/telescope-symbols.nvim',
-            'nvim-telescope/telescope-github.nvim',
-            'nvim-telescope/telescope-hop.nvim'
+            'nvim-telescope/telescope-symbols.nvim'
+            -- 'nvim-telescope/telescope-github.nvim',
+            -- 'nvim-telescope/telescope-hop.nvim'
         },
         config = function()
             require("config.telescope")
