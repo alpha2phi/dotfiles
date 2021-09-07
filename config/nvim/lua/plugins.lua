@@ -298,7 +298,7 @@ return require('packer').startup(function()
     use {'simrat39/rust-tools.nvim'}
 
     -- Go
-    use {'ray-x/go.nvim', config = function() require('go').setup() end}
+    -- use {'ray-x/go.nvim', config = function() require('go').setup() end}
 
     -- Markdown
     use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
