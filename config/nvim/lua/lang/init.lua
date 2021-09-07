@@ -235,39 +235,39 @@ setup_null_ls()
 
 -- rust-tools.nvim
 local function setup_rust_tools()
-    local tools = {
-        autoSetHints = true,
-        runnables = {use_telescope = true},
-        inlay_hints = {show_parameter_hints = true},
-        hover_actions = {auto_focus = true}
-    }
+    -- local tools = {
+    --     autoSetHints = true,
+    --     runnables = {use_telescope = true},
+    --     inlay_hints = {show_parameter_hints = true},
+    --     hover_actions = {auto_focus = true}
+    -- }
     require('rust-tools').setup({
-        tools = tools,
+        -- tools = tools,
         server = {
             on_attach = lsp_on_attach,
             capabilities = capabilities,
             flags = {debounce_text_changes = 150}
+        },
+        settings = {
+            ["rust-analyzer"] = {
+                --         assist = {
+                --             importGranularity = "module",
+                --             importEnforceGranularity = true
+                --         },
+                --         cargo = {loadOutDirsFromCheck = true, allFeatures = true},
+                --         procMacro = {enable = true},
+                --         checkOnSave = {command = "clippy"},
+                --         experimental = {procAttrMacros = true},
+                --         hoverActions = {references = true},
+                --         inlayHints = {
+                --             chainingHints = true,
+                --             maxLength = 40,
+                --             parameterHints = true,
+                --             typeHints = true
+                --         },
+                lens = {methodReferences = true, references = true}
+            }
         }
-        -- settings = {
-        --     ["rust-analyzer"] = {
-        --         assist = {
-        --             importGranularity = "module",
-        --             importEnforceGranularity = true
-        --         },
-        --         cargo = {loadOutDirsFromCheck = true, allFeatures = true},
-        --         procMacro = {enable = true},
-        --         checkOnSave = {command = "clippy"},
-        --         experimental = {procAttrMacros = true},
-        --         hoverActions = {references = true},
-        --         inlayHints = {
-        --             chainingHints = true,
-        --             maxLength = 40,
-        --             parameterHints = true,
-        --             typeHints = true
-        --         },
-        --         lens = {methodReferences = true, references = true}
-        --     }
-        -- }
     })
     require('rust-tools-debug').setup()
 end

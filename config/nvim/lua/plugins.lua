@@ -149,7 +149,7 @@ return require('packer').startup(function()
     -- use { 'nvim-lua/completion-nvim' }
 
     -- Better LSP experience
-    use {'tjdevries/astronauta.nvim'}
+    -- use {'tjdevries/astronauta.nvim'}
     use {'glepnir/lspsaga.nvim'}
     use {
         'onsails/lspkind-nvim',
