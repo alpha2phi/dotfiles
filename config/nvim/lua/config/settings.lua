@@ -36,6 +36,20 @@ function M.auto_cmds()
     -- cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
     vim.cmd 'au TextYankPost * silent! lua vim.highlight.on_yank()'
 
+    vim.cmd [[
+        set expandtab smarttab shiftround autoindent smartindent smartcase
+        set path+=**
+        set wildmode=longest,list,full
+        set wildmenu
+        set wildignore+=*.pyc
+        set wildignore+=*_build/*
+        set wildignore+=**/coverage/*
+        set wildignore+=**/node_modules/*
+        set wildignore+=**/android/*
+        set wildignore+=**/ios/*
+        set wildignore+=**/.git/*
+    ]]
+
     vim.api.nvim_exec([[
         cnoreabbrev W! w!
         cnoreabbrev Q! q!
@@ -87,7 +101,7 @@ end
 function M.plugins()
     vim.api.nvim_exec([[
 
-        let g:doge_mapping = "<Leader>gd"
+        let g:doge_mapping = "<Leader>gg"
         let g:doge_doc_standard_python = 'google'
 
 

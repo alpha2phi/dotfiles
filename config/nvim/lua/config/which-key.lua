@@ -88,6 +88,18 @@ local mappings = {
         z = {"<Cmd>lefta 20vsp .<CR>", "Netrw"}
     },
 
+    -- Git
+    g = {
+        name = "Source code",
+        s = {"<Cmd>Git<Cr>", "Git status"},
+        p = {"<Cmd>Git push<Cr>", "Git push"},
+        b = {"<Cmd>Git branch<Cr>", "Git branch"},
+        d = {"<Cmd>Gvdiffsplit<Cr>", "Git diff"},
+        f = {"<Cmd>Git fetch --all<Cr>", "Git fetch"},
+
+        g = {name = "Generate doc"}
+    },
+
     -- eSpeak
     e = {name = "eSpeak", s = {"<Cmd>call tts#Speak()<CR>", "Speak"}},
 
@@ -99,9 +111,6 @@ local mappings = {
             "Search project files"
         }
     },
-
-    -- Git
-    g = {name = "Source code", d = {name = "Generate doc"}},
 
     -- Easymotion
     ["<Space>"] = {name = "Easymotion"},

@@ -41,18 +41,3 @@ opt.formatoptions = opt.formatoptions - "a" -- Auto formatting is BAD.
 + "n" -- Indent past the formatlistpat, not underneath it.
 + "j" -- Auto-remove comments if possible.
 - "2" -- I'm not in gradeschool anymore
-
-cmd [[
-set expandtab smarttab shiftround autoindent smartindent smartcase
-set path+=**
-set wildmode=longest,list,full
-set wildmenu
-set wildignore+=*.pyc
-set wildignore+=*_build/*
-set wildignore+=**/coverage/*
-set wildignore+=**/node_modules/*
-set wildignore+=**/android/*
-set wildignore+=**/ios/*
-set wildignore+=**/.git/*
-]]
-
