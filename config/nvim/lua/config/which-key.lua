@@ -132,19 +132,14 @@ local mappings = {
         g = {"q/", "Grep history"}
     },
 
-    -- Test
+    -- Testing
     t = {
         name = "Test",
-        n = ":w<CR>:TestNearest<CR>",
-        "Test nearest",
-        f = ":w<CR>:TestFile<CR>",
-        "Test file",
-        s = ":w<CR>:TestSuite<CR>",
-        "Test suite",
-        l = ":w<CR>:TestLast<CR>",
-        "Test last",
-        v = ":w<CR>:TestVisit<CR>",
-        "Test visit"
+        n = {":w<CR>:TestNearest<CR>", "Test nearest"},
+        f = {":w<CR>:TestFile<CR>", "Test file"},
+        s = {":w<CR>:TestSuite<CR>", "Test suite"},
+        l = {":w<CR>:TestLast<CR>", "Test last"},
+        v = {":w<CR>:TestVisit<CR>", "Test visit"}
     },
 
     d = {
