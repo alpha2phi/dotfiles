@@ -75,6 +75,7 @@ local function set_lsp_config(client, bufnr)
         vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
     end
 
+    print("-------------------------done lsp")
 end
 
 local function set_lsp_highlight(client, bufnr)

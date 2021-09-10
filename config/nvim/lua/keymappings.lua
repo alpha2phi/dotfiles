@@ -1,96 +1,99 @@
-local utils = require('utils')
+local M = {}
 
-utils.map_key('n', '<C-l>', '<cmd>noh<CR>') -- Clear highlights
-utils.map_key('i', 'jk', '<Esc>') -- jk to escape
-utils.map_key('n', '<Leader>tt', '<Cmd>15sp +term<CR>')
-utils.map_key('n', '<Leader>fq', '<Cmd>q<CR>')
-utils.map_key('n', '<Leader>fsf', '<Cmd>w<CR>')
-utils.map_key('n', '<Leader>w', '<Cmd>update<CR>')
-utils.map_key('n', '<Leader>fv', '<Cmd>NvimTreeToggle<CR>')
-utils.map_key('n', '<Leader>rr', '!!$SHELL<CR>')
-utils.map_key('n', '<C-w><C-o>', ':MaximizerToggle!<CR>')
--- utils.map_key('n', '<Leader>fv', '<Cmd>lefta 20vsp .<CR>')
--- utils.map_key('n', '<Leader>dsv', ':source %<CR>')
--- utils.map_key('n', '<Leader>dsl', ':luafile %<CR>')
+local generic_opts_any = {noremap = true, silent = true}
 
-utils.map_key('t', '<C-w><C-o>', '<C-\\><C-n> :MaximizerToggle!<CR>')
-utils.map_key('t', '<C-h>', '<C-\\><C-n><C-w>h')
-utils.map_key('t', '<C-j>', '<C-\\><C-n><C-w>j')
-utils.map_key('t', '<C-k>', '<C-\\><C-n><C-w>k')
-utils.map_key('t', '<C-l>', '<C-\\><C-n><C-w>l')
-utils.map_key('t', 'jk', '<C-\\><C-n>')
+local generic_opts = {
+    insert_mode = generic_opts_any,
+    normal_mode = generic_opts_any,
+    visual_mode = generic_opts_any,
+    visual_block_mode = generic_opts_any,
+    command_mode = generic_opts_any,
+    term_mode = {silent = true}
+}
 
--- utils.map_key('n', '<Leader>bd', '<Cmd>bd<CR>')
--- utils.map_key('n', '<Leader>ba', '<Cmd>%bd|e#<CR>')
--- utils.map_key('n', '<Leader>bn', '<Cmd>bn<CR>')
--- utils.map_key('n', '<Leader>bp', '<Cmd>bp<CR>')
--- utils.map_key('n', '<Leader>bq', '<Cmd>q<CR>')
--- utils.map_key('n', '<Leader>bl', '<Cmd>ls<CR>')
+local mode_adapters = {
+    insert_mode = "i",
+    normal_mode = "n",
+    term_mode = "t",
+    visual_mode = "v",
+    visual_block_mode = "x",
+    command_mode = "c"
+}
 
-utils.map_key('n', '<Leader>qf', '<Cmd>copen<CR>')
-utils.map_key('n', '<Leader>qc', '<Cmd>cclose<CR>')
-utils.map_key('n', '<Leader>qn', '<Cmd>cnext<CR>')
-utils.map_key('n', '<Leader>qp', '<Cmd>cprev<CR>')
-utils.map_key('n', '<Leader>qz', '<Cmd>cex []<CR>')
-utils.map_key('n', '<Leader>qh', 'q:')
-utils.map_key('n', '<Leader>qs', 'q/')
+local keymappings = {
+    insert_mode = {
+        ["jk"] = "<Esc>",
+        ["<M-j>"] = "<Esc>:m .+1<CR>==gi",
+        ["<M-k>"] = "<Esc>:m .-2<CR>==gi",
+        [","] = ",<c-g>u",
+        ["."] = ".<c-g>u",
+        ["!"] = "!<c-g>u",
+        ["?"] = "?<c-g>u"
+    },
+    normal_mode = {
+        ["<C-l>"] = "<Cmd>noh<CR>",
+        ["<C-w><C-o>"] = "<Cmd>MaximizerToggle!<CR>",
+        ["<silent> <M-left>"] = "<C-w>>",
+        ["<silent> <M-right>"] = "<C-w><",
+        ["<silent> <M-up>"] = "<C-w>+",
+        ["<silent> <M-down"] = "<C-w>-",
+        ["<M-j>"] = ":m .+1<CR>==",
+        ["<M-k>"] = ":m .-2<CR>==",
+        ["Y"] = "y$",
+        ["<S-h"] = ":bp<Cr>",
+        ["<S-l"] = ":bn<Cr>",
+        ["n"] = "nzzzv",
+        ["N"] = "Nzzzv",
+        ["J"] = "mzJ`z",
+        ["<expr> j"] = "(v:count > 1 ? \"m'\" . v:count : '') . 'j'",
+        ["<expr> k"] = "(v:count > 1 ? \"m'\" . v:count : '') . 'k'",
+        ["s"] = "<Plug>(easymotion-overwin-f)"
+        -- [";"] = ":"
+    },
+    visual_mode = {
+        ["<"] = "<gv",
+        [">"] = ">gv",
+        ["J"] = ":m '>+1<CR>gv=gv",
+        ["K"] = ":m '<-2<CR>gv=gv"
+        -- [";"] = ":"
+    },
+    term_mode = {
+        ['<C-w><C-o>'] = '<C-\\><C-n> :MaximizerToggle!<CR>',
+        ['<C-h>'] = '<C-\\><C-n><C-w>h',
+        ['<C-j>'] = '<C-\\><C-n><C-w>j',
+        ['<C-k>'] = '<C-\\><C-n><C-w>k',
+        ['<C-l>'] = '<C-\\><C-n><C-w>l',
+        ['jk'] = '<C-\\><C-n>'
+    },
+    command_mode = {
+        ["<C-j>"] = {
+            'pumvisible() ? "\\<C-n>" : "\\<C-j>"',
+            {expr = true, noremap = true}
+        },
+        ["<C-k>"] = {
+            'pumvisible() ? "\\<C-p>" : "\\<C-k>"',
+            {expr = true, noremap = true}
+        },
+        ["w!!"] = "execute 'silent! write !sudo tee % >/dev/null' <bar> edit!"
+    }
+}
 
--- Transparent background
-utils.map_key('n', '<Leader>xc', '<Cmd>hi Normal ctermbg=none guibg=none<CR>')
+function M.set_keymaps(mode, key, val)
+    local opt = generic_opts[mode] and generic_opts[mode] or generic_opts_any
+    if type(val) == "table" then
+        opt = val[2]
+        val = val[1]
+    end
+    vim.api.nvim_set_keymap(mode, key, val, opt)
+end
 
--- utils.map_key('n', ';', ':')
--- utils.map_key('v', ';', ':')
+function M.map(mode, keymaps)
+    mode = mode_adapters[mode] and mode_adapters[mode] or mode
+    for k, v in pairs(keymaps) do M.set_keymaps(mode, k, v) end
+end
 
-vim.api.nvim_exec([[
+function M.setup()
+    for mode, mapping in pairs(keymappings) do M.map(mode, mapping) end
+end
 
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
-
-vmap < <gv
-vmap > >gv
-
-nnoremap <silent> <M-left> <C-w>>
-nnoremap <silent> <M-right> <C-w><
-nnoremap <silent> <M-up> <C-w>+
-nnoremap <silent> <M-down> <C-w>-
-
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
-nnoremap <Leader>pd :let &runtimepath.=','.escape(expand('%:p:h'), '\,')
-
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-nnoremap <M-j> :m .+1<CR>==
-nnoremap <M-k> :m .-2<CR>==
-inoremap <M-j> <Esc>:m .+1<CR>==gi
-inoremap <M-k> <Esc>:m .-2<CR>==gi
-
-nnoremap <Leader>es :call tts#Speak()<CR>
-vnoremap <Leader>es :call tts#Speak(1)<CR>
-
-nnoremap Y y$
-
-nnoremap <S-h> :bp<CR>
-nnoremap <S-l> :bn<CR>
-
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap J mzJ`z
-
-inoremap , ,<c-g>u
-inoremap . .<c-g>u
-inoremap ! !<c-g>u
-inoremap ? ?<c-g>u
-
-nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
-nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
-
-]], false)
+return M
