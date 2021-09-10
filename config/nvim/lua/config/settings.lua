@@ -86,7 +86,10 @@ end
 
 function M.plugins()
     vim.api.nvim_exec([[
+
         let g:doge_mapping = "<Leader>gd"
+        let g:doge_doc_standard_python = 'google'
+
 
         "let test#strategy = "neovim"
         let test#strategy = "dispatch"

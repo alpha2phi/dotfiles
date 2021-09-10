@@ -124,7 +124,7 @@ return require('packer').startup(function()
             'octaltree/cmp-look', 'hrsh7th/cmp-path', 'hrsh7th/cmp-calc',
             'f3fora/cmp-spell', 'hrsh7th/cmp-emoji'
         },
-        config = function() require('config.cmp') end
+        config = function() require('config.cmp').setup() end
     }
     use {
         'tzachar/cmp-tabnine',
@@ -279,15 +279,8 @@ return require('packer').startup(function()
     use {'jbyuki/one-small-step-for-vimkind'}
 
     -- Development workflow
-    use {
-        'voldikss/vim-browser-search',
-        config = function() require("config.browser-search") end
-    }
-    use {
-        'kkoomen/vim-doge',
-        run = ':call doge#install()',
-        config = function() vim.g.doge_doc_standard_python = 'google' end
-    }
+    use {'voldikss/vim-browser-search'}
+    use {'kkoomen/vim-doge', run = ':call doge#install()'}
 
     -- Rust
     use {'rust-lang/rust.vim'}

@@ -77,7 +77,7 @@ local mappings = {
         f = {"<Cmd>Telescope git_files<Cr>", "Git files"}, -- or DashboardFindFile
         g = {"<Cmd>Telescope live_grep<Cr>", "Live grep"},
         h = {"<Cmd>Telescope help_tags<Cr>", "Help"},
-        p = {"<Cmd>Telescope file_browser<Cr>", "Pop-up browser"},
+        p = {"<Cmd>Telescope file_browser<Cr>", "Pop-up file browser"},
         x = {"<Cmd>DashboardFindHistory<Cr>", "History"},
         m = {"<Cmd>DashboardJumpMark<Cr>", "Mark"},
         n = {"<Cmd>DashboardNewFile<Cr>", "New file"},
@@ -119,7 +119,7 @@ local mappings = {
             "Web search"
         },
         s = {"<Cmd>lua require('spectre').open()<CR>", "Search"},
-        b = {name = "Web search currrent word"},
+        b = {"<Plug>SearchNormal", "Browser search"},
         v = {
             "<Cmd>lua require('spectre').open_visual({select_word=true})<CR>",
             "Visual search"
@@ -192,7 +192,8 @@ local mappings = {
 local vmappings = {
     s = {
         name = "Search",
-        v = {"<Cmd>lua require('spectre').open_visual()<CR>", "Visual search"}
+        v = {"<Cmd>lua require('spectre').open_visual()<CR>", "Visual search"},
+        b = {"<Plug>SearchVisual", "Browser search"}
     },
     e = {name = "eSpeak", s = {"<Cmd>call tts#Speak(1)<CR>", "Speak"}}
 
