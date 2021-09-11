@@ -1,14 +1,6 @@
-vim.api.nvim_exec([[
+local M = {}
 
-nnoremap <silent><expr> <Leader>m  :MagmaEvaluateOperator<CR>
-nnoremap <silent>       <Leader>ml :MagmaEvaluateLine<CR>
-xnoremap <silent>       <Leader>m  :<C-u>MagmaEvaluateVisual<CR>
-nnoremap <silent>       <Leader>mr :MagmaReevaluateCell<CR>
-nnoremap <silent>       <Leader>md :MagmaDelete<CR>
-nnoremap <silent>       <Leader>mo :MagmaShowOutput<CR>
-nnoremap <silent>       <Leader>mi :MagmaInit<CR>
-nnoremap <silent>       <Leader>mu :MagmaDeinit<CR>
+function M.setup() vim.g.magma_automatically_open_output = false end
 
-let g:magma_automatically_open_output = v:false
+return M
 
-]], false)

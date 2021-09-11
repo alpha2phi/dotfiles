@@ -20,10 +20,7 @@ return require('packer').startup(function()
     }
     use {
         'TimUntersberger/neogit',
-        config = function()
-            require('neogit').setup {integrations = {diffview = true}}
-            require('config.neogit')
-        end
+        config = function() require("config.neogit").setup() end
     }
     use {'sindrets/diffview.nvim'}
     use {'unblevable/quick-scope'}
@@ -89,10 +86,7 @@ return require('packer').startup(function()
             -- 'nvim-telescope/telescope-github.nvim',
             -- 'nvim-telescope/telescope-hop.nvim'
         },
-        config = function()
-            require("config.telescope")
-            require("config.project")
-        end
+        config = function() require("config.telescope").setup() end
     }
     use {
         'nvim-telescope/telescope-frecency.nvim',
@@ -272,7 +266,7 @@ return require('packer').startup(function()
     -- DAP
     use {'mfussenegger/nvim-dap'}
     use {'nvim-telescope/telescope-dap.nvim'}
-    use {'mfussenegger/nvim-dap-python'} -- Python
+    use {'mfussenegger/nvim-dap-python'}
     use {'theHamsta/nvim-dap-virtual-text'}
     use {'rcarriga/nvim-dap-ui'}
     use {'Pocco81/DAPInstall.nvim'}
@@ -306,7 +300,7 @@ return require('packer').startup(function()
     use {
         'dccsillag/magma-nvim',
         run = ':UpdateRemotePlugins',
-        config = function() require("config.magma") end
+        config = function() require("config.magma").setup() end
     }
 
     -- use {

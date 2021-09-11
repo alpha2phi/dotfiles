@@ -1,3 +1,5 @@
-local utils = require('utils')
+local M = {}
 
-utils.map_key('n', '<Leader>gn', '<cmd>Neogit<CR>')
+function M.setup() require('neogit').setup {integrations = {diffview = true}} end
+
+return M

@@ -96,6 +96,7 @@ local mappings = {
         b = {"<Cmd>Git branch<Cr>", "Git branch"},
         d = {"<Cmd>Gvdiffsplit<Cr>", "Git diff"},
         f = {"<Cmd>Git fetch --all<Cr>", "Git fetch"},
+        n = {"<Cmd>Neogit<Cr>", "NeoGit"},
         ["r"] = {
             name = "Rebase",
             u = {
@@ -122,7 +123,11 @@ local mappings = {
         name = "Project",
         s = {
             "<Cmd>lua require('config.telescope').switch_projects()<CR>",
-            "Search project files"
+            "Search files"
+        },
+        p = {
+            "<Cmd>lua require'telescope'.extensions.project.project{ change_dir = true }<Cr>",
+            "List projects"
         }
     },
 
@@ -158,11 +163,23 @@ local mappings = {
     -- Testing
     t = {
         name = "Test",
-        n = {":w<CR>:TestNearest<CR>", "Test nearest"},
-        f = {":w<CR>:TestFile<CR>", "Test file"},
-        s = {":w<CR>:TestSuite<CR>", "Test suite"},
-        l = {":w<CR>:TestLast<CR>", "Test last"},
-        v = {":w<CR>:TestVisit<CR>", "Test visit"}
+        n = {"<Cmd>w<CR>:TestNearest<CR>", "Test nearest"},
+        f = {"<Cmd>w<CR>:TestFile<CR>", "Test file"},
+        s = {"<Cmd>w<CR>:TestSuite<CR>", "Test suite"},
+        l = {"<Cmd>w<CR>:TestLast<CR>", "Test last"},
+        v = {"<Cmd>w<CR>:TestVisit<CR>", "Test visit"}
+    },
+
+    -- Magma
+    m = {
+        name = "Jupyter mode - Magma",
+        l = {"<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line"},
+        r = {"<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell"},
+        d = {"<Cmd>MagmaDelete<Cr>", "Delete"},
+        o = {"<Cmd>MagmaShowOutput<Cr>", "Show output"},
+        i = {"<Cmd>MagmaInit<Cr>", "Init"},
+        u = {"<Cmd>MagmaDeinit<Cr>", "Deinit"}
+
     },
 
     d = {
@@ -218,7 +235,11 @@ local vmappings = {
         v = {"<Cmd>lua require('spectre').open_visual()<CR>", "Visual search"},
         b = {"<Plug>SearchVisual", "Browser search"}
     },
-    e = {name = "eSpeak", s = {"<Cmd>call tts#Speak(1)<CR>", "Speak"}}
+    e = {name = "eSpeak", s = {"<Cmd>call tts#Speak(1)<CR>", "Speak"}},
+    m = {
+        name = "Jupyter mode - Magma",
+        e = {"<Cmd><C-u>MagmaEvaluateVisual<Cr>", "Evaluate"}
+    }
 
 }
 
