@@ -70,7 +70,7 @@ return require('packer').startup(function()
     -- Testing
     use {
         "rcarriga/vim-ultest",
-        config = "require('config.ultest').setup()",
+        config = "require('config.test').setup()",
         run = ":UpdateRemotePlugins",
         requires = {"vim-test/vim-test"}
     }
@@ -203,7 +203,7 @@ return require('packer').startup(function()
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        config = function() require('config.treesitter') end
+        config = function() require('config.treesitter').setup() end
 
     }
     use {'nvim-treesitter/nvim-treesitter-textobjects'}

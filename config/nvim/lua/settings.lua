@@ -69,21 +69,6 @@ function M.auto_cmds()
     ]], false)
 end
 
-function M.plugins()
-    vim.api.nvim_exec([[
-
-        "let test#strategy = "neovim"
-        let test#strategy = "dispatch"
-        let test#neovim#term_position = "belowright"
-        let g:test#preserve_screen = 1
-        let test#python#runner = 'pyunit'
-
-    ]], false)
-end
-
-function M.setup()
-    M.auto_cmds()
-    M.plugins()
-end
+function M.setup() M.auto_cmds() end
 
 return M
