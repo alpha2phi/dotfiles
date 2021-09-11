@@ -44,51 +44,41 @@ local alt_key_mappings = {
     }, {"code_lens", "n", "<leader>lclr", "<Cmd>lua vim.lsp.codelens.run()<CR>"}
 }
 
-function M.setup()
+local function set_lsp_config(client, bufnr)
+    require"lsp_signature".on_attach({
+        bind = true,
+        handler_opts = {border = "single"}
+    })
 
-    -- Language specific key mappings
-    require('config.lsp.keymappings')
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(...) end
+    local function buf_set_option(...) vim.api.nvim_buf_set_option(...) end
 
-    local function set_lsp_config(client, bufnr)
-        require"lsp_signature".on_attach({
-            bind = true,
-            handler_opts = {border = "single"}
-        })
+    buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-        local function buf_set_keymap(...)
-            vim.api.nvim_buf_set_keymap(...)
-        end
-        local function buf_set_option(...)
-            vim.api.nvim_buf_set_option(...)
-        end
-
-        buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-        -- Key mappings
-        local opts = {noremap = true, silent = true}
-        for _, mappings in pairs(key_mappings) do
-            local mode, lhs, rhs = unpack(mappings)
-            buf_set_keymap(bufnr, mode, lhs, rhs, opts)
-        end
-
-        -- Other key mappings
-        for _, mappings in pairs(alt_key_mappings) do
-            local capability, mode, lhs, rhs = unpack(mappings)
-            if client.resolved_capabilities[capability] then
-                buf_set_keymap(bufnr, mode, lhs, rhs, opts)
-            end
-        end
-
-        if client.resolved_capabilities.document_formatting then
-            vim.cmd(
-                "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-        end
-
+    -- Key mappings
+    local opts = {noremap = true, silent = true}
+    for _, mappings in pairs(key_mappings) do
+        local mode, lhs, rhs = unpack(mappings)
+        buf_set_keymap(bufnr, mode, lhs, rhs, opts)
     end
 
-    local function set_lsp_highlight(client, bufnr)
-        if client.resolved_capabilities.document_highlight then
-            vim.api.nvim_exec([[
+    -- Other key mappings
+    for _, mappings in pairs(alt_key_mappings) do
+        local capability, mode, lhs, rhs = unpack(mappings)
+        if client.resolved_capabilities[capability] then
+            buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+        end
+    end
+
+    if client.resolved_capabilities.document_formatting then
+        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+    end
+
+end
+
+local function set_lsp_highlight(client, bufnr)
+    if client.resolved_capabilities.document_highlight then
+        vim.api.nvim_exec([[
         hi LspReferenceRead cterm=bold ctermbg=red guibg=#282f45
         hi LspReferenceText cterm=bold ctermbg=red guibg=#282f45
         hi LspReferenceWrite cterm=bold ctermbg=red guibg=#282f45
@@ -98,26 +88,31 @@ function M.setup()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
         augroup END
         ]], false)
-        end
-
-        -- if client.resolved_capabilities.code_lens then
-        --     print("code lens")
-        --     vim.api.nvim_exec([[
-        --     augroup lsp_code_lens
-        --     autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-        --     augroup END
-        --     ]], false)
-        -- end
-
     end
 
-    local lsp_on_attach = function(client, bufnr)
-        set_lsp_config(client, bufnr)
-        set_lsp_highlight(client, bufnr)
-    end
+    -- if client.resolved_capabilities.code_lens then
+    --     print("code lens")
+    --     vim.api.nvim_exec([[
+    --     augroup lsp_code_lens
+    --     autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+    --     augroup END
+    --     ]], false)
+    -- end
 
-    -- local function lsp_on_exit(client, bufnr) print("LSP exit") end
-    -- local function lsp_on_init(client) print(vim.inspect(client)) end
+end
+
+local lsp_on_attach = function(client, bufnr)
+    set_lsp_config(client, bufnr)
+    set_lsp_highlight(client, bufnr)
+end
+
+-- local function lsp_on_exit(client, bufnr) print("LSP exit") end
+-- local function lsp_on_init(client) print(vim.inspect(client)) end
+
+function M.setup()
+
+    -- Language specific key mappings
+    -- require('config.lsp.keymappings')
 
     local nvim_lsp = require('lspconfig')
     local capabilities = vim.lsp.protocol.make_client_capabilities()
