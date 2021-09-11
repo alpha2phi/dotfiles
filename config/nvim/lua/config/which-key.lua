@@ -43,7 +43,8 @@ local mappings = {
             ":let &runtimepath.=','.escape(expand('%:p:h'), '\\,')<Cr>",
             "Set runtime path"
         },
-        f = {"<Cmd>FloatermNew<Cr>", "Floating terminal"}
+        f = {"<Cmd>FloatermNew<Cr>", "Floating terminal"},
+        i = {"<Cmd>PackerInstall<Cr>", "Packer install"}
         -- n = {
         --     "<Cmd>FloatermNew nvim ~/workspace/myself/notes/notes.md<Cr>",
         --     "Floating note"
@@ -134,11 +135,6 @@ local mappings = {
     -- Easymotion
     ["<Space>"] = {name = "Easymotion"},
 
-    -- Vimspector
-    ["<F5>"] = {name = "Vimspector - Launch"},
-    ["<F8>"] = {name = "Vimspector - Run to Cursor"},
-    ["<F9>"] = {name = "Vimspector - Cond. Breakpoint"},
-
     -- Search
     ["s"] = {
         name = "Search",
@@ -179,53 +175,11 @@ local mappings = {
         o = {"<Cmd>MagmaShowOutput<Cr>", "Show output"},
         i = {"<Cmd>MagmaInit<Cr>", "Init"},
         u = {"<Cmd>MagmaDeinit<Cr>", "Deinit"}
-
     },
 
     K = {name = "Cheatsheet"},
-    C = {name = "Cheatsheet toggle comment"},
-
-    d = {
-        name = "dap",
-        t = {"toggle breakpoint"},
-        s = {"step, set breakpoint, scopes"},
-        h = {"hover"},
-        u = {"ui"},
-        c = {"continue, telescope commands & configs"},
-        f = {"telescope frames"},
-        v = {"telescope variables"}
-    },
-
-    -- c = {
-    --     name = "lsp saga",
-    --     c = {"code action"},
-    --     l = {"lsp finder & line diagnostics"},
-    --     h = {"hover doc"},
-    --     t = {"floaterm"},
-    --     r = {"rename"},
-    --     s = {"signature help"},
-    --     p = {"preview definition"}
-    -- },
-
-    ["dl"] = {name = "list breakpoints"},
-    ["dr"] = {name = "repl"},
-
-    v = {name = "vimspector"},
+    C = {name = "Cheatsheet (toggle comment)"},
     h = {name = "git signs"},
-
-    l = {name = "lsp"},
-    ["lw"] = {name = "workspace"},
-    ["lc"] = {name = "code action"},
-    ["lcl"] = {name = "code lens"},
-    ["ld"] = {name = "diagnostics"},
-    ["lr"] = {name = "references, rename, run"},
-    ["ll"] = {name = "location list"},
-    ["lt"] = {name = "type definition"},
-    ["ls"] = {name = "symbol"},
-    ["lf"] = {name = "format"},
-    ["lo"] = {name = "telescope lsp symbols"},
-    ["lq"] = {name = "telescope quickfix"},
-
     x = {name = "treesitter & swap"}
 
 }
@@ -243,6 +197,61 @@ local vmappings = {
     }
 
 }
+
+local lsp_mappings = {
+    -- c = {
+    --     name = "lsp saga",
+    --     c = {"code action"},
+    --     l = {"lsp finder & line diagnostics"},
+    --     h = {"hover doc"},
+    --     t = {"floaterm"},
+    --     r = {"rename"},
+    --     s = {"signature help"},
+    --     p = {"preview definition"}
+    -- },
+
+    -- Vimspector
+    ["<F5>"] = {name = "Vimspector - Launch"},
+    ["<F8>"] = {name = "Vimspector - Run to Cursor"},
+    ["<F9>"] = {name = "Vimspector - Cond. Breakpoint"},
+
+    l = {name = "lsp"},
+    ["lw"] = {name = "workspace"},
+    ["lc"] = {name = "code action"},
+    ["lcl"] = {name = "code lens"},
+    ["ld"] = {name = "diagnostics"},
+    ["lr"] = {name = "references, rename, run"},
+    ["ll"] = {name = "location list"},
+    ["lt"] = {name = "type definition"},
+    ["ls"] = {name = "symbol"},
+    ["lf"] = {name = "format"},
+    ["lo"] = {name = "telescope lsp symbols"},
+    ["lq"] = {name = "telescope quickfix"}
+
+}
+
+local dap_mappings = {
+
+    d = {
+        name = "dap",
+        t = {"toggle breakpoint"},
+        s = {"step, set breakpoint, scopes"},
+        h = {"hover"},
+        u = {"ui"},
+        c = {"continue, telescope commands & configs"},
+        f = {"telescope frames"},
+        v = {"telescope variables"}
+    },
+
+    ["dl"] = {name = "list breakpoints"},
+    ["dr"] = {name = "repl"},
+
+    v = {name = "vimspector"}
+}
+
+function M.register_lsp() end
+
+function M.register_dap() end
 
 function M.setup()
     local wk = require("which-key")

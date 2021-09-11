@@ -21,6 +21,6 @@ require("settings").setup()
 
 require('plugins').setup()
 
-require('config.lsp')
+require('config.lsp').setup()
 
 require('config.dap')

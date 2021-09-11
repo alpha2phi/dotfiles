@@ -50,10 +50,12 @@ function M.setup()
             'ruifm/gitlinker.nvim',
             config = function() require("gitlinker").setup() end
         }
-        -- use {
-        --     'rmagatti/auto-session',
-        --     config = function() require("config.auto-session").setup({}) end
-        -- }
+        use {
+            'rmagatti/auto-session',
+            config = function()
+                require("config.auto-session").setup({})
+            end
+        }
         use {
             'windwp/nvim-autopairs',
             run = 'make',
