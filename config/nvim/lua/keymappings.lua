@@ -1,13 +1,13 @@
 local M = {}
 
-local generic_opts_any = {noremap = true, silent = true}
+local opts = {noremap = false, silent = true}
 
 local generic_opts = {
-    insert_mode = generic_opts_any,
-    normal_mode = generic_opts_any,
-    visual_mode = generic_opts_any,
-    visual_block_mode = generic_opts_any,
-    command_mode = generic_opts_any,
+    insert_mode = opts,
+    normal_mode = opts,
+    visual_mode = opts,
+    visual_block_mode = opts,
+    command_mode = opts,
     term_mode = {silent = true}
 }
 
@@ -31,6 +31,7 @@ local keymappings = {
         ["?"] = "?<c-g>u"
     },
     normal_mode = {
+        ["s"] = "<Plug>(easymotion-overwin-f)",
         ["<C-l>"] = "<Cmd>noh<CR>",
         ["<C-w><C-o>"] = "<Cmd>MaximizerToggle!<CR>",
         ["<M-left>"] = "<C-w>>",
@@ -46,8 +47,7 @@ local keymappings = {
         ["N"] = "Nzzzv",
         ["J"] = "mzJ`z",
         ["<expr> j"] = "(v:count > 1 ? \"m'\" . v:count : '') . 'j'",
-        ["<expr> k"] = "(v:count > 1 ? \"m'\" . v:count : '') . 'k'",
-        ["s"] = "<Plug>(easymotion-overwin-f)"
+        ["<expr> k"] = "(v:count > 1 ? \"m'\" . v:count : '') . 'k'"
         -- [";"] = ":"
     },
     visual_mode = {
@@ -79,7 +79,7 @@ local keymappings = {
 }
 
 function M.set_keymaps(mode, key, val)
-    local opt = generic_opts[mode] and generic_opts[mode] or generic_opts_any
+    local opt = generic_opts[mode] and generic_opts[mode] or opts
     if type(val) == "table" then
         opt = val[2]
         val = val[1]
