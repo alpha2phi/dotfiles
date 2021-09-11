@@ -5,9 +5,6 @@ vim.g.maplocalleader = ','
 local fn = vim.fn
 local execute = vim.api.nvim_command
 
--- Sensible defaults
-require('defaults')
-
 -- Auto install packer.nvim if not exists
 local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -17,11 +14,13 @@ end
 vim.cmd [[packadd packer.nvim]]
 vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
 
-require("config.settings").setup()
-
-require('plugins')
+require('defaults').setup()
 
 require("keymappings").setup()
+
+require("settings").setup()
+
+require('plugins')
 
 require('config.lsp')
 

@@ -5,10 +5,7 @@ return require('packer').startup(function()
 
     -- Development
     use {'tpope/vim-dispatch'}
-    use {
-        'tpope/vim-fugitive',
-        config = function() require('config.fugitive') end
-    }
+    use {'tpope/vim-fugitive'}
     use {'tpope/vim-surround'}
     use {'tpope/vim-commentary'}
     use {'tpope/vim-rhubarb'}
@@ -280,7 +277,11 @@ return require('packer').startup(function()
 
     -- Development workflow
     use {'voldikss/vim-browser-search'}
-    use {'kkoomen/vim-doge', run = ':call doge#install()'}
+    use {
+        'kkoomen/vim-doge',
+        run = ':call doge#install()',
+        config = function() require("config.doge").setup() end
+    }
 
     -- Rust
     use {'rust-lang/rust.vim'}
