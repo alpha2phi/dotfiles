@@ -9,7 +9,7 @@ require("config.telescope")
 require("config.symbols_outline")
 require("config.bufferline")
 -- nvim-compe
-require("config.compe")
+require("config.cmp")
 
 -- lspkind-nvim
 require("config.lspkind")

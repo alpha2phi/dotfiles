@@ -29,7 +29,7 @@ catppuccino.setup({
 		telescope = true,
 		nvimtree = false,
 		which_key = true,
-		indent_blankline = true,
+		indent_blankline = false,
 		dashboard = false,
 		neogit = true,
 		vim_sneak = false,

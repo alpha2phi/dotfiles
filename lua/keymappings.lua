@@ -1,27 +1,12 @@
 local nest = require("nest")
 
 nest.applyKeymaps({
-	{
-		options = { expr = true },
-		{
-			{ "<C-Space>", "compe#complete()" },
-			{ "<CR>", "compe#confirm('<CR>')" },
-			{
-				"<C-",
-				{
-					{ "e>", "compe#close('<C-e>')" },
-					{ "j>", "compe#scroll({ 'delta': +4 })" },
-					{ "k>", "compe#scroll({ 'delta': -4 })" },
-				},
-			},
-		},
-	},
 	{ "<Esc><Esc>", "<cmd>nohl<CR>" },
 	{ ";", "<Cmd>Telescope git_files<CR>" },
-	{ "<M-left>", "<C-w>7<" },
-	{ "<M-right>", "<C-w>7>" },
-	{ "<M-up>", "<C-w>7+" },
-	{ "<M-down>", "<C-w>7-" },
+	{ "<M-left>", "<C-w>7>" },
+	{ "<M-right>", "<C-w>7<" },
+	{ "<M-up>", "<C-w>7-" },
+	{ "<M-down>", "<C-w>7+" },
 	{ "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
 	{
 		"[",
@@ -31,7 +16,7 @@ nest.applyKeymaps({
 			{ "m", "<Cmd>BookmarkPrevious<CR>" },
 			{ "t", "<Cmd>FloatermPrev<CR>" },
 			{ "w", "<Cmd>tabprevious<CR>" },
-			{ "<leader>", "<C-o>" },
+			{ ".", "<C-o>" },
 		},
 	},
 	{
@@ -42,7 +27,7 @@ nest.applyKeymaps({
 			{ "m", "<Cmd>BookmarkNext<CR>" },
 			{ "t", "<Cmd>FloatermNext<CR>" },
 			{ "w", "<Cmd>tabnext<CR>" },
-			{ "<leader>", "<C-i>" },
+			{ ".", "<C-i>" },
 		},
 	},
 	{

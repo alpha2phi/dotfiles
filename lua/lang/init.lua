@@ -1,8 +1,5 @@
 USER = vim.fn.expand("$USER")
 
--- Language specific key mappings
-require("lang.keymappings")
-
 local on_attach = function(client, bufnr)
 	require("lsp_signature").on_attach(client)
 

@@ -2,12 +2,6 @@ return require("packer").startup({
 	function(use)
 		use({ "wbthomason/packer.nvim" })
 		use({ "LionC/nest.nvim" })
-		use({
-			"AckslD/nvim-neoclip.lua",
-			config = function()
-				require("neoclip").setup()
-			end,
-		})
 
 		-- Development
 		use({ "tpope/vim-dispatch" })
@@ -123,20 +117,29 @@ return require("packer").startup({
 		use({
 			"rmagatti/session-lens",
 			requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
-			config = function()
-				require("session-lens").setup({
-					shorten_path = false,
-					theme_conf = { border = false },
-					previewer = true,
-				})
-			end,
 		})
 		use({ "tom-anders/telescope-vim-bookmarks.nvim" })
 		use({ "nvim-telescope/telescope-snippets.nvim" })
+		use({
+			"AckslD/nvim-neoclip.lua",
+		})
 
 		-- Completion
-		use({ "hrsh7th/nvim-compe" })
-		use({ "tzachar/compe-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-compe" })
+		use({
+			"hrsh7th/nvim-cmp",
+			requires = {
+				"hrsh7th/cmp-buffer",
+				"hrsh7th/cmp-nvim-lsp",
+				"quangnguyen30192/cmp-nvim-ultisnips",
+				"hrsh7th/cmp-nvim-lua",
+				"octaltree/cmp-look",
+				"hrsh7th/cmp-path",
+				"hrsh7th/cmp-calc",
+				"f3fora/cmp-spell",
+				"hrsh7th/cmp-emoji",
+			},
+		})
+		use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
 		-- use {'codota/tabnine-vim'}
 
 		-- Better LSP experience
@@ -395,7 +398,6 @@ return require("packer").startup({
 					sign_priority = 6,
 					update_debounce = 100,
 					status_formatter = nil, -- Use default
-					use_decoration_api = true,
 					use_internal_diff = true, -- If luajit is present
 				})
 			end,

@@ -4,8 +4,8 @@ local wo = vim.wo
 local bo = vim.bo
 local indent = 2
 
-cmd 'syntax enable'
-cmd 'filetype plugin indent on'
+cmd("syntax enable")
+cmd("filetype plugin indent on")
 
 bo.shiftwidth = indent
 bo.tabstop = indent
@@ -16,7 +16,7 @@ o.ignorecase = true
 o.scrolloff = 8
 o.splitbelow = true
 o.splitright = true
-o.clipboard = 'unnamed,unnamedplus'
+o.clipboard = "unnamed,unnamedplus"
 o.timeoutlen = 300
 o.updatetime = 300
 o.inccommand = "split"
@@ -25,7 +25,7 @@ wo.relativenumber = true
 wo.scrolloff = 8
 wo.cursorline = true
 
-cmd [[
+cmd([[
 set colorcolumn=80,100,120
 set expandtab smarttab shiftround autoindent smartindent smartcase
 set path+=**
@@ -60,87 +60,108 @@ set mouse=a mousemodel=popup
 set tabstop=2 softtabstop=0 shiftwidth=2
 set sessionoptions="globals,tabpages,winpos,winsize,blank,buffers,curdir,folds,help,options,terminal"
 set guioptions-=e
-]]
+]])
 
-cmd 'let g:Powerline_symbols = "fancy"'
+cmd('let g:Powerline_symbols = "fancy"')
 
 -- Highlight on yank
-cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
+cmd("au TextYankPost * lua vim.highlight.on_yank {on_visual = false}")
 
 -- Auto format
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 augroup auto_fmt
     autocmd!
     autocmd BufWritePre *.clj,*.cljc,*.cljs CljFmt
 aug END
-]], false)
+]],
+	false
+)
 
 -- Git Blame Virtual
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 augroup auto_blame
   autocmd!
   autocmd CursorHold * lua require'utils'.Git.blameVirtText()
   autocmd CursorMoved * lua require'utils'.Git.clearBlameVirtText()
   autocmd CursorMovedI * lua require'utils'.Git.clearBlameVirtText()
 augroup END
-]], false)
+]],
+	false
+)
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 augroup auto_spellcheck
     autocmd!
     autocmd BufNewFile,BufRead *.md setlocal spell
     autocmd BufNewFile,BufRead *.org setfiletype markdown
     autocmd BufNewFile,BufRead *.org setlocal spell
 augroup END
-]], false)
+]],
+	false
+)
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 augroup auto_term
     autocmd!
     autocmd TermOpen * setlocal nonumber norelativenumber
     autocmd TermOpen * startinsert
 augroup END
-]], false)
+]],
+	false
+)
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 augroup markdown_syntax
   au!
   au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
   au BufNewFile,BufFilePre,BufRead *.MD set filetype=markdown
 augroup END
-]], false)
+]],
+	false
+)
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 augroup CursorLine
   au!
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
 augroup END
-]], false)
+]],
+	false
+)
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
-]], false)
+]],
+	false
+)
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 augroup foldMethodSetLocal
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave *.js setlocal foldmethod=syntax
-  autocmd BufEnter,FocusGained,InsertLeave *.ts setlocal foldmethod=syntax
-  autocmd BufEnter,FocusGained,InsertLeave *.jsx setlocal foldmethod=syntax
-  autocmd BufEnter,FocusGained,InsertLeave *.tsx setlocal foldmethod=syntax
   autocmd BufEnter,FocusGained,InsertLeave *.clj setlocal foldmethod=syntax
   autocmd BufEnter,FocusGained,InsertLeave *.cljc setlocal foldmethod=syntax
   autocmd BufEnter,FocusGained,InsertLeave *.cljs setlocal foldmethod=syntax
   autocmd BufEnter,FocusGained,InsertLeave *.json setlocal foldmethod=indent
 augroup END
-]], false)
+]],
+	false
+)
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
     fun! TrimWhitespace()
         let l:save = winsaveview()
         keeppatterns %s/\s\+$//e
@@ -149,9 +170,12 @@ vim.api.nvim_exec([[
 
     autocmd FileType go,rust,html,typescript,javascript,python autocmd BufWritePre <buffer> call TrimWhitespace()
 
-]], false)
+]],
+	false
+)
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
     function! WinMove(key)
         let t:curwin = winnr()
         exec "wincmd ".a:key
@@ -164,5 +188,6 @@ vim.api.nvim_exec([[
             exec "wincmd ".a:key
         endif
     endfunction
-]], false)
-
+]],
+	false
+)
