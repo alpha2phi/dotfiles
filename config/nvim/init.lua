@@ -20,7 +20,7 @@ require("keymappings").setup()
 
 require("settings").setup()
 
-require('plugins')
+require('plugins').setup()
 
 require('config.lsp')
 
