@@ -182,6 +182,9 @@ local mappings = {
 
     },
 
+    K = {name = "Cheatsheet"},
+    C = {name = "Cheatsheet toggle comment"},
+
     d = {
         name = "dap",
         t = {"toggle breakpoint"},
@@ -207,7 +210,6 @@ local mappings = {
     ["dl"] = {name = "list breakpoints"},
     ["dr"] = {name = "repl"},
 
-    k = {name = "cheatsheet"},
     v = {name = "vimspector"},
     h = {name = "git signs"},
 
@@ -224,7 +226,6 @@ local mappings = {
     ["lo"] = {name = "telescope lsp symbols"},
     ["lq"] = {name = "telescope quickfix"},
 
-    n = {name = "floaterm, narrow, glow"},
     x = {name = "treesitter & swap"}
 
 }

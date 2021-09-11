@@ -29,7 +29,7 @@ return require('packer').startup(function()
         'folke/which-key.nvim',
         config = function() require("config.which-key").setup() end
     }
-    use {'chrisbra/NrrwRgn'}
+    -- use {'chrisbra/NrrwRgn'}
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
     use {'windwp/nvim-spectre'}
     use {
