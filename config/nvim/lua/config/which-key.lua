@@ -96,7 +96,21 @@ local mappings = {
         b = {"<Cmd>Git branch<Cr>", "Git branch"},
         d = {"<Cmd>Gvdiffsplit<Cr>", "Git diff"},
         f = {"<Cmd>Git fetch --all<Cr>", "Git fetch"},
-
+        ["r"] = {
+            name = "Rebase",
+            u = {
+                "<Cmd>Git rebase upstream/master<Cr>",
+                "Git rebase upstream/master"
+            },
+            o = {
+                "<Cmd>Git rebase origin/master<Cr>", "Git rebase origin/master"
+            }
+        },
+        x = {
+            name = "Diff",
+            ["2"] = {"<Cmd>diffget //2", "Diffget 2"},
+            ["3"] = {"<Cmd>diffget //3", "Diffget 3"}
+        },
         g = {name = "Generate doc"}
     },
 
