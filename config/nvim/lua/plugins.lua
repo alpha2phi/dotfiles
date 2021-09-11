@@ -36,10 +36,10 @@ return require('packer').startup(function()
         'ruifm/gitlinker.nvim',
         config = function() require("gitlinker").setup() end
     }
-    use {
-        'rmagatti/auto-session',
-        config = function() require("config.auto-session").setup({}) end
-    }
+    -- use {
+    --     'rmagatti/auto-session',
+    --     config = function() require("config.auto-session").setup({}) end
+    -- }
     use {
         'windwp/nvim-autopairs',
         run = 'make',
@@ -134,7 +134,10 @@ return require('packer').startup(function()
 
     -- Better LSP experience
     -- use {'tjdevries/astronauta.nvim'}
-    use {'glepnir/lspsaga.nvim'}
+    use {
+        'glepnir/lspsaga.nvim',
+        config = function() require("config.lspsaga").setup() end
+    }
     use {
         'onsails/lspkind-nvim',
         config = function() require('lspkind').init() end
@@ -260,7 +263,10 @@ return require('packer').startup(function()
     }
 
     -- Debugging
-    use {'puremourning/vimspector'}
+    use {
+        'puremourning/vimspector',
+        config = function() require("config.vimspector").setup() end
+    }
     use {'nvim-telescope/telescope-vimspector.nvim'}
 
     -- DAP
