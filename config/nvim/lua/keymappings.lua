@@ -1,6 +1,6 @@
 local M = {}
 
-local opts = {noremap = false, silent = true}
+local opts = {noremap = true, silent = false}
 
 local generic_opts = {
     insert_mode = opts,
@@ -8,12 +8,14 @@ local generic_opts = {
     visual_mode = opts,
     visual_block_mode = opts,
     command_mode = opts,
-    term_mode = {silent = true}
+    normal_remap_mode = {noremap=false, silent=false},
+    term_mode = {silent = false}
 }
 
 local mode_adapters = {
     insert_mode = "i",
     normal_mode = "n",
+    normal_remap_mode = "n",
     term_mode = "t",
     visual_mode = "v",
     visual_block_mode = "x",
@@ -30,8 +32,10 @@ local keymappings = {
         ["!"] = "!<c-g>u",
         ["?"] = "?<c-g>u"
     },
-    normal_mode = {
+    normal_remap_mode = {
         ["s"] = "<Plug>(easymotion-overwin-f)",
+    },
+    normal_mode = {
         ["<C-l>"] = "<Cmd>noh<CR>",
         ["<C-w><C-o>"] = "<Cmd>MaximizerToggle!<CR>",
         ["<M-left>"] = "<C-w>>",

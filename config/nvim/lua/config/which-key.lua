@@ -4,7 +4,7 @@ local opts = {
     mode = "n",
     prefix = "<leader>",
     buffer = nil,
-    silent = true,
+    silent = false,
     noremap = true,
     nowait = true
 }
@@ -13,14 +13,14 @@ local vopts = {
     mode = "v",
     prefix = "<leader>",
     buffer = nil,
-    silent = true,
+    silent = false,
     noremap = true,
     nowait = true
 }
 
 local mappings = {
-    ["w"] = {"<Cmd>w<CR>", "Save"},
-    ["q"] = {"<Cmd>q<CR>", "Quit"},
+    ["w"] = {"<Cmd>w<Cr>", "Save"},
+    ["q"] = {"<Cmd>q<Cr>", "Quit"},
 
     -- System
     ["z"] = {
@@ -38,7 +38,7 @@ local mappings = {
             "<Cmd>lua require('config.telescope').search_dotfiles()<CR>",
             "Configuration"
         },
-        r = {'<Cmd>luafile %<CR>', "Reload lua file"},
+        r = {"<Cmd>luafile %<Cr>", "Reload lua file"},
         p = {
             ":let &runtimepath.=','.escape(expand('%:p:h'), '\\,')<Cr>",
             "Set runtime path"

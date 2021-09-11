@@ -32,6 +32,7 @@ function M.setup()
                     spell = "[Spell]",
                     calc = "[Calc]",
                     emoji = "[Emoji]"
+                    treesitter = "[treesitter]"
                 })[entry.source.name]
                 return vim_item
             end
@@ -78,9 +79,10 @@ function M.setup()
             end
         },
         sources = {
-            {name = 'buffer'}, {name = 'nvim_lsp'}, {name = "ultisnips"},
+            {name = "buffer"}, {name = "nvim_lsp"}, {name = "ultisnips"},
             {name = "nvim_lua"}, {name = "look"}, {name = "path"},
-            {name = "calc"}, {name = "spell"}, {name = "emoji"} -- {name = 'cmp_tabnine'}
+            {name = "calc"}, {name = "spell"}, {name = "emoji"} ,
+            {name = "treesitter"}-- {name = 'cmp_tabnine'}
         },
         completion = {completeopt = 'menu,menuone,noinsert'}
     }
