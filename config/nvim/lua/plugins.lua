@@ -73,7 +73,7 @@ return require('packer').startup(function()
     -- Testing
     use {
         "rcarriga/vim-ultest",
-        config = "require('config.ultest').post()",
+        config = "require('config.ultest').setup()",
         run = ":UpdateRemotePlugins",
         requires = {"vim-test/vim-test"}
     }
@@ -229,13 +229,16 @@ return require('packer').startup(function()
     }
 
     -- Dashboard
-    use {'glepnir/dashboard-nvim'}
+    use {
+        'glepnir/dashboard-nvim',
+        config = function() require("config.dashboard").setup() end
+    }
 
     -- Status line
     use {
         'glepnir/galaxyline.nvim',
         branch = 'main',
-        config = function() require("config.galaxyline") end
+        config = function() require("config.galaxyline").setup() end
     }
     -- use {
     --     'hoob3rt/lualine.nvim',
@@ -297,7 +300,7 @@ return require('packer').startup(function()
     -- TODO: trying
     use {
         "rcarriga/nvim-notify",
-        config = function() vim.notify = require "notify" end
+        config = function() vim.notify = require("notify") end
     }
 
     use {

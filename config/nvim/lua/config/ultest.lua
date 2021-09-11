@@ -2,7 +2,7 @@ vim.g.ultest_use_pty = 1
 
 local M = {}
 
-function M.post()
+function M.setup()
     local builders = {
         python = function(cmd)
             local non_modules = {"python", "pipenv", "poetry"}
