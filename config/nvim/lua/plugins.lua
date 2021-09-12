@@ -3,8 +3,7 @@ local M = {}
 function M.setup()
 
     local packer = require("packer")
-    local util = require "packer.util"
-
+    -- local util = require "packer.util"
     -- packer.init({
     --     compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua',
     --                                    'packer_compiled.lua')
@@ -218,7 +217,12 @@ function M.setup()
 
         -- Lua development
         use {'folke/lua-dev.nvim'}
-        use {'simrat39/symbols-outline.nvim'}
+        use {
+            'simrat39/symbols-outline.nvim',
+            config = function()
+                require("config.symbols-outline").setup()
+            end
+        }
         use {'~/workspace/dev/alpha2phi/alpha.nvim'}
 
         -- Better syntax

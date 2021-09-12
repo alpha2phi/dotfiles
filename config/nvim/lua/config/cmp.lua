@@ -31,7 +31,7 @@ function M.setup()
                     path = "[Path]",
                     spell = "[Spell]",
                     calc = "[Calc]",
-                    emoji = "[Emoji]"
+                    emoji = "[Emoji]",
                     treesitter = "[treesitter]"
                 })[entry.source.name]
                 return vim_item

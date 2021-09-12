@@ -1,49 +1,48 @@
 local M = {}
 
-local user = vim.fn.expand('$USER')
-local key_mappings = {
-    {'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>'},
-    {'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>'},
-    {'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>'},
-    {'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>'},
-    {'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>'},
-    {'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>'},
-    {'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>'},
-    {'n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
-    {'n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
-    {
-        'n', '<leader>lwl',
-        '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'
-    }, {'n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
-    {'n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>'},
-    {'n', '<leader>lrf', '<cmd>lua vim.lsp.buf.references()<CR>'},
-    {
-        'n', '<leader>lds',
-        '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'
-    }, {'n', '<leader>lde', '<cmd>lua vim.lsp.diagnostic.enable()<CR>'},
-    {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
-    {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
-    {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
-    {'v', '<leader>lcr', '<cmd>lua vim.lsp.buf.range_code_action()<CR>'},
-    {'n', '<leader>lss', '<cmd>lua vim.lsp.buf.document_symbol()<CR>'},
-    {'n', '<leader>lsw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>'}
-}
+-- local keymappings = {
+--     {'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>'},
+--     {'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>'},
+--     {'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>'},
+--     {'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>'},
+--     {'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>'},
+--     {'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>'},
+--     {'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>'},
+--     {'n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
+--     {'n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
+--     {
+--         'n', '<leader>lwl',
+--         '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'
+--     }, {'n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
+--     {'n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>'},
+--     {'n', '<leader>lrf', '<cmd>lua vim.lsp.buf.references()<CR>'},
+--     {
+--         'n', '<leader>lds',
+--         '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'
+--     }, {'n', '<leader>lde', '<cmd>lua vim.lsp.diagnostic.enable()<CR>'},
+--     {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
+--     {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
+--     {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
+--     {'v', '<leader>lcr', '<cmd>lua vim.lsp.buf.range_code_action()<CR>'},
+--     {'n', '<leader>lss', '<cmd>lua vim.lsp.buf.document_symbol()<CR>'},
+--     {'n', '<leader>lsw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>'}
+-- }
 
-local alt_key_mappings = {
-    {
-        "document_formatting", "n", "<leader>lff",
-        "<cmd>lua vim.lsp.buf.formatting()<CR>"
-    }, {
-        "document_range_formatting", "n", "<leader>lfr",
-        "<cmd>lua vim.lsp.buf.range_formatting()<CR>"
-    },
-    {
-        "code_lens", "n", "<leader>lcld",
-        "<Cmd>lua vim.lsp.codelens.refresh()<CR>"
-    }, {"code_lens", "n", "<leader>lclr", "<Cmd>lua vim.lsp.codelens.run()<CR>"}
-}
+-- local key_mappings_opt = {
+--     {
+--         "document_formatting", "n", "<leader>lff",
+--         "<cmd>lua vim.lsp.buf.formatting()<CR>"
+--     }, {
+--         "document_range_formatting", "n", "<leader>lfr",
+--         "<cmd>lua vim.lsp.buf.range_formatting()<CR>"
+--     },
+--     {
+--         "code_lens", "n", "<leader>lcld",
+--         "<Cmd>lua vim.lsp.codelens.refresh()<CR>"
+--     }, {"code_lens", "n", "<leader>lclr", "<Cmd>lua vim.lsp.codelens.run()<CR>"}
+-- }
 
-local function set_lsp_highlight(client, bufnr)
+function M.lsp_highlight(client, bufnr)
     if client.resolved_capabilities.document_highlight then
         vim.api.nvim_exec([[
         hi LspReferenceRead cterm=bold ctermbg=red guibg=#282f45
@@ -68,16 +67,7 @@ local function set_lsp_highlight(client, bufnr)
 
 end
 
-local lsp_on_attach = function(client, bufnr)
-    set_lsp_config(client, bufnr)
-    set_lsp_highlight(client, bufnr)
-end
-
--- local function lsp_on_exit(client, bufnr) print("LSP exit") end
--- local function lsp_on_init(client) print(vim.inspect(client)) end
-
 function M.lsp_config(client, bufnr)
-
     require"lsp_signature".on_attach({
         bind = true,
         handler_opts = {border = "single"}
@@ -89,31 +79,40 @@ function M.lsp_config(client, bufnr)
     buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Key mappings
-    local opts = {noremap = true, silent = true}
-    for _, mappings in pairs(key_mappings) do
-        local mode, lhs, rhs = unpack(mappings)
-        buf_set_keymap(bufnr, mode, lhs, rhs, opts)
-    end
+    -- local opts = {noremap = true, silent = true}
+    -- for _, mappings in pairs(key_mappings) do
+    --     local mode, lhs, rhs = unpack(mappings)
+    --     buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+    -- end
 
-    -- Other key mappings
-    for _, mappings in pairs(alt_key_mappings) do
-        local capability, mode, lhs, rhs = unpack(mappings)
-        if client.resolved_capabilities[capability] then
-            buf_set_keymap(bufnr, mode, lhs, rhs, opts)
-        end
-    end
+    -- -- Other key mappings
+    -- for _, mappings in pairs(alt_key_mappings) do
+    --     local capability, mode, lhs, rhs = unpack(mappings)
+    --     if client.resolved_capabilities[capability] then
+    --         buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+    --     end
+    -- end
 
     if client.resolved_capabilities.document_formatting then
         vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
     end
-
 end
 
-function M.temp()
-    -- Language specific key mappings
-    require('config.lsp.keymappings')
+function M.lsp_init(client, bufnr)
+    -- LSP init
+end
 
-    local lspconfig = require('lspconfig')
+function M.lsp_exit(client, bufnr)
+    -- LSP exit
+end
+
+function M.lsp_attach(client, bufnr)
+    M.lsp_config(client, bufnr)
+    M.lsp_highlight(client, bufnr)
+end
+
+function M.get_capabilities()
+
     local capabilities = vim.lsp.protocol.make_client_capabilities()
 
     -- for nvim-cmp
@@ -121,7 +120,6 @@ function M.temp()
 
     -- Code actions
     capabilities.textDocument.codeAction = {
-        -- FIX: Code actions not working
         dynamicRegistration = true,
         codeActionLiteralSupport = {
             codeActionKind = {
@@ -132,19 +130,6 @@ function M.temp()
                 end)()
             }
         }
-
-        -- codeActionLiteralSupport = {
-        --     codeActionKind = {
-        --         valueSet = {
-        --             "", "Empty", "QuickFix", "Refactor", "RefactorExtract",
-        --             "RefactorInline", "RefactorRewrite", "Source",
-        --             "SourceOrganizeImports", "quickfix", "refactor",
-        --             "refactor.extract", "refactor.inline", "refactor.rewrite",
-        --             "source", "source.organizeImports"
-        --         }
-        --     }
-        -- },
-        -- dynamicRegistration = false
     }
 
     capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -153,6 +138,42 @@ function M.temp()
     }
     capabilities.experimental = {}
     capabilities.experimental.hoverActions = true
+
+    return capabilities
+
+end
+
+function M.setup_server(server, config)
+    print("LSP - ", server)
+
+    local lspconfig = require('lspconfig')
+    lspconfig[server].setup(vim.tbl_deep_extend("force", {
+        on_attach = M.lsp_attach,
+        on_exit = M.lsp_exit,
+        on_init = M.lsp_init,
+        capabilities = M.get_capabilities(),
+        flags = {debounce_text_changes = 150},
+        init_options = config
+    }, {}))
+
+    local cfg = lspconfig[server]
+    if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
+        print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
+    end
+
+end
+
+
+
+
+
+
+
+-- Refactoring in progress
+
+function M.temp()
+    -- Language specific key mappings
+    require('config.lsp.keymappings')
 
     -- Language servers
     local servers = {
@@ -277,73 +298,6 @@ function M.temp()
     end
 
     pcall(setup_rust_tools)
-
-    -- Lua LSP
-    local sumneko_root_path = ""
-    local sumneko_binary = ""
-
-    if vim.fn.has("mac") == 1 then
-        sumneko_root_path = "/Users/" .. user ..
-                                "/.config/nvim/lua-language-server"
-        sumneko_binary = "/Users/" .. user ..
-                             "/.config/nvim/lua-language-server/bin/macOS/lua-language-server"
-    elseif vim.fn.has("unix") == 1 then
-        sumneko_root_path = "/home/" .. user ..
-                                "/.config/nvim/lua-language-server"
-        sumneko_binary = "/home/" .. user ..
-                             "/.config/nvim/lua-language-server/bin/Linux/lua-language-server"
-    else
-        print("Unsupported system for sumneko")
-    end
-
-    -- lua-dev.nvim
-    local luadev = require("lua-dev").setup({
-        library = {vimruntime = true, types = true, plugins = true},
-        lspconfig = {
-            capabilities = capabilities,
-            on_attach = lsp_on_attach,
-            cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-            settings = {
-                Lua = {
-                    runtime = {
-                        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                        version = 'LuaJIT',
-                        -- Setup your lua path
-                        path = vim.split(package.path, ';')
-                    },
-                    diagnostics = {
-                        -- Get the language server to recognize the `vim` global
-                        globals = {'vim'}
-                    },
-                    workspace = {
-                        -- Make the server aware of Neovim runtime files
-                        library = {
-                            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-                        }
-                    }
-                }
-            }
-        }
-    })
-    lspconfig.sumneko_lua.setup(luadev)
-
-    -- symbols-outline.nvim
-    vim.g.symbols_outline = {
-        highlight_hovered_item = true,
-        show_guides = true,
-        auto_preview = false, -- experimental
-        position = 'right',
-        keymaps = {
-            close = "<Esc>",
-            goto_location = "<Cr>",
-            focus_location = "o",
-            hover_symbol = "<C-space>",
-            rename_symbol = "r",
-            code_actions = "a"
-        },
-        lsp_blacklist = {}
-    }
 
     vim.lsp.handlers["textDocument/publishDiagnostics"] =
         vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

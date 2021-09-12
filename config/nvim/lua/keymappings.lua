@@ -8,7 +8,7 @@ local generic_opts = {
     visual_mode = opts,
     visual_block_mode = opts,
     command_mode = opts,
-    normal_remap_mode = {noremap=false, silent=false},
+    normal_remap_mode = {noremap = false, silent = false},
     term_mode = {silent = false}
 }
 
