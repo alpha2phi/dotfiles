@@ -14,7 +14,6 @@ local generic_opts = {
 local mode_adapters = {
     insert_mode = "i",
     normal_mode = "n",
-    normal_remap_mode = "n",
     term_mode = "t",
     visual_mode = "v",
     visual_block_mode = "x",
@@ -32,7 +31,9 @@ local keymappings = {
         ["?"] = "?<c-g>u"
     },
     normal_mode = {
-        ["s"] = {"<Plug>(easymotion-overwin-f)", {noremap = false, silent = false}},
+        ["s"] = {
+            "<Plug>(easymotion-overwin-f)", {noremap = false, silent = false}
+        },
         ["<C-l>"] = "<Cmd>noh<CR>",
         ["<C-w><C-o>"] = "<Cmd>MaximizerToggle!<CR>",
         ["<M-left>"] = "<C-w>>",
@@ -79,6 +80,19 @@ local keymappings = {
     }
 }
 
+local lsp_keymappings = {
+
+    normal_mode = {
+        ["K"] = "<Cmd>lua vim.lsp.buf.hover()<CR>",
+        ["gD"] = "<Cmd>lua vim.lsp.buf.declaration()<CR>",
+        ["gd"] = "<Cmd>lua vim.lsp.buf.definition()<CR>",
+        ["gi"] = "<Cmd>lua vim.lsp.buf.implementation()<CR>",
+        ["<C-k>"] = "<Cmd>lua vim.lsp.buf.signature_help()<CR>",
+        ["[d"] = "<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",
+        ["]d"] = '<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>'
+    }
+}
+
 function M.set_keymaps(mode, key, val)
     local opt = generic_opts[mode] and generic_opts[mode] or opts
     if type(val) == "table" then
@@ -95,6 +109,10 @@ end
 
 function M.setup()
     for mode, mapping in pairs(keymappings) do M.map(mode, mapping) end
+end
+
+function M.setup_lsp_mappings()
+    for mode, mapping in pairs(lsp_keymappings) do M.map(mode, mapping) end
 end
 
 return M

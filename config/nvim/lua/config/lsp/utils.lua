@@ -1,47 +1,5 @@
 local M = {}
 
--- local keymappings = {
---     {'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>'},
---     {'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>'},
---     {'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>'},
---     {'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>'},
---     {'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>'},
---     {'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>'},
---     {'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>'},
---     {'n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
---     {'n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
---     {
---         'n', '<leader>lwl',
---         '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'
---     }, {'n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
---     {'n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>'},
---     {'n', '<leader>lrf', '<cmd>lua vim.lsp.buf.references()<CR>'},
---     {
---         'n', '<leader>lds',
---         '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'
---     }, {'n', '<leader>lde', '<cmd>lua vim.lsp.diagnostic.enable()<CR>'},
---     {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
---     {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
---     {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
---     {'v', '<leader>lcr', '<cmd>lua vim.lsp.buf.range_code_action()<CR>'},
---     {'n', '<leader>lss', '<cmd>lua vim.lsp.buf.document_symbol()<CR>'},
---     {'n', '<leader>lsw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>'}
--- }
-
--- local key_mappings_opt = {
---     {
---         "document_formatting", "n", "<leader>lff",
---         "<cmd>lua vim.lsp.buf.formatting()<CR>"
---     }, {
---         "document_range_formatting", "n", "<leader>lfr",
---         "<cmd>lua vim.lsp.buf.range_formatting()<CR>"
---     },
---     {
---         "code_lens", "n", "<leader>lcld",
---         "<Cmd>lua vim.lsp.codelens.refresh()<CR>"
---     }, {"code_lens", "n", "<leader>lclr", "<Cmd>lua vim.lsp.codelens.run()<CR>"}
--- }
-
 function M.lsp_highlight(client, bufnr)
     if client.resolved_capabilities.document_highlight then
         vim.api.nvim_exec([[
@@ -68,16 +26,16 @@ function M.lsp_highlight(client, bufnr)
 end
 
 function M.lsp_config(client, bufnr)
-    require"lsp_signature".on_attach({
+
+    require("lsp_signature").on_attach({
         bind = true,
         handler_opts = {border = "single"}
     })
 
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(...) end
-
     buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+    -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(...) end
     -- Key mappings
     -- local opts = {noremap = true, silent = true}
     -- for _, mappings in pairs(key_mappings) do
@@ -93,8 +51,14 @@ function M.lsp_config(client, bufnr)
     --     end
     -- end
 
+    local lspkeymappings = require("keymappings")
+    print("perform lsp keymappings")
+    lspkeymappings.setup_lsp_mappings()
+
+    local whichkey = require("config.which-key")
+
     if client.resolved_capabilities.document_formatting then
-        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+        vim.cmd("autocmd BufWritePre <Buffer> lua vim.lsp.buf.formatting_sync()")
     end
 end
 

@@ -166,20 +166,20 @@ local mappings = {
         v = {"<Cmd>w<CR>:TestVisit<CR>", "Test visit"}
     },
 
-    -- Magma
-    m = {
-        name = "Jupyter mode - Magma",
-        l = {"<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line"},
-        r = {"<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell"},
-        d = {"<Cmd>MagmaDelete<Cr>", "Delete"},
-        o = {"<Cmd>MagmaShowOutput<Cr>", "Show output"},
-        i = {"<Cmd>MagmaInit<Cr>", "Init"},
-        u = {"<Cmd>MagmaDeinit<Cr>", "Deinit"}
-    },
+    -- -- Magma
+    -- m = {
+    --     name = "Jupyter mode - Magma",
+    --     l = {"<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line"},
+    --     r = {"<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell"},
+    --     d = {"<Cmd>MagmaDelete<Cr>", "Delete"},
+    --     o = {"<Cmd>MagmaShowOutput<Cr>", "Show output"},
+    --     i = {"<Cmd>MagmaInit<Cr>", "Init"},
+    --     u = {"<Cmd>MagmaDeinit<Cr>", "Deinit"}
+    -- },
 
     K = {name = "Cheatsheet"},
     C = {name = "Cheatsheet (toggle comment)"},
-    h = {name = "git signs"},
+    h = {name = "Git signs"},
     x = {name = "treesitter & swap"}
 
 }
@@ -199,6 +199,7 @@ local vmappings = {
 }
 
 local lsp_mappings = {
+
     -- c = {
     --     name = "lsp saga",
     --     c = {"code action"},
@@ -228,10 +229,64 @@ local lsp_mappings = {
     ["lo"] = {name = "telescope lsp symbols"},
     ["lq"] = {name = "telescope quickfix"}
 
+-- nnoremap <silent><leader>clf :Lspsaga lsp_finder<CR>
+-- nnoremap <silent><leader>cca :Lspsaga code_action<CR>
+-- vnoremap <silent><leader>cca :<C-U>Lspsaga range_code_action<CR>
+
+-- nnoremap <silent><leader>chd :Lspsaga hover_doc<CR>
+-- nnoremap <silent><C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+-- nnoremap <silent><C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+
+-- nnoremap <silent><leader>csh :Lspsaga signature_help<CR>
+
+-- nnoremap <silent><leader>crn :Lspsaga rename<CR>
+
+-- nnoremap <silent><leader>cpd:Lspsaga preview_definition<CR>
+
+-- nnoremap <silent> <leader>cld :Lspsaga show_line_diagnostics<CR>
+
+-- nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
+-- nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
+
+-- nnoremap <silent> <leader>cto :Lspsaga open_floaterm<CR>
+-- tnoremap <silent> <leader>ctc <C-\><C-n>:Lspsaga close_floaterm<CR>
+
+
+
+--     {'n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
+--     {'n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
+--     {
+--         'n', '<leader>lwl',
+--         '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'
+--     }, {'n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
+--     {'n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>'},
+--     {'n', '<leader>lrf', '<cmd>lua vim.lsp.buf.references()<CR>'},
+--     {
+--         'n', '<leader>lds',
+--         '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'
+--     }, {'n', '<leader>lde', '<cmd>lua vim.lsp.diagnostic.enable()<CR>'},
+--     {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
+--     {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
+--     {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
+--     {'v', '<leader>lcr', '<cmd>lua vim.lsp.buf.range_code_action()<CR>'},
+--     {'n', '<leader>lss', '<cmd>lua vim.lsp.buf.document_symbol()<CR>'},
+--     {'n', '<leader>lsw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>'}
+
+--     {
+--         "document_formatting", "n", "<leader>lff",
+--         "<cmd>lua vim.lsp.buf.formatting()<CR>"
+--     }, {
+--         "document_range_formatting", "n", "<leader>lfr",
+--         "<cmd>lua vim.lsp.buf.range_formatting()<CR>"
+--     },
+--     {
+--         "code_lens", "n", "<leader>lcld",
+--         "<Cmd>lua vim.lsp.codelens.refresh()<CR>"
+--     }, {"code_lens", "n", "<leader>lclr", "<Cmd>lua vim.lsp.codelens.run()<CR>"}
 }
 
-local dap_mappings = {
 
+local dap_mappings = {
     d = {
         name = "dap",
         t = {"toggle breakpoint"},
@@ -249,9 +304,15 @@ local dap_mappings = {
     v = {name = "vimspector"}
 }
 
-function M.register_lsp() end
+function M.register_lsp(client)
+    local wk = require("which-key")
+    wk.register(lsp_mappings, opts)
+end
 
-function M.register_dap() end
+function M.register_dap()
+    local wk = require("which-key")
+    wk.register(dap_mappings, opts)
+end
 
 function M.setup()
     local wk = require("which-key")

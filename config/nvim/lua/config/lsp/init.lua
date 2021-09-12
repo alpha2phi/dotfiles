@@ -1,20 +1,5 @@
 local M = {}
 
--- local function setup_servers()
-
---     local lspconfig = require("lspconfig")
---     local lspinstall = require("lspinstall")
---     local capabilities = vim.lsp.protocol.make_client_capabilities()
-
---     lspinstall.setup()
---     local servers = lspinstall.installed_servers()
---     for _, server in pairs(servers) do
---         -- For lua use lua-dev
---         if server ~= "lua" then lspconfig[server].setup {} end
---     end
-
--- end
-
 local lsp_providers = {lua = true}
 
 local function setup_servers()
@@ -26,6 +11,7 @@ local function setup_servers()
 
     local servers = lspinstall.installed_servers()
     for _, server in pairs(servers) do
+        -- print("LSP -", server)
         if lsp_providers[server] then
             require("config.lsp." .. server).setup()
         else
