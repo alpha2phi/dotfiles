@@ -27,24 +27,15 @@ function M.setup()
                 override_file_sorter = true,
                 case_mode = "smart_case"
             }
+        },
+        defaults = {
+            mappings = {
+                i = {
+                    ["<C-j>"] = actions.move_selection_next,
+                    ["<C-k>"] = actions.move_selection_previous
+                }
+            }
         }
-        -- defaults = {
-        --     mappings = {
-        --         i = {
-        --             ["<C-h>"] = require("telescope").extensions.hop.hop,
-        --             -- ["<C-h>"] = require("telescope").extensions.hop
-        --             --     .hop_toggle_selection,
-        --             ["<C-space>"] = function(prompt_bufnr)
-        --                 local opts = {
-        --                     callback = actions.toggle_selection,
-        --                     loop_callback = actions.send_selected_to_qflist
-        --                 }
-        --                 require("telescope").extensions.hop._hop_loop(prompt_bufnr,
-        --                                                               opts)
-        --             end
-        --         }
-        --     }
-        -- }
     }
 
     -- require('telescope').load_extension('snippets')

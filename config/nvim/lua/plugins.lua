@@ -311,10 +311,10 @@ function M.setup()
         use {'plasticboy/vim-markdown'}
 
         -- TODO: trying
-        use {
-            "rcarriga/nvim-notify",
-            config = function() vim.notify = require("notify") end
-        }
+        -- use {
+        --     "rcarriga/nvim-notify",
+        --     config = function() vim.notify = require("notify") end
+        -- }
 
         use {
             'dccsillag/magma-nvim',
