@@ -14,14 +14,14 @@ function M.lsp_highlight(client, bufnr)
         ]], false)
     end
 
-    -- if client.resolved_capabilities.code_lens then
-    --     print("code lens")
-    --     vim.api.nvim_exec([[
-    --     augroup lsp_code_lens
-    --     autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-    --     augroup END
-    --     ]], false)
-    -- end
+    if client.resolved_capabilities.code_lens then
+        print("code lens")
+        vim.api.nvim_exec([[
+        augroup lsp_code_lens
+        autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+        augroup END
+        ]], false)
+    end
 
 end
 
@@ -34,22 +34,6 @@ function M.lsp_config(client, bufnr)
 
     local function buf_set_option(...) vim.api.nvim_buf_set_option(...) end
     buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(...) end
-    -- Key mappings
-    -- local opts = {noremap = true, silent = true}
-    -- for _, mappings in pairs(key_mappings) do
-    --     local mode, lhs, rhs = unpack(mappings)
-    --     buf_set_keymap(bufnr, mode, lhs, rhs, opts)
-    -- end
-
-    -- -- Other key mappings
-    -- for _, mappings in pairs(alt_key_mappings) do
-    --     local capability, mode, lhs, rhs = unpack(mappings)
-    --     if client.resolved_capabilities[capability] then
-    --         buf_set_keymap(bufnr, mode, lhs, rhs, opts)
-    --     end
-    -- end
 
     -- Key mappings
     local lspkeymappings = require("keymappings")
@@ -137,7 +121,7 @@ end
 
 -- Refactoring in progress
 
-function M.temp()
+function M.WIP()
     -- Language specific key mappings
     require('config.lsp.keymappings')
 

@@ -83,7 +83,7 @@ local mappings = {
         m = {"<Cmd>DashboardJumpMark<Cr>", "Mark"},
         n = {"<Cmd>DashboardNewFile<Cr>", "New file"},
         r = {"<Cmd>Telescope frecency<Cr>", "Recent file"},
-        s = {"<Cmd>Telescope symbols<Cr>", "Recent file"},
+        s = {"<Cmd>Telescope symbols<Cr>", "Symbols"},
         a = {"<Cmd>xa<Cr>", "Save all & quit"},
         e = {"<Cmd>NvimTreeToggle<CR>", "Explorer"},
         z = {"<Cmd>lefta 20vsp .<CR>", "Netrw"}
@@ -127,7 +127,7 @@ local mappings = {
             "Search files"
         },
         p = {
-            "<Cmd>lua require'telescope'.extensions.project.project{ change_dir = true }<Cr>",
+            "<Cmd>lua require('telescope').extensions.project.project({change_dir = true})<Cr>",
             "List projects"
         }
     },
@@ -190,7 +190,7 @@ local vmappings = {
         v = {"<Cmd>lua require('spectre').open_visual()<CR>", "Visual search"},
         b = {"<Plug>SearchVisual", "Browser search"}
     },
-    e = {name = "eSpeak", s = {"<Cmd>call tts#Speak(1)<CR>", "Speak"}},
+    e = {name = "eSpeak", s = {"<Cmd>call tts#Speak(1)<CR>", "Speak"}}
     -- m = {
     --     name = "Jupyter mode - Magma",
     --     e = {"<Cmd><C-u>MagmaEvaluateVisual<Cr>", "Evaluate"}
@@ -204,14 +204,11 @@ local lsp_mappings = {
         r = {"<Cmd>Lspsaga rename<CR>", "Rename"},
         -- r = {"<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename"}
 
-        u = {"<Cmd>Telescope lsp_references<CR>", "References"},
+        u = {"<Cmd>Telescope lsp_references<CR>", "References"}
         -- u = {"<Cmd>Lspsaga lsp_finder<CR>", "References"},
         -- u = {"<Cmd>lua vim.lsp.buf.references()<CR>", "References"},
 
-
-
     }
-
 
     -- WIP - refactoring
 
@@ -252,38 +249,43 @@ local lsp_mappings = {
     -- nnoremap <silent> <leader>cto :Lspsaga open_floaterm<CR>
     -- tnoremap <silent> <leader>ctc <C-\><C-n>:Lspsaga close_floaterm<CR>
 
---     {'n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
---     {'n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
---     {
---         'n', '<leader>lwl',
---         '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'
---     }, {'n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
---     {
---         'n', '<leader>lds',
---         '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'
---     }, {'n', '<leader>lde', '<cmd>lua vim.lsp.diagnostic.enable()<CR>'},
---     {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
---     {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
---     {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
---     {'v', '<leader>lcr', '<cmd>lua vim.lsp.buf.range_code_action()<CR>'},
---     {'n', '<leader>lss', '<cmd>lua vim.lsp.buf.document_symbol()<CR>'},
---     {'n', '<leader>lsw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>'}
+    --     {'n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
+    --     {'n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
+    --     {
+    --         'n', '<leader>lwl',
+    --         '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'
+    --     }, {'n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
+    --     {
+    --         'n', '<leader>lds',
+    --         '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'
+    --     }, {'n', '<leader>lde', '<cmd>lua vim.lsp.diagnostic.enable()<CR>'},
+    --     {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
+    --     {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
+    --     {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
+    --     {'v', '<leader>lcr', '<cmd>lua vim.lsp.buf.range_code_action()<CR>'},
+    --     {'n', '<leader>lss', '<cmd>lua vim.lsp.buf.document_symbol()<CR>'},
+    --     {'n', '<leader>lsw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>'}
 
---     {
---         "document_formatting", "n", "<leader>lff",
---         "<cmd>lua vim.lsp.buf.formatting()<CR>"
---     }, {
---         "document_range_formatting", "n", "<leader>lfr",
---         "<cmd>lua vim.lsp.buf.range_formatting()<CR>"
---     },
---     {
---         "code_lens", "n", "<leader>lcld",
---         "<Cmd>lua vim.lsp.codelens.refresh()<CR>"
---     }, {"code_lens", "n", "<leader>lclr", "<Cmd>lua vim.lsp.codelens.run()<CR>"}
 }
 
-local lsp_mappings_opts  = {
+local lsp_mappings_opts = {
+    {
+        "document_formatting",
+        {["lf"] = {"<Cmd>lua vim.lsp.buf.formatting()<CR>", "Format"}}
+    },
+    {
+        "code_lens",
+        {["ll"] = {"<Cmd>lua vim.lsp.codelens.refresh()<CR>", "Codelens"}}
+    }
 
+    --     {
+    --         "document_range_formatting", "n", "<leader>lfr",
+    --         "<cmd>lua vim.lsp.buf.range_formatting()<CR>"
+    --     },
+    --     {
+    --         "code_lens", "n", "<leader>lcld",
+    --         "<Cmd>lua vim.lsp.codelens.refresh()<CR>"
+    --     }, {"code_lens", "n", "<leader>lclr", "<Cmd>lua vim.lsp.codelens.run()<CR>"}
 }
 
 local dap_mappings = {
@@ -313,6 +315,13 @@ local dap_mappings = {
 function M.register_lsp(client)
     local wk = require("which-key")
     wk.register(lsp_mappings, opts)
+
+    for _, m in pairs(lsp_mappings_opts) do
+        local capability, key = unpack(m)
+        if client.resolved_capabilities[capability] then
+            wk.register(key, opts)
+        end
+    end
 end
 
 function M.register_dap(client)
