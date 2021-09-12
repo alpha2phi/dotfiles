@@ -1,6 +1,6 @@
 local M = {}
 
-local lsp_providers = {lua = true}
+local lsp_providers = {lua = true, rust = true }
 
 local function setup_servers()
 

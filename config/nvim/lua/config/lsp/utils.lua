@@ -14,14 +14,14 @@ function M.lsp_highlight(client, bufnr)
         ]], false)
     end
 
-    if client.resolved_capabilities.code_lens then
-        print("code lens")
-        vim.api.nvim_exec([[
-        augroup lsp_code_lens
-        autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-        augroup END
-        ]], false)
-    end
+    -- if client.resolved_capabilities.code_lens then
+    --     print("code lens")
+    --     vim.api.nvim_exec([[
+    --     augroup lsp_code_lens
+    --     autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+    --     augroup END
+    --     ]], false)
+    -- end
 
 end
 
