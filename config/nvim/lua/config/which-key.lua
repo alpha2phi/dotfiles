@@ -191,14 +191,29 @@ local vmappings = {
         b = {"<Plug>SearchVisual", "Browser search"}
     },
     e = {name = "eSpeak", s = {"<Cmd>call tts#Speak(1)<CR>", "Speak"}},
-    m = {
-        name = "Jupyter mode - Magma",
-        e = {"<Cmd><C-u>MagmaEvaluateVisual<Cr>", "Evaluate"}
-    }
-
+    -- m = {
+    --     name = "Jupyter mode - Magma",
+    --     e = {"<Cmd><C-u>MagmaEvaluateVisual<Cr>", "Evaluate"}
+    -- }
 }
 
 local lsp_mappings = {
+
+    l = {
+        name = "LSP",
+        r = {"<Cmd>Lspsaga rename<CR>", "Rename"},
+        -- r = {"<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename"}
+
+        u = {"<Cmd>Telescope lsp_references<CR>", "References"},
+        -- u = {"<Cmd>Lspsaga lsp_finder<CR>", "References"},
+        -- u = {"<Cmd>lua vim.lsp.buf.references()<CR>", "References"},
+
+
+
+    }
+
+
+    -- WIP - refactoring
 
     -- c = {
     --     name = "lsp saga",
@@ -206,52 +221,36 @@ local lsp_mappings = {
     --     l = {"lsp finder & line diagnostics"},
     --     h = {"hover doc"},
     --     t = {"floaterm"},
-    --     r = {"rename"},
     --     s = {"signature help"},
     --     p = {"preview definition"}
     -- },
 
-    -- Vimspector
-    ["<F5>"] = {name = "Vimspector - Launch"},
-    ["<F8>"] = {name = "Vimspector - Run to Cursor"},
-    ["<F9>"] = {name = "Vimspector - Cond. Breakpoint"},
+    -- l = {name = "lsp"},
+    -- ["lw"] = {name = "workspace"},
+    -- ["lc"] = {name = "code action"},
+    -- ["lcl"] = {name = "code lens"},
+    -- ["ld"] = {name = "diagnostics"},
+    -- ["lr"] = {name = "references, rename, run"},
+    -- ["ll"] = {name = "location list"},
+    -- ["lt"] = {name = "type definition"},
+    -- ["ls"] = {name = "symbol"},
+    -- ["lf"] = {name = "format"},
+    -- ["lo"] = {name = "telescope lsp symbols"},
+    -- ["lq"] = {name = "telescope quickfix"}
 
-    l = {name = "lsp"},
-    ["lw"] = {name = "workspace"},
-    ["lc"] = {name = "code action"},
-    ["lcl"] = {name = "code lens"},
-    ["ld"] = {name = "diagnostics"},
-    ["lr"] = {name = "references, rename, run"},
-    ["ll"] = {name = "location list"},
-    ["lt"] = {name = "type definition"},
-    ["ls"] = {name = "symbol"},
-    ["lf"] = {name = "format"},
-    ["lo"] = {name = "telescope lsp symbols"},
-    ["lq"] = {name = "telescope quickfix"}
-
--- nnoremap <silent><leader>clf :Lspsaga lsp_finder<CR>
--- nnoremap <silent><leader>cca :Lspsaga code_action<CR>
--- vnoremap <silent><leader>cca :<C-U>Lspsaga range_code_action<CR>
-
--- nnoremap <silent><leader>chd :Lspsaga hover_doc<CR>
--- nnoremap <silent><C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
--- nnoremap <silent><C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-
--- nnoremap <silent><leader>csh :Lspsaga signature_help<CR>
-
--- nnoremap <silent><leader>crn :Lspsaga rename<CR>
-
--- nnoremap <silent><leader>cpd:Lspsaga preview_definition<CR>
-
--- nnoremap <silent> <leader>cld :Lspsaga show_line_diagnostics<CR>
-
--- nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
--- nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
-
--- nnoremap <silent> <leader>cto :Lspsaga open_floaterm<CR>
--- tnoremap <silent> <leader>ctc <C-\><C-n>:Lspsaga close_floaterm<CR>
-
-
+    -- nnoremap <silent><leader>cca :Lspsaga code_action<CR>
+    -- vnoremap <silent><leader>cca :<C-U>Lspsaga range_code_action<CR>
+    -- nnoremap <silent><leader>chd :Lspsaga hover_doc<CR>
+    -- nnoremap <silent><C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+    -- nnoremap <silent><C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+    -- nnoremap <silent><leader>csh :Lspsaga signature_help<CR>
+    -- nnoremap <silent><leader>crn :Lspsaga rename<CR>
+    -- nnoremap <silent><leader>cpd:Lspsaga preview_definition<CR>
+    -- nnoremap <silent> <leader>cld :Lspsaga show_line_diagnostics<CR>
+    -- nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
+    -- nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
+    -- nnoremap <silent> <leader>cto :Lspsaga open_floaterm<CR>
+    -- tnoremap <silent> <leader>ctc <C-\><C-n>:Lspsaga close_floaterm<CR>
 
 --     {'n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
 --     {'n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
@@ -259,8 +258,6 @@ local lsp_mappings = {
 --         'n', '<leader>lwl',
 --         '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'
 --     }, {'n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
---     {'n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>'},
---     {'n', '<leader>lrf', '<cmd>lua vim.lsp.buf.references()<CR>'},
 --     {
 --         'n', '<leader>lds',
 --         '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'
@@ -285,8 +282,17 @@ local lsp_mappings = {
 --     }, {"code_lens", "n", "<leader>lclr", "<Cmd>lua vim.lsp.codelens.run()<CR>"}
 }
 
+local lsp_mappings_opts  = {
+
+}
 
 local dap_mappings = {
+
+    -- Vimspector
+    -- ["<F5>"] = {name = "Vimspector - Launch"},
+    -- ["<F8>"] = {name = "Vimspector - Run to Cursor"},
+    -- ["<F9>"] = {name = "Vimspector - Cond. Breakpoint"},
+
     d = {
         name = "dap",
         t = {"toggle breakpoint"},
@@ -309,7 +315,7 @@ function M.register_lsp(client)
     wk.register(lsp_mappings, opts)
 end
 
-function M.register_dap()
+function M.register_dap(client)
     local wk = require("which-key")
     wk.register(dap_mappings, opts)
 end
