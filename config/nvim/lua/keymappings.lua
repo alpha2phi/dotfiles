@@ -8,7 +8,6 @@ local generic_opts = {
     visual_mode = opts,
     visual_block_mode = opts,
     command_mode = opts,
-    normal_remap_mode = {noremap = false, silent = false},
     term_mode = {silent = false}
 }
 
@@ -32,10 +31,8 @@ local keymappings = {
         ["!"] = "!<c-g>u",
         ["?"] = "?<c-g>u"
     },
-    normal_remap_mode = {
-        ["s"] = "<Plug>(easymotion-overwin-f)",
-    },
     normal_mode = {
+        ["s"] = {"<Plug>(easymotion-overwin-f)", {noremap = false, silent = false}},
         ["<C-l>"] = "<Cmd>noh<CR>",
         ["<C-w><C-o>"] = "<Cmd>MaximizerToggle!<CR>",
         ["<M-left>"] = "<C-w>>",

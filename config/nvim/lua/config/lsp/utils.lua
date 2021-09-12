@@ -144,7 +144,6 @@ function M.get_capabilities()
 end
 
 function M.setup_server(server, config)
-    print("LSP - ", server)
 
     local lspconfig = require('lspconfig')
     lspconfig[server].setup(vim.tbl_deep_extend("force", {

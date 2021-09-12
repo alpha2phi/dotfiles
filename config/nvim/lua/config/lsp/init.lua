@@ -27,10 +27,8 @@ local function setup_servers()
     local servers = lspinstall.installed_servers()
     for _, server in pairs(servers) do
         if lsp_providers[server] then
-            print("Own -", server)
             require("config.lsp." .. server).setup()
         else
-            print("LSPInstall -", server)
             lsputils.setup_server(server)
         end
     end
