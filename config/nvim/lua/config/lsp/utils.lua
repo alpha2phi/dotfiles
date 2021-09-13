@@ -154,29 +154,6 @@ function M.WIP()
     -- Language specific key mappings
     require('config.lsp.keymappings')
 
-    -- Language servers
-    local servers = {
-        gopls = {
-            -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
-            experimentalPostfixCompletions = true,
-            analyses = {unusedparams = true, unreachable = false},
-            codelenses = {
-                generate = true,
-                gc_details = true,
-                test = true,
-                tidy = true
-            },
-            usePlaceholders = true,
-            completeUnimported = true,
-            staticcheck = true,
-            matcher = "fuzzy",
-            experimentalDiagnosticsDelay = "500ms",
-            symbolMatcher = "fuzzy",
-            gofumpt = true,
-            buildFlags = {"-tags", "integration"}
-        },
-    }
-
     local function setup_null_ls()
         lspconfig["null-ls"].setup(vim.tbl_deep_extend("force", {
             on_attach = lsp_on_attach,
