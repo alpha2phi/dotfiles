@@ -52,15 +52,6 @@ function M.lsp_highlight(client, bufnr)
         augroup END
         ]], false)
     end
-
-    -- if client.resolved_capabilities.code_lens then
-    --     print("code lens")
-    --     vim.api.nvim_exec([[
-    --     augroup lsp_code_lens
-    --     autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-    --     augroup END
-    --     ]], false)
-    -- end
 end
 
 function M.lsp_config(client, bufnr)
@@ -77,7 +68,7 @@ function M.lsp_config(client, bufnr)
     lspkeymappings.setup_lsp_mappings()
 
     -- Auto cmds
-    local lspautocmds = require("config.lsp.auto_cmds")
+    local lspautocmds = require("config.lsp.autocmds")
     lspautocmds.register()
 
     -- LSP and DAP menu

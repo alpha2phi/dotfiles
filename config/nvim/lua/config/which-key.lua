@@ -18,15 +18,6 @@ local vopts = {
     nowait = true
 }
 
-local iopts = {
-    mode = "i",
-    prefix = "<leader>",
-    buffer = nil,
-    silent = false,
-    noremap = true,
-    nowait = true
-}
-
 local mappings = {
     ["w"] = {"<Cmd>w<Cr>", "Save"},
     ["q"] = {"<Cmd>q<Cr>", "Quit"},
@@ -176,12 +167,13 @@ local mappings = {
     },
 
     -- Run
-    r = {name = "Run",
-      s = {name = "Swap next parameter"},
-      S = {name = "Swap previous parameter"}
+    r = {
+        name = "Run",
+        s = {name = "Swap next parameter"},
+        S = {name = "Swap previous parameter"}
     },
 
-    h = {name = "Git signs"},
+    h = {name = "Git signs"}
 
     -- -- Magma
     -- m = {
@@ -220,11 +212,11 @@ local lsp_mappings = {
         u = {"<Cmd>Telescope lsp_references<CR>", "References"},
         o = {"<Cmd>Telescope lsp_document_symbols<CR>", "Document symbols"},
         d = {"<Cmd>Telescope lsp_definitions<CR>", "Definition"},
+        a = {"<Cmd>Telescope lsp_code_actions<CR>", "Definition"}
     }
 
     -- WIP - refactoring
 
-    -- nnoremap <silent><leader>cca :Lspsaga code_action<CR>
     -- nnoremap <silent><leader>chd :Lspsaga hover_doc<CR>
     -- nnoremap <silent><C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
     -- nnoremap <silent><C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
@@ -246,12 +238,14 @@ local lsp_mappings_opts = {
     {
         "document_formatting",
         {["lf"] = {"<Cmd>lua vim.lsp.buf.formatting()<CR>", "Format"}}
-    },
-    {
+    }, {
         "code_lens",
-        {["ll"] = {"<Cmd>lua vim.lsp.codelens.refresh()<CR>", "Codelens refresh"}}
-    },
-    {
+        {
+            ["ll"] = {
+                "<Cmd>lua vim.lsp.codelens.refresh()<CR>", "Codelens refresh"
+            }
+        }
+    }, {
         "code_lens",
         {["ls"] = {"<Cmd>lua vim.lsp.codelens.run()<CR>", "Codelens run"}}
     }
@@ -291,11 +285,6 @@ function M.register_lsp(client)
             wk.register(key, opts)
         end
     end
-end
-
-
-function M.register_autocmds()
-
 end
 
 function M.register_dap(client)
