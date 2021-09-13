@@ -18,6 +18,15 @@ local vopts = {
     nowait = true
 }
 
+local iopts = {
+    mode = "i",
+    prefix = "<leader>",
+    buffer = nil,
+    silent = false,
+    noremap = true,
+    nowait = true
+}
+
 local mappings = {
     ["w"] = {"<Cmd>w<Cr>", "Save"},
     ["q"] = {"<Cmd>q<Cr>", "Quit"},
@@ -215,21 +224,12 @@ local lsp_mappings = {
 
     -- WIP - refactoring
 
-    -- l = {name = "lsp"},
-    -- ["lw"] = {name = "workspace"},
-    -- ["lc"] = {name = "code action"},
-    -- ["lcl"] = {name = "code lens"},
-    -- ["ld"] = {name = "diagnostics"},
-    -- ["ll"] = {name = "location list"},
-
     -- nnoremap <silent><leader>cca :Lspsaga code_action<CR>
     -- nnoremap <silent><leader>chd :Lspsaga hover_doc<CR>
     -- nnoremap <silent><C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
     -- nnoremap <silent><C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
     -- nnoremap <silent><leader>cpd:Lspsaga preview_definition<CR>
     -- nnoremap <silent> <leader>cld :Lspsaga show_line_diagnostics<CR>
-    -- nnoremap <silent> <leader>cto :Lspsaga open_floaterm<CR>
-    -- tnoremap <silent> <leader>ctc <C-\><C-n>:Lspsaga close_floaterm<CR>
 
     --     {
     --         'n', '<leader>lds',
@@ -249,10 +249,12 @@ local lsp_mappings_opts = {
     },
     {
         "code_lens",
-        {["ll"] = {"<Cmd>lua vim.lsp.codelens.refresh()<CR>", "Codelens"}}
+        {["ll"] = {"<Cmd>lua vim.lsp.codelens.refresh()<CR>", "Codelens refresh"}}
+    },
+    {
+        "code_lens",
+        {["ls"] = {"<Cmd>lua vim.lsp.codelens.run()<CR>", "Codelens run"}}
     }
-
-    -- {"code_lens", "n", "<leader>lclr", "<Cmd>lua vim.lsp.codelens.run()<CR>"}
 }
 
 local dap_mappings = {
@@ -289,6 +291,11 @@ function M.register_lsp(client)
             wk.register(key, opts)
         end
     end
+end
+
+
+function M.register_autocmds()
+
 end
 
 function M.register_dap(client)

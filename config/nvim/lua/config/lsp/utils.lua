@@ -76,6 +76,10 @@ function M.lsp_config(client, bufnr)
     local lspkeymappings = require("keymappings")
     lspkeymappings.setup_lsp_mappings()
 
+    -- Auto cmds
+    local lspautocmds = require("config.lsp.auto_cmds")
+    lspautocmds.register()
+
     -- LSP and DAP menu
     local whichkey = require("config.which-key")
     whichkey.register_lsp(client)
