@@ -11,10 +11,7 @@ function M.lsp_diagnostics()
 
     local on_references = vim.lsp.handlers["textDocument/references"]
     vim.lsp.handlers["textDocument/references"] =
-        vim.lsp.with(on_references, {
-            loclist = true,
-            virtual_text = true
-        })
+        vim.lsp.with(on_references, {loclist = true, virtual_text = true})
 
     -- Send diagnostics to quickfix list
     do
@@ -66,10 +63,6 @@ function M.lsp_config(client, bufnr)
     -- Key mappings
     local lspkeymappings = require("keymappings")
     lspkeymappings.setup_lsp_mappings()
-
-    -- Auto cmds
-    local lspautocmds = require("config.lsp.autocmds")
-    lspautocmds.register()
 
     -- LSP and DAP menu
     local whichkey = require("config.which-key")
@@ -142,12 +135,10 @@ function M.setup_server(server, config)
     end
 end
 
-
 -- Refactoring in progress
 
 function M.WIP()
     -- Language specific key mappings
-    require('config.lsp.keymappings')
 
     local function setup_null_ls()
         lspconfig["null-ls"].setup(vim.tbl_deep_extend("force", {

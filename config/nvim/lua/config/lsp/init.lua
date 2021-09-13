@@ -18,6 +18,9 @@ local function setup_servers()
         end
     end
 
+    -- null-ls
+    require("config.lsp.null-ls").setup()
+
 end
 
 local function post_install()

@@ -48,28 +48,17 @@ function M.keymappings()
         noremap = true,
         nowait = true
     }
-    local iopts = {
-        mode = "i",
-        prefix = "<leader>",
-        buffer = nil,
-        silent = false,
-        noremap = true,
-        nowait = true
-    }
 
     local wk = require("which-key")
     local mappings = {
-        ["rc"] = {name = "Cargo run"},
         ["rr"] = {name = "Rust run"},
-        ["rl"] = {name = "Rust runnables"},
         ["rd"] = {name = "Rust debuggables"},
-        ["rw"] = {name = "Cargo watch"}
+        ["rw"] = {name = "Cargo watch"},
+        ["rc"] = {name = "Cargo run"},
+        ["rl"] = {name = "Rust runnables"},
     }
-    local imappings = {r = {name = "Run", ["w"] = {name = "Cargo watch"}}}
 
     wk.register(mappings, opts)
-    wk.register(imappings, iopts)
-
 end
 
 return M
