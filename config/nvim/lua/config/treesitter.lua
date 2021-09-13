@@ -63,8 +63,8 @@ function M.setup()
             },
             swap = {
                 enable = true,
-                swap_next = {["<leader>xp"] = "@parameter.inner"},
-                swap_previous = {["<leader>xP"] = "@parameter.inner"}
+                swap_next = {["<Leader>rs"] = "@parameter.inner"},
+                swap_previous = {["<Leader>rS"] = "@parameter.inner"}
             },
             lsp_interop = {
                 enable = true,

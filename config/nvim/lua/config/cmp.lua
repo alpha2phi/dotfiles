@@ -44,20 +44,32 @@ function M.setup()
             ['<C-j>'] = cmp.mapping.select_next_item(),
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
-            ['<C-Space>'] = cmp.mapping.complete(),
             ['<C-e>'] = cmp.mapping.close(),
             ['<CR>'] = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Insert,
                 select = true
             }),
-            ["<Tab>"] = cmp.mapping(function(fallback)
+            ["<C-Space>"] = cmp.mapping(function(fallback)
                 if vim.fn.pumvisible() == 1 then
-                    if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or
-                        vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+                    if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
                         return vim.fn.feedkeys(t(
-                                                   "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"))
+                                                   "<C-R>=UltiSnips#ExpandSnippet()<CR>"))
                     end
-
+                    vim.fn.feedkeys(t("<C-n>"), "n")
+                elseif check_back_space() then
+                    vim.fn.feedkeys(t("<cr>"), "n")
+                else
+                    fallback()
+                end
+            end, {"i", "s"}),
+            ["<Tab>"] = cmp.mapping(function(fallback)
+                if vim.fn.complete_info()["selected"] == -1 and
+                    vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+                    vim.fn.feedkeys(t("<C-R>=UltiSnips#ExpandSnippet()<CR>"))
+                elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+                    vim.fn
+                        .feedkeys(t("<ESC>:call UltiSnips#JumpForwards()<CR>"))
+                elseif vim.fn.pumvisible() == 1 then
                     vim.fn.feedkeys(t("<C-n>"), "n")
                 elseif check_back_space() then
                     vim.fn.feedkeys(t("<tab>"), "n")
@@ -66,7 +78,10 @@ function M.setup()
                 end
             end, {"i", "s"}),
             ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if vim.fn.pumvisible() == 1 then
+                if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+                    return vim.fn.feedkeys(t(
+                                               "<C-R>=UltiSnips#JumpBackwards()<CR>"))
+                elseif vim.fn.pumvisible() == 1 then
                     vim.fn.feedkeys(t("<C-p>"), "n")
                 else
                     fallback()
@@ -81,8 +96,8 @@ function M.setup()
         sources = {
             {name = "buffer"}, {name = "nvim_lsp"}, {name = "ultisnips"},
             {name = "nvim_lua"}, {name = "look"}, {name = "path"},
-            {name = "calc"}, {name = "spell"}, {name = "emoji"} ,
-            {name = "treesitter"}-- {name = 'cmp_tabnine'}
+            {name = "calc"}, {name = "spell"}, {name = "emoji"},
+            {name = "treesitter"} -- {name = 'cmp_tabnine'}
         },
         completion = {completeopt = 'menu,menuone,noinsert'}
     }

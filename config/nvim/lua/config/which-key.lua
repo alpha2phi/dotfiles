@@ -166,6 +166,14 @@ local mappings = {
         v = {"<Cmd>w<CR>:TestVisit<CR>", "Test visit"}
     },
 
+    -- Run
+    r = {name = "Run",
+      s = {name = "Swap next parameter"},
+      S = {name = "Swap previous parameter"}
+    },
+
+    h = {name = "Git signs"},
+
     -- -- Magma
     -- m = {
     --     name = "Jupyter mode - Magma",
@@ -177,10 +185,8 @@ local mappings = {
     --     u = {"<Cmd>MagmaDeinit<Cr>", "Deinit"}
     -- },
 
-    K = {name = "Cheatsheet"},
-    C = {name = "Cheatsheet (toggle comment)"},
-    h = {name = "Git signs"},
-    x = {name = "treesitter & swap"}
+    -- K = {name = "Cheatsheet"},
+    -- C = {name = "Cheatsheet (toggle comment)"},
 
 }
 

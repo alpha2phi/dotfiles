@@ -60,14 +60,14 @@ function M.setup()
             run = 'make',
             config = function() require('nvim-autopairs').setup {} end
         }
-        use {
-            'ojroques/nvim-lspfuzzy',
-            requires = {
-                {'junegunn/fzf'}, {'junegunn/fzf.vim'} -- to enable preview (optional)
-            },
-            config = function() require('lspfuzzy').setup {} end
-        }
-        use {'liuchengxu/vista.vim'}
+        -- use {
+        --     'ojroques/nvim-lspfuzzy',
+        --     requires = {
+        --         {'junegunn/fzf'}, {'junegunn/fzf.vim'} -- to enable preview (optional)
+        --     },
+        --     config = function() require('lspfuzzy').setup {} end
+        -- }
+        -- use {'liuchengxu/vista.vim'}
 
         -- Color scheme
         use {
@@ -161,7 +161,7 @@ function M.setup()
         use {'p00f/nvim-ts-rainbow'}
         use {'ray-x/lsp_signature.nvim'}
         use {'szw/vim-maximizer'}
-        use {'dbeniamine/cheat.sh-vim'}
+        -- use {'dbeniamine/cheat.sh-vim'}
         -- use {'dyng/ctrlsf.vim'}
         -- use {'pechorin/any-jump.vim'}
         use {'kshenoy/vim-signature'}
@@ -204,17 +204,13 @@ function M.setup()
         --         'golang/vscode-go', 'rust-lang/vscode-rust'
         --     }
         -- }
-        use {'honza/vim-snippets'}
         use {
             'SirVer/ultisnips',
+            requires = {"honza/vim-snippets"},
             config = function()
-                vim.cmd [[
-                let g:UltiSnipsJumpForwardTrigger="<c-j>"
-                let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-            ]]
+                vim.g.UltiSnipsRemoveSelectModeMappings = 0
             end
         }
-
         -- Lua development
         use {'folke/lua-dev.nvim'}
         use {
@@ -307,7 +303,6 @@ function M.setup()
         use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
         use {'plasticboy/vim-markdown'}
 
-
         -- TODO: trying
 
         -- Go
@@ -337,7 +332,6 @@ function M.setup()
 end
 
 return M
-
 
 ------------------ Plugins list ----------------------
 -- use {
