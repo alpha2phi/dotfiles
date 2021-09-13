@@ -211,7 +211,6 @@ local lsp_mappings = {
         u = {"<Cmd>Telescope lsp_references<CR>", "References"},
         o = {"<Cmd>Telescope lsp_document_symbols<CR>", "Document symbols"},
         d = {"<Cmd>Telescope lsp_definitions<CR>", "Definition"},
-        a = {"<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", "Add folder"}
     }
 
     -- WIP - refactoring

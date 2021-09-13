@@ -1,5 +1,44 @@
 local M = {}
 
+function M.lsp_diagnostics()
+    vim.lsp.handlers["textDocument/publishDiagnostics"] =
+        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+            virtual_text = true,
+            underline = false,
+            signs = true,
+            update_in_insert = false
+        })
+
+    local on_references = vim.lsp.handlers["textDocument/references"]
+    vim.lsp.handlers["textDocument/references"] =
+        vim.lsp.with(on_references, {
+            loclist = true,
+            virtual_text = true
+        })
+
+    -- Send diagnostics to quickfix list
+    do
+        local method = "textDocument/publishDiagnostics"
+        local default_handler = vim.lsp.handlers[method]
+        vim.lsp.handlers[method] = function(err, meth, result, client_id, bufnr,
+                                            config)
+            default_handler(err, meth, result, client_id, bufnr, config)
+            local diagnostics = vim.lsp.diagnostic.get_all()
+            local qflist = {}
+            for buf, diagnostic in pairs(diagnostics) do
+                for _, d in ipairs(diagnostic) do
+                    d.bufnr = buf
+                    d.lnum = d.range.start.line + 1
+                    d.col = d.range.start.character + 1
+                    d.text = d.message
+                    table.insert(qflist, d)
+                end
+            end
+            vim.lsp.util.set_qflist(qflist)
+        end
+    end
+end
+
 function M.lsp_highlight(client, bufnr)
     if client.resolved_capabilities.document_highlight then
         vim.api.nvim_exec([[
@@ -22,11 +61,9 @@ function M.lsp_highlight(client, bufnr)
     --     augroup END
     --     ]], false)
     -- end
-
 end
 
 function M.lsp_config(client, bufnr)
-
     require("lsp_signature").on_attach({
         bind = true,
         handler_opts = {border = "single"}
@@ -60,10 +97,10 @@ end
 function M.lsp_attach(client, bufnr)
     M.lsp_config(client, bufnr)
     M.lsp_highlight(client, bufnr)
+    M.lsp_diagnostics()
 end
 
 function M.get_capabilities()
-
     local capabilities = vim.lsp.protocol.make_client_capabilities()
 
     -- for nvim-cmp
@@ -91,11 +128,9 @@ function M.get_capabilities()
     capabilities.experimental.hoverActions = true
 
     return capabilities
-
 end
 
 function M.setup_server(server, config)
-
     local lspconfig = require('lspconfig')
     lspconfig[server].setup(vim.tbl_deep_extend("force", {
         on_attach = M.lsp_attach,
@@ -110,7 +145,6 @@ function M.setup_server(server, config)
     if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
         print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
     end
-
 end
 
 
@@ -122,7 +156,6 @@ function M.WIP()
 
     -- Language servers
     local servers = {
-        pyright = {},
         gopls = {
             -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
             experimentalPostfixCompletions = true,
@@ -142,34 +175,7 @@ function M.WIP()
             gofumpt = true,
             buildFlags = {"-tags", "integration"}
         },
-        tsserver = {},
-        vimls = {}
-        -- rust_analyzer = {},
     }
-
-    -- local servers = require'lspinstall'.installed_servers()
-    -- local coq = require("coq")
-
-    local function setup_servers(lsp_servers)
-        for server, config in pairs(lsp_servers) do
-
-            lspconfig[server].setup( -- coq.lsp_ensure_capabilities(
-            vim.tbl_deep_extend("force", {
-                on_attach = lsp_on_attach,
-                -- on_exit = lsp_on_exit,
-                -- on_init = lsp_on_init,
-                capabilities = capabilities,
-                flags = {debounce_text_changes = 150},
-                init_options = config
-            }, {}))
-            -- )
-
-            local cfg = lspconfig[server]
-            if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
-                print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
-            end
-        end
-    end
 
     local function setup_null_ls()
         lspconfig["null-ls"].setup(vim.tbl_deep_extend("force", {
@@ -199,46 +205,9 @@ function M.WIP()
         null_ls.config({sources = sources})
     end
 
-    setup_servers(servers)
     configure_null_ls()
     setup_null_ls()
 
-    vim.lsp.handlers["textDocument/publishDiagnostics"] =
-        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-            virtual_text = true,
-            underline = false,
-            signs = true,
-            update_in_insert = false
-        })
-
-    -- local on_references = vim.lsp.handlers["textDocument/references"]
-    -- vim.lsp.handlers["textDocument/references"] =
-    --     vim.lsp.with(on_references, {
-    --         -- loclist = true,
-    --         virtual_text = true
-    --     })
-
-    -- Send diagnostics to quickfix list
-    do
-        local method = "textDocument/publishDiagnostics"
-        local default_handler = vim.lsp.handlers[method]
-        vim.lsp.handlers[method] = function(err, meth, result, client_id, bufnr,
-                                            config)
-            default_handler(err, meth, result, client_id, bufnr, config)
-            local diagnostics = vim.lsp.diagnostic.get_all()
-            local qflist = {}
-            for buf, diagnostic in pairs(diagnostics) do
-                for _, d in ipairs(diagnostic) do
-                    d.bufnr = buf
-                    d.lnum = d.range.start.line + 1
-                    d.col = d.range.start.character + 1
-                    d.text = d.message
-                    table.insert(qflist, d)
-                end
-            end
-            vim.lsp.util.set_qflist(qflist)
-        end
-    end
 end
 
 return M
