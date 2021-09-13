@@ -70,8 +70,8 @@ function M.setup()
                 enable = true,
                 border = 'none',
                 peek_definition_code = {
-                    ["<leader>pf"] = "@function.outer",
-                    ["<leader>pc"] = "@class.outer"
+                    ["df"] = "@function.outer",
+                    ["dF"] = "@class.outer"
                 }
             }
             -- refactor = {

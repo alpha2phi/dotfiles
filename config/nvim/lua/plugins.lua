@@ -303,24 +303,26 @@ function M.setup()
         use {'rust-lang/rust.vim'}
         use {'simrat39/rust-tools.nvim'}
 
-        -- Go
-        -- use {'ray-x/go.nvim', config = function() require('go').setup() end}
-
         -- Markdown
         use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
         use {'plasticboy/vim-markdown'}
 
+
         -- TODO: trying
+
+        -- Go
+        -- use {'ray-x/go.nvim', config = function() require('go').setup() end}
+
         -- use {
         --     "rcarriga/nvim-notify",
         --     config = function() vim.notify = require("notify") end
         -- }
 
-        use {
-            'dccsillag/magma-nvim',
-            run = ':UpdateRemotePlugins',
-            config = function() require("config.magma").setup() end
-        }
+        -- use {
+        --     'dccsillag/magma-nvim',
+        --     run = ':UpdateRemotePlugins',
+        --     config = function() require("config.magma").setup() end
+        -- }
 
         -- use {
         --     'kristijanhusak/orgmode.nvim',
@@ -336,6 +338,8 @@ end
 
 return M
 
+
+------------------ Plugins list ----------------------
 -- use {
 --     "folke/persistence.nvim",
 --     event = "BufReadPre",
