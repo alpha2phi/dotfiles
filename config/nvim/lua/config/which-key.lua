@@ -208,46 +208,25 @@ local lsp_mappings = {
     l = {
         name = "LSP",
         r = {"<Cmd>Lspsaga rename<CR>", "Rename"},
-        -- r = {"<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename"}
-
-        u = {"<Cmd>Telescope lsp_references<CR>", "References"}
-        -- u = {"<Cmd>Lspsaga lsp_finder<CR>", "References"},
-        -- u = {"<Cmd>lua vim.lsp.buf.references()<CR>", "References"},
+        u = {"<Cmd>Telescope lsp_references<CR>", "References"},
+        o = {"<Cmd>Telescope lsp_document_symbols<CR>", "Document symbols"},
+        d = {"<Cmd>Telescope lsp_definitions<CR>", "Definition"}
 
     }
 
     -- WIP - refactoring
-
-    -- c = {
-    --     name = "lsp saga",
-    --     c = {"code action"},
-    --     l = {"lsp finder & line diagnostics"},
-    --     h = {"hover doc"},
-    --     t = {"floaterm"},
-    --     s = {"signature help"},
-    --     p = {"preview definition"}
-    -- },
 
     -- l = {name = "lsp"},
     -- ["lw"] = {name = "workspace"},
     -- ["lc"] = {name = "code action"},
     -- ["lcl"] = {name = "code lens"},
     -- ["ld"] = {name = "diagnostics"},
-    -- ["lr"] = {name = "references, rename, run"},
     -- ["ll"] = {name = "location list"},
-    -- ["lt"] = {name = "type definition"},
-    -- ["ls"] = {name = "symbol"},
-    -- ["lf"] = {name = "format"},
-    -- ["lo"] = {name = "telescope lsp symbols"},
-    -- ["lq"] = {name = "telescope quickfix"}
 
     -- nnoremap <silent><leader>cca :Lspsaga code_action<CR>
-    -- vnoremap <silent><leader>cca :<C-U>Lspsaga range_code_action<CR>
     -- nnoremap <silent><leader>chd :Lspsaga hover_doc<CR>
     -- nnoremap <silent><C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
     -- nnoremap <silent><C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-    -- nnoremap <silent><leader>csh :Lspsaga signature_help<CR>
-    -- nnoremap <silent><leader>crn :Lspsaga rename<CR>
     -- nnoremap <silent><leader>cpd:Lspsaga preview_definition<CR>
     -- nnoremap <silent> <leader>cld :Lspsaga show_line_diagnostics<CR>
     -- nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
@@ -269,8 +248,6 @@ local lsp_mappings = {
     --     {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
     --     {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
     --     {'v', '<leader>lcr', '<cmd>lua vim.lsp.buf.range_code_action()<CR>'},
-    --     {'n', '<leader>lss', '<cmd>lua vim.lsp.buf.document_symbol()<CR>'},
-    --     {'n', '<leader>lsw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>'}
 
 }
 
@@ -284,14 +261,7 @@ local lsp_mappings_opts = {
         {["ll"] = {"<Cmd>lua vim.lsp.codelens.refresh()<CR>", "Codelens"}}
     }
 
-    --     {
-    --         "document_range_formatting", "n", "<leader>lfr",
-    --         "<cmd>lua vim.lsp.buf.range_formatting()<CR>"
-    --     },
-    --     {
-    --         "code_lens", "n", "<leader>lcld",
-    --         "<Cmd>lua vim.lsp.codelens.refresh()<CR>"
-    --     }, {"code_lens", "n", "<leader>lclr", "<Cmd>lua vim.lsp.codelens.run()<CR>"}
+    -- {"code_lens", "n", "<leader>lclr", "<Cmd>lua vim.lsp.codelens.run()<CR>"}
 }
 
 local dap_mappings = {

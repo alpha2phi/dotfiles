@@ -114,11 +114,6 @@ function M.setup_server(server, config)
 end
 
 
-
-
-
-
-
 -- Refactoring in progress
 
 function M.WIP()
