@@ -33,7 +33,6 @@ function M.autocmds()
         autocmd FileType rust map <buffer> <Leader>rd :update<CR>:RustDebuggables<CR>
 
         autocmd FileType rust map <buffer> <Leader>rw :update<CR>:sp term://cargo watch -s 'clear && cargo run -q'<CR>
-        autocmd FileType rust imap <buffer> <Leader>rw <esc>:update<CR>:sp term://cargo watch -s 'clear && cargo run -q'<CR>
       augroup END
 
     ]], false)
@@ -55,7 +54,7 @@ function M.keymappings()
         ["rd"] = {name = "Rust debuggables"},
         ["rw"] = {name = "Cargo watch"},
         ["rc"] = {name = "Cargo run"},
-        ["rl"] = {name = "Rust runnables"},
+        ["rl"] = {name = "Rust runnables"}
     }
 
     wk.register(mappings, opts)

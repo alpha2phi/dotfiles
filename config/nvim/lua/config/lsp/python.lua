@@ -17,7 +17,6 @@ function M.autocmds()
         autocmd!
 
         autocmd FileType python map <buffer> <Leader>rw :update<CR>:sp term://nodemon -e py %<CR>
-        autocmd FileType python imap <buffer> <Leader>rw <esc>:update<CR>:sp term://nodemon -e py %<CR>
 
         autocmd FileType python map <buffer> <Leader>rr :update<CR>:exec '!python3' shellescape(@%, 1)<CR>
         autocmd FileType python map <buffer> <Leader>rd :update<CR>:sp term://python3 -m pdb %<CR>

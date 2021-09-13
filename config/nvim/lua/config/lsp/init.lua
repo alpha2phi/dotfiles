@@ -9,6 +9,9 @@ local function setup_servers()
 
     lspinstall.setup()
 
+    -- null-ls
+    require("config.lsp.null-ls").setup()
+
     local servers = lspinstall.installed_servers()
     for _, server in pairs(servers) do
         if lsp_providers[server] then
@@ -18,8 +21,6 @@ local function setup_servers()
         end
     end
 
-    -- null-ls
-    require("config.lsp.null-ls").setup()
 end
 
 local function post_install()
