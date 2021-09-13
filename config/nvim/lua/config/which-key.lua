@@ -210,8 +210,8 @@ local lsp_mappings = {
         r = {"<Cmd>Lspsaga rename<CR>", "Rename"},
         u = {"<Cmd>Telescope lsp_references<CR>", "References"},
         o = {"<Cmd>Telescope lsp_document_symbols<CR>", "Document symbols"},
-        d = {"<Cmd>Telescope lsp_definitions<CR>", "Definition"}
-
+        d = {"<Cmd>Telescope lsp_definitions<CR>", "Definition"},
+        a = {"<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", "Add folder"}
     }
 
     -- WIP - refactoring
@@ -229,17 +229,9 @@ local lsp_mappings = {
     -- nnoremap <silent><C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
     -- nnoremap <silent><leader>cpd:Lspsaga preview_definition<CR>
     -- nnoremap <silent> <leader>cld :Lspsaga show_line_diagnostics<CR>
-    -- nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
-    -- nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
     -- nnoremap <silent> <leader>cto :Lspsaga open_floaterm<CR>
     -- tnoremap <silent> <leader>ctc <C-\><C-n>:Lspsaga close_floaterm<CR>
 
-    --     {'n', '<leader>lwa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
-    --     {'n', '<leader>lwr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
-    --     {
-    --         'n', '<leader>lwl',
-    --         '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'
-    --     }, {'n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
     --     {
     --         'n', '<leader>lds',
     --         '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'

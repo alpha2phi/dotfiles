@@ -120,6 +120,12 @@ function M.setup()
         -- LSP config
         use {'neovim/nvim-lspconfig'}
         use {'kabouzeid/nvim-lspinstall'}
+        use {
+            'tamago324/nlsp-settings.nvim',
+            config = function()
+                require("config.nlsp-settings").setup()
+            end
+        }
 
         -- Completion - use either one of this
         use {
