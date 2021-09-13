@@ -295,21 +295,21 @@ local dap_mappings = {
     -- ["<F8>"] = {name = "Vimspector - Run to Cursor"},
     -- ["<F9>"] = {name = "Vimspector - Cond. Breakpoint"},
 
-    d = {
-        name = "dap",
-        t = {"toggle breakpoint"},
-        s = {"step, set breakpoint, scopes"},
-        h = {"hover"},
-        u = {"ui"},
-        c = {"continue, telescope commands & configs"},
-        f = {"telescope frames"},
-        v = {"telescope variables"}
-    },
+    -- d = {
+    --     name = "dap",
+    --     t = {"toggle breakpoint"},
+    --     s = {"step, set breakpoint, scopes"},
+    --     h = {"hover"},
+    --     u = {"ui"},
+    --     c = {"continue, telescope commands & configs"},
+    --     f = {"telescope frames"},
+    --     v = {"telescope variables"}
+    -- },
 
-    ["dl"] = {name = "list breakpoints"},
-    ["dr"] = {name = "repl"},
+    -- ["dl"] = {name = "list breakpoints"},
+    -- ["dr"] = {name = "repl"},
 
-    v = {name = "vimspector"}
+    -- v = {name = "vimspector"}
 }
 
 function M.register_lsp(client)
