@@ -70,7 +70,7 @@ function M.lsp_config(client, bufnr)
     whichkey.register_dap(client)
 
     if client.resolved_capabilities.document_formatting then
-        vim.cmd("autocmd BufWritePre <Buffer> lua vim.lsp.buf.formatting_sync()")
+        vim.cmd("autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()")
     end
 end
 
@@ -133,44 +133,6 @@ function M.setup_server(server, config)
     if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
         print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
     end
-end
-
--- Refactoring in progress
-
-function M.WIP()
-    -- Language specific key mappings
-
-    local function setup_null_ls()
-        lspconfig["null-ls"].setup(vim.tbl_deep_extend("force", {
-            on_attach = lsp_on_attach,
-            capabilities = capabilities,
-            flags = {debounce_text_changes = 150}
-        }, {}))
-
-        local cfg = lspconfig["null-ls"]
-        if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
-            print("null-ls" .. ": cmd not found: " .. vim.inspect(cfg.cmd))
-        end
-    end
-
-    local function configure_null_ls()
-        local null_ls = require("null-ls")
-        local sources = {
-            null_ls.builtins.formatting.prettier,
-            null_ls.builtins.diagnostics.write_good
-                .with({filetypes = {"markdown", "text"}}),
-            null_ls.builtins.code_actions.gitsigns,
-            null_ls.builtins.formatting.lua_format,
-            null_ls.builtins.formatting.isort,
-            null_ls.builtins.formatting.black,
-            null_ls.builtins.diagnostics.flake8
-        }
-        null_ls.config({sources = sources})
-    end
-
-    configure_null_ls()
-    setup_null_ls()
-
 end
 
 return M
