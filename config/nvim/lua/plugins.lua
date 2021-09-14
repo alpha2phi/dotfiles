@@ -343,6 +343,7 @@ function M.setup()
         require("config.doge").setup()
       end,
     }
+    use { "michaelb/sniprun", run = "bash install.sh" }
 
     -- Rust
     use { "rust-lang/rust.vim" }
