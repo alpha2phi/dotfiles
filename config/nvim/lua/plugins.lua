@@ -357,6 +357,9 @@ function M.setup()
     use { "rust-lang/rust.vim" }
     use { "simrat39/rust-tools.nvim" }
 
+    -- TypeScript
+    use { "jose-elias-alvarez/nvim-lsp-ts-utils" }
+
     -- Markdown
     use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install" }
     use { "plasticboy/vim-markdown" }
