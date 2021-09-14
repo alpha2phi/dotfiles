@@ -58,9 +58,11 @@ function M.setup()
       end,
     }
     use {
-      "rmagatti/auto-session",
+      "rmagatti/session-lens",
+      requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
       config = function()
         require("config.auto-session").setup {}
+        require("session-lens").setup {}
       end,
     }
     use {

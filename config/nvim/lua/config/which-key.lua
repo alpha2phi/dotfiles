@@ -30,7 +30,7 @@ local mappings = {
       "Transparent background",
     },
     s = { ":<C-u>SaveSession<Cr>", "Save session" },
-    l = { ":<C-u>RestoreSession<Cr>", "Load session" },
+    l = { ":<C-u>SearchSession<Cr>", "Load session" },
     c = { "<Cmd>DashboardChangeColorscheme<Cr>", "Color scheme" },
     t = { "<Cmd>15sp +term<CR>", "New terminal" },
     e = { "!!$SHELL<CR>", "Execute line" },
