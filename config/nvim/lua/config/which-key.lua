@@ -236,8 +236,8 @@ local lsp_mappings = {
   -- nnoremap <silent> <leader>cld :Lspsaga show_line_diagnostics<CR>
 
   --     {
-  --         'n', '<leader>lds',
-  --         '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'
+  --     'n', '<leader>lds',
+  --    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'
   --     }, {'n', '<leader>lde', '<cmd>lua vim.lsp.diagnostic.enable()<CR>'},
   --     {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
   --     {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},

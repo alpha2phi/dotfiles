@@ -1,7 +1,13 @@
 local M = {}
 
 function M.setup()
-  vim.g.magma_automatically_open_output = false
+  require("sniprun").setup {
+    display = {
+      "Classic",
+      "VirtualTextOk",
+      "TempFloatingWindow",
+    },
+  }
 end
 
 return M
