@@ -340,7 +340,6 @@ function M.register_dap(client)
     wk.register(dap_mappings, opts)
 
     if vim.g.my_debugger == "d" then
-        print("register dap -----")
         wk.register({
             ["dx"] = {
                 ":lua vim.g.my_debugger = 'v'<CR>", "Switch to vimspector"
