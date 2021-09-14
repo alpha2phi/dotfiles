@@ -134,12 +134,12 @@ function M.setup()
     -- LSP config
     use { "neovim/nvim-lspconfig" }
     use { "kabouzeid/nvim-lspinstall" }
-    -- use {
-    --     'tamago324/nlsp-settings.nvim',
-    --     config = function()
-    --         require("config.nlsp-settings").setup()
-    --     end
-    -- }
+    use {
+      "tamago324/nlsp-settings.nvim",
+      config = function()
+        require("config.nlsp-settings").setup()
+      end,
+    }
 
     -- Completion - use either one of this
     use {
@@ -359,7 +359,14 @@ function M.setup()
     use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install" }
     use { "plasticboy/vim-markdown" }
 
-    -- TODO: trying
+    -- Note taking
+    use {
+      "vhyrro/neorg",
+      config = function()
+        require("config.neorg").setup()
+      end,
+      requires = "nvim-lua/plenary.nvim",
+    }
 
     -- Go
     -- use {'ray-x/go.nvim', config = function() require('go').setup() end}
@@ -412,21 +419,7 @@ return M
 -- }
 
 -- Writing and note taking
--- use {
---     "vhyrro/neorg",
---     config = function()
---         require('neorg').setup {
---             load = {
---                 ["core.defaults"] = {}, -- Load all the default modules
---                 ["core.norg.concealer"] = {}, -- Allows for use of icons
---                 ["core.norg.dirman"] = { -- Manage your directories with Neorg
---                     config = {workspaces = {my_workspace = "~/neorg"}}
---                 }
---             }
---         }
---     end,
---     requires = "nvim-lua/plenary.nvim"
--- }
+
 -- use {'Pocco81/HighStr.nvim'}
 -- use {'gyim/vim-boxdraw'}
 -- use {'preservim/vim-pencil'}
