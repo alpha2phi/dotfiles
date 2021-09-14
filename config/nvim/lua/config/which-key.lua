@@ -142,7 +142,7 @@ local mappings = {
             "<Cmd>lua require('telescope').extensions.arecibo.websearch()<CR>",
             "Web search"
         },
-        s = {"<Cmd>lua require('spectre').open()<CR>", "Search"},
+        s = {"<Cmd>lua require('spectre').open()<CR>", "Search file"},
         b = {"<Plug>SearchNormal", "Browser search"},
         v = {
             "<Cmd>lua require('spectre').open_visual({select_word=true})<CR>",
@@ -153,7 +153,8 @@ local mappings = {
             "Open file search"
         },
         c = {"q:", "Command history"},
-        g = {"q/", "Grep history"}
+        g = {"q/", "Grep history"},
+        p = {":echo 'search cht.sh'<CR>", "Search code"}
     },
 
     -- Testing

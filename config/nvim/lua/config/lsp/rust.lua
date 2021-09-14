@@ -25,14 +25,8 @@ function M.autocmds()
       augroup RUST
         autocmd!
 
-        autocmd FileType rust map <buffer> <Leader>rc :update<CR>:Cargo run<CR>
-        autocmd FileType rust map <buffer> <Leader>rr :update<CR>:RustRun<CR>
         autocmd FileType rust packadd termdebug
-
-        autocmd FileType rust map <buffer> <Leader>rl :update<CR>:RustRunnables<CR>
-        autocmd FileType rust map <buffer> <Leader>rd :update<CR>:RustDebuggables<CR>
-
-        autocmd FileType rust map <buffer> <Leader>rw :update<CR>:sp term://cargo watch -s 'clear && cargo run -q'<CR>
+        autocmd BufEnter *.rs lua require("config.lsp.rust").keymappings()
       augroup END
 
     ]], false)
@@ -50,13 +44,18 @@ function M.keymappings()
 
     local wk = require("which-key")
     local mappings = {
-        ["rr"] = {name = "Rust run"},
-        ["rd"] = {name = "Rust debuggables"},
-        ["rw"] = {name = "Cargo watch"},
-        ["rc"] = {name = "Cargo run"},
-        ["rl"] = {name = "Rust runnables"}
+        ["r"] = {
+            name = "Run",
+            r = {":update<CR>:RustRun<CR>", "Rust run"},
+            d = {":update<CR>:RustDebuggables<CR>", "Rust debuggables"},
+            w = {
+                ":update<CR>:sp term://cargo watch -s 'clear && cargo run -q'<CR>",
+                "Cargo watch"
+            },
+            c = {":update<CR>:Cargo run<CR>", "Cargo run"},
+            l = {":RustRunnables<CR>", "Rust runnables"}
+        }
     }
-
     wk.register(mappings, opts)
 end
 

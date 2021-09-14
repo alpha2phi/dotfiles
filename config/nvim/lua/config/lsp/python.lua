@@ -16,14 +16,7 @@ function M.autocmds()
       augroup PYTHON
         autocmd!
 
-        autocmd FileType python map <buffer> <Leader>rw :update<CR>:sp term://nodemon -e py %<CR>
-
-        autocmd FileType python map <buffer> <Leader>rr :update<CR>:exec '!python3' shellescape(@%, 1)<CR>
-        autocmd FileType python map <buffer> <Leader>rd :update<CR>:sp term://python3 -m pdb %<CR>
-
-        autocmd FileType python map <buffer> <Leader>rl :update<CR>:exec '!python3'<CR>
-
-        autocmd FileType python map <buffer> <Leader>ro :PyrightOrganizeImports<CR>
+        autocmd BufEnter *.py lua require("config.lsp.python").keymappings()
       augroup END
 
     ]], false)
@@ -41,14 +34,19 @@ function M.keymappings()
 
     local wk = require("which-key")
     local mappings = {
-        ["rr"] = {name = "Run"},
-        ["rd"] = {name = "PDB Debug"},
-        ["rw"] = {name = "Nodemon watch"},
-        ["rc"] = {name = "Organize imports"},
-        ["rl"] = {name = "REPL"}
+        ["r"] = {
+            name = "Run",
+            r = {
+                ":update<CR>:exec '!python3' shellescape(@%, 1)<CR>",
+                "Python run"
+            },
+            d = {":update<CR>:sp term://python3 -m pdb %<CR>", "PDB debug"},
+            w = {":update<CR>:sp term://nodemon -e py %<CR>", "Nodemon watch"},
+            c = {":PyrightOrganizeImports<CR>", "Organize imports"},
+            l = {":update<CR>:exec '!python3'<CR>", "REPL"}
+        }
     }
     wk.register(mappings, opts)
-
 end
 
 return M
