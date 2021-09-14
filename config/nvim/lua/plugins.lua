@@ -373,6 +373,9 @@ function M.setup()
       requires = "nvim-lua/plenary.nvim",
     }
 
+    -- Trying
+    use { "jamestthompson3/nvim-remote-containers" }
+
     -- Go
     -- use {'ray-x/go.nvim', config = function() require('go').setup() end}
 
