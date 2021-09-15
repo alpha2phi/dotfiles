@@ -45,10 +45,6 @@ local mappings = {
     },
     f = { "<Cmd>FloatermNew<Cr>", "Floating terminal" },
     i = { "<Cmd>PackerInstall<Cr>", "Packer install" },
-    -- n = {
-    --     "<Cmd>FloatermNew nvim ~/workspace/myself/notes/notes.md<Cr>",
-    --     "Floating note"
-    -- }
   },
 
   -- Buffer
@@ -177,7 +173,17 @@ local mappings = {
     s = { "<Cmd>lua require'sniprun'.run()<CR>", "Run snippets" },
   },
 
+  -- Git signs
   h = { name = "Git signs" },
+
+  -- Notes
+  n = {
+    name = "Notes",
+    n = {
+      "<Cmd>FloatermNew nvim <Cr>",
+      "New note",
+    },
+  },
 
   -- -- Magma
   -- m = {

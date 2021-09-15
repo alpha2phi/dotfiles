@@ -21,6 +21,9 @@ function M.auto_cmds()
         set wildignore+=**/.git/*
     ]]
 
+  -- don't auto commenting new lines
+  vim.cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
+
   vim.api.nvim_exec(
     [[
         cnoreabbrev W! w!
