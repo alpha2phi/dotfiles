@@ -1,13 +1,13 @@
 local M = {}
 
 function M.auto_cmds()
-    vim.cmd 'colorscheme gruvbox-material'
+  vim.cmd "colorscheme gruvbox-material"
 
-    -- Highlight on yank
-    -- cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
-    vim.cmd 'au TextYankPost * silent! lua vim.highlight.on_yank()'
+  -- Highlight on yank
+  -- cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
+  vim.cmd "au TextYankPost * silent! lua vim.highlight.on_yank()"
 
-    vim.cmd [[
+  vim.cmd [[
         set expandtab smarttab shiftround autoindent smartindent smartcase
         set path+=**
         set wildmode=longest,list,full
@@ -21,7 +21,8 @@ function M.auto_cmds()
         set wildignore+=**/.git/*
     ]]
 
-    vim.api.nvim_exec([[
+  vim.api.nvim_exec(
+    [[
         cnoreabbrev W! w!
         cnoreabbrev Q! q!
         cnoreabbrev Qall! qall!
@@ -32,43 +33,56 @@ function M.auto_cmds()
         cnoreabbrev W w
         cnoreabbrev Q q
         cnoreabbrev Qall qall
-    ]], false)
+    ]],
+    false
+  )
 
-    -- Auto format
-    -- vim.api.nvim_exec([[
-    -- augroup auto_fmt
-    --     autocmd!
-    --     autocmd BufWritePre *.py,*.lua,*.rs try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
-    -- aug END
-    -- ]], false)
+  -- Auto format
+  -- vim.api.nvim_exec([[
+  -- augroup auto_fmt
+  --     autocmd!
+  --     autocmd BufWritePre *.py,*.lua,*.rs try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
+  -- aug END
+  -- ]], false)
 
-    vim.api.nvim_exec([[
+  vim.api.nvim_exec(
+    [[
         augroup auto_html
             autocmd!
             autocmd Filetype html setlocal ts=2 sw=2 expandtab
             autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 noexpandtab
         augroup END
-    ]], false)
+    ]],
+    false
+  )
 
-    vim.api.nvim_exec([[
+  vim.api.nvim_exec(
+    [[
         augroup auto_term
             autocmd!
             autocmd TermOpen * setlocal nonumber norelativenumber
             autocmd TermOpen * startinsert
         augroup END
-    ]], false)
+    ]],
+    false
+  )
 
-    vim.api.nvim_exec([[
+  vim.api.nvim_exec(
+    [[
         fun! TrimWhitespace()
             let l:save = winsaveview()
             keeppatterns %s/\s\+$//e
             call winrestview(l:save)
         endfun
 
-        autocmd FileType * autocmd BufWritePre <buffer> call TrimWhitespace()
-    ]], false)
+        "-- autocmd FileType * autocmd BufWritePre <buffer> call TrimWhitespace()
+    ]],
+    false
+  )
 end
 
-function M.setup() M.auto_cmds() end
+function M.setup()
+  M.auto_cmds()
+end
 
 return M
