@@ -82,7 +82,7 @@ local mappings = {
     s = { "<Cmd>Telescope symbols<Cr>", "Symbols" },
     a = { "<Cmd>xa<Cr>", "Save all & quit" },
     e = { "<Cmd>NvimTreeToggle<CR>", "Explorer" },
-    z = { "<Cmd>lefta 20vsp .<CR>", "Netrw" },
+    z = { "<Cmd>lefta 20vsp ./<CR>", "Netrw" },
   },
 
   -- Git
@@ -180,7 +180,7 @@ local mappings = {
   n = {
     name = "Notes",
     n = {
-      "<Cmd>FloatermNew nvim <Cr>",
+      "<Cmd>FloatermNew nvim ~/workspace/dev/notes/<Cr>",
       "New note",
     },
   },
