@@ -60,6 +60,7 @@ CONFIG = {
   capabilities = lsputils.get_capabilities(),
   on_init = lsputils.lsp_init,
   on_exit = lsputils.lsp_exit,
+  flags = { debounce_text_changes = 150 },
 }
 
 function M.setup()

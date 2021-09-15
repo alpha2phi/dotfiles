@@ -72,7 +72,7 @@ function M.lsp_config(client, bufnr)
   whichkey.register_dap(client)
 
   if client.resolved_capabilities.document_formatting then
-    vim.cmd "autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()"
+    vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()"
   end
 end
 
