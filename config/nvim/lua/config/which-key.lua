@@ -55,6 +55,7 @@ local mappings = {
     l = { "<Cmd>ls<Cr>", "List buffers" },
     n = { "<Cmd>bn<Cr>", "Next buffer" },
     p = { "<Cmd>bp<Cr>", "Previous buffer" },
+    f = { "<Cmd>bd!<Cr>", "Force delete current buffer" },
   },
 
   -- Quick fix
@@ -152,7 +153,7 @@ local mappings = {
     },
     c = { "q:", "Command history" },
     g = { "q/", "Grep history" },
-    p = { ":echo 'search cht.sh'<CR>", "Search code" },
+    l = { "<Cmd>lua require('utils.cheatsheet').cheatsheet()<CR>", "Search code" },
   },
 
   -- Testing
