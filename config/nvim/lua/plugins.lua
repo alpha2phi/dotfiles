@@ -259,7 +259,7 @@ function M.setup()
         require("config.symbols-outline").setup()
       end,
     }
-    use { "~/workspace/dev/alpha2phi/alpha.nvim" }
+    -- use { "~/workspace/dev/alpha2phi/alpha.nvim" }
 
     -- Better syntax
     use {
@@ -292,6 +292,14 @@ function M.setup()
         require("config.dashboard").setup()
       end,
     }
+
+    -- use {
+    --   "goolord/alpha-nvim",
+    --   requires = { "kyazdani42/nvim-web-devicons" },
+    --   config = function()
+    --     require("alpha").setup(require("alpha.themes.dashboard").opts)
+    --   end,
+    -- }
 
     -- Status line
     use {
@@ -374,11 +382,7 @@ function M.setup()
     }
 
     -- Trying
-    use { "jamestthompson3/nvim-remote-containers" }
-
-    -- Go
-    -- use {'ray-x/go.nvim', config = function() require('go').setup() end}
-
+    use { "lewis6991/impatient.nvim" }
     -- use {
     --     "rcarriga/nvim-notify",
     --     config = function() vim.notify = require("notify") end
@@ -389,22 +393,28 @@ function M.setup()
     --     run = ':UpdateRemotePlugins',
     --     config = function() require("config.magma").setup() end
     -- }
-
-    -- use {
-    --     'kristijanhusak/orgmode.nvim',
-    --     config = function()
-    --         require('orgmode').setup {
-    --             org_agenda_files = {'~/workspace/dev/notes/**/*'},
-    --             org_default_notes_file = '~workspace/dev/notes/notes.org'
-    --         }
-    --     end
-    -- }
   end)
 end
 
 return M
 
 ------------------ Plugins list ----------------------
+
+-- Go
+-- use {'ray-x/go.nvim', config = function() require('go').setup() end}
+
+-- use { "jamestthompson3/nvim-remote-containers" }
+
+-- use {
+--     'kristijanhusak/orgmode.nvim',
+--     config = function()
+--         require('orgmode').setup {
+--             org_agenda_files = {'~/workspace/dev/notes/**/*'},
+--             org_default_notes_file = '~workspace/dev/notes/notes.org'
+--         }
+--     end
+-- }
+
 -- use {
 --     "folke/persistence.nvim",
 --     event = "BufReadPre",
