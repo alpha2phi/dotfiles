@@ -302,21 +302,25 @@ function M.setup()
     -- }
 
     -- Status line
+    -- use {
+    --   "famiu/feline.nvim",
+    --   config = function()
+    --     require("config.feline").setup()
+    --   end,
+    -- }
+    -- use {
+    --   "glepnir/galaxyline.nvim",
+    --   branch = "main",
+    --   config = function()
+    --     require("config.galaxyline").setup()
+    --   end,
+    -- }
     use {
-      "glepnir/galaxyline.nvim",
-      branch = "main",
+      "hoob3rt/lualine.nvim",
       config = function()
-        require("config.galaxyline").setup()
+        require("config.lualine").setup()
       end,
     }
-    -- use {
-    --     'hoob3rt/lualine.nvim',
-    --     requires = {
-    --         'kyazdani42/nvim-web-devicons',
-    --         config = function() require("config.lualine") end,
-    --         opt = true
-    --     }
-    -- }
 
     use {
       "akinsho/nvim-bufferline.lua",
