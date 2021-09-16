@@ -2,12 +2,12 @@ local M = {}
 
 function M.cheatsheet()
   local input = vim.fn.input("cheatsheet input: ", "", "file")
-  local command = ""
+  local cmd = ""
 
   if input == "" then
     return
   elseif input == "h" then
-    command = ""
+    cmd = ""
   else
     local lang = ""
     local search = ""
@@ -21,15 +21,15 @@ function M.cheatsheet()
         search = search .. "+" .. w
       end
     end
-    command = lang
+    cmd = lang
     if search ~= "" then
-      command = command .. "/" .. search
+      cmd = cmd .. "/" .. search
     end
   end
-  M.cheatsheet_cmd(command)
+  M.cheatsheet_cmd(cmd)
 end
 
-function M.cheatsheet_cmd(command)
+function M.cheatsheet_cmd(cmd)
   vim.api.nvim_exec("enew", true)
   local buf = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_set_name(buf, "cheatsheet-" .. buf)
@@ -39,8 +39,8 @@ function M.cheatsheet_cmd(command)
   vim.api.nvim_exec("terminal", true)
   local chan_id = vim.b.terminal_job_id
 
-  local cheatsheetcmd = "curl cht.sh/" .. command
-  vim.api.nvim_chan_send(chan_id, cheatsheetcmd .. "\n")
+  local cht_cmd = "curl cht.sh/" .. cmd
+  vim.api.nvim_chan_send(chan_id, cht_cmd .. "\n")
 end
 
 return M
