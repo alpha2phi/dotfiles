@@ -284,7 +284,15 @@ local dap_nvim_dap_mappings = {
 }
 
 local dap_vimspector_mappings = {
-  d = { name = "DAP" },
+  d = {
+    name = "DAP",
+    b = { "<Cmd>call vimspector#ToggleBreakpoint()<CR>", "Toggle breakpoint" },
+    c = { "<Cmd>call vimspector#Continue()<CR>", "Continue" },
+    s = { "<Cmd>call vimspector#StepOver()<CR>", "Step over" },
+    i = { "<Cmd>call vimspector#StepInto()<CR>", "Step into" },
+    o = { "<Cmd>call vimspector#StepOut()<CR>", "Step out" },
+    u = { "<Cmd>call vimspector#Launch()<CR>", "Launch" },
+  },
 
   --- REFACTORING WIP
   --
@@ -292,32 +300,6 @@ local dap_vimspector_mappings = {
   -- ["<F5>"] = {name = "Vimspector - Launch"},
   -- ["<F8>"] = {name = "Vimspector - Run to Cursor"},
   -- ["<F9>"] = {name = "Vimspector - Cond. Breakpoint"},
-
-  -- d = {
-  --     name = "dap",
-  --     t = {"toggle breakpoint"},
-  --     s = {"step, set breakpoint, scopes"},
-  --     h = {"hover"},
-  --     u = {"ui"},
-  --     c = {"continue, telescope commands & configs"},
-  --     f = {"telescope frames"},
-  --     v = {"telescope variables"}
-  -- },
-
-  -- ["dl"] = {name = "list breakpoints"},
-  -- ["dr"] = {name = "repl"},
-
-  -- v = {name = "vimspector"}
-
-  --     local utils = require('utils')
-
-  --     -- key mappings
-  --     utils.map_key('n', '<leader>dct', '<cmd>lua require"dap".continue()<CR>')
-  --     utils.map_key('n', '<leader>dsv', '<cmd>lua require"dap".step_over()<CR>')
-  --     utils.map_key('n', '<leader>dsi', '<cmd>lua require"dap".step_into()<CR>')
-  --     utils.map_key('n', '<leader>dso', '<cmd>lua require"dap".step_out()<CR>')
-  --     utils.map_key('n', '<leader>dtb',
-  --                   '<cmd>lua require"dap".toggle_breakpoint()<CR>')
 
   --     utils.map_key('n', '<leader>dsc',
   --                   '<cmd>lua require"dap.ui.variables".scopes()<CR>')
@@ -335,7 +317,6 @@ local dap_vimspector_mappings = {
   --                   '<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>')
   --     utils.map_key('n', '<leader>dsbm',
   --                   '<cmd>lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>')
-  --     utils.map_key('n', '<leader>dro', '<cmd>lua require"dap".repl.open()<CR>')
   --     utils.map_key('n', '<leader>drl',
   --                   '<cmd>lua require"dap".repl.run_last()<CR>')
 
@@ -350,9 +331,6 @@ local dap_vimspector_mappings = {
   --                   '<cmd>lua require"telescope".extensions.dap.variables{}<CR>')
   --     utils.map_key('n', '<leader>df',
   --                   '<cmd>lua require"telescope".extensions.dap.frames{}<CR>')
-
-  --     -- nvim-dap-ui
-  --     utils.map_key('n', '<leader>dui', '<cmd>lua require"dapui".toggle()<CR>')
 }
 
 function M.register_lsp(client)

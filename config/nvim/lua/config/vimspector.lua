@@ -1,7 +1,15 @@
 local M = {}
 
 function M.setup()
-    -- vim.g.vimspector_enable_mappings = 'HUMAN'
+  vim.g.vimspector_enable_mappings = "HUMAN"
+  vim.g.vimspector_install_gadgets = {
+    "debugpy",
+    "vscode-go",
+    "CodeLLDB",
+    "vscode-node-debug2",
+    "local-lua-debugger-vscode",
+  }
+  vim.cmd [[packadd! vimspector]]
 end
 
 return M
@@ -10,7 +18,6 @@ return M
 --     call win_gotoid(a:id)
 --     MaximizerToggle
 -- endfun
--- nmap <leader>vl :call vimspector#Launch()<CR>
 -- nmap <leader>vr :VimspectorReset<CR>
 -- nmap <leader>ve :VimspectorEval
 -- nmap <leader>vw :VimspectorWatch
@@ -18,6 +25,7 @@ return M
 -- nmap <leader>vi <Plug>VimspectorBalloonEval
 -- xmap <leader>vi <Plug>VimspectorBalloonEval
 -- let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-go', 'CodeLLDB', 'vscode-node-debug2' ]
+
 -- " Integration with telescope.nvim
 -- nmap <leader>vc :lua require('telescope').extensions.vimspector.configurations()<CR>
 -- " Inspection
