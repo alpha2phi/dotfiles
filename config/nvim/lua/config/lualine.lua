@@ -179,25 +179,28 @@ function M.setup()
       if next(clients) == nil then
         return msg
       end
-      local client_names = ""
+      local client_names = {}
       for _, client in ipairs(clients) do
         local filetypes = client.config.filetypes
         if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-          -- return client.name
-          if client_names == "" then
-            client_names = client.name
-          else
-            client_names = client_names .. "," .. client.name
-          end
+          client_names[client.name] = true
         end
       end
-      if client_names ~= "" then
-        return client_names
+      if next(client_names) then
+        local names = ""
+        for k, _ in pairs(client_names) do
+          if names == "" then
+            names = k
+          else
+            names = names .. "," .. k
+          end
+        end
+        return names
       end
       return msg
     end,
     icon = " LSP:",
-    color = { fg = colors.yellow, gui = "bold" },
+    color = { fg = colors.violet, gui = "bold" },
   }
 
   -- Add components to right sections
