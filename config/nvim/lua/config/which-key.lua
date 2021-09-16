@@ -4,7 +4,7 @@ local opts = {
   mode = "n",
   prefix = "<leader>",
   buffer = nil,
-  silent = false,
+  silent = true,
   noremap = true,
   nowait = true,
 }
@@ -232,24 +232,22 @@ local lsp_mappings = {
     o = { "<Cmd>Telescope lsp_document_symbols<CR>", "Document symbols" },
     d = { "<Cmd>Telescope lsp_definitions<CR>", "Definition" },
     a = { "<Cmd>Telescope lsp_code_actions<CR>", "Definition" },
+    e = { "<Cmd>lua vim.lsp.diagnostic.enable()<CR>", "Enable diagnostics" },
+    x = { "<Cmd>lua vim.lsp.diagnostic.disable()<CR>", "Disable diagnostics" },
   },
 
   -- WIP - refactoring
-
   -- nnoremap <silent><leader>chd :Lspsaga hover_doc<CR>
   -- nnoremap <silent><C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
   -- nnoremap <silent><C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
   -- nnoremap <silent><leader>cpd:Lspsaga preview_definition<CR>
   -- nnoremap <silent> <leader>cld :Lspsaga show_line_diagnostics<CR>
-
-  --     {
-  --     'n', '<leader>lds',
-  --    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'
-  --     }, {'n', '<leader>lde', '<cmd>lua vim.lsp.diagnostic.enable()<CR>'},
-  --     {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
-  --     {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
-  --     {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
-  --     {'v', '<leader>lcr', '<cmd>lua vim.lsp.buf.range_code_action()<CR>'},
+  -- {'n', '<leader>lds', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>' },
+  -- {'n', '<leader>lde', '<cmd>lua vim.lsp.diagnostic.enable()<CR>'},
+  -- {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
+  -- {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
+  -- {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
+  -- {'v', '<leader>lcr', '<cmd>lua vim.lsp.buf.range_code_action()<CR>'},
 }
 
 local lsp_mappings_opts = {
@@ -272,8 +270,20 @@ local lsp_mappings_opts = {
   },
 }
 
-local dap_mappings = {
+local dap_nvim_dap_mappings = {
+  d = {
+    name = "DAP",
+    b = { "<Cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle breakpoint" },
+    c = { "<Cmd>lua require('dap').continue()<CR>", "Continue" },
+    s = { "<Cmd>lua require('dap').step_over()<CR>", "Step over" },
+    i = { "<Cmd>lua require('dap').step_into()<CR>", "Step into" },
+    o = { "<Cmd>lua require('dap').step_out()<CR>", "Step out" },
+    u = { "<Cmd>lua require('dapui').toggle()<CR>", "Toggle UI" },
+    p = { "<Cmd>lua require('dap').repl.open()<CR>", "REPL" },
+  },
+}
 
+local dap_vimspector_mappings = {
   d = { name = "DAP" },
 
   --- REFACTORING WIP
@@ -357,21 +367,34 @@ function M.register_lsp(client)
   end
 end
 
-function M.register_dap()
+function M.register_dap_vimspector()
   local wk = require "which-key"
-  wk.register(dap_mappings, opts)
+  wk.register({
+    ["dx"] = {
+      ":lua require('config.which-key').register_dap_nvim_dap()<CR>",
+      "Switch to vimspector",
+    },
+  }, opts)
+  wk.register(dap_vimspector_mappings, opts)
+  vim.g.my_debugger = "v"
+  vim.g.vimspector_enable_mappings = "HUMAN"
+end
 
-  if vim.g.my_debugger == "d" then
-    wk.register({
-      ["dx"] = {
-        ":lua vim.g.my_debugger = 'v'<CR>",
-        "Switch to vimspector",
-      },
-    }, opts)
+function M.register_dap_nvim_dap()
+  local wk = require "which-key"
+  wk.register({
+    ["dx"] = { ":lua require('config.which-key').register_dap_vimspector()<CR>", "Switch to nvim-dap" },
+  }, opts)
+  wk.register(dap_nvim_dap_mappings, opts)
+  vim.g.my_debugger = "d"
+  vim.g.vimspector_enable_mappings = ""
+end
+
+function M.register_dap()
+  if vim.g.my_debugger == "v" then
+    M.register_dap_vimspector()
   else
-    wk.register({
-      ["dx"] = { ":lua vim.g.my_debugger = 'd'<CR>", "Switch to nvim-dap" },
-    }, opts)
+    M.register_dap_nvim_dap()
   end
 end
 

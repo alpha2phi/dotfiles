@@ -1,11 +1,14 @@
 local M = {}
 
 function M.setup()
+  -- DAPInstall
+  local dap_install = require "dap-install"
+  dap_install.setup {
+    installation_path = vim.fn.stdpath "data" .. "/dapinstall/",
+  }
+
   -- telescope-dap
   require("telescope").load_extension "dap"
-
-  -- d for nvim-dap, v for vimspector
-  vim.g.my_debugger = "d"
 
   -- nvim-dap-virtual-text. Show virtual text for current frame
   vim.g.dap_virtual_text = true
