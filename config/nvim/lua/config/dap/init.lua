@@ -23,6 +23,10 @@ function M.setup()
   -- nvim-dap
   vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
   vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
+
+  -- key mappings
+  local wk = require "config.which-key"
+  wk.register_dap()
 end
 
 return M

@@ -69,7 +69,6 @@ function M.lsp_config(client, bufnr)
   -- LSP and DAP menu
   local whichkey = require "config.which-key"
   whichkey.register_lsp(client)
-  whichkey.register_dap(client)
 
   if client.resolved_capabilities.document_formatting then
     vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()"

@@ -357,7 +357,7 @@ function M.register_lsp(client)
   end
 end
 
-function M.register_dap(client)
+function M.register_dap()
   local wk = require "which-key"
   wk.register(dap_mappings, opts)
 
