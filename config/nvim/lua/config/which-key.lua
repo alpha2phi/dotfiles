@@ -297,6 +297,7 @@ local dap_vimspector_mappings = {
     i = { "<Cmd>call vimspector#StepInto()<CR>", "Step into" },
     o = { "<Cmd>call vimspector#StepOut()<CR>", "Step out" },
     u = { "<Cmd>call vimspector#Launch()<CR>", "Launch" },
+f = {"<Cmd>lua require('telescope').extensions.vimspector.configurations()<CR>", "Configurations"}
   },
 
   --- REFACTORING WIP
