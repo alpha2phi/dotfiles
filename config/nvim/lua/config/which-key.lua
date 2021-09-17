@@ -280,6 +280,11 @@ local dap_nvim_dap_mappings = {
     o = { "<Cmd>lua require('dap').step_out()<CR>", "Step out" },
     u = { "<Cmd>lua require('dapui').toggle()<CR>", "Toggle UI" },
     p = { "<Cmd>lua require('dap').repl.open()<CR>", "REPL" },
+    e = { '<Cmd>lua require"telescope".extensions.dap.commands{}<CR>', "Commands" },
+    f = { '<Cmd>lua require"telescope".extensions.dap.configurations{}<CR>', "Configurations" },
+    r = { '<Cmd>lua require"telescope".extensions.dap.list_breakpoints{}<CR>', "List breakpoints" },
+    v = { '<Cmd>lua require"telescope".extensions.dap.variables{}<CR>', "Variables" },
+    m = { '<Cmd>lua require"telescope".extensions.dap.frames{}<CR>', "Frames" },
   },
 }
 
@@ -319,18 +324,6 @@ local dap_vimspector_mappings = {
   --                   '<cmd>lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>')
   --     utils.map_key('n', '<leader>drl',
   --                   '<cmd>lua require"dap".repl.run_last()<CR>')
-
-  --     -- telescope-dap
-  --     utils.map_key('n', '<leader>dcc',
-  --                   '<cmd>lua require"telescope".extensions.dap.commands{}<CR>')
-  --     utils.map_key('n', '<leader>dco',
-  --                   '<cmd>lua require"telescope".extensions.dap.configurations{}<CR>')
-  --     utils.map_key('n', '<leader>dlb',
-  --                   '<cmd>lua require"telescope".extensions.dap.list_breakpoints{}<CR>')
-  --     utils.map_key('n', '<leader>dv',
-  --                   '<cmd>lua require"telescope".extensions.dap.variables{}<CR>')
-  --     utils.map_key('n', '<leader>df',
-  --                   '<cmd>lua require"telescope".extensions.dap.frames{}<CR>')
 }
 
 function M.register_lsp(client)
