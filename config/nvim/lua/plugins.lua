@@ -331,12 +331,7 @@ function M.setup()
     }
 
     -- Debugging
-    use {
-      "puremourning/vimspector",
-      config = function()
-        require("config.vimspector").setup()
-      end,
-    }
+    use { "puremourning/vimspector" }
     use { "nvim-telescope/telescope-vimspector.nvim" }
 
     -- DAP
