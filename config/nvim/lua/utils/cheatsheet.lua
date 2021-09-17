@@ -1,9 +1,5 @@
 local M = {}
 
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
 function M.cheatsheet()
   local input = vim.fn.input("cheatsheet input: ", "", "file")
   local cmd = ""
