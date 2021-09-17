@@ -82,6 +82,11 @@ function M.auto_cmds()
     ]],
     false
   )
+
+  vim.cmd [[ au CmdWinEnter * quit ]]
+
+  vim.cmd [[
+    map <F4> :echom "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR> ]]
 end
 
 function M.setup()
