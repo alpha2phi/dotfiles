@@ -1,5 +1,9 @@
 local M = {}
 
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
 function M.cheatsheet()
   local input = vim.fn.input("cheatsheet input: ", "", "file")
   local cmd = ""
@@ -41,6 +45,7 @@ function M.cheatsheet_cmd(cmd)
 
   local cht_cmd = "curl cht.sh/" .. cmd
   vim.api.nvim_chan_send(chan_id, cht_cmd .. "\n")
+  vim.cmd [[stopinsert]]
 end
 
 return M
