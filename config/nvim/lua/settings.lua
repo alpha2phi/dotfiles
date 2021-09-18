@@ -83,10 +83,15 @@ function M.auto_cmds()
     false
   )
 
-  vim.cmd [[ au CmdWinEnter * quit ]]
+  vim.cmd [[ autocmd CmdWinEnter * quit ]]
 
-  vim.cmd [[
-    map <F4> :echom "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR> ]]
+  vim.api.nvim_exec(
+    [[
+      hi InactiveWindow guibg=#282C34
+      autocmd VimEnter * set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+    ]],
+    false
+  )
 end
 
 function M.setup()
