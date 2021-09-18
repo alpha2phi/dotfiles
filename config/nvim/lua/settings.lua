@@ -83,7 +83,7 @@ function M.auto_cmds()
     false
   )
 
-  vim.cmd [[ autocmd CmdWinEnter * quit ]]
+  -- vim.cmd [[ autocmd CmdWinEnter * quit ]]
 
   vim.api.nvim_exec(
     [[
