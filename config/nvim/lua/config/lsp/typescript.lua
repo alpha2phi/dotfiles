@@ -65,8 +65,8 @@ CONFIG = {
 
 function M.setup()
   lspconfig["typescript"].setup(CONFIG)
-  -- M.autocmds()
-  -- M.keymappings()
+  M.autocmds()
+  M.keymappings()
 end
 
 function M.autocmds()
@@ -77,6 +77,7 @@ function M.autocmds()
         autocmd!
 
         autocmd BufEnter *.ts lua require("config.lsp.typescript").keymappings()
+        autocmd BufEnter *.js lua require("config.lsp.typescript").keymappings()
       augroup END
 
     ]],
@@ -98,14 +99,20 @@ function M.keymappings()
   local mappings = {
     ["r"] = {
       name = "Run",
-      -- r = {
-      --   ":update<CR>:exec '!python3' shellescape(@%, 1)<CR>",
-      --   "Python run",
-      -- },
-      -- d = { ":update<CR>:sp term://python3 -m pdb %<CR>", "PDB debug" },
-      -- w = { ":update<CR>:sp term://nodemon -e py %<CR>", "Nodemon watch" },
-      -- c = { ":PyrightOrganizeImports<CR>", "Organize imports" },
-      -- l = { ":update<CR>:exec '!python3'<CR>", "REPL" },
+      r = {
+        ":update<CR>:sp term://nodemon -e js %<CR>",
+        "Nodemon watch - Javascript",
+      },
+      d = {
+        ":update<CR>:sp term://nodemon -e yarn start<CR>",
+        "Nodemon yarn",
+      },
+      w = {
+        ":update<CR>:sp term://nodemon -e ts %<CR>",
+        "Nodemon watch - Typescript",
+      },
+      c = { "", "Not defined" },
+      l = { "", "Not defined" },
     },
   }
   wk.register(mappings, opts)
