@@ -32,7 +32,8 @@ local mappings = {
     s = { ":<C-u>SaveSession<Cr>", "Save session" },
     l = { ":<C-u>SearchSession<Cr>", "Load session" },
     c = { "<Cmd>DashboardChangeColorscheme<Cr>", "Color scheme" },
-    t = { "<Cmd>15sp +term<CR>", "New terminal" },
+    h = { "<Cmd>15sp +term<CR>", "New horizontal terminal" },
+    t = { "<Cmd>terminal<CR>", "New terminal" },
     e = { "!!$SHELL<CR>", "Execute line" },
     z = {
       "<Cmd>lua require('config.telescope').search_dotfiles()<CR>",
