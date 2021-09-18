@@ -231,7 +231,7 @@ local lsp_mappings = {
     u = { "<Cmd>Telescope lsp_references<CR>", "References" },
     o = { "<Cmd>Telescope lsp_document_symbols<CR>", "Document symbols" },
     d = { "<Cmd>Telescope lsp_definitions<CR>", "Definition" },
-    a = { "<Cmd>Telescope lsp_code_actions<CR>", "Definition" },
+    a = { "<Cmd>Telescope lsp_code_actions<CR>", "Code actions" },
     e = { "<Cmd>lua vim.lsp.diagnostic.enable()<CR>", "Enable diagnostics" },
     x = { "<Cmd>lua vim.lsp.diagnostic.disable()<CR>", "Disable diagnostics" },
   },
