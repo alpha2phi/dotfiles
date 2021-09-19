@@ -45,7 +45,7 @@ local mappings = {
       "Set runtime path",
     },
     f = { "<Cmd>FloatermNew<Cr>", "Floating terminal" },
-    i = { "<Cmd>PackerInstall<Cr>", "Packer install" },
+    i = { "<Cmd>Packer Update<Cr>", "Packer update" },
   },
 
   -- Buffer
