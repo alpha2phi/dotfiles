@@ -9,3 +9,5 @@ My Neovim configuration. To get started, read my [Medium article](https://alpha2
 ## Emacs
 
 My Emacs configuration. To get started, read my [Medium article](https://alpha2phi.medium.com/emacs-beginner-configuration-9578dbe71d03)
+
+![Emacs](images/emacs.jpg)
