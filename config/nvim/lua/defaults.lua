@@ -31,7 +31,7 @@ function M.setup()
   o.history = 100
   o.lazyredraw = true
   o.synmaxcol = 240
-
+  o.mouse = "a"
   wo.number = true
   wo.relativenumber = true
   wo.scrolloff = 8
