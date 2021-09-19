@@ -188,6 +188,10 @@ local mappings = {
       "<Cmd>FloatermNew nvim ~/workspace/dev/notes/<Cr>",
       "New note",
     },
+    z = {
+      "<Cmd>ZenMode<Cr>",
+      "Zen Mode",
+    },
   },
 
   -- -- Magma

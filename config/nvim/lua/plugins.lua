@@ -379,6 +379,12 @@ function M.setup()
       end,
       requires = "nvim-lua/plenary.nvim",
     }
+    use {
+      "folke/zen-mode.nvim",
+      config = function()
+        require("zen-mode").setup {}
+      end,
+    }
 
     -- Trying
     use { "lewis6991/impatient.nvim" }
