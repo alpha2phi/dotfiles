@@ -22,7 +22,7 @@ function M.setup()
   o.splitbelow = true
   o.splitright = true
   o.clipboard = "unnamed,unnamedplus"
-  o.timeoutlen = 500
+  o.timeoutlen = 300
   o.updatetime = 300
   o.inccommand = "split"
   o.cmdheight = 1
