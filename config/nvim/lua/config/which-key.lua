@@ -242,6 +242,7 @@ local lsp_mappings = {
     a = { "<Cmd>Telescope lsp_code_actions<CR>", "Code actions" },
     e = { "<Cmd>lua vim.lsp.diagnostic.enable()<CR>", "Enable diagnostics" },
     x = { "<Cmd>lua vim.lsp.diagnostic.disable()<CR>", "Disable diagnostics" },
+    n = { "<Cmd>update<CR>:Neoformat<CR>", "Neoformat" },
   },
 
   -- WIP - refactoring

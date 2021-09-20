@@ -331,8 +331,8 @@ function M.setup()
     }
 
     -- Debugging
-    use { "puremourning/vimspector" }
-    use { "nvim-telescope/telescope-vimspector.nvim" }
+    use { "puremourning/vimspector", event = "BufWinEnter" }
+    use { "nvim-telescope/telescope-vimspector.nvim", event = "BufWinEnter" }
 
     -- DAP
     use { "mfussenegger/nvim-dap" }
