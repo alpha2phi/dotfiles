@@ -388,6 +388,8 @@ function M.setup()
 
     -- Trying
     use { "lewis6991/impatient.nvim" }
+
+    use { "untitled-ai/jupyter_ascending.vim" }
     -- use {
     --     "rcarriga/nvim-notify",
     --     config = function() vim.notify = require("notify") end
