@@ -48,7 +48,6 @@ function M.setup()
     -- use {'chrisbra/NrrwRgn'}
     use {
       "kyazdani42/nvim-tree.lua",
-      requires = "kyazdani42/nvim-web-devicons",
     }
     use { "windwp/nvim-spectre" }
     use {
@@ -216,7 +215,6 @@ function M.setup()
     }
     use {
       "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
       config = function()
         require("todo-comments").setup {}
       end,
@@ -230,10 +228,7 @@ function M.setup()
     }
     use { "junegunn/vim-easy-align" }
     use { "antoinemadec/FixCursorHold.nvim" }
-    use {
-      "jose-elias-alvarez/null-ls.nvim",
-      requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    }
+    use { "jose-elias-alvarez/null-ls.nvim" }
 
     -- Snippets
     -- use {
@@ -324,7 +319,6 @@ function M.setup()
 
     use {
       "akinsho/nvim-bufferline.lua",
-      requires = "kyazdani42/nvim-web-devicons",
       config = function()
         require("config.bufferline").setup()
       end,
@@ -377,7 +371,6 @@ function M.setup()
       config = function()
         require("config.neorg").setup()
       end,
-      requires = "nvim-lua/plenary.nvim",
     }
     use {
       "folke/zen-mode.nvim",
