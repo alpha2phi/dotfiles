@@ -18,6 +18,15 @@ local vopts = {
   nowait = true,
 }
 
+local xopts = {
+  mode = "x",
+  prefix = "<leader>",
+  buffer = nil,
+  silent = true,
+  noremap = true,
+  nowait = true,
+}
+
 local mappings = {
   ["w"] = { "<Cmd>w<Cr>", "Save" },
   ["q"] = { "<Cmd>q<Cr>", "Quit" },
@@ -236,10 +245,13 @@ local vmappings = {
     name = "Source code",
     y = { name = "Git URL" },
   },
-  -- m = {
-  --     name = "Jupyter mode - Magma",
-  --     e = {"<Cmd><C-u>MagmaEvaluateVisual<Cr>", "Evaluate"}
-  -- }
+}
+
+local xmappings = {
+  m = {
+    name = "Jupyter mode - Magma",
+    e = { "<Cmd><C-u>MagmaEvaluateVisual<Cr>", "Evaluate" },
+  },
 }
 
 local lsp_mappings = {
@@ -396,6 +408,7 @@ function M.setup()
   wk.setup {}
   wk.register(mappings, opts)
   wk.register(vmappings, vopts)
+  wk.register(xmappings, xopts)
 end
 
 return M
