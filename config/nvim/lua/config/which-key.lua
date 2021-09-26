@@ -216,7 +216,7 @@ local mappings = {
 
   -- Magma
   m = {
-    name = "Jupyter mode - Magma",
+    name = "Magma",
     l = { "<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line" },
     r = { "<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell" },
     d = { "<Cmd>MagmaDelete<Cr>", "Delete" },
@@ -249,7 +249,7 @@ local vmappings = {
 
 local xmappings = {
   m = {
-    name = "Jupyter mode - Magma",
+    name = "Magma",
     e = { "<Cmd><C-u>MagmaEvaluateVisual<Cr>", "Evaluate" },
   },
 }
