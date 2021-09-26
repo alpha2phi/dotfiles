@@ -48,6 +48,9 @@ function M.setup()
     -- use {'chrisbra/NrrwRgn'}
     use {
       "kyazdani42/nvim-tree.lua",
+      config = function()
+        require("nvim-tree").setup {}
+      end,
     }
     use { "windwp/nvim-spectre" }
     use {
