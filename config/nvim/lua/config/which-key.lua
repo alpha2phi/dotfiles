@@ -174,13 +174,23 @@ local mappings = {
   -- Run
   r = {
     name = "Run",
-    x = { name = "Swap next parameter" },
-    X = { name = "Swap previous parameter" },
+    x = "Swap next parameter",
+    X = "Swap previous parameter",
     s = { "<Cmd>lua require'sniprun'.run()<CR>", "Run snippets" },
   },
 
   -- Git signs
-  h = { name = "Git signs" },
+  h = {
+    name = "Git signs",
+    b = "Blame line",
+    p = "Preview hunk",
+    R = "Reset buffer",
+    r = "Reset buffer",
+    s = "Stage hunk",
+    S = "Stage buffer",
+    u = "Undo stage hunk",
+    U = "Reset buffer index",
+  },
 
   -- Notes
   n = {
@@ -195,16 +205,16 @@ local mappings = {
     },
   },
 
-  -- -- Magma
-  -- m = {
-  --     name = "Jupyter mode - Magma",
-  --     l = {"<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line"},
-  --     r = {"<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell"},
-  --     d = {"<Cmd>MagmaDelete<Cr>", "Delete"},
-  --     o = {"<Cmd>MagmaShowOutput<Cr>", "Show output"},
-  --     i = {"<Cmd>MagmaInit<Cr>", "Init"},
-  --     u = {"<Cmd>MagmaDeinit<Cr>", "Deinit"}
-  -- },
+  -- Magma
+  m = {
+    name = "Jupyter mode - Magma",
+    l = { "<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line" },
+    r = { "<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell" },
+    d = { "<Cmd>MagmaDelete<Cr>", "Delete" },
+    o = { "<Cmd>MagmaShowOutput<Cr>", "Show output" },
+    i = { "<Cmd>MagmaInit<Cr>", "Init" },
+    u = { "<Cmd>MagmaDeinit<Cr>", "Deinit" },
+  },
 
   -- K = {name = "Cheatsheet"},
   -- C = {name = "Cheatsheet (toggle comment)"},

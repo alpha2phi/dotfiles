@@ -6,6 +6,7 @@ local wo = vim.wo
 local bo = vim.bo
 local indent = 4
 local opt = vim.opt
+local g = vim.g
 
 function M.setup()
   cmd "syntax enable"
@@ -48,6 +49,8 @@ function M.setup()
     + "n" -- Indent past the formatlistpat, not underneath it.
     + "j" -- Auto-remove comments if possible.
     - "2" -- I'm not in gradeschool anymore
+
+  g.python3_host_prog = "~/miniconda3/bin/python3"
 end
 
 return M

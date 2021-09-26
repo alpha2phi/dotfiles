@@ -390,16 +390,25 @@ function M.setup()
     use { "lewis6991/impatient.nvim" }
 
     use { "untitled-ai/jupyter_ascending.vim" }
+
+    use { "jdhao/better-escape.vim", event = "InsertEnter" }
+
+    use {
+      "glacambre/firenvim",
+      run = function()
+        vim.fn["firenvim#install"](0)
+      end,
+    }
+
     -- use {
     --     "rcarriga/nvim-notify",
     --     config = function() vim.notify = require("notify") end
     -- }
 
-    -- use {
-    --     'dccsillag/magma-nvim',
-    --     run = ':UpdateRemotePlugins',
-    --     config = function() require("config.magma").setup() end
-    -- }
+    use {
+      "dccsillag/magma-nvim",
+      run = ":UpdateRemotePlugins",
+    }
   end)
 end
 
