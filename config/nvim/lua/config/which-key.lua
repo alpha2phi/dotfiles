@@ -245,6 +245,10 @@ local vmappings = {
     name = "Source code",
     y = { name = "Git URL" },
   },
+  b = {
+    name = "Buffer",
+    h = { ":fold<CR>", "Hide/fold code" },
+  },
 }
 
 local xmappings = {
