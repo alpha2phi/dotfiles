@@ -26,10 +26,13 @@ function M.nvim_dap_setup()
   -- nvim-dap
   vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
   vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
+
+  vim.g.vimspector_enable_mappings = ""
 end
 
 function M.vimspector_setup()
-  -- vim.g.vimspector_enable_mappings = "HUMAN"
+  vim.g.vimspector_enable_mappings = "HUMAN"
+
   vim.g.vimspector_install_gadgets = {
     "debugpy",
     "vscode-go",
