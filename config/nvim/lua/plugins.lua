@@ -385,16 +385,9 @@ function M.setup()
     -- Trying
     use { "lewis6991/impatient.nvim" }
 
+    use { "sindrets/winshift.nvim" }
+
     use { "untitled-ai/jupyter_ascending.vim" }
-
-    use { "jdhao/better-escape.vim", event = "InsertEnter" }
-
-    use {
-      "glacambre/firenvim",
-      run = function()
-        vim.fn["firenvim#install"](0)
-      end,
-    }
 
     use {
       "rcarriga/nvim-notify",
@@ -413,6 +406,8 @@ end
 return M
 
 ------------------ Plugins list ----------------------
+
+-- use { "jdhao/better-escape.vim", event = "InsertEnter" }
 
 -- Go
 -- use {'ray-x/go.nvim', config = function() require('go').setup() end}
