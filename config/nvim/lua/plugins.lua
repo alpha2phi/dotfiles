@@ -95,6 +95,7 @@ function M.setup()
     use { "folke/tokyonight.nvim" }
     use { "sainnhe/everforest" }
     use { "folke/lsp-colors.nvim" }
+    use { "navarasu/onedark.nvim" }
 
     -- Testing
     use {
