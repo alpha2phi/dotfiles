@@ -79,6 +79,9 @@ local keymappings = {
     },
     ["w!!"] = "execute 'silent! write !sudo tee % >/dev/null' <bar> edit!",
     ["%%"] = { "getcmdtype() == ':' ? expand('%:p:h').'/' : '%%'", { expr = true, noremap = true } },
+    ["%H"] = { "<C-R>=expand('%:h:p') . std#path#separator()<CR>", { expr = false, noremap = true } },
+    ["%T"] = { "<C-R>=expand('%:t')<CR>", { expr = false, noremap = true } },
+    ["%P"] = { "<C-R>=expand('%:p')<CR>", { expr = false, noremap = true } },
   },
 }
 
