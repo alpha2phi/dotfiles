@@ -11,6 +11,7 @@ function M.auto_cmds()
         set expandtab smarttab shiftround autoindent smartindent smartcase
         set path+=**
         set wildmode=longest,list,full
+        set wildoptions=pum
         set wildmenu
         set wildignore+=*.pyc
         set wildignore+=*_build/*
