@@ -209,6 +209,10 @@ local mappings = {
       "<Cmd>FloatermNew nvim ~/workspace/dev/notes/<Cr>",
       "New note",
     },
+    o = { "<Cmd>GkeepOpen<Cr>", "GKeep Open" },
+    c = { "<Cmd>GkeepClose<Cr>", "GKeep Close" },
+    r = { "<Cmd>GkeepRefresh<Cr>", "GKeep Refresh" },
+    s = { "<Cmd>GkeepSync<Cr>", "GKeep Sync" },
     z = {
       "<Cmd>ZenMode<Cr>",
       "Zen Mode",
