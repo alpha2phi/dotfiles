@@ -416,6 +416,13 @@ function M.setup()
         require("neoclip").setup()
       end,
     }
+
+    use {
+      "weilbith/nvim-code-action-menu",
+      cmd = "CodeActionMenu",
+    }
+
+    use { "stevearc/gkeep.nvim", run = ":UpdateRemotePlugins" }
   end)
 end
 

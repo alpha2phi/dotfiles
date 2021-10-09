@@ -168,6 +168,7 @@ local mappings = {
     g = { "q/", "Grep history" },
     l = { "<Cmd>lua require('utils.cheatsheet').cheatsheet()<CR>", "Search code" },
     o = { "<Cmd>SymbolsOutline<CR>", "Symbols Outline" },
+    z = { "<Cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy find buffer" },
   },
 
   -- Testing
