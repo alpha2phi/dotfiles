@@ -105,6 +105,7 @@ function M.setup()
       { name = "emoji" },
       { name = "treesitter" },
       { name = "neorg" },
+      { name = "crates" },
       -- { name = "look" },
       -- { name = "calc" },
       -- { name = "spell" },

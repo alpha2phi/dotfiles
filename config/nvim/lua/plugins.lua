@@ -361,6 +361,13 @@ function M.setup()
     -- Rust
     use { "rust-lang/rust.vim" }
     use { "simrat39/rust-tools.nvim" }
+    use {
+      "Saecki/crates.nvim",
+      event = { "BufRead Cargo.toml" },
+      config = function()
+        require("crates").setup()
+      end,
+    }
 
     -- TypeScript
     use { "jose-elias-alvarez/nvim-lsp-ts-utils" }
