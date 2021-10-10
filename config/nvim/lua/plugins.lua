@@ -404,24 +404,6 @@ function M.setup()
       end,
     }
 
-    use {
-      "dccsillag/magma-nvim",
-      run = ":UpdateRemotePlugins",
-    }
-
-    use {
-      "AckslD/nvim-neoclip.lua",
-      requires = { "tami5/sqlite.lua", module = "sqlite" },
-      config = function()
-        require("neoclip").setup()
-      end,
-    }
-
-    use {
-      "weilbith/nvim-code-action-menu",
-      cmd = "CodeActionMenu",
-    }
-
     use { "stevearc/gkeep.nvim", run = ":UpdateRemotePlugins" }
 
     use { "Pocco81/Catppuccino.nvim" }
@@ -439,6 +421,24 @@ end
 return M
 
 ------------------ Plugins list ----------------------
+
+-- use {
+--   "dccsillag/magma-nvim",
+--   run = ":UpdateRemotePlugins",
+-- }
+
+-- use {
+--   "AckslD/nvim-neoclip.lua",
+--   requires = { "tami5/sqlite.lua", module = "sqlite" },
+--   config = function()
+--     require("neoclip").setup()
+--   end,
+-- }
+
+-- use {
+--   "weilbith/nvim-code-action-menu",
+--   cmd = "CodeActionMenu",
+-- }
 
 -- use { "jdhao/better-escape.vim", event = "InsertEnter" }
 
