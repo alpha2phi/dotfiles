@@ -374,7 +374,7 @@ function M.setup()
 
     -- Markdown
     use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install" }
-    use { "plasticboy/vim-markdown" }
+    use { "plasticboy/vim-markdown", requires = { "godlygeek/tabular" } }
 
     -- Note taking
     use {
@@ -423,6 +423,16 @@ function M.setup()
     }
 
     use { "stevearc/gkeep.nvim", run = ":UpdateRemotePlugins" }
+
+    use { "Pocco81/Catppuccino.nvim" }
+
+    use {
+      "max397574/better-escape.nvim",
+      config = function()
+        require("better_escape").setup()
+      end,
+      event = "InsertEnter",
+    }
   end)
 end
 

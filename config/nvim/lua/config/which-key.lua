@@ -213,6 +213,7 @@ local mappings = {
     c = { "<Cmd>GkeepClose<Cr>", "GKeep Close" },
     r = { "<Cmd>GkeepRefresh<Cr>", "GKeep Refresh" },
     s = { "<Cmd>GkeepSync<Cr>", "GKeep Sync" },
+    p = { "<Cmd>MarkdownPreview<Cr>", "Preview markdown" },
     z = {
       "<Cmd>ZenMode<Cr>",
       "Zen Mode",
