@@ -51,6 +51,7 @@ function M.setup()
     - "2" -- I'm not in gradeschool anymore
 
   g.python3_host_prog = "~/miniconda3/bin/python3"
+  g.vim_markdown_fenced_languages = { "html", "javascript", "typescript", "css", "python", "lua", "vim" }
 end
 
 return M

@@ -406,8 +406,6 @@ function M.setup()
 
     use { "stevearc/gkeep.nvim", run = ":UpdateRemotePlugins" }
 
-    use { "Pocco81/Catppuccino.nvim" }
-
     use {
       "max397574/better-escape.nvim",
       config = function()
@@ -421,6 +419,8 @@ end
 return M
 
 ------------------ Plugins list ----------------------
+
+-- use { "Pocco81/Catppuccino.nvim" }
 
 -- use {
 --   "dccsillag/magma-nvim",
