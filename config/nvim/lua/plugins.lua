@@ -406,6 +406,8 @@ function M.setup()
 
     use { "stevearc/gkeep.nvim", run = ":UpdateRemotePlugins" }
 
+    use { "gelguy/wilder.nvim", run = ":UpdateRemotePlugins" }
+
     use {
       "max397574/better-escape.nvim",
       config = function()
