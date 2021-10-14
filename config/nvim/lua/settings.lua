@@ -22,10 +22,6 @@ function M.auto_cmds()
         set wildignore+=**/.git/*
     ]]
 
-  vim.cmd [[
-      call wilder#setup({'modes': [':', '/', '?']})
-  ]]
-
   -- don't auto commenting new lines
   vim.cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
 

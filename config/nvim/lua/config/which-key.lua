@@ -214,10 +214,8 @@ local mappings = {
     r = { "<Cmd>GkeepRefresh<Cr>", "GKeep Refresh" },
     s = { "<Cmd>GkeepSync<Cr>", "GKeep Sync" },
     p = { "<Cmd>MarkdownPreview<Cr>", "Preview markdown" },
-    z = {
-      "<Cmd>ZenMode<Cr>",
-      "Zen Mode",
-    },
+    z = { "<Cmd>ZenMode<Cr>", "Zen Mode" },
+    g = { "<Cmd>GrammarousCheck<Cr>", "Grammar check" },
   },
 
   -- Magma

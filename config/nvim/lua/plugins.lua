@@ -406,7 +406,13 @@ function M.setup()
 
     use { "stevearc/gkeep.nvim", run = ":UpdateRemotePlugins" }
 
-    use { "gelguy/wilder.nvim", run = ":UpdateRemotePlugins" }
+    use {
+      "gelguy/wilder.nvim",
+      run = ":UpdateRemotePlugins",
+      config = function()
+        require("config.wilder").setup()
+      end,
+    }
 
     use {
       "max397574/better-escape.nvim",
@@ -415,6 +421,8 @@ function M.setup()
       end,
       event = "InsertEnter",
     }
+
+    use { "rhysd/vim-grammarous" }
   end)
 end
 
