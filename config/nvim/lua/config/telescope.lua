@@ -31,10 +31,8 @@ function M.setup()
         override_file_sorter = true,
         case_mode = "smart_case",
       },
-      extensions = {
-        media_files = {
-          filetypes = { "png", "jpg", "mp4", "webm", "pdf", "gif" },
-        },
+      media_files = {
+        filetypes = { "png", "jpg", "mp4", "webm", "pdf", "gif" },
       },
     },
     defaults = {
@@ -52,7 +50,7 @@ function M.setup()
   -- require('telescope').load_extension('snippets')
   -- require('telescope').load_extension('gh')
   -- require('telescope').load_extension('hop')
-  -- require('telescope').load_extension('arecibo')
+  require("telescope").load_extension "arecibo"
   require("telescope").load_extension "media_files"
 
   M.search_dotfiles = function()
