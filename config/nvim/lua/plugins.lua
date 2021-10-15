@@ -333,6 +333,7 @@ function M.setup()
       config = function()
         require("config.bufferline").setup()
       end,
+      event = "VimEnter",
     }
 
     -- Debugging
@@ -356,6 +357,7 @@ function M.setup()
       config = function()
         require("config.doge").setup()
       end,
+      event = "VimEnter",
     }
     use {
       "michaelb/sniprun",
@@ -370,7 +372,6 @@ function M.setup()
     use { "simrat39/rust-tools.nvim" }
     use {
       "Saecki/crates.nvim",
-      event = "VimEnter",
       event = { "BufRead Cargo.toml" },
       config = function()
         require("crates").setup()
