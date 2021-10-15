@@ -61,7 +61,7 @@ function M.setup()
     }
     use {
       "rmagatti/session-lens",
-      requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
+      requires = { "rmagatti/auto-session" },
       config = function()
         require("config.auto-session").setup {}
         require("session-lens").setup {}
@@ -113,6 +113,7 @@ function M.setup()
       requires = {
         "nvim-telescope/telescope-project.nvim",
         "nvim-telescope/telescope-symbols.nvim",
+        "nvim-telescope/telescope-media-files.nvim",
         -- 'nvim-telescope/telescope-github.nvim',
         -- 'nvim-telescope/telescope-hop.nvim'
       },
@@ -128,6 +129,10 @@ function M.setup()
       end,
     }
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+    use {
+      "nvim-telescope/telescope-arecibo.nvim",
+      rocks = { "openssl", "lua-http-parser" },
+    }
     use {
       "ahmedkhalf/project.nvim",
       config = function()
@@ -359,10 +364,11 @@ function M.setup()
     }
 
     -- Rust
-    use { "rust-lang/rust.vim" }
+    use { "rust-lang/rust.vim", event = "VimEnter" }
     use { "simrat39/rust-tools.nvim" }
     use {
       "Saecki/crates.nvim",
+      event = "VimEnter",
       event = { "BufRead Cargo.toml" },
       config = function()
         require("crates").setup()
@@ -370,21 +376,23 @@ function M.setup()
     }
 
     -- TypeScript
-    use { "jose-elias-alvarez/nvim-lsp-ts-utils" }
+    use { "jose-elias-alvarez/nvim-lsp-ts-utils", event = "VimEnter" }
 
     -- Markdown
-    use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install" }
-    use { "plasticboy/vim-markdown", requires = { "godlygeek/tabular" } }
+    use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install", event = "VimEnter" }
+    use { "plasticboy/vim-markdown", requires = { "godlygeek/tabular" }, event = "VimEnter" }
 
     -- Note taking
     use {
       "vhyrro/neorg",
+      event = "VimEnter",
       config = function()
         require("config.neorg").setup()
       end,
     }
     use {
       "folke/zen-mode.nvim",
+      event = "VimEnter",
       config = function()
         require("zen-mode").setup {}
       end,
@@ -423,6 +431,12 @@ function M.setup()
     }
 
     use { "rhysd/vim-grammarous" }
+
+    use {
+      "dstein64/vim-startuptime",
+      cmd = "StartupTime",
+      config = [[vim.g.startuptime_tries = 10]],
+    }
   end)
 end
 
