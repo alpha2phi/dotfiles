@@ -259,6 +259,7 @@ function M.setup()
     use { "folke/lua-dev.nvim" }
     use {
       "simrat39/symbols-outline.nvim",
+      event = "VimEnter",
       config = function()
         require("config.symbols-outline").setup()
       end,
@@ -321,6 +322,7 @@ function M.setup()
     -- }
     use {
       "hoob3rt/lualine.nvim",
+      event = "VimEnter",
       config = function()
         require("config.lualine").setup()
       end,
