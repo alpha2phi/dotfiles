@@ -5,18 +5,19 @@ local lsputils = require "config.lsp.utils"
 CONFIG = {}
 
 function M.setup()
-  local null_ls = require "null-ls"
+  local nls = require "null-ls"
   local sources = {
-    -- null_ls.builtins.formatting.prettier,
-    -- null_ls.builtins.diagnostics.write_good.with { filetypes = { "markdown", "text" } },
-    -- null_ls.builtins.formatting.isort,
-    -- null_ls.builtins.code_actions.gitsigns,
-    null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.stylua,
-    null_ls.builtins.formatting.black,
-    null_ls.builtins.diagnostics.flake8,
+    nls.builtins.formatting.prettierd,
+    nls.builtins.formatting.eslint_d,
+    nls.builtins.diagnostics.shellcheck,
+    nls.builtins.diagnostics.markdownlint,
+    -- nls.builtins.code_actions.gitsigns,
+    nls.builtins.formatting.prettier,
+    nls.builtins.formatting.stylua,
+    nls.builtins.formatting.black,
+    nls.builtins.diagnostics.flake8,
   }
-  null_ls.config { sources = sources }
+  nls.config { sources = sources }
 
   lsputils.setup_server("null-ls", CONFIG)
 end

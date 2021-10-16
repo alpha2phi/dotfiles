@@ -40,7 +40,12 @@ function M.setup()
     }
     use {
       "sindrets/diffview.nvim",
-      cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+      cmd = {
+        "DiffviewOpen",
+        "DiffviewClose",
+        "DiffviewToggleFiles",
+        "DiffviewFocusFiles",
+      },
     }
     use { "unblevable/quick-scope", event = "VimEnter" }
     use { "voldikss/vim-floaterm", event = "VimEnter" }
@@ -135,7 +140,10 @@ function M.setup()
           "nvim-telescope/telescope-frecency.nvim",
           requires = { "tami5/sql.nvim" },
         },
-        { "nvim-telescope/telescope-vimspector.nvim", event = "BufWinEnter" },
+        {
+          "nvim-telescope/telescope-vimspector.nvim",
+          event = "BufWinEnter",
+        },
         { "nvim-telescope/telescope-dap.nvim" },
       },
       config = function()
@@ -152,9 +160,8 @@ function M.setup()
     -- use {'airblade/vim-rooter'}
 
     -- LSP config
-    use { "neovim/nvim-lspconfig" }
-    -- use { "kabouzeid/nvim-lspinstall" }
     use { "williamboman/nvim-lsp-installer" }
+    use { "jose-elias-alvarez/null-ls.nvim", event = "VimEnter" }
     use {
       "tamago324/nlsp-settings.nvim",
       event = "VimEnter",
@@ -162,11 +169,20 @@ function M.setup()
         require("config.nlsp-settings").setup()
       end,
     }
+    use {
+      "neovim/nvim-lspconfig",
+      opt = true,
+      event = "VimEnter",
+      config = function()
+        require("config.lsp").setup()
+        require("config.dap").setup()
+      end,
+    }
 
     -- Completion - use either one of this
     use {
       "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
+      event = "VimEnter",
       requires = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
@@ -253,7 +269,6 @@ function M.setup()
     }
     use { "junegunn/vim-easy-align" }
     use { "antoinemadec/FixCursorHold.nvim" }
-    use { "jose-elias-alvarez/null-ls.nvim" }
 
     -- Snippets
     -- use {
@@ -292,7 +307,10 @@ function M.setup()
         require("config.treesitter").setup()
       end,
       requires = {
-        { "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" },
+        {
+          "nvim-treesitter/playground",
+          cmd = "TSHighlightCapturesUnderCursor",
+        },
         "nvim-treesitter/nvim-treesitter-textobjects",
         "JoosepAlviste/nvim-ts-context-commentstring",
         "RRethy/nvim-treesitter-textsubjects",
@@ -407,7 +425,12 @@ function M.setup()
       ft = "markdown",
       cmd = { "MarkdownPreview" },
     }
-    use { "plasticboy/vim-markdown", ft = "markdown", requires = { "godlygeek/tabular" }, event = "VimEnter" }
+    use {
+      "plasticboy/vim-markdown",
+      ft = "markdown",
+      requires = { "godlygeek/tabular" },
+      event = "VimEnter",
+    }
 
     -- Note taking
     use {
@@ -440,7 +463,11 @@ function M.setup()
       end,
     }
 
-    use { "stevearc/gkeep.nvim", event = "VimEnter", run = ":UpdateRemotePlugins" }
+    use {
+      "stevearc/gkeep.nvim",
+      event = "VimEnter",
+      run = ":UpdateRemotePlugins",
+    }
 
     use {
       "gelguy/wilder.nvim",

@@ -27,14 +27,11 @@ sys_init()
 
 require("defaults").setup()
 
-require("keymappings").setup()
-
 require("settings").setup()
 
-require("plugins").setup()
-
-require("config.lsp").setup()
-
-require("config.dap").setup()
+vim.defer_fn(function()
+  require("keymappings").setup()
+  require("plugins").setup()
+end, 0)
 
 ----- End loading ----------
