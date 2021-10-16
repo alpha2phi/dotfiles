@@ -156,7 +156,7 @@ local mappings = {
       "Web search",
     },
     s = { "<Cmd>lua require('spectre').open()<CR>", "Search file" },
-    b = { "<Plug>SearchNormal", "Browser search" },
+    z = { "<Plug>SearchNormal", "Browser search" },
     v = {
       "<Cmd>lua require('spectre').open_visual({select_word=true})<CR>",
       "Visual search",
@@ -169,7 +169,7 @@ local mappings = {
     g = { "q/", "Grep history" },
     l = { "<Cmd>lua require('utils.cheatsheet').cheatsheet()<CR>", "Search code" },
     o = { "<Cmd>SymbolsOutline<CR>", "Symbols Outline" },
-    z = { "<Cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy find buffer" },
+    b = { "<Cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy find buffer" },
   },
 
   -- Testing

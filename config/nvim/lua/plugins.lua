@@ -26,17 +26,22 @@ function M.setup()
     use { "easymotion/vim-easymotion" }
     use {
       "lewis6991/gitsigns.nvim",
+      event = "BufReadPre",
       config = function()
         require("gitsigns").setup()
       end,
     }
     use {
       "TimUntersberger/neogit",
+      cmd = "Neogit",
       config = function()
         require("config.neogit").setup()
       end,
     }
-    use { "sindrets/diffview.nvim" }
+    use {
+      "sindrets/diffview.nvim",
+      cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+    }
     use { "unblevable/quick-scope" }
     use { "voldikss/vim-floaterm" }
     use {
@@ -48,13 +53,15 @@ function M.setup()
     -- use {'chrisbra/NrrwRgn'}
     use {
       "kyazdani42/nvim-tree.lua",
+      cmd = { "NvimTreeToggle", "NvimTreeClose" },
       config = function()
         require("nvim-tree").setup {}
       end,
     }
-    use { "windwp/nvim-spectre" }
+    use { "windwp/nvim-spectre", event = "VimEnter" }
     use {
       "ruifm/gitlinker.nvim",
+      event = "VimEnter",
       config = function()
         require("gitlinker").setup()
       end,
@@ -62,6 +69,7 @@ function M.setup()
     use {
       "rmagatti/session-lens",
       requires = { "rmagatti/auto-session" },
+      event = "VimEnter",
       config = function()
         require("config.auto-session").setup {}
         require("session-lens").setup {}
@@ -110,6 +118,8 @@ function M.setup()
     use { "nvim-lua/popup.nvim" }
     use {
       "nvim-telescope/telescope.nvim",
+      cmd = { "Telescope" },
+      module = "telescope",
       requires = {
         "nvim-telescope/telescope-project.nvim",
         "nvim-telescope/telescope-symbols.nvim",
@@ -143,7 +153,8 @@ function M.setup()
 
     -- LSP config
     use { "neovim/nvim-lspconfig" }
-    use { "kabouzeid/nvim-lspinstall" }
+    -- use { "kabouzeid/nvim-lspinstall" }
+    use { "williamboman/nvim-lsp-installer" }
     use {
       "tamago324/nlsp-settings.nvim",
       config = function()
@@ -154,6 +165,7 @@ function M.setup()
     -- Completion - use either one of this
     use {
       "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
       requires = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
@@ -211,8 +223,10 @@ function M.setup()
     use { "andymass/vim-matchup" }
     use {
       "folke/trouble.nvim",
+      event = "BufReadPre",
+      cmd = { "TroubleToggle", "Trouble" },
       config = function()
-        require("trouble").setup {}
+        require("trouble").setup { auto_open = false }
       end,
     }
     use {
@@ -224,6 +238,8 @@ function M.setup()
     }
     use {
       "folke/todo-comments.nvim",
+      cmd = { "TodoTrouble", "TodoTelescope" },
+      event = "BufReadPost",
       config = function()
         require("todo-comments").setup {}
       end,
@@ -333,7 +349,7 @@ function M.setup()
       config = function()
         require("config.bufferline").setup()
       end,
-      event = "VimEnter",
+      event = "BufReadPre",
     }
 
     -- Debugging
@@ -382,8 +398,13 @@ function M.setup()
     use { "jose-elias-alvarez/nvim-lsp-ts-utils", event = "VimEnter" }
 
     -- Markdown
-    use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install", event = "VimEnter" }
-    use { "plasticboy/vim-markdown", requires = { "godlygeek/tabular" }, event = "VimEnter" }
+    use {
+      "iamcco/markdown-preview.nvim",
+      run = "cd app && yarn install",
+      ft = "markdown",
+      cmd = { "MarkdownPreview" },
+    }
+    use { "plasticboy/vim-markdown", ft = "markdown", requires = { "godlygeek/tabular" }, event = "VimEnter" }
 
     -- Note taking
     use {
@@ -395,7 +416,7 @@ function M.setup()
     }
     use {
       "folke/zen-mode.nvim",
-      event = "VimEnter",
+      cmd = "ZenMode",
       config = function()
         require("zen-mode").setup {}
       end,
