@@ -14,16 +14,16 @@ function M.setup()
     use { "wbthomason/packer.nvim", opt = true }
 
     -- Development
-    use { "tpope/vim-dispatch", event = "VimEnter" }
-    use { "tpope/vim-fugitive", event = "VimEnter" }
-    use { "tpope/vim-surround", event = "VimEnter" }
-    use { "tpope/vim-commentary", event = "VimEnter" }
-    use { "tpope/vim-rhubarb", event = "VimEnter" }
-    use { "tpope/vim-unimpaired", event = "VimEnter" }
-    use { "tpope/vim-vinegar", event = "VimEnter" }
-    use { "tpope/vim-sleuth", event = "VimEnter" }
-    use { "wellle/targets.vim", event = "VimEnter" }
-    use { "easymotion/vim-easymotion", event = "VimEnter" }
+    use { "tpope/vim-dispatch" }
+    use { "tpope/vim-fugitive" }
+    use { "tpope/vim-surround" }
+    use { "tpope/vim-commentary" }
+    use { "tpope/vim-rhubarb" }
+    use { "tpope/vim-unimpaired" }
+    use { "tpope/vim-vinegar" }
+    use { "tpope/vim-sleuth" }
+    use { "wellle/targets.vim" }
+    use { "easymotion/vim-easymotion" }
     use {
       "lewis6991/gitsigns.nvim",
       event = "BufReadPre",
@@ -432,12 +432,12 @@ function M.setup()
 
     use { "untitled-ai/jupyter_ascending.vim" }
 
-    use {
-      "rcarriga/nvim-notify",
-      config = function()
-        vim.notify = require "notify"
-      end,
-    }
+    -- use {
+    --   "rcarriga/nvim-notify",
+    --   config = function()
+    --     vim.notify = require "notify"
+    --   end,
+    -- }
 
     use { "stevearc/gkeep.nvim", event = "VimEnter", run = ":UpdateRemotePlugins" }
 
