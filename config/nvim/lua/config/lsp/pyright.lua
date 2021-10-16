@@ -2,10 +2,14 @@ local M = {}
 
 local lsputils = require "config.lsp.utils"
 
-CONFIG = {}
+function M.config(installed_server)
+  return {
+    cmd = installed_server._default_options.cmd,
+  }
+end
 
-function M.setup()
-  lsputils.setup_server("python", CONFIG)
+function M.setup(installed_server)
+  lsputils.setup_server("pyright", M.config(installed_server))
   M.autocmds()
   M.keymappings()
 end
@@ -17,7 +21,7 @@ function M.autocmds()
       augroup PYTHON
         autocmd!
 
-        autocmd BufEnter *.py lua require("config.lsp.python").keymappings()
+        autocmd BufEnter *.py lua require("config.lsp.pyright").keymappings()
       augroup END
 
     ]],

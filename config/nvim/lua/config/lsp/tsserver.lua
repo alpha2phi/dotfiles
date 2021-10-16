@@ -55,16 +55,19 @@ function M.lsp_attach(client, bufnr)
   ts_utils.setup_client(client)
 end
 
-CONFIG = {
-  on_attach = M.lsp_attach,
-  capabilities = lsputils.get_capabilities(),
-  on_init = lsputils.lsp_init,
-  on_exit = lsputils.lsp_exit,
-  flags = { debounce_text_changes = 150 },
-}
+function M.config(installed_server)
+  return {
+    on_attach = M.lsp_attach,
+    capabilities = lsputils.get_capabilities(),
+    on_init = lsputils.lsp_init,
+    on_exit = lsputils.lsp_exit,
+    flags = { debounce_text_changes = 150 },
+    cmd = installed_server._default_options.cmd,
+  }
+end
 
-function M.setup()
-  lspconfig["typescript"].setup(CONFIG)
+function M.setup(installed_server)
+  lspconfig["tsserver"].setup(M.config(installed_server))
   M.autocmds()
   M.keymappings()
 end
@@ -76,8 +79,8 @@ function M.autocmds()
       augroup TYPESCRIPT
         autocmd!
 
-        autocmd BufEnter *.ts lua require("config.lsp.typescript").keymappings()
-        autocmd BufEnter *.js lua require("config.lsp.typescript").keymappings()
+        autocmd BufEnter *.ts lua require("config.lsp.tsserver").keymappings()
+        autocmd BufEnter *.js lua require("config.lsp.tsserver").keymappings()
       augroup END
 
     ]],

@@ -42,8 +42,8 @@ function M.setup()
       "sindrets/diffview.nvim",
       cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
     }
-    use { "unblevable/quick-scope" }
-    use { "voldikss/vim-floaterm" }
+    use { "unblevable/quick-scope", event = "VimEnter" }
+    use { "voldikss/vim-floaterm", event = "VimEnter" }
     use {
       "folke/which-key.nvim",
       config = function()
@@ -221,7 +221,7 @@ function M.setup()
     -- use {'pechorin/any-jump.vim'}
     use { "kshenoy/vim-signature" }
     use { "kevinhwang91/nvim-bqf" }
-    use { "andymass/vim-matchup" }
+    use { "andymass/vim-matchup", event = "CursorMoved" }
     use {
       "folke/trouble.nvim",
       event = "BufReadPre",
@@ -432,12 +432,13 @@ function M.setup()
 
     use { "untitled-ai/jupyter_ascending.vim" }
 
-    -- use {
-    --   "rcarriga/nvim-notify",
-    --   config = function()
-    --     vim.notify = require "notify"
-    --   end,
-    -- }
+    use {
+      "rcarriga/nvim-notify",
+      event = "VimEnter",
+      config = function()
+        vim.notify = require "notify"
+      end,
+    }
 
     use { "stevearc/gkeep.nvim", event = "VimEnter", run = ":UpdateRemotePlugins" }
 

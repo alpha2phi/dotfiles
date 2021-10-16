@@ -71,7 +71,7 @@ function M.lsp_config(client, bufnr)
   whichkey.register_lsp(client)
 
   if client.resolved_capabilities.document_formatting then
-    vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()"
+    vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()"
   end
 end
 
@@ -120,15 +120,19 @@ function M.get_capabilities()
 end
 
 function M.setup_server(server, config)
-  local lspconfig = require "lspconfig"
-  lspconfig[server].setup(vim.tbl_deep_extend("force", {
+  local options = {
     on_attach = M.lsp_attach,
     on_exit = M.lsp_exit,
     on_init = M.lsp_init,
     capabilities = M.get_capabilities(),
     flags = { debounce_text_changes = 150 },
-    init_options = config,
-  }, {}))
+  }
+  for k, v in pairs(config) do
+    options[k] = v
+  end
+
+  local lspconfig = require "lspconfig"
+  lspconfig[server].setup(vim.tbl_deep_extend("force", options, {}))
 
   local cfg = lspconfig[server]
   if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
