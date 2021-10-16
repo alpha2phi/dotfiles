@@ -14,16 +14,16 @@ function M.setup()
     use { "wbthomason/packer.nvim", opt = true }
 
     -- Development
-    use { "tpope/vim-dispatch" }
-    use { "tpope/vim-fugitive" }
-    use { "tpope/vim-surround" }
-    use { "tpope/vim-commentary" }
-    use { "tpope/vim-rhubarb" }
-    use { "tpope/vim-unimpaired" }
-    use { "tpope/vim-vinegar" }
-    use { "tpope/vim-sleuth" }
-    use { "wellle/targets.vim" }
-    use { "easymotion/vim-easymotion" }
+    use { "tpope/vim-dispatch", event = "VimEnter" }
+    use { "tpope/vim-fugitive", event = "VimEnter" }
+    use { "tpope/vim-surround", event = "VimEnter" }
+    use { "tpope/vim-commentary", event = "VimEnter" }
+    use { "tpope/vim-rhubarb", event = "VimEnter" }
+    use { "tpope/vim-unimpaired", event = "VimEnter" }
+    use { "tpope/vim-vinegar", event = "VimEnter" }
+    use { "tpope/vim-sleuth", event = "VimEnter" }
+    use { "wellle/targets.vim", event = "VimEnter" }
+    use { "easymotion/vim-easymotion", event = "VimEnter" }
     use {
       "lewis6991/gitsigns.nvim",
       event = "BufReadPre",
@@ -244,7 +244,6 @@ function M.setup()
         require("todo-comments").setup {}
       end,
     }
-    use { "RRethy/nvim-treesitter-textsubjects" }
     use {
       "nacro90/numb.nvim",
       config = function()
@@ -267,12 +266,13 @@ function M.setup()
     use {
       "SirVer/ultisnips",
       requires = { "honza/vim-snippets" },
+      event = "VimEnter",
       config = function()
         vim.g.UltiSnipsRemoveSelectModeMappings = 0
       end,
     }
     -- Lua development
-    use { "folke/lua-dev.nvim" }
+    use { "folke/lua-dev.nvim", event = "VimEnter" }
     use {
       "simrat39/symbols-outline.nvim",
       event = "VimEnter",
@@ -285,22 +285,28 @@ function M.setup()
     -- Better syntax
     use {
       "nvim-treesitter/nvim-treesitter",
+      event = "BufRead",
       run = ":TSUpdate",
       config = function()
         require("config.treesitter").setup()
       end,
+      requires = {
+        { "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" },
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        "RRethy/nvim-treesitter-textsubjects",
+      },
     }
-    use { "nvim-treesitter/nvim-treesitter-textobjects" }
-    use { "nvim-treesitter/playground" }
-    use { "JoosepAlviste/nvim-ts-context-commentstring" }
     use {
       "romgrk/nvim-treesitter-context",
+      event = "BufRead",
       config = function()
         require("treesitter-context.config").setup { enable = true }
       end,
     }
     use {
       "windwp/nvim-ts-autotag",
+      event = "BufRead",
       config = function()
         require("nvim-ts-autotag").setup { enable = true }
       end,

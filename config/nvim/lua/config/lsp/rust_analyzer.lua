@@ -4,7 +4,7 @@ local lsputils = require "config.lsp.utils"
 
 CONFIG = {}
 
-function M.setup()
+function M.setup(installed_server)
   require("rust-tools").setup {
     tools = {
       hover_actions = {
@@ -32,7 +32,7 @@ function M.autocmds()
         autocmd!
 
         autocmd FileType rust packadd termdebug
-        autocmd BufEnter *.rs lua require("config.lsp.rust").keymappings()
+        autocmd BufEnter *.rs lua require("config.lsp.rust_analyzer").keymappings()
       augroup END
 
     ]],

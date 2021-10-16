@@ -1,6 +1,7 @@
 local M = {}
 
-local lsp_providers = { lua = true, rust = true, go = true, python = true, typescript = true }
+-- local lsp_providers = { lua = true, rust = true, go = true, python = true, typescript = true }
+local lsp_providers = { rust_analyzer = true }
 
 local function setup_servers()
   -- local lspinstall = require "lspinstall"
@@ -14,11 +15,11 @@ local function setup_servers()
   require("config.lsp.null-ls").setup()
 
   lsp_installer.on_server_ready(function(server)
-    local opts = {}
-    print(vim.inspect.inspect(server))
-
-    server:setup(opts)
-    vim.cmd [[ do User LspAttachBuffers ]]
+    if lsp_providers[server.name] then
+      require("config.lsp." .. server.name).setup(server)
+    else
+      print(server.name .. "default")
+    end
   end)
 
   -- local servers = lspinstall.installed_servers()
