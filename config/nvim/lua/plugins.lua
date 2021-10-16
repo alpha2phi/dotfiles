@@ -126,25 +126,25 @@ function M.setup()
         "nvim-telescope/telescope-media-files.nvim",
         -- 'nvim-telescope/telescope-github.nvim',
         -- 'nvim-telescope/telescope-hop.nvim'
+        { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+        {
+          "nvim-telescope/telescope-arecibo.nvim",
+          rocks = { "openssl", "lua-http-parser" },
+        },
+        {
+          "nvim-telescope/telescope-frecency.nvim",
+          requires = { "tami5/sql.nvim" },
+        },
+        { "nvim-telescope/telescope-vimspector.nvim", event = "BufWinEnter" },
+        { "nvim-telescope/telescope-dap.nvim" },
       },
       config = function()
         require("config.telescope").setup()
       end,
     }
     use {
-      "nvim-telescope/telescope-frecency.nvim",
-      requires = { "tami5/sql.nvim" },
-      config = function()
-        require("telescope").load_extension "frecency"
-      end,
-    }
-    use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
-    use {
-      "nvim-telescope/telescope-arecibo.nvim",
-      rocks = { "openssl", "lua-http-parser" },
-    }
-    use {
       "ahmedkhalf/project.nvim",
+      event = "VimEnter",
       config = function()
         require("project_nvim").setup {}
       end,
@@ -157,6 +157,7 @@ function M.setup()
     use { "williamboman/nvim-lsp-installer" }
     use {
       "tamago324/nlsp-settings.nvim",
+      event = "VimEnter",
       config = function()
         require("config.nlsp-settings").setup()
       end,
@@ -295,6 +296,7 @@ function M.setup()
         "nvim-treesitter/nvim-treesitter-textobjects",
         "JoosepAlviste/nvim-ts-context-commentstring",
         "RRethy/nvim-treesitter-textsubjects",
+        "jose-elias-alvarez/nvim-lsp-ts-utils",
       },
     }
     use {
@@ -360,11 +362,9 @@ function M.setup()
 
     -- Debugging
     use { "puremourning/vimspector", event = "BufWinEnter" }
-    use { "nvim-telescope/telescope-vimspector.nvim", event = "BufWinEnter" }
 
     -- DAP
     use { "mfussenegger/nvim-dap" }
-    use { "nvim-telescope/telescope-dap.nvim" }
     use { "mfussenegger/nvim-dap-python" }
     use { "theHamsta/nvim-dap-virtual-text" }
     use { "rcarriga/nvim-dap-ui" }
@@ -399,9 +399,6 @@ function M.setup()
         require("crates").setup()
       end,
     }
-
-    -- TypeScript
-    use { "jose-elias-alvarez/nvim-lsp-ts-utils", event = "VimEnter" }
 
     -- Markdown
     use {
@@ -442,7 +439,7 @@ function M.setup()
       end,
     }
 
-    use { "stevearc/gkeep.nvim", run = ":UpdateRemotePlugins" }
+    use { "stevearc/gkeep.nvim", event = "VimEnter", run = ":UpdateRemotePlugins" }
 
     use {
       "gelguy/wilder.nvim",

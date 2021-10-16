@@ -52,6 +52,7 @@ function M.setup()
   -- require('telescope').load_extension('hop')
   require("telescope").load_extension "arecibo"
   require("telescope").load_extension "media_files"
+  require("telescope").load_extension "frecency"
 
   M.search_dotfiles = function()
     require("telescope.builtin").find_files {
