@@ -51,6 +51,7 @@ local keymappings = {
     ["J"] = "mzJ`z",
     ["<expr> j"] = "(v:count > 1 ? \"m'\" . v:count : '') . 'j'",
     ["<expr> k"] = "(v:count > 1 ? \"m'\" . v:count : '') . 'k'",
+    ["gx"] = { "<Plug>(openbrowser-smart-search)", { noremap = false, silent = false } },
     -- [";"] = ":"
   },
   visual_mode = {
@@ -58,6 +59,7 @@ local keymappings = {
     [">"] = ">gv",
     ["J"] = ":m '>+1<CR>gv=gv",
     ["K"] = ":m '<-2<CR>gv=gv",
+    ["gx"] = { "<Plug>(openbrowser-smart-search)", { noremap = false, silent = false } },
     -- [";"] = ":"
   },
   term_mode = {

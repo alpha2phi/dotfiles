@@ -22,7 +22,7 @@ function M.setup()
     extensions = {
       arecibo = {
         ["selected_engine"] = "google",
-        ["url_open_command"] = "open",
+        ["url_open_command"] = "xdg-open",
         ["show_http_headers"] = false,
         ["show_domain_icons"] = false,
       },
@@ -53,6 +53,7 @@ function M.setup()
   require("telescope").load_extension "arecibo"
   require("telescope").load_extension "media_files"
   require("telescope").load_extension "frecency"
+  require("telescope").load_extension "gkeep"
 
   M.search_dotfiles = function()
     require("telescope.builtin").find_files {

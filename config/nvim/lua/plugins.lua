@@ -3,13 +3,11 @@ local M = {}
 function M.setup()
   local packer = require "packer"
 
-  -- local util = require "packer.util"
-  -- packer.init({
-  --     compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua',
-  --                                    'packer_compiled.lua')
-  -- })
+  local conf = {
+    compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+  }
 
-  packer.startup(function(use)
+  local function plugins(use)
     -- Packer can manage itself as an optional plugin
     use { "wbthomason/packer.nvim", opt = true }
 
@@ -81,7 +79,9 @@ function M.setup()
     }
     use {
       "rmagatti/session-lens",
-      requires = { "rmagatti/auto-session" },
+      requires = { 
+        { "rmagatti/auto-session", event="VimEnter" }
+      },
       event = "VimEnter",
       config = function()
         require("config.auto-session").setup {}
@@ -164,6 +164,13 @@ function M.setup()
     use { "williamboman/nvim-lsp-installer" }
     use { "jose-elias-alvarez/null-ls.nvim" }
     use {
+      "tamago324/nlsp-settings.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("config.nlsp-settings").setup()
+      end,
+    }
+    use {
       "neovim/nvim-lspconfig",
       opt = true,
       event = "BufReadPre",
@@ -171,15 +178,6 @@ function M.setup()
         require("config.lsp").setup()
         require("config.dap").setup()
       end,
-      requires = {
-        {
-          "tamago324/nlsp-settings.nvim",
-          event = "BufReadPre",
-          config = function()
-            require("config.nlsp-settings").setup()
-          end,
-        },
-      },
     }
 
     -- Completion - use either one of this
@@ -406,7 +404,8 @@ function M.setup()
     use { "jbyuki/one-small-step-for-vimkind" }
 
     -- Development workflow
-    use { "voldikss/vim-browser-search" }
+    use { "voldikss/vim-browser-search", event = "VimEnter" }
+    use { "tyru/open-browser.vim", event = "VimEnter" }
     use {
       "kkoomen/vim-doge",
       run = ":call doge#install()",
@@ -462,7 +461,7 @@ function M.setup()
       run = ":UpdateRemotePlugins",
     }
 
-    use { "rhysd/vim-grammarous" }
+    use { "rhysd/vim-grammarous", ft = { "markdown" } }
 
     use {
       "folke/zen-mode.nvim",
@@ -500,8 +499,16 @@ function M.setup()
       config = [[vim.g.startuptime_tries = 10]],
     }
 
-    use { "tyru/open-browser.vim", event = "VimEnter" }
-  end)
+    use {
+      "AckslD/nvim-neoclip.lua",
+      config = function()
+        require("neoclip").setup()
+      end,
+    }
+  end
+
+  packer.init(conf)
+  packer.startup(plugins)
 end
 
 return M
@@ -513,14 +520,6 @@ return M
 -- use {
 --   "dccsillag/magma-nvim",
 --   run = ":UpdateRemotePlugins",
--- }
-
--- use {
---   "AckslD/nvim-neoclip.lua",
---   requires = { "tami5/sqlite.lua", module = "sqlite" },
---   config = function()
---     require("neoclip").setup()
---   end,
 -- }
 
 -- use {
