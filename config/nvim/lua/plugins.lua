@@ -79,9 +79,7 @@ function M.setup()
     }
     use {
       "rmagatti/session-lens",
-      requires = { 
-        { "rmagatti/auto-session", event="VimEnter" }
-      },
+      requires = { "rmagatti/auto-session" },
       event = "VimEnter",
       config = function()
         require("config.auto-session").setup {}
