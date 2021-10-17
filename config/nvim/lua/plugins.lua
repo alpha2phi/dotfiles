@@ -16,7 +16,7 @@ function M.setup()
     use { "tpope/vim-fugitive" }
     use { "tpope/vim-surround" }
     use { "tpope/vim-commentary" }
-    use { "tpope/vim-rhubarb" }
+    use { "tpope/vim-rhubarb", event = "VimEnter" }
     use { "tpope/vim-unimpaired" }
     use { "tpope/vim-vinegar" }
     use { "tpope/vim-sleuth" }
@@ -497,12 +497,12 @@ function M.setup()
       config = [[vim.g.startuptime_tries = 10]],
     }
 
-    use {
-      "AckslD/nvim-neoclip.lua",
-      config = function()
-        require("neoclip").setup()
-      end,
-    }
+    -- use {
+    --   "AckslD/nvim-neoclip.lua",
+    --   config = function()
+    --     require("neoclip").setup()
+    --   end,
+    -- }
   end
 
   packer.init(conf)

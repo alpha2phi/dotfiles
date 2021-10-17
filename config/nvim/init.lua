@@ -28,9 +28,8 @@ require("defaults").setup()
 
 require("settings").setup()
 
-require "packer_compiled"
-
 vim.defer_fn(function()
+  require "packer_compiled"
   require("keymappings").setup()
   require("plugins").setup()
 end, 0)
