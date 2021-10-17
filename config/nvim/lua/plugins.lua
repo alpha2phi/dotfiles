@@ -24,6 +24,7 @@ function M.setup()
     use { "tpope/vim-sleuth" }
     use { "wellle/targets.vim" }
     use { "easymotion/vim-easymotion" }
+    use { "lewis6991/impatient.nvim" }
     use {
       "lewis6991/gitsigns.nvim",
       event = "BufReadPre",
@@ -55,6 +56,13 @@ function M.setup()
         require("config.which-key").setup()
       end,
     }
+    use {
+      "gelguy/wilder.nvim",
+      run = ":UpdateRemotePlugins",
+      config = function()
+        require("config.wilder").setup()
+      end,
+    }
     -- use {'chrisbra/NrrwRgn'}
     use {
       "kyazdani42/nvim-tree.lua",
@@ -78,13 +86,6 @@ function M.setup()
       config = function()
         require("config.auto-session").setup {}
         require("session-lens").setup {}
-      end,
-    }
-    use {
-      "windwp/nvim-autopairs",
-      run = "make",
-      config = function()
-        require("nvim-autopairs").setup {}
       end,
     }
     -- use {
@@ -161,28 +162,30 @@ function M.setup()
 
     -- LSP config
     use { "williamboman/nvim-lsp-installer" }
-    use { "jose-elias-alvarez/null-ls.nvim", event = "VimEnter" }
-    use {
-      "tamago324/nlsp-settings.nvim",
-      event = "VimEnter",
-      config = function()
-        require("config.nlsp-settings").setup()
-      end,
-    }
+    use { "jose-elias-alvarez/null-ls.nvim" }
     use {
       "neovim/nvim-lspconfig",
       opt = true,
-      event = "VimEnter",
+      event = "BufReadPre",
       config = function()
         require("config.lsp").setup()
         require("config.dap").setup()
       end,
+      requires = {
+        {
+          "tamago324/nlsp-settings.nvim",
+          event = "BufReadPre",
+          config = function()
+            require("config.nlsp-settings").setup()
+          end,
+        },
+      },
     }
 
     -- Completion - use either one of this
     use {
       "hrsh7th/nvim-cmp",
-      event = "VimEnter",
+      event = "BufRead",
       requires = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
@@ -229,7 +232,6 @@ function M.setup()
       end,
     }
     use { "sbdchd/neoformat" }
-    use { "p00f/nvim-ts-rainbow" }
     use { "ray-x/lsp_signature.nvim" }
     use { "szw/vim-maximizer" }
     -- use {'dbeniamine/cheat.sh-vim'}
@@ -240,17 +242,10 @@ function M.setup()
     use { "andymass/vim-matchup", event = "CursorMoved" }
     use {
       "folke/trouble.nvim",
-      event = "BufReadPre",
+      event = "VimEnter",
       cmd = { "TroubleToggle", "Trouble" },
       config = function()
         require("trouble").setup { auto_open = false }
-      end,
-    }
-    use {
-      "mfussenegger/nvim-ts-hint-textobject",
-      config = function()
-        vim.cmd [[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]]
-        vim.cmd [[vnoremap <silent> m :lua require('tsht').nodes()<CR>]]
       end,
     }
     use {
@@ -307,29 +302,50 @@ function M.setup()
         require("config.treesitter").setup()
       end,
       requires = {
+        { "jose-elias-alvarez/nvim-lsp-ts-utils", event = "BufRead" },
+        { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufRead" },
+        { "p00f/nvim-ts-rainbow", event = "BufRead" },
         {
           "nvim-treesitter/playground",
           cmd = "TSHighlightCapturesUnderCursor",
+          event = "BufRead",
         },
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        "RRethy/nvim-treesitter-textsubjects",
-        "jose-elias-alvarez/nvim-lsp-ts-utils",
+        {
+          "nvim-treesitter/nvim-treesitter-textobjects",
+          event = "BufRead",
+        },
+        { "RRethy/nvim-treesitter-textsubjects", event = "BufRead" },
+        {
+          "windwp/nvim-autopairs",
+          event = "BufRead",
+          run = "make",
+          config = function()
+            require("nvim-autopairs").setup {}
+          end,
+        },
+        {
+          "windwp/nvim-ts-autotag",
+          event = "BufRead",
+          config = function()
+            require("nvim-ts-autotag").setup { enable = true }
+          end,
+        },
+        {
+          "romgrk/nvim-treesitter-context",
+          event = "BufRead",
+          config = function()
+            require("treesitter-context.config").setup { enable = true }
+          end,
+        },
+        {
+          "mfussenegger/nvim-ts-hint-textobject",
+          event = "BufRead",
+          config = function()
+            vim.cmd [[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]]
+            vim.cmd [[vnoremap <silent> m :lua require('tsht').nodes()<CR>]]
+          end,
+        },
       },
-    }
-    use {
-      "romgrk/nvim-treesitter-context",
-      event = "BufRead",
-      config = function()
-        require("treesitter-context.config").setup { enable = true }
-      end,
-    }
-    use {
-      "windwp/nvim-ts-autotag",
-      event = "BufRead",
-      config = function()
-        require("nvim-ts-autotag").setup { enable = true }
-      end,
     }
 
     -- Dashboard
@@ -441,6 +457,14 @@ function M.setup()
       end,
     }
     use {
+      "stevearc/gkeep.nvim",
+      event = "VimEnter",
+      run = ":UpdateRemotePlugins",
+    }
+
+    use { "rhysd/vim-grammarous" }
+
+    use {
       "folke/zen-mode.nvim",
       cmd = "ZenMode",
       config = function()
@@ -449,7 +473,6 @@ function M.setup()
     }
 
     -- Trying
-    use { "lewis6991/impatient.nvim" }
 
     use { "sindrets/winshift.nvim" }
 
@@ -464,20 +487,6 @@ function M.setup()
     }
 
     use {
-      "stevearc/gkeep.nvim",
-      event = "VimEnter",
-      run = ":UpdateRemotePlugins",
-    }
-
-    use {
-      "gelguy/wilder.nvim",
-      run = ":UpdateRemotePlugins",
-      config = function()
-        require("config.wilder").setup()
-      end,
-    }
-
-    use {
       "max397574/better-escape.nvim",
       config = function()
         require("better_escape").setup()
@@ -485,13 +494,13 @@ function M.setup()
       event = "InsertEnter",
     }
 
-    use { "rhysd/vim-grammarous" }
-
     use {
       "dstein64/vim-startuptime",
       cmd = "StartupTime",
       config = [[vim.g.startuptime_tries = 10]],
     }
+
+    use { "tyru/open-browser.vim", event = "VimEnter" }
   end)
 end
 
