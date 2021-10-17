@@ -20,18 +20,20 @@ local function sys_init()
 end
 
 ----- Start loading ----------
-packer_init()
-
 sys_init()
+
+require "packer_compiled"
+
+packer_init()
 
 require("defaults").setup()
 
 require("settings").setup()
 
-vim.defer_fn(function()
-  require "packer_compiled"
-  require("keymappings").setup()
-  require("plugins").setup()
-end, 0)
+require("keymappings").setup()
+
+-- vim.defer_fn(function()
+require("plugins").setup()
+-- end, 0)
 
 ----- End loading ----------
