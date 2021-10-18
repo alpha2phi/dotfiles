@@ -45,6 +45,6 @@
 (require 'presentation)
 
 ;; Desktop
-(require 'desktop)
+; (require 'desktop)
 
 ;;; init.el ends here

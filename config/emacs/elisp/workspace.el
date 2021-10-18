@@ -7,7 +7,7 @@
   ; :bind-keymap
   ; ("C-c p" . projectile-command-map)
   :init
-  (setq projectile-project-search-path '("~/workspace/development/" "~/workspace/development/alpha2phi/"))
+  (setq projectile-project-search-path '("~/workspace/dev/" "~/workspace/dev/alpha2phi/"))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package counsel-projectile
