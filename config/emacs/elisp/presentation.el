@@ -59,5 +59,10 @@
                  (org-present-read-write)))
 	))
 
+(use-package ob-mermaid
+  :custom
+  (setq ob-mermaid-cli-path "/usr/bin/mmdc")
+)
+
 (provide 'presentation)
 ;;; presentation.el ends here
