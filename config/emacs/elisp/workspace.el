@@ -1,3 +1,9 @@
+;;; workspace.el --- Workspace configuration
+;;; Commentary:
+;; Set up workspace
+
+;;; Code:
+;; Set up projectile
 (use-package projectile
   :defer 0
   :diminish projectile-mode
