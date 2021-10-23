@@ -287,7 +287,8 @@ function M.setup()
         require("config.symbols-outline").setup()
       end,
     }
-    use { "~/workspace/dev/alpha2phi/alpha.nvim" }
+    -- use { "~/workspace/dev/alpha2phi/alpha.nvim" }
+    use { "~/workspace/dev/alpha2phi/learn-nvim" }
 
     -- Better syntax
     use {
