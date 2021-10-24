@@ -94,6 +94,7 @@ local lsp_keymappings = {
     ["gD"] = "<Cmd>lua vim.lsp.buf.declaration()<CR>",
     ["gd"] = "<Cmd>lua vim.lsp.buf.definition()<CR>",
     ["gi"] = "<Cmd>lua vim.lsp.buf.implementation()<CR>",
+    ["gr"] = "<Cmd>lua vim.lsp.buf.references()<CR>",
     ["<C-k>"] = "<Cmd>lua vim.lsp.buf.signature_help()<CR>",
     ["[d"] = "<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",
     ["]d"] = "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
