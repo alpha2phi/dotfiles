@@ -80,7 +80,7 @@ function M.setup()
     use { "google/vim-searchindex" }
     use {
       "rmagatti/session-lens",
-      requires = { "rmagatti/auto-session" },
+      requires = { "rmagatti/auto-session", event = "VimEnter" },
       event = "VimEnter",
       config = function()
         require("config.auto-session").setup {}
