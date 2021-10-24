@@ -77,6 +77,7 @@ function M.setup()
         require("gitlinker").setup()
       end,
     }
+    use { "google/vim-searchindex" }
     use {
       "rmagatti/session-lens",
       requires = { "rmagatti/auto-session" },
@@ -498,6 +499,7 @@ function M.setup()
       config = [[vim.g.startuptime_tries = 10]],
     }
 
+    use { "RishabhRD/nvim-cheat.sh", requires = { "RishabhRD/popfix" } }
     -- use {
     --   "AckslD/nvim-neoclip.lua",
     --   config = function()

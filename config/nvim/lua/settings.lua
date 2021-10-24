@@ -80,6 +80,8 @@ function M.auto_cmds()
         endfun
 
         "-- autocmd FileType * autocmd BufWritePre <buffer> call TrimWhitespace()
+
+        nnoremap <expr> <CR> {-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()
     ]],
     false
   )
