@@ -49,6 +49,7 @@ local mappings = {
       "Configuration",
     },
     r = { "<Cmd>luafile %<Cr>", "Reload lua file" },
+    m = { "<Cmd>messages<Cr>", "Messages" },
     p = {
       ":let &runtimepath.=','.escape(expand('%:p:h'), '\\,')<Cr>",
       "Set runtime path",
