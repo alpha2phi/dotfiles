@@ -289,7 +289,7 @@ function M.setup()
       end,
     }
     -- use { "~/workspace/dev/alpha2phi/alpha.nvim" }
-    use { "~/workspace/dev/alpha2phi/learn-nvim" }
+    use { "~/workspace/dev/alpha2phi/learn-nvim", requires = { "nvim-lua/plenary.nvim" } }
 
     -- Better syntax
     use {
@@ -377,7 +377,7 @@ function M.setup()
     --   end,
     -- }
     use {
-      "hoob3rt/lualine.nvim",
+      "nvim-lualine/lualine.nvim",
       event = "VimEnter",
       config = function()
         require("config.lualine").setup()
@@ -473,6 +473,10 @@ function M.setup()
 
     -- Trying
 
+    -- use { "mfussenegger/nvim-lint" }  -- try this with vale
+
+    use { "sudormrfbin/cheatsheet.nvim" }
+
     use { "sindrets/winshift.nvim" }
 
     use { "untitled-ai/jupyter_ascending.vim" }
@@ -499,7 +503,7 @@ function M.setup()
       config = [[vim.g.startuptime_tries = 10]],
     }
 
-    use { "RishabhRD/nvim-cheat.sh", requires = { "RishabhRD/popfix" } }
+    -- use { "RishabhRD/nvim-cheat.sh", requires = { "RishabhRD/popfix" } }
     -- use {
     --   "AckslD/nvim-neoclip.lua",
     --   config = function()
