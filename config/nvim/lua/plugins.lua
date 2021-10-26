@@ -477,9 +477,9 @@ function M.setup()
 
     use { "sudormrfbin/cheatsheet.nvim" }
 
-    use { "sindrets/winshift.nvim" }
+    -- use { "sindrets/winshift.nvim" }
 
-    use { "untitled-ai/jupyter_ascending.vim" }
+    -- use { "untitled-ai/jupyter_ascending.vim" }
 
     use {
       "rcarriga/nvim-notify",

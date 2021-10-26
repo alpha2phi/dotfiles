@@ -32,8 +32,8 @@ require("settings").setup()
 
 require("keymappings").setup()
 
--- vim.defer_fn(function()
-require("plugins").setup()
--- end, 0)
+vim.defer_fn(function()
+  require("plugins").setup()
+end, 0)
 
 ----- End loading ----------
