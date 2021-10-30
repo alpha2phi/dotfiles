@@ -489,13 +489,13 @@ function M.setup()
       end,
     }
 
-    use {
-      "max397574/better-escape.nvim",
-      config = function()
-        require("better_escape").setup()
-      end,
-      event = "InsertEnter",
-    }
+    -- use {
+    --   "max397574/better-escape.nvim",
+    --   config = function()
+    --     require("better_escape").setup()
+    --   end,
+    --   event = "InsertEnter",
+    -- }
 
     use {
       "dstein64/vim-startuptime",
