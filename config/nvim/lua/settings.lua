@@ -95,6 +95,14 @@ function M.auto_cmds()
     ]],
     false
   )
+
+  vim.api.nvim_exec(
+    [[
+        imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+        let g:copilot_no_tab_map = v:true
+    ]],
+    false
+  )
 end
 
 function M.setup()
