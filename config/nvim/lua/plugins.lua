@@ -217,7 +217,7 @@ function M.setup()
     -- Better LSP experience
     -- use {'tjdevries/astronauta.nvim'}
     use {
-      "glepnir/lspsaga.nvim",
+      "tami5/lspsaga.nvim",
       config = function()
         require("config.lspsaga").setup()
       end,
@@ -472,6 +472,8 @@ function M.setup()
     }
 
     -- Trying
+
+    use { "github/copilot.vim" }
 
     -- use { "mfussenegger/nvim-lint" }  -- try this with vale
 
