@@ -1,7 +1,9 @@
+---@diagnostic disable: undefined-global
 local cmd = vim.cmd
 local o = vim.o
 local wo = vim.wo
 local bo = vim.bo
+local opt = vim.opt
 local indent = 2
 
 cmd("syntax enable")
@@ -13,7 +15,7 @@ bo.softtabstop = indent
 o.termguicolors = true
 o.hidden = true
 o.ignorecase = true
-o.scrolloff = 8
+o.scrolloff = 0
 o.splitbelow = true
 o.splitright = true
 o.clipboard = "unnamed,unnamedplus"
@@ -22,11 +24,12 @@ o.updatetime = 300
 o.inccommand = "split"
 wo.number = true
 wo.relativenumber = true
-wo.scrolloff = 8
 wo.cursorline = true
+opt.undodir = vim.fn.stdpath("config") .. "/.undo"
 
 cmd([[
 set colorcolumn=80,100,120
+set cursorcolumn
 set expandtab smarttab shiftround autoindent smartindent smartcase
 set path+=**
 set wildmode=longest,list,full
@@ -155,6 +158,17 @@ augroup foldMethodSetLocal
   autocmd BufEnter,FocusGained,InsertLeave *.cljc setlocal foldmethod=syntax
   autocmd BufEnter,FocusGained,InsertLeave *.cljs setlocal foldmethod=syntax
   autocmd BufEnter,FocusGained,InsertLeave *.json setlocal foldmethod=indent
+augroup END
+]],
+	false
+)
+
+vim.api.nvim_exec(
+	[[
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent! loadview
 augroup END
 ]],
 	false

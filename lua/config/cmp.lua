@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 local cmp = require("cmp")
 
 local t = function(str)
@@ -32,25 +34,23 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		["<C-p>"] = cmp.mapping.select_prev_item(),
-		["<C-n>"] = cmp.mapping.select_next_item(),
-		["<C-j>"] = cmp.mapping.scroll_docs(-4),
-		["<C-k>"] = cmp.mapping.scroll_docs(4),
+		["<A-k>"] = cmp.mapping.scroll_docs(-4),
+		["<A-j>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-e>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Insert,
+		["<C-c>"] = cmp.mapping({
+			i = cmp.mapping.abort(),
+			c = cmp.mapping.close(),
+		}),
+		["<C-CR>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		}),
 		["<Tab>"] = cmp.mapping(function(fallback)
-			if vim.fn.pumvisible() == 1 then
-				if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-					return vim.fn.feedkeys(t("<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"))
-				end
-
-				vim.fn.feedkeys(t("<C-n>"), "n")
-			elseif check_back_space() then
-				vim.fn.feedkeys(t("<tab>"), "n")
+			if cmp.visible() then
+				-- vim.fn.feedkeys(t("<C-n>"), "n")
+				cmp.select_next_item()
+			elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+				return vim.fn.feedkeys(t("<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"))
 			else
 				fallback()
 			end
@@ -59,8 +59,8 @@ cmp.setup({
 			"s",
 		}),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if vim.fn.pumvisible() == 1 then
-				vim.fn.feedkeys(t("<C-p>"), "n")
+			if cmp.visible() then
+				cmp.select_prev_item()
 			else
 				fallback()
 			end
@@ -86,15 +86,26 @@ cmp.setup({
 		{ name = "emoji" },
 		{ name = "nvim_lua" },
 	},
-	completion = { completeopt = "menu,menuone,noinsert" },
+	preselect = cmp.PreselectMode.None,
+	completion = {
+		completeopt = "menu,menuone,noinsert",
+	},
+	experimental = {
+		ghost_text = true,
+	},
 })
 
 -- Autopairs
--- require("nvim-autopairs.completion.cmp").setup({
--- 	map_cr = true,
--- 	map_complete = true,
--- 	auto_select = true,
--- })
+require("nvim-autopairs.completion.cmp").setup({
+	map_cr = true, --  map <CR> on insert mode
+	map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
+	auto_select = true, -- automatically select the first item
+	insert = false, -- use insert confirm behavior instead of replace
+	map_char = { -- modifies the function or method delimiter by filetypes
+		all = "(",
+		tex = "{",
+	},
+})
 
 -- TabNine
 local tabnine = require("cmp_tabnine.config")

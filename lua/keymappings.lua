@@ -3,17 +3,17 @@ local nest = require("nest")
 nest.applyKeymaps({
 	{ "<Esc><Esc>", "<cmd>nohl<CR>" },
 	{ ";", "<Cmd>Telescope git_files<CR>" },
-	{ "<M-left>", "<C-w>7>" },
-	{ "<M-right>", "<C-w>7<" },
-	{ "<M-up>", "<C-w>7-" },
-	{ "<M-down>", "<C-w>7+" },
-	{ "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
+	{ "<A-h>", "<C-w>7<" },
+	{ "<A-l>", "<C-w>7>" },
+	{ "<A-j>", "<C-w>7-" },
+	{ "<A-k>", "<C-w>7+" },
+	{ "<C-k>", "vim.lsp.buf.signature_help" },
 	{
 		"[",
 		{
 			{ "b", "<Cmd>BufferLineCyclePrev<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" },
-			{ "m", "<Cmd>BookmarkPrevious<CR>" },
+			{ "m", "<Cmd>BookmarkPrev<CR>" },
 			{ "t", "<Cmd>FloatermPrev<CR>" },
 			{ "w", "<Cmd>tabprevious<CR>" },
 			{ ".", "<C-o>" },
@@ -43,10 +43,10 @@ nest.applyKeymaps({
 		"<leader>",
 		{
 			{ "<esc>", "<Cmd>set relativenumber!<CR>" },
-			{ "<left>", '<Cmd>call WinMove("h")<CR>' },
-			{ "<right>", '<Cmd>call WinMove("l")<CR>' },
-			{ "<up>", '<Cmd>call WinMove("k")<CR>' },
-			{ "<down>", '<Cmd>call WinMove("j")<CR>' },
+			{ "H", '<Cmd>call WinMove("h")<CR>' },
+			{ "L", '<Cmd>call WinMove("l")<CR>' },
+			{ "K", '<Cmd>call WinMove("k")<CR>' },
+			{ "J", '<Cmd>call WinMove("j")<CR>' },
 			{ "%", {
 				{ "l", ":luafile %<CR>" },
 				{ "i", ":luafile ~/.config/nvim/init.lua<CR>" },
@@ -74,6 +74,7 @@ nest.applyKeymaps({
 				{
 					{ "?", "<Cmd>Telescope Cheatsheet<CR>" },
 					{ "/", "<Cmd>TodoTelescope<CR>" },
+					{ "$", "<Cmd>Telescope aerial<CR>" },
 					{ "b", "<Cmd>Telescope buffers<CR>" },
 					{ "c", "<Cmd>Telescope colorscheme<CR>" },
 					{ "e", "<Cmd>Telescope file_browser<CR>" },
@@ -84,8 +85,9 @@ nest.applyKeymaps({
 					{ "m.", "<Cmd>Telescope vim_bookmarks current_file<CR>" },
 					{ "n", "<Cmd>Telescope node_modules list" },
 					{ "o", "<Cmd>Telescope treesitter<CR>" },
-					{ "p", "<Cmd>Telescope projects<CR>" },
+					{ "p", ":lua require'telescope'.extensions.project.project{}<CR>" },
 					{ "s", "<Cmd>Telescope ultisnips ultisnips<CR>" },
+					{ "S", "<Cmd>SearchSession<CR>" },
 					{ "y", "<Cmd>Telescope neoclip<CR>" },
 					{ "z", "<Cmd>Telescope current_buffer_fuzzy_find<CR>" },
 					{
@@ -125,6 +127,14 @@ nest.applyKeymaps({
 					},
 				},
 			},
+			{
+				"g",
+				{
+					{ "d", "<cmd>DiffviewOpen<CR>" },
+					{ "D", "<cmd>DiffviewFileHistory<CR>" },
+					{ "R", "<cmd>DiffviewRefresh<CR>" },
+				},
+			},
 			{ "G", "<Cmd>Neogit<CR>" },
 			{
 				"j",
@@ -146,17 +156,23 @@ nest.applyKeymaps({
 			{
 				"l",
 				{
-					{ "<C-k>", "<Cmd>Lspsaga signature_help<CR>" },
 					{ ":", "<cmd>lua vim.lsp.buf.type_definition()<CR>" },
 					{ "$", "<cmd>lua vim.lsp.buf.document_symbol()<CR>" },
 					{ "a", "<Cmd>Lspsaga code_action<CR>" },
 					{ "d", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>" },
 					{ "D", "<Cmd>Lspsaga preview_definition<CR>" },
 					{ "f", "<Cmd>Lspsaga lsp_finder<CR>" },
-					{ "k", "<Cmd>Lspsaga hover_doc<CR>" },
+					{ "k", "<Cmd>Lspsaga signature_help<CR>" },
+					{ "K", "<Cmd>Lspsaga hover_doc<CR>" },
 					{ "r", "<Cmd>Lspsaga rename<CR>" },
 					{ "R", "<cmd>lua vim.lsp.buf.references()<CR>" },
 					{ "ql", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>" },
+				},
+			},
+			{
+				"q",
+				{
+					{ "q", "<cmd>FloatermKill<CR>:wqa<CR>" },
 				},
 			},
 			{
@@ -164,10 +180,12 @@ nest.applyKeymaps({
 				{
 					{ "b", {
 						{ "m", "<Cmd>BResizeZoom<CR>" },
+						{ "v", "<Cmd>BufferLinePick<CR>" },
 					} },
 					{ "c", "<Cmd>call ToggleBackgroundLightness()<CR>" },
 					{ "C", "<Cmd>TSContextToggle<CR>" },
 					{ "d", "<Cmd>TroubleToggle<CR>" },
+					{ "D", ":lua require('dapui').toggle()" },
 					{
 						"f",
 						{
@@ -175,7 +193,9 @@ nest.applyKeymaps({
 							{ "*", "<Cmd>Ranger<CR>" },
 						},
 					},
+					{ "F", "<Cmd>Twilight<CR>" },
 					{ "m", "<Cmd>BookmarkToggle<CR>" },
+					{ "o", "<Cmd>AerialToggle right<CR>" },
 					{
 						"q",
 						{
@@ -184,6 +204,8 @@ nest.applyKeymaps({
 						},
 					},
 					{ "t", "<Cmd>FloatermToggle<CR>" },
+					{ "R", "<Cmd>ProjectRoot<CR>" },
+					{ "Z", "<Cmd>ZenMode<CR>" },
 					{
 						"<leader>",
 						{

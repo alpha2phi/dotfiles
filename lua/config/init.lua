@@ -1,36 +1,31 @@
-require("config.auto_session")
-require("config.catppuccino")
-require("config.colorscheme")
--- require('config.fugitive')
-require("config.devicon")
--- require('config.project')
-require("config.trouble")
-require("config.telescope")
-require("config.symbols_outline")
-require("config.bufferline")
--- nvim-compe
+-- lsp
+require("config.treesitter")
+require("config.aerial")
+-- require("config.navigator")
+require("config.lightbulb")
+require("config.lspcolors")
+require("config.lspkind")
+require("config.lspsaga")
+-- moved lsputils config to lang/init
+-- require("config.lsputils")
+
 require("config.cmp")
 
--- lspkind-nvim
-require("config.lspkind")
+require("config.telescope")
 
--- treesitter
-require("config.treesitter")
-
--- nvim-colorizer
-require("config.colorizer")
-
--- nvim-lightbulb
-require("config.lightbulb")
-
--- snippets.nvim
-require("config.snippets")
-
--- formatter
+require("config.auto_session")
+require("config.autopairs")
+require("config.codicons")
+require("config.dap")
+require("config.devicon")
+require("config.diffview")
 require("config.formatter")
+require("config.iron")
+-- require("config.symbols_outline")
+require("config.trouble")
+require("config.zen")
+require("config.scroll")
 
--- navigator
--- require("config.navigator")
-
--- vim-slime
--- require('config.slime')
+require("config.bufferline")
+require("config.colorschemes")
+require("config.colorizer")

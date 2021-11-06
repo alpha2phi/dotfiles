@@ -1,7 +1,7 @@
-USER = vim.fn.expand("$USER")
-
+---@diagnostic disable: undefined-global
 local on_attach = function(client, bufnr)
 	require("lsp_signature").on_attach(client)
+	require("aerial").on_attach(client)
 
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -134,17 +134,16 @@ vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "", numhl = "Lsp
 vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", numhl = "LspDiagnosticsDefaultHint" })
 
 -- Lua LSP
-USER = vim.fn.expand("$USER")
-
 local sumneko_root_path = ""
 local sumneko_binary = ""
+local user_home = vim.fn.expand("$HOME")
 
 if vim.fn.has("mac") == 1 then
-	sumneko_root_path = "/Users/" .. USER .. "/.local/git/lua-language-server"
-	sumneko_binary = "/Users/" .. USER .. "/.local/git/lua-language-server/bin/macOS/lua-language-server"
+	sumneko_root_path = user_home .. "/.local/git/lua-language-server"
+	sumneko_binary = user_home .. "/.local/git/lua-language-server/bin/macOS/lua-language-server"
 elseif vim.fn.has("unix") == 1 then
-	sumneko_root_path = "/home/" .. USER .. "/.local/git/lua-language-server"
-	sumneko_binary = "/home/" .. USER .. "/.local/git/lua-language-server/bin/Linux/lua-language-server"
+	sumneko_root_path = user_home .. "/.local/git/lua-language-server"
+	sumneko_binary = user_home .. "/.local/git/lua-language-server/bin/Linux/lua-language-server"
 else
 	print("Unsupported system for sumneko")
 end
@@ -182,21 +181,21 @@ local luadev = require("lua-dev").setup({
 nvim_lsp.sumneko_lua.setup(luadev)
 
 -- symbols-outline.nvim
-vim.g.symbols_outline = {
-	highlight_hovered_item = true,
-	show_guides = true,
-	auto_preview = true, -- experimental
-	position = "right",
-	keymaps = {
-		close = "<Esc>",
-		goto_location = "<Cr>",
-		focus_location = "o",
-		hover_symbol = "<C-space>",
-		rename_symbol = "r",
-		code_actions = "a",
-	},
-	lsp_blacklist = {},
-}
+-- vim.g.symbols_outline = {
+-- 	highlight_hovered_item = true,
+-- 	show_guides = true,
+-- 	auto_preview = true, -- experimental
+-- 	position = "right",
+-- 	keymaps = {
+-- 		close = "<Esc>",
+-- 		goto_location = "<Cr>",
+-- 		focus_location = "o",
+-- 		hover_symbol = "<C-space>",
+-- 		rename_symbol = "r",
+-- 		code_actions = "a",
+-- 	},
+-- 	lsp_blacklist = {},
+-- }
 
 -- LSP Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -208,15 +207,15 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 
 -- Send diagnostics to quickfix list
 do
-	local method = "textDocument/publishDiagnostics"
-	local default_handler = vim.lsp.handlers[method]
-	vim.lsp.handlers[method] = function(err, method, result, client_id, bufnr, config)
-		default_handler(err, method, result, client_id, bufnr, config)
+	local cur_method = "textDocument/publishDiagnostics"
+	local default_handler = vim.lsp.handlers[cur_method]
+	vim.lsp.handlers[cur_method] = function(err, cur_loc_method, result, client_id, bufnr, config)
+		default_handler(err, cur_loc_method, result, client_id, bufnr, config)
 		local diagnostics = vim.lsp.diagnostic.get_all()
 		local qflist = {}
-		for bufnr, diagnostic in pairs(diagnostics) do
+		for cur_bufnr, diagnostic in pairs(diagnostics) do
 			for _, d in ipairs(diagnostic) do
-				d.bufnr = bufnr
+				d.bufnr = cur_bufnr
 				d.lnum = d.range.start.line + 1
 				d.col = d.range.start.character + 1
 				d.text = d.message
@@ -226,3 +225,12 @@ do
 		vim.lsp.util.set_qflist(qflist)
 	end
 end
+
+vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
+vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
+vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
+vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
+vim.lsp.handlers["textDocument/typeDefinition"] = require("lsputil.locations").typeDefinition_handler
+vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
+vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
+vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler

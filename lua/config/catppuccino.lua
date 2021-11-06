@@ -41,4 +41,4 @@ catppuccino.setup({
 })
 
 -- load it
-catppuccino.load()
+-- catppuccino.load()

@@ -1,6 +1,6 @@
 local gl = require("galaxyline")
 local gls = gl.section
-gl.short_line_list = {"LuaTree", "CHADTREE", "OUTLINE"}
+gl.short_line_list = { "LuaTree", "CHADTREE", "OUTLINE" }
 local i = require("statusline.icons")
 local c = require("statusline.colors")
 local u = require("statusline.utils")
@@ -39,178 +39,206 @@ viMode = vimode.get_mode
 viModeSeperator = vimode.seperator
 
 gls.left[1] = {
-    ViMode = {
-        provider = viMode,
-        highlight = {c.Color('act1'), c.Color('DarkGoldenrod2')}
-    }
+	ViMode = {
+		provider = viMode,
+		highlight = { c.Color("act1"), c.Color("DarkGoldenrod2") },
+	},
 }
 
 gls.left[2] = {
-    ViModeSeperator = {
-        provider = viModeSeperator,
-        highlight = {c.Color('act1'), c.Color('DarkGoldenrod2')}
-    }
+	ViModeSeperator = {
+		provider = viModeSeperator,
+		highlight = { c.Color("act1"), c.Color("DarkGoldenrod2") },
+	},
 }
 
 gls.left[3] = {
-    FileSize = {
-        provider = fileSize,
-        condition = u.buffer_not_empty,
-        highlight = {c.Color('base'), c.Color('act1')}
-    }
+	FileSize = {
+		provider = fileSize,
+		condition = u.buffer_not_empty,
+		highlight = { c.Color("base"), c.Color("act1") },
+		separator = i.slant.Right,
+		separator_highlight = { c.Color("act1"), c.Color("DarkGoldenrod2") },
+	},
 }
 
 gls.left[4] = {
-    FileName = {
-        provider = fileName,
-        condition = u.buffer_not_empty,
-        separator = i.slant.Left,
-        separator_highlight = {c.Color('purple'), c.Color('act1')},
-        highlight = {c.Color('func'), c.Color('act1'), "bold"}
-    }
+	FileName = {
+		provider = fileName,
+		condition = u.buffer_not_empty,
+		highlight = { c.Color("act1"), c.Color("DarkGoldenrod2"), "bold" },
+		separator = i.slant.Right,
+		separator_highlight = { c.Color("purple"), c.Color("DarkGoldenrod2") },
+	},
 }
 
 gls.left[5] = {
-    FileType = {
-        provider = fileType,
-        condition = u.buffer_not_empty,
-        highlight = {c.Color('base'), c.Color('purple')}
-    }
+	FileSeparator = {
+		provider = space,
+		condition = u.buffer_not_empty,
+		highlight = { c.Color("purple"), c.Color("act1") },
+		separator = i.slant.Right,
+		separator_highlight = { c.Color("act1"), c.Color("purple") },
+	},
 }
 
 gls.left[6] = {
-    FiletTypeSeperator = {
-        provider = filetTypeSeperator
-    }
+	FileType = {
+		provider = fileType,
+		condition = u.buffer_not_empty,
+		highlight = { c.Color("base"), c.Color("purple") },
+	},
 }
 
 gls.left[7] = {
-    DiagnosticError = {
-        provider = diagnosticError,
-        icon = " " .. i.diagnostic.error,
-        highlight = {c.Color('error'), c.Color('act1')}
-    }
+	FiletTypeSeperator = {
+		provider = filetTypeSeperator,
+	},
 }
 
 gls.left[8] = {
-    DiagnosticWarn = {
-        provider = diagnosticWarn,
-        icon = " " .. i.diagnostic.warn,
-        highlight = {c.Color('warning'), c.Color('act1')}
-    }
+	DiagnosticError = {
+		provider = diagnosticError,
+		icon = " " .. i.diagnostic.error,
+		highlight = { c.Color("error"), c.Color("act1") },
+	},
 }
 
 gls.left[9] = {
-    DiagnosticInfo = {
-        provider = diagnosticInfo,
-        icon = " " .. i.diagnostic.info,
-        highlight = {c.Color('info'), c.Color('act1')}
-    }
+	DiagnosticWarn = {
+		provider = diagnosticWarn,
+		icon = " " .. i.diagnostic.warn,
+		highlight = { c.Color("warning"), c.Color("act1") },
+	},
 }
 
 gls.left[10] = {
-    DiagnosticEndSpace = {
-        provider = diagnosticEndSpace,
-        highlight = {c.Color('act1'), c.Color('act1')}
-    }
+	DiagnosticInfo = {
+		provider = diagnosticInfo,
+		icon = " " .. i.diagnostic.info,
+		highlight = { c.Color("info"), c.Color("act1") },
+	},
 }
-
 gls.left[11] = {
-    DiagnosticSeperator = {
-        provider = diagnosticSeperator,
-        highlight = {c.Color('purple'), c.Color('act1')}
-    }
+	DiagnosticEndSpace = {
+		provider = diagnosticEndSpace,
+		highlight = { c.Color("act1"), c.Color("act1") },
+	},
 }
-
-
 gls.left[12] = {
-    GitBranch = {
-        provider = gitBranch,
-        icon = "  " .. i.git .. " ",
-        condition = u.buffer_not_empty,
-    }
+	DiagnosticSeperator = {
+		provider = diagnosticSeperator,
+		highlight = { c.Color("purple"), c.Color("act1") },
+	},
 }
 gls.left[13] = {
-    DiffAdd = {
-        provider = diffAdd,
-        condition = u.checkwidth,
-        icon = i.diff.Add,
-        highlight = {c.Color('green'), c.Color('purple')}
-    }
+	GitBranch = {
+		provider = gitBranch,
+		icon = "  " .. i.git .. " ",
+		condition = u.buffer_not_empty,
+	},
 }
 gls.left[14] = {
-    DiffModified = {
-        provider = diffModified,
-        condition = u.checkwidth,
-        icon = i.diff.Modified,
-        highlight = {c.Color('orange'), c.Color('purple')}
-    }
+	DiffAdd = {
+		provider = diffAdd,
+		condition = u.checkwidth,
+		icon = " " .. i.diff.Add .. " ",
+		highlight = { c.Color("green"), c.Color("purple") },
+	},
 }
 gls.left[15] = {
-    DiffRemove = {
-        provider = diffRemove,
-        condition = u.checkwidth,
-        icon = i.diff.Remove,
-        highlight = {c.Color('red'), c.Color('purple')}
-    }
+	DiffModified = {
+		provider = diffModified,
+		condition = u.checkwidth,
+		icon = " " .. i.diff.Modified .. " ",
+		highlight = { c.Color("orange"), c.Color("purple") },
+	},
 }
 gls.left[16] = {
-    GitSeperator = {
-        provider = gitSeperator,
-        condition = u.buffer_not_empty
-    }
+	DiffRemove = {
+		provider = diffRemove,
+		condition = u.checkwidth,
+		icon = " " .. i.diff.Remove .. " ",
+		highlight = { c.Color("red"), c.Color("purple") },
+	},
 }
-
 gls.left[17] = {
-    Space = {
-        provider = space,
-        highlight = {c.Color('blue'), c.Color('purple')}
-    }
+	GitSeperator = {
+		provider = gitSeperator,
+		condition = u.buffer_not_empty,
+		separator = i.slant.Right,
+		separator_highlight = { c.Color("purple"), c.Color("act1") },
+	},
+}
+gls.left[18] = {
+	Space = {
+		provider = space,
+		highlight = { c.Color("base"), c.Color("purple") },
+	},
 }
 
 gls.right[1] = {
-    FileFormat = {
-        provider = fileFormat,
-        highlight = {c.Color('base'), c.Color('purple')}
-    }
+	FileFormat = {
+		provider = fileFormat,
+		highlight = { c.Color("base"), c.Color("purple") },
+		separator = i.slant.Left,
+		separator_highlight = { c.Color("purple"), c.Color("act1") },
+	},
 }
 gls.right[2] = {
-    LineInfo = {
-        provider = lineColumn,
-        separator = " | ",
-        separator_highlight = {c.Color('base'), c.Color('purple')},
-        highlight = {c.Color('base'), c.Color('purple')}
-    }
+	LineInfo = {
+		provider = lineColumn,
+		separator = " | ",
+		separator_highlight = { c.Color("base"), c.Color("purple") },
+		highlight = { c.Color("base"), c.Color("purple") },
+	},
 }
 gls.right[3] = {
-    PerCent = {
-        provider = linePercent,
-        separator = i.slant.Left,
-        separator_highlight = {c.Color('act1'), c.Color('purple')},
-        highlight = {c.Color('base'), c.Color('act1')}
-    }
+	PerCent = {
+		provider = linePercent,
+		separator = i.slant.Left,
+		separator_highlight = { c.Color("act1"), c.Color("purple") },
+		highlight = { c.Color("base"), c.Color("act1") },
+	},
 }
 gls.right[4] = {
-    ScrollBar = {
-        provider = scrollBar,
-        highlight = {c.Color('yellow'), c.Color('purple')}
-    }
+	ScrollBar = {
+		provider = scrollBar,
+		highlight = { c.Color("yellow"), c.Color("purple") },
+	},
 }
 
 gls.short_line_left[1] = {
-    BufferType = {
-        provider = fileTypeName,
-        separator = i.slant.Right,
-        separator_highlight = {c.Color('purple'), c.Color('bg')},
-        highlight = {c.Color('base'), c.Color('purple')}
-    }
+	BufferType = {
+		provider = fileTypeName,
+		separator = i.slant.Right,
+		separator_highlight = { c.Color("purple"), c.Color("DarkGoldenrod2") },
+		highlight = { c.Color("base"), c.Color("purple") },
+	},
+}
+
+gls.short_line_left[2] = {
+	FileName = {
+		provider = fileName,
+		condition = u.buffer_not_empty,
+		separator = i.slant.Right,
+		separator_highlight = { c.Color("DarkGoldenrod2"), c.Color("act1") },
+		highlight = { c.Color("act1"), c.Color("DarkGoldenrod2"), "bold" },
+	},
+}
+
+gls.short_line_left[3] = {
+	Space = {
+		provider = space,
+		highlight = { c.Color("blue"), c.Color("act1") },
+	},
 }
 
 gls.short_line_right[1] = {
-    BufferIcon = {
-        provider = bufferIcon,
-        separator = i.slant.Left,
-        separator_highlight = {c.Color('purple'), c.Color('bg')},
-        highlight = {c.Color('base'), c.Color('purple')}
-    }
+	BufferIcon = {
+		provider = bufferIcon,
+		separator = i.slant.Left,
+		separator_highlight = { c.Color("purple"), c.Color("bg") },
+		highlight = { c.Color("base"), c.Color("purple") },
+	},
 }

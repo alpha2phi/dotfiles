@@ -1,4 +1,6 @@
+---@diagnostic disable: undefined-global
 local trouble = require("trouble.providers.telescope")
+local actions = require("telescope.actions")
 
 require("telescope").setup({
 	find_command = {
@@ -25,11 +27,56 @@ require("telescope").setup({
 			override_file_sorter = true,
 			case_mode = "smart_case",
 		},
+		project = {
+			base_dirs = {
+				{ path = "~/.local/git", max_depth = 3 },
+			},
+			hidden_files = true,
+		},
 	},
 	defaults = {
+		pickers = {
+			spell_suggest = {
+				theme = "cursor",
+			},
+			lsp_code_actions = {
+				theme = "cursor",
+			},
+			lsp_range_code_actions = {
+				theme = "cursor",
+			},
+			buffers = {
+				theme = "dropdown",
+			},
+			oldfiles = {
+				theme = "dropdown",
+			},
+			git_branches = {
+				theme = "dropdown",
+			},
+			find_files = {
+				theme = "dropdown",
+				hidden = true,
+			},
+			git_commits = {
+				mappings = {
+					i = {
+						["<CR>"] = function(prompt_bufnr)
+							actions.close(prompt_bufnr)
+							local value = actions.get_selected_entry(prompt_bufnr).value
+							vim.cmd("DiffviewOpen " .. value .. "~1.." .. value)
+						end,
+					},
+				},
+			},
+		},
 		mappings = {
 			i = { ["<c-t>"] = trouble.open_with_trouble },
 			n = { ["<c-t>"] = trouble.open_with_trouble },
+		},
+		history = {
+			path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
+			limit = 100,
 		},
 	},
 })
@@ -38,12 +85,14 @@ require("neoclip").setup()
 
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("gh")
--- require('telescope').load_extension('node_modules')
+-- require("telescope").load_extension("node_modules")
 require("telescope").load_extension("session-lens")
 require("telescope").load_extension("vim_bookmarks")
 require("telescope").load_extension("ultisnips")
-require("telescope").load_extension("projects")
+require("telescope").load_extension("project")
 require("telescope").load_extension("neoclip")
+require("telescope").load_extension("smart_history")
+-- require("telescope").load_extension("aerial")
 -- require('telescope').load_extension('snippets')
 -- require('telescope').load_extension('arecibo')
 -- require('telescope').load_extension('media_files')
@@ -65,9 +114,9 @@ require("telescope").extensions.vim_bookmarks.current_file({
 })
 
 require("session-lens").setup({
-	shorten_path = false,
+	path_display = { "shorten" },
 	theme_conf = { border = false },
-	previewer = true,
+	previewer = false,
 })
 
 local actions = require("telescope.actions")

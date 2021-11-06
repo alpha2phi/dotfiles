@@ -251,7 +251,7 @@ au BufNewFile,BufRead .babelrc set ft=json
 au BufNewFile,BufRead .watchmanconfig set ft=json
 au BufNewFile,BufRead .buckconfig set ft=toml
 au BufNewFile,BufRead .flowconfig set ft=ini
-au BufNewFile,BufRead *.{js,mjs,cjs,jsm,es,es6},Jakefile set ft=javascript foldmethod=expr
+au BufNewFile,BufRead *.{js,mjs,cjs,jsm,es,es6} set ft=javascript
 au BufNewFile,BufRead .tern-{project,port} set ft=json
 au BufNewFile,BufRead *.postman_collection set ft=json
 
@@ -284,7 +284,7 @@ au BufNewFile,BufRead *.hamljs set ft=jst
 au BufNewFile,BufRead *.ect set ft=jst
 
 " jsx
-au BufNewFile,BufRead *.jsx set ft=javascriptreact foldmethod=expr
+au BufNewFile,BufRead *.jsx set ft=javascriptreact
 
 " julia
 au BufNewFile,BufRead *.jl set ft=julia
