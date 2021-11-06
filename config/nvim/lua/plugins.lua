@@ -199,11 +199,7 @@ function M.setup()
         require("config.cmp").setup()
       end,
     }
-    -- use {
-    --   "tzachar/cmp-tabnine",
-    --   run = "./install.sh",
-    --   requires = "hrsh7th/nvim-cmp",
-    -- }
+    use { "tzachar/cmp-tabnine", run = "./install.sh" }
     -- use {'hrsh7th/nvim-compe'}
     -- use {
     --     'ms-jpq/coq_nvim',
