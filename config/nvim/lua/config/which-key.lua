@@ -96,6 +96,7 @@ local mappings = {
     e = { "<Cmd>NvimTreeToggle<CR>", "Explorer" },
     z = { "<Cmd>lefta 20vsp ~/workspace/dev/alpha2phi<CR>", "Netrw" },
     v = { "<Cmd>Telescope media_files<CR>", "View media files" },
+    t = { "<Cmd>Telescope<CR>", "Telescope" },
   },
 
   -- Git
