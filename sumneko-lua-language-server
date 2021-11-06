@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+$(dirname $0)/sumneko-lua/extension/server/bin/macOS/lua-language-server -E -e LANG=en $(dirname $0)/sumneko-lua/extension/server/main.lua $*
