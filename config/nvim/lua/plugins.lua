@@ -182,7 +182,7 @@ function M.setup()
     -- Completion - use either one of this
     use {
       "hrsh7th/nvim-cmp",
-      event = "BufRead",
+      --event = "BufRead",
       requires = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
@@ -453,7 +453,7 @@ function M.setup()
     }
     use {
       "stevearc/gkeep.nvim",
-      event = "VimEnter",
+      -- event = "VimEnter",
       run = ":UpdateRemotePlugins",
     }
 
@@ -468,6 +468,13 @@ function M.setup()
     }
 
     -- Trying
+    use {
+      "vuki656/package-info.nvim",
+      requires = "MunifTanjim/nui.nvim",
+      config = function()
+        require("package-info").setup()
+      end,
+    }
 
     use { "github/copilot.vim" }
 
@@ -487,13 +494,13 @@ function M.setup()
       end,
     }
 
-    -- use {
-    --   "max397574/better-escape.nvim",
-    --   config = function()
-    --     require("better_escape").setup()
-    --   end,
-    --   event = "InsertEnter",
-    -- }
+    use {
+      "max397574/better-escape.nvim",
+      config = function()
+        require("better_escape").setup()
+      end,
+      event = "InsertEnter",
+    }
 
     use {
       "dstein64/vim-startuptime",
@@ -502,6 +509,7 @@ function M.setup()
     }
 
     -- use { "RishabhRD/nvim-cheat.sh", requires = { "RishabhRD/popfix" } }
+
     -- use {
     --   "AckslD/nvim-neoclip.lua",
     --   config = function()
