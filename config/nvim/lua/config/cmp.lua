@@ -137,7 +137,22 @@ function M.setup()
   local tabnine = require "cmp_tabnine.config"
   tabnine:setup { max_lines = 1000, max_num_results = 20, sort = true }
 
-  -- Database completion
+  -- cmdline
+  cmp.setup.cmdline(":", {
+    sources = {
+      { name = "cmdline" },
+    },
+  })
+
+  -- lsp_document_symbols
+  cmp.setup.cmdline('/', {
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp_document_symbol' }
+    }, {
+      { name = 'buffer' }
+    })
+  })
+    -- Database completion
   vim.api.nvim_exec(
     [[
         autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })

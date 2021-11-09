@@ -194,6 +194,8 @@ function M.setup()
         "f3fora/cmp-spell",
         "hrsh7th/cmp-emoji",
         "ray-x/cmp-treesitter",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/cmp-nvim-lsp-document-symbol",
       },
       config = function()
         require("config.cmp").setup()
