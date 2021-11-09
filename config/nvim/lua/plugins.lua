@@ -518,6 +518,9 @@ function M.setup()
     --     require("neoclip").setup()
     --   end,
     -- }
+
+    use { "vim-denops/denops.vim" }
+    use { "vim-denops/denops-helloworld.vim" }
   end
 
   packer.init(conf)
