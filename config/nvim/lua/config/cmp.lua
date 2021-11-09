@@ -145,14 +145,14 @@ function M.setup()
   })
 
   -- lsp_document_symbols
-  cmp.setup.cmdline('/', {
+  cmp.setup.cmdline("/", {
     sources = cmp.config.sources({
-      { name = 'nvim_lsp_document_symbol' }
+      { name = "nvim_lsp_document_symbol" },
     }, {
-      { name = 'buffer' }
-    })
+      { name = "buffer" },
+    }),
   })
-    -- Database completion
+  -- Database completion
   vim.api.nvim_exec(
     [[
         autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
