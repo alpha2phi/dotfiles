@@ -111,7 +111,7 @@ function M.setup()
       end,
     },
     sources = {
-      { name = "buffer" },
+      { name = "buffer", keyword_length = 3 },
       { name = "nvim_lsp" },
       { name = "ultisnips" },
       { name = "nvim_lua" },
@@ -126,6 +126,7 @@ function M.setup()
       { name = "cmp_tabnine" },
     },
     completion = { completeopt = "menu,menuone,noinsert" },
+    experimental = { native_menu = false, ghost_text = true },
   }
 
   -- If you want insert `(` after select function or method item
