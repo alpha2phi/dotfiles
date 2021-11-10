@@ -54,13 +54,13 @@ function M.setup()
         require("config.which-key").setup()
       end,
     }
-    use {
-      "gelguy/wilder.nvim",
-      run = ":UpdateRemotePlugins",
-      config = function()
-        require("config.wilder").setup()
-      end,
-    }
+    -- use {
+    --   "gelguy/wilder.nvim",
+    --   run = ":UpdateRemotePlugins",
+    --   config = function()
+    --     require("config.wilder").setup()
+    --   end,
+    -- }
     -- use {'chrisbra/NrrwRgn'}
     use {
       "kyazdani42/nvim-tree.lua",
@@ -162,13 +162,13 @@ function M.setup()
     -- LSP config
     use { "williamboman/nvim-lsp-installer" }
     use { "jose-elias-alvarez/null-ls.nvim" }
-    use {
-      "tamago324/nlsp-settings.nvim",
-      event = "BufReadPre",
-      config = function()
-        require("config.nlsp-settings").setup()
-      end,
-    }
+    -- use {
+    --   "tamago324/nlsp-settings.nvim",
+    --   -- event = "BufReadPre",
+    --   config = function()
+    --     require("config.nlsp-settings").setup()
+    --   end,
+    -- }
     use {
       "neovim/nvim-lspconfig",
       opt = true,
@@ -246,7 +246,7 @@ function M.setup()
     use {
       "folke/todo-comments.nvim",
       cmd = { "TodoTrouble", "TodoTelescope" },
-      event = "BufReadPost",
+      -- event = "BufReadPost",
       config = function()
         require("todo-comments").setup {}
       end,
@@ -271,9 +271,13 @@ function M.setup()
     -- }
     use {
       "SirVer/ultisnips",
-      requires = { "honza/vim-snippets" },
       event = "VimEnter",
+      requires = { { "honza/vim-snippets", rtp = "." } },
       config = function()
+        vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+        vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
+        vim.g.UltiSnipsJumpBackwardTrigger = "<Plug>(ultisnips_jump_backward)"
+        vim.g.UltiSnipsListSnippets = "<c-x><c-s>"
         vim.g.UltiSnipsRemoveSelectModeMappings = 0
       end,
     }
@@ -501,7 +505,7 @@ function M.setup()
       config = function()
         require("better_escape").setup()
       end,
-      event = "InsertEnter",
+      -- event = "InsertEnter",
     }
 
     use {
