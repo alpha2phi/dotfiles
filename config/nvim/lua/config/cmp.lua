@@ -85,33 +85,34 @@ function M.setup()
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       },
-      -- ["<CR>"] = cmp.mapping {
-      --   i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
-      --   c = function(fallback)
-      --     if cmp.visible() then
-      --       cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
-      --     else
-      --       fallback()
-      --     end
-      --   end,
-      -- },
-      ["<C-Space>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-            return press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
+      ["<C-Space>"] = cmp.mapping {
+        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+          else
+            fallback()
           end
+        end,
+      },
+      -- ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+      -- ["<C-Space>"] = cmp.mapping(function(fallback)
+      --   if cmp.visible() then
+      --     if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+      --       return press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
+      --     end
 
-          cmp.select_next_item()
-        elseif has_any_words_before() then
-          press "<Space>"
-        else
-          fallback()
-        end
-      end, {
-        "i",
-        "s",
-        "c",
-      }),
+      --     cmp.select_next_item()
+      --   elseif has_any_words_before() then
+      --     press "<Space>"
+      --   else
+      --     fallback()
+      --   end
+      -- end, {
+      --   "i",
+      --   "s",
+      --   "c",
+      -- }),
       ["<Tab>"] = cmp.mapping(function(fallback)
         if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
           press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
