@@ -15,6 +15,10 @@ function M.setup()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
   end
 
+  local t = function(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+  end
+
   cmp.setup {
     formatting = {
       format = require("lspkind").cmp_format {
@@ -37,9 +41,41 @@ function M.setup()
     },
     mapping = {
       ["<C-p>"] = cmp.mapping.select_prev_item(),
-      ["<C-k>"] = cmp.mapping.select_prev_item(),
+      -- ["<C-k>"] = cmp.mapping.select_prev_item(),
+      ["<C-k>"] = cmp.mapping {
+        c = function()
+          if cmp.visible() then
+            cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
+          else
+            vim.api.nvim_feedkeys(t "<Up>", "n", true)
+          end
+        end,
+        i = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
+          else
+            fallback()
+          end
+        end,
+      },
       ["<C-n>"] = cmp.mapping.select_next_item(),
-      ["<C-j>"] = cmp.mapping.select_next_item(),
+      -- ["<C-j>"] = cmp.mapping.select_next_item(),
+      ["<C-j>"] = cmp.mapping {
+        c = function()
+          if cmp.visible() then
+            cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+          else
+            vim.api.nvim_feedkeys(t "<Down>", "n", true)
+          end
+        end,
+        i = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+          else
+            fallback()
+          end
+        end,
+      },
       ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-e>"] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
@@ -49,6 +85,16 @@ function M.setup()
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       },
+      -- ["<CR>"] = cmp.mapping {
+      --   i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+      --   c = function(fallback)
+      --     if cmp.visible() then
+      --       cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+      --     else
+      --       fallback()
+      --     end
+      --   end,
+      -- },
       ["<C-Space>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
