@@ -70,6 +70,7 @@ return require("packer").startup({
 		use({ "sainnhe/everforest" })
 		use({ "tanvirtin/monokai.nvim" })
 		use({ "Pocco81/Catppuccino.nvim" })
+		use({ "katawful/kat.nvim" })
 		use({ "sainnhe/edge" })
 		use({ "rafamadriz/neon" })
 		-- use({
@@ -153,7 +154,8 @@ return require("packer").startup({
 		use({ "neovim/nvim-lspconfig" })
 		use({ "kabouzeid/nvim-lspinstall" })
 		-- use({ "glepnir/lspsaga.nvim" })
-		use({ "jasonrhansen/lspsaga.nvim", branch = "finder-preview-fixes" })
+		-- use({ "jasonrhansen/lspsaga.nvim", branch = "finder-preview-fixes" })
+		use({ "tami5/lspsaga.nvim" })
 		use({ "onsails/lspkind-nvim" })
 		use({ "mortepau/codicons.nvim" })
 		-- use {'sbdchd/neoformat'}
@@ -237,7 +239,7 @@ return require("packer").startup({
 				"hrsh7th/cmp-emoji",
 			},
 		})
-		use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
+		-- use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
 		-- use {'codota/tabnine-vim'}
 
 		-- Lua development
@@ -503,6 +505,8 @@ return require("packer").startup({
 		-- use {'junegunn/fzf.vim'}
 		-- use {'fiatjaf/neuron.vim' }
 
+		-- Pair Programming
+		use({ "Floobits/floobits-neovim" })
 		-- -- DAP
 		use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 		use({ "nvim-telescope/telescope-dap.nvim" })

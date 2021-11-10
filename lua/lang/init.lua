@@ -3,7 +3,7 @@ local on_attach = function(client, bufnr)
 	require("lsp_signature").on_attach(client)
 	require("aerial").on_attach(client)
 
-	local function buf_set_keymap(...)
+	local function bufkeymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
 	local function buf_set_option(...)
@@ -17,9 +17,9 @@ local on_attach = function(client, bufnr)
 
 	-- Set some keybinds conditional on server capabilities
 	if client.resolved_capabilities.document_formatting then
-		buf_set_keymap("n", "<leader>l<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+		bufkeymap("n", "<leader>l<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 	elseif client.resolved_capabilities.document_range_formatting then
-		buf_set_keymap("n", "<leader>l<leader>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+		bufkeymap("n", "<leader>l<leader>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 	end
 
 	-- Set autocommands conditional on server_capabilities
@@ -38,6 +38,16 @@ local on_attach = function(client, bufnr)
 			false
 		)
 	end
+
+	bufkeymap(0, "n", "gr", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
+	bufkeymap(0, "n", "gx", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
+	bufkeymap(0, "x", "gx", ":<c-u>Lspsaga range_code_action<cr>", { silent = true, noremap = true })
+	bufkeymap(0, "n", "K", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
+	bufkeymap(0, "n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>", { silent = true, noremap = true })
+	bufkeymap(0, "n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
+	bufkeymap(0, "n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
+	bufkeymap(0, "n", "<A-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>")
+	bufkeymap(0, "n", "<A-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>")
 end
 
 local nvim_lsp = require("lspconfig")

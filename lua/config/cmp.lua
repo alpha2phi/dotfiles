@@ -19,7 +19,7 @@ cmp.setup({
 			vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
 			-- set a name for each source
 			vim_item.menu = ({
-				cmp_tabnine = "[TabNine]",
+				-- cmp_tabnine = "[TabNine]",
 				nvim_lsp = "[LSP]",
 				buffer = "[Buffer]",
 				ultisnips = "[UltiSnips]",
@@ -75,7 +75,7 @@ cmp.setup({
 		end,
 	},
 	sources = {
-		{ name = "cmp_tabnine" },
+		-- { name = "cmp_tabnine" },
 		{ name = "nvim_lsp" },
 		{ name = "buffer" },
 		{ name = "ultisnips" },
@@ -99,7 +99,7 @@ cmp.setup({
 require("nvim-autopairs.completion.cmp").setup({
 	map_cr = true, --  map <CR> on insert mode
 	map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
-	auto_select = true, -- automatically select the first item
+	auto_select = false, -- automatically select the first item
 	insert = false, -- use insert confirm behavior instead of replace
 	map_char = { -- modifies the function or method delimiter by filetypes
 		all = "(",
@@ -108,8 +108,8 @@ require("nvim-autopairs.completion.cmp").setup({
 })
 
 -- TabNine
-local tabnine = require("cmp_tabnine.config")
-tabnine:setup({ max_lines = 1000, max_num_results = 21, sort = true })
+-- local tabnine = require("cmp_tabnine.config")
+-- tabnine:setup({ max_lines = 1000, max_num_results = 21, sort = true })
 
 -- Database completion
 -- vim.api.nvim_exec(

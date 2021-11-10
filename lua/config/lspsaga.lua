@@ -1,13 +1,13 @@
 local saga = require("lspsaga")
 
-return saga.init_lsp_saga({
+return saga.setup({
 	max_preview_lines = 21,
 	finder_action_keys = {
-		open = "<cr>",
-		vsplit = "<right>",
-		split = "<down>",
+		open = "o",
+		vsplit = "s",
+		split = "i",
 		quit = "q",
-		scroll_down = "<A-j>",
-		scroll_up = "<A-k>",
+		scroll_down = "<C-f>",
+		scroll_up = "<C-b>",
 	},
 })

@@ -75,11 +75,11 @@ local colors = {
 	bg = "#ffefef",
 	fg = "#707070",
 	red = "#e05661",
-	orange = "#ee9025",
-	yellow = "#eebb97",
+	orange = "#ff3377",
+	yellow = "#ee9025",
 	green = "#1da912",
-	cyan = "#56b6c2",
-	blue = "#118dc3",
+	cyan = "#00ffff",
+	blue = "#56b6c2",
 	purple = "#9a77cf",
 	white = "#fafafa",
 	black = "#3f3f3f",
@@ -87,7 +87,7 @@ local colors = {
 	highlight = "#efdebd",
 }
 onedarkpro.setup({
-	theme = "onelight", -- The theme to be used (opts: 'onedark' or 'onelight')
+	theme = "onedark", -- The theme to be used (opts: 'onedark' or 'onelight')
 	colors = {
 		bg = colors.bg,
 		fg = colors.fg,
@@ -162,3 +162,8 @@ lush(require("lush_jsx").setup({
 		"xml",
 	},
 }))
+
+--kat.nvim
+vim.g.kat_nvim_commentStyle = "italic"
+vim.g.kat_nvim_integrations = { "lsp", "treesitter", "ts_rainbow", "cmp" }
+vim.g.kat_nvim_stupidFeatures = false

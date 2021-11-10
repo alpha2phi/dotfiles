@@ -9,18 +9,16 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd ~/.config/nvim/init.lua
-edit ~/.local/git/in-house/in-house-web/src/store/index.js
+edit ~/.config/nvim/lua/plugins.lua
 argglobal
-balt ~/.local/git/in-house/in-house-web/src/components/organisms/VenueList/index.jsx
-let s:l = 41 - ((37 * winheight(0) + 32) / 64)
+balt ~/.config/nvim/lua/lang/init.lua
+let s:l = 242 - ((29 * winheight(0) + 29) / 59)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 41
-normal! 011|
-badd +10 ~/.local/git/joehannes-ux/lush-jsx.nvim/lua/lush_jsx/languages/js.lua
-badd +116 ~/.config/nvim/ftdetect/ftdetect.vim
-badd +42 ~/.local/git/in-house/in-house-web/src/store/index.js
+keepjumps 242
+normal! 05|
+badd +242 ~/.config/nvim/lua/plugins.lua
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
