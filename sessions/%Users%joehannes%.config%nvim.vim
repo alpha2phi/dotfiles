@@ -9,21 +9,21 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd ~/.config/nvim/init.lua
-edit ~/.config/nvim/lua/plugins.lua
+edit ~/.config/nvim/lua/lang/init.lua
 argglobal
-balt ~/.config/nvim/lua/lang/init.lua
-let s:l = 242 - ((29 * winheight(0) + 29) / 59)
+balt ~/.config/nvim/init.lua
+let s:l = 49 - ((47 * winheight(0) + 29) / 59)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 242
-normal! 05|
-badd +242 ~/.config/nvim/lua/plugins.lua
+keepjumps 49
+normal! 012|
+badd +49 ~/.config/nvim/lua/lang/init.lua
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 shortmess=filnxtToOFc
+set winheight=1 winwidth=20 shortmess=aoO
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

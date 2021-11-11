@@ -4,6 +4,7 @@ return require("packer").startup({
 		use({ "wbthomason/packer.nvim" })
 		use({ "LionC/nest.nvim" })
 
+		use({ "Olical/aniseed" })
 		-- Development
 		use({ "tpope/vim-dispatch" })
 		use({ "tpope/vim-commentary" })
@@ -70,7 +71,7 @@ return require("packer").startup({
 		use({ "sainnhe/everforest" })
 		use({ "tanvirtin/monokai.nvim" })
 		use({ "Pocco81/Catppuccino.nvim" })
-		use({ "katawful/kat.nvim" })
+		use({ "joehannes-ux/kat.nvim" })
 		use({ "sainnhe/edge" })
 		use({ "rafamadriz/neon" })
 		-- use({

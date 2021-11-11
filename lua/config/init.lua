@@ -26,6 +26,6 @@ require("config.trouble")
 require("config.zen")
 require("config.scroll")
 
-require("config.bufferline")
 require("config.colorschemes")
 require("config.colorizer")
+-- require("config.bufferline")

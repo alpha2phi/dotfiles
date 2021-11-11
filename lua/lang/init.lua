@@ -39,15 +39,25 @@ local on_attach = function(client, bufnr)
 		)
 	end
 
-	bufkeymap(0, "n", "gr", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
-	bufkeymap(0, "n", "gx", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
-	bufkeymap(0, "x", "gx", ":<c-u>Lspsaga range_code_action<cr>", { silent = true, noremap = true })
-	bufkeymap(0, "n", "K", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
-	bufkeymap(0, "n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>", { silent = true, noremap = true })
-	bufkeymap(0, "n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
-	bufkeymap(0, "n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
-	bufkeymap(0, "n", "<A-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>")
-	bufkeymap(0, "n", "<A-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>")
+	bufkeymap("n", "gr", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
+	bufkeymap("n", "gx", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
+	bufkeymap("x", "gx", ":<c-u>Lspsaga range_code_action<cr>", { silent = true, noremap = true })
+	bufkeymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
+	bufkeymap("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>", { silent = true, noremap = true })
+	bufkeymap("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
+	bufkeymap("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
+	bufkeymap(
+		"n",
+		"<A-u>",
+		"<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>",
+		{ silent = true, noremap = true }
+	)
+	bufkeymap(
+		"n",
+		"<A-d>",
+		"<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>",
+		{ silent = true, noremap = true }
+	)
 end
 
 local nvim_lsp = require("lspconfig")

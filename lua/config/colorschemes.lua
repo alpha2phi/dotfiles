@@ -11,7 +11,7 @@ vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer", "symbols
 
 -- configure catppuccino
 catppuccino.setup({
-	colorscheme = "catppuccino",
+	colorscheme = "neon_latte",
 	transparency = false,
 	term_colors = false,
 	styles = {
@@ -134,36 +134,38 @@ onedarkpro.setup({
 })
 -- onedarkpro.load("onelight")
 
-vim.g.lush_jsx_contrast_dark = "hard"
-vim.g.lush_jsx_contrast_light = "hard"
-lush(require("lush_jsx").setup({
-	plugins = {
-		"cmp", -- nvim-cmp
-		"gitsigns",
-		"lsp",
-		"lspsaga",
-		"neogit",
-		"telescope",
-		"treesitter",
-	},
-	langs = {
-		"clojure",
-		"csharp",
-		"css",
-		"html",
-		"js",
-		"json",
-		"jsx",
-		"lua",
-		"markdown",
-		"python",
-		"typescript",
-		"viml",
-		"xml",
-	},
-}))
+-- vim.g.lush_jsx_contrast_dark = "hard"
+-- vim.g.lush_jsx_contrast_light = "hard"
+-- lush(require("lush_jsx").setup({
+-- 	plugins = {
+-- 		"cmp", -- nvim-cmp
+-- 		"gitsigns",
+-- 		"lsp",
+-- 		"lspsaga",
+-- 		"neogit",
+-- 		"telescope",
+-- 		"treesitter",
+-- 	},
+-- 	langs = {
+-- 		"clojure",
+-- 		"csharp",
+-- 		"css",
+-- 		"html",
+-- 		"js",
+-- 		"json",
+-- 		"jsx",
+-- 		"lua",
+-- 		"markdown",
+-- 		"python",
+-- 		"typescript",
+-- 		"viml",
+-- 		"xml",
+-- 	},
+-- }))
 
 --kat.nvim
 vim.g.kat_nvim_commentStyle = "italic"
-vim.g.kat_nvim_integrations = { "lsp", "treesitter", "ts_rainbow", "cmp" }
-vim.g.kat_nvim_stupidFeatures = false
+vim.g.kat_nvim_integrations = { "lsp", "treesitter", "ts_rainbow", "cmp", "bufferline" }
+vim.g.kat_nvim_stupidFeatures = true
+
+vim.cmd([[colorscheme kat.nvim]])
