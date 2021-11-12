@@ -520,7 +520,8 @@ function M.setup()
     -- }
 
     use { "vim-denops/denops.vim" }
-    use { "vim-denops/denops-helloworld.vim" }
+    use { "Shougo/ddc.vim" }
+    -- use { "vim-denops/denops-helloworld.vim" }
   end
 
   packer.init(conf)
