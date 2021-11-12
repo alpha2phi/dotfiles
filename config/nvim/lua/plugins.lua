@@ -54,13 +54,13 @@ function M.setup()
         require("config.which-key").setup()
       end,
     }
-    use {
-      "gelguy/wilder.nvim",
-      run = ":UpdateRemotePlugins",
-      config = function()
-        require("config.wilder").setup()
-      end,
-    }
+    -- use {
+    --   "gelguy/wilder.nvim",
+    --   run = ":UpdateRemotePlugins",
+    --   config = function()
+    --     require("config.wilder").setup()
+    --   end,
+    -- }
     -- use {'chrisbra/NrrwRgn'}
     use {
       "kyazdani42/nvim-tree.lua",
