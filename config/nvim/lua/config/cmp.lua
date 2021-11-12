@@ -15,10 +15,6 @@ function M.setup()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
   end
 
-  -- local t = function(str)
-  --   return vim.api.nvim_replace_termcodes(str, true, true, true)
-  -- end
-
   cmp.setup {
     formatting = {
       format = require("lspkind").cmp_format {
@@ -28,7 +24,7 @@ function M.setup()
           nvim_lsp = "[LSP]",
           ultisnips = "[UltiSnips]",
           nvim_lua = "[Lua]",
-          cmp_tabnine = "[TabNine]",
+          -- cmp_tabnine = "[TabNine]",
           look = "[Look]",
           path = "[Path]",
           spell = "[Spell]",
@@ -40,88 +36,27 @@ function M.setup()
       },
     },
     mapping = {
-      -- ["<C-p>"] = cmp.mapping.select_prev_item(),
-      -- ["<C-k>"] = cmp.mapping.select_prev_item(),
-      -- ["<C-k>"] = cmp.mapping {
-      --   c = function()
-      --     if cmp.visible() then
-      --       cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
-      --     else
-      --       vim.api.nvim_feedkeys(t "<Up>", "n", true)
-      --     end
-      --   end,
-      --   i = function(fallback)
-      --     if cmp.visible() then
-      --       cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
-      --     else
-      --       fallback()
-      --     end
-      --   end,
-      -- },
-      -- ["<C-n>"] = cmp.mapping.select_next_item(),
-      -- ["<C-j>"] = cmp.mapping.select_next_item(),
-      -- ["<C-j>"] = cmp.mapping {
-      --   c = function()
-      --     if cmp.visible() then
-      --       cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
-      --     else
-      --       vim.api.nvim_feedkeys(t "<Down>", "n", true)
-      --     end
-      --   end,
-      --   i = function(fallback)
-      --     if cmp.visible() then
-      --       cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
-      --     else
-      --       fallback()
-      --     end
-      --   end,
-      -- },
-      ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-      ["<C-e>"] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
-      ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
-      ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
+      ["<C-j>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
+      ["<C-k>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+      ["<Down>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
+      ["<Up>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
+      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      -- ["<C-Space>"] = cmp.mapping.complete(),
+      ["<C-e>"] = cmp.mapping.close(),
       ["<CR>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       },
-      ["<C-Space>"] = cmp.mapping {
-        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
-        c = function(fallback)
-          if cmp.visible() then
-            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
-          else
-            fallback()
+      ["<C-Space>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+            return press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
           end
-        end,
-      },
-      -- ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      -- ["<C-Space>"] = cmp.mapping(function(fallback)
-      --   if cmp.visible() then
-      --     if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-      --       return press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
-      --     end
 
-      --     cmp.select_next_item()
-      --   elseif has_any_words_before() then
-      --     press "<Space>"
-      --   else
-      --     fallback()
-      --   end
-      -- end, {
-      --   "i",
-      --   "s",
-      --   "c",
-      -- }),
-      ["<C-j>"] = cmp.mapping(function(fallback)
-        if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-          press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
-        elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-          press "<ESC>:call UltiSnips#JumpForwards()<CR>"
-        elseif cmp.visible() then
           cmp.select_next_item()
         elseif has_any_words_before() then
-          press "<Tab>"
+          press "<Space>"
         else
           fallback()
         end
@@ -131,7 +66,7 @@ function M.setup()
         "c",
       }),
       ["<Tab>"] = cmp.mapping(function(fallback)
-        if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+        if cmp.get_selected_entry() == nil and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
           press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
         elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
           press "<ESC>:call UltiSnips#JumpForwards()<CR>"
@@ -139,19 +74,6 @@ function M.setup()
           cmp.select_next_item()
         elseif has_any_words_before() then
           press "<Tab>"
-        else
-          fallback()
-        end
-      end, {
-        "i",
-        "s",
-        "c",
-      }),
-      ["<C-k>"] = cmp.mapping(function(fallback)
-        if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-          press "<ESC>:call UltiSnips#JumpBackwards()<CR>"
-        elseif cmp.visible() then
-          cmp.select_prev_item()
         else
           fallback()
         end
@@ -192,9 +114,9 @@ function M.setup()
       -- { name = "look" },
       -- { name = "calc" },
       -- { name = "spell" },
-      { name = "cmp_tabnine" },
+      -- { name = "cmp_tabnine" },
     },
-    completion = { completeopt = "menu,menuone,noinsert" },
+    completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
     experimental = { native_menu = false, ghost_text = false },
   }
 
@@ -203,8 +125,8 @@ function M.setup()
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 
   -- TabNine
-  local tabnine = require "cmp_tabnine.config"
-  tabnine:setup { max_lines = 1000, max_num_results = 20, sort = true }
+  -- local tabnine = require "cmp_tabnine.config"
+  -- tabnine:setup { max_lines = 1000, max_num_results = 20, sort = true }
 
   -- Use cmdline & path source for ':'.
   cmp.setup.cmdline(":", {
