@@ -15,9 +15,9 @@ function M.setup()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
   end
 
-  local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-  end
+  -- local t = function(str)
+  --   return vim.api.nvim_replace_termcodes(str, true, true, true)
+  -- end
 
   cmp.setup {
     formatting = {
@@ -200,7 +200,6 @@ function M.setup()
 
   -- If you want insert `(` after select function or method item
   local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-  local cmp = require "cmp"
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 
   -- TabNine
