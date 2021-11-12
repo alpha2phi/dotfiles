@@ -40,42 +40,42 @@ function M.setup()
       },
     },
     mapping = {
-      ["<C-p>"] = cmp.mapping.select_prev_item(),
+      -- ["<C-p>"] = cmp.mapping.select_prev_item(),
       -- ["<C-k>"] = cmp.mapping.select_prev_item(),
-      ["<C-k>"] = cmp.mapping {
-        c = function()
-          if cmp.visible() then
-            cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
-          else
-            vim.api.nvim_feedkeys(t "<Up>", "n", true)
-          end
-        end,
-        i = function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
-          else
-            fallback()
-          end
-        end,
-      },
-      ["<C-n>"] = cmp.mapping.select_next_item(),
+      -- ["<C-k>"] = cmp.mapping {
+      --   c = function()
+      --     if cmp.visible() then
+      --       cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
+      --     else
+      --       vim.api.nvim_feedkeys(t "<Up>", "n", true)
+      --     end
+      --   end,
+      --   i = function(fallback)
+      --     if cmp.visible() then
+      --       cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
+      --     else
+      --       fallback()
+      --     end
+      --   end,
+      -- },
+      -- ["<C-n>"] = cmp.mapping.select_next_item(),
       -- ["<C-j>"] = cmp.mapping.select_next_item(),
-      ["<C-j>"] = cmp.mapping {
-        c = function()
-          if cmp.visible() then
-            cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
-          else
-            vim.api.nvim_feedkeys(t "<Down>", "n", true)
-          end
-        end,
-        i = function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
-          else
-            fallback()
-          end
-        end,
-      },
+      -- ["<C-j>"] = cmp.mapping {
+      --   c = function()
+      --     if cmp.visible() then
+      --       cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+      --     else
+      --       vim.api.nvim_feedkeys(t "<Down>", "n", true)
+      --     end
+      --   end,
+      --   i = function(fallback)
+      --     if cmp.visible() then
+      --       cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+      --     else
+      --       fallback()
+      --     end
+      --   end,
+      -- },
       ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-e>"] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
@@ -113,6 +113,23 @@ function M.setup()
       --   "s",
       --   "c",
       -- }),
+      ["<C-j>"] = cmp.mapping(function(fallback)
+        if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+          press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
+        elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+          press "<ESC>:call UltiSnips#JumpForwards()<CR>"
+        elseif cmp.visible() then
+          cmp.select_next_item()
+        elseif has_any_words_before() then
+          press "<Tab>"
+        else
+          fallback()
+        end
+      end, {
+        "i",
+        "s",
+        "c",
+      }),
       ["<Tab>"] = cmp.mapping(function(fallback)
         if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
           press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
@@ -122,6 +139,19 @@ function M.setup()
           cmp.select_next_item()
         elseif has_any_words_before() then
           press "<Tab>"
+        else
+          fallback()
+        end
+      end, {
+        "i",
+        "s",
+        "c",
+      }),
+      ["<C-k>"] = cmp.mapping(function(fallback)
+        if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+          press "<ESC>:call UltiSnips#JumpBackwards()<CR>"
+        elseif cmp.visible() then
+          cmp.select_prev_item()
         else
           fallback()
         end
