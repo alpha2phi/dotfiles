@@ -146,12 +146,12 @@ function M.setup()
       { name = "nvim_lsp", max_item_count = 10 },
       { name = "ultisnips", max_item_count = 5 },
       { name = "nvim_lua", max_item_count = 5 },
-      { name = "buffer", keyword_length = 3, max_item_count = 5 },
+      { name = "buffer", keyword_length = 5, max_item_count = 5 },
       { name = "path" },
-      { name = "emoji" },
       { name = "treesitter", max_item_count = 10 },
-      { name = "neorg" },
       { name = "crates" },
+      -- { name = "emoji" },
+      -- { name = "neorg" },
       -- { name = "look" },
       -- { name = "calc" },
       -- { name = "spell" },
@@ -181,9 +181,9 @@ function M.setup()
   -- lsp_document_symbols
   cmp.setup.cmdline("/", {
     sources = cmp.config.sources({
-      { name = "nvim_lsp_document_symbol", max_item_count = 8 },
+      { name = "nvim_lsp_document_symbol", max_item_count = 8, keyword_length = 3 },
     }, {
-      { name = "buffer", max_item_count = 5 },
+      { name = "buffer", max_item_count = 5, keyword_length = 5 },
     }),
   })
 
