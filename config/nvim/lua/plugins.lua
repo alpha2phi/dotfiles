@@ -296,7 +296,6 @@ function M.setup()
     -- Better syntax
     use {
       "nvim-treesitter/nvim-treesitter",
-      event = "BufRead",
       run = ":TSUpdate",
       config = function()
         require("config.treesitter").setup()
@@ -308,16 +307,13 @@ function M.setup()
         {
           "nvim-treesitter/playground",
           cmd = "TSHighlightCapturesUnderCursor",
-          event = "BufRead",
         },
         {
           "nvim-treesitter/nvim-treesitter-textobjects",
-          event = "BufRead",
         },
         { "RRethy/nvim-treesitter-textsubjects", event = "BufRead" },
         {
           "windwp/nvim-autopairs",
-          event = "BufRead",
           run = "make",
           config = function()
             require("nvim-autopairs").setup {}
@@ -325,21 +321,18 @@ function M.setup()
         },
         {
           "windwp/nvim-ts-autotag",
-          event = "BufRead",
           config = function()
             require("nvim-ts-autotag").setup { enable = true }
           end,
         },
         {
           "romgrk/nvim-treesitter-context",
-          event = "BufRead",
           config = function()
             require("treesitter-context.config").setup { enable = true }
           end,
         },
         {
           "mfussenegger/nvim-ts-hint-textobject",
-          event = "BufRead",
           config = function()
             vim.cmd [[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]]
             vim.cmd [[vnoremap <silent> m :lua require('tsht').nodes()<CR>]]
