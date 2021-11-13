@@ -481,10 +481,6 @@ function M.setup()
 
     use { "sudormrfbin/cheatsheet.nvim" }
 
-    -- use { "sindrets/winshift.nvim" }
-
-    -- use { "untitled-ai/jupyter_ascending.vim" }
-
     use {
       "rcarriga/nvim-notify",
       event = "VimEnter",
@@ -498,7 +494,6 @@ function M.setup()
       config = function()
         require("better_escape").setup()
       end,
-      -- event = "InsertEnter",
     }
 
     use {
@@ -506,15 +501,6 @@ function M.setup()
       cmd = "StartupTime",
       config = [[vim.g.startuptime_tries = 10]],
     }
-
-    -- use { "RishabhRD/nvim-cheat.sh", requires = { "RishabhRD/popfix" } }
-
-    -- use {
-    --   "AckslD/nvim-neoclip.lua",
-    --   config = function()
-    --     require("neoclip").setup()
-    --   end,
-    -- }
   end
 
   packer.init(conf)
@@ -524,6 +510,16 @@ end
 return M
 
 ------------------ Plugins list ----------------------
+
+-- use { "sindrets/winshift.nvim" }
+
+-- use { "RishabhRD/nvim-cheat.sh", requires = { "RishabhRD/popfix" } }
+
+-- use {
+--   "AckslD/nvim-neoclip.lua",
+--   config = function()
+--     require("neoclip").setup()
+--   end,
 
 -- use { "Pocco81/Catppuccino.nvim" }
 
