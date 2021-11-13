@@ -320,7 +320,9 @@ function M.setup()
           event = "BufRead",
           run = "make",
           config = function()
-            require("nvim-autopairs").setup {}
+            require("nvim-autopairs").setup {
+              check_ts = true,
+            }
           end,
         },
         {

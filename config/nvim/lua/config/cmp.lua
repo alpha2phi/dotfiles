@@ -15,56 +15,97 @@ function M.setup()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
   end
 
+  local t = function(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+  end
+
   cmp.setup {
     formatting = {
       format = require("lspkind").cmp_format {
         with_text = true,
         menu = {
-          buffer = "[Buffer]",
           nvim_lsp = "[LSP]",
-          ultisnips = "[UltiSnips]",
+          buffer = "[Buffer]",
           nvim_lua = "[Lua]",
-          -- cmp_tabnine = "[TabNine]",
+          ultisnips = "[UltiSnips]",
+          treesitter = "[treesitter]",
           look = "[Look]",
           path = "[Path]",
           spell = "[Spell]",
           calc = "[Calc]",
           emoji = "[Emoji]",
-          treesitter = "[treesitter]",
           neorg = "[Neorg]",
+          -- cmp_tabnine = "[TabNine]",
         },
       },
     },
     mapping = {
-      ["<C-j>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
-      ["<C-k>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+      ["<C-j>"] = cmp.mapping {
+        c = function()
+          if cmp.visible() then
+            cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+          else
+            vim.api.nvim_feedkeys(t "<Down>", "n", true)
+          end
+        end,
+        i = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+          else
+            fallback()
+          end
+        end,
+      },
+      ["<C-k>"] = cmp.mapping {
+        c = function()
+          if cmp.visible() then
+            cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
+          else
+            vim.api.nvim_feedkeys(t "<Up>", "n", true)
+          end
+        end,
+        i = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
+          else
+            fallback()
+          end
+        end,
+      },
       ["<Down>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
       ["<Up>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      -- ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.close(),
+      ["<C-y>"] = cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      },
       ["<CR>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       },
-      ["<C-Space>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-            return press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
+      ["<C-Space>"] = cmp.mapping {
+        i = function(fallback)
+          if cmp.visible() then
+            if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+              return press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
+            end
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace }
+          elseif has_any_words_before() then
+            press "<Space>"
+          else
+            fallback()
           end
-
-          cmp.select_next_item()
-        elseif has_any_words_before() then
-          press "<Space>"
-        else
-          fallback()
-        end
-      end, {
-        "i",
-        "s",
-        "c",
-      }),
+        end,
+        c = function()
+          if cmp.visible() then
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace }
+          else
+            vim.api.nvim_feedkeys(t "<Down>", "n", true)
+          end
+        end,
+      },
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.get_selected_entry() == nil and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
           press "<C-R>=UltiSnips#ExpandSnippet()<CR>"
@@ -102,13 +143,13 @@ function M.setup()
       end,
     },
     sources = {
-      { name = "buffer", keyword_length = 3 },
-      { name = "nvim_lsp" },
-      { name = "ultisnips" },
-      { name = "nvim_lua" },
+      { name = "nvim_lsp", max_item_count = 10 },
+      { name = "ultisnips", max_item_count = 5 },
+      { name = "nvim_lua", max_item_count = 5 },
+      { name = "buffer", keyword_length = 3, max_item_count = 5 },
       { name = "path" },
       { name = "emoji" },
-      { name = "treesitter" },
+      { name = "treesitter", max_item_count = 10 },
       { name = "neorg" },
       { name = "crates" },
       -- { name = "look" },
@@ -131,18 +172,18 @@ function M.setup()
   -- Use cmdline & path source for ':'.
   cmp.setup.cmdline(":", {
     sources = cmp.config.sources({
-      { name = "path" },
+      { name = "path", max_item_count = 5 },
     }, {
-      { name = "cmdline" },
+      { name = "cmdline", max_item_count = 8 },
     }),
   })
 
   -- lsp_document_symbols
   cmp.setup.cmdline("/", {
     sources = cmp.config.sources({
-      { name = "nvim_lsp_document_symbol" },
+      { name = "nvim_lsp_document_symbol", max_item_count = 8 },
     }, {
-      { name = "buffer" },
+      { name = "buffer", max_item_count = 5 },
     }),
   })
 
