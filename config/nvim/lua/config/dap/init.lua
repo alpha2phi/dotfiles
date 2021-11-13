@@ -11,7 +11,7 @@ function M.nvim_dap_setup()
   require("telescope").load_extension "dap"
 
   -- nvim-dap-virtual-text. Show virtual text for current frame
-  vim.g.dap_virtual_text = true
+  -- vim.g.dap_virtual_text = true -- deprecated
 
   -- nvim-dap-ui
   require("dapui").setup {}

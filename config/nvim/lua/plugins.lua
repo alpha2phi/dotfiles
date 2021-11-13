@@ -7,6 +7,10 @@ function M.setup()
     compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
   }
 
+  local executable = function(x)
+    return vim.fn.executable(x) == 1
+  end
+
   local function plugins(use)
     -- Packer can manage itself as an optional plugin
     use { "wbthomason/packer.nvim", opt = true }
@@ -123,8 +127,6 @@ function M.setup()
     use { "nvim-lua/popup.nvim" }
     use {
       "nvim-telescope/telescope.nvim",
-      cmd = { "Telescope" },
-      module = "telescope",
       requires = {
         "nvim-telescope/telescope-project.nvim",
         "nvim-telescope/telescope-symbols.nvim",
@@ -171,8 +173,6 @@ function M.setup()
     -- }
     use {
       "neovim/nvim-lspconfig",
-      opt = true,
-      event = "BufReadPre",
       config = function()
         require("config.lsp").setup()
         require("config.dap").setup()
@@ -182,7 +182,6 @@ function M.setup()
     -- Completion - use either one of this
     use {
       "hrsh7th/nvim-cmp",
-      --event = "BufRead",
       requires = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
@@ -393,7 +392,12 @@ function M.setup()
     -- DAP
     use { "mfussenegger/nvim-dap" }
     use { "mfussenegger/nvim-dap-python" }
-    use { "theHamsta/nvim-dap-virtual-text" }
+    use {
+      "theHamsta/nvim-dap-virtual-text",
+      config = function()
+        require("nvim-dap-virtual-text").setup {}
+      end,
+    }
     use { "rcarriga/nvim-dap-ui" }
     use { "Pocco81/DAPInstall.nvim" }
     use { "jbyuki/one-small-step-for-vimkind" }
@@ -477,13 +481,8 @@ function M.setup()
 
     use { "github/copilot.vim" }
 
-    -- use { "mfussenegger/nvim-lint" }  -- try this with vale
-
-    use { "sudormrfbin/cheatsheet.nvim" }
-
     use {
       "rcarriga/nvim-notify",
-      event = "VimEnter",
       config = function()
         vim.notify = require "notify"
       end,
@@ -501,6 +500,18 @@ function M.setup()
       cmd = "StartupTime",
       config = [[vim.g.startuptime_tries = 10]],
     }
+    -- use { "mfussenegger/nvim-lint" }  -- try this with vale
+
+    if executable "deno" then
+      use { "vim-denops/denops.vim" }
+      use {
+        "Shougo/ddc.vim",
+        requires = {
+          "Shougo/ddc-around",
+          "Shougo/ddc-nvim-lsp",
+        },
+      }
+    end
   end
 
   packer.init(conf)
@@ -510,6 +521,8 @@ end
 return M
 
 ------------------ Plugins list ----------------------
+
+-- use { "sudormrfbin/cheatsheet.nvim" }
 
 -- use { "sindrets/winshift.nvim" }
 
