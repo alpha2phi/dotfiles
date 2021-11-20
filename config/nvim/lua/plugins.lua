@@ -292,6 +292,7 @@ function M.setup()
     }
     -- use { "~/workspace/dev/alpha2phi/alpha.nvim" }
     use { "~/workspace/alpha2phi/learn-nvim", requires = { "nvim-lua/plenary.nvim" } }
+    use { "~/workspace/alpha2phi/cmp-openai-codex", requires = { "nvim-lua/plenary.nvim" } }
 
     -- Better syntax
     use {
