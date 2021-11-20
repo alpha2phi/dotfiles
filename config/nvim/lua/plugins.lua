@@ -26,6 +26,7 @@ function M.setup()
     use { "tpope/vim-sleuth" }
     use { "wellle/targets.vim" }
     use { "easymotion/vim-easymotion" }
+    -- use { "ggandor/lightspeed.nvim" }
     use { "lewis6991/impatient.nvim" }
     use {
       "lewis6991/gitsigns.nvim",
