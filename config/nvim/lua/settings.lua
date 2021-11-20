@@ -60,6 +60,7 @@ function M.auto_cmds()
     false
   )
 
+  -- Terminal
   vim.api.nvim_exec(
     [[
         augroup auto_term
@@ -67,10 +68,29 @@ function M.auto_cmds()
             autocmd TermOpen * setlocal nonumber norelativenumber
             autocmd TermOpen * startinsert
         augroup END
+
+        function! ClearScrollback()
+          if &scrollback == 0
+            set scrollback=10000
+          else
+            set scrollback=0
+          endif
+        endfunction
+
+        -- function! ClearScrollback()
+        --   if &scrollback == 0
+        --     set scrollback=10000
+        --   else
+        --     set scrollback=0
+        --   endif
+        -- endfunction
+
+        -- tnoremap <C-l> <C-\><C-n>:call ClearScrollback()<CR><s-a>
     ]],
     false
   )
 
+  -- Trimming and highlight search
   vim.api.nvim_exec(
     [[
         fun! TrimWhitespace()
@@ -88,6 +108,7 @@ function M.auto_cmds()
 
   -- vim.cmd [[ autocmd CmdWinEnter * quit ]]
 
+  -- Window highlight
   vim.api.nvim_exec(
     [[
       hi InactiveWindow guibg=#282C34
@@ -96,6 +117,7 @@ function M.auto_cmds()
     false
   )
 
+  -- Copilot
   vim.api.nvim_exec(
     [[
         imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
