@@ -61,7 +61,7 @@ local mappings = {
   -- Buffer
   b = {
     name = "Buffer",
-    a = { "<Cmd>%bd|e#<Cr>", "Delete all buffers" },
+    a = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
     d = { "<Cmd>bd<Cr>", "Delete current buffer" },
     l = { "<Cmd>ls<Cr>", "List buffers" },
     n = { "<Cmd>bn<Cr>", "Next buffer" },
