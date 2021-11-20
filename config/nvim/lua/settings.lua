@@ -68,24 +68,6 @@ function M.auto_cmds()
             autocmd TermOpen * setlocal nonumber norelativenumber
             autocmd TermOpen * startinsert
         augroup END
-
-        function! ClearScrollback()
-          if &scrollback == 0
-            set scrollback=10000
-          else
-            set scrollback=0
-          endif
-        endfunction
-
-        -- function! ClearScrollback()
-        --   if &scrollback == 0
-        --     set scrollback=10000
-        --   else
-        --     set scrollback=0
-        --   endif
-        -- endfunction
-
-        -- tnoremap <C-l> <C-\><C-n>:call ClearScrollback()<CR><s-a>
     ]],
     false
   )
