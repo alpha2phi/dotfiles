@@ -117,6 +117,7 @@ function M.setup()
         elseif has_any_words_before() then
           press "<Tab>"
         else
+          press "<Tab>"
           fallback()
         end
       end, {
