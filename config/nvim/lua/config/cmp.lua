@@ -131,6 +131,7 @@ function M.setup()
         elseif cmp.visible() then
           cmp.select_prev_item()
         else
+          press "<S-Tab>"
           fallback()
         end
       end, {
