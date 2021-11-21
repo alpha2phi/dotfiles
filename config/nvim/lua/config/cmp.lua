@@ -147,8 +147,8 @@ function M.setup()
     },
     sources = {
       { name = "nvim_lsp", max_item_count = 10 },
-      { name = "ultisnips", max_item_count = 5 },
       { name = "nvim_lua", max_item_count = 5 },
+      { name = "ultisnips", max_item_count = 5 },
       { name = "buffer", keyword_length = 5, max_item_count = 5 },
       { name = "path" },
       { name = "treesitter", max_item_count = 10 },

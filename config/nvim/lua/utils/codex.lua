@@ -3,8 +3,8 @@ local Job = require "plenary.job"
 local M = {}
 
 local API_KEY_FILE = vim.env.HOME .. "/.config/openai-codex/env"
-local OPENAI_URL = "https://api.openai.com/v1/engines/davinci/completions"
-local MAX_TOKENS = 10
+local OPENAI_URL = "https://api.openai.com/v1/engines/davinci-codex/completions"
+local MAX_TOKENS = 100
 
 local function get_api_key()
   local file = io.open(API_KEY_FILE, "rb")
@@ -18,6 +18,8 @@ local function get_api_key()
 end
 
 function M.complete()
+  local buf = vim.api.nvim_get_current_buf()
+
   local api_key = get_api_key()
   if api_key == nil then
     vim.notify "OpenAI API key not found"
@@ -26,9 +28,10 @@ function M.complete()
 
   local request = {}
   request["max_tokens"] = MAX_TOKENS
-  request["prompt"] = "This is a test"
+  request["prompt"] = "Create a Python function to say 'hello world'"
   local body = vim.fn.json_encode(request)
 
+  local completion = ""
   local job = Job:new {
     command = "curl",
     args = {
@@ -49,13 +52,14 @@ function M.complete()
         return
       end
 
-      if parsed['choices'] ~= nil then
-        print(vim.inspect.inspect(parsed["choices"][1]))
+      if parsed["choices"] ~= nil then
+        completion = parsed["choices"][1]["text"]
       end
     end,
   }
   job:start()
   job:wait()
+  vim.notify(completion)
 end
 
 -- return M
