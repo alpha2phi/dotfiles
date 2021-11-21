@@ -7,9 +7,9 @@ function M.setup()
     compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
   }
 
-  local executable = function(x)
-    return vim.fn.executable(x) == 1
-  end
+  -- local executable = function(x)
+  --   return vim.fn.executable(x) == 1
+  -- end
 
   local function plugins(use)
     -- Packer can manage itself as an optional plugin
@@ -291,8 +291,8 @@ function M.setup()
       end,
     }
     -- use { "~/workspace/dev/alpha2phi/alpha.nvim" }
-    use { "~/workspace/alpha2phi/learn-nvim", requires = { "nvim-lua/plenary.nvim" } }
-    use { "~/workspace/alpha2phi/cmp-openai-codex", requires = { "nvim-lua/plenary.nvim" } }
+    -- use { "~/workspace/alpha2phi/learn-nvim", requires = { "nvim-lua/plenary.nvim" } }
+    -- use { "~/workspace/alpha2phi/cmp-openai-codex", requires = { "nvim-lua/plenary.nvim" } }
 
     -- Better syntax
     use {
@@ -504,16 +504,19 @@ function M.setup()
     }
     -- use { "mfussenegger/nvim-lint" }  -- try this with vale
 
-    if executable "deno" then
-      use { "vim-denops/denops.vim" }
-      use {
-        "Shougo/ddc.vim",
-        requires = {
-          "Shougo/ddc-around",
-          "Shougo/ddc-nvim-lsp",
-        },
-      }
-    end
+    -- use { "ThePrimeagen/harpoon" }
+
+    -- use { "christoomey/vim-quicklink", requires = { "mattn/webapi-vim" } }
+    -- if executable "deno" then
+    --   use { "vim-denops/denops.vim" }
+    --   use {
+    --     "Shougo/ddc.vim",
+    --     requires = {
+    --       "Shougo/ddc-around",
+    --       "Shougo/ddc-nvim-lsp",
+    --     },
+    --   }
+    -- end
   end
 
   packer.init(conf)
