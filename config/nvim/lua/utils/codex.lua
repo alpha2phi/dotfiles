@@ -28,7 +28,7 @@ function M.complete()
 
   local request = {}
   request["max_tokens"] = MAX_TOKENS
-  request["prompt"] = "Create a Python function to say 'hello world'"
+  request["prompt"] = "Python\nCreate a base64 encoding function\n"
   local body = vim.fn.json_encode(request)
 
   local completion = ""
