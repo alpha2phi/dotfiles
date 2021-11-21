@@ -35,6 +35,9 @@ function M.config(installed_server)
 end
 
 function M.setup(installed_server)
+  local opts = {}
+  installed_server:setup(opts)
+
   local luadev = require("lua-dev").setup(M.config(installed_server))
   local lspconfig = require "lspconfig"
   lspconfig.sumneko_lua.setup(luadev)
