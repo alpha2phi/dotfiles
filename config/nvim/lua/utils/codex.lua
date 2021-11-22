@@ -4,7 +4,7 @@ local M = {}
 
 local API_KEY_FILE = vim.env.HOME .. "/.config/openai-codex/env"
 local OPENAI_URL = "https://api.openai.com/v1/engines/davinci-codex/completions"
-local MAX_TOKENS = 100
+local MAX_TOKENS = 1
 
 local function get_api_key()
   local file = io.open(API_KEY_FILE, "rb")
@@ -28,8 +28,18 @@ function M.complete()
 
   local request = {}
   request["max_tokens"] = MAX_TOKENS
-  request["prompt"] = "Python\nCreate a base64 encoding function\n"
+  request["temperature"] = 0
+  request["top_p"] = 0
+  request["logprobs"] = 10
+
+  local text = "Python\nCreate a base64 encoding function\n"
+  request["prompt"] = string.format("<|endoftext|>%s\n--\nLabel:", text)
   local body = vim.fn.json_encode(request)
+
+  -- curl https://api.openai.com/v1/engines/content-filter-alpha/completions\
+  --  -H "Content-Type: application/json"\
+  --  -H "Authorization: Bearer YOUR_API_KEY"\
+  --  -d '{"prompt": "<|endoftext|>[prompt]\n--\nLabel:", "temperature": 0, "max_tokens": 1, "top_p":0, "logprobs": 10}'
 
   local completion = ""
   local job = Job:new {
@@ -52,6 +62,7 @@ function M.complete()
         return
       end
 
+      print(vim.inspect.inspect(parsed))
       if parsed["choices"] ~= nil then
         completion = parsed["choices"][1]["text"]
       end
@@ -59,7 +70,7 @@ function M.complete()
   }
   job:start()
   job:wait()
-  vim.notify(completion)
+  print(completion)
 end
 
 -- return M

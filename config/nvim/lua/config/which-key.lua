@@ -50,10 +50,11 @@ local mappings = {
     },
     r = { "<Cmd>luafile %<Cr>", "Reload lua file" },
     m = { "<Cmd>messages<Cr>", "Messages" },
-    p = {
-      ":let &runtimepath.=','.escape(expand('%:p:h'), '\\,')<Cr>",
-      "Set runtime path",
-    },
+    p = { "<Cmd>messages clear<Cr>", "Clear messages" },
+    -- p = {
+    --   ":let &runtimepath.=','.escape(expand('%:p:h'), '\\,')<Cr>",
+    --   "Set runtime path",
+    -- },
     f = { "<Cmd>FloatermNew<Cr>", "Floating terminal" },
     i = { "<Cmd>PackerUpdate<Cr>", "Packer update" },
   },
