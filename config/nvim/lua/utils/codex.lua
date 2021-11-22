@@ -19,6 +19,7 @@ end
 
 function M.complete()
   local buf = vim.api.nvim_get_current_buf()
+  local ft = vim.bo.filetype
 
   local api_key = get_api_key()
   if api_key == nil then
@@ -28,18 +29,10 @@ function M.complete()
 
   local request = {}
   request["max_tokens"] = MAX_TOKENS
-  -- request["temperature"] = 0
-  -- request["top_p"] = 0
-  -- request["logprobs"] = 10
 
   local text = "# Python 3\n# Calculate the mean distance between an array of points and the origin"
   request["prompt"] = text
   local body = vim.fn.json_encode(request)
-
-  -- curl https://api.openai.com/v1/engines/content-filter-alpha/completions\
-  --  -H "Content-Type: application/json"\
-  --  -H "Authorization: Bearer YOUR_API_KEY"\
-  --  -d '{"prompt": "<|endoftext|>[prompt]\n--\nLabel:", "temperature": 0, "max_tokens": 1, "top_p":0, "logprobs": 10}'
 
   local completion = ""
   local job = Job:new {
@@ -64,13 +57,12 @@ function M.complete()
 
       if parsed["choices"] ~= nil then
         completion = parsed["choices"][1]["text"]
-        print(completion)
+        vim.notify(completion)
       end
     end,
   }
   job:start()
-  job:wait(10000)
-  print(completion)
+  -- job:wait(10000)
 end
 
 -- return M
