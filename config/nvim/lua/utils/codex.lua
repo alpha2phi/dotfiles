@@ -4,7 +4,7 @@ local M = {}
 
 local API_KEY_FILE = vim.env.HOME .. "/.config/openai-codex/env"
 local OPENAI_URL = "https://api.openai.com/v1/engines/davinci-codex/completions"
-local MAX_TOKENS = 1
+local MAX_TOKENS = 200
 
 local function get_api_key()
   local file = io.open(API_KEY_FILE, "rb")
@@ -28,12 +28,12 @@ function M.complete()
 
   local request = {}
   request["max_tokens"] = MAX_TOKENS
-  request["temperature"] = 0
-  request["top_p"] = 0
-  request["logprobs"] = 10
+  -- request["temperature"] = 0
+  -- request["top_p"] = 0
+  -- request["logprobs"] = 10
 
-  local text = "Python\nCreate a base64 encoding function\n"
-  request["prompt"] = string.format("<|endoftext|>%s\n--\nLabel:", text)
+  local text = "# Python 3\n# Calculate the mean distance between an array of points and the origin"
+  request["prompt"] = text
   local body = vim.fn.json_encode(request)
 
   -- curl https://api.openai.com/v1/engines/content-filter-alpha/completions\
@@ -62,14 +62,14 @@ function M.complete()
         return
       end
 
-      print(vim.inspect.inspect(parsed))
       if parsed["choices"] ~= nil then
         completion = parsed["choices"][1]["text"]
+        print(completion)
       end
     end,
   }
   job:start()
-  job:wait()
+  job:wait(10000)
   print(completion)
 end
 
