@@ -20,7 +20,7 @@ function M.setup()
     use { "tpope/vim-fugitive" }
     use { "tpope/vim-surround" }
     use { "tpope/vim-commentary" }
-    use { "tpope/vim-rhubarb", event = "VimEnter" }
+    use { "tpope/vim-rhubarb" }
     use { "tpope/vim-unimpaired" }
     use { "tpope/vim-vinegar" }
     use { "tpope/vim-sleuth" }
@@ -444,7 +444,6 @@ function M.setup()
       "plasticboy/vim-markdown",
       ft = "markdown",
       requires = { "godlygeek/tabular" },
-      event = "VimEnter",
     }
 
     -- Note taking
