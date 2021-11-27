@@ -4,6 +4,7 @@ local M = {}
 
 local API_KEY_FILE = vim.env.HOME .. "/.config/openai-codex/env"
 local OPENAI_URL = "https://api.openai.com/v1/engines/davinci-codex/completions"
+-- local OPENAI_URL = "https://api.openai.com/v1/engines/cushman-codex/completions"
 local MAX_TOKENS = 300
 
 local function get_api_key()
@@ -22,7 +23,7 @@ local function trim(s)
 end
 
 function M.complete(v)
-  v = v or false
+  v = v or true
   local ft = vim.bo.filetype
   local buf = vim.api.nvim_get_current_buf()
 
@@ -37,13 +38,14 @@ function M.complete(v)
     local line1 = vim.api.nvim_buf_get_mark(0, "<")[1]
     local line2 = vim.api.nvim_buf_get_mark(0, ">")[1]
     text = vim.api.nvim_buf_get_lines(buf, line1 - 1, line2, false)
-    -- vim.notify(text)
     text = trim(table.concat(text, "\n"))
   else
-    local cs = vim.bo.commentstring
-    local current_line = trim(vim.api.nvim_get_current_line())
-    text = string.format(cs .. "\n%s", ft, current_line)
+    text = trim(vim.api.nvim_get_current_line())
   end
+  local cs = vim.bo.commentstring
+  text = string.format(cs .. "\n%s", ft, text)
+
+  -- vim.notify(text)
 
   local request = {}
   request["max_tokens"] = MAX_TOKENS

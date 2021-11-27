@@ -243,6 +243,7 @@ local vmappings = {
     name = "Search",
     v = { "<Cmd>lua require('spectre').open_visual()<CR>", "Visual search" },
     b = { "<Plug>SearchVisual", "Browser search" },
+    c = { "<Cmd>lua require('utils.codex').complete()<CR>", "Codex complete" },
   },
   h = { name = "Git signs" },
   e = { name = "eSpeak", s = { "<Cmd>call tts#Speak(1)<CR>", "Speak" } },
