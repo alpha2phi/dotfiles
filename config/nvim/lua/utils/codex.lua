@@ -36,7 +36,8 @@ function M.complete(v)
   if v then
     local line1 = vim.api.nvim_buf_get_mark(0, "<")[1]
     local line2 = vim.api.nvim_buf_get_mark(0, ">")[1]
-    text = vim.api.nvim_buf_get_lines(buf, line1, line2, false)
+    text = vim.api.nvim_buf_get_lines(buf, line1 - 1, line2, false)
+    -- vim.notify(text)
     text = trim(table.concat(text, "\n"))
   else
     local cs = vim.bo.commentstring
