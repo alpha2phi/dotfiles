@@ -30,7 +30,6 @@ function M.setup()
     use { "lewis6991/impatient.nvim" }
     use {
       "lewis6991/gitsigns.nvim",
-      event = "BufReadPre",
       config = function()
         require("gitsigns").setup()
       end,
@@ -302,9 +301,9 @@ function M.setup()
         require("config.treesitter").setup()
       end,
       requires = {
-        { "jose-elias-alvarez/nvim-lsp-ts-utils", event = "BufRead" },
-        { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufRead" },
-        { "p00f/nvim-ts-rainbow", event = "BufRead" },
+        { "jose-elias-alvarez/nvim-lsp-ts-utils" },
+        { "JoosepAlviste/nvim-ts-context-commentstring" },
+        { "p00f/nvim-ts-rainbow" },
         {
           "nvim-treesitter/playground",
           cmd = "TSHighlightCapturesUnderCursor",
@@ -312,7 +311,7 @@ function M.setup()
         {
           "nvim-treesitter/nvim-treesitter-textobjects",
         },
-        { "RRethy/nvim-treesitter-textsubjects", event = "BufRead" },
+        { "RRethy/nvim-treesitter-textsubjects" },
         {
           "windwp/nvim-autopairs",
           run = "make",
