@@ -270,7 +270,7 @@ function M.setup()
     -- }
     use {
       "SirVer/ultisnips",
-      requires = { { "honza/vim-snippets", rtp = "." } },
+      requires = { { "honza/vim-snippets", rtp = "." }, "mlaursen/vim-react-snippets" },
       config = function()
         vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
         vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
