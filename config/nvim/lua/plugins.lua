@@ -270,7 +270,6 @@ function M.setup()
     -- }
     use {
       "SirVer/ultisnips",
-      event = "VimEnter",
       requires = { { "honza/vim-snippets", rtp = "." } },
       config = function()
         vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
