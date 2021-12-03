@@ -29,8 +29,8 @@ local keymappings = {
     ["."] = ".<c-g>u",
     ["!"] = "!<c-g>u",
     ["?"] = "?<c-g>u",
-    -- ["<S-CR>"] = "<C-O>o",
-    -- ["<C-CR>"] = "<C-O>O",
+    ["<M-o>"] = "<C-O>o",
+    ["<M-O>"] = "<C-O>O",
   },
   normal_mode = {
     ["s"] = {
