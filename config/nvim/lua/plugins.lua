@@ -135,6 +135,7 @@ function M.setup()
         "fhill2/telescope-ultisnips.nvim",
         "cljoly/telescope-repo.nvim",
         "jvgrootveld/telescope-zoxide",
+        "dhruvmanila/telescope-bookmarks.nvim",
         -- 'nvim-telescope/telescope-hop.nvim'
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         {
