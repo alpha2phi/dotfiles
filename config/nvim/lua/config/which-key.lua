@@ -58,6 +58,7 @@ local mappings = {
     f = { "<Cmd>FloatermNew<Cr>", "Floating terminal" },
     i = { "<Cmd>PackerUpdate<Cr>", "Packer update" },
     y = { "<Cmd>Telescope neoclip<Cr>", "Clipboard manager" },
+    x = { "<Cmd>Telescope bookmarks<Cr>", "Browser bookmarks" },
   },
 
   -- Buffer
