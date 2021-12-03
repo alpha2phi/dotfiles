@@ -502,6 +502,13 @@ function M.setup()
       cmd = "StartupTime",
       config = [[vim.g.startuptime_tries = 10]],
     }
+
+    use {
+      "AckslD/nvim-neoclip.lua",
+      config = function()
+        require("neoclip").setup()
+      end,
+    }
     -- use { "mfussenegger/nvim-lint" }  -- try this with vale
 
     -- use { "ThePrimeagen/harpoon" }
@@ -531,13 +538,7 @@ return M
 
 -- use { "sindrets/winshift.nvim" }
 
--- use { "RishabhRD/nvim-cheat.sh", requires = { "RishabhRD/popfix" } }
-
--- use {
---   "AckslD/nvim-neoclip.lua",
---   config = function()
---     require("neoclip").setup()
---   end,
+-- use { "RishabhRD/nvim-cheat.sh", requires = { "RishabhRD/popfix" } }-- use { "RishabhRD/nvim-cheat.sh", requires = { "RishabhRD/popfix" } }-- use { "RishabhRD/nvim-cheat.sh", requires = { "RishabhRD/popfix" } }
 
 -- use { "Pocco81/Catppuccino.nvim" }
 

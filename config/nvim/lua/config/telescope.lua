@@ -49,6 +49,7 @@ function M.setup()
 
   -- require('telescope').load_extension('snippets')
   -- require('telescope').load_extension('hop')
+  require("telescope").load_extension "neoclip"
   require("telescope").load_extension "zoxide"
   require("telescope").load_extension "ultisnips"
   require("telescope").load_extension "repo"
