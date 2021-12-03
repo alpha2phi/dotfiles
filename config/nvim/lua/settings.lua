@@ -107,7 +107,16 @@ function M.auto_cmds()
     ]],
     false
   )
+
+  -- Open file
+  vim.api.nvim_exec(
+    [[
+      nnoremap g1 <cmd>vsplit term://visidata <cfile><CR>
+    ]],
+    false
+  )
 end
+-- au BufEnter *.csv bdelete
 
 function M.setup()
   M.auto_cmds()

@@ -131,7 +131,10 @@ function M.setup()
         "nvim-telescope/telescope-project.nvim",
         "nvim-telescope/telescope-symbols.nvim",
         "nvim-telescope/telescope-media-files.nvim",
-        -- 'nvim-telescope/telescope-github.nvim',
+        "nvim-telescope/telescope-github.nvim",
+        "fhill2/telescope-ultisnips.nvim",
+        "cljoly/telescope-repo.nvim",
+        "jvgrootveld/telescope-zoxide",
         -- 'nvim-telescope/telescope-hop.nvim'
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         {

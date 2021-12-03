@@ -48,8 +48,11 @@ function M.setup()
   }
 
   -- require('telescope').load_extension('snippets')
-  -- require('telescope').load_extension('gh')
   -- require('telescope').load_extension('hop')
+  require("telescope").load_extension "zoxide"
+  require("telescope").load_extension "ultisnips"
+  require("telescope").load_extension "repo"
+  require("telescope").load_extension "gh"
   require("telescope").load_extension "arecibo"
   require("telescope").load_extension "media_files"
   require("telescope").load_extension "frecency"

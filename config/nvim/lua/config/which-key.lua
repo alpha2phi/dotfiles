@@ -99,11 +99,13 @@ local mappings = {
     v = { "<Cmd>Telescope media_files<CR>", "View media files" },
     t = { "<Cmd>Telescope<CR>", "Telescope" },
     l = { "<Cmd>e!<CR>", "Reload file" },
+    j = { "<Cmd>Telescope zoxide list<CR>", "Jump to folder" },
   },
 
   -- Git
   g = {
     name = "Source code",
+    a = { "<Cmd>Telescope repo list<Cr>", "All repositories" },
     s = { "<Cmd>Git<Cr>", "Git status" },
     p = { "<Cmd>Git push<Cr>", "Git push" },
     b = { "<Cmd>Git branch<Cr>", "Git branch" },
@@ -174,6 +176,7 @@ local mappings = {
     l = { "<Cmd>lua require('utils.cheatsheet').cheatsheet()<CR>", "Search code" },
     o = { "<Cmd>SymbolsOutline<CR>", "Symbols Outline" },
     b = { "<Cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy find buffer" },
+    u = { "<Cmd>Telescope ultisnips<CR>", "Search snippets" },
   },
 
   -- Testing
