@@ -117,6 +117,14 @@ function M.auto_cmds()
   -- )
   -- nnoremap g1 <cmd>!tmux new-window vd <cfile><CR>
   -- au BufEnter *.csv bdelete
+
+  vim.api.nvim_exec(
+    [[
+      nnoremap g2 <cmd>lua require("utils.term").send()<CR>
+      xnoremap g2 <cmd>lua require("utils.term").send(true)<CR>
+    ]],
+    false
+  )
 end
 
 function M.setup()

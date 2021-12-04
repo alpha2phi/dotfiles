@@ -5,7 +5,6 @@ local function trim(s)
 end
 
 function M.send(v)
-  v = v or true -- visual mode
   local term_buf_id = -1
   for _, buf_id in ipairs(vim.fn.tabpagebuflist()) do
     local buf_type = vim.api.nvim_buf_get_option(buf_id, "buftype")
