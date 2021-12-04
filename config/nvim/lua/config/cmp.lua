@@ -53,7 +53,8 @@ function M.setup()
           if cmp.visible() then
             cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
           else
-            fallback()
+            -- fallback()
+            vim.api.nvim_feedkeys(t "<Down>", "n", true)
           end
         end,
       },
@@ -69,7 +70,8 @@ function M.setup()
           if cmp.visible() then
             cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
           else
-            fallback()
+            vim.api.nvim_feedkeys(t "<Up>", "n", true)
+            -- fallback()
           end
         end,
       },
