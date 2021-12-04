@@ -239,6 +239,11 @@ local mappings = {
     u = { "<Cmd>MagmaDeinit<Cr>", "Deinit" },
   },
 
+  -- Viewer
+  v = {
+    name = "View",
+    v = { "<Cmd>vsplit term://vd <cfile><CR>", "VisiData" },
+  },
   -- K = {name = "Cheatsheet"},
   -- C = {name = "Cheatsheet (toggle comment)"},
 }

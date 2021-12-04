@@ -109,15 +109,15 @@ function M.auto_cmds()
   )
 
   -- Open file
-  vim.api.nvim_exec(
-    [[
-      nnoremap g1 <cmd>vsplit term://vd <cfile><CR>
-    ]],
-    false
-  )
+  -- vim.api.nvim_exec(
+  --   [[
+  --     nnoremap g1 <cmd>vsplit term://vd <cfile><CR>
+  --   ]],
+  --   false
+  -- )
   -- nnoremap g1 <cmd>!tmux new-window vd <cfile><CR>
+  -- au BufEnter *.csv bdelete
 end
--- au BufEnter *.csv bdelete
 
 function M.setup()
   M.auto_cmds()
