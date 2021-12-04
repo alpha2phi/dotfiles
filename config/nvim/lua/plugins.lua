@@ -482,7 +482,7 @@ function M.setup()
       end,
     }
 
-    use { "github/copilot.vim" }
+    -- use { "github/copilot.vim" }
 
     use {
       "rcarriga/nvim-notify",
