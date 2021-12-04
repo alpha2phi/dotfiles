@@ -282,8 +282,8 @@ local lsp_mappings = {
     o = { "<Cmd>Telescope lsp_document_symbols<CR>", "Document symbols" },
     d = { "<Cmd>Telescope lsp_definitions<CR>", "Definition" },
     a = { "<Cmd>Telescope lsp_code_actions<CR>", "Code actions" },
-    e = { "<Cmd>lua vim.lsp.diagnostic.enable()<CR>", "Enable diagnostics" },
-    x = { "<Cmd>lua vim.lsp.diagnostic.disable()<CR>", "Disable diagnostics" },
+    e = { "<Cmd>lua vim.diagnostic.enable()<CR>", "Enable diagnostics" },
+    x = { "<Cmd>lua vim.diagnostic.disable()<CR>", "Disable diagnostics" },
     n = { "<Cmd>update<CR>:Neoformat<CR>", "Neoformat" },
     t = { "<Cmd>TroubleToggle<CR>", "Trouble" },
   },
@@ -294,10 +294,10 @@ local lsp_mappings = {
   -- nnoremap <silent><C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
   -- nnoremap <silent><leader>cpd:Lspsaga preview_definition<CR>
   -- nnoremap <silent> <leader>cld :Lspsaga show_line_diagnostics<CR>
-  -- {'n', '<leader>lds', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>' },
-  -- {'n', '<leader>lde', '<cmd>lua vim.lsp.diagnostic.enable()<CR>'},
-  -- {'n', '<leader>ldd', '<cmd>lua vim.lsp.diagnostic.disable()<CR>'},
-  -- {'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>'},
+  -- {'n', '<leader>lds', '<cmd>lua vim.diagnostic.show_line_diagnostics()<CR>' },
+  -- {'n', '<leader>lde', '<cmd>lua vim.diagnostic.enable()<CR>'},
+  -- {'n', '<leader>ldd', '<cmd>lua vim.diagnostic.disable()<CR>'},
+  -- {'n', '<leader>ll', '<cmd>lua vim.diagnostic.set_loclist()<CR>'},
   -- {'n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
   -- {'v', '<leader>lcr', '<cmd>lua vim.lsp.buf.range_code_action()<CR>'},
 }

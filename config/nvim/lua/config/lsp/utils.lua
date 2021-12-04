@@ -1,7 +1,7 @@
 local M = {}
 
 function M.lsp_diagnostics()
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.diagnostic.on_publish_diagnostics, {
     virtual_text = true,
     underline = false,
     signs = true,
@@ -17,7 +17,7 @@ function M.lsp_diagnostics()
     local default_handler = vim.lsp.handlers[method]
     vim.lsp.handlers[method] = function(err, meth, result, client_id, bufnr, config)
       default_handler(err, meth, result, client_id, bufnr, config)
-      local diagnostics = vim.lsp.diagnostic.get_all()
+      local diagnostics = vim.diagnostic.get_all()
       local qflist = {}
       for buf, diagnostic in pairs(diagnostics) do
         for _, d in ipairs(diagnostic) do
