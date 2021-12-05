@@ -108,20 +108,14 @@ function M.auto_cmds()
     false
   )
 
-  -- Open file
-  -- vim.api.nvim_exec(
-  --   [[
-  --     nnoremap g1 <cmd>vsplit term://vd <cfile><CR>
-  --   ]],
-  --   false
-  -- )
   -- nnoremap g1 <cmd>!tmux new-window vd <cfile><CR>
-  -- au BufEnter *.csv bdelete
-
+  -- nnoremap g1 <cmd>vsplit term://vd <cfile><CR>
+  -- nnoremap g2 <cmd>lua require("utils.term").send()<CR>
+  -- xnoremap g2 <cmd>lua require("utils.term").send(true)<CR>
   vim.api.nvim_exec(
     [[
-      nnoremap g2 <cmd>lua require("utils.term").send()<CR>
-      xnoremap g2 <cmd>lua require("utils.term").send(true)<CR>
+      autocmd BufNewFile  test_*.py	0r ~/.config/nvim/snippets/unittest.py
+      autocmd BufNewFile  *.html	0r ~/.config/nvim/snippets/html5.html
     ]],
     false
   )
