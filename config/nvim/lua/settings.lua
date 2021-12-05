@@ -100,13 +100,13 @@ function M.auto_cmds()
   )
 
   -- Copilot
-  -- vim.api.nvim_exec(
-  --   [[
-  --       imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-  --       let g:copilot_no_tab_map = v:true
-  --   ]],
-  --   false
-  -- )
+  vim.api.nvim_exec(
+    [[
+        imap <silent><script><expr> <C-s> copilot#Accept("\<CR>")
+        let g:copilot_no_tab_map = v:true
+    ]],
+    false
+  )
 
   -- Open file
   -- vim.api.nvim_exec(
