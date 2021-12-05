@@ -511,6 +511,12 @@ function M.setup()
       end,
     }
 
+    use {
+      "code-biscuits/nvim-biscuits",
+      config = function()
+        require("nvim-biscuits").setup {}
+      end,
+    }
     -- use {
     --   "pwntester/octo.nvim",
     --   config = function()
