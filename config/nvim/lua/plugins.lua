@@ -510,6 +510,14 @@ function M.setup()
         require("neoclip").setup()
       end,
     }
+
+    -- use {
+    --   "pwntester/octo.nvim",
+    --   config = function()
+    --     require("octo").setup()
+    --   end,
+    -- }
+
     -- use { "mfussenegger/nvim-lint" }  -- try this with vale
 
     -- use { "ThePrimeagen/harpoon" }
