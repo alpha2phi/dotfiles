@@ -19,7 +19,15 @@ function M.setup()
     use { "tpope/vim-dispatch" }
     use { "tpope/vim-fugitive" }
     use { "tpope/vim-surround" }
-    use { "tpope/vim-commentary" }
+    -- use { "tpope/vim-commentary" }
+    use {
+      "numToStr/Comment.nvim",
+      config = function()
+        require("Comment").setup {
+          mappings = { extra = true },
+        }
+      end,
+    }
     use { "tpope/vim-rhubarb" }
     use { "tpope/vim-unimpaired" }
     use { "tpope/vim-vinegar" }
