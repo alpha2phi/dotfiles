@@ -485,6 +485,15 @@ function M.setup()
 
     use { "stevearc/dressing.nvim" }
 
+    use { "nathom/filetype.nvim" }
+
+    use {
+      "SmiteshP/nvim-gps",
+      config = function()
+        require("nvim-gps").setup()
+      end,
+    }
+
     use {
       "vuki656/package-info.nvim",
       requires = "MunifTanjim/nui.nvim",
