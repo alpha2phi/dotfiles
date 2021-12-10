@@ -480,6 +480,12 @@ function M.setup()
         require("zen-mode").setup {}
       end,
     }
+    use {
+      "folke/twilight.nvim",
+      config = function()
+        require("twilight").setup {}
+      end,
+    }
 
     -- Trying
 

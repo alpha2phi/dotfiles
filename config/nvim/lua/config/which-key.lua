@@ -225,6 +225,7 @@ local mappings = {
     s = { "<Cmd>GkeepSync<Cr>", "GKeep Sync" },
     p = { "<Cmd>MarkdownPreview<Cr>", "Preview markdown" },
     z = { "<Cmd>ZenMode<Cr>", "Zen Mode" },
+    h = { "<Cmd>Twilight<Cr>", "Twilight" },
     g = { "<Cmd>GrammarousCheck<Cr>", "Grammar check" },
   },
 
