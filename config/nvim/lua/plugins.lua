@@ -164,6 +164,8 @@ function M.setup()
         require("config.telescope").setup()
       end,
     }
+
+    -- Project settings
     use {
       "ahmedkhalf/project.nvim",
       event = "VimEnter",
@@ -398,6 +400,13 @@ function M.setup()
       event = "BufReadPre",
     }
 
+    use {
+      "SmiteshP/nvim-gps",
+      config = function()
+        require("nvim-gps").setup()
+      end,
+    }
+
     -- Debugging
     use { "puremourning/vimspector", event = "BufWinEnter" }
 
@@ -496,17 +505,7 @@ function M.setup()
       end,
     }
 
-    use { "stevearc/dressing.nvim" }
-
-    use { "nathom/filetype.nvim" }
-
-    use {
-      "SmiteshP/nvim-gps",
-      config = function()
-        require("nvim-gps").setup()
-      end,
-    }
-
+    -- Web
     use {
       "vuki656/package-info.nvim",
       requires = "MunifTanjim/nui.nvim",
@@ -515,8 +514,10 @@ function M.setup()
       end,
     }
 
+    -- AI completion
     use { "github/copilot.vim" }
 
+    -- Notifications
     use {
       "rcarriga/nvim-notify",
       config = function()
@@ -524,25 +525,34 @@ function M.setup()
       end,
     }
 
+    -- Better configuration
     use {
       "max397574/better-escape.nvim",
       config = function()
         require("better_escape").setup()
       end,
     }
+    use { "nathom/filetype.nvim" }
 
+    -- Performance
     use {
       "dstein64/vim-startuptime",
       cmd = "StartupTime",
       config = [[vim.g.startuptime_tries = 10]],
     }
 
+    -- Clipboard
     use {
       "AckslD/nvim-neoclip.lua",
       config = function()
         require("neoclip").setup()
       end,
     }
+
+    -- Trying
+
+    use { "stevearc/dressing.nvim" }
+
 
     use {
       "code-biscuits/nvim-biscuits",
