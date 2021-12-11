@@ -19,7 +19,8 @@ function M.setup()
   o.hidden = true
   o.breakindent = true
   o.ignorecase = true
-  o.scrolloff = 8
+  o.scrolloff = 999
+  o.sidescrolloff = 999
   o.splitbelow = true
   o.splitright = true
   o.clipboard = "unnamed,unnamedplus"
@@ -27,7 +28,6 @@ function M.setup()
   o.updatetime = 300
   o.inccommand = "split"
   o.cmdheight = 1
-  o.sidescrolloff = 8
   o.sessionoptions = "blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
   o.history = 100
   o.lazyredraw = true
@@ -35,7 +35,8 @@ function M.setup()
   o.mouse = "a"
   wo.number = true
   wo.relativenumber = true
-  wo.scrolloff = 8
+  wo.scrolloff = 999
+  wo.sidescrolloff = 999
   wo.cursorline = true
   opt.pumblend = 17
 
