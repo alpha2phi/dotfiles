@@ -487,7 +487,14 @@ function M.setup()
       end,
     }
 
-    -- Trying
+    -- Database
+    use {
+      "tpope/vim-dadbod",
+      requires = { "kristijanhusak/vim-dadbod-ui", "kristijanhusak/vim-dadbod-completion" },
+      config = function()
+        require("config.dadbod").setup()
+      end,
+    }
 
     use { "stevearc/dressing.nvim" }
 
