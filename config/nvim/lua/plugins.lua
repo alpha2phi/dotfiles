@@ -274,14 +274,6 @@ function M.setup()
     use { "antoinemadec/FixCursorHold.nvim" }
 
     -- Snippets
-    -- use {
-    --     'hrsh7th/vim-vsnip',
-    --     requires = {
-    --         'rafamadriz/friendly-snippets', 'cstrap/python-snippets',
-    --         'ylcnfrht/vscode-python-snippet-pack', 'xabikos/vscode-javascript',
-    --         'golang/vscode-go', 'rust-lang/vscode-rust'
-    --     }
-    -- }
     use {
       "SirVer/ultisnips",
       requires = { { "honza/vim-snippets", rtp = "." }, "mlaursen/vim-react-snippets" },
@@ -551,8 +543,16 @@ function M.setup()
 
     -- Trying
 
-    use { "stevearc/dressing.nvim" }
+    -- use {
+    --     'hrsh7th/vim-vsnip',
+    --     requires = {
+    --         'rafamadriz/friendly-snippets', 'cstrap/python-snippets',
+    --         'ylcnfrht/vscode-python-snippet-pack', 'xabikos/vscode-javascript',
+    --         'golang/vscode-go', 'rust-lang/vscode-rust'
+    --     }
+    -- }
 
+    use { "stevearc/dressing.nvim" }
 
     use {
       "code-biscuits/nvim-biscuits",
