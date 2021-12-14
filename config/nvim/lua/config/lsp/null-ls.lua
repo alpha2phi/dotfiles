@@ -18,9 +18,9 @@ function M.setup()
     -- nls.builtins.diagnostics.markdownlint,
     -- nls.builtins.diagnostics.vale,
   }
-  nls.config { sources = sources }
+  nls.setup { sources = sources }
 
-  lsputils.setup_server("null-ls", CONFIG)
+  -- lsputils.setup_server("null-ls", CONFIG)
 end
 
 return M
