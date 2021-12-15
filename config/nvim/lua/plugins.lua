@@ -528,14 +528,16 @@ function M.setup()
         require("better_escape").setup()
       end,
     }
+
     use { "nathom/filetype.nvim" }
 
     -- Performance
-    use {
-      "dstein64/vim-startuptime",
-      cmd = "StartupTime",
-      config = [[vim.g.startuptime_tries = 10]],
-    }
+    use {"tweekmonster/startuptime.vim"}
+    -- use {
+    --   "dstein64/vim-startuptime",
+    --   cmd = "StartupTime",
+    --   config = [[vim.g.startuptime_tries = 10]],
+    -- }
 
     -- Clipboard
     use {
@@ -546,24 +548,31 @@ function M.setup()
     }
 
     -- Trying
+    use {
+      "tanvirtin/vgit.nvim",
+      event = "BufWinEnter",
+      config = function()
+        require("vgit").setup()
+      end,
+    }
 
     -- use {"haringsrob/nvim_context_vt"}
 
-    use {
-      "hrsh7th/vim-vsnip",
-      requires = {
-        "rafamadriz/friendly-snippets",
-        "cstrap/python-snippets",
-        "ylcnfrht/vscode-python-snippet-pack",
-        "xabikos/vscode-javascript",
-        "golang/vscode-go",
-        "rust-lang/vscode-rust",
-      },
-    }
+    -- use {
+    --   "hrsh7th/vim-vsnip",
+    --   requires = {
+    --     "rafamadriz/friendly-snippets",
+    --     "cstrap/python-snippets",
+    --     "ylcnfrht/vscode-python-snippet-pack",
+    --     "xabikos/vscode-javascript",
+    --     "golang/vscode-go",
+    --     "rust-lang/vscode-rust",
+    --   },
+    -- }
+    --
+    -- use { "hrsh7th/cmp-vsnip" }
 
-    use { "hrsh7th/cmp-vsnip" }
-
-    use { "stevearc/dressing.nvim" }
+    -- use { "stevearc/dressing.nvim" }
 
     -- use {
     --   "code-biscuits/nvim-biscuits",
