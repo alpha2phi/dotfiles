@@ -436,7 +436,12 @@ function M.setup()
 
     -- Rust
     use { "rust-lang/rust.vim", event = "VimEnter" }
-    use { "simrat39/rust-tools.nvim" }
+    use {
+      "simrat39/rust-tools.nvim",
+      config = function()
+        require("rust-tools").setup {}
+      end,
+    }
     use {
       "Saecki/crates.nvim",
       event = { "BufRead Cargo.toml" },
@@ -468,7 +473,6 @@ function M.setup()
     }
     use {
       "stevearc/gkeep.nvim",
-      -- event = "VimEnter",
       run = ":UpdateRemotePlugins",
     }
 
@@ -543,23 +547,33 @@ function M.setup()
 
     -- Trying
 
-    -- use {
-    --     'hrsh7th/vim-vsnip',
-    --     requires = {
-    --         'rafamadriz/friendly-snippets', 'cstrap/python-snippets',
-    --         'ylcnfrht/vscode-python-snippet-pack', 'xabikos/vscode-javascript',
-    --         'golang/vscode-go', 'rust-lang/vscode-rust'
-    --     }
-    -- }
+    -- use {"haringsrob/nvim_context_vt"}
+
+    use {
+      "hrsh7th/vim-vsnip",
+      requires = {
+        "rafamadriz/friendly-snippets",
+        "cstrap/python-snippets",
+        "ylcnfrht/vscode-python-snippet-pack",
+        "xabikos/vscode-javascript",
+        "golang/vscode-go",
+        "rust-lang/vscode-rust",
+      },
+    }
+
+    use { "hrsh7th/cmp-vsnip" }
 
     use { "stevearc/dressing.nvim" }
 
-    use {
-      "code-biscuits/nvim-biscuits",
-      config = function()
-        require("nvim-biscuits").setup {}
-      end,
-    }
+    -- use {
+    --   "code-biscuits/nvim-biscuits",
+    --   config = function()
+    --     require("nvim-biscuits").setup {}
+    --   end,
+    -- }
+
+    -- use { "preservim/vimux" }
+    -- use { "camgraff/telescope-tmux.nvim", requires = { "norcalli/nvim-terminal.lua" } }
 
     -- use {
     --   "pwntester/octo.nvim",
