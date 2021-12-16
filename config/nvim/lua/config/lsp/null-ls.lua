@@ -18,9 +18,14 @@ function M.setup()
     -- nls.builtins.diagnostics.markdownlint,
     -- nls.builtins.diagnostics.vale,
   }
-  nls.setup { sources = sources }
-
-  -- lsputils.setup_server("null-ls", CONFIG)
+  nls.setup {
+    sources = sources,
+    on_attach = lsputils.lsp_attach,
+    on_exit = lsputils.lsp_exit,
+    on_init = lsputils.lsp_init,
+    capabilities = lsputils.get_capabilities(),
+    flags = { debounce_text_changes = 150 },
+  }
 end
 
 return M

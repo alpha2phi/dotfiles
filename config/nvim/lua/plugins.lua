@@ -532,7 +532,7 @@ function M.setup()
     use { "nathom/filetype.nvim" }
 
     -- Performance
-    use {"tweekmonster/startuptime.vim"}
+    use { "tweekmonster/startuptime.vim" }
     -- use {
     --   "dstein64/vim-startuptime",
     --   cmd = "StartupTime",
