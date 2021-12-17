@@ -413,7 +413,7 @@ function M.register_dap_vimspector()
   local wk = require "which-key"
   wk.register({
     ["dx"] = {
-      ":lua require('config.which-key').register_dap_nvim_dap()<CR>",
+      ":lua require('config.whichkey').register_dap_nvim_dap()<CR>",
       "Switch to nvim-dap",
     },
   }, opts)
@@ -425,7 +425,7 @@ end
 function M.register_dap_nvim_dap()
   local wk = require "which-key"
   wk.register({
-    ["dx"] = { ":lua require('config.which-key').register_dap_vimspector()<CR>", "Switch to vimspector" },
+    ["dx"] = { ":lua require('config.whichkey').register_dap_vimspector()<CR>", "Switch to vimspector" },
   }, opts)
   wk.register(dap_nvim_dap_mappings, opts)
   vim.g.my_debugger = "d"

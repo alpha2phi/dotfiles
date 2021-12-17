@@ -129,4 +129,4 @@ function M.setup()
   M.auto_cmds()
 end
 
-return M
+M.setup()

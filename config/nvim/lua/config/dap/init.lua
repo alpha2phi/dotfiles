@@ -71,7 +71,7 @@ function M.setup()
   M.vimspector_setup()
 
   -- key mappings
-  local wk = require "config.which-key"
+  local wk = require "config.whichkey"
   wk.register_dap()
 end
 

@@ -1,16 +1,19 @@
 local M = {}
 
+local g = vim.g
 local cmd = vim.cmd
 local o = vim.o
 local wo = vim.wo
 local bo = vim.bo
 local indent = 4
 local opt = vim.opt
-local g = vim.g
 
 function M.setup()
-  cmd "syntax enable"
-  cmd "filetype plugin indent on"
+  cmd [[filetype plugin indent on]]
+  cmd [[syntax enable]]
+
+  g.mapleader = " "
+  g.maplocalleader = ","
 
   bo.shiftwidth = indent
   bo.tabstop = indent
@@ -58,4 +61,6 @@ function M.setup()
   g.vim_markdown_fenced_languages = { "html", "javascript", "typescript", "css", "python", "lua", "vim" }
 end
 
-return M
+M.setup()
+
+

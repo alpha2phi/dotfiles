@@ -1,19 +1,51 @@
 local M = {}
 
-function M.setup()
-  local packer = require "packer"
+local packer_bootstrap = false
 
+local function packer_init()
+  local fn = vim.fn
+  local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    packer_bootstrap = fn.system {
+      "git",
+      "clone",
+      "--depth",
+      "1",
+      "https://github.com/wbthomason/packer.nvim",
+      install_path,
+    }
+  end
+  vim.cmd "autocmd BufWritePost plugins.lua PackerCompile"
+end
+
+-- local function load(module)
+--     local function requiref(module)
+--         require(module)
+--     end
+--     res = pcall(requiref,module)
+--     if not(res) then
+-- 	print("Missing ", module)
+--     end
+-- end
+
+packer_init()
+
+require "packer_compiled"
+
+function M.setup()
   local conf = {
     compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
   }
 
-  -- local executable = function(x)
-  --   return vim.fn.executable(x) == 1
-  -- end
-
   local function plugins(use)
-    -- Packer can manage itself as an optional plugin
-    use { "wbthomason/packer.nvim", opt = true }
+    use {
+      "lewis6991/impatient.nvim",
+      config = function()
+        require "impatient"
+      end,
+    }
+
+    use { "wbthomason/packer.nvim" }
 
     -- Development
     use { "tpope/vim-dispatch" }
@@ -35,7 +67,6 @@ function M.setup()
     use { "wellle/targets.vim" }
     use { "easymotion/vim-easymotion" }
     -- use { "ggandor/lightspeed.nvim" }
-    use { "lewis6991/impatient.nvim" }
     use {
       "lewis6991/gitsigns.nvim",
       config = function()
@@ -63,17 +94,9 @@ function M.setup()
     use {
       "folke/which-key.nvim",
       config = function()
-        require("config.which-key").setup()
+        require("config.whichkey").setup()
       end,
     }
-    -- use {
-    --   "gelguy/wilder.nvim",
-    --   run = ":UpdateRemotePlugins",
-    --   config = function()
-    --     require("config.wilder").setup()
-    --   end,
-    -- }
-    -- use {'chrisbra/NrrwRgn'}
     use {
       "kyazdani42/nvim-tree.lua",
       cmd = { "NvimTreeToggle", "NvimTreeClose" },
@@ -92,21 +115,12 @@ function M.setup()
     use { "google/vim-searchindex" }
     use {
       "rmagatti/session-lens",
-      requires = { "rmagatti/auto-session", event = "VimEnter" },
-      event = "VimEnter",
+      requires = { "rmagatti/auto-session" },
       config = function()
-        require("config.auto-session").setup {}
+        require("config.auto-session").setup()
         require("session-lens").setup {}
       end,
     }
-    -- use {
-    --     'ojroques/nvim-lspfuzzy',
-    --     requires = {
-    --         {'junegunn/fzf'}, {'junegunn/fzf.vim'} -- to enable preview (optional)
-    --     },
-    --     config = function() require('lspfuzzy').setup {} end
-    -- }
-    -- use {'liuchengxu/vista.vim'}
 
     -- Color scheme
     use {
@@ -214,19 +228,6 @@ function M.setup()
         require("config.cmp").setup()
       end,
     }
-    -- use { "tzachar/cmp-tabnine", run = "./install.sh" }
-    -- use {'hrsh7th/nvim-compe'}
-    -- use {
-    --     'ms-jpq/coq_nvim',
-    --     branch = 'coq',
-    --     event = "VimEnter",
-    --     config = 'vim.cmd[[COQnow]]'
-    -- }
-    -- use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
-    -- use { 'nvim-lua/completion-nvim' }
-
-    -- Better LSP experience
-    -- use {'tjdevries/astronauta.nvim'}
     use {
       "tami5/lspsaga.nvim",
       config = function()
@@ -242,9 +243,6 @@ function M.setup()
     use { "sbdchd/neoformat" }
     use { "ray-x/lsp_signature.nvim" }
     use { "szw/vim-maximizer" }
-    -- use {'dbeniamine/cheat.sh-vim'}
-    -- use {'dyng/ctrlsf.vim'}
-    -- use {'pechorin/any-jump.vim'}
     use { "kshenoy/vim-signature" }
     use { "kevinhwang91/nvim-bqf" }
     use { "andymass/vim-matchup", event = "CursorMoved" }
@@ -259,7 +257,6 @@ function M.setup()
     use {
       "folke/todo-comments.nvim",
       cmd = { "TodoTrouble", "TodoTelescope" },
-      -- event = "BufReadPost",
       config = function()
         require("todo-comments").setup {}
       end,
@@ -294,9 +291,6 @@ function M.setup()
         require("config.symbols-outline").setup()
       end,
     }
-    -- use { "~/workspace/dev/alpha2phi/alpha.nvim" }
-    -- use { "~/workspace/alpha2phi/learn-nvim", requires = { "nvim-lua/plenary.nvim" } }
-    -- use { "~/workspace/alpha2phi/cmp-openai-codex", requires = { "nvim-lua/plenary.nvim" } }
 
     -- Better syntax
     use {
@@ -354,28 +348,6 @@ function M.setup()
       end,
     }
 
-    -- use {
-    --   "goolord/alpha-nvim",
-    --   requires = { "kyazdani42/nvim-web-devicons" },
-    --   config = function()
-    --     require("alpha").setup(require("alpha.themes.dashboard").opts)
-    --   end,
-    -- }
-
-    -- Status line
-    -- use {
-    --   "famiu/feline.nvim",
-    --   config = function()
-    --     require("config.feline").setup()
-    --   end,
-    -- }
-    -- use {
-    --   "glepnir/galaxyline.nvim",
-    --   branch = "main",
-    --   config = function()
-    --     require("config.galaxyline").setup()
-    --   end,
-    -- }
     use {
       "nvim-lualine/lualine.nvim",
       event = "VimEnter",
@@ -533,11 +505,6 @@ function M.setup()
 
     -- Performance
     use { "tweekmonster/startuptime.vim" }
-    -- use {
-    --   "dstein64/vim-startuptime",
-    --   cmd = "StartupTime",
-    --   config = [[vim.g.startuptime_tries = 10]],
-    -- }
 
     -- Clipboard
     use {
@@ -556,65 +523,135 @@ function M.setup()
       end,
     }
 
-    -- use {"haringsrob/nvim_context_vt"}
-
-    -- use {
-    --   "hrsh7th/vim-vsnip",
-    --   requires = {
-    --     "rafamadriz/friendly-snippets",
-    --     "cstrap/python-snippets",
-    --     "ylcnfrht/vscode-python-snippet-pack",
-    --     "xabikos/vscode-javascript",
-    --     "golang/vscode-go",
-    --     "rust-lang/vscode-rust",
-    --   },
-    -- }
-    --
-    -- use { "hrsh7th/cmp-vsnip" }
-
-    -- use { "stevearc/dressing.nvim" }
-
-    -- use {
-    --   "code-biscuits/nvim-biscuits",
-    --   config = function()
-    --     require("nvim-biscuits").setup {}
-    --   end,
-    -- }
-
-    -- use { "preservim/vimux" }
-    -- use { "camgraff/telescope-tmux.nvim", requires = { "norcalli/nvim-terminal.lua" } }
-
-    -- use {
-    --   "pwntester/octo.nvim",
-    --   config = function()
-    --     require("octo").setup()
-    --   end,
-    -- }
-
-    -- use { "mfussenegger/nvim-lint" }  -- try this with vale
-
-    -- use { "ThePrimeagen/harpoon" }
-
-    -- use { "christoomey/vim-quicklink", requires = { "mattn/webapi-vim" } }
-    -- if executable "deno" then
-    --   use { "vim-denops/denops.vim" }
-    --   use {
-    --     "Shougo/ddc.vim",
-    --     requires = {
-    --       "Shougo/ddc-around",
-    --       "Shougo/ddc-nvim-lsp",
-    --     },
-    --   }
-    -- end
+    if packer_bootstrap then
+      require("packer").sync()
+    end
   end
 
-  packer.init(conf)
-  packer.startup(plugins)
+  require("packer").init(conf)
+  require("packer").startup(plugins)
 end
 
 return M
 
 ------------------ Plugins list ----------------------
+
+-- use {'dbeniamine/cheat.sh-vim'}
+-- use {'dyng/ctrlsf.vim'}
+-- use {'pechorin/any-jump.vim'}
+-- use {
+--   "gelguy/wilder.nvim",
+--   run = ":UpdateRemotePlugins",
+--   config = function()
+--     require("config.wilder").setup()
+--   end,
+-- }
+-- use {'chrisbra/NrrwRgn'}
+-- use { "tzachar/cmp-tabnine", run = "./install.sh" }
+-- use {'hrsh7th/nvim-compe'}
+-- use {
+--     'ms-jpq/coq_nvim',
+--     branch = 'coq',
+--     event = "VimEnter",
+--     config = 'vim.cmd[[COQnow]]'
+-- }
+-- use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
+-- use { 'nvim-lua/completion-nvim' }
+
+-- Better LSP experience
+-- use {'tjdevries/astronauta.nvim'}
+-- use { "~/workspace/dev/alpha2phi/alpha.nvim" }
+-- use { "~/workspace/alpha2phi/learn-nvim", requires = { "nvim-lua/plenary.nvim" } }
+-- use { "~/workspace/alpha2phi/cmp-openai-codex", requires = { "nvim-lua/plenary.nvim" } }
+-- use {
+--   "goolord/alpha-nvim",
+--   requires = { "kyazdani42/nvim-web-devicons" },
+--   config = function()
+--     require("alpha").setup(require("alpha.themes.dashboard").opts)
+--   end,
+-- }
+
+-- Status line
+-- use {
+--   "famiu/feline.nvim",
+--   config = function()
+--     require("config.feline").setup()
+--   end,
+-- }
+-- use {
+--   "glepnir/galaxyline.nvim",
+--   branch = "main",
+--   config = function()
+--     require("config.galaxyline").setup()
+--   end,
+-- }
+
+-- use {
+--     'ojroques/nvim-lspfuzzy',
+--     requires = {
+--         {'junegunn/fzf'}, {'junegunn/fzf.vim'} -- to enable preview (optional)
+--     },
+--     config = function() require('lspfuzzy').setup {} end
+-- }
+-- use {'liuchengxu/vista.vim'}
+-- use {
+--   "dstein64/vim-startuptime",
+--   cmd = "StartupTime",
+--   config = [[vim.g.startuptime_tries = 10]],
+-- }
+-- use {"haringsrob/nvim_context_vt"}
+
+-- use {
+--   "hrsh7th/vim-vsnip",
+--   requires = {
+--     "rafamadriz/friendly-snippets",
+--     "cstrap/python-snippets",
+--     "ylcnfrht/vscode-python-snippet-pack",
+--     "xabikos/vscode-javascript",
+--     "golang/vscode-go",
+--     "rust-lang/vscode-rust",
+--   },
+-- }
+--
+-- use { "hrsh7th/cmp-vsnip" }
+
+-- use { "stevearc/dressing.nvim" }
+
+-- use {
+--   "code-biscuits/nvim-biscuits",
+--   config = function()
+--     require("nvim-biscuits").setup {}
+--   end,
+-- }
+
+-- use { "preservim/vimux" }
+-- use { "camgraff/telescope-tmux.nvim", requires = { "norcalli/nvim-terminal.lua" } }
+
+-- use {
+--   "pwntester/octo.nvim",
+--   config = function()
+--     require("octo").setup()
+--   end,
+-- }
+
+-- use { "mfussenegger/nvim-lint" }  -- try this with vale
+-- use { "ThePrimeagen/harpoon" }
+
+-- use { "christoomey/vim-quicklink", requires = { "mattn/webapi-vim" } }
+-- if executable "deno" then
+--   use { "vim-denops/denops.vim" }
+--   use {
+--     "Shougo/ddc.vim",
+--     requires = {
+--       "Shougo/ddc-around",
+--       "Shougo/ddc-nvim-lsp",
+--     },
+--   }
+-- end
+
+-- local executable = function(x)
+--   return vim.fn.executable(x) == 1
+-- end
 
 -- use { "sudormrfbin/cheatsheet.nvim" }
 
