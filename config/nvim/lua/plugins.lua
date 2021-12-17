@@ -18,19 +18,7 @@ local function packer_init()
   vim.cmd "autocmd BufWritePost plugins.lua PackerCompile"
 end
 
--- local function load(module)
---     local function requiref(module)
---         require(module)
---     end
---     res = pcall(requiref,module)
---     if not(res) then
--- 	print("Missing ", module)
---     end
--- end
-
 packer_init()
-
-require "packer_compiled"
 
 function M.setup()
   local conf = {
@@ -522,6 +510,7 @@ function M.setup()
         require("vgit").setup()
       end,
     }
+    -- use {"haringsrob/nvim_context_vt"}
 
     if packer_bootstrap then
       require("packer").sync()
@@ -530,6 +519,7 @@ function M.setup()
 
   require("packer").init(conf)
   require("packer").startup(plugins)
+  require "packer_compiled"
 end
 
 return M
@@ -599,7 +589,6 @@ return M
 --   cmd = "StartupTime",
 --   config = [[vim.g.startuptime_tries = 10]],
 -- }
--- use {"haringsrob/nvim_context_vt"}
 
 -- use {
 --   "hrsh7th/vim-vsnip",
