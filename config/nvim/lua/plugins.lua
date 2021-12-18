@@ -27,12 +27,7 @@ function M.setup()
   }
 
   local function plugins(use)
-    use {
-      "lewis6991/impatient.nvim",
-      config = function()
-        require "impatient"
-      end,
-    }
+    use { "lewis6991/impatient.nvim" }
 
     use { "wbthomason/packer.nvim" }
 
@@ -550,10 +545,8 @@ function M.setup()
     end
   end
 
-  local ok_packer, _ = pcall(require, "packer_compiled")
-  if not ok_packer then
-    print "Could not load packer_compiled.lua"
-  end
+  pcall(require, "impatient")
+  pcall(require, "packer_compiled")
   require("packer").init(conf)
   require("packer").startup(plugins)
 end
