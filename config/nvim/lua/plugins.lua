@@ -514,6 +514,8 @@ function M.setup()
     }
 
     -- Trying
+    use { "rhysd/git-messenger.vim" }
+
     use {
       "tanvirtin/vgit.nvim",
       event = "BufWinEnter",

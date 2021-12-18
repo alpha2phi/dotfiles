@@ -113,6 +113,7 @@ local mappings = {
     b = { "<Cmd>Git branch<Cr>", "Git branch" },
     d = { "<Cmd>Gvdiffsplit<Cr>", "Git diff" },
     f = { "<Cmd>Git fetch --all<Cr>", "Git fetch" },
+    m = { "<Cmd>GitMessenger<Cr>", "Git messenger" },
     n = { "<Cmd>Neogit<Cr>", "NeoGit" },
     v = { "<Cmd>DiffviewOpen<Cr>", "Diffview open" },
     c = { "<Cmd>DiffviewClose<Cr>", "Diffview close" },
