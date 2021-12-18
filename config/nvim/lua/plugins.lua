@@ -525,6 +525,10 @@ function M.setup()
     }
     use { "hrsh7th/cmp-vsnip" }
 
+    use {
+      "weilbith/nvim-code-action-menu",
+      cmd = "CodeActionMenu",
+    }
     -- use {"haringsrob/nvim_context_vt"}
 
     if packer_bootstrap then
@@ -659,11 +663,6 @@ return M
 -- use {
 --   "dccsillag/magma-nvim",
 --   run = ":UpdateRemotePlugins",
--- }
-
--- use {
---   "weilbith/nvim-code-action-menu",
---   cmd = "CodeActionMenu",
 -- }
 
 -- use { "jdhao/better-escape.vim", event = "InsertEnter" }
