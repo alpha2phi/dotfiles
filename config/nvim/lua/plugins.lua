@@ -381,6 +381,7 @@ function M.setup()
     use { "tyru/open-browser.vim", event = "VimEnter" }
     use {
       "kkoomen/vim-doge",
+      event = "VimEnter",
       run = ":call doge#install()",
       config = function()
         require("config.doge").setup()
@@ -405,6 +406,7 @@ function M.setup()
     }
     use {
       "Saecki/crates.nvim",
+      event = "VimEnter",
       event = { "BufRead Cargo.toml" },
       config = function()
         require("crates").setup()
@@ -420,6 +422,7 @@ function M.setup()
     }
     use {
       "plasticboy/vim-markdown",
+      event = "VimEnter",
       ft = "markdown",
       requires = { "godlygeek/tabular" },
     }
@@ -441,6 +444,7 @@ function M.setup()
 
     use {
       "folke/zen-mode.nvim",
+      event = "VimEnter",
       cmd = "ZenMode",
       config = function()
         require("zen-mode").setup {}
@@ -448,6 +452,7 @@ function M.setup()
     }
     use {
       "folke/twilight.nvim",
+      event = "VimEnter",
       config = function()
         require("twilight").setup {}
       end,
@@ -456,6 +461,7 @@ function M.setup()
     -- Database
     use {
       "tpope/vim-dadbod",
+      event = "VimEnter",
       requires = { "kristijanhusak/vim-dadbod-ui", "kristijanhusak/vim-dadbod-completion" },
       config = function()
         require("config.dadbod").setup()
@@ -465,6 +471,7 @@ function M.setup()
     -- Web
     use {
       "vuki656/package-info.nvim",
+      event = "VimEnter",
       requires = "MunifTanjim/nui.nvim",
       config = function()
         require("package-info").setup()
@@ -494,8 +501,13 @@ function M.setup()
 
     -- Performance
     use { "tweekmonster/startuptime.vim" }
-
+    -- use {
+    --   "dstein64/vim-startuptime",
+    --   cmd = "StartupTime",
+    --   config = [[vim.g.startuptime_tries = 10]],
+    -- }
     -- Clipboard
+
     use {
       "AckslD/nvim-neoclip.lua",
       config = function()
@@ -514,7 +526,7 @@ function M.setup()
 
     use {
       "hrsh7th/vim-vsnip",
-      event = "BufWinEnter",
+      event = "VimEnter",
       requires = {
         "rafamadriz/friendly-snippets",
         "cstrap/python-snippets",
@@ -538,13 +550,12 @@ function M.setup()
     end
   end
 
-  require("packer").init(conf)
-  require("packer").startup(plugins)
-
   local ok_packer, _ = pcall(require, "packer_compiled")
   if not ok_packer then
     print "Could not load packer_compiled.lua"
   end
+  require("packer").init(conf)
+  require("packer").startup(plugins)
 end
 
 return M
@@ -609,11 +620,6 @@ return M
 --     config = function() require('lspfuzzy').setup {} end
 -- }
 -- use {'liuchengxu/vista.vim'}
--- use {
---   "dstein64/vim-startuptime",
---   cmd = "StartupTime",
---   config = [[vim.g.startuptime_tries = 10]],
--- }
 
 -- use { "stevearc/dressing.nvim" }
 
