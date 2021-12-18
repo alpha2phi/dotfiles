@@ -1,6 +1,6 @@
 local M = {}
 
-local keymap = require("utils.keymap")
+local keymap = require "utils.keymap"
 
 local keymappings = {
   insert_mode = {
@@ -36,6 +36,11 @@ local keymappings = {
     ["<expr> j"] = "(v:count > 1 ? \"m'\" . v:count : '') . 'j'",
     ["<expr> k"] = "(v:count > 1 ? \"m'\" . v:count : '') . 'k'",
     ["gx"] = { "<Plug>(openbrowser-smart-search)", { noremap = false, silent = false } },
+    [",h"] = "<Cmd>wincmd h<Cr>",
+    [",j"] = "<Cmd>wincmd j<Cr>",
+    [",l"] = "<Cmd>wincmd l<Cr>",
+    [",k"] = "<Cmd>wincmd k<Cr>",
+    [",s"] = "<Cmd>split<Cr>",
     -- [";"] = ":"
   },
   visual_mode = {
