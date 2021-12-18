@@ -514,6 +514,7 @@ function M.setup()
 
     use {
       "hrsh7th/vim-vsnip",
+      event = "BufWinEnter",
       requires = {
         "rafamadriz/friendly-snippets",
         "cstrap/python-snippets",
@@ -525,10 +526,10 @@ function M.setup()
     }
     use { "hrsh7th/cmp-vsnip" }
 
-    use {
-      "weilbith/nvim-code-action-menu",
-      cmd = "CodeActionMenu",
-    }
+    -- use {
+    --   "weilbith/nvim-code-action-menu",
+    --   cmd = "CodeActionMenu",
+    -- }
     -- use {"haringsrob/nvim_context_vt"}
 
     if packer_bootstrap then
