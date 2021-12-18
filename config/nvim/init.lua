@@ -1,4 +1,2 @@
-
-require("keymappings").setup()
-
+-- Set up plugins
 require("plugins").setup()

@@ -1,5 +1,21 @@
 local M = {}
 
+local lsp_keymappings = {
+
+  normal_mode = {
+    ["K"] = "<Cmd>lua vim.lsp.buf.hover()<CR>",
+    ["gD"] = "<Cmd>lua vim.lsp.buf.declaration()<CR>",
+    ["gd"] = "<Cmd>lua vim.lsp.buf.definition()<CR>",
+    ["gi"] = "<Cmd>lua vim.lsp.buf.implementation()<CR>",
+    ["gr"] = "<Cmd>lua vim.lsp.buf.references()<CR>",
+    ["<C-k>"] = "<Cmd>lua vim.lsp.buf.signature_help()<CR>",
+    ["[d"] = "<Cmd>lua vim.diagnostic.goto_prev()<CR>",
+    ["]d"] = "<Cmd>lua vim.diagnostic.goto_next()<CR>",
+    ["[e"] = "<Cmd>Lspsaga diagnostic_jump_next<CR>",
+    ["]e"] = "<Cmd>Lspsaga diagnostic_jump_prev<CR>",
+  },
+}
+
 function M.lsp_diagnostics()
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = true,
@@ -63,8 +79,10 @@ function M.lsp_config(client, bufnr)
   buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- Key mappings
-  local lspkeymappings = require "keymappings"
-  lspkeymappings.setup_lsp_mappings()
+  local keymap = require "utils.keymap"
+  for mode, mapping in pairs(lsp_keymappings) do
+    keymap.map(mode, mapping)
+  end
 
   -- LSP and DAP menu
   local whichkey = require "config.whichkey"
