@@ -381,7 +381,6 @@ function M.setup()
     use { "tyru/open-browser.vim", event = "VimEnter" }
     use {
       "kkoomen/vim-doge",
-      event = "VimEnter",
       run = ":call doge#install()",
       config = function()
         require("config.doge").setup()
@@ -406,7 +405,6 @@ function M.setup()
     }
     use {
       "Saecki/crates.nvim",
-      event = "VimEnter",
       event = { "BufRead Cargo.toml" },
       config = function()
         require("crates").setup()
