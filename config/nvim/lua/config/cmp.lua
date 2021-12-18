@@ -15,9 +15,9 @@ function M.setup()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
   end
 
-  -- local feedkey = function(key, mode)
-  --   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-  -- end
+  local feedkey = function(key, mode)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+  end
 
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -82,8 +82,8 @@ function M.setup()
       },
       ["<Down>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
       ["<Up>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       -- ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       -- ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       -- ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
@@ -150,8 +150,8 @@ function M.setup()
           press "<ESC>:call UltiSnips#JumpForwards()<CR>"
         elseif cmp.visible() then
           cmp.select_next_item()
-        -- elseif vim.fn["vsnip#available"](1) == 1 then
-        --   feedkey("<Plug>(vsnip-expand-or-jump)", "")
+        elseif vim.fn["vsnip#available"](1) == 1 then
+          feedkey("<Plug>(vsnip-expand-or-jump)", "")
         elseif has_any_words_before() then
           press "<Tab>"
         else
@@ -168,8 +168,8 @@ function M.setup()
           press "<ESC>:call UltiSnips#JumpBackwards()<CR>"
         elseif cmp.visible() then
           cmp.select_prev_item()
-        -- elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-        --   feedkey("<Plug>(vsnip-jump-prev)", "")
+        elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+          feedkey("<Plug>(vsnip-jump-prev)", "")
         else
           press "<S-Tab>"
           fallback()
@@ -183,14 +183,14 @@ function M.setup()
     snippet = {
       expand = function(args)
         vim.fn["UltiSnips#Anon"](args.body)
-        -- vim.fn["vsnip#anonymous"](args.body)
+        vim.fn["vsnip#anonymous"](args.body)
       end,
     },
     sources = {
       { name = "nvim_lsp", max_item_count = 10 },
       { name = "nvim_lua", max_item_count = 5 },
       { name = "ultisnips", max_item_count = 5 },
-      -- { name = "vsnip", max_item_count = 5 },
+      { name = "vsnip", max_item_count = 5 },
       { name = "buffer", keyword_length = 5, max_item_count = 5 },
       { name = "path" },
       { name = "treesitter", max_item_count = 10 },

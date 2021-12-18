@@ -511,16 +511,35 @@ function M.setup()
         require("vgit").setup()
       end,
     }
+
+    use {
+      "hrsh7th/vim-vsnip",
+      requires = {
+        "rafamadriz/friendly-snippets",
+        "cstrap/python-snippets",
+        "ylcnfrht/vscode-python-snippet-pack",
+        "xabikos/vscode-javascript",
+        "golang/vscode-go",
+        "rust-lang/vscode-rust",
+      },
+    }
+    use { "hrsh7th/cmp-vsnip" }
+
     -- use {"haringsrob/nvim_context_vt"}
 
     if packer_bootstrap then
+      print "Setting up Neovim. Restart required after installation!"
       require("packer").sync()
     end
   end
 
   require("packer").init(conf)
   require("packer").startup(plugins)
-  require "packer_compiled"
+
+  local ok_packer, _ = pcall(require, "packer_compiled")
+  if not ok_packer then
+    print "Could not load packer_compiled.lua"
+  end
 end
 
 return M
@@ -590,20 +609,6 @@ return M
 --   cmd = "StartupTime",
 --   config = [[vim.g.startuptime_tries = 10]],
 -- }
-
--- use {
---   "hrsh7th/vim-vsnip",
---   requires = {
---     "rafamadriz/friendly-snippets",
---     "cstrap/python-snippets",
---     "ylcnfrht/vscode-python-snippet-pack",
---     "xabikos/vscode-javascript",
---     "golang/vscode-go",
---     "rust-lang/vscode-rust",
---   },
--- }
---
--- use { "hrsh7th/cmp-vsnip" }
 
 -- use { "stevearc/dressing.nvim" }
 
