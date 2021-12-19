@@ -126,7 +126,6 @@ function M.setup()
     use { "sainnhe/everforest" }
     use { "sainnhe/edge" }
     use { "sainnhe/sonokai" }
-    use { "folke/lsp-colors.nvim" }
     use {
       "catppuccin/nvim",
       as = "catppuccin",
@@ -134,12 +133,13 @@ function M.setup()
         require("catppuccin").setup {}
       end,
     }
-    use { "mhartington/oceanic-next" }
-    use { "bluz71/vim-nightfly-guicolors" }
-    use { "dracula/vim" }
-    use { "fenetikm/falcon" }
-    use { "shaunsingh/nord.nvim" }
-    use { "marko-cerovac/material.nvim" }
+    -- use { "mhartington/oceanic-next" }
+    -- use { "bluz71/vim-nightfly-guicolors" }
+    -- use { "dracula/vim" }
+    -- use { "marko-cerovac/material.nvim" }
+    -- use { "fenetikm/falcon" }
+    -- use { "shaunsingh/nord.nvim" }
+    -- use { "folke/lsp-colors.nvim" }
     -- use { "NLKNguyen/papercolor-theme" }
     -- use { "navarasu/onedark.nvim" }
 
