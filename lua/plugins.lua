@@ -2,6 +2,14 @@
 return require("packer").startup({
 	function(use)
 		use({ "wbthomason/packer.nvim" })
+		use({
+			"glacambre/firenvim",
+			run = function()
+				vim.fn["firenvim#install"](0)
+			end,
+		})
+		use({ "stevearc/dressing.nvim" })
+		use({ "rcarriga/nvim-notify" })
 		use({ "LionC/nest.nvim" })
 
 		use({ "Olical/aniseed" })
@@ -9,6 +17,7 @@ return require("packer").startup({
 		use({ "tpope/vim-dispatch" })
 		use({ "tpope/vim-commentary" })
 		use({ "JoosepAlviste/nvim-ts-context-commentstring" })
+		use({ "haringsrob/nvim_context_vt" })
 		use({ "machakann/vim-sandwich" })
 		use({ "tpope/vim-unimpaired" })
 		use({ "tpope/vim-sleuth" })
@@ -26,6 +35,28 @@ return require("packer").startup({
 			end,
 		})
 		use({ "karb94/neoscroll.nvim" })
+		use({
+			"edluffy/specs.nvim",
+			config = function()
+				require("specs").setup({
+					show_jumps = true,
+					min_jump = 21,
+					popup = {
+						delay_ms = 21, -- delay before popup displays
+						inc_ms = 5, -- time increments used for fade/resize effects
+						blend = 30, -- starting blend, between 0-100 (fully transparent), see :h winblend
+						width = 50,
+						winhl = "PMenu",
+						fader = require("specs").linear_fader,
+						resizer = require("specs").shrink_resizer,
+					},
+					ignore_filetypes = {},
+					ignore_buftypes = {
+						nofile = true,
+					},
+				})
+			end,
+		})
 		use({ "unblevable/quick-scope" })
 		use({ "voldikss/vim-floaterm" })
 		use({ "windwp/vim-floaterm-repl" })
@@ -70,7 +101,7 @@ return require("packer").startup({
 		use({ "NLKNguyen/papercolor-theme" })
 		use({ "sainnhe/everforest" })
 		use({ "tanvirtin/monokai.nvim" })
-		use({ "Pocco81/Catppuccino.nvim" })
+		use({ "catppuccin/nvim", as = "catppuccin" })
 		use({ "joehannes-ux/kat.nvim" })
 		use({ "sainnhe/edge" })
 		use({ "rafamadriz/neon" })
@@ -152,12 +183,23 @@ return require("packer").startup({
 
 		-- Better LSP experience
 		-- LSP config
-		use({ "neovim/nvim-lspconfig" })
-		use({ "kabouzeid/nvim-lspinstall" })
+		use({ "neovim/nvim-lspconfig", "williamboman/nvim-lsp-installer" })
 		-- use({ "glepnir/lspsaga.nvim" })
 		-- use({ "jasonrhansen/lspsaga.nvim", branch = "finder-preview-fixes" })
 		use({ "tami5/lspsaga.nvim" })
 		use({ "onsails/lspkind-nvim" })
+		use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
+		use({
+			"rmagatti/goto-preview",
+			config = function()
+				require("goto-preview").setup({
+					default_mappings = true,
+					resizing_mappings = true,
+					dismiss_on_move = true,
+					opacity = 10,
+				})
+			end,
+		})
 		use({ "mortepau/codicons.nvim" })
 		-- use {'sbdchd/neoformat'}
 		use({ "mhartington/formatter.nvim" })
@@ -169,38 +211,22 @@ return require("packer").startup({
 		-- use {'pechorin/any-jump.vim'}
 		use({ "kshenoy/vim-signature" })
 		use({ "kyazdani42/nvim-web-devicons" })
+		-- use({
+		-- 	"folke/trouble.nvim",
+		-- 	requires = "kyazdani42/nvim-web-devicons",
+		-- 	config = function()
+		-- 		require("trouble").setup({})
+		-- 	end,
+		-- })
+		use({ "mhinz/vim-grepper" })
+		use({ "kevinhwang91/nvim-bqf" })
 		use({
-			"folke/trouble.nvim",
-			requires = "kyazdani42/nvim-web-devicons",
-			config = function()
-				require("trouble").setup({})
+			"junegunn/fzf",
+			run = function()
+				vim.fn["fzf#install"]()
 			end,
 		})
-		use({
-			"kevinhwang91/nvim-bqf",
-			config = function()
-				require("bqf").setup({
-					preview = {
-						win_height = 12,
-						win_vheight = 12,
-						delay_syntax = 80,
-						border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
-					},
-					func_map = {
-						vsplit = "",
-						ptogglemode = "z,",
-						stoggleup = "",
-					},
-					filter = {
-						fzf = {
-							action_for = { ["ctrl-s"] = "split" },
-							extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
-						},
-					},
-				})
-			end,
-		})
-		use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
+		-- use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
 		-- use({ "ray-x/guihua.lua", run = "cd lua/fzy && make" })
 		-- use({ "ray-x/navigator.lua", requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" } })
 		-- use({ "junegunn/vim-peekaboo" })
@@ -208,9 +234,22 @@ return require("packer").startup({
 		-- use {'wellle/context.vim'}
 		-- use {'lukas-reineke/indent-blankline.nvim' }
 		-- use {'Yggdroot/indentLine' }
-		-- use {'beauwilliams/focus.nvim' }
-		use({ "RishabhRD/popfix" })
-		use({ "RishabhRD/nvim-lsputils" })
+		use({
+			"beauwilliams/focus.nvim",
+			config = function()
+				require("focus").setup()
+			end,
+		})
+		use({
+			"luukvbaal/stabilize.nvim",
+			config = function()
+				require("stabilize").setup({
+					nested = "QuickFixCmdPost,DiagnosticChanged *",
+				})
+			end,
+		})
+		-- use({ "RishabhRD/popfix" })
+		-- use({ "RishabhRD/nvim-lsputils" })
 		use({ "RRethy/vim-illuminate" })
 
 		-- Snippets
@@ -259,8 +298,8 @@ return require("packer").startup({
 		-- use({ "Olical/conjure", tag = "v4.20.0" })
 		use({ "dense-analysis/ale" })
 		use({ "eraserhd/parinfer-rust", run = "cargo build --release" })
-		use({ "dmac/vim-cljfmt", run = "go get github.com/cespare/goclj/cljfmt" })
-		use({ "clojure-vim/async-clj-omni" })
+		-- use({ "dmac/vim-cljfmt", run = "go get github.com/cespare/goclj/cljfmt" })
+		-- use({ "clojure-vim/async-clj-omni" })
 
 		-- Better syntax
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -269,12 +308,29 @@ return require("packer").startup({
 		use({
 			"romgrk/nvim-treesitter-context",
 			config = function()
-				require("treesitter-context.config").setup({ enable = true })
+				require("treesitter-context.config").setup({
+					enable = true,
+					patterns = {
+						"class",
+						"function",
+						"method",
+						"for",
+						"while",
+						"if",
+						"switch",
+					},
+				})
 			end,
 		})
 		use({
 			"SmiteshP/nvim-gps",
 			requires = "nvim-treesitter/nvim-treesitter",
+		})
+		use({
+			"mizlan/iswap.nvim",
+			config = function()
+				require("iswap").setup({})
+			end,
 		})
 		use({
 			"folke/zen-mode.nvim",
@@ -304,6 +360,20 @@ return require("packer").startup({
 				})
 			end,
 		})
+		-- use({
+		-- 	"sunjon/shade.nvim",
+		-- 	config = function()
+		-- 		require("shade").setup({
+		-- 			overlay_opacity = 50,
+		-- 			opacity_step = 1,
+		-- 			keys = {
+		-- 				brightness_up = "<C-Up>",
+		-- 				brightness_down = "<C-Down>",
+		-- 				toggle = "<Leader><Leader>",
+		-- 			},
+		-- 		})
+		-- 	end,
+		-- })
 		-- use {'nvim-treesitter/playground'}
 
 		-- UI/UX ... Dashboard, tabline...
@@ -385,7 +455,99 @@ return require("packer").startup({
 
 		-- Documentation/Help/Bookmarks ...
 		use({ "sunaku/vim-dasht" })
+		-- for persisting global bookmarks
 		use({ "MattesGroeger/vim-bookmarks" })
+		-- for non-persisting grouped bookmarks
+		use({
+			"chentau/marks.nvim",
+			config = function()
+				require("marks").setup({
+					mappings = {
+						delete_bookmark = "md.",
+						set_bookmark0 = "m0",
+						delete_bookmark0 = "md0",
+						next_bookmark0 = "]m0",
+						prev_bookmark0 = "[m0",
+						set_bookmark1 = "m1",
+						delete_bookmark1 = "md1",
+						next_bookmark1 = "]m1",
+						prev_bookmark1 = "[m1",
+						set_bookmark2 = "m2",
+						delete_bookmark2 = "md2",
+						next_bookmark2 = "]m2",
+						prev_bookmark2 = "[m2",
+						set_bookmark3 = "m3",
+						delete_bookmark3 = "md3",
+						next_bookmark3 = "]m3",
+						prev_bookmark3 = "[m3",
+						set_bookmark4 = "m4",
+						delete_bookmark4 = "md4",
+						next_bookmark4 = "]m4",
+						prev_bookmark4 = "[m4",
+						set_bookmark5 = "m5",
+						delete_bookmark5 = "md5",
+						next_bookmark5 = "]m5",
+						prev_bookmark5 = "[m5",
+						set_bookmark6 = "m6",
+						delete_bookmark6 = "md6",
+						next_bookmark6 = "]m6",
+						prev_bookmark6 = "[m6",
+						set_bookmark7 = "m7",
+						delete_bookmark7 = "md7",
+						next_bookmark7 = "]m7",
+						prev_bookmark7 = "[m7",
+						set_bookmark8 = "m8",
+						delete_bookmark8 = "md8",
+						next_bookmark8 = "]m8",
+						prev_bookmark8 = "[m8",
+						set_bookmark9 = "m9",
+						delete_bookmark9 = "md9",
+						next_bookmark9 = "]m9",
+						prev_bookmark9 = "[m9",
+					},
+					bookmark_0 = {
+						sign = "",
+						virt_text = " ( 0) ",
+					},
+					bookmark_1 = {
+						sign = "",
+						virt_text = " ( 1) ",
+					},
+					bookmark_2 = {
+						sign = "",
+						virt_text = " ( 2) ",
+					},
+					bookmark_3 = {
+						sign = "",
+						virt_text = " ( 3) ",
+					},
+					bookmark_4 = {
+						sign = "",
+						virt_text = " ( 4) ",
+					},
+					bookmark_5 = {
+						sign = "",
+						virt_text = " ( 5) ",
+					},
+					bookmark_6 = {
+						sign = "",
+						virt_text = " ( 6) ",
+					},
+					bookmark_7 = {
+						sign = "",
+						virt_text = " ( 7) ",
+					},
+					bookmark_8 = {
+						sign = "",
+						virt_text = " ( 8) ",
+					},
+					bookmark_9 = {
+						sign = "",
+						virt_text = " ( 9) ",
+					},
+				})
+			end,
+		})
 
 		-- Writing and note taking
 		-- use {'gyim/vim-boxdraw'}
@@ -464,7 +626,7 @@ return require("packer").startup({
 					watch_index = {
 						interval = 1000,
 					},
-					current_line_blame = false,
+					current_line_blame = true,
 					sign_priority = 6,
 					update_debounce = 100,
 					status_formatter = nil, -- Use default
@@ -496,7 +658,37 @@ return require("packer").startup({
 			"folke/todo-comments.nvim",
 			requires = "nvim-lua/plenary.nvim",
 			config = function()
-				require("todo-comments").setup({})
+				require("todo-comments").setup()
+			end,
+		})
+		use({
+			"ruifm/gitlinker.nvim",
+			requires = "nvim-lua/plenary.nvim",
+			config = function()
+				require("gitlinker").setup({
+					opts = {
+						remote = nil, -- force the use of a specific remote
+						-- adds current line nr in the url for normal mode
+						add_current_line_on_normal_mode = true,
+						-- callback for what to do with the url
+						action_callback = require("gitlinker.actions").copy_to_clipboard,
+						-- print the url after performing the action
+						print_url = true,
+					},
+					callbacks = {
+						["github.com"] = require("gitlinker.hosts").get_github_type_url,
+						["gitlab.com"] = require("gitlinker.hosts").get_gitlab_type_url,
+						["try.gitea.io"] = require("gitlinker.hosts").get_gitea_type_url,
+						["codeberg.org"] = require("gitlinker.hosts").get_gitea_type_url,
+						["bitbucket.org"] = require("gitlinker.hosts").get_bitbucket_type_url,
+						["try.gogs.io"] = require("gitlinker.hosts").get_gogs_type_url,
+						["git.sr.ht"] = require("gitlinker.hosts").get_srht_type_url,
+						["git.launchpad.net"] = require("gitlinker.hosts").get_launchpad_type_url,
+						["repo.or.cz"] = require("gitlinker.hosts").get_repoorcz_type_url,
+						["git.kernel.org"] = require("gitlinker.hosts").get_cgit_type_url,
+						["git.savannah.gnu.org"] = require("gitlinker.hosts").get_cgit_type_url,
+					},
+				})
 			end,
 		})
 		-- use {'oberblastmeister/neuron.nvim', branch = 'unstable', run = 'nix-env -if https://github.com/srid/neuron/archive/master.tar.gz' }

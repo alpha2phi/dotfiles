@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 require("dapui").setup({
 	icons = { expanded = "▾", collapsed = "▸" },
 	mappings = {

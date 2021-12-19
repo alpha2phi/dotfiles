@@ -9,12 +9,7 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd ~/.config/nvim/init.lua
-edit ~/.config/nvim/init.lua
-let s:save_splitbelow = &splitbelow
-let s:save_splitright = &splitright
-set splitbelow splitright
-let &splitbelow = s:save_splitbelow
-let &splitright = s:save_splitright
+edit ~/.config/nvim/lua/plugins.lua
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -24,13 +19,16 @@ set winminwidth=0
 set winwidth=1
 argglobal
 balt ~/.config/nvim/README.md
-let s:l = 4 - ((3 * winheight(0) + 15) / 31)
+let s:l = 175 - ((47 * winheight(0) + 33) / 66)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 4
-normal! 0
-badd +4 ~/.config/nvim/init.lua
+keepjumps 175
+normal! 035|
+lcd ~/.config/nvim
+if exists(':tcd') == 2 | tcd ~/.config/nvim | endif
+badd +36 ~/.config/nvim/init.lua
+badd +175 ~/.config/nvim/lua/plugins.lua
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

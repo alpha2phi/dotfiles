@@ -8,22 +8,59 @@ endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd ~/.config/nvim/init.lua
-edit ~/.config/nvim/lua/lang/init.lua
+$argadd ~/.config/nvim/lua/keymappings.lua
+edit ~/.config/nvim/init.lua
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+wincmd =
 argglobal
-balt ~/.config/nvim/init.lua
-let s:l = 49 - ((47 * winheight(0) + 29) / 59)
+balt ~/.config/nvim/lua/plugins.lua
+let s:l = 4 - ((3 * winheight(0) + 30) / 60)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 49
-normal! 012|
-badd +49 ~/.config/nvim/lua/lang/init.lua
+keepjumps 4
+normal! 07|
+lcd ~/.config/nvim
+wincmd w
+argglobal
+if bufexists("~/.config/nvim/lua/config/colorschemes.lua") | buffer ~/.config/nvim/lua/config/colorschemes.lua | else | edit ~/.config/nvim/lua/config/colorschemes.lua | endif
+if &buftype ==# 'terminal'
+  silent file ~/.config/nvim/lua/config/colorschemes.lua
+endif
+balt ~/.config/nvim/lua/plugins.lua
+let s:l = 60 - ((25 * winheight(0) + 30) / 60)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 60
+normal! 05|
+lcd ~/.config/nvim
+wincmd w
+wincmd =
+badd +4 ~/.config/nvim/init.lua
+badd +60 ~/.config/nvim/lua/config/colorschemes.lua
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 shortmess=aoO
+set winheight=40 winwidth=168 shortmess=aoO
+let &winminheight = s:save_winminheight
+let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

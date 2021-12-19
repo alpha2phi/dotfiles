@@ -2,7 +2,7 @@
 local lush = require("lush")
 local onedarkpro = require("onedarkpro")
 local odp_utils = require("onedarkpro.utils")
-local catppuccino = require("catppuccino")
+local catppuccino = require("catppuccin")
 
 -- tokyonight
 vim.g.tokyonight_style = "day"
@@ -11,13 +11,12 @@ vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer", "symbols
 
 -- configure catppuccino
 catppuccino.setup({
-	colorscheme = "neon_latte",
-	transparency = false,
+	transparent_background = false,
 	term_colors = false,
 	styles = {
-		comments = "NONE",
+		comments = "italic",
 		functions = "bold,italic",
-		keywords = "bold",
+		keywords = "italic",
 		strings = "NONE",
 		variables = "bold",
 	},
@@ -32,27 +31,36 @@ catppuccino.setup({
 				information = "italic",
 			},
 			underlines = {
-				errors = "undercurl",
-				hints = "undercurl",
-				warnings = "undercurl",
-				information = "undercurl",
+				errors = "underline",
+				hints = "underline",
+				warnings = "underline",
+				information = "underline",
 			},
 		},
-		lsp_trouble = true,
+		lsp_trouble = false,
 		lsp_saga = true,
 		gitgutter = false,
 		gitsigns = true,
 		telescope = true,
-		nvimtree = false,
+		nvimtree = {
+			enabled = false,
+			show_root = false,
+		},
 		which_key = true,
-		indent_blankline = false,
+		indent_blankline = {
+			enabled = false,
+			colored_indent_levels = false,
+		},
 		dashboard = false,
 		neogit = true,
 		vim_sneak = false,
 		fern = false,
 		barbar = false,
 		bufferline = true,
-		markdown = true,
+		markdown = false,
+		lightspeed = false,
+		ts_rainbow = true,
+		hop = false,
 	},
 })
 

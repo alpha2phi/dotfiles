@@ -9,17 +9,17 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd ~/.config/nvim/init.lua
-edit ~/.local/git/united-signals/onboarding/frontend/src/shared/devexpress/molecules/Cell-Filter-Editor.js
+edit ~/.local/git/joehannes-ux/kat.nvim/fnl/katdotnvim/highlights/syntax.fnl
 argglobal
-balt ~/.local/git/united-signals/onboarding/frontend/src/modules/dataimport/atoms/ModalDialogTitle.js
-let s:l = 1 - ((0 * winheight(0) + 29) / 59)
+balt ~/.local/git/joehannes-ux/kat.nvim/lua/katdotnvim/highlights/syntax.lua
+let s:l = 76 - ((55 * winheight(0) + 29) / 59)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 76
 normal! 0
-if exists(':tcd') == 2 | tcd ~/.local/git/united-signals/onboarding/frontend | endif
-badd +1 ~/.local/git/united-signals/onboarding/frontend/src/shared/devexpress/molecules/Cell-Filter-Editor.js
+if exists(':tcd') == 2 | tcd ~/.local/git/joehannes-ux/kat.nvim | endif
+badd +76 ~/.local/git/joehannes-ux/kat.nvim/fnl/katdotnvim/highlights/syntax.fnl
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

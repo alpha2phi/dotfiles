@@ -5,4 +5,8 @@ vim.g.aerial = {
 	link_folds_to_tree = false,
 	open_automatic = false,
 	close_behavior = "auto",
+	filter_kind = false,
+	backends = {
+		["_"] = { "lsp", "treesitter" },
+	},
 }

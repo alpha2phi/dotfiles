@@ -7,13 +7,14 @@ nest.applyKeymaps({
 	{ "<A-l>", "<C-w>7>" },
 	{ "<A-j>", "<C-w>7-" },
 	{ "<A-k>", "<C-w>7+" },
-	{ "<C-k>", "vim.lsp.buf.signature_help" },
+	{ "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
 	{
 		"[",
 		{
 			{ "b", "<Cmd>BufferLineCyclePrev<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" },
 			{ "m", "<Cmd>BookmarkPrev<CR>" },
+			{ "q", "<Cmd>cprev<CR>" },
 			{ "t", "<Cmd>FloatermPrev<CR>" },
 			{ "w", "<Cmd>tabprevious<CR>" },
 			{ ".", "<C-o>" },
@@ -25,6 +26,7 @@ nest.applyKeymaps({
 			{ "b", "<Cmd>BufferLineCycleNext<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" },
 			{ "m", "<Cmd>BookmarkNext<CR>" },
+			{ "q", "<Cmd>cnext<CR>" },
 			{ "t", "<Cmd>FloatermNext<CR>" },
 			{ "w", "<Cmd>tabnext<CR>" },
 			{ ".", "<C-i>" },
@@ -33,6 +35,7 @@ nest.applyKeymaps({
 	{
 		"g",
 		{
+			{ "a", "<cmd>CodeActionMenu<CR>" },
 			{ "D", "<Cmd>lua vim.lsp.buf.declaration()<CR>" },
 			{ "d", "<Cmd>lua vim.lsp.buf.definition()<CR>" },
 			{ "i", "<cmd>lua vim.lsp.buf.implementation()<CR>" },
@@ -67,6 +70,7 @@ nest.applyKeymaps({
 			},
 			{ "b", {
 				{ "q", ":bp|bd #<CR>" },
+				{ "p", "<Cmd>BufferLinePick<CR>" },
 			} },
 			{ "D", "<Cmd>DogeGenerate<CR>" },
 			{
@@ -133,6 +137,17 @@ nest.applyKeymaps({
 					{ "d", "<cmd>DiffviewOpen<CR>" },
 					{ "D", "<cmd>DiffviewFileHistory<CR>" },
 					{ "R", "<cmd>DiffviewRefresh<CR>" },
+					{
+						"y",
+						{
+							".",
+							'<cmd>lua require"gitlinker".get_buf_range_url("n")<cr>',
+						},
+						{
+							"*",
+							'<cmd>lua require"gitlinker".get_repo_url()<cr>',
+						},
+					},
 				},
 			},
 			{ "G", "<Cmd>Neogit<CR>" },
@@ -172,16 +187,36 @@ nest.applyKeymaps({
 			{
 				"q",
 				{
-					{ "q", "<cmd>FloatermKill<CR>:wqa<CR>" },
+					{ "mm", "<cmd>BookmarkShowAll<CR>" },
+					{ "m0", "<cmd>BookmarksList 0<CR>" },
+					{ "m1", "<cmd>BookmarksList 1<CR>" },
+					{ "m2", "<cmd>BookmarksList 2<CR>" },
+					{ "m3", "<cmd>BookmarksList 3<CR>" },
+					{ "m4", "<cmd>BookmarksList 4<CR>" },
+					{ "m5", "<cmd>BookmarksList 5<CR>" },
+					{ "m6", "<cmd>BookmarksList 6<CR>" },
+					{ "m7", "<cmd>BookmarksList 7<CR>" },
+					{ "m8", "<cmd>BookmarksList 8<CR>" },
+					{ "m9", "<cmd>BookmarksList 9<CR>" },
+				},
+			},
+			{ "Q", "<cmd>FloatermKill<CR>:wqa<CR>" },
+			{
+				"s",
+				{
+					{ ".", "<cmd>ISwapWith<CR>" },
+					{ "*", "<cmd>ISwap<CR>" },
 				},
 			},
 			{
 				"t",
 				{
-					{ "b", {
-						{ "m", "<Cmd>BResizeZoom<CR>" },
-						{ "v", "<Cmd>BufferLinePick<CR>" },
-					} },
+					{
+						"b",
+						{
+							{ "m", "<Cmd>BResizeZoom<CR>" },
+						},
+					},
 					{ "c", "<Cmd>call ToggleBackgroundLightness()<CR>" },
 					{ "C", "<Cmd>TSContextToggle<CR>" },
 					{ "d", "<Cmd>TroubleToggle<CR>" },
@@ -229,10 +264,14 @@ nest.applyKeymaps({
 					},
 				},
 			},
-			{ "w", {
-				{ "n", "<Cmd>tabnew<CR>" },
-				{ "q", "<Cmd>tabclose<CR>" },
-			} },
+			{
+				"w",
+				{
+					{ "n", "<Cmd>tabnew<CR>" },
+					{ "q", "<Cmd>tabclose<CR>" },
+					{ "o", "<Cmd>lua require('aerial').focus()<CR>" },
+				},
+			},
 		},
 	},
 })

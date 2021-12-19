@@ -1,3 +1,4 @@
+---@diagnostic disable:undefined-global
 local eslint = function()
 	return {
 		exe = "./node_modules/.bin/eslint",

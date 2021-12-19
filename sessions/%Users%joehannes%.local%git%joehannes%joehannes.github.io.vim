@@ -8,23 +8,24 @@ endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd ~/.config/nvim/init.lua
-edit ~/.local/git/united-signals/onboarding/frontend/src/shared/devexpress/molecules/Cell-Filter-Editor.js
+$argadd ~/.config/nvim/lua/keymappings.lua
+edit ~/.local/git/joehannes/joehannes.github.io/.env
 argglobal
-balt ~/.local/git/united-signals/onboarding/frontend/src/modules/dataimport/atoms/ModalDialogTitle.js
-let s:l = 1 - ((0 * winheight(0) + 29) / 59)
+balt ~/.local/git/joehannes/joehannes.github.io/package.json
+let s:l = 1 - ((0 * winheight(0) + 30) / 60)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 1
 normal! 0
-if exists(':tcd') == 2 | tcd ~/.local/git/united-signals/onboarding/frontend | endif
-badd +1 ~/.local/git/united-signals/onboarding/frontend/src/shared/devexpress/molecules/Cell-Filter-Editor.js
+if exists(':tcd') == 2 | tcd ~/.local/git/joehannes/joehannes.github.io | endif
+badd +1 ~/.local/git/joehannes/joehannes.github.io/.env
+badd +6 ~/.local/git/joehannes/joehannes.github.io/NeogitStatus
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 shortmess=aoO
+set winheight=1 winwidth=1 shortmess=aoO
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

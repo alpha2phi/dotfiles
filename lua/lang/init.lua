@@ -1,7 +1,12 @@
 ---@diagnostic disable: undefined-global
 local on_attach = function(client, bufnr)
-	require("lsp_signature").on_attach(client)
-	require("aerial").on_attach(client)
+	require("lsp_signature").on_attach({
+		bind = true,
+		handler_opts = {
+			border = "rounded",
+		},
+	}, bufnr)
+	require("aerial").on_attach(client, bufnr)
 
 	local function bufkeymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -61,6 +66,7 @@ local on_attach = function(client, bufnr)
 end
 
 local nvim_lsp = require("lspconfig")
+local nvim_lsp_configs = require("lspconfig.configs")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Code actions
@@ -81,11 +87,21 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- LSPs
 local function setup_servers()
-	require("lspinstall").setup()
-	local servers = require("lspinstall").installed_servers()
-	for _, server in pairs(servers) do
-		if server == "diagnosticls" then
-			nvim_lsp[server].setup({
+	local servers = require("nvim-lsp-installer")
+	servers.on_server_ready(function(server)
+		if
+			(server.name == "diagnosticls" or server.name == "tsserver" or server.name == "eslint")
+			and not server:is_installed()
+		then
+			server:install()
+		end
+
+		if not server:is_installed() then
+			return
+		end
+
+		if server.name == "diagnosticls" then
+			local opts = {
 				capabilities = capabilities,
 				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json" },
 				init_options = {
@@ -131,17 +147,146 @@ local function setup_servers()
 						},
 					},
 				},
-			})
+			}
+			server:setup(opts)
+		elseif server.name == "eslint" then
+			local opts = {
+				capabilities = capabilities,
+				on_attach = function(client, bufnr)
+					-- neovim's LSP client does not currently support dynamic capabilities registration, so we need to set
+					-- the resolved capabilities of the eslint server ourselves!
+					client.resolved_capabilities.document_formatting = true
+					on_attach(client, bufnr)
+				end,
+				settings = {
+					format = { enable = true }, -- this will enable formatting
+				},
+			}
+			server:setup(opts)
+		elseif server.name == "jsonls" then
+			local opts = {
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					json = {
+						schemas = {
+							{
+								fileMatch = { "package.json" },
+								url = "https://json.schemastore.org/package.json",
+							},
+							{
+								fileMatch = { "tsconfig*.json" },
+								url = "https://json.schemastore.org/tsconfig.json",
+							},
+							{
+								fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
+								url = "https://json.schemastore.org/prettierrc.json",
+							},
+							{
+								fileMatch = { ".eslintrc", ".eslintrc.json" },
+								url = "https://json.schemastore.org/eslintrc.json",
+							},
+							{
+								fileMatch = { ".babelrc", ".babelrc.json", "babel.config.json" },
+								url = "https://json.schemastore.org/babelrc.json",
+							},
+							{
+								fileMatch = { "lerna.json" },
+								url = "https://json.schemastore.org/lerna.json",
+							},
+							{
+								fileMatch = { "now.json", "vercel.json" },
+								url = "https://json.schemastore.org/now.json",
+							},
+							{
+								fileMatch = { "ecosystem.json" },
+								url = "https://json.schemastore.org/pm2-ecosystem.json",
+							},
+						},
+					},
+				},
+			}
+
+			server:setup(opts)
+		elseif server.name == "tsserver" then
+			local opts = {
+				init_options = require("nvim-lsp-ts-utils").init_options,
+				capabilities = capabilities,
+				on_attach = function(client, bufnr)
+					local ts_utils = require("nvim-lsp-ts-utils")
+
+					-- defaults
+					ts_utils.setup({
+						debug = false,
+						disable_commands = false,
+						enable_import_on_completion = false,
+
+						-- import all
+						import_all_timeout = 5000, -- ms
+						-- lower numbers = higher priority
+						import_all_priorities = {
+							same_file = 1, -- add to existing import statement
+							local_files = 2, -- git files or files with relative path markers
+							buffer_content = 3, -- loaded buffer content
+							buffers = 4, -- loaded buffer names
+						},
+						import_all_scan_buffers = 100,
+						import_all_select_source = false,
+
+						-- formatting
+						enable_formatting = true,
+
+						-- parentheses completion
+						complete_parens = false,
+						signature_help_in_parens = false,
+
+						-- filter diagnostics
+						filter_out_diagnostics_by_severity = { "hint" },
+						filter_out_diagnostics_by_code = {},
+
+						-- inlay hints
+						auto_inlay_hints = true,
+						inlay_hints_highlight = "Comment",
+
+						-- update imports on file move
+						update_imports_on_move = true,
+						require_confirmation_on_move = true,
+						watch_dir = nil,
+					})
+
+					-- required to fix code action ranges and filter diagnostics
+					ts_utils.setup_client(client)
+
+					-- no default maps, so you may want to define some here
+					local kmOpts = { silent = true }
+					vim.api.nvim_buf_set_keymap(bufnr, "n", "gO", ":TSLspOrganize<CR>", kmOpts)
+					vim.api.nvim_buf_set_keymap(bufnr, "n", "gR", ":TSLspRenameFile<CR>", kmOpts)
+					vim.api.nvim_buf_set_keymap(bufnr, "n", "gI*", ":TSLspImportAll<CR>", kmOpts)
+					vim.api.nvim_buf_set_keymap(bufnr, "n", "gI.", ":TSLspImportCurrent<CR>", kmOpts)
+
+					on_attach(client, bufnr)
+				end,
+				settings = {
+					format = { enable = true }, -- this will enable formatting
+				},
+			}
+			server:setup(opts)
 		else
-			nvim_lsp[server].setup({ capabilities = capabilities, on_attach = on_attach })
+			local opts = {
+				capabilities = capabilities,
+				on_attach = on_attach,
+			}
+			server:setup(opts)
 		end
-	end
+
+		vim.cmd([[ do User LspAttachBuffers ]])
+	end)
 end
 
 setup_servers()
 
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require("lspinstall").post_install_hook = function()
+require("nvim-lsp-installer").post_install_hook = function()
 	setup_servers() -- reload installed servers
 	vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
@@ -246,11 +391,11 @@ do
 	end
 end
 
-vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
-vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
-vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
-vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
-vim.lsp.handlers["textDocument/typeDefinition"] = require("lsputil.locations").typeDefinition_handler
-vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
-vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
-vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler
+-- vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
+-- vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
+-- vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
+-- vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
+-- vim.lsp.handlers["textDocument/typeDefinition"] = require("lsputil.locations").typeDefinition_handler
+-- vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
+-- vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
+-- vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler
