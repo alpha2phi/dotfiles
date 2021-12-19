@@ -16,7 +16,10 @@ local function setup_servers()
 
   lsp_installer.on_server_ready(function(server)
     if lsp_providers[server.name] then
-      require("config.lsp." .. server.name).setup(server)
+      local opts = require("config.lsp." .. server.name).setup(server)
+      if opts then
+        server:setup(opts)
+      end
     else
       local opts = {}
       server:setup(opts)

@@ -2,7 +2,7 @@ local M = {}
 
 local lsputils = require "config.lsp.utils"
 
-function M.config(install_server)
+function M.config(installed_server)
   return {
     -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
     experimentalPostfixCompletions = true,
@@ -21,12 +21,11 @@ function M.config(install_server)
     on_init = lsputils.lsp_init,
     on_exit = lsputils.lsp_exit,
     flags = { debounce_text_changes = 150 },
-    cmd = installed_server._default_options.cmd,
   }
 end
 
-function M.setup(install_server)
-  lsputils.setup_server("gopls", M.config(install_server))
+function M.setup(installed_server)
+  return M.config(installed_server)
 end
 
 return M

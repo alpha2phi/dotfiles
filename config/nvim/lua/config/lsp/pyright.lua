@@ -1,17 +1,18 @@
 local M = {}
 
-local lsputils = require "config.lsp.utils"
+-- local lsputils = require "config.lsp.utils"
 
 function M.config(installed_server)
   return {
-    cmd = installed_server._default_options.cmd,
+    -- cmd = installed_server._default_options.cmd,
   }
 end
 
 function M.setup(installed_server)
-  lsputils.setup_server("pyright", M.config(installed_server))
+  -- lsputils.setup_server("pyright", M.config(installed_server))
   M.autocmds()
   M.keymappings()
+  return M.config(installed_server)
 end
 
 function M.autocmds()

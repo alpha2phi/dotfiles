@@ -2,7 +2,13 @@ local M = {}
 
 local lsputils = require "config.lsp.utils"
 
-CONFIG = {}
+local config = {
+  capabilities = lsputils.get_capabilities(),
+  on_attach = lsputils.lsp_attach,
+  on_init = lsputils.lsp_init,
+  on_exit = lsputils.lsp_exit,
+  flags = { debounce_text_changes = 150 },
+}
 
 function M.setup(installed_server)
   require("rust-tools").setup {
@@ -11,18 +17,19 @@ function M.setup(installed_server)
         auto_focus = true,
       },
     },
-    server = {
-      capabilities = lsputils.get_capabilities(),
-      on_attach = lsputils.lsp_attach,
-      on_init = lsputils.lsp_init,
-      on_exit = lsputils.lsp_exit,
-      flags = { debounce_text_changes = 150 },
-      cmd = installed_server._default_options.cmd,
-    },
+    -- server = {
+    --   capabilities = lsputils.get_capabilities(),
+    --   on_attach = lsputils.lsp_attach,
+    --   on_init = lsputils.lsp_init,
+    --   on_exit = lsputils.lsp_exit,
+    --   flags = { debounce_text_changes = 150 },
+    --   cmd = installed_server._default_options.cmd,
+    -- },
   }
 
   M.autocmds()
   M.keymappings()
+  return config
 end
 
 function M.autocmds()

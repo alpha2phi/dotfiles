@@ -1,7 +1,6 @@
 local M = {}
 
 local lsputils = require "config.lsp.utils"
-local lspconfig = require "lspconfig"
 
 function M.lsp_attach(client, bufnr)
   lsputils.lsp_attach(client, bufnr)
@@ -62,14 +61,13 @@ function M.config(installed_server)
     on_init = lsputils.lsp_init,
     on_exit = lsputils.lsp_exit,
     flags = { debounce_text_changes = 150 },
-    cmd = installed_server._default_options.cmd,
   }
 end
 
 function M.setup(installed_server)
-  lspconfig["tsserver"].setup(M.config(installed_server))
   M.autocmds()
   M.keymappings()
+  return M.config(installed_server)
 end
 
 function M.autocmds()
