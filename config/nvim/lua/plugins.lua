@@ -122,11 +122,26 @@ function M.setup()
       end,
     }
     use { "sainnhe/gruvbox-material" }
-    use { "NLKNguyen/papercolor-theme" }
     use { "folke/tokyonight.nvim" }
     use { "sainnhe/everforest" }
+    use { "sainnhe/edge" }
+    use { "sainnhe/sonokai" }
     use { "folke/lsp-colors.nvim" }
-    use { "navarasu/onedark.nvim" }
+    use {
+      "catppuccin/nvim",
+      as = "catppuccin",
+      config = function()
+        require("catppuccin").setup {}
+      end,
+    }
+    use { "mhartington/oceanic-next" }
+    use { "bluz71/vim-nightfly-guicolors" }
+    use { "dracula/vim" }
+    use { "fenetikm/falcon" }
+    use { "shaunsingh/nord.nvim" }
+    use { "marko-cerovac/material.nvim" }
+    -- use { "NLKNguyen/papercolor-theme" }
+    -- use { "navarasu/onedark.nvim" }
 
     -- Testing
     use {
@@ -523,6 +538,14 @@ function M.setup()
     }
 
     -- Trying
+    use {
+      "mvllow/modes.nvim",
+      event = "BufRead",
+      config = function()
+        vim.opt.cursorline = true
+        require("modes").setup()
+      end,
+    }
     use {
       "jbyuki/venn.nvim",
       config = function()
