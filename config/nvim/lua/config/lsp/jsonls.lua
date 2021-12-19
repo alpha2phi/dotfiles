@@ -9,7 +9,7 @@ function M.setup(installed_server)
         schemas = require("schemastore").json.schemas(),
       },
     },
-    on_attach = M.lsp_attach,
+    on_attach = lsputils.lsp_attach,
     capabilities = lsputils.get_capabilities(),
     on_init = lsputils.lsp_init,
     on_exit = lsputils.lsp_exit,
