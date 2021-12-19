@@ -64,6 +64,14 @@ function M.setup()
         require("config.neogit").setup()
       end,
     }
+    use { "rhysd/git-messenger.vim" }
+    use {
+      "tanvirtin/vgit.nvim",
+      event = "BufWinEnter",
+      config = function()
+        require("vgit").setup()
+      end,
+    }
     use {
       "sindrets/diffview.nvim",
       cmd = {
@@ -515,17 +523,20 @@ function M.setup()
     }
 
     -- Trying
-    use { "b0o/schemastore.nvim" }
-
-    use { "rhysd/git-messenger.vim" }
-
     use {
-      "tanvirtin/vgit.nvim",
-      event = "BufWinEnter",
+      "jbyuki/venn.nvim",
       config = function()
-        require("vgit").setup()
+        vim.api.nvim_set_keymap("v", "<Leader>vb", ":VBox<CR>", { noremap = true })
       end,
     }
+    use {
+      "voldikss/vim-translator",
+      setup = function()
+        vim.g.translator_history_enable = true
+      end,
+    }
+
+    use { "b0o/schemastore.nvim" }
 
     use {
       "hrsh7th/vim-vsnip",
