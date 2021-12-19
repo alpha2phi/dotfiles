@@ -1,6 +1,13 @@
 local M = {}
 
-local lsp_providers = { rust_analyzer = true, tsserver = true, pyright = true, gopls = true, sumneko_lua = true }
+local lsp_providers = {
+  rust_analyzer = true,
+  tsserver = true,
+  pyright = true,
+  gopls = true,
+  sumneko_lua = true,
+  jsonls = true,
+}
 
 local function setup_servers()
   local lsp_installer = require "nvim-lsp-installer"

@@ -515,6 +515,8 @@ function M.setup()
     }
 
     -- Trying
+    use { "b0o/schemastore.nvim" }
+
     use { "rhysd/git-messenger.vim" }
 
     use {

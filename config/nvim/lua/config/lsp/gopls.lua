@@ -16,7 +16,12 @@ function M.config(install_server)
     symbolMatcher = "fuzzy",
     gofumpt = true,
     buildFlags = { "-tags", "integration" },
-    cmd = install_server._default_options.cmd,
+    capabilities = lsputils.get_capabilities(),
+    on_attach = lsputils.lsp_attach,
+    on_init = lsputils.lsp_init,
+    on_exit = lsputils.lsp_exit,
+    flags = { debounce_text_changes = 150 },
+    cmd = installed_server._default_options.cmd,
   }
 end
 
