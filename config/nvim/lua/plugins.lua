@@ -325,10 +325,16 @@ function M.setup()
     }
 
     -- Dashboard
+    -- use {
+    --   "glepnir/dashboard-nvim",
+    --   config = function()
+    --     require("config.dashboard").setup()
+    --   end,
+    -- }
     use {
-      "glepnir/dashboard-nvim",
+      "goolord/alpha-nvim",
       config = function()
-        require("config.dashboard").setup()
+        require("config.alpha").setup()
       end,
     }
 
@@ -582,13 +588,6 @@ return M
 -- use { "~/workspace/dev/alpha2phi/alpha.nvim" }
 -- use { "~/workspace/alpha2phi/learn-nvim", requires = { "nvim-lua/plenary.nvim" } }
 -- use { "~/workspace/alpha2phi/cmp-openai-codex", requires = { "nvim-lua/plenary.nvim" } }
--- use {
---   "goolord/alpha-nvim",
---   requires = { "kyazdani42/nvim-web-devicons" },
---   config = function()
---     require("alpha").setup(require("alpha.themes.dashboard").opts)
---   end,
--- }
 
 -- Status line
 -- use {
