@@ -149,8 +149,12 @@ local mappings = {
       "Search files",
     },
     p = {
-      "<Cmd>lua require('telescope').extensions.project.project({change_dir = true})<Cr>",
+      "<Cmd>lua require('telescope').extensions.project.project({})<Cr>",
       "List projects",
+    },
+    r = {
+      "<Cmd>Telescope projects<Cr>",
+      "Recent projects",
     },
   },
 

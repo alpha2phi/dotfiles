@@ -16,7 +16,7 @@ local function packer_init()
     }
     vim.cmd [[packadd packer.nvim]]
   end
-  vim.cmd "autocmd BufWritePost plugins.lua PackerCompile"
+  vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
 end
 
 packer_init()
@@ -24,6 +24,11 @@ packer_init()
 function M.setup()
   local conf = {
     compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+    display = {
+      open_fn = function()
+        return require("packer.util").float { border = "rounded" }
+      end,
+    },
   }
 
   local function plugins(use)
@@ -191,7 +196,7 @@ function M.setup()
       "ahmedkhalf/project.nvim",
       event = "VimEnter",
       config = function()
-        require("project_nvim").setup {}
+        require("config.project").setup()
       end,
     }
     -- use {'airblade/vim-rooter'}
