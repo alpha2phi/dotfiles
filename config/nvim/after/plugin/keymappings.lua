@@ -41,6 +41,8 @@ local keymappings = {
     [",l"] = "<Cmd>wincmd l<Cr>",
     [",k"] = "<Cmd>wincmd k<Cr>",
     [",s"] = "<Cmd>split<Cr>",
+    ["g,"] = "g,zvzz",
+    ["g;"] = "g;zvzz",
     -- [";"] = ":"
   },
   visual_mode = {

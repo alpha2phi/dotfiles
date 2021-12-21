@@ -96,7 +96,6 @@ function M.setup()
     }
     use {
       "kyazdani42/nvim-tree.lua",
-      cmd = { "NvimTreeToggle", "NvimTreeClose" },
       config = function()
         require("nvim-tree").setup {}
       end,
@@ -359,12 +358,13 @@ function M.setup()
     --     require("config.dashboard").setup()
     --   end,
     -- }
-    use {
-      "goolord/alpha-nvim",
-      config = function()
-        require("config.alpha").setup()
-      end,
-    }
+    use { "mhinz/vim-startify" }
+    -- use {
+    --   "goolord/alpha-nvim",
+    --   config = function()
+    --     require("config.alpha").setup()
+    --   end,
+    -- }
 
     use {
       "nvim-lualine/lualine.nvim",
