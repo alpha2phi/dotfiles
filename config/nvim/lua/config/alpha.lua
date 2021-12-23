@@ -37,7 +37,10 @@ function M.setup()
   }
 
   local function footer()
-    return "github.com/alpha2phi"
+    -- local total_plugins = #vim.tbl_keys(packer_plugins)
+    local fortune = require "alpha.fortune"
+    return fortune()
+    -- return total_plugins .. " plugins  " .. "\n" .. table.concat(fortune())
   end
 
   dashboard.section.footer.val = footer()

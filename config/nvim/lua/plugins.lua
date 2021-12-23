@@ -358,13 +358,34 @@ function M.setup()
     --     require("config.dashboard").setup()
     --   end,
     -- }
-    use { "mhinz/vim-startify" }
+    -- use { "mhinz/vim-startify" }
     -- use {
-    --   "goolord/alpha-nvim",
+    --   "startup-nvim/startup.nvim",
     --   config = function()
-    --     require("config.alpha").setup()
+    --     require("startup").setup { theme = "evil" }
     --   end,
     -- }
+    -- use {
+    --   "echasnovski/mini.nvim",
+    --   config = function()
+    --     local starter = require "mini.starter"
+    --     starter.setup {
+    --       items = {
+    --         starter.sections.telescope(),
+    --       },
+    --       content_hooks = {
+    --         starter.gen_hook.adding_bullet(),
+    --         starter.gen_hook.aligning("center", "center"),
+    --       },
+    --     }
+    --   end,
+    -- }
+    use {
+      "goolord/alpha-nvim",
+      config = function()
+        require("config.alpha").setup()
+      end,
+    }
 
     use {
       "nvim-lualine/lualine.nvim",
