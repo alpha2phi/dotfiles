@@ -137,7 +137,8 @@ function M.setup()
         require("catppuccin").setup {}
       end,
     }
-    use { "rebelot/kanagawa.nvim" }
+    use { "EdenEast/nightfox.nvim" }
+    -- use { "rebelot/kanagawa.nvim" }
     -- use { "mhartington/oceanic-next" }
     -- use { "bluz71/vim-nightfly-guicolors" }
     -- use { "dracula/vim" }
@@ -565,7 +566,13 @@ function M.setup()
     }
 
     -- Trying
-    use { "skywind3000/vim-quickui" }
+    use {
+      "luukvbaal/stabilize.nvim",
+      config = function()
+        require("stabilize").setup()
+      end,
+    }
+    -- use { "skywind3000/vim-quickui" }
     use {
       "ThePrimeagen/refactoring.nvim",
       config = function()
