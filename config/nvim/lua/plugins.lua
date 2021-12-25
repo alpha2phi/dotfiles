@@ -137,6 +137,7 @@ function M.setup()
         require("catppuccin").setup {}
       end,
     }
+    use { "rebelot/kanagawa.nvim" }
     -- use { "mhartington/oceanic-next" }
     -- use { "bluz71/vim-nightfly-guicolors" }
     -- use { "dracula/vim" }
@@ -564,6 +565,13 @@ function M.setup()
     }
 
     -- Trying
+    use { "skywind3000/vim-quickui" }
+    use {
+      "ThePrimeagen/refactoring.nvim",
+      config = function()
+        require("config.refactoring").setup()
+      end,
+    }
     use {
       "mvllow/modes.nvim",
       event = "BufRead",
@@ -896,10 +904,6 @@ return M
 
 -- use { 'romgrk/barbar.nvim' }
 
--- use {
---     'ThePrimeagen/refactoring.nvim',
---     config = function() require("config.refactoring") end
--- }
 -- use {
 --     'ray-x/navigator.lua',
 --     requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
