@@ -478,13 +478,13 @@ function M.setup()
     }
 
     -- Note taking
-    use {
-      "vhyrro/neorg",
-      event = "VimEnter",
-      config = function()
-        require("config.neorg").setup()
-      end,
-    }
+    -- use {
+    --   "nvim-neorg/neorg",
+    --   event = "VimEnter",
+    --   config = function()
+    --     require("config.neorg").setup()
+    --   end,
+    -- }
     use {
       "stevearc/gkeep.nvim",
       run = ":UpdateRemotePlugins",
@@ -566,6 +566,12 @@ function M.setup()
     }
 
     -- Trying
+    use {
+      "ldelossa/litee.nvim",
+      config = function()
+        require("litee").setup {}
+      end,
+    }
     use {
       "luukvbaal/stabilize.nvim",
       config = function()
