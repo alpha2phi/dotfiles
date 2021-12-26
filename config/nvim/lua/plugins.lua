@@ -130,14 +130,14 @@ function M.setup()
     use { "sainnhe/everforest" }
     use { "sainnhe/edge" }
     use { "sainnhe/sonokai" }
-    use {
-      "catppuccin/nvim",
-      as = "catppuccin",
-      config = function()
-        require("catppuccin").setup {}
-      end,
-    }
-    use { "EdenEast/nightfox.nvim" }
+    -- use {
+    --   "catppuccin/nvim",
+    --   as = "catppuccin",
+    --   config = function()
+    --     require("catppuccin").setup {}
+    --   end,
+    -- }
+    -- use { "EdenEast/nightfox.nvim" }
     -- use { "rebelot/kanagawa.nvim" }
     -- use { "mhartington/oceanic-next" }
     -- use { "bluz71/vim-nightfly-guicolors" }
@@ -566,18 +566,18 @@ function M.setup()
     }
 
     -- Trying
-    use {
-      "ldelossa/litee.nvim",
-      config = function()
-        require("litee").setup {}
-      end,
-    }
-    use {
-      "luukvbaal/stabilize.nvim",
-      config = function()
-        require("stabilize").setup()
-      end,
-    }
+    -- use {
+    --   "ldelossa/litee.nvim",
+    --   config = function()
+    --     require("litee").setup {}
+    --   end,
+    -- }
+    -- use {
+    --   "luukvbaal/stabilize.nvim",
+    --   config = function()
+    --     require("stabilize").setup()
+    --   end,
+    -- }
     -- use { "skywind3000/vim-quickui" }
     use {
       "ThePrimeagen/refactoring.nvim",
