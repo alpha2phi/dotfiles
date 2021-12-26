@@ -9,4 +9,5 @@ vim.g.aerial = {
 	backends = {
 		["_"] = { "lsp", "treesitter" },
 	},
+	max_width = 50,
 }

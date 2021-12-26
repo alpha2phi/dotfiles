@@ -1,4 +1,12 @@
 ---@diagnostic disable: undefined-global
+local efmls = require("efmls-configs")
+
+efmls.init({
+	default_config = true,
+})
+
+efmls.setup()
+
 local on_attach = function(client, bufnr)
 	require("lsp_signature").on_attach({
 		bind = true,
@@ -49,8 +57,8 @@ local on_attach = function(client, bufnr)
 	bufkeymap("x", "gx", ":<c-u>Lspsaga range_code_action<cr>", { silent = true, noremap = true })
 	bufkeymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
 	bufkeymap("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>", { silent = true, noremap = true })
-	bufkeymap("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
-	bufkeymap("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
+	-- bufkeymap("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
+	-- bufkeymap("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
 	bufkeymap(
 		"n",
 		"<A-u>",
@@ -90,8 +98,7 @@ local function setup_servers()
 	local servers = require("nvim-lsp-installer")
 	servers.on_server_ready(function(server)
 		if
-			(server.name == "diagnosticls" or server.name == "tsserver" or server.name == "eslint")
-			and not server:is_installed()
+			(server.name == "tsserver" or server.name == "efm" or server.name == "jsonls") and not server:is_installed()
 		then
 			server:install()
 		end
@@ -100,70 +107,70 @@ local function setup_servers()
 			return
 		end
 
-		if server.name == "diagnosticls" then
-			local opts = {
-				capabilities = capabilities,
-				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json" },
-				init_options = {
-					filetypes = {
-						javascript = "eslint",
-						typescript = "eslint",
-						javascriptreact = "eslint",
-						typescriptreact = "eslint",
-						css = "eslint",
-						json = "eslint",
-					},
-					linters = {
-						eslint = {
-							sourceName = "eslint",
-							command = "eslint_d",
-							rootPatterns = {
-								".eslintrc.js",
-								".eslintrc",
-								"package.json",
-							},
-							debounce = 100,
-							args = {
-								"--cache",
-								"--stdin",
-								"--stdin-filename",
-								"%filepath",
-								"--format",
-								"json",
-							},
-							parseJson = {
-								errorsRoot = "[0].messages",
-								line = "line",
-								column = "column",
-								endLine = "endLine",
-								endColumn = "endColumn",
-								message = "${message} [${ruleId}]",
-								security = "severity",
-							},
-							securities = {
-								[2] = "error",
-								[1] = "warning",
-							},
-						},
-					},
-				},
-			}
-			server:setup(opts)
-		elseif server.name == "eslint" then
-			local opts = {
-				capabilities = capabilities,
-				on_attach = function(client, bufnr)
-					-- neovim's LSP client does not currently support dynamic capabilities registration, so we need to set
-					-- the resolved capabilities of the eslint server ourselves!
-					client.resolved_capabilities.document_formatting = true
-					on_attach(client, bufnr)
-				end,
-				settings = {
-					format = { enable = true }, -- this will enable formatting
-				},
-			}
-			server:setup(opts)
-		elseif server.name == "jsonls" then
+		-- if server.name == "diagnosticls" then
+		-- 	local opts = {
+		-- 		capabilities = capabilities,
+		-- 		filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json" },
+		-- 		init_options = {
+		-- 			filetypes = {
+		-- 				javascript = "eslint",
+		-- 				typescript = "eslint",
+		-- 				javascriptreact = "eslint",
+		-- 				typescriptreact = "eslint",
+		-- 				css = "eslint",
+		-- 				json = "eslint",
+		-- 			},
+		-- 			linters = {
+		-- 				eslint = {
+		-- 					sourceName = "eslint",
+		-- 					command = "eslint_d",
+		-- 					rootPatterns = {
+		-- 						".eslintrc.js",
+		-- 						".eslintrc",
+		-- 						"package.json",
+		-- 					},
+		-- 					debounce = 100,
+		-- 					args = {
+		-- 						"--cache",
+		-- 						"--stdin",
+		-- 						"--stdin-filename",
+		-- 						"%filepath",
+		-- 						"--format",
+		-- 						"json",
+		-- 					},
+		-- 					parseJson = {
+		-- 						errorsRoot = "[0].messages",
+		-- 						line = "line",
+		-- 						column = "column",
+		-- 						endLine = "endLine",
+		-- 						endColumn = "endColumn",
+		-- 						message = "${message} [${ruleId}]",
+		-- 						security = "severity",
+		-- 					},
+		-- 					securities = {
+		-- 						[2] = "error",
+		-- 						[1] = "warning",
+		-- 					},
+		-- 				},
+		-- 			},
+		-- 		},
+		-- 	}
+		-- 	server:setup(opts)
+		-- elseif server.name == "eslint" then
+		-- 	local opts = {
+		-- 		capabilities = capabilities,
+		-- 		on_attach = function(client, bufnr)
+		-- 			-- neovim's LSP client does not currently support dynamic capabilities registration, so we need to set
+		-- 			-- the resolved capabilities of the eslint server ourselves!
+		-- 			client.resolved_capabilities.document_formatting = true
+		-- 			on_attach(client, bufnr)
+		-- 		end,
+		-- 		settings = {
+		-- 			format = { enable = true }, -- this will enable formatting
+		-- 		},
+		-- 	}
+		-- 	server:setup(opts)
+		if server.name == "jsonls" then
 			local opts = {
 				capabilities = capabilities,
 				on_attach = on_attach,
@@ -275,6 +282,9 @@ local function setup_servers()
 			local opts = {
 				capabilities = capabilities,
 				on_attach = on_attach,
+				settings = {
+					format = { enable = true }, -- this will enable formatting
+				},
 			}
 			server:setup(opts)
 		end
@@ -363,33 +373,33 @@ nvim_lsp.sumneko_lua.setup(luadev)
 -- }
 
 -- LSP Enable diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	virtual_text = true,
-	underline = true,
-	signs = true,
-	update_in_insert = false,
-})
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+-- 	virtual_text = true,
+-- 	underline = true,
+-- 	signs = true,
+-- 	update_in_insert = false,
+-- })
 
 -- Send diagnostics to quickfix list
-do
-	local cur_method = "textDocument/publishDiagnostics"
-	local default_handler = vim.lsp.handlers[cur_method]
-	vim.lsp.handlers[cur_method] = function(err, cur_loc_method, result, client_id, bufnr, config)
-		default_handler(err, cur_loc_method, result, client_id, bufnr, config)
-		local diagnostics = vim.lsp.diagnostic.get_all()
-		local qflist = {}
-		for cur_bufnr, diagnostic in pairs(diagnostics) do
-			for _, d in ipairs(diagnostic) do
-				d.bufnr = cur_bufnr
-				d.lnum = d.range.start.line + 1
-				d.col = d.range.start.character + 1
-				d.text = d.message
-				table.insert(qflist, d)
-			end
-		end
-		vim.lsp.util.set_qflist(qflist)
-	end
-end
+-- do
+-- 	local cur_method = "textDocument/publishDiagnostics"
+-- 	local default_handler = vim.lsp.handlers[cur_method]
+-- 	vim.lsp.handlers[cur_method] = function(err, cur_loc_method, result, client_id, bufnr, config)
+-- 		default_handler(err, cur_loc_method, result, client_id, bufnr, config)
+-- 		local diagnostics = vim.lsp.diagnostic.get_all()
+-- 		local qflist = {}
+-- 		for cur_bufnr, diagnostic in pairs(diagnostics) do
+-- 			for _, d in ipairs(diagnostic) do
+-- 				d.bufnr = cur_bufnr
+-- 				d.lnum = d.range.start.line + 1
+-- 				d.col = d.range.start.character + 1
+-- 				d.text = d.message
+-- 				table.insert(qflist, d)
+-- 			end
+-- 		end
+-- 		vim.lsp.util.set_qflist(qflist)
+-- 	end
+-- end
 
 -- vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
 -- vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler

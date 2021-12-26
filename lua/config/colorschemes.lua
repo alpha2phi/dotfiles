@@ -95,7 +95,6 @@ local colors = {
 	highlight = "#efdebd",
 }
 onedarkpro.setup({
-	theme = "onedark", -- The theme to be used (opts: 'onedark' or 'onelight')
 	colors = {
 		bg = colors.bg,
 		fg = colors.fg,
@@ -136,8 +135,10 @@ onedarkpro.setup({
 		italic = true, -- Use the themes opinionated italic styles?
 		underline = true, -- Use the themes opinionated underline styles?
 		undercurl = true, -- Use the themes opinionated undercurl styles?
-		transparent = false, -- Use a transparent background?
-		highlight_cursorline = true, -- Use cursorline highlighting?
+		cursorline = true,
+		transparency = false, -- Use a transparent background?
+		terminal_colors = true,
+		window_unfocussed_color = true,
 	},
 })
 -- onedarkpro.load("onelight")
@@ -173,7 +174,7 @@ onedarkpro.setup({
 
 --kat.nvim
 vim.g.kat_nvim_commentStyle = "italic"
-vim.g.kat_nvim_integrations = { "lsp", "treesitter", "ts_rainbow", "cmp", "bufferline" }
+vim.g.kat_nvim_integrations = { "lsp", "treesitter", "ts_rainbow", "cmp" } --, "bufferline" }
 vim.g.kat_nvim_stupidFeatures = true
 
 vim.cmd([[colorscheme kat.nvim]])

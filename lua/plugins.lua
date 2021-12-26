@@ -1,15 +1,18 @@
 ---@diagnostic disable: undefined-global
+
+vim.cmd([[packadd packer.nvim]])
+
 return require("packer").startup({
 	function(use)
 		use({ "wbthomason/packer.nvim" })
+		use({ "stevearc/dressing.nvim" })
 		use({
-			"glacambre/firenvim",
-			run = function()
-				vim.fn["firenvim#install"](0)
+			"rcarriga/nvim-notify",
+			event = "VimEnter",
+			config = function()
+				vim.notify = require("notify")
 			end,
 		})
-		use({ "stevearc/dressing.nvim" })
-		use({ "rcarriga/nvim-notify" })
 		use({ "LionC/nest.nvim" })
 
 		use({ "Olical/aniseed" })
@@ -24,7 +27,12 @@ return require("packer").startup({
 		use({ "tpope/vim-repeat" })
 		-- use {'guns/vim-sexp'}
 		-- use {'tpope/vim-sexp-mappings-for-regular-people'}
-		use({ "gelguy/wilder.nvim" })
+		use({
+			"gelguy/wilder.nvim",
+			config = function()
+				require("config/wilder")
+			end,
+		})
 		use({ "wellle/targets.vim" })
 		use({
 			"phaazon/hop.nvim",
@@ -34,6 +42,7 @@ return require("packer").startup({
 				require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 			end,
 		})
+		use({ "indianboy42/hop-extensions" })
 		use({ "karb94/neoscroll.nvim" })
 		use({
 			"edluffy/specs.nvim",
@@ -66,7 +75,7 @@ return require("packer").startup({
 		use({ "norcalli/nvim-colorizer.lua" })
 		use({ "lokaltog/neoranger" })
 		use({ "diepm/vim-rest-console" })
-		use({ "hkupty/iron.nvim" }) --Interactive REPL
+		-- use({ "hkupty/iron.nvim" }) --Interactive REPL
 		use({ "kosayoda/nvim-lightbulb" })
 		-- Color
 		use({
@@ -138,7 +147,7 @@ return require("packer").startup({
 		--     'nvim-telescope/telescope-arecibo.nvim',
 		--     rocks = {"openssl", "lua-http-parser"}
 		-- }
-		-- use { 'nvim-telescope/telescope-media-files.nvim' }
+		use({ "nvim-telescope/telescope-media-files.nvim" })
 		-- use { 'nvim-telescope/telescope-packer.nvim ' }
 		use({ "sudormrfbin/cheatsheet.nvim" })
 		use({ "rmagatti/auto-session" })
@@ -190,6 +199,10 @@ return require("packer").startup({
 		use({ "onsails/lspkind-nvim" })
 		use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
 		use({
+			"creativenull/efmls-configs-nvim",
+			requires = { "neovim/nvim-lspconfig" },
+		})
+		use({
 			"rmagatti/goto-preview",
 			config = function()
 				require("goto-preview").setup({
@@ -234,12 +247,17 @@ return require("packer").startup({
 		-- use {'wellle/context.vim'}
 		-- use {'lukas-reineke/indent-blankline.nvim' }
 		-- use {'Yggdroot/indentLine' }
-		use({
-			"beauwilliams/focus.nvim",
-			config = function()
-				require("focus").setup()
-			end,
-		})
+		-- use({
+		-- 	"beauwilliams/focus.nvim",
+		-- 	config = function()
+		-- 		require("focus").setup({
+		-- 			excluded_filetypes = { "toggleterm", "floaterm", "AERIAL", "aerial" },
+		-- 			excluded_buftypes = { "nofile", "prompt", "popup", "help", "floaterm", "aerial", "AERIAL" },
+		-- 			width = 120,
+		-- 			minwidth = 80,
+		-- 			signcolumn = false,
+		-- 		}) end,
+		-- })
 		use({
 			"luukvbaal/stabilize.nvim",
 			config = function()
@@ -277,6 +295,9 @@ return require("packer").startup({
 				"hrsh7th/cmp-calc",
 				"f3fora/cmp-spell",
 				"hrsh7th/cmp-emoji",
+				"ray-x/cmp-treesitter",
+				"hrsh7th/cmp-cmdline",
+				"hrsh7th/cmp-nvim-lsp-document-symbol",
 			},
 		})
 		-- use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
@@ -296,7 +317,7 @@ return require("packer").startup({
 
 		-- Clojure Development
 		-- use({ "Olical/conjure", tag = "v4.20.0" })
-		use({ "dense-analysis/ale" })
+		-- use({ "dense-analysis/ale" })
 		use({ "eraserhd/parinfer-rust", run = "cargo build --release" })
 		-- use({ "dmac/vim-cljfmt", run = "go get github.com/cespare/goclj/cljfmt" })
 		-- use({ "clojure-vim/async-clj-omni" })
@@ -410,8 +431,8 @@ return require("packer").startup({
 		})
 
 		-- Debugging
-		-- use({ "puremourning/vimspector" })
-		-- use({ "nvim-telescope/telescope-vimspector.nvim" })
+		use({ "puremourning/vimspector" })
+		use({ "nvim-telescope/telescope-vimspector.nvim" })
 
 		-- Telescope fzf
 		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
@@ -701,10 +722,10 @@ return require("packer").startup({
 		-- Pair Programming
 		use({ "Floobits/floobits-neovim" })
 		-- -- DAP
-		use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-		use({ "nvim-telescope/telescope-dap.nvim" })
-		use({ "theHamsta/nvim-dap-virtual-text" })
-		use({ "Pocco81/DAPInstall.nvim" })
+		-- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+		-- use({ "nvim-telescope/telescope-dap.nvim" })
+		-- use({ "theHamsta/nvim-dap-virtual-text" })
+		-- use({ "Pocco81/DAPInstall.nvim" })
 
 		-- Project mgmt
 		-- use {'vim-ctrlspace/vim-ctrlspace' }
@@ -739,152 +760,142 @@ return require("packer").startup({
 		use({ "roxma/vim-tmux-clipboard" })
 		-- use {'christoomey/vim-tmux-navigator'}
 
-		use({
-			"pwntester/octo.nvim",
-			config = function()
-				require("octo").setup({
-					default_remote = { "upstream", "origin" }, -- order to try remotes
-					reaction_viewer_hint_icon = "", -- marker for user reactions
-					user_icon = " ", -- user icon
-					timeline_marker = "", -- timeline marker
-					timeline_indent = "2", -- timeline indentation
-					right_bubble_delimiter = "", -- Bubble delimiter
-					left_bubble_delimiter = "", -- Bubble delimiter
-					github_hostname = "", -- GitHub Enterprise host
-					snippet_context_lines = 4, -- number or lines around commented lines
-					file_panel = {
-						size = 10, -- changed files panel rows
-						use_icons = true, -- use web-devicons in file panel
-					},
-					mappings = {
-						issue = {
-							close_issue = "<space>ic", -- close issue
-							reopen_issue = "<space>io", -- reopen issue
-							list_issues = "<space>il", -- list open issues on same repo
-							reload = "<C-r>", -- reload issue
-							open_in_browser = "<C-b>", -- open issue in browser
-							copy_url = "<C-y>", -- copy url to system clipboard
-							add_assignee = "<space>aa", -- add assignee
-							remove_assignee = "<space>ad", -- remove assignee
-							create_label = "<space>lc", -- create label
-							add_label = "<space>la", -- add label
-							remove_label = "<space>ld", -- remove label
-							goto_issue = "<space>gi", -- navigate to a local repo issue
-							add_comment = "<space>ca", -- add comment
-							delete_comment = "<space>cd", -- delete comment
-							next_comment = "]c", -- go to next comment
-							prev_comment = "[c", -- go to previous comment
-							react_hooray = "<space>rp", -- add/remove 🎉 reaction
-							react_heart = "<space>rh", -- add/remove ❤️ reaction
-							react_eyes = "<space>re", -- add/remove 👀 reaction
-							react_thumbs_up = "<space>r+", -- add/remove 👍 reaction
-							react_thumbs_down = "<space>r-", -- add/remove 👎 reaction
-							react_rocket = "<space>rr", -- add/remove 🚀 reaction
-							react_laugh = "<space>rl", -- add/remove 😄 reaction
-							react_confused = "<space>rc", -- add/remove 😕 reaction
-						},
-						pull_request = {
-							checkout_pr = "<space>po", -- checkout PR
-							merge_pr = "<space>pm", -- merge PR
-							list_commits = "<space>pc", -- list PR commits
-							list_changed_files = "<space>pf", -- list PR changed files
-							show_pr_diff = "<space>pd", -- show PR diff
-							add_reviewer = "<space>va", -- add reviewer
-							remove_reviewer = "<space>vd", -- remove reviewer request
-							close_issue = "<space>ic", -- close PR
-							reopen_issue = "<space>io", -- reopen PR
-							list_issues = "<space>il", -- list open issues on same repo
-							reload = "<C-r>", -- reload PR
-							open_in_browser = "<C-b>", -- open PR in browser
-							copy_url = "<C-y>", -- copy url to system clipboard
-							add_assignee = "<space>aa", -- add assignee
-							remove_assignee = "<space>ad", -- remove assignee
-							create_label = "<space>lc", -- create label
-							add_label = "<space>la", -- add label
-							remove_label = "<space>ld", -- remove label
-							goto_issue = "<space>gi", -- navigate to a local repo issue
-							add_comment = "<space>ca", -- add comment
-							delete_comment = "<space>cd", -- delete comment
-							next_comment = "]c", -- go to next comment
-							prev_comment = "[c", -- go to previous comment
-							react_hooray = "<space>rp", -- add/remove 🎉 reaction
-							react_heart = "<space>rh", -- add/remove ❤️ reaction
-							react_eyes = "<space>re", -- add/remove 👀 reaction
-							react_thumbs_up = "<space>r+", -- add/remove 👍 reaction
-							react_thumbs_down = "<space>r-", -- add/remove 👎 reaction
-							react_rocket = "<space>rr", -- add/remove 🚀 reaction
-							react_laugh = "<space>rl", -- add/remove 😄 reaction
-							react_confused = "<space>rc", -- add/remove 😕 reaction
-						},
-						review_thread = {
-							goto_issue = "<space>gi", -- navigate to a local repo issue
-							add_comment = "<space>ca", -- add comment
-							add_suggestion = "<space>sa", -- add suggestion
-							delete_comment = "<space>cd", -- delete comment
-							next_comment = "]c", -- go to next comment
-							prev_comment = "[c", -- go to previous comment
-							select_next_entry = "]q", -- move to previous changed file
-							select_prev_entry = "[q", -- move to next changed file
-							close_review_tab = "<C-c>", -- close review tab
-							react_hooray = "<space>rp", -- add/remove 🎉 reaction
-							react_heart = "<space>rh", -- add/remove ❤️ reaction
-							react_eyes = "<space>re", -- add/remove 👀 reaction
-							react_thumbs_up = "<space>r+", -- add/remove 👍 reaction
-							react_thumbs_down = "<space>r-", -- add/remove 👎 reaction
-							react_rocket = "<space>rr", -- add/remove 🚀 reaction
-							react_laugh = "<space>rl", -- add/remove 😄 reaction
-							react_confused = "<space>rc", -- add/remove 😕 reaction
-						},
-						submit_win = {
-							approve_review = "<C-a>", -- approve review
-							comment_review = "<C-m>", -- comment review
-							request_changes = "<C-r>", -- request changes review
-							close_review_tab = "<C-c>", -- close review tab
-						},
-						review_diff = {
-							add_review_comment = "<space>ca", -- add a new review comment
-							add_review_suggestion = "<space>sa", -- add a new review suggestion
-							focus_files = "<leader>e", -- move focus to changed file panel
-							toggle_files = "<leader>b", -- hide/show changed files panel
-							next_thread = "]t", -- move to next thread
-							prev_thread = "[t", -- move to previous thread
-							select_next_entry = "]q", -- move to previous changed file
-							select_prev_entry = "[q", -- move to next changed file
-							close_review_tab = "<C-c>", -- close review tab
-							toggle_viewed = "<leader><space>", -- toggle viewer viewed state
-						},
-						file_panel = {
-							next_entry = "j", -- move to next changed file
-							prev_entry = "k", -- move to previous changed file
-							select_entry = "<cr>", -- show selected changed file diffs
-							refresh_files = "R", -- refresh changed files panel
-							focus_files = "<leader>e", -- move focus to changed file panel
-							toggle_files = "<leader>b", -- hide/show changed files panel
-							select_next_entry = "]q", -- move to previous changed file
-							select_prev_entry = "[q", -- move to next changed file
-							close_review_tab = "<C-c>", -- close review tab
-							toggle_viewed = "<leader><space>", -- toggle viewer viewed state
-						},
-					},
-				})
-			end,
-		})
+		-- use({
+		-- 	"pwntester/octo.nvim",
+		-- 	config = function()
+		-- 		require("octo").setup({
+		-- 			default_remote = { "upstream", "origin" }, -- order to try remotes
+		-- 			reaction_viewer_hint_icon = "", -- marker for user reactions
+		-- 			user_icon = " ", -- user icon
+		-- 			timeline_marker = "", -- timeline marker
+		-- 			timeline_indent = "2", -- timeline indentation
+		-- 			right_bubble_delimiter = "", -- Bubble delimiter
+		-- 			left_bubble_delimiter = "", -- Bubble delimiter
+		-- 			github_hostname = "", -- GitHub Enterprise host
+		-- 			snippet_context_lines = 4, -- number or lines around commented lines
+		-- 			file_panel = {
+		-- 				size = 10, -- changed files panel rows
+		-- 				use_icons = true, -- use web-devicons in file panel
+		-- 			},
+		-- 			mappings = {
+		-- 				issue = {
+		-- 					close_issue = "<space>ic", -- close issue
+		-- 					reopen_issue = "<space>io", -- reopen issue
+		-- 					list_issues = "<space>il", -- list open issues on same repo
+		-- 					reload = "<C-r>", -- reload issue
+		-- 					open_in_browser = "<C-b>", -- open issue in browser
+		-- 					copy_url = "<C-y>", -- copy url to system clipboard
+		-- 					add_assignee = "<space>aa", -- add assignee
+		-- 					remove_assignee = "<space>ad", -- remove assignee
+		-- 					create_label = "<space>lc", -- create label
+		-- 					add_label = "<space>la", -- add label
+		-- 					remove_label = "<space>ld", -- remove label
+		-- 					goto_issue = "<space>gi", -- navigate to a local repo issue
+		-- 					add_comment = "<space>ca", -- add comment
+		-- 					delete_comment = "<space>cd", -- delete comment
+		-- 					next_comment = "]c", -- go to next comment
+		-- 					prev_comment = "[c", -- go to previous comment
+		-- 					react_hooray = "<space>rp", -- add/remove 🎉 reaction
+		-- 					react_heart = "<space>rh", -- add/remove ❤️ reaction
+		-- 					react_eyes = "<space>re", -- add/remove 👀 reaction
+		-- 					react_thumbs_up = "<space>r+", -- add/remove 👍 reaction
+		-- 					react_thumbs_down = "<space>r-", -- add/remove 👎 reaction
+		-- 					react_rocket = "<space>rr", -- add/remove 🚀 reaction
+		-- 					react_laugh = "<space>rl", -- add/remove 😄 reaction
+		-- 					react_confused = "<space>rc", -- add/remove 😕 reaction
+		-- 				},
+		-- 				pull_request = {
+		-- 					checkout_pr = "<space>po", -- checkout PR
+		-- 					merge_pr = "<space>pm", -- merge PR
+		-- 					list_commits = "<space>pc", -- list PR commits
+		-- 					list_changed_files = "<space>pf", -- list PR changed files
+		-- 					show_pr_diff = "<space>pd", -- show PR diff
+		-- 					add_reviewer = "<space>va", -- add reviewer
+		-- 					remove_reviewer = "<space>vd", -- remove reviewer request
+		-- 					close_issue = "<space>ic", -- close PR
+		-- 					reopen_issue = "<space>io", -- reopen PR
+		-- 					list_issues = "<space>il", -- list open issues on same repo
+		-- 					reload = "<C-r>", -- reload PR
+		-- 					open_in_browser = "<C-b>", -- open PR in browser
+		-- 					copy_url = "<C-y>", -- copy url to system clipboard
+		-- 					add_assignee = "<space>aa", -- add assignee
+		-- 					remove_assignee = "<space>ad", -- remove assignee
+		-- 					create_label = "<space>lc", -- create label
+		-- 					add_label = "<space>la", -- add label
+		-- 					remove_label = "<space>ld", -- remove label
+		-- 					goto_issue = "<space>gi", -- navigate to a local repo issue
+		-- 					add_comment = "<space>ca", -- add comment
+		-- 					delete_comment = "<space>cd", -- delete comment
+		-- 					next_comment = "]c", -- go to next comment
+		-- 					prev_comment = "[c", -- go to previous comment
+		-- 					react_hooray = "<space>rp", -- add/remove 🎉 reaction
+		-- 					react_heart = "<space>rh", -- add/remove ❤️ reaction
+		-- 					react_eyes = "<space>re", -- add/remove 👀 reaction
+		-- 					react_thumbs_up = "<space>r+", -- add/remove 👍 reaction
+		-- 					react_thumbs_down = "<space>r-", -- add/remove 👎 reaction
+		-- 					react_rocket = "<space>rr", -- add/remove 🚀 reaction
+		-- 					react_laugh = "<space>rl", -- add/remove 😄 reaction
+		-- 					react_confused = "<space>rc", -- add/remove 😕 reaction
+		-- 				},
+		-- 				review_thread = {
+		-- 					goto_issue = "<space>gi", -- navigate to a local repo issue
+		-- 					add_comment = "<space>ca", -- add comment
+		-- 					add_suggestion = "<space>sa", -- add suggestion
+		-- 					delete_comment = "<space>cd", -- delete comment
+		-- 					next_comment = "]c", -- go to next comment
+		-- 					prev_comment = "[c", -- go to previous comment
+		-- 					select_next_entry = "]q", -- move to previous changed file
+		-- 					select_prev_entry = "[q", -- move to next changed file
+		-- 					close_review_tab = "<C-c>", -- close review tab
+		-- 					react_hooray = "<space>rp", -- add/remove 🎉 reaction
+		-- 					react_heart = "<space>rh", -- add/remove ❤️ reaction
+		-- 					react_eyes = "<space>re", -- add/remove 👀 reaction
+		-- 					react_thumbs_up = "<space>r+", -- add/remove 👍 reaction
+		-- 					react_thumbs_down = "<space>r-", -- add/remove 👎 reaction
+		-- 					react_rocket = "<space>rr", -- add/remove 🚀 reaction
+		-- 					react_laugh = "<space>rl", -- add/remove 😄 reaction
+		-- 					react_confused = "<space>rc", -- add/remove 😕 reaction
+		-- 				},
+		-- 				submit_win = {
+		-- 					approve_review = "<C-a>", -- approve review
+		-- 					comment_review = "<C-m>", -- comment review
+		-- 					request_changes = "<C-r>", -- request changes review
+		-- 					close_review_tab = "<C-c>", -- close review tab
+		-- 				},
+		-- 				review_diff = {
+		-- 					add_review_comment = "<space>ca", -- add a new review comment
+		-- 					add_review_suggestion = "<space>sa", -- add a new review suggestion
+		-- 					focus_files = "<leader>e", -- move focus to changed file panel
+		-- 					toggle_files = "<leader>b", -- hide/show changed files panel
+		-- 					next_thread = "]t", -- move to next thread
+		-- 					prev_thread = "[t", -- move to previous thread
+		-- 					select_next_entry = "]q", -- move to previous changed file
+		-- 					select_prev_entry = "[q", -- move to next changed file
+		-- 					close_review_tab = "<C-c>", -- close review tab
+		-- 					toggle_viewed = "<leader><space>", -- toggle viewer viewed state
+		-- 				},
+		-- 				file_panel = {
+		-- 					next_entry = "j", -- move to next changed file
+		-- 					prev_entry = "k", -- move to previous changed file
+		-- 					select_entry = "<cr>", -- show selected changed file diffs
+		-- 					refresh_files = "R", -- refresh changed files panel
+		-- 					focus_files = "<leader>e", -- move focus to changed file panel
+		-- 					toggle_files = "<leader>b", -- hide/show changed files panel
+		-- 					select_next_entry = "]q", -- move to previous changed file
+		-- 					select_prev_entry = "[q", -- move to next changed file
+		-- 					close_review_tab = "<C-c>", -- close review tab
+		-- 					toggle_viewed = "<leader><space>", -- toggle viewer viewed state
+		-- 				},
+		-- 			},
+		-- 		})
+		-- 	end,
+		-- })
 
 		use({
 			"folke/which-key.nvim",
 			config = function()
-				require("which-key").setup({})
+				require("which-key").setup()
 			end,
 		})
 	end,
-	config = {
-		compile_path = vim.fn.stdpath("config") .. "/lua" .. "/packer_compiled.lua",
-		git = {
-			clone_timeout = false,
-		},
-		display = {
-			open_fn = require("packer.util").float,
-		},
-		max_jobs = 16,
-	},
 })

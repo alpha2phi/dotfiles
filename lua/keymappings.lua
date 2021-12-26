@@ -84,6 +84,7 @@ nest.applyKeymaps({
 					{ "e", "<Cmd>Telescope file_browser<CR>" },
 					{ "f", "<Cmd>Telescope find_files<CR>" },
 					{ "g", "<Cmd>Telescope live_grep<CR>" },
+					{ "i", "<Cmd>Telescope media_files<CR>" },
 					{ "k", "<Cmd>Telescope help_tags<CR>" },
 					{ "m*", "<Cmd>Telescope vim_bookmarks all<CR>" },
 					{ "m.", "<Cmd>Telescope vim_bookmarks current_file<CR>" },
@@ -102,12 +103,12 @@ nest.applyKeymaps({
 								{
 									{ "$.", "<Cmd>Telescope lsp_document_symbols<CR>" },
 									{ "$*", "<Cmd>Telescope lsp_workspace_symbols<CR>" },
+									{ "a", "<Cmd>Telescope lsp_code_actions<CR>" },
 									{ "d.", "<Cmd>Telescope lsp_document_diagnostics<CR>" },
 									{ "d*", "<Cmd>Telescope lsp_workspace_diagnostics<CR>" },
-									{ "gr", "<Cmd>Telescope lsp_references<CR>" },
-									{ "gi", "<Cmd>Telescope lsp_implementations<CR>" },
-									{ "ga", "<Cmd>Telescope lsp_code_actions<CR>" },
-									{ "gd", "<Cmd>Telescope lsp_definitions<CR>" },
+									{ "D", "<Cmd>Telescope lsp_definitions<CR>" },
+									{ "i", "<Cmd>Telescope lsp_implementations<CR>" },
+									{ "r", "<Cmd>Telescope lsp_references<CR>" },
 								},
 							},
 							{
@@ -154,11 +155,13 @@ nest.applyKeymaps({
 			{
 				"j",
 				{
-					{ "w", "<Cmd>HopWord<CR>" },
 					{ "/", "<Cmd>HopPattern<CR>" },
 					{ "1", "<Cmd>HopChar1<CR>" },
 					{ "2", "<Cmd>HopChar2<CR>" },
+					{ "j", "<Cmd>lua require('hop-extensions').hint_references()<CR>" },
 					{ "l", "<Cmd>HopLine<CR>" },
+					{ "t", "<Cmd>lua require('hop-extensions').hint_scopes()<CR>" },
+					{ "w", "<Cmd>HopWord<CR>" },
 				},
 			},
 			{
@@ -219,7 +222,7 @@ nest.applyKeymaps({
 					},
 					{ "c", "<Cmd>call ToggleBackgroundLightness()<CR>" },
 					{ "C", "<Cmd>TSContextToggle<CR>" },
-					{ "d", "<Cmd>TroubleToggle<CR>" },
+					-- { "d", "<Cmd>TroubleToggle<CR>" },
 					{ "D", ":lua require('dapui').toggle()" },
 					{
 						"f",
@@ -247,16 +250,16 @@ nest.applyKeymaps({
 							{ "c", {
 								{ "<3", "<Cmd>CPLoad neon_latte<CR>" },
 							} },
-							{
-								"d",
-								{
-									{ "*", "<Cmd>TroubleToggle lsp_workspace_diagnostics<CR>" },
-									{ ".", "<Cmd>TroubleToggle lsp_document_diagnostics<CR>" },
-									{ "r", "<Cmd>TroubleToggle lsp_references<CR>" },
-									{ "q", "<Cmd>TroubleToggle quickfix<CR>" },
-									{ "l", "<Cmd>TroubleToggle loclist<CR>" },
-								},
-							},
+							-- {
+							-- 	"d",
+							-- 	{
+							-- 		{ "*", "<Cmd>TroubleToggle lsp_workspace_diagnostics<CR>" },
+							-- 		{ ".", "<Cmd>TroubleToggle lsp_document_diagnostics<CR>" },
+							-- 		{ "r", "<Cmd>TroubleToggle lsp_references<CR>" },
+							-- 		{ "q", "<Cmd>TroubleToggle quickfix<CR>" },
+							-- 		{ "l", "<Cmd>TroubleToggle loclist<CR>" },
+							-- 	},
+							-- },
 							{ "t", {
 								{ "n", "<Cmd>FloatermNew<CR>" },
 							} },

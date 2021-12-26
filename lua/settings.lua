@@ -55,7 +55,7 @@ set noswapfile
 set nocompatible
 set hidden
 set encoding=utf-8
-set cmdheight=3
+set cmdheight=1
 set updatetime=200
 set shortmess+=c
 set signcolumn=yes

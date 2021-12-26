@@ -1,8 +1,9 @@
 ---@diagnostic disable: undefined-global
 -- local trouble = require("trouble.providers.telescope")
+local telescope = require("telescope")
 local actions = require("telescope.actions")
 
-require("telescope").setup({
+telescope.setup({
 	find_command = {
 		"rg",
 		"--no-heading",
@@ -22,6 +23,10 @@ require("telescope").setup({
 		--     ["show_http_headers"] = false,
 		--     ["show_domain_icons"] = false
 		-- },
+		media_files = {
+			filetypes = { "png", "webp", "jpg", "jpeg", "mp4", "webm", "pdf" },
+			find_cmd = "rg",
+		},
 		fzf = {
 			override_generic_sorter = false,
 			override_file_sorter = true,
@@ -83,29 +88,29 @@ require("telescope").setup({
 
 require("neoclip").setup()
 
-require("telescope").load_extension("fzf")
-require("telescope").load_extension("gh")
--- require("telescope").load_extension("node_modules")
-require("telescope").load_extension("session-lens")
-require("telescope").load_extension("vim_bookmarks")
-require("telescope").load_extension("ultisnips")
-require("telescope").load_extension("project")
-require("telescope").load_extension("neoclip")
-require("telescope").load_extension("smart_history")
--- require("telescope").load_extension("aerial")
+telescope.load_extension("fzf")
+telescope.load_extension("gh")
+-- telescope.load_extension("node_modules")
+telescope.load_extension("session-lens")
+telescope.load_extension("vim_bookmarks")
+telescope.load_extension("ultisnips")
+telescope.load_extension("project")
+telescope.load_extension("neoclip")
+telescope.load_extension("smart_history")
+telescope.load_extension("aerial")
 -- require('telescope').load_extension('snippets')
 -- require('telescope').load_extension('arecibo')
--- require('telescope').load_extension('media_files')
+telescope.load_extension("media_files")
 
-local bookmark_actions = require("telescope").extensions.vim_bookmarks.actions
-require("telescope").extensions.vim_bookmarks.all({
+local bookmark_actions = telescope.extensions.vim_bookmarks.actions
+telescope.extensions.vim_bookmarks.all({
 	attach_mappings = function(_, map)
 		map("n", "dd", bookmark_actions.delete_selected_or_at_cursor)
 
 		return true
 	end,
 })
-require("telescope").extensions.vim_bookmarks.current_file({
+telescope.extensions.vim_bookmarks.current_file({
 	attach_mappings = function(_, map)
 		map("n", "dd", bookmark_actions.delete_selected_or_at_cursor)
 
@@ -118,8 +123,6 @@ require("session-lens").setup({
 	theme_conf = { border = false },
 	previewer = false,
 })
-
-local actions = require("telescope.actions")
 
 local M = {}
 

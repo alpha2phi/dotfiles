@@ -12,18 +12,19 @@ $argadd ~/.config/nvim/init.lua
 edit ~/.local/git/in-house/in-house-web/src/pages/houses.jsx
 argglobal
 balt ~/.local/git/in-house/in-house-web/src/pages/houses.jsx
-let s:l = 1 - ((0 * winheight(0) + 23) / 46)
+let s:l = 131 - ((42 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 131
 normal! 06|
-badd +33 ~/.local/git/in-house/in-house-web/src/pages/houses.jsx
+lcd ~/.local/git/in-house/in-house-web
+badd +105 ~/.local/git/in-house/in-house-web/src/pages/houses.jsx
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 shortmess=filnxtToOFc
+set winheight=30 winwidth=120 shortmess=filnxtToOFc
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

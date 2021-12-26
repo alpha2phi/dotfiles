@@ -79,6 +79,7 @@ cmp.setup({
 	sources = {
 		-- { name = "cmp_tabnine" },
 		{ name = "nvim_lsp" },
+		{ name = "treesitter" },
 		{ name = "buffer" },
 		{ name = "ultisnips" },
 		{ name = "look" },
@@ -108,3 +109,18 @@ cmp.setup({
 -- ]],
 -- 	false
 -- )
+
+-- cmdline
+cmp.setup.cmdline(":", {
+	sources = {
+		{ name = "cmdline" },
+	},
+})
+-- lsp_document_symbols
+cmp.setup.cmdline("/", {
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp_document_symbol" },
+	}, {
+		{ name = "buffer" },
+	}),
+})
