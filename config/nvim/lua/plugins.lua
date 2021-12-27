@@ -569,7 +569,7 @@ function M.setup()
     use {
       "sidebar-nvim/sidebar.nvim",
       config = function()
-        require("sidebar-nvim").setup { open = true }
+        require("sidebar-nvim").setup { open = false }
       end,
     }
     -- use {

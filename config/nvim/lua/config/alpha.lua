@@ -37,10 +37,17 @@ function M.setup()
   }
 
   local function footer()
-    -- local total_plugins = #vim.tbl_keys(packer_plugins)
+    -- Number of plugins
+    local total_plugins = #vim.tbl_keys(packer_plugins)
+    local datetime = os.date "%d-%m-%Y  %H:%M:%S"
+    local plugins_text = "\t" .. total_plugins .. " plugins  " .. datetime
+
+    -- Quote
     local fortune = require "alpha.fortune"
-    return fortune()
-    -- return total_plugins .. " plugins  " .. "\n" .. table.concat(fortune())
+    local quote = fortune()
+    local quote = table.concat(fortune(), "\n")
+
+    return plugins_text .. "\n" .. quote
   end
 
   dashboard.section.footer.val = footer()
