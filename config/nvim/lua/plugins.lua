@@ -566,6 +566,12 @@ function M.setup()
     }
 
     -- Trying
+    use {
+      "sidebar-nvim/sidebar.nvim",
+      config = function()
+        require("sidebar-nvim").setup { open = true }
+      end,
+    }
     -- use {
     --   "ldelossa/litee.nvim",
     --   config = function()
