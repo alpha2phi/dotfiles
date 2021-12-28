@@ -80,6 +80,7 @@ local mappings = {
     n = { "<Cmd>cnext<Cr>", "Next quickfix" },
     p = { "<Cmd>cprev<Cr>", "Previous quickfix" },
     x = { "<Cmd>cex []<Cr>", "Clear quickfix" },
+    t = { "<Cmd>BqfAutoToggle<Cr>", "Toggle preview" },
   },
 
   -- File

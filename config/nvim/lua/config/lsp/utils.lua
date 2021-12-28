@@ -27,26 +27,26 @@ function M.lsp_diagnostics()
   local on_references = vim.lsp.handlers["textDocument/references"]
   vim.lsp.handlers["textDocument/references"] = vim.lsp.with(on_references, { loclist = true, virtual_text = true })
 
-  -- Send diagnostics to quickfix list
-  do
-    local method = "textDocument/publishDiagnostics"
-    local default_handler = vim.lsp.handlers[method]
-    vim.lsp.handlers[method] = function(err, meth, result, client_id, bufnr, config)
-      default_handler(err, meth, result, client_id, bufnr, config)
-      local diagnostics = vim.diagnostic.get()
-      local qflist = {}
-      for buf, diagnostic in pairs(diagnostics) do
-        for _, d in ipairs(diagnostic) do
-          d.bufnr = buf
-          d.lnum = d.range.start.line + 1
-          d.col = d.range.start.character + 1
-          d.text = d.message
-          table.insert(qflist, d)
-        end
-      end
-      vim.diagnostic.setqflist(qflist)
-    end
-  end
+  -- -- Send diagnostics to quickfix list
+  -- do
+  --   local method = "textDocument/publishDiagnostics"
+  --   local default_handler = vim.lsp.handlers[method]
+  --   vim.lsp.handlers[method] = function(err, meth, result, client_id, bufnr, config)
+  --     default_handler(err, meth, result, client_id, bufnr, config)
+  --     local diagnostics = vim.diagnostic.get()
+  --     local qflist = {}
+  --     for buf, diagnostic in pairs(diagnostics) do
+  --       for _, d in ipairs(diagnostic) do
+  --         d.bufnr = buf
+  --         d.lnum = d.range.start.line + 1
+  --         d.col = d.range.start.character + 1
+  --         d.text = d.message
+  --         table.insert(qflist, d)
+  --       end
+  --     end
+  --     vim.diagnostic.setqflist(qflist)
+  --   end
+  -- end
 end
 
 function M.lsp_highlight(client, bufnr)
