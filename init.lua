@@ -1,5 +1,4 @@
 ---@diagnostic disable: undefined-global
-
 -- Map leader to space
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
@@ -14,22 +13,21 @@ require("settings")
 
 -- Auto install packer.nvim if not exists
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
+if fn.empty(fn.glob(install_path)) then
 	fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
 	execute("packadd packer.nvim")
-else
-	packer.init({
-		compile_path = putil.join_paths(vim.fn.stdpath("config"), "plugin", "packer_compiled.lua"),
-		git = {
-			clone_timeout = false,
-		},
-		display = {
-			open_fn = putil.float,
-		},
-		max_jobs = 16,
-		opt_default = false,
-	})
 end
+packer.init({
+	compile_path = putil.join_paths(vim.fn.stdpath("config"), "plugin", "packer_compiled.lua"),
+	git = {
+		clone_timeout = false,
+	},
+	display = {
+		open_fn = putil.float,
+	},
+	max_jobs = 16,
+	opt_default = false,
+})
 
 -- Install plugins
 require("plugins")

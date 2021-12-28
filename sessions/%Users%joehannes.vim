@@ -29,12 +29,13 @@ set winwidth=1
 wincmd =
 argglobal
 balt ~/.config/nvim/README.md
-let s:l = 94 - ((1 * winheight(0) + 37) / 75)
+let s:l = 94 - ((1 * winheight(0) + 38) / 77)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 94
 normal! 024|
+lcd ~/.config/nvim
 wincmd w
 argglobal
 if bufexists("~/.config/nvim/lua/config/colorschemes.lua") | buffer ~/.config/nvim/lua/config/colorschemes.lua | else | edit ~/.config/nvim/lua/config/colorschemes.lua | endif
@@ -42,18 +43,18 @@ if &buftype ==# 'terminal'
   silent file ~/.config/nvim/lua/config/colorschemes.lua
 endif
 balt ~/.config/nvim/lua/plugins.lua
-let s:l = 110 - ((25 * winheight(0) + 37) / 75)
+let s:l = 110 - ((28 * winheight(0) + 38) / 77)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 110
-normal! 023|
+normal! 01|
 wincmd w
 2wincmd w
 wincmd =
 if exists(':tcd') == 2 | tcd ~/.config/nvim | endif
-badd +901 ~/.config/nvim/lua/plugins.lua
-badd +117 ~/.config/nvim/lua/config/colorschemes.lua
+badd +330 ~/.config/nvim/lua/plugins.lua
+badd +110 ~/.config/nvim/lua/config/colorschemes.lua
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

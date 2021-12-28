@@ -148,10 +148,10 @@ require("bufferline").setup({
 			end,
 			right = function()
 				local result = {}
-				local error = vim.lsp.diagnostic.get_count(0, [[Error]])
-				local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
-				local info = vim.lsp.diagnostic.get_count(0, [[Information]])
-				local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
+				local error = vim.diagnostic.get(0, { severity = [[Error]] }).get_count
+				local warning = vim.diagnostic.get(0, { severity = [[Warning]] }).get_count
+				local info = vim.diagnostic.get(0, { severity = [[Information]] }).get_count
+				local hint = vim.diagnostic.get(0, { severity = [[Hint]] }).get_zRunt
 
 				if error ~= 0 then
 					table.insert(result, { text = "  " .. error, guifg = "#EC5241" })

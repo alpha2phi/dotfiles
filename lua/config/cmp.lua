@@ -1,30 +1,32 @@
 ---@diagnostic disable: undefined-global
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local cmp = require("cmp")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 local t = function(str)
 	return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-local check_back_space = function()
-	local col = vim.fn.col(".") - 1
-	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
+local has_words_before = function()
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+local feedkey = function(key, mode)
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 cmp.setup({
-
 	formatting = {
 		format = function(entry, vim_item)
 			-- fancy icons and a name of kind
 			vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
 			-- set a name for each source
 			vim_item.menu = ({
-				-- cmp_tabnine = "[TabNine]",
 				nvim_lsp = "[LSP]",
+				treesitter = "[TS]",
 				buffer = "[Buffer]",
-				ultisnips = "[UltiSnips]",
+				vsnip = "[VSnip]",
 				look = "[Look]",
 				path = "[Path]",
 				spell = "[Spell]",
@@ -36,44 +38,76 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		["<A-k>"] = cmp.mapping.scroll_docs(-4),
-		["<A-j>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-c>"] = cmp.mapping({
-			i = cmp.mapping.abort(),
-			c = cmp.mapping.close(),
-		}),
-		["<C-CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
-				-- vim.fn.feedkeys(t("<C-n>"), "n")
 				cmp.select_next_item()
-			elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-				return vim.fn.feedkeys(t("<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"))
+			elseif vim.fn["vsnip#available"](1) == 1 then
+				feedkey("<Plug>(vsnip-expand-or-jump)", "")
+			elseif has_words_before() then
+				cmp.complete()
 			else
-				fallback()
+				fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
 			end
-		end, {
-			"i",
-			"s",
-		}),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.select_prev_item()
-			else
-				fallback()
+			elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+				feedkey("<Plug>(vsnip-jump-prev)", "")
 			end
-		end, {
-			"i",
-			"s",
+		end, { "i", "s" }),
+		["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+		["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+		["<C-n>"] = cmp.mapping({
+			c = function()
+				if cmp.visible() then
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					vim.api.nvim_feedkeys(t("<Down>"), "n", true)
+				end
+			end,
+			i = function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					fallback()
+				end
+			end,
+		}),
+		["<C-p>"] = cmp.mapping({
+			c = function()
+				if cmp.visible() then
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					vim.api.nvim_feedkeys(t("<Up>"), "n", true)
+				end
+			end,
+			i = function(fallback)
+				if cmp.visible() then
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					fallback()
+				end
+			end,
+		}),
+		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-3), { "i", "c" }),
+		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(3), { "i", "c" }),
+		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+		["<C-e>"] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
+		["<CR>"] = cmp.mapping({
+			i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+			c = function(fallback)
+				if cmp.visible() then
+					cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+				else
+					fallback()
+				end
+			end,
 		}),
 	},
 	snippet = {
 		expand = function(args)
-			vim.fn["UltiSnips#Anon"](args.body)
+			vim.fn["vsnip#anonymous"](args.body)
 		end,
 	},
 	sources = {
@@ -81,17 +115,18 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "treesitter" },
 		{ name = "buffer" },
-		{ name = "ultisnips" },
+		{ name = "vsnip" },
 		{ name = "look" },
 		{ name = "path" },
 		{ name = "calc" },
 		{ name = "spell" },
 		{ name = "emoji" },
 		{ name = "nvim_lua" },
+		{ name = "npm", keyworld_length = 4 },
 	},
-	preselect = cmp.PreselectMode.None,
+	-- preselect = cmp.PreselectMode.None,
 	completion = {
-		completeopt = "menu,menuone,noinsert",
+		completeopt = "menu,menuone,noselect",
 	},
 	experimental = {
 		ghost_text = true,
@@ -112,15 +147,18 @@ cmp.setup({
 
 -- cmdline
 cmp.setup.cmdline(":", {
-	sources = {
+	completion = { autocomplete = false },
+	sources = cmp.config.sources({
+		{ name = "path" },
 		{ name = "cmdline" },
-	},
+	}),
 })
 -- lsp_document_symbols
 cmp.setup.cmdline("/", {
+	completion = { autocomplete = false },
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp_document_symbol" },
 	}, {
-		{ name = "buffer" },
+		{ name = "buffer", opts = { keyword_pattern = [=[[^[:blank:]].*]=] } },
 	}),
 })

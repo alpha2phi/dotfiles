@@ -6,13 +6,13 @@ return require("packer").startup({
 	function(use)
 		use({ "wbthomason/packer.nvim" })
 		use({ "stevearc/dressing.nvim" })
-		use({
-			"rcarriga/nvim-notify",
-			event = "VimEnter",
-			config = function()
-				vim.notify = require("notify")
-			end,
-		})
+		-- use({
+		-- 	"rcarriga/nvim-notify",
+		-- 	event = "VimEnter",
+		-- 	config = function()
+		-- 		vim.notify = require("notify")
+		-- 	end,
+		-- })
 		use({ "LionC/nest.nvim" })
 
 		use({ "Olical/aniseed" })
@@ -30,7 +30,7 @@ return require("packer").startup({
 		use({
 			"gelguy/wilder.nvim",
 			config = function()
-				require("config/wilder")
+				require("config.wilder")
 			end,
 		})
 		use({ "wellle/targets.vim" })
@@ -156,7 +156,7 @@ return require("packer").startup({
 			requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
 		})
 		use({ "tom-anders/telescope-vim-bookmarks.nvim" })
-		use({ "nvim-telescope/telescope-snippets.nvim" })
+		-- use({ "nvim-telescope/telescope-snippets.nvim" })
 		use({
 			"AckslD/nvim-neoclip.lua",
 			requires = { "tami5/sqlite.lua", module = "sqlite" },
@@ -173,16 +173,24 @@ return require("packer").startup({
 						set_reg = false,
 					},
 					keys = {
-						i = {
-							select = "<cr>",
-							paste = "<c-p>",
-							paste_behind = "<c-P>",
-							custom = {},
+						telescope = {
+							i = {
+								select = "<cr>",
+								paste = "<c-p>",
+								paste_behind = "<c-P>",
+								custom = {},
+							},
+							n = {
+								select = "<cr>",
+								paste = "p",
+								paste_behind = "P",
+								custom = {},
+							},
 						},
-						n = {
-							select = "<cr>",
-							paste = "p",
-							paste_behind = "P",
+						fzf = {
+							select = "default",
+							paste = "ctrl-p",
+							paste_behind = "ctrl-P",
 							custom = {},
 						},
 					},
@@ -271,24 +279,43 @@ return require("packer").startup({
 		use({ "RRethy/vim-illuminate" })
 
 		-- Snippets
-		-- use({ "hrsh7th/vim-vsnip" })
-		-- use({ "rafamadriz/friendly-snippets" })
+		use({ "hrsh7th/cmp-vsnip" })
+		use({ "hrsh7th/vim-vsnip" })
+		use({ "rafamadriz/friendly-snippets" })
 		-- use {'cstrap/python-snippets'}
 		-- use {'ylcnfrht/vscode-python-snippet-pack'}
-		-- use({ "xabikos/vscode-javascript" })
+		use({ "xabikos/vscode-javascript" })
 		-- use {'golang/vscode-go'}
 		-- use {'rust-lang/vscode-rust'}
-		use({ "SirVer/ultisnips" })
-		-- use({ "honza/vim-snippets" })
+		-- use({
+		-- 	"SirVer/ultisnips",
+		-- 	requires = { { "honza/vim-snippets", rtp = "." } },
+		-- 	config = function()
+		-- 		vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+		-- 		vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
+		-- 		vim.g.UltiSnipsJumpBackwardTrigger = "<Plug>(ultisnips_jump_backward)"
+		-- 		vim.g.UltiSnipsListSnippets = "<c-x><c-s>"
+		-- 		vim.g.UltiSnipsRemoveSelectModeMappings = 0
+		-- 	end,
+		-- })
 		-- use({ "norcalli/snippets.nvim" })
 
+		use({
+			"David-Kunz/cmp-npm",
+			requires = {
+				"nvim-lua/plenary.nvim",
+			},
+			config = function()
+				require("cmp-npm").setup({})
+			end,
+		})
 		-- Completion
 		use({
 			"hrsh7th/nvim-cmp",
 			requires = {
-				"hrsh7th/cmp-buffer",
 				"hrsh7th/cmp-nvim-lsp",
-				"quangnguyen30192/cmp-nvim-ultisnips",
+				"hrsh7th/cmp-vsnip",
+				"hrsh7th/cmp-buffer",
 				"hrsh7th/cmp-nvim-lua",
 				"octaltree/cmp-look",
 				"hrsh7th/cmp-path",
@@ -298,6 +325,7 @@ return require("packer").startup({
 				"ray-x/cmp-treesitter",
 				"hrsh7th/cmp-cmdline",
 				"hrsh7th/cmp-nvim-lsp-document-symbol",
+				"David-Kunz/cmp-npm",
 			},
 		})
 		-- use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
@@ -326,23 +354,26 @@ return require("packer").startup({
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 		use({ "nvim-treesitter/nvim-treesitter-refactor" })
 		use({ "nvim-treesitter/nvim-treesitter-textobjects" })
-		use({
-			"romgrk/nvim-treesitter-context",
-			config = function()
-				require("treesitter-context.config").setup({
-					enable = true,
-					patterns = {
-						"class",
-						"function",
-						"method",
-						"for",
-						"while",
-						"if",
-						"switch",
-					},
-				})
-			end,
-		})
+		-- use({
+		-- 	"romgrk/nvim-treesitter-context",
+		-- 	config = function()
+		-- 		require("treesitter-context").setup({
+		-- 			enable = true,
+		-- 			throttle = true,
+		-- 			max_lines = 0,
+		-- 			patterns = {
+		-- 				"class",
+		-- 				"function",
+		-- 				"method",
+		-- 				"for",
+		-- 				"while",
+		-- 				"if",
+		-- 				"switch",
+		-- 				"case",
+		-- 			},
+		-- 		})
+		-- 	end,
+		-- })
 		use({
 			"SmiteshP/nvim-gps",
 			requires = "nvim-treesitter/nvim-treesitter",

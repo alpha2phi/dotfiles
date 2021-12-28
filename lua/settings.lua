@@ -2,30 +2,31 @@
 local cmd = vim.cmd
 local o = vim.o
 local wo = vim.wo
-local bo = vim.bo
 local opt = vim.opt
 local indent = 2
 
 cmd("syntax enable")
 cmd("filetype plugin indent on")
 
-bo.shiftwidth = indent
-bo.tabstop = indent
-bo.softtabstop = indent
 o.termguicolors = true
 o.hidden = true
 o.ignorecase = true
-o.scrolloff = 0
+o.scrolloff = 120
 o.splitbelow = true
 o.splitright = true
 o.clipboard = "unnamed,unnamedplus"
 o.timeoutlen = 300
 o.updatetime = 300
 o.inccommand = "split"
+o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 wo.number = true
 wo.relativenumber = true
 wo.cursorline = true
 opt.undodir = vim.fn.stdpath("config") .. "/.undo"
+opt.shiftwidth = indent
+opt.tabstop = indent
+opt.softtabstop = indent
+opt.expandtab = true
 
 cmd([[
 set colorcolumn=80,100,120
@@ -46,8 +47,6 @@ set number relativenumber
 set guifont=FiraCode\ Nerd\ Font\ Mono
 set showtabline=2
 set laststatus=2
-" disable auto equalalways ... window dimenstions resizing auto off
-" set noea
 set directory=/tmp
 set nobackup
 set nowritebackup
@@ -60,8 +59,6 @@ set updatetime=200
 set shortmess+=c
 set signcolumn=yes
 set mouse=a mousemodel=popup
-set tabstop=2 softtabstop=0 shiftwidth=2
-set sessionoptions="globals,tabpages,winpos,winsize,blank,buffers,curdir,folds,help,options,terminal"
 set guioptions-=e
 ]])
 
