@@ -605,22 +605,24 @@ function M.setup()
         require("config.refactoring").setup()
       end,
     }
-    use {
-      "mvllow/modes.nvim",
-      event = "BufRead",
-      config = function()
-        vim.opt.cursorline = true
-        require("modes").setup()
-      end,
-    }
+    -- use {
+    --   "mvllow/modes.nvim",
+    --   event = "BufRead",
+    --   config = function()
+    --     vim.opt.cursorline = true
+    --     require("modes").setup()
+    --   end,
+    -- }
     use {
       "jbyuki/venn.nvim",
+      event = "VimEnter",
       config = function()
         vim.api.nvim_set_keymap("v", "<Leader>vb", ":VBox<CR>", { noremap = true })
       end,
     }
     use {
       "voldikss/vim-translator",
+      event = "VimEnter",
       setup = function()
         vim.g.translator_history_enable = true
       end,
