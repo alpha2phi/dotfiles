@@ -274,12 +274,12 @@ function M.setup()
         require("todo-comments").setup {}
       end,
     }
-    use {
-      "nacro90/numb.nvim",
-      config = function()
-        require("numb").setup()
-      end,
-    }
+    -- use {
+    --   "nacro90/numb.nvim",
+    --   config = function()
+    --     require("numb").setup()
+    --   end,
+    -- }
     use { "junegunn/vim-easy-align" }
     use { "antoinemadec/FixCursorHold.nvim" }
 
@@ -570,6 +570,15 @@ function M.setup()
     -- To try
     -- https://github.com/danymat/neogen
     -- https://github.com/chaoren/vim-wordmotion
+    -- https://github.com/rlch/github-notifications.nvim
+    -- https://github.com/winston0410/range-highlight.nvim
+    use {
+      "winston0410/range-highlight.nvim",
+      requires = { { "winston0410/cmd-parser.nvim" } },
+      config = function()
+        require("range-highlight").setup {}
+      end,
+    }
 
     use {
       "sidebar-nvim/sidebar.nvim",
