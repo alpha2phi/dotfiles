@@ -1,12 +1,12 @@
 local M = {}
 
+local indent = 2
 local g = vim.g
 local cmd = vim.cmd
-local o = vim.o
-local wo = vim.wo
-local bo = vim.bo
-local indent = 4
 local opt = vim.opt
+-- local o = vim.o
+-- local wo = vim.wo
+-- local bo = vim.bo
 
 function M.setup()
   cmd [[filetype plugin indent on]]
@@ -15,32 +15,32 @@ function M.setup()
   g.mapleader = " "
   g.maplocalleader = ","
 
-  bo.shiftwidth = indent
-  bo.tabstop = indent
-  bo.softtabstop = indent
-  o.termguicolors = true
-  o.hidden = true
-  o.breakindent = true
-  o.ignorecase = true
-  o.scrolloff = 999
-  o.sidescrolloff = 999
-  o.splitbelow = true
-  o.splitright = true
-  o.clipboard = "unnamed,unnamedplus"
-  o.timeoutlen = 300
-  o.updatetime = 300
-  o.inccommand = "split"
-  o.cmdheight = 1
-  o.sessionoptions = "blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
-  o.history = 100
-  o.lazyredraw = true
-  o.synmaxcol = 240
-  o.mouse = "a"
-  wo.number = true
-  wo.relativenumber = true
-  wo.scrolloff = 999
-  wo.sidescrolloff = 999
-  wo.cursorline = true
+  opt.shiftwidth = indent
+  opt.tabstop = indent
+  opt.softtabstop = indent
+  opt.termguicolors = true
+  opt.hidden = true
+  opt.breakindent = true
+  opt.ignorecase = true
+  opt.scrolloff = 999
+  opt.sidescrolloff = 999
+  opt.splitbelow = true
+  opt.splitright = true
+  opt.clipboard = "unnamed,unnamedplus"
+  opt.timeoutlen = 300
+  opt.updatetime = 300
+  opt.inccommand = "split"
+  opt.cmdheight = 1
+  opt.sessionoptions = "blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
+  opt.history = 100
+  opt.lazyredraw = true
+  opt.synmaxcol = 240
+  opt.mouse = "a"
+  opt.number = true
+  opt.relativenumber = true
+  opt.scrolloff = 999
+  opt.sidescrolloff = 999
+  opt.cursorline = true
   opt.pumblend = 17
 
   -- opt.formatoptions:append "cqnj"

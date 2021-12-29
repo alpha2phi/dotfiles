@@ -8,6 +8,11 @@ function M.auto_cmds()
   vim.cmd "au TextYankPost * silent! lua vim.highlight.on_yank()"
 
   vim.cmd [[
+    autocmd InsertLeave,WinEnter * set cursorline
+    autocmd InsertEnter,WinLeave * set nocursorline
+  ]]
+
+  vim.cmd [[
         set expandtab smarttab shiftround autoindent smartindent smartcase
         set path+=**
         set wildmode=longest,list,full
