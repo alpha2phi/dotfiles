@@ -566,6 +566,11 @@ function M.setup()
     }
 
     -- Trying
+
+    -- To try
+    -- https://github.com/danymat/neogen
+    -- https://github.com/chaoren/vim-wordmotion
+
     use {
       "sidebar-nvim/sidebar.nvim",
       config = function()

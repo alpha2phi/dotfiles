@@ -276,6 +276,7 @@ local vmappings = {
   r = {
     name = "Run",
     s = { "<Cmd>lua require'sniprun'.run('v')<CR>", "Run snippets" },
+    r = { "<Esc><Cmd>lua require('telescope').extensions.refactoring.refactors()<CR>", "Refactor" },
   },
   g = {
     name = "Source code",
@@ -358,6 +359,10 @@ local dap_nvim_dap_mappings = {
     r = { '<Cmd>lua require"telescope".extensions.dap.list_breakpoints{}<CR>', "List breakpoints" },
     v = { '<Cmd>lua require"telescope".extensions.dap.variables{}<CR>', "Variables" },
     m = { '<Cmd>lua require"telescope".extensions.dap.frames{}<CR>', "Frames" },
+
+    -- Refactoring print
+    P = { ':lua require("refactoring").debug.printf({below = false})<CR>', "Print" },
+    C = { ':lua require("refactoring").debug.cleanup({})<CR>', "Clear print" },
   },
 }
 
@@ -374,6 +379,10 @@ local dap_vimspector_mappings = {
     r = { "<Cmd>call vimspector#ListBreakPoints()<CR>", "List breakpoints" },
     v = { "<Cmd>call vimspector#AddWatch()<CR>", "Add watch" },
     m = { "<Cmd>call vimspector#Evaluate()<CR>", "Evaluate" },
+
+    -- Refactoring print
+    P = { ':lua require("refactoring").debug.printf({below = false})<CR>', "Print" },
+    C = { ':lua require("refactoring").debug.cleanup({})<CR>', "Clear print" },
   },
 
   --- REFACTORING WIP
