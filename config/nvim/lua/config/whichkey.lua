@@ -29,7 +29,7 @@ local xopts = {
 
 local mappings = {
   ["w"] = { "<Cmd>w!<Cr>", "Save" },
-  ["q"] = { "<Cmd>q!<Cr>", "Quit!" },
+  ["q"] = { "<Cmd>q!<Cr>", "Quit" },
 
   -- System
   ["z"] = {
@@ -135,7 +135,10 @@ local mappings = {
       ["2"] = { "<Cmd>diffget //2", "Diffget 2" },
       ["3"] = { "<Cmd>diffget //3", "Diffget 3" },
     },
-    g = { name = "Generate doc" },
+    g = {
+      "<Cmd>DogeGenerate<Cr>",
+      "Generate doc",
+    },
     y = { name = "Git URL" },
   },
 

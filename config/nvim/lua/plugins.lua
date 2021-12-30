@@ -584,10 +584,19 @@ function M.setup()
     -- }
 
     -- To try
-    -- https://github.com/danymat/neogen
+    use { "b0o/schemastore.nvim" }
     -- https://github.com/chaoren/vim-wordmotion
     -- https://github.com/winston0410/range-highlight.nvim
     -- https://github.com/mfussenegger/nvim-lint
+    use {
+      "danymat/neogen",
+      config = function()
+        require("neogen").setup {
+          enabled = true,
+        }
+      end,
+      requires = "nvim-treesitter/nvim-treesitter",
+    }
     -- use {
     --   "winston0410/range-highlight.nvim",
     --   requires = { { "winston0410/cmd-parser.nvim" } },
@@ -648,7 +657,6 @@ function M.setup()
     --   end,
     -- }
 
-    use { "b0o/schemastore.nvim" }
     -- use { "stevearc/dressing.nvim", event = "BufWinEnter" }
     -- use {
     --   "hrsh7th/vim-vsnip",
