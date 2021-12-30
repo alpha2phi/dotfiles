@@ -43,6 +43,7 @@ function M.setup()
     -- use { "tpope/vim-commentary" }
     use {
       "numToStr/Comment.nvim",
+      keys = { "gc", "gcc", "gbc" },
       config = function()
         require("Comment").setup {
           mappings = { extra = true },
@@ -57,7 +58,8 @@ function M.setup()
     use { "easymotion/vim-easymotion" }
     use {
       "lewis6991/gitsigns.nvim",
-      event = "VimEnter",
+      event = "BufReadPre",
+      wants = "plenary.nvim",
       config = function()
         require("gitsigns").setup()
       end,
@@ -447,7 +449,7 @@ function M.setup()
     }
     use {
       "michaelb/sniprun",
-      cmd = {"SnipRun"},
+      cmd = { "SnipRun" },
       run = "bash install.sh",
       config = function()
         require("config.sniprun").setup()
@@ -583,7 +585,6 @@ function M.setup()
     -- To try
     -- https://github.com/danymat/neogen
     -- https://github.com/chaoren/vim-wordmotion
-    -- https://github.com/rlch/github-notifications.nvim
     -- https://github.com/winston0410/range-highlight.nvim
     -- https://github.com/mfussenegger/nvim-lint
     -- use {
