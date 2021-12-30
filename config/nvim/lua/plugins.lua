@@ -580,8 +580,6 @@ function M.setup()
     -- Trying
 
     -- To try
-    -- https://github.com/chaoren/vim-wordmotion
-    -- https://github.com/winston0410/range-highlight.nvim
     -- https://github.com/mfussenegger/nvim-lint
     use { "b0o/schemastore.nvim" }
     use {
@@ -591,6 +589,7 @@ function M.setup()
         require("config.harpoon").setup()
       end,
     }
+    use { "chaoren/vim-wordmotion" }
     -- use {
     --   "rlch/github-notifications.nvim",
     --   config = [[require('config.github-notifications').setup()]],
@@ -612,18 +611,18 @@ function M.setup()
     --   end,
     -- }
 
-    -- use {
-    --   "sidebar-nvim/sidebar.nvim",
-    --   config = function()
-    --     require("sidebar-nvim").setup { open = false }
-    --   end,
-    -- }
-    -- use {
-    --   "ldelossa/litee.nvim",
-    --   config = function()
-    --     require("litee").setup {}
-    --   end,
-    -- }
+    use {
+      "sidebar-nvim/sidebar.nvim",
+      config = function()
+        require("sidebar-nvim").setup { open = false }
+      end,
+    }
+    use {
+      "ldelossa/litee.nvim",
+      config = function()
+        require("litee").setup {}
+      end,
+    }
     -- use {
     --   "luukvbaal/stabilize.nvim",
     --   config = function()
