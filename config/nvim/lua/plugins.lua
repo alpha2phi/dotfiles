@@ -73,13 +73,13 @@ function M.setup()
       end,
     }
     use { "rhysd/git-messenger.vim" }
-    use {
-      "tanvirtin/vgit.nvim",
-      event = "BufWinEnter",
-      config = function()
-        require("vgit").setup()
-      end,
-    }
+    -- use {
+    --   "tanvirtin/vgit.nvim",
+    --   event = "BufWinEnter",
+    --   config = function()
+    --     require("vgit").setup()
+    --   end,
+    -- }
     use {
       "sindrets/diffview.nvim",
       cmd = {

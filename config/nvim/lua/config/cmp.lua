@@ -240,11 +240,8 @@ function M.setup()
   -- Database completion
   vim.api.nvim_exec(
     [[
-        augroup cmp_database
-          autocmd!
-          autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
-          autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
-        augroup END
+        autocmd! FileType sql setlocal omnifunc=vim_dadbod_completion#omni
+        autocmd! FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
     ]],
     false
   )
