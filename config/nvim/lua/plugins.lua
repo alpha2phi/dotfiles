@@ -578,25 +578,32 @@ function M.setup()
     }
 
     -- Trying
+
+    -- To try
+    -- https://github.com/chaoren/vim-wordmotion
+    -- https://github.com/winston0410/range-highlight.nvim
+    -- https://github.com/mfussenegger/nvim-lint
+    use { "b0o/schemastore.nvim" }
+    use {
+      "ThePrimeagen/harpoon",
+      event = "VimEnter",
+      config = function()
+        require("config.harpoon").setup()
+      end,
+    }
     -- use {
     --   "rlch/github-notifications.nvim",
     --   config = [[require('config.github-notifications').setup()]],
     -- }
-
-    -- To try
-    use { "b0o/schemastore.nvim" }
-    -- https://github.com/chaoren/vim-wordmotion
-    -- https://github.com/winston0410/range-highlight.nvim
-    -- https://github.com/mfussenegger/nvim-lint
-    use {
-      "danymat/neogen",
-      config = function()
-        require("neogen").setup {
-          enabled = true,
-        }
-      end,
-      requires = "nvim-treesitter/nvim-treesitter",
-    }
+    -- use {
+    --   "danymat/neogen",
+    --   config = function()
+    --     require("neogen").setup {
+    --       enabled = true,
+    --     }
+    --   end,
+    --   requires = "nvim-treesitter/nvim-treesitter",
+    -- }
     -- use {
     --   "winston0410/range-highlight.nvim",
     --   requires = { { "winston0410/cmd-parser.nvim" } },
@@ -631,9 +638,6 @@ function M.setup()
     --     require("config.refactoring").setup()
     --   end,
     -- }
-    use {
-      "ThePrimeagen/harpoon",
-    }
     -- use {
     --   "mvllow/modes.nvim",
     --   event = "BufRead",

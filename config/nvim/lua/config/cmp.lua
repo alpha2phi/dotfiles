@@ -15,9 +15,9 @@ function M.setup()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
   end
 
-  local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-  end
+  -- local feedkey = function(key, mode)
+  --   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+  -- end
 
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -240,8 +240,8 @@ function M.setup()
   -- Database completion
   vim.api.nvim_exec(
     [[
-        autocmd! FileType sql setlocal omnifunc=vim_dadbod_completion#omni
-        autocmd! FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
+        " autocmd! FileType sql setlocal omnifunc=vim_dadbod_completion#omni
+        autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
     ]],
     false
   )
