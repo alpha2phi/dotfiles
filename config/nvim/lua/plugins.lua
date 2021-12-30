@@ -96,6 +96,7 @@ function M.setup()
     }
     use {
       "kyazdani42/nvim-tree.lua",
+      event = "BufWinEnter",
       config = function()
         require("nvim-tree").setup {}
       end,
@@ -256,12 +257,12 @@ function M.setup()
         require("lspkind").init()
       end,
     }
-    use { "sbdchd/neoformat" }
-    use { "ray-x/lsp_signature.nvim" }
-    use { "szw/vim-maximizer" }
-    use { "kshenoy/vim-signature" }
-    use { "kevinhwang91/nvim-bqf" }
+    use { "sbdchd/neoformat", event = "BufWinEnter" }
+    use { "szw/vim-maximizer", event = "BufWinEnter" }
+    use { "kshenoy/vim-signature", event = "BufWinEnter" }
+    use { "kevinhwang91/nvim-bqf", event = "BufWinEnter" }
     use { "andymass/vim-matchup", event = "CursorMoved" }
+    use { "ray-x/lsp_signature.nvim" }
     use {
       "folke/trouble.nvim",
       event = "VimEnter",
@@ -547,6 +548,7 @@ function M.setup()
     -- Better configuration
     use {
       "max397574/better-escape.nvim",
+      event = "VimEnter",
       config = function()
         require("better_escape").setup()
       end,
