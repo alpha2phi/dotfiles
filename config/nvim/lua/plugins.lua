@@ -58,8 +58,9 @@ function M.setup()
     use { "easymotion/vim-easymotion" }
     use {
       "lewis6991/gitsigns.nvim",
-      event = "BufReadPre",
-      wants = "plenary.nvim",
+      -- event = "BufReadPre",
+      -- wants = "plenary.nvim",
+      -- requires = { "nvim-lua/plenary.nvim" },
       config = function()
         require("gitsigns").setup()
       end,
@@ -648,7 +649,7 @@ function M.setup()
     -- }
 
     use { "b0o/schemastore.nvim" }
-    use { "stevearc/dressing.nvim", event = "BufWinEnter" }
+    -- use { "stevearc/dressing.nvim", event = "BufWinEnter" }
     -- use {
     --   "hrsh7th/vim-vsnip",
     --   event = "VimEnter",

@@ -28,8 +28,8 @@ local xopts = {
 }
 
 local mappings = {
-  ["w"] = { "<Cmd>w<Cr>", "Save" },
-  ["q"] = { "<Cmd>q<Cr>", "Quit!" },
+  ["w"] = { "<Cmd>w!<Cr>", "Save" },
+  ["q"] = { "<Cmd>q!<Cr>", "Quit!" },
 
   -- System
   ["z"] = {
