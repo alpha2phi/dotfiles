@@ -55,9 +55,9 @@ function M.setup()
     use { "tpope/vim-sleuth" }
     use { "wellle/targets.vim" }
     use { "easymotion/vim-easymotion" }
-    -- use { "ggandor/lightspeed.nvim" }
     use {
       "lewis6991/gitsigns.nvim",
+      event = "VimEnter",
       config = function()
         require("gitsigns").setup()
       end,
@@ -158,8 +158,8 @@ function M.setup()
     }
 
     -- Telescope
-    use { "nvim-lua/plenary.nvim", module = "plenary" }
-    use { "nvim-lua/popup.nvim", module = "popup" }
+    use { "nvim-lua/plenary.nvim" }
+    use { "nvim-lua/popup.nvim" }
     use {
       "nvim-telescope/telescope.nvim",
       module = "telescope",
@@ -215,6 +215,8 @@ function M.setup()
     -- }
     use {
       "neovim/nvim-lspconfig",
+      as = "nvim-lspconfig",
+      event = "VimEnter",
       config = function()
         require("config.lsp").setup()
         require("config.dap").setup()
@@ -224,6 +226,7 @@ function M.setup()
     -- Completion - use either one of this
     use {
       "hrsh7th/nvim-cmp",
+      after = "nvim-lspconfig",
       requires = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
@@ -277,7 +280,7 @@ function M.setup()
     }
     use {
       "nacro90/numb.nvim",
-      event = "BufReadPost",
+      event = "VimEnter",
       config = function()
         require("numb").setup()
       end,
@@ -453,6 +456,7 @@ function M.setup()
     use { "rust-lang/rust.vim", event = "VimEnter" }
     use {
       "simrat39/rust-tools.nvim",
+      after = "nvim-lspconfig",
       config = function()
         require("rust-tools").setup {}
       end,
@@ -574,6 +578,7 @@ function M.setup()
     -- https://github.com/chaoren/vim-wordmotion
     -- https://github.com/rlch/github-notifications.nvim
     -- https://github.com/winston0410/range-highlight.nvim
+    -- https://github.com/mfussenegger/nvim-lint
     -- use {
     --   "winston0410/range-highlight.nvim",
     --   requires = { { "winston0410/cmd-parser.nvim" } },
@@ -607,6 +612,9 @@ function M.setup()
       config = function()
         require("config.refactoring").setup()
       end,
+    }
+    use {
+      "ThePrimeagen/harpoon",
     }
     -- use {
     --   "mvllow/modes.nvim",
@@ -652,6 +660,9 @@ function M.setup()
     --   cmd = "CodeActionMenu",
     -- }
     -- use {"haringsrob/nvim_context_vt"}
+
+    -- LIST of plugins
+    -- https://gist.github.com/mengwangk/dc703fb091e25dd75b7ef7c7be3bd4c9
 
     if packer_bootstrap then
       print "Setting up Neovim. Restart required after installation!"
