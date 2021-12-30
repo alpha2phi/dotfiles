@@ -611,18 +611,18 @@ function M.setup()
     --   end,
     -- }
 
-    use {
-      "sidebar-nvim/sidebar.nvim",
-      config = function()
-        require("sidebar-nvim").setup { open = false }
-      end,
-    }
-    use {
-      "ldelossa/litee.nvim",
-      config = function()
-        require("litee").setup {}
-      end,
-    }
+    -- use {
+    --   "sidebar-nvim/sidebar.nvim",
+    --   config = function()
+    --     require("sidebar-nvim").setup { open = false }
+    --   end,
+    -- }
+    -- use {
+    --   "ldelossa/litee.nvim",
+    --   config = function()
+    --     require("litee").setup {}
+    --   end,
+    -- }
     -- use {
     --   "luukvbaal/stabilize.nvim",
     --   config = function()
