@@ -226,7 +226,6 @@ function M.setup()
     -- Completion - use either one of this
     use {
       "hrsh7th/nvim-cmp",
-      after = "nvim-lspconfig",
       requires = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
