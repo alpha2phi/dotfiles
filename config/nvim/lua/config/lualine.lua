@@ -170,6 +170,10 @@ function M.setup()
     cond = gps.is_available,
   }
 
+  -- ins_left {
+  --   require("github-notifications").statusline_notification_count,
+  -- }
+
   ins_left {
     function()
       return "%="

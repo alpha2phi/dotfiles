@@ -227,7 +227,6 @@ function M.setup()
     -- Completion - use either one of this
     use {
       "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
       requires = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
@@ -422,17 +421,18 @@ function M.setup()
     use { "puremourning/vimspector", event = "BufWinEnter" }
 
     -- DAP
-    use { "mfussenegger/nvim-dap" }
-    use { "mfussenegger/nvim-dap-python" }
+    use { "mfussenegger/nvim-dap", event = "BufWinEnter", as = "nvim-dap" }
+    use { "mfussenegger/nvim-dap-python", after = "nvim-dap" }
     use {
       "theHamsta/nvim-dap-virtual-text",
+      after = "nvim-dap",
       config = function()
         require("nvim-dap-virtual-text").setup {}
       end,
     }
-    use { "rcarriga/nvim-dap-ui" }
-    use { "Pocco81/DAPInstall.nvim" }
-    use { "jbyuki/one-small-step-for-vimkind" }
+    use { "rcarriga/nvim-dap-ui", after = "nvim-dap" }
+    use { "Pocco81/DAPInstall.nvim", after = "nvim-dap" }
+    use { "jbyuki/one-small-step-for-vimkind", after = "nvim-dap" }
 
     -- Development workflow
     use { "voldikss/vim-browser-search", event = "VimEnter" }
@@ -447,6 +447,7 @@ function M.setup()
     }
     use {
       "michaelb/sniprun",
+      cmd = {"SnipRun"},
       run = "bash install.sh",
       config = function()
         require("config.sniprun").setup()
@@ -574,6 +575,10 @@ function M.setup()
     }
 
     -- Trying
+    -- use {
+    --   "rlch/github-notifications.nvim",
+    --   config = [[require('config.github-notifications').setup()]],
+    -- }
 
     -- To try
     -- https://github.com/danymat/neogen
@@ -608,13 +613,13 @@ function M.setup()
     --   end,
     -- }
     -- use { "skywind3000/vim-quickui" }
-    use {
-      "ThePrimeagen/refactoring.nvim",
-      event = "VimEnter",
-      config = function()
-        require("config.refactoring").setup()
-      end,
-    }
+    -- use {
+    --   "ThePrimeagen/refactoring.nvim",
+    --   event = "VimEnter",
+    --   config = function()
+    --     require("config.refactoring").setup()
+    --   end,
+    -- }
     use {
       "ThePrimeagen/harpoon",
     }
@@ -642,7 +647,7 @@ function M.setup()
     -- }
 
     use { "b0o/schemastore.nvim" }
-
+    use { "stevearc/dressing.nvim", event = "BufWinEnter" }
     -- use {
     --   "hrsh7th/vim-vsnip",
     --   event = "VimEnter",
