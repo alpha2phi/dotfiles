@@ -1,3 +1,4 @@
+---@diagnostic disable:undefined-global
 local G = {}
 local home = os.getenv("HOME")
 local path_sep = G.is_windows and "\\" or "/"
@@ -139,4 +140,25 @@ function G.qftf(info)
 	return ret
 end
 
+local function preview_location_callback(_, result)
+	if result == nil or vim.tbl_isempty(result) then
+		return nil
+	end
+	vim.lsp.util.preview_location(result[1])
+end
+
+function G.PeekDefinition()
+	local params = vim.lsp.util.make_position_params()
+	return vim.lsp.buf_request(0, "textDocument/definition", params, preview_location_callback)
+end
+
+function G.PeekDeclaration()
+	local params = vim.lsp.util.make_position_params()
+	return vim.lsp.buf_request(0, "textDocument/declaration", params, preview_location_callback)
+end
+
+function G.PeekImplementation()
+	local params = vim.lsp.util.make_position_params()
+	return vim.lsp.buf_request(0, "textDocument/implementation", params, preview_location_callback)
+end
 return G

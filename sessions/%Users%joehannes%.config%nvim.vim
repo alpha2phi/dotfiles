@@ -13,13 +13,16 @@ argglobal
 $argadd ~/.config/nvim/init.lua
 tabnew
 tabrewind
-edit ~/.config/nvim/lua/config/cmp.lua
+edit ~/.config/nvim/lua/global.lua
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
-1wincmd h
+wincmd _ | wincmd |
+vsplit
+2wincmd h
+wincmd w
 wincmd w
 let &splitbelow = s:save_splitbelow
 let &splitright = s:save_splitright
@@ -30,63 +33,83 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 159 + 160) / 320)
-exe 'vert 2resize ' . ((&columns * 160 + 160) / 320)
+exe 'vert 1resize ' . ((&columns * 120 + 160) / 320)
+exe 'vert 2resize ' . ((&columns * 120 + 160) / 320)
+exe 'vert 3resize ' . ((&columns * 78 + 160) / 320)
 argglobal
-balt ~/.config/nvim/lua/settings.lua
+balt ~/.config/nvim/lua/lang/init.lua
 setlocal fdm=expr
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
-setlocal fdl=100
+setlocal fdl=4
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-19
+79
 normal! zo
-40
-normal! zo
-41
-normal! zo
-149
-normal! zo
-let s:l = 154 - ((66 * winheight(0) + 38) / 77)
+let s:l = 61 - ((38 * winheight(0) + 38) / 77)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 154
-normal! 05|
+keepjumps 61
+normal! 012|
 lcd ~/.config/nvim
 wincmd w
 argglobal
-if bufexists("~/.config/nvim/lua/settings.lua") | buffer ~/.config/nvim/lua/settings.lua | else | edit ~/.config/nvim/lua/settings.lua | endif
+if bufexists("~/.config/nvim/lua/config/aerial.lua") | buffer ~/.config/nvim/lua/config/aerial.lua | else | edit ~/.config/nvim/lua/config/aerial.lua | endif
 if &buftype ==# 'terminal'
-  silent file ~/.config/nvim/lua/settings.lua
+  silent file ~/.config/nvim/lua/config/aerial.lua
 endif
-balt ~/.config/nvim/lua/config/auto_session.lua
+balt ~/.config/nvim/lua/plugins.lua
 setlocal fdm=expr
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
-setlocal fdl=0
+setlocal fdl=2
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 62 - ((38 * winheight(0) + 38) / 77)
+let s:l = 9 - ((8 * winheight(0) + 38) / 77)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 62
-normal! 017|
+keepjumps 9
+normal! 012|
 lcd ~/.config/nvim
 wincmd w
-2wincmd w
-exe 'vert 1resize ' . ((&columns * 159 + 160) / 320)
-exe 'vert 2resize ' . ((&columns * 160 + 160) / 320)
+argglobal
+if bufexists("~/.config/nvim/lua/keymappings.lua") | buffer ~/.config/nvim/lua/keymappings.lua | else | edit ~/.config/nvim/lua/keymappings.lua | endif
+if &buftype ==# 'terminal'
+  silent file ~/.config/nvim/lua/keymappings.lua
+endif
+balt ~/.config/nvim/lua/lang/init.lua
+setlocal fdm=expr
+setlocal fde=nvim_treesitter#foldexpr()
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=11
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+5
+normal! zo
+37
+normal! zo
+let s:l = 3 - ((2 * winheight(0) + 38) / 77)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 3
+normal! 028|
+lcd ~/.config/nvim
+wincmd w
+exe 'vert 1resize ' . ((&columns * 120 + 160) / 320)
+exe 'vert 2resize ' . ((&columns * 120 + 160) / 320)
+exe 'vert 3resize ' . ((&columns * 78 + 160) / 320)
 tabnext
 edit ~/.local/git/joehannes/joehannes.github.io/src/pages/Welcome.tsx
 argglobal
-balt ~/.local/git/joehannes/joehannes.github.io/src/pages/Welcome.tsx
 setlocal fdm=expr
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
@@ -95,19 +118,26 @@ setlocal fdl=5
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 23 - ((22 * winheight(0) + 38) / 77)
+11
+normal! zo
+let s:l = 24 - ((23 * winheight(0) + 38) / 77)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 23
-normal! 045|
+keepjumps 24
+normal! 0
 lcd ~/.local/git/joehannes/joehannes.github.io
-tabnext 1
-badd +154 ~/.config/nvim/lua/config/cmp.lua
-badd +0 ~/.config/nvim/init.lua
-badd +62 ~/.config/nvim/lua/settings.lua
+tabnext 2
+badd +61 ~/.config/nvim/lua/global.lua
+badd +12 ~/.config/nvim/init.lua
+badd +1 ~/.local/git/joehannes/joehannes.github.io/src/pages/Welcome.tsx
+badd +77 ~/.config/nvim/lua/lang/init.lua
+badd +54 ~/.config/nvim/lua/plugins.lua
+badd +2 ~/.config/nvim/lua/keymappings.lua
+badd +68 ~/.config/nvim/lua/settings.lua
+badd +1 ~/.config/nvim/lua/config/cmp.lua
 badd +1 ~/.config/nvim/lua/config/auto_session.lua
-badd +23 ~/.local/git/joehannes/joehannes.github.io/src/pages/Welcome.tsx
+badd +2 ~/.config/nvim/lua/config/aerial.lua
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

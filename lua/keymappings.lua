@@ -1,3 +1,5 @@
+---@diagnostic undefined-global
+local fn = require("global")
 local nest = require("nest")
 
 nest.applyKeymaps({
@@ -35,13 +37,17 @@ nest.applyKeymaps({
 	{
 		"g",
 		{
-			{ "a", "<cmd>CodeActionMenu<CR>" },
 			{ "D", "<Cmd>lua vim.lsp.buf.declaration()<CR>" },
 			{ "d", "<Cmd>lua vim.lsp.buf.definition()<CR>" },
 			{ "i", "<cmd>lua vim.lsp.buf.implementation()<CR>" },
+			{ "j", "<C-i>" },
+			{ "k", "<C-o>" },
+			{ "o", "<cmd>Lspsaga show_line_diagnostics<cr>" },
+			{ "r", "<cmd>Lspsaga rename<cr>" },
+			{ "x", "<cmd>CodeActionMenu<CR>" },
 		},
 	},
-	{ "K", "<Cmd>lua vim.lsp.buf.hover()<CR>" },
+	{ "K", "<cmd>Lspsaga hover_doc<cr>" },
 	{
 		"<leader>",
 		{
@@ -281,7 +287,7 @@ nest.applyKeymaps({
 
 nest.applyKeymaps({
 	{ mode = "i", {
-		{ "jk", ":Esc<CR>" },
+		{ "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
 	} },
 })
 

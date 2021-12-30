@@ -51,26 +51,6 @@ local on_attach = function(client, bufnr)
 			false
 		)
 	end
-
-	bufkeymap("n", "gr", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
-	bufkeymap("n", "gx", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
-	bufkeymap("x", "gx", ":<c-u>Lspsaga range_code_action<cr>", { silent = true, noremap = true })
-	bufkeymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
-	bufkeymap("n", "go", "<cmd>Lspsaga show_line_diagnostics<cr>", { silent = true, noremap = true })
-	-- bufkeymap("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
-	-- bufkeymap("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
-	bufkeymap(
-		"n",
-		"<A-u>",
-		"<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>",
-		{ silent = true, noremap = true }
-	)
-	bufkeymap(
-		"n",
-		"<A-d>",
-		"<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>",
-		{ silent = true, noremap = true }
-	)
 end
 
 local nvim_lsp = require("lspconfig")
@@ -102,7 +82,7 @@ local function setup_servers()
 			server:install()
 		end
 
-		if not server:is_installed() then
+		if not server:is_installed() or server.name == "efm" then
 			return
 		end
 

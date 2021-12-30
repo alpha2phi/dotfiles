@@ -1,18 +1,55 @@
 ---@diagnostic disable: undefined-global
-
 vim.cmd([[packadd packer.nvim]])
 
 return require("packer").startup({
 	function(use)
 		use({ "wbthomason/packer.nvim" })
 		use({ "stevearc/dressing.nvim" })
-		-- use({
-		-- 	"rcarriga/nvim-notify",
-		-- 	event = "VimEnter",
-		-- 	config = function()
-		-- 		vim.notify = require("notify")
-		-- 	end,
-		-- })
+		use({
+			"Krafi2/jeskape.nvim",
+			config = function()
+				require("jeskape").setup({
+					-- Mappings are specified in this table. Jeskape uses neovim's keymap
+					-- system under the hood, so anything allowed in a normal `map`'s righ hand
+					-- side will work here too. Check out ':h  map.txt' to see what's possible.
+					mappings = {
+						-- Typing `hi` quickly will cause the string `hello!` to be inserted.
+						-- hi = "hello!",
+						-- They can also be specified in a tree-like format.
+						j = {
+							-- Here `jk` will escape insert mode.
+							k = "<cmd>stopinsert<cr>",
+							-- You can have as many layers as you want!
+							-- h = {
+							-- 	g = "<cmd>stopinsert<cr>",
+							-- },
+							-- If the mapping leads to a function, it will be evaluated every
+							-- time the mapping is reached and its return value will be fed to
+							-- neovim.
+							-- f = function()
+							-- 	print("Oh look, a function!")
+							-- 	-- Insert the name of the current file.
+							-- 	return vim.fn.expand("%:t")
+							-- end,
+						},
+						-- You can use lua's arbitrary key notation to map special characters
+						[";;"] = "<cmd>stopinsert<cr>",
+						-- Use `<cmd>` to map commands. Be carful to terminate the command with `<cr>`.
+						-- ff = "<cmd>echo 'commands work too'<cr>",
+					},
+					-- The maximum length of time between keystrokes where they are still
+					-- considered a part of the same mapping.
+					timeout = vim.o.timeoutlen,
+				})
+			end,
+		})
+		use({
+			"rcarriga/nvim-notify",
+			event = "VimEnter",
+			config = function()
+				vim.notify = require("notify")
+			end,
+		})
 		use({ "LionC/nest.nvim" })
 
 		use({ "Olical/aniseed" })
