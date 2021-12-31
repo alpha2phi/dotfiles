@@ -37,10 +37,9 @@ function M.setup()
     use { "wbthomason/packer.nvim" }
 
     -- Development
-    use { "tpope/vim-dispatch" }
     use { "tpope/vim-fugitive" }
     use { "tpope/vim-surround" }
-    -- use { "tpope/vim-commentary" }
+    use { "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } }
     use {
       "numToStr/Comment.nvim",
       keys = { "gc", "gcc", "gbc" },
