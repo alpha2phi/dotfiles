@@ -219,7 +219,8 @@ function M.setup()
     use {
       "neovim/nvim-lspconfig",
       as = "nvim-lspconfig",
-      event = "VimEnter",
+      after = "nvim-treesitter",
+      opt = true,
       config = function()
         require("config.lsp").setup()
         require("config.dap").setup()
@@ -229,6 +230,8 @@ function M.setup()
     -- Completion - use either one of this
     use {
       "hrsh7th/nvim-cmp",
+      after = "nvim-treesitter",
+      opt = true,
       requires = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
@@ -315,6 +318,9 @@ function M.setup()
     -- Better syntax
     use {
       "nvim-treesitter/nvim-treesitter",
+      as = "nvim-treesitter",
+      event = "BufRead",
+      opt = true,
       run = ":TSUpdate",
       config = function()
         require("config.treesitter").setup()
@@ -398,7 +404,7 @@ function M.setup()
 
     use {
       "nvim-lualine/lualine.nvim",
-      event = "VimEnter",
+      after = "nvim-treesitter",
       config = function()
         require("config.lualine").setup()
       end,
@@ -414,6 +420,7 @@ function M.setup()
 
     use {
       "SmiteshP/nvim-gps",
+      module = "nvim-gps",
       config = function()
         require("nvim-gps").setup()
       end,
