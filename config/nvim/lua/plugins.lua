@@ -601,7 +601,7 @@ function M.setup()
     use {
       "pianocomposer321/yabs.nvim",
       after = "telescope",
-      requires = { "nvim-lua/plenary.nvim" },
+      requires = { "nvim-lua/plenary.nvim", "pianocomposer321/consolation.nvim" },
       config = function()
         require("config.yabs").setup()
       end,
