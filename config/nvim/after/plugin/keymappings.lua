@@ -24,7 +24,7 @@ local keymappings = {
     ["<M-left>"] = "<C-w>>",
     ["<M-right>"] = "<C-w><",
     ["<M-up>"] = "<C-w>+",
-    ["<M-down"] = "<C-w>-",
+    ["<M-down>"] = "<C-w>-",
     ["<M-j>"] = ":m .+1<CR>==",
     ["<M-k>"] = ":m .-2<CR>==",
     ["Y"] = "y$",
