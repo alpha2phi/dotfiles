@@ -71,7 +71,6 @@ function M.auto_cmds()
         augroup auto_term
             autocmd!
             autocmd TermOpen * setlocal nonumber norelativenumber
-            " autocmd TermOpen * setlocal scrolloff=0
             autocmd TermOpen * startinsert
         augroup END
     ]],
