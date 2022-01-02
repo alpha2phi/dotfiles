@@ -102,7 +102,7 @@ function M.lsp_config(client, bufnr)
   end
 
   if client.resolved_capabilities.document_formatting then
-    vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()"
+    vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()"
   end
 end
 
