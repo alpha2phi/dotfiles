@@ -21,6 +21,10 @@ function M.setup()
             command = "python %",
             output = "echo",
           },
+          monitor = {
+            command = "nodemon -e py %",
+            output = "terminal",
+          },
         },
       },
 
