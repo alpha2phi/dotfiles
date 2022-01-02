@@ -8,7 +8,7 @@ function M.setup()
   local nls = require "null-ls"
   local sources = {
     nls.builtins.formatting.prettierd.with {
-      filetypes = { "html", "typescript", "yaml", "markdown" },
+      filetypes = { "html", "javascript", "json", "typescript", "yaml", "markdown" },
     },
     nls.builtins.formatting.eslint_d,
     nls.builtins.diagnostics.shellcheck,

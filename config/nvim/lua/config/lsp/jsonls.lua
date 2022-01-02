@@ -7,6 +7,7 @@ function M.setup(installed_server)
     settings = {
       json = {
         schemas = require("schemastore").json.schemas(),
+        format = { enable = false },
       },
     },
     on_attach = lsputils.lsp_attach,
@@ -15,6 +16,7 @@ function M.setup(installed_server)
     on_exit = lsputils.lsp_exit,
     flags = { debounce_text_changes = 150 },
   }
+  print(vim.inspect(opts))
   return opts
 end
 
