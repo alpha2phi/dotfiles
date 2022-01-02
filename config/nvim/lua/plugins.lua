@@ -598,6 +598,14 @@ function M.setup()
         require("config.command-palette").setup()
       end,
     }
+    use {
+      "pianocomposer321/yabs.nvim",
+      after = "telescope",
+      requires = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("config.yabs").setup()
+      end,
+    }
 
     use { "b0o/schemastore.nvim" }
     use {
