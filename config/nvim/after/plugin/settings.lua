@@ -1,8 +1,6 @@
 local M = {}
 
 function M.auto_cmds()
-  vim.cmd "colorscheme gruvbox-material"
-
   -- Highlight on yank
   -- cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
   vim.cmd "au TextYankPost * silent! lua vim.highlight.on_yank()"
@@ -13,8 +11,6 @@ function M.auto_cmds()
   ]]
 
   vim.cmd [[
-        set expandtab smarttab shiftround autoindent smartindent smartcase
-        set path+=**
         set wildmode=longest,list,full
         set wildoptions=pum
         set wildmenu

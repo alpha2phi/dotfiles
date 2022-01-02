@@ -15,33 +15,40 @@ function M.setup()
   g.mapleader = " "
   g.maplocalleader = ","
 
-  opt.shiftwidth = indent
-  opt.tabstop = indent
-  opt.softtabstop = indent
-  opt.termguicolors = true
-  opt.hidden = true
+  opt.autoindent = true
   opt.breakindent = true
-  opt.ignorecase = true
-  opt.scrolloff = 999
-  opt.sidescrolloff = 999
-  opt.splitbelow = true
-  opt.splitright = true
   opt.clipboard = "unnamed,unnamedplus"
-  opt.timeoutlen = 300
-  opt.updatetime = 300
-  opt.inccommand = "split"
   opt.cmdheight = 1
-  opt.sessionoptions = "blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
+  opt.cursorline = true
+  opt.expandtab = true
+  opt.hidden = true
   opt.history = 100
+  opt.ignorecase = true
+  opt.inccommand = "split"
   opt.lazyredraw = true
-  opt.synmaxcol = 240
   opt.mouse = "a"
   opt.number = true
+  opt.pumblend = 17
   opt.relativenumber = true
   opt.scrolloff = 999
+  opt.scrolloff = 999
+  opt.sessionoptions = "blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
+  opt.shiftround = true
+  opt.shiftwidth = indent
   opt.sidescrolloff = 999
-  opt.cursorline = true
-  opt.pumblend = 17
+  opt.sidescrolloff = 999
+  opt.smartcase = true
+  opt.smartindent = true
+  opt.smarttab = true
+  opt.softtabstop = indent
+  opt.splitbelow = true
+  opt.splitright = true
+  opt.synmaxcol = 240
+  opt.tabstop = indent
+  opt.termguicolors = true
+  opt.timeoutlen = 300
+  opt.updatetime = 300
+  opt.path:append "**"
 
   -- opt.formatoptions:append "cqnj"
   -- opt.formatoptions:remove "ator2"

@@ -128,7 +128,12 @@ function M.setup()
         require("nvim-web-devicons").setup { default = true }
       end,
     }
-    use { "sainnhe/gruvbox-material" }
+    use {
+      "sainnhe/gruvbox-material",
+      config = function()
+        vim.cmd "colorscheme gruvbox-material"
+      end,
+    }
     use { "sainnhe/everforest", opt = true }
     use { "projekt0n/github-nvim-theme", opt = true }
     -- use { "sainnhe/edge" },
