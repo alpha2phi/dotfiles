@@ -596,26 +596,27 @@ function M.setup()
     -- https://github.com/mfussenegger/nvim-lint
 
     use { "kazhala/close-buffers.nvim", cmd = { "BDelete", "BWipeout" } }
-    use {
-      "LinArcX/telescope-command-palette.nvim",
-      after = "telescope",
-      config = function()
-        require("config.command-palette").setup()
-      end,
-    }
-    use {
-      "pianocomposer321/yabs.nvim",
-      after = "telescope",
-      requires = { "nvim-lua/plenary.nvim", "pianocomposer321/consolation.nvim" },
-      config = function()
-        require("config.yabs").setup()
-      end,
-    }
+    -- use {
+    --   "LinArcX/telescope-command-palette.nvim",
+    --   after = "telescope",
+    --   config = function()
+    --     require("config.command-palette").setup()
+    --   end,
+    -- }
+    -- use {
+    --   "pianocomposer321/yabs.nvim",
+    --   after = "telescope",
+    --   requires = { "nvim-lua/plenary.nvim", "pianocomposer321/consolation.nvim" },
+    --   config = function()
+    --     require("config.yabs").setup()
+    --   end,
+    -- }
 
     use { "b0o/schemastore.nvim" }
     use {
       "ThePrimeagen/harpoon",
-      event = "VimEnter",
+      -- event = "VimEnter",
+      module = "harpoon",
       config = function()
         require("config.harpoon").setup()
       end,

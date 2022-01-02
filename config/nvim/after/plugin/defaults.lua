@@ -12,6 +12,7 @@ function M.setup()
   cmd [[filetype plugin indent on]]
   cmd [[syntax enable]]
 
+  vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
   g.mapleader = " "
   g.maplocalleader = ","
 
