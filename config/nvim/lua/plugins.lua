@@ -129,14 +129,9 @@ function M.setup()
       end,
     }
     use { "sainnhe/gruvbox-material" }
-    use { "sainnhe/everforest" }
-    use {
-      "projekt0n/github-nvim-theme",
-      config = function()
-        require("github-theme").setup()
-      end,
-    }
-    -- use { "sainnhe/edge" }
+    use { "sainnhe/everforest", opt = true }
+    use { "projekt0n/github-nvim-theme", opt = true }
+    -- use { "sainnhe/edge" },
     -- use { "sainnhe/sonokai" }
     -- use { "folke/tokyonight.nvim" }
     -- use {
@@ -172,6 +167,7 @@ function M.setup()
     use {
       "nvim-telescope/telescope.nvim",
       module = "telescope",
+      as = "telescope",
       requires = {
         "nvim-telescope/telescope-project.nvim",
         "nvim-telescope/telescope-symbols.nvim",
@@ -593,6 +589,16 @@ function M.setup()
 
     -- To try
     -- https://github.com/mfussenegger/nvim-lint
+
+    use { "kazhala/close-buffers.nvim", cmd = { "BDelete", "BWipeout" } }
+    use {
+      "LinArcX/telescope-command-palette.nvim",
+      after = "telescope",
+      config = function()
+        require("config.command-palette").setup()
+      end,
+    }
+
     use { "b0o/schemastore.nvim" }
     use {
       "ThePrimeagen/harpoon",
@@ -601,7 +607,7 @@ function M.setup()
         require("config.harpoon").setup()
       end,
     }
-    use { "chaoren/vim-wordmotion" }
+    use { "chaoren/vim-wordmotion", opt = true, fn = { "<Plug>WordMotion_w" } }
     -- use {
     --   "rlch/github-notifications.nvim",
     --   config = [[require('config.github-notifications').setup()]],

@@ -64,7 +64,8 @@ local mappings = {
   -- Buffer
   b = {
     name = "Buffer",
-    a = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
+    -- a = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
+    a = { "<Cmd>BWipeout other<Cr>", "Delete all buffers" },
     d = { "<Cmd>bd<Cr>", "Delete current buffer" },
     l = { "<Cmd>ls<Cr>", "List buffers" },
     n = { "<Cmd>bn<Cr>", "Next buffer" },
@@ -216,7 +217,7 @@ local mappings = {
     name = "Run",
     x = "Swap next parameter",
     X = "Swap previous parameter",
-    s = { "<Cmd>lua require'sniprun'.run()<CR>", "Run snippets" },
+    s = { "<Cmd>SnipRun<CR>", "Run snippets" },
   },
 
   -- Git signs
