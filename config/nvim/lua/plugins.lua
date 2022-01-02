@@ -129,10 +129,16 @@ function M.setup()
       end,
     }
     use { "sainnhe/gruvbox-material" }
-    use { "folke/tokyonight.nvim" }
     use { "sainnhe/everforest" }
-    use { "sainnhe/edge" }
-    use { "sainnhe/sonokai" }
+    use {
+      "projekt0n/github-nvim-theme",
+      config = function()
+        require("github-theme").setup()
+      end,
+    }
+    -- use { "sainnhe/edge" }
+    -- use { "sainnhe/sonokai" }
+    -- use { "folke/tokyonight.nvim" }
     -- use {
     --   "catppuccin/nvim",
     --   as = "catppuccin",
