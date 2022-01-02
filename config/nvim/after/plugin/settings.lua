@@ -54,17 +54,6 @@ function M.auto_cmds()
   -- aug END
   -- ]], false)
 
-  vim.api.nvim_exec(
-    [[
-        augroup auto_html
-            autocmd!
-            autocmd Filetype html setlocal ts=2 sw=2 expandtab
-            autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 noexpandtab
-        augroup END
-    ]],
-    false
-  )
-
   -- Terminal
   vim.api.nvim_exec(
     [[
