@@ -78,11 +78,14 @@ local mappings = {
     name = "Jump",
     a = { "<Cmd>lua require('harpoon.mark').add_file()<Cr>", "Add" },
     m = { "<Cmd>lua require('harpoon.ui').toggle_quick_menu()<Cr>", "Menu" },
+    c = { "<Cmd>lua require('harpoon.cmd-ui').toggle_quick_menu()<Cr>", "Menu" },
   },
   ["1"] = { "<Cmd>lua require('harpoon.ui').nav_file(1) <Cr>", "Jump 1" },
   ["2"] = { "<Cmd>lua require('harpoon.ui').nav_file(2) <Cr>", "Jump 2" },
   ["3"] = { "<Cmd>lua require('harpoon.ui').nav_file(3) <Cr>", "Jump 3" },
   ["4"] = { "<Cmd>lua require('harpoon.term').gotoTerminal(1)<Cr>", "Terminal" },
+  ["5"] = { "<Cmd>lua require('harpoon.term').sendCommand(1,1)<Cr>", "Command 1" },
+  ["6"] = { "<Cmd>lua require('harpoon.term').sendCommand(1,2)<Cr>", "Command 2" },
 
   -- Quick fix
   c = {
