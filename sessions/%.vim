@@ -2,6 +2,8 @@ let SessionLoad = 1
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 let v:this_session=expand("<sfile>:p")
 silent only
+silent tabonly
+cd ~/.local/git/joehannes-os/neovim-lua-config
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -9,17 +11,27 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd ~/.config/nvim/init.lua
-edit ~/.local/git/in-house/in-house-web/src/pages/houses.jsx
+edit config/nvim/init.lua
 argglobal
 balt ~/.local/git/in-house/in-house-web/src/pages/houses.jsx
-let s:l = 131 - ((42 * winheight(0) + 24) / 48)
+setlocal fdm=expr
+setlocal fde=nvim_treesitter#foldexpr()
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 33 - ((32 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 131
-normal! 06|
-lcd ~/.local/git/in-house/in-house-web
-badd +105 ~/.local/git/in-house/in-house-web/src/pages/houses.jsx
+keepjumps 33
+normal! 0
+tabnext 1
+badd +34 ~/.local/git/in-house/in-house-web/src/pages/houses.jsx
+badd +0 ~/.config/nvim/init.lua
+badd +33 config/nvim/init.lua
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

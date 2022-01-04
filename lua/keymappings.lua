@@ -1,5 +1,7 @@
----@diagnostic undefined-global
+---@diagnostic disable:undefined-global
 local fn = require("global")
+local preview = require("goto-preview")
+-- local calltree = require("litee.calltree")
 local nest = require("nest")
 
 nest.applyKeymaps({
@@ -15,11 +17,11 @@ nest.applyKeymaps({
 		{
 			{ "b", "<Cmd>BufferLineCyclePrev<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" },
-			{ "m", "<Cmd>BookmarkPrev<CR>" },
 			{ "q", "<Cmd>cprev<CR>" },
 			{ "t", "<Cmd>FloatermPrev<CR>" },
 			{ "w", "<Cmd>tabprevious<CR>" },
 			{ ".", "<C-o>" },
+			{ "M", "<Cmd>BookmarkPrev<CR>" },
 		},
 	},
 	{
@@ -27,11 +29,11 @@ nest.applyKeymaps({
 		{
 			{ "b", "<Cmd>BufferLineCycleNext<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" },
-			{ "m", "<Cmd>BookmarkNext<CR>" },
 			{ "q", "<Cmd>cnext<CR>" },
 			{ "t", "<Cmd>FloatermNext<CR>" },
 			{ "w", "<Cmd>tabnext<CR>" },
 			{ ".", "<C-i>" },
+			{ "m", "<Cmd>BookmarkNext<CR>" },
 		},
 	},
 	{
@@ -48,6 +50,7 @@ nest.applyKeymaps({
 		},
 	},
 	{ "K", "<cmd>Lspsaga hover_doc<cr>" },
+	-- { "T", calltree.hover_calltree },
 	{
 		"<leader>",
 		{
@@ -187,10 +190,18 @@ nest.applyKeymaps({
 					{ "D", "<Cmd>Lspsaga preview_definition<CR>" },
 					{ "f", "<Cmd>Lspsaga lsp_finder<CR>" },
 					{ "k", "<Cmd>Lspsaga signature_help<CR>" },
-					{ "K", "<Cmd>Lspsaga hover_doc<CR>" },
 					{ "r", "<Cmd>Lspsaga rename<CR>" },
 					{ "R", "<cmd>lua vim.lsp.buf.references()<CR>" },
 					{ "ql", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>" },
+				},
+			},
+			{
+				"p",
+				{
+					{ "d", fn.PeekDefinition },
+					{ "i", fn.PeekImplementation },
+					{ "r", preview.goto_preview_references },
+					{ "D", fn.PeekDeclaration },
 				},
 			},
 			{

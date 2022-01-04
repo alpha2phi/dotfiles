@@ -54,6 +54,9 @@ return require("packer").startup({
 
 		use({ "Olical/aniseed" })
 		-- Development
+		use({ "junegunn/fzf", run = "-> fzf#install()" })
+		use({ "junegunn/fzf.vim" })
+
 		use({ "tpope/vim-dispatch" })
 		use({ "tpope/vim-commentary" })
 		use({ "JoosepAlviste/nvim-ts-context-commentstring" })
@@ -278,12 +281,6 @@ return require("packer").startup({
 		-- })
 		use({ "mhinz/vim-grepper" })
 		use({ "kevinhwang91/nvim-bqf" })
-		use({
-			"junegunn/fzf",
-			run = function()
-				vim.fn["fzf#install"]()
-			end,
-		})
 		-- use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
 		-- use({ "ray-x/guihua.lua", run = "cd lua/fzy && make" })
 		-- use({ "ray-x/navigator.lua", requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" } })
@@ -314,6 +311,13 @@ return require("packer").startup({
 		-- use({ "RishabhRD/popfix" })
 		-- use({ "RishabhRD/nvim-lsputils" })
 		use({ "RRethy/vim-illuminate" })
+
+		use({
+			"github/copilot.vim",
+			config = function()
+				require("config.copilot").setup()
+			end,
+		})
 
 		-- Snippets
 		use({ "hrsh7th/cmp-vsnip" })
@@ -486,7 +490,18 @@ return require("packer").startup({
 		-- use({ "simrat39/symbols-outline.nvim" })
 		-- aerial is an lsp-outline
 		use({ "stevearc/aerial.nvim" })
-
+		-- use({
+		-- "ldelossa/litee.nvim",
+		-- config = function()
+		-- 	require("litee.lib").setup()
+		-- end,
+		-- })
+		-- use({
+		-- "ldelossa/litee-calltree.nvim",
+		-- config = function()
+		-- 	require("litee.calltree").setup()
+		-- end,
+		-- })
 		-- Status line
 		use({
 			-- "glepnir/galaxyline.nvim",
@@ -783,8 +798,6 @@ return require("packer").startup({
 		-- use {'oberblastmeister/neuron.nvim', branch = 'unstable', run = 'nix-env -if https://github.com/srid/neuron/archive/master.tar.gz' }
 
 		-- use {'oberblastmeister/neuron.nvim' }
-		-- use {'junegunn/fzf', run = '-> fzf#install()' }
-		-- use {'junegunn/fzf.vim'}
 		-- use {'fiatjaf/neuron.vim' }
 
 		-- Pair Programming

@@ -1,5 +1,6 @@
 ---@diagnostic disable: undefined-global
 local efmls = require("efmls-configs")
+-- local litee_handlers =
 
 efmls.init({
 	default_config = true,
@@ -14,7 +15,6 @@ local on_attach = function(client, bufnr)
 			border = "rounded",
 		},
 	}, bufnr)
-	require("aerial").on_attach(client, bufnr)
 
 	local function bufkeymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)

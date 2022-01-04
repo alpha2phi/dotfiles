@@ -177,4 +177,6 @@ vim.g.kat_nvim_commentStyle = "italic"
 vim.g.kat_nvim_integrations = { "lsp", "treesitter", "ts_rainbow", "cmp" } --, "bufferline" }
 vim.g.kat_nvim_stupidFeatures = true
 
-vim.cmd([[colorscheme kat.nvim]])
+vim.cmd([[
+  colorscheme kat.nvim
+]])
