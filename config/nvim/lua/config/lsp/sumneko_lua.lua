@@ -5,6 +5,8 @@ local lsputils = require "config.lsp.utils"
 -- DATA_PATH = vim.fn.stdpath "data"
 
 function M.config(installed_server)
+  print(vim.inspect(installed_server))
+  print(installed_server._default_options.cmd)
   return {
     library = { vimruntime = true, types = true, plugins = true },
     lspconfig = {
@@ -12,7 +14,7 @@ function M.config(installed_server)
       on_attach = lsputils.lsp_attach,
       on_init = lsputils.lsp_init,
       on_exit = lsputils.lsp_exit,
-      cmd = installed_server._default_options.cmd,
+      cmd_env = installed_server._default_options.cmd_env,
       settings = {
         Lua = {
           runtime = {

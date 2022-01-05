@@ -16,7 +16,6 @@ function M.setup(installed_server)
     on_exit = lsputils.lsp_exit,
     flags = { debounce_text_changes = 150 },
   }
-  print(vim.inspect(opts))
   return opts
 end
 
