@@ -44,9 +44,7 @@ function M.setup()
       "numToStr/Comment.nvim",
       keys = { "gc", "gcc", "gbc" },
       config = function()
-        require("Comment").setup {
-          mappings = { extra = true },
-        }
+        require("config.comment").setup()
       end,
     }
     use { "tpope/vim-rhubarb" }
