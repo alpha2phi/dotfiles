@@ -7,11 +7,13 @@ let g:doge_javascript_settings = {
 
 let g:doge_filetype_aliases = {
 \  'javascript': [
-\    'javascript.jsx',
+\    'javascript',
 \    'javascriptreact',
-\    'javascript.tsx',
-\    'typescriptreact',
+\    'javascript.jsx'
+\   ],
+\   'typescript': [
 \    'typescript',
+\    'typescriptreact',
 \    'typescript.tsx'
 \  ],
 \}

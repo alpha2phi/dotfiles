@@ -6,7 +6,7 @@ local nest = require("nest")
 
 nest.applyKeymaps({
 	{ "<Esc><Esc>", "<cmd>nohl<CR>" },
-	{ ";", "<Cmd>Telescope git_files<CR>" },
+	{ "<CR><CR>", "<Cmd>BResizeZoom<CR>" },
 	{ "<A-h>", "<C-w>7<" },
 	{ "<A-l>", "<C-w>7>" },
 	{ "<A-j>", "<C-w>7-" },
@@ -39,13 +39,17 @@ nest.applyKeymaps({
 	{
 		"g",
 		{
-			{ "D", "<Cmd>lua vim.lsp.buf.declaration()<CR>" },
 			{ "d", "<Cmd>lua vim.lsp.buf.definition()<CR>" },
+			{ "D", "<Cmd>lua vim.lsp.buf.declaration()<CR>" },
 			{ "i", "<cmd>lua vim.lsp.buf.implementation()<CR>" },
+			{ "I*", "<cmd>TSLspImportAll<CR>" },
+			{ "I.", "<cmd>TSLspImportCurrent<CR>" },
 			{ "j", "<C-i>" },
 			{ "k", "<C-o>" },
 			{ "o", "<cmd>Lspsaga show_line_diagnostics<cr>" },
+			{ "O", "<cmd>TSLspOrganize<cr>" },
 			{ "r", "<cmd>Lspsaga rename<cr>" },
+			{ "R", "<cmd>TSLspRenameFile<CR>" },
 			{ "x", "<cmd>CodeActionMenu<CR>" },
 		},
 	},
@@ -55,6 +59,7 @@ nest.applyKeymaps({
 		"<leader>",
 		{
 			{ "<esc>", "<Cmd>set relativenumber!<CR>" },
+			{ "<CR>", "<Cmd>ZenMode<CR>" },
 			{ "H", '<Cmd>call WinMove("h")<CR>' },
 			{ "L", '<Cmd>call WinMove("l")<CR>' },
 			{ "K", '<Cmd>call WinMove("k")<CR>' },
@@ -81,11 +86,12 @@ nest.applyKeymaps({
 				{ "q", ":bp|bd #<CR>" },
 				{ "p", "<Cmd>BufferLinePick<CR>" },
 			} },
-			{ "D", "<Cmd>DogeGenerate<CR>" },
+			{ "D", "<Cmd>DogeGenerate 'jsdoc'<CR>" },
 			{
 				"f",
 				{
 					{ "?", "<Cmd>Telescope Cheatsheet<CR>" },
+					{ ";", "<Cmd>Telescope git_files<CR>" },
 					{ "/", "<Cmd>TodoTelescope<CR>" },
 					{ "$", "<Cmd>Telescope aerial<CR>" },
 					{ "b", "<Cmd>Telescope buffers<CR>" },
@@ -189,6 +195,7 @@ nest.applyKeymaps({
 					{ "d", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>" },
 					{ "D", "<Cmd>Lspsaga preview_definition<CR>" },
 					{ "f", "<Cmd>Lspsaga lsp_finder<CR>" },
+					{ "F", vim.lsp.buf.formatting },
 					{ "k", "<Cmd>Lspsaga signature_help<CR>" },
 					{ "r", "<Cmd>Lspsaga rename<CR>" },
 					{ "R", "<cmd>lua vim.lsp.buf.references()<CR>" },
@@ -264,9 +271,6 @@ nest.applyKeymaps({
 					{
 						"<leader>",
 						{
-							{ "c", {
-								{ "<3", "<Cmd>CPLoad neon_latte<CR>" },
-							} },
 							-- {
 							-- 	"d",
 							-- 	{

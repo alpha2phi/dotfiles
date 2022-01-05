@@ -11,48 +11,31 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd ~/.config/nvim
-tabnew
-tabrewind
-edit ~/.config/nvim/init.lua
+edit src/pages/Welcome.tsx
 argglobal
-setlocal fdm=expr
+balt src/components/Branding.tsx
+setlocal fdm=manual
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
-setlocal fdl=5
+setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
-setlocal fen
-let s:l = 81 - ((38 * winheight(0) + 38) / 77)
+setlocal nofen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 28 - ((27 * winheight(0) + 39) / 78)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 81
-normal! 03|
-lcd ~/.config/nvim
-tabnext
-edit ~/.local/git/joehannes/joehannes.github.io/src/pages/Welcome.tsx
-argglobal
-balt ~/.local/git/joehannes/joehannes.github.io/src/pages/Welcome.tsx
-setlocal fdm=expr
-setlocal fde=nvim_treesitter#foldexpr()
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=5
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-24
-normal! zo
-let s:l = 25 - ((24 * winheight(0) + 38) / 77)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 25
-normal! $
-tabnext 2
-badd +81 ~/.config/nvim/init.lua
-badd +25 ~/.local/git/joehannes/joehannes.github.io/src/pages/Welcome.tsx
+keepjumps 28
+normal! 021|
+lcd ~/.local/git/joehannes/joehannes.github.io
+tabnext 1
+badd +1 ~/.config/nvim/init.lua
+badd +0 ~/.config/nvim
+badd +28 ~/.local/git/joehannes/joehannes.github.io/src/pages/Welcome.tsx
+badd +34 ~/.local/git/joehannes/joehannes.github.io/src/components/Branding.tsx
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

@@ -18,7 +18,7 @@ return require("packer").startup({
 						-- They can also be specified in a tree-like format.
 						j = {
 							-- Here `jk` will escape insert mode.
-							k = "<cmd>stopinsert<cr>",
+							k = "<cmd>stopinsert<cr><cmd>w<cr>",
 							-- You can have as many layers as you want!
 							-- h = {
 							-- 	g = "<cmd>stopinsert<cr>",
@@ -33,7 +33,8 @@ return require("packer").startup({
 							-- end,
 						},
 						-- You can use lua's arbitrary key notation to map special characters
-						[";;"] = "<cmd>stopinsert<cr>",
+						-- move to end of WORD and enter insert mode after that char
+						[";;"] = "<cmd>stopinsert<cr><cmd>w<cr><cmd>normal E<cr><cmd>normal a<cr>",
 						-- Use `<cmd>` to map commands. Be carful to terminate the command with `<cr>`.
 						-- ff = "<cmd>echo 'commands work too'<cr>",
 					},
@@ -143,12 +144,14 @@ return require("packer").startup({
 		use({ "rktjmp/lush.nvim" })
 		use({ "savq/melange" })
 		-- use({ "adisen99/codeschool.nvim" })
-		use({ "joehannes-ux/lush-jsx.nvim" })
+		-- use({ "joehannes-ux/lush-jsx.nvim" })
 		use({ "olimorris/onedarkpro.nvim" })
 
 		-- use({ "navarasu/onedark.nvim" })
 		use({ "NLKNguyen/papercolor-theme" })
 		use({ "sainnhe/everforest" })
+		use({ "mhartington/oceanic-next" })
+		use({ "kyoz/purify" })
 		use({ "tanvirtin/monokai.nvim" })
 		use({ "catppuccin/nvim", as = "catppuccin" })
 		use({ "joehannes-ux/kat.nvim" })
@@ -392,6 +395,10 @@ return require("packer").startup({
 		-- use({ "clojure-vim/async-clj-omni" })
 
 		-- Better syntax
+		use({ "sheerun/vim-polyglot" }) -- don't know it obsolete because of treesitter
+		-- use({ "othree/yajs.vim" }) -- probably included in polyglot
+		use({ "othree/es.next.syntax.vim" })
+		use({ "othree/javascript-libraries-syntax.vim" })
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 		use({ "nvim-treesitter/nvim-treesitter-refactor" })
 		use({ "nvim-treesitter/nvim-treesitter-textobjects" })
@@ -412,7 +419,7 @@ return require("packer").startup({
 		-- 				"switch",
 		-- 				"case",
 		-- 			},
-		-- 		})
+		-- 		}
 		-- 	end,
 		-- })
 		use({
