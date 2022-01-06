@@ -24,7 +24,7 @@ setlocal fdn=20
 setlocal nofen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 28 - ((27 * winheight(0) + 39) / 78)
+let s:l = 28 - ((27 * winheight(0) + 38) / 77)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -32,10 +32,8 @@ keepjumps 28
 normal! 021|
 lcd ~/.local/git/joehannes/joehannes.github.io
 tabnext 1
-badd +1 ~/.config/nvim/init.lua
-badd +0 ~/.config/nvim
 badd +28 ~/.local/git/joehannes/joehannes.github.io/src/pages/Welcome.tsx
-badd +34 ~/.local/git/joehannes/joehannes.github.io/src/components/Branding.tsx
+badd +18 ~/.local/git/joehannes/joehannes.github.io/src/components/Branding.tsx
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

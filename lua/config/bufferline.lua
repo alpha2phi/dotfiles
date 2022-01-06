@@ -12,56 +12,88 @@ local colors, groups, main, syntax, ucolors =
 	autoload("katdotnvim.highlights.syntax"),
 	autoload("katdotnvim.utils.color")
 
-local function tabFG()
+function groups.fillBG()
+	return "#F634B1"
+end
+
+function groups.selectionBG()
+	return "#00C4FC"
+end
+
+function groups.mainFG()
+	return "#000000"
+end
+
+function groups.mainBG()
+	return "#333355"
+end
+
+function groups.highlightBG()
+	return "#333355"
+end
+
+local function tabColor(color)
 	local output = ""
-	if (main.katStyle == "dark") and (main.katContrast == "soft") then
-		output = ucolors.brighten(groups.mainFG(), 0.8)
+	if vim.opt.background:get() == "light" then
+		output = ucolors.brighten(color or groups.mainFG(), 0.5)
 	else
-		output = groups.mainFG()
+		output = color or groups.mainFG()
 	end
 	return output
 end
 
-require("bufferline").setup({
-	highlights = {
-		fill = { guifg = groups.fillBG(), guibg = groups.fillBG() },
-		tab = { guifg = tabFG(), guibg = groups.highlightBG() },
-		tab_selected = { guifg = tabFG(), guibg = groups.selectionBG() },
-		tab_close = { guifg = tabFG(), guibg = groups.highlightBG(), gui = "bold,italic" },
-		info = { guifg = tabFG(), guibg = groups.selectionBG() },
-		buffer_visible = { guifg = tabFG(), guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8) },
-		buffer_selected = { guifg = tabFG(), guibg = groups.selectionBG(), gui = "bold,italic" },
-		close_button = { guifg = tabFG(), guibg = groups.highlightBG(), gui = "bold" },
-		close_button_visible = {
-			guifg = tabFG(),
-			guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
-			gui = "bold",
-		},
-		close_button_selected = { guifg = tabFG(), guibg = groups.selectionBG(), gui = "bold" },
-		modified = { guifg = groups.warningBG(), guibg = groups.highlightBG() },
-		modified_visible = {
-			guifg = groups.warningBG(),
-			guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
-		},
-		modified_selected = { guifg = groups.warningBG(), guibg = groups.selectionBG() },
-		duplicate_selected = { guifg = tabFG(), guibg = groups.selectionBG() },
-		duplicate_visible = {
-			guifg = tabFG(),
-			guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
-		},
-		duplicate = { guifg = tabFG(), guibg = groups.highlightBG() },
-		separator_selected = { guifg = groups.fillBG(), guibg = groups.selectionBG() },
-		separator_visible = {
-			guifg = groups.fillBG(),
-			guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
-		},
-		separator = { guifg = groups.fillBG(), guibg = groups.highlightBG() },
-		indicator_selected = { guifg = tabFG(), guibg = groups.selectionBG() },
-		pick_selected = { guifg = tabFG(), guibg = groups.selectionBG() },
-		pick_visible = { guifg = tabFG(), guibg = groups.selectionBG() },
-		pick = { guifg = tabFG(), guibg = groups.selectionBG() },
-		background = { guifg = tabFG(), guibg = groups.highlightBG() },
+local function alternateColor(light, dark)
+	if vim.opt.background:get() == "light" then
+		return light
+	end
+	return dark
+end
+
+local highlights = {
+	fill = { guifg = groups.fillBG(), guibg = groups.fillBG() },
+	tab = { guifg = tabColor(), guibg = groups.highlightBG() },
+	tab_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
+	tab_close = { guifg = tabColor(), guibg = groups.fillBG(), gui = "bold,italic" },
+	info = { guifg = tabColor(), guibg = groups.selectionBG() },
+	buffer_visible = {
+		guifg = tabColor(),
+		guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
 	},
+	buffer_selected = { guifg = tabColor(), guibg = groups.selectionBG(), gui = "bold,italic" },
+	close_button = { guifg = tabColor(), guibg = groups.highlightBG(), gui = "bold" },
+	close_button_visible = {
+		guifg = tabColor(),
+		guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+		gui = "bold",
+	},
+	close_button_selected = { guifg = tabColor(), guibg = groups.selectionBG(), gui = "bold" },
+	modified = { guifg = groups.warningBG(), guibg = groups.highlightBG() },
+	modified_visible = {
+		guifg = groups.warningBG(),
+		guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+	},
+	modified_selected = { guifg = groups.warningBG(), guibg = groups.selectionBG() },
+	duplicate_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
+	duplicate_visible = {
+		guifg = tabColor(),
+		guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+	},
+	duplicate = { guifg = tabColor(), guibg = groups.highlightBG() },
+	separator_selected = { guifg = groups.fillBG(), guibg = groups.selectionBG() },
+	separator_visible = {
+		guifg = groups.fillBG(),
+		guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+	},
+	separator = { guifg = groups.fillBG(), guibg = groups.highlightBG() },
+	indicator_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
+	pick_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
+	pick_visible = { guifg = tabColor(), guibg = groups.selectionBG() },
+	pick = { guifg = tabColor(), guibg = groups.selectionBG() },
+	background = { guifg = tabColor(), guibg = groups.highlightBG() },
+}
+
+local opts = {
+	highlights = highlights,
 	options = {
 		numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both",
 		close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
@@ -114,6 +146,9 @@ require("bufferline").setup({
 			-- filter out based on arbitrary rules
 			-- e.g. filter out vim wiki buffer from tabline in your work repo
 
+			-- since I use tabpages as per project (usually), I filter the buffers that don't belong to the current tabpage
+			-- in combination with a root/project/cwd-plugin that autosets my cwd on selection of telescope:project,
+			-- which I do on creation of a new tabpage, this works fine for me
 			if not not vim.api.nvim_buf_get_name(buf_number):find(vim.fn.getcwd(), 0, true) then
 				return true
 			end
@@ -256,4 +291,6 @@ require("bufferline").setup({
 			},
 		},
 	},
-})
+}
+
+require("bufferline").setup(opts)

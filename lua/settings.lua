@@ -11,7 +11,7 @@ cmd("filetype plugin indent on")
 o.termguicolors = true
 o.hidden = true
 o.ignorecase = true
-o.scrolloff = 120
+o.scrolloff = 0
 o.splitbelow = true
 o.splitright = true
 o.clipboard = "unnamed,unnamedplus"

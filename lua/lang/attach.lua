@@ -9,6 +9,8 @@ function on_attach.generic(client, bufnr)
 		},
 	}, bufnr)
 
+	require("aerial").on_attach(client, bufnr)
+
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- Set autocommands conditional on server_capabilities
