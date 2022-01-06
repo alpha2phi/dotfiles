@@ -32,6 +32,10 @@ function groups.highlightBG()
 	return "#333355"
 end
 
+function groups.warningBG()
+	return "#FF0000"
+end
+
 local function tabColor(color)
 	local output = ""
 	if vim.opt.background:get() == "light" then
@@ -57,9 +61,18 @@ local highlights = {
 	info = { guifg = tabColor(), guibg = groups.selectionBG() },
 	buffer_visible = {
 		guifg = tabColor(),
-		guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+		guibg = groups.mainBG(),
 	},
 	buffer_selected = { guifg = tabColor(), guibg = groups.selectionBG(), gui = "bold,italic" },
+	diagnostic = {
+		guifg = tabColor(),
+		guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+	},
+	diagnostic_visible = {
+		guifg = tabColor(),
+		guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+	},
+	diagnostic_selected = { guifg = tabColor(), guibg = groups.selectionBG(), gui = "bold,italic" },
 	close_button = { guifg = tabColor(), guibg = groups.highlightBG(), gui = "bold" },
 	close_button_visible = {
 		guifg = tabColor(),
@@ -86,10 +99,8 @@ local highlights = {
 	},
 	separator = { guifg = groups.fillBG(), guibg = groups.highlightBG() },
 	indicator_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
-	pick_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
-	pick_visible = { guifg = tabColor(), guibg = groups.selectionBG() },
-	pick = { guifg = tabColor(), guibg = groups.selectionBG() },
-	background = { guifg = tabColor(), guibg = groups.highlightBG() },
+	pick = { guifg = "#FFFFFF", guibg = groups.mainBG() },
+	background = { guifg = "#FFFFFF", guibg = groups.mainBG() },
 }
 
 local opts = {
@@ -176,7 +187,7 @@ local opts = {
 
 				if gps.is_available() then
 					table.insert(result, { text = gps.get_location() .. " ", guifg = "magenta", guibg = "black" })
-					table.insert(result, { text = "   ", guifg = "black", guibg = "transparency" })
+					table.insert(result, { text = "   ", guifg = "black", guibg = "#F634B1" })
 				end
 
 				return result
@@ -206,90 +217,90 @@ local opts = {
 				return result
 			end,
 		},
-		groups = {
-			options = {
-				toggle_hidden_on_enter = true, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
-			},
-			items = {
-				{
-					name = "cfg", -- Mandatory
-					highlight = { gui = "italic", guisp = "magenta" }, -- Optional
-					auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
-					icon = "", -- Optional
-					matcher = function(buf) -- Mandatory
-						return vim.fn.fnamemodify(buf.path, ":.") == buf.filename
-							or vim.fn.fnamemodify(buf.path, ":.:h"):match("config")
-					end,
-					-- separator = { -- Optional
-					--   style = require('bufferline.groups').separator.tab
-					-- },
-				},
-				{
-					name = "block", -- Mandatory
-					highlight = { gui = "italic", guisp = "purple" }, -- Optional
-					auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
-					icon = "", -- Optional
-					matcher = function(buf) -- Mandatory
-						return vim.fn.fnamemodify(buf.path, ":p"):match("/component.*/")
-					end,
-					-- separator = { -- Optional
-					--   style = require('bufferline.groups').separator.tab
-					-- },
-				},
-				{
-					name = "view", -- Mandatory
-					highlight = { gui = "italic", guisp = "marine" }, -- Optional
-					auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
-					icon = "恵", -- Optional
-					matcher = function(buf) -- Mandatory
-						return vim.fn.fnamemodify(buf.path, ":p"):match("/page.*/")
-							or vim.fn.fnamemodify(buf.path, ":p"):match("/view.*/")
-					end,
-					-- separator = { -- Optional
-					--   style = require('bufferline.groups').separator.tab
-					-- },
-				},
-				{
-					name = "store", -- Mandatory
-					highlight = { gui = "italic", guisp = "gold" }, -- Optional
-					auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
-					icon = "", -- Optional
-					matcher = function(buf) -- Mandatory
-						return vim.fn.fnamemodify(buf.path, ":p"):match("/store/")
-					end,
-					-- separator = { -- Optional
-					--   style = require('bufferline.groups').separator.tab
-					-- },
-				},
-				{
-					name = "tool", -- Mandatory
-					highlight = { gui = "italic", guisp = "green" }, -- Optional
-					auto_close = true, -- whether or not close this group if it doesn't contain the current buffer
-					icon = "", -- Optional
-					matcher = function(buf) -- Mandatory
-						return vim.fn.fnamemodify(buf.path, ":p"):match("/util.*/")
-							or vim.fn.fnamemodify(buf.path, ":p"):match("/lib.*/")
-					end,
-					-- separator = { -- Optional
-					--   style = require('bufferline.groups').separator.tab
-					-- },
-				},
-				{
-					name = "def", -- Mandatory
-					highlight = { gui = "italic", guisp = "red" }, -- Optional
-					auto_close = true, -- whether or not close this group if it doesn't contain the current buffer
-					icon = "", -- Optional
-					matcher = function(buf) -- Mandatory
-						return vim.fn.fnamemodify(buf.path, ":p"):match("/style.*/")
-							or vim.fn.fnamemodify(buf.path, ":p"):match("/settings/")
-					end,
-					-- separator = { -- Optional
-					--   style = require('bufferline.groups').separator.tab
-					-- },
-				},
-				bgroups.builtin.ungrouped,
-			},
-		},
+		-- groups = {
+		-- 	options = {
+		-- 		toggle_hidden_on_enter = true, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
+		-- 	},
+		-- 	items = {
+		-- 		{
+		-- 			name = "cfg", -- Mandatory
+		-- 			highlight = { gui = "italic", guisp = "gold" }, -- Optional
+		-- 			auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
+		-- 			icon = "", -- Optional
+		-- 			matcher = function(buf) -- Mandatory
+		-- 				return vim.fn.fnamemodify(buf.path, ":.") == buf.filename
+		-- 					or vim.fn.fnamemodify(buf.path, ":.:h"):match("config")
+		-- 			end,
+		-- 			-- separator = { -- Optional
+		-- 			-- 	style = require("bufferline.groups").separator.tab,
+		-- 			-- },
+		-- 		},
+		-- 		{
+		-- 			name = "block", -- Mandatory
+		-- 			highlight = { gui = "italic", guisp = "gold" }, -- Optional
+		-- 			auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
+		-- 			icon = "", -- Optional
+		-- 			matcher = function(buf) -- Mandatory
+		-- 				return vim.fn.fnamemodify(buf.path, ":p"):match("/component.*/")
+		-- 			end,
+		-- 			-- separator = { -- Optional
+		-- 			-- 	style = require("bufferline.groups").separator.tab,
+		-- 			-- },
+		-- 		},
+		-- 		{
+		-- 			name = "view", -- Mandatory
+		-- 			highlight = { gui = "italic", guisp = "gold" }, -- Optional
+		-- 			auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
+		-- 			icon = "恵", -- Optional
+		-- 			matcher = function(buf) -- Mandatory
+		-- 				return vim.fn.fnamemodify(buf.path, ":p"):match("/page.*/")
+		-- 					or vim.fn.fnamemodify(buf.path, ":p"):match("/view.*/")
+		-- 			end,
+		-- 			-- separator = { -- Optional
+		-- 			-- 	style = require("bufferline.groups").separator.tab,
+		-- 			-- },
+		-- 		},
+		-- 		{
+		-- 			name = "store", -- Mandatory
+		-- 			highlight = { gui = "italic", guisp = "gold" }, -- Optional
+		-- 			auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
+		-- 			icon = "", -- Optional
+		-- 			matcher = function(buf) -- Mandatory
+		-- 				return vim.fn.fnamemodify(buf.path, ":p"):match("/store/")
+		-- 			end,
+		-- 			-- separator = { -- Optional
+		-- 			-- 	style = require("bufferline.groups").separator.tab,
+		-- 			-- },
+		-- 		},
+		-- 		{
+		-- 			name = "tool", -- Mandatory
+		-- 			highlight = { gui = "italic", guisp = "gold" }, -- Optional
+		-- 			auto_close = true, -- whether or not close this group if it doesn't contain the current buffer
+		-- 			icon = "", -- Optional
+		-- 			matcher = function(buf) -- Mandatory
+		-- 				return vim.fn.fnamemodify(buf.path, ":p"):match("/util.*/")
+		-- 					or vim.fn.fnamemodify(buf.path, ":p"):match("/lib.*/")
+		-- 			end,
+		-- 			-- separator = { -- Optional
+		-- 			-- 	style = require("bufferline.groups").separator.tab,
+		-- 			-- },
+		-- 		},
+		-- 		{
+		-- 			name = "def", -- Mandatory
+		-- 			highlight = { gui = "italic", guisp = "gold" }, -- Optional
+		-- 			auto_close = true, -- whether or not close this group if it doesn't contain the current buffer
+		-- 			icon = "", -- Optional
+		-- 			matcher = function(buf) -- Mandatory
+		-- 				return vim.fn.fnamemodify(buf.path, ":p"):match("/style.*/")
+		-- 					or vim.fn.fnamemodify(buf.path, ":p"):match("/settings/")
+		-- 			end,
+		-- 			-- separator = { -- Optional
+		-- 			-- 	style = require("bufferline.groups").separator.tab,
+		-- 			-- },
+		-- 		},
+		-- 		bgroups.builtin.ungrouped,
+		-- 	},
+		-- },
 	},
 }
 

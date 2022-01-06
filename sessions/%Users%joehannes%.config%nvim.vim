@@ -12,108 +12,32 @@ argglobal
 %argdel
 $argadd init.lua
 edit init.lua
-let s:save_splitbelow = &splitbelow
-let s:save_splitright = &splitright
-set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-wincmd _ | wincmd |
-vsplit
-wincmd _ | wincmd |
-vsplit
-3wincmd h
-wincmd w
-wincmd w
-wincmd w
-let &splitbelow = s:save_splitbelow
-let &splitright = s:save_splitright
-wincmd t
-let s:save_winminheight = &winminheight
-let s:save_winminwidth = &winminwidth
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-exe 'vert 1resize ' . ((&columns * 121 + 160) / 320)
-exe 'vert 2resize ' . ((&columns * 121 + 160) / 320)
-exe 'vert 3resize ' . ((&columns * 35 + 160) / 320)
-exe 'vert 4resize ' . ((&columns * 40 + 160) / 320)
 argglobal
-balt lua/global.lua
+balt lua/plugins.lua
 setlocal fdm=expr
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
-setlocal fdl=0
+setlocal fdl=2
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 9 - ((8 * winheight(0) + 38) / 77)
+let s:l = 34 - ((33 * winheight(0) + 38) / 77)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 9
-normal! 036|
+keepjumps 34
+normal! 03|
 lcd ~/.config/nvim
-wincmd w
-argglobal
-if bufexists("~/.config/nvim/lua/global.lua") | buffer ~/.config/nvim/lua/global.lua | else | edit ~/.config/nvim/lua/global.lua | endif
-if &buftype ==# 'terminal'
-  silent file ~/.config/nvim/lua/global.lua
-endif
-balt ~/.config/nvim/init.lua
-setlocal fdm=expr
-setlocal fde=nvim_treesitter#foldexpr()
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=4
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-let s:l = 134 - ((47 * winheight(0) + 38) / 77)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 134
-normal! 08|
-lcd ~/.config/nvim
-wincmd w
-argglobal
-enew
-setlocal fdm=expr
-setlocal fde=nvim_treesitter#foldexpr()
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-wincmd w
-argglobal
-enew
-setlocal fdm=expr
-setlocal fde=nvim_treesitter#foldexpr()
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-wincmd w
-exe 'vert 1resize ' . ((&columns * 121 + 160) / 320)
-exe 'vert 2resize ' . ((&columns * 121 + 160) / 320)
-exe 'vert 3resize ' . ((&columns * 35 + 160) / 320)
-exe 'vert 4resize ' . ((&columns * 40 + 160) / 320)
 tabnext 1
-badd +9 ~/.config/nvim/init.lua
-badd +122 ~/.config/nvim/lua/global.lua
+badd +23 ~/.config/nvim/init.lua
+badd +303 ~/.config/nvim/lua/config/bufferline.lua
+badd +475 ~/.config/nvim/lua/plugins.lua
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 shortmess=filnxtToOFc
-let &winminheight = s:save_winminheight
-let &winminwidth = s:save_winminwidth
+set winheight=1 winwidth=20 shortmess=aoO
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

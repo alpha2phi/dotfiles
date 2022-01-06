@@ -5,45 +5,7 @@ return require("packer").startup({
 	function(use)
 		use({ "wbthomason/packer.nvim" })
 		use({ "stevearc/dressing.nvim" })
-		use({
-			"Krafi2/jeskape.nvim",
-			config = function()
-				require("jeskape").setup({
-					-- Mappings are specified in this table. Jeskape uses neovim's keymap
-					-- system under the hood, so anything allowed in a normal `map`'s righ hand
-					-- side will work here too. Check out ':h  map.txt' to see what's possible.
-					mappings = {
-						-- Typing `hi` quickly will cause the string `hello!` to be inserted.
-						-- hi = "hello!",
-						-- They can also be specified in a tree-like format.
-						j = {
-							-- Here `jk` will escape insert mode.
-							k = "<cmd>stopinsert<cr><cmd>w<cr>",
-							-- You can have as many layers as you want!
-							-- h = {
-							-- 	g = "<cmd>stopinsert<cr>",
-							-- },
-							-- If the mapping leads to a function, it will be evaluated every
-							-- time the mapping is reached and its return value will be fed to
-							-- neovim.
-							-- f = function()
-							-- 	print("Oh look, a function!")
-							-- 	-- Insert the name of the current file.
-							-- 	return vim.fn.expand("%:t")
-							-- end,
-						},
-						-- You can use lua's arbitrary key notation to map special characters
-						-- move to end of WORD and enter insert mode after that char
-						[";;"] = "<cmd>stopinsert<cr><cmd>w<cr><cmd>normal E<cr><cmd>normal a<cr>",
-						-- Use `<cmd>` to map commands. Be carful to terminate the command with `<cr>`.
-						-- ff = "<cmd>echo 'commands work too'<cr>",
-					},
-					-- The maximum length of time between keystrokes where they are still
-					-- considered a part of the same mapping.
-					timeout = vim.o.timeoutlen,
-				})
-			end,
-		})
+
 		use({
 			"rcarriga/nvim-notify",
 			event = "VimEnter",
@@ -69,6 +31,13 @@ return require("packer").startup({
 		-- use {'guns/vim-sexp'}
 		-- use {'tpope/vim-sexp-mappings-for-regular-people'}
 		use({
+			"anuvyklack/pretty-fold.nvim",
+			config = function()
+				require("pretty-fold").setup({})
+				require("pretty-fold.preview").setup_keybinding("h")
+			end,
+		})
+		use({
 			"gelguy/wilder.nvim",
 			config = function()
 				require("config.wilder")
@@ -90,7 +59,7 @@ return require("packer").startup({
 			config = function()
 				require("specs").setup({
 					show_jumps = true,
-					min_jump = 21,
+					min_jump = 2,
 					popup = {
 						delay_ms = 21, -- delay before popup displays
 						inc_ms = 5, -- time increments used for fade/resize effects
@@ -402,26 +371,26 @@ return require("packer").startup({
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 		use({ "nvim-treesitter/nvim-treesitter-refactor" })
 		use({ "nvim-treesitter/nvim-treesitter-textobjects" })
-		-- use({
-		-- 	"romgrk/nvim-treesitter-context",
-		-- 	config = function()
-		-- 		require("treesitter-context").setup({
-		-- 			enable = true,
-		-- 			throttle = true,
-		-- 			max_lines = 0,
-		-- 			patterns = {
-		-- 				"class",
-		-- 				"function",
-		-- 				"method",
-		-- 				"for",
-		-- 				"while",
-		-- 				"if",
-		-- 				"switch",
-		-- 				"case",
-		-- 			},
-		-- 		}
-		-- 	end,
-		-- })
+		use({
+			"romgrk/nvim-treesitter-context",
+			config = function()
+				require("treesitter-context").setup({
+					enable = true,
+					throttle = true,
+					max_lines = 0,
+					patterns = {
+						"class",
+						"function",
+						"method",
+						"for",
+						"while",
+						"if",
+						"switch",
+						"case",
+					},
+				})
+			end,
+		})
 		use({
 			"SmiteshP/nvim-gps",
 			requires = "nvim-treesitter/nvim-treesitter",
@@ -514,9 +483,6 @@ return require("packer").startup({
 			-- "glepnir/galaxyline.nvim",
 			-- branch = "main",
 			"NTBBloodbath/galaxyline.nvim",
-			config = function()
-				require("statusline")
-			end,
 			requires = { "kyazdani42/nvim-web-devicons" },
 		})
 
@@ -980,9 +946,49 @@ return require("packer").startup({
 		-- })
 
 		use({
+			"Krafi2/jeskape.nvim",
+			config = function()
+				require("jeskape").setup({
+					-- Mappings are specified in this table. Jeskape uses neovim's keymap
+					-- system under the hood, so anything allowed in a normal `map`'s righ hand
+					-- side will work here too. Check out ':h  map.txt' to see what's possible.
+					mappings = {
+						-- Typing `hi` quickly will cause the string `hello!` to be inserted.
+						-- hi = "hello!",
+						-- They can also be specified in a tree-like format.
+						j = {
+							-- Here `jk` will escape insert mode.
+							k = "<cmd>stopinsert<cr><cmd>w<cr>",
+							-- You can have as many layers as you want!
+							-- h = {
+							-- 	g = "<cmd>stopinsert<cr>",
+							-- },
+							-- If the mapping leads to a function, it will be evaluated every
+							-- time the mapping is reached and its return value will be fed to
+							-- neovim.
+							-- f = function()
+							-- 	print("Oh look, a function!")
+							-- 	-- Insert the name of the current file.
+							-- 	return vim.fn.expand("%:t")
+							-- end,
+						},
+						-- You can use lua's arbitrary key notation to map special characters
+						-- move to end of WORD and enter insert mode after that char
+						[";;"] = "<cmd>stopinsert<cr><cmd>w!<cr><cmd>startinsert<cr><cmd>normal W<cr><cmd>startinsert<cr>",
+						["<Esc>"] = "<cmd>stopinsert<cr>",
+						-- Use `<cmd>` to map commands. Be carful to terminate the command with `<cr>`.
+						-- ff = "<cmd>echo 'commands work too'<cr>",
+					},
+					-- The maximum length of time between keystrokes where they are still
+					-- considered a part of the same mapping.
+					timeout = vim.o.timeoutlen,
+				})
+			end,
+		})
+		use({
 			"folke/which-key.nvim",
 			config = function()
-				require("which-key").setup()
+				require("which-key").setup({})
 			end,
 		})
 	end,
