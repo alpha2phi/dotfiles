@@ -19,3 +19,5 @@ hi def link qfError CocErrorSign
 hi def link qfWarning CocWarningSign
 hi def link qfInfo CocInfoSign
 hi def link qfNote CocHintSign
+
+let b:current_syntax = 'qf'

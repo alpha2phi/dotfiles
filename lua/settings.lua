@@ -8,6 +8,7 @@ local indent = 2
 cmd("syntax enable")
 cmd("filetype plugin indent on")
 
+o.qftf = "{info -> v:lua._G.qftf(info)}"
 o.termguicolors = true
 o.hidden = true
 o.ignorecase = true
