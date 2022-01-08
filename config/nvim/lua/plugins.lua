@@ -89,7 +89,7 @@ function M.setup()
     use { "unblevable/quick-scope", event = "VimEnter" }
     use { "voldikss/vim-floaterm", event = "VimEnter" }
     use {
-      -- "folke/which-key.nvim",
+      -- "folke/which-key.nvim", -- TODO: fix
       "zeertzjq/which-key.nvim",
       branch = "patch-1",
       config = function()
@@ -320,6 +320,7 @@ function M.setup()
       config = function()
         require("config.symbols-outline").setup()
       end,
+      disable = true, -- TODO: fix
     }
 
     -- Better syntax
@@ -594,6 +595,15 @@ function M.setup()
 
     -- To try
     -- https://github.com/mfussenegger/nvim-lint
+
+    use {
+      "akinsho/toggleterm.nvim",
+      keys = [[<c-\>]],
+      cmd = { "ToggleTerm" },
+      config = function()
+        require("config.toggleterm").setup()
+      end,
+    }
 
     use { "kazhala/close-buffers.nvim", cmd = { "BDelete", "BWipeout" } }
     -- use {
