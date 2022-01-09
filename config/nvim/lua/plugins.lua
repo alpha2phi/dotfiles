@@ -598,8 +598,8 @@ function M.setup()
 
     use {
       "akinsho/toggleterm.nvim",
-      keys = [[<c-\>]],
-      cmd = { "ToggleTerm" },
+      keys = { [[<c-\>]] },
+      cmd = { "ToggleTerm", "TermExec" },
       config = function()
         require("config.toggleterm").setup()
       end,
