@@ -1,5 +1,5 @@
 ---@diagnostic disable: undefined-global
--- local trouble = require("trouble.providers.telescope")
+local trouble = require("trouble.providers.telescope")
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 
@@ -76,8 +76,8 @@ telescope.setup({
 			},
 		},
 		mappings = {
-			-- i = { ["<c-t>"] = trouble.open_with_trouble },
-			-- n = { ["<c-t>"] = trouble.open_with_trouble },
+			i = { ["<c-t>"] = trouble.open_with_trouble },
+			n = { ["<c-t>"] = trouble.open_with_trouble },
 		},
 		history = {
 			path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
@@ -86,14 +86,12 @@ telescope.setup({
 	},
 })
 
-require("neoclip").setup()
-
 telescope.load_extension("fzf")
 telescope.load_extension("gh")
 -- telescope.load_extension("node_modules")
 telescope.load_extension("session-lens")
 telescope.load_extension("vim_bookmarks")
-telescope.load_extension("ultisnips")
+-- telescope.load_extension("ultisnips")
 telescope.load_extension("project")
 telescope.load_extension("neoclip")
 telescope.load_extension("smart_history")

@@ -8,11 +8,11 @@ local indent = 2
 cmd("syntax enable")
 cmd("filetype plugin indent on")
 
-o.qftf = "{info -> v:lua._G.qftf(info)}"
+o.qftf = "{info -> v:lua.qftf(info)}"
 o.termguicolors = true
 o.hidden = true
 o.ignorecase = true
-o.scrolloff = 0
+o.scrolloff = 21
 o.splitbelow = true
 o.splitright = true
 o.clipboard = "unnamed,unnamedplus"
@@ -79,19 +79,6 @@ aug END
 	false
 )
 
--- Git Blame Virtual
-vim.api.nvim_exec(
-	[[
-augroup auto_blame
-  autocmd!
-  autocmd CursorHold * lua require'utils'.Git.blameVirtText()
-  autocmd CursorMoved * lua require'utils'.Git.clearBlameVirtText()
-  autocmd CursorMovedI * lua require'utils'.Git.clearBlameVirtText()
-augroup END
-]],
-	false
-)
-
 vim.api.nvim_exec(
 	[[
 augroup auto_spellcheck
@@ -110,17 +97,6 @@ augroup auto_term
     autocmd!
     autocmd TermOpen * setlocal nonumber norelativenumber
     autocmd TermOpen * startinsert
-augroup END
-]],
-	false
-)
-
-vim.api.nvim_exec(
-	[[
-augroup markdown_syntax
-  au!
-  au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-  au BufNewFile,BufFilePre,BufRead *.MD set filetype=markdown
 augroup END
 ]],
 	false
@@ -180,7 +156,7 @@ vim.api.nvim_exec(
         call winrestview(l:save)
     endfun
 
-    autocmd FileType go,rust,html,typescript,javascript,python autocmd BufWritePre <buffer> call TrimWhitespace()
+    autocmd FileType go,rust,html,typescript,typescriptreact,javascript,javascriptreact,python autocmd BufWritePre <buffer> call TrimWhitespace()
 
 ]],
 	false

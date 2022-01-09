@@ -24,7 +24,7 @@ require("config.diffview")
 require("config.formatter")
 -- require("config.iron")
 -- require("config.symbols_outline")
--- require("config.trouble")
+require("config.trouble")
 require("config.zen")
 require("config.scroll")
 

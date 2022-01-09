@@ -1,5 +1,4 @@
 ---@diagnostic disable:undefined-global
-local fn = require("global")
 local preview = require("goto-preview")
 -- local calltree = require("litee.calltree")
 local nest = require("nest")
@@ -39,6 +38,7 @@ nest.applyKeymaps({
 	{
 		"g",
 		{
+			{ "$", "<Cmd>Telescope treesitter<CR>" },
 			{ "d", "<Cmd>lua vim.lsp.buf.definition()<CR>" },
 			{ "D", "<Cmd>lua vim.lsp.buf.declaration()<CR>" },
 			{ "i", "<cmd>lua vim.lsp.buf.implementation()<CR>" },
@@ -46,6 +46,7 @@ nest.applyKeymaps({
 			{ "I.", "<cmd>TSLspImportCurrent<CR>" },
 			{ "j", "<C-i>" },
 			{ "k", "<C-o>" },
+			{ "l", "<Cmd>Trouble lsp_references<CR>" },
 			{ "o", "<cmd>Lspsaga show_line_diagnostics<cr>" },
 			{ "O", "<cmd>TSLspOrganize<cr>" },
 			{ "r", "<cmd>Lspsaga rename<cr>" },
@@ -86,7 +87,7 @@ nest.applyKeymaps({
 				{ "q", ":bp|bd #<CR>" },
 				{ "p", "<Cmd>BufferLinePick<CR>" },
 			} },
-			{ "D", "<Cmd>DogeGenerate 'jsdoc'<CR>" },
+			{ "D", "<Cmd>DogeGenerate jsdoc<CR>" },
 			{
 				"f",
 				{
@@ -104,7 +105,6 @@ nest.applyKeymaps({
 					{ "m*", "<Cmd>Telescope vim_bookmarks all<CR>" },
 					{ "m.", "<Cmd>Telescope vim_bookmarks current_file<CR>" },
 					{ "n", "<Cmd>Telescope node_modules list" },
-					{ "o", "<Cmd>Telescope treesitter<CR>" },
 					{ "p", ":lua require'telescope'.extensions.project.project{}<CR>" },
 					{ "s", "<Cmd>Telescope ultisnips ultisnips<CR>" },
 					{ "S", "<Cmd>SearchSession<CR>" },
@@ -205,10 +205,10 @@ nest.applyKeymaps({
 			{
 				"p",
 				{
-					{ "d", fn.PeekDefinition },
-					{ "i", fn.PeekImplementation },
+					{ "d", PeekDefinition },
+					{ "i", PeekImplementation },
 					{ "r", preview.goto_preview_references },
-					{ "D", fn.PeekDeclaration },
+					{ "D", PeekDeclaration },
 				},
 			},
 			{
@@ -246,8 +246,8 @@ nest.applyKeymaps({
 					},
 					{ "c", "<Cmd>call ToggleBackgroundLightness()<CR>" },
 					{ "C", "<Cmd>TSContextToggle<CR>" },
-					-- { "d", "<Cmd>TroubleToggle<CR>" },
-					{ "D", ":lua require('dapui').toggle()" },
+					{ "d", "<Cmd>TroubleToggle<CR>" },
+					-- { "D", ":lua require('dapui').toggle()" },
 					{
 						"f",
 						{
@@ -271,16 +271,16 @@ nest.applyKeymaps({
 					{
 						"<leader>",
 						{
-							-- {
-							-- 	"d",
-							-- 	{
-							-- 		{ "*", "<Cmd>TroubleToggle lsp_workspace_diagnostics<CR>" },
-							-- 		{ ".", "<Cmd>TroubleToggle lsp_document_diagnostics<CR>" },
-							-- 		{ "r", "<Cmd>TroubleToggle lsp_references<CR>" },
-							-- 		{ "q", "<Cmd>TroubleToggle quickfix<CR>" },
-							-- 		{ "l", "<Cmd>TroubleToggle loclist<CR>" },
-							-- 	},
-							-- },
+							{
+								"d",
+								{
+									{ "*", "<Cmd>Trouble lsp_workspace_diagnostics<CR>" },
+									{ ".", "<Cmd>Trouble lsp_document_diagnostics<CR>" },
+									{ "r", "<Cmd>Trouble lsp_refences<CR>" },
+									{ "q", "<Cmd>Trouble quickfix<CR>" },
+									{ "l", "<Cmd>Trouble loclist<CR>" },
+								},
+							},
 							{ "t", {
 								{ "n", "<Cmd>FloatermNew<CR>" },
 							} },
@@ -301,9 +301,12 @@ nest.applyKeymaps({
 })
 
 nest.applyKeymaps({
-	{ mode = "i", {
-		{ "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
-	} },
+	{
+		mode = "i",
+		{
+			{ "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
+		},
+	},
 })
 
 nest.applyKeymaps({

@@ -92,20 +92,40 @@ return require("packer").startup({
 			"glepnir/indent-guides.nvim",
 			branch = "main",
 			config = function()
+				local even_colors = nil
+				local odd_colors = nil
 				if vim.opt.background:get() == "light" then
-					require("indent_guides").setup({
-						even_colors = { fg = "#FC5C94", bg = "#FC5C94" },
-						odd_colors = { fg = "#333333", bg = "#333333" },
-						indent_guide_size = 1,
-					})
+					even_colors = { fg = "#FC5C94", bg = "#FC5C94" }
+					odd_colors = { fg = "#333333", bg = "#333333" }
 				else
-					require("indent_guides").setup({
-						even_colors = { fg = "#5d4d7a", bg = "#5d4d7a" },
-						odd_colors = { fg = "#cdcdcd", bg = "#cdcdcd" },
-						indent_guide_size = 1,
-					})
+					even_colors = { fg = "#5d4d7a", bg = "#5d4d7a" }
+					odd_colors = { fg = "#cdcdcd", bg = "#cdcdcd" }
 				end
-				require("indent_guides").indent_guides_enable()
+				require("indent_guides").setup({
+					indent_levels = 30,
+					indent_guide_size = 1,
+					indent_start_level = 1,
+					indent_enable = true,
+					indent_space_guides = true,
+					indent_tab_guides = false,
+					indent_soft_pattern = "\\s",
+					exclude_filetypes = {
+						"help",
+						"dashboard",
+						"dashpreview",
+						"NvimTree",
+						"vista",
+						"sagahover",
+						"aerial",
+						"AERIAL",
+						"minimap",
+						"Minimap",
+						"MINIMAP",
+						"-MINIMAP",
+					},
+					even_colors = even_colors,
+					odd_colors = odd_colors,
+				})
 			end,
 		})
 		-- a virtual scrollbar with sign support
@@ -146,13 +166,13 @@ return require("packer").startup({
 		use({ "nvim-telescope/telescope.nvim" })
 		use({ "fhill2/telescope-ultisnips.nvim" })
 		use({ "nvim-telescope/telescope-smart-history.nvim" })
-		-- use {
-		--     'nvim-telescope/telescope-frecency.nvim',
-		--     requires = {'tami5/sql.nvim'},
-		--     config = function()
-		--         require('telescope').load_extension('frecency')
-		--     end
-		-- }
+		use({
+			"nvim-telescope/telescope-frecency.nvim",
+			requires = { "tami5/sql.nvim" },
+			config = function()
+				require("telescope").load_extension("frecency")
+			end,
+		})
 		use({ "nvim-telescope/telescope-symbols.nvim" })
 		use({ "nvim-telescope/telescope-github.nvim" })
 		-- use {
@@ -177,7 +197,9 @@ return require("packer").startup({
 					history = 1000,
 					enable_persistant_history = true,
 					db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
-					filter = nil,
+					filter = function()
+						return true
+					end,
 					preview = true,
 					default_register = '"',
 					content_spec_column = false,
@@ -244,15 +266,33 @@ return require("packer").startup({
 		-- use {'pechorin/any-jump.vim'}
 		use({ "kshenoy/vim-signature" })
 		use({ "kyazdani42/nvim-web-devicons" })
+		use({
+			"folke/trouble.nvim",
+			requires = "kyazdani42/nvim-web-devicons",
+			config = require("config/trouble").setup,
+		})
+		use({
+			"wfxr/minimap.vim",
+			run = "cargo install --locked code-minimap",
+			config = require("config/minimap").setup,
+		})
 		-- use({
-		-- 	"folke/trouble.nvim",
-		-- 	requires = "kyazdani42/nvim-web-devicons",
+		-- 	"onsails/diaglist.nvim",
 		-- 	config = function()
-		-- 		require("trouble").setup({})
+		-- 		require("diaglist").init({
+		-- 			-- increase for noisy servers
+		-- 			debounce_ms = 1000,
+		-- 			-- use loclist for buf_diag only => false
+		-- 			-- use qflist for buf_diag only => true -> losing all diag list
+		-- 			buf_clients_only = false,
+		-- 		})
 		-- 	end,
 		-- })
 		use({ "mhinz/vim-grepper" })
-		use({ "kevinhwang91/nvim-bqf" })
+		use({
+			"kevinhwang91/nvim-bqf",
+			config = require("config/bqf"),
+		})
 		-- use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
 		-- use({ "ray-x/guihua.lua", run = "cd lua/fzy && make" })
 		-- use({ "ray-x/navigator.lua", requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" } })
@@ -298,6 +338,7 @@ return require("packer").startup({
 		-- use {'cstrap/python-snippets'}
 		-- use {'ylcnfrht/vscode-python-snippet-pack'}
 		use({ "xabikos/vscode-javascript" })
+		use({ "stevearc/vim-vsnip-snippets" })
 		-- use {'golang/vscode-go'}
 		-- use {'rust-lang/vscode-rust'}
 		-- use({
