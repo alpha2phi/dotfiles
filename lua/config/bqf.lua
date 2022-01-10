@@ -1,18 +1,18 @@
 ---@diagnostic disable: undefined-global
-local fn = vim.fn
-local cmd = vim.cmd
-local api = vim.api
 
-cmd([[
+local config = {}
+
+-- https://github.com/mhinz/vim-grepper
+vim.g.grepper = { tools = { "rg", "grep" }, searchreg = 1 }
+
+vim.cmd([[
     packadd nvim-bqf
     packadd fzf
     packadd nvim-treesitter
     packadd vim-grepper
 ]])
 
--- https://github.com/mhinz/vim-grepper
-vim.g.grepper = { tools = { "rg", "grep" }, searchreg = 1 }
-cmd(([[
+vim.cmd(([[
     aug Grepper
         au!
         au User Grepper ++nested %s
@@ -20,7 +20,7 @@ cmd(([[
 ]]):format([[call setqflist([], 'r', {'context': {'bqf': {'pattern_hl': '\%#' . getreg('/')}}})]]))
 
 -- try `gsiw` under word
-cmd([[
+vim.cmd([[
     nmap gs  <plug>(GrepperOperator)
     xmap gs  <plug>(GrepperOperator)
 ]])
@@ -30,7 +30,7 @@ vim.cmd([[
     hi link BqfPreviewRange Search
 ]])
 
-return function()
+function config.setup()
 	require("bqf").setup({
 		auto_enable = true,
 		preview = {
@@ -69,3 +69,5 @@ return function()
 		},
 	})
 end
+
+return config

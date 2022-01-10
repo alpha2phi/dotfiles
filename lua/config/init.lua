@@ -1,6 +1,4 @@
 -- lsp
-require("config.treesitter")
-require("config.aerial")
 require("config.wilder")
 -- require("config.navigator")
 require("config.lightbulb")

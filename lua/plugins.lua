@@ -40,7 +40,7 @@ return require("packer").startup({
 		use({
 			"gelguy/wilder.nvim",
 			config = function()
-				require("config.wilder")
+				require("config/wilder")
 			end,
 		})
 		use({ "wellle/targets.vim" })
@@ -155,8 +155,8 @@ return require("packer").startup({
 		use({ "folke/tokyonight.nvim" })
 
 		-- Testing
-		-- use {'vim-test/vim-test'}
-		-- use { "rcarriga/vim-ultest", run = ":UpdateRemotePlugins" }
+		use({ "vim-test/vim-test" })
+		use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
 
 		-- Telescope
 		use({ "tami5/sqlite.lua" })
@@ -190,7 +190,7 @@ return require("packer").startup({
 				require("session-lens").setup({
 					path_display = { "shorten" },
 					theme_conf = { border = false },
-					previewer = true,
+					previewer = false,
 				})
 			end,
 		})
@@ -309,14 +309,12 @@ return require("packer").startup({
 		use({ "mhinz/vim-grepper" })
 		use({
 			"kevinhwang91/nvim-bqf",
-			config = require("config/bqf"),
+			config = function()
+				require("config/bqf").setup()
+			end,
 		})
-		-- use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
-		-- use({ "ray-x/guihua.lua", run = "cd lua/fzy && make" })
-		-- use({ "ray-x/navigator.lua", requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" } })
 		-- use({ "junegunn/vim-peekaboo" })
 		-- use {'gennaro-tedesco/nvim-peekup'}
-		-- use {'wellle/context.vim'}
 		-- use {'lukas-reineke/indent-blankline.nvim' }
 		-- use {'Yggdroot/indentLine' }
 		-- use({
@@ -427,7 +425,13 @@ return require("packer").startup({
 		-- use({ "othree/yajs.vim" }) -- probably included in polyglot
 		use({ "othree/es.next.syntax.vim" })
 		use({ "othree/javascript-libraries-syntax.vim" })
-		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+		use({
+			"nvim-treesitter/nvim-treesitter",
+			run = ":TSUpdate",
+			config = function()
+				require("config/treesitter").setup()
+			end,
+		})
 		use({ "nvim-treesitter/nvim-treesitter-refactor" })
 		use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 		use({
@@ -526,7 +530,12 @@ return require("packer").startup({
 		-- }
 		-- use({ "simrat39/symbols-outline.nvim" })
 		-- aerial is an lsp-outline
-		use({ "stevearc/aerial.nvim" })
+		use({
+			"stevearc/aerial.nvim",
+			config = function()
+				require("config/aerial").setup()
+			end,
+		})
 		-- use({
 		-- "ldelossa/litee.nvim",
 		-- config = function()

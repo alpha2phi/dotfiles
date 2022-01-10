@@ -16,6 +16,7 @@ nest.applyKeymaps({
 		{
 			{ "b", "<Cmd>BufferLineCyclePrev<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" },
+			{ "e", "<plug>(ultest-prev-fail)" },
 			{ "q", "<Cmd>cprev<CR>" },
 			{ "t", "<Cmd>FloatermPrev<CR>" },
 			{ "w", "<Cmd>tabprevious<CR>" },
@@ -28,6 +29,7 @@ nest.applyKeymaps({
 		{
 			{ "b", "<Cmd>BufferLineCycleNext<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" },
+			{ "e", "<plug>(ultest-next-fail)" },
 			{ "q", "<Cmd>cnext<CR>" },
 			{ "t", "<Cmd>FloatermNext<CR>" },
 			{ "w", "<Cmd>tabnext<CR>" },
@@ -94,6 +96,15 @@ nest.applyKeymaps({
 				{ "p", "<Cmd>BufferLinePick<CR>" },
 			} },
 			{ "D", "<Cmd>DogeGenerate jsdoc<CR>" },
+			{
+				"e",
+				{
+					{ "<C-c>", "<plug>(ultest-stop-file)" },
+					{ "*", "<plug>(ultest-run-file)" },
+					{ ".", "<plug>(ultest-run-nearest)" },
+					{ "h", "<plug>(ultest-run-last)" },
+				},
+			},
 			{
 				"f",
 				{
@@ -254,6 +265,7 @@ nest.applyKeymaps({
 					{ "C", "<Cmd>TSContextToggle<CR>" },
 					{ "d", "<Cmd>TroubleToggle<CR>" },
 					-- { "D", ":lua require('dapui').toggle()" },
+					{ "e", "<plug>(ultest-summary-toggle)" },
 					{
 						"f",
 						{
@@ -298,6 +310,7 @@ nest.applyKeymaps({
 			{
 				"w",
 				{
+					{ "e", "<plug>(ultest-summary-jump)" },
 					{ "n", "<Cmd>tabnew<CR>" },
 					{ "q", "<Cmd>tabclose<CR>" },
 					{ "o", "<Cmd>lua require('aerial').focus()<CR>" },
