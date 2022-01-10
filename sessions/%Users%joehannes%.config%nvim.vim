@@ -11,9 +11,9 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd init.lua
-edit lua/config/copilot.lua
+edit lua/config/auto_session.lua
 argglobal
-balt lua/keymappings.lua
+balt lua/plugins.lua
 setlocal fdm=expr
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
@@ -22,22 +22,19 @@ setlocal fdl=1
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 9 - ((8 * winheight(0) + 38) / 77)
+let s:l = 5 - ((4 * winheight(0) + 38) / 77)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 9
-normal! 047|
+keepjumps 5
+normal! 046|
 lcd ~/.config/nvim
+if exists(':tcd') == 2 | tcd ~/.config/nvim | endif
 tabnext 1
-badd +308 ~/.config/nvim/lua/keymappings.lua
-badd +12 ~/.config/nvim/init.lua
-badd +22 ~/.config/nvim/lua/plugins.lua
-badd +17 ~/.config/nvim/lua/config/aerial.lua
-badd +16 ~/.config/nvim/lua/config/auto_session.lua
-badd +14 ~/.config/nvim/lua/config/minimap.lua
-badd +22 ~/.config/nvim/lua/settings.lua
-badd +9 ~/.config/nvim/lua/config/copilot.lua
+badd +47 ~/.config/nvim/init.lua
+badd +5 ~/.config/nvim/lua/config/auto_session.lua
+badd +91 ~/.config/nvim/lua/config/telescope.lua
+badd +377 ~/.config/nvim/lua/plugins.lua
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

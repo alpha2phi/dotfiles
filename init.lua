@@ -47,30 +47,3 @@ vim.cmd("au VimEnter * call wilder#setup()")
 vim.cmd("au VimLeavePre * exec BookmarkSave $HOME/.config/nvim/bookmarks")
 vim.cmd("au BufWritePost plugins.lua luafile $HOME/.config/nvim/init.lua")
 vim.cmd("au BufWritePost plugins.lua PackerCompile")
-vim.cmd([[
-	function! ToggleQuickFix()
-    if empty(filter(getwininfo(), 'v:val.quickfix'))
-        copen
-    else
-        cclose
-    endif
-	endfunction
-
-	function! ToggleQuickLoc()
-    if empty(filter(getwininfo(), 'v:val.loclist'))
-        lopen
-    else
-        lclose
-    endif
-	endfunction
-
-	function! ToggleBackgroundLightness()
-    if &background ==# 'dark'
-        set background=light
-        lua require("indent_guides").setup({ even_colors = { fg = "#FC5C94", bg = "#FC5C94" }, odd_colors = { fg = "#333333", bg = "#333333" }, indent_guide_size = 1 })
-    else
-        set background=dark
-				lua require("indent_guides").setup({ even_colors = { fg = "#5d4d7a", bg = "#5d4d7a" }, odd_colors = { fg = "#cdcdcd", bg = "#cdcdcd" }, indent_guide_size = 1 })
-    endif
-	endfunction
-]])

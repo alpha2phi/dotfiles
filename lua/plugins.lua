@@ -128,8 +128,8 @@ return require("packer").startup({
 				})
 			end,
 		})
-		-- a virtual scrollbar with sign support
 
+		-- colorschemes
 		use({ "rktjmp/lush.nvim" })
 		use({ "savq/melange" })
 		-- use({ "adisen99/codeschool.nvim" })
@@ -186,6 +186,13 @@ return require("packer").startup({
 		use({
 			"rmagatti/session-lens",
 			requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
+			config = function()
+				require("session-lens").setup({
+					path_display = { "shorten" },
+					theme_conf = { border = false },
+					previewer = true,
+				})
+			end,
 		})
 		use({ "tom-anders/telescope-vim-bookmarks.nvim" })
 		-- use({ "nvim-telescope/telescope-snippets.nvim" })
@@ -272,9 +279,20 @@ return require("packer").startup({
 			config = require("config/trouble").setup,
 		})
 		use({
+			"petertriho/nvim-scrollbar",
+			config = function()
+				require("config/scrollbar").setup()
+			end,
+		})
+		use({
+			"kevinhwang91/nvim-hlslens",
+			config = function()
+				require("config/hlslens").setup()
+			end,
+		})
+		use({
 			"wfxr/minimap.vim",
 			run = "cargo install --locked code-minimap",
-			config = require("config/minimap").setup,
 		})
 		-- use({
 		-- 	"onsails/diaglist.nvim",

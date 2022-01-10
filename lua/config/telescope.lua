@@ -108,18 +108,13 @@ telescope.extensions.vim_bookmarks.all({
 		return true
 	end,
 })
+
 telescope.extensions.vim_bookmarks.current_file({
 	attach_mappings = function(_, map)
 		map("n", "dd", bookmark_actions.delete_selected_or_at_cursor)
 
 		return true
 	end,
-})
-
-require("session-lens").setup({
-	path_display = { "shorten" },
-	theme_conf = { border = false },
-	previewer = false,
 })
 
 local M = {}

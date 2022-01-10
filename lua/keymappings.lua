@@ -35,13 +35,17 @@ nest.applyKeymaps({
 			{ "m", "<Cmd>BookmarkNext<CR>" },
 		},
 	},
+	{ "*", "*<cmd>lua require('hlslens').start()<CR>" },
+	{ "#", "#<cmd>lua require('hlslens').start()<CR>" },
 	{
 		"g",
 		{
+			{ "*", "g*<cmd>lua require('hlslens').start()<CR>" },
+			{ "#", "g#<cmd>lua require('hlslens').start()<CR>" },
 			{ "$", "<Cmd>Telescope treesitter<CR>" },
 			{ "d", "<Cmd>lua vim.lsp.buf.definition()<CR>" },
 			{ "D", "<Cmd>lua vim.lsp.buf.declaration()<CR>" },
-			{ "i", "<cmd>lua vim.lsp.buf.implementation()<CR>" },
+			-- { "i", "<cmd>lua vim.lsp.buf.implementation()<CR>" },
 			{ "I*", "<cmd>TSLspImportAll<CR>" },
 			{ "I.", "<cmd>TSLspImportCurrent<CR>" },
 			{ "j", "<C-i>" },
@@ -55,6 +59,8 @@ nest.applyKeymaps({
 		},
 	},
 	{ "K", "<cmd>Lspsaga hover_doc<cr>" },
+	{ "n", "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>" },
+	{ "N", "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>" },
 	-- { "T", calltree.hover_calltree },
 	{
 		"<leader>",
@@ -257,6 +263,7 @@ nest.applyKeymaps({
 					},
 					{ "F", "<Cmd>Twilight<CR>" },
 					{ "m", "<Cmd>BookmarkToggle<CR>" },
+					{ "M", "<Cmd>MinimapToggle<CR>" },
 					{ "o", "<Cmd>AerialToggle right<CR>" },
 					{
 						"q",

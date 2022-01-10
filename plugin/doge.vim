@@ -9,9 +9,7 @@ let g:doge_filetype_aliases = {
 \  'javascript': [
 \    'javascript',
 \    'javascriptreact',
-\    'javascript.jsx'
-\   ],
-\   'typescript': [
+\    'javascript.jsx',
 \    'typescript',
 \    'typescriptreact',
 \    'typescript.tsx'

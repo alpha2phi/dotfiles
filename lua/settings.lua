@@ -12,7 +12,7 @@ o.qftf = "{info -> v:lua.qftf(info)}"
 o.termguicolors = true
 o.hidden = true
 o.ignorecase = true
-o.scrolloff = 21
+o.scrolloff = 50
 o.splitbelow = true
 o.splitright = true
 o.clipboard = "unnamed,unnamedplus"
@@ -179,3 +179,36 @@ vim.api.nvim_exec(
 ]],
 	false
 )
+
+cmd([[
+	let g:minimap_width = 21
+	let g:minimap_auto_start = 0
+	let g:minimap_auto_start_win_enter = 0
+	let g:minimap_git_colors = 1
+
+	function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+    else
+        cclose
+    endif
+	endfunction
+
+	function! ToggleQuickLoc()
+    if empty(filter(getwininfo(), 'v:val.loclist'))
+        lopen
+    else
+        lclose
+    endif
+	endfunction
+
+	function! ToggleBackgroundLightness()
+    if &background ==# 'dark'
+        set background=light
+        lua require("indent_guides").setup({ even_colors = { fg = "#FC5C94", bg = "#FC5C94" }, odd_colors = { fg = "#333333", bg = "#333333" }, indent_guide_size = 1 })
+    else
+        set background=dark
+				lua require("indent_guides").setup({ even_colors = { fg = "#5d4d7a", bg = "#5d4d7a" }, odd_colors = { fg = "#cdcdcd", bg = "#cdcdcd" }, indent_guide_size = 1 })
+    endif
+	endfunction
+]])
