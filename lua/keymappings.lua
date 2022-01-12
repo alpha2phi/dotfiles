@@ -275,7 +275,6 @@ nest.applyKeymaps({
 					},
 					{ "F", "<Cmd>Twilight<CR>" },
 					{ "m", "<Cmd>BookmarkToggle<CR>" },
-					{ "M", "<Cmd>MinimapToggle<CR>" },
 					{ "o", "<Cmd>AerialToggle right<CR>" },
 					{
 						"q",

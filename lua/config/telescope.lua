@@ -1,45 +1,24 @@
 ---@diagnostic disable: undefined-global
-local trouble = require("trouble.providers.telescope")
-local telescope = require("telescope")
-local actions = require("telescope.actions")
+local config = {}
 
-telescope.setup({
-	find_command = {
-		"rg",
-		"--no-heading",
-		"--with-filename",
-		"--line-number",
-		"--column",
-		"--smart-case",
-	},
-	use_less = true,
-	file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-	grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-	qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-	extensions = {
-		-- arecibo = {
-		--     ["selected_engine"] = 'google',
-		--     ["url_open_command"] = 'open',
-		--     ["show_http_headers"] = false,
-		--     ["show_domain_icons"] = false
+function config.setup()
+	local trouble = require("trouble.providers.telescope")
+	local telescope = require("telescope")
+	local actions = require("telescope.actions")
+
+	telescope.setup({
+		-- find_command = {
+		-- 	"rg",
+		-- 	"--no-heading",
+		-- 	"--with-filename",
+		-- 	"--line-number",
+		-- 	"--column",
+		-- 	"--smart-case",
 		-- },
-		media_files = {
-			filetypes = { "png", "webp", "jpg", "jpeg", "mp4", "webm", "pdf" },
-			find_cmd = "rg",
-		},
-		fzf = {
-			override_generic_sorter = false,
-			override_file_sorter = true,
-			case_mode = "smart_case",
-		},
-		project = {
-			base_dirs = {
-				{ path = "~/.local/git", max_depth = 3 },
-			},
-			hidden_files = true,
-		},
-	},
-	defaults = {
+		-- use_less = true,
+		-- file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+		-- grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+		-- qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 		pickers = {
 			spell_suggest = {
 				theme = "cursor",
@@ -75,72 +54,69 @@ telescope.setup({
 				},
 			},
 		},
-		mappings = {
-			i = { ["<c-t>"] = trouble.open_with_trouble },
-			n = { ["<c-t>"] = trouble.open_with_trouble },
+		extensions = {
+			-- arecibo = {
+			--     ["selected_engine"] = 'google',
+			--     ["url_open_command"] = 'open',
+			--     ["show_http_headers"] = false,
+			--     ["show_domain_icons"] = false
+			-- },
+			frecency = {
+				db_root = vim.fn.stdpath("data") .. "/databases/",
+				show_scores = false,
+				show_unindexed = true,
+				ignore_patterns = { "*.git/*", "*/tmp/*" },
+				disable_devicons = false,
+				workspaces = {
+					["conf"] = vim.fn.expand("$HOME") .. "/.config",
+					["data"] = vim.fn.expand("$HOME") .. "/.local/share",
+					["project"] = vim.fn.expand("$HOME") .. "./.local/git",
+					["wiki"] = vim.fn.expand("$HOME") .. "/wiki",
+				},
+			},
+			media_files = {
+				filetypes = { "png", "webp", "jpg", "jpeg", "mp4", "webm", "pdf" },
+				find_cmd = "rg",
+			},
+			fzf = {
+				fuzzy = true,
+				override_generic_sorter = true,
+				override_file_sorter = true,
+				case_mode = "smart_case",
+			},
+			project = {
+				base_dirs = {
+					{ path = "~/.config/nvim" },
+					{ path = "~/.local/git", max_depth = 3 },
+				},
+				hidden_files = true,
+			},
 		},
-		history = {
-			path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
-			limit = 100,
+		defaults = {
+			mappings = {
+				i = { ["<c-t>"] = trouble.open_with_trouble },
+				n = { ["<c-t>"] = trouble.open_with_trouble },
+			},
+			history = {
+				path = vim.fn.stdpath("data") .. "/databases/telescope_history.sqlite3",
+				limit = 100,
+			},
 		},
-	},
-})
-
-telescope.load_extension("fzf")
-telescope.load_extension("gh")
--- telescope.load_extension("node_modules")
-telescope.load_extension("session-lens")
-telescope.load_extension("vim_bookmarks")
--- telescope.load_extension("ultisnips")
-telescope.load_extension("project")
-telescope.load_extension("neoclip")
-telescope.load_extension("smart_history")
-telescope.load_extension("aerial")
--- require('telescope').load_extension('snippets')
--- require('telescope').load_extension('arecibo')
-telescope.load_extension("media_files")
-
-local bookmark_actions = telescope.extensions.vim_bookmarks.actions
-telescope.extensions.vim_bookmarks.all({
-	attach_mappings = function(_, map)
-		map("n", "dd", bookmark_actions.delete_selected_or_at_cursor)
-
-		return true
-	end,
-})
-
-telescope.extensions.vim_bookmarks.current_file({
-	attach_mappings = function(_, map)
-		map("n", "dd", bookmark_actions.delete_selected_or_at_cursor)
-
-		return true
-	end,
-})
-
-local M = {}
-
-M.search_dotfiles = function()
-	require("telescope.builtin").find_files({
-		prompt_title = "< VimRC >",
-		cwd = "$HOME/.config/nvim/",
 	})
+
+	telescope.load_extension("fzf")
+	telescope.load_extension("gh")
+	-- telescope.load_extension("node_modules")
+	-- telescope.load_extension("session-lens")
+	telescope.load_extension("vim_bookmarks")
+	telescope.load_extension("project")
+	telescope.load_extension("neoclip")
+	telescope.load_extension("smart_history")
+	telescope.load_extension("aerial")
+	-- require('telescope').load_extension('snippets')
+	-- require('telescope').load_extension('arecibo')
+	telescope.load_extension("media_files")
+	telescope.load_extension("frecency")
 end
 
-M.switch_projects = function()
-	require("telescope.builtin").find_files({
-		prompt_title = "< Switch Project >",
-		cwd = "$HOME/.local/git/",
-	})
-end
-
-M.git_branches = function()
-	require("telescope.builtin").git_branches({
-		attach_mappings = function(prompt_bufnr, map)
-			map("i", "<c-d>", actions.git_delete_branch)
-			map("n", "<c-d>", actions.git_delete_branch)
-			return true
-		end,
-	})
-end
-
-return M
+return config

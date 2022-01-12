@@ -4,8 +4,9 @@ vim.cmd([[packadd packer.nvim]])
 return require("packer").startup({
 	function(use)
 		use({ "wbthomason/packer.nvim" })
-		use({ "stevearc/dressing.nvim" })
 
+		--helper libs and deps
+		use({ "stevearc/dressing.nvim" })
 		use({
 			"rcarriga/nvim-notify",
 			event = "VimEnter",
@@ -13,9 +14,28 @@ return require("packer").startup({
 				vim.notify = require("notify")
 			end,
 		})
+		use({ "nvim-lua/popup.nvim" })
+		use({ "nvim-lua/plenary.nvim" })
+		use({ "tami5/sqlite.lua" })
+		use({ "Olical/aniseed" })
+
+		--keymappings
 		use({ "LionC/nest.nvim" })
 
-		use({ "Olical/aniseed" })
+		--icons
+		use({
+			"mortepau/codicons.nvim",
+			config = function()
+				require("config/codicons").setup()
+			end,
+		})
+		use({
+			"kyazdani42/nvim-web-devicons",
+			config = function()
+				require("config/devicon").setup()
+			end,
+		})
+
 		-- Development
 		use({ "junegunn/fzf", run = "-> fzf#install()" })
 		use({ "junegunn/fzf.vim" })
@@ -30,6 +50,13 @@ return require("packer").startup({
 		use({ "tpope/vim-repeat" })
 		-- use {'guns/vim-sexp'}
 		-- use {'tpope/vim-sexp-mappings-for-regular-people'}
+		use({
+			"rmagatti/auto-session",
+			config = function()
+				require("config/auto_session").setup()
+			end,
+		})
+
 		use({
 			"anuvyklack/pretty-fold.nvim",
 			config = function()
@@ -53,7 +80,12 @@ return require("packer").startup({
 			end,
 		})
 		use({ "indianboy42/hop-extensions" })
-		use({ "karb94/neoscroll.nvim" })
+		use({
+			"karb94/neoscroll.nvim",
+			config = function()
+				require("config/scroll").setup()
+			end,
+		})
 		use({
 			"edluffy/specs.nvim",
 			config = function()
@@ -81,12 +113,28 @@ return require("packer").startup({
 		use({ "windwp/vim-floaterm-repl" })
 		-- use({ "jiangmiao/auto-pairs" })
 		use({ "windwp/nvim-ts-autotag" })
-		use({ "windwp/nvim-autopairs" })
-		use({ "norcalli/nvim-colorizer.lua" })
+		use({
+			"windwp/nvim-autopairs",
+			requires = { "windwp/nvim-ts-autotag" },
+			config = function()
+				require("config/autopairs").setup()
+			end,
+		})
+		use({
+			"norcalli/nvim-colorizer.lua",
+			config = function()
+				require("config/colorizer").setup()
+			end,
+		})
 		use({ "lokaltog/neoranger" })
 		use({ "diepm/vim-rest-console" })
 		-- use({ "hkupty/iron.nvim" }) --Interactive REPL
-		use({ "kosayoda/nvim-lightbulb" })
+		use({
+			"kosayoda/nvim-lightbulb",
+			config = function()
+				require("config/lightbulb").setup()
+			end,
+		})
 		-- Color
 		use({
 			"glepnir/indent-guides.nvim",
@@ -121,7 +169,7 @@ return require("packer").startup({
 						"minimap",
 						"Minimap",
 						"MINIMAP",
-						"-MINIMAP",
+						"-MINIMAP-",
 					},
 					even_colors = even_colors,
 					odd_colors = odd_colors,
@@ -158,35 +206,38 @@ return require("packer").startup({
 		use({ "vim-test/vim-test" })
 		use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
 
+		-- Debugging
+		use({ "puremourning/vimspector" })
+
 		-- Telescope
-		use({ "tami5/sqlite.lua" })
-		use({ "nvim-lua/plenary.nvim" })
-		-- use {'ludovicchabant/vim-gutentags'}
-		use({ "nvim-lua/popup.nvim" })
-		use({ "nvim-telescope/telescope.nvim" })
-		use({ "fhill2/telescope-ultisnips.nvim" })
-		use({ "nvim-telescope/telescope-smart-history.nvim" })
 		use({
-			"nvim-telescope/telescope-frecency.nvim",
-			requires = { "tami5/sql.nvim" },
-			config = function()
-				require("telescope").load_extension("frecency")
-			end,
+			"nvim-telescope/telescope-fzf-native.nvim",
+			run = "make",
 		})
-		use({ "nvim-telescope/telescope-symbols.nvim" })
-		use({ "nvim-telescope/telescope-github.nvim" })
-		-- use {
-		--     'nvim-telescope/telescope-arecibo.nvim',
-		--     rocks = {"openssl", "lua-http-parser"}
-		-- }
-		use({ "nvim-telescope/telescope-media-files.nvim" })
-		-- use { 'nvim-telescope/telescope-packer.nvim ' }
-		use({ "sudormrfbin/cheatsheet.nvim" })
-		use({ "rmagatti/auto-session" })
 		use({
-			"rmagatti/session-lens",
-			requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
+			"nvim-telescope/telescope.nvim",
+			requires = {
+				"nvim-lua/popup.nvim",
+				"nvim-lua/plenary.nvim",
+				"tami5/sqlite.lua",
+				"nvim-telescope/telescope-project.nvim",
+				"nvim-telescope/telescope-smart-history.nvim",
+				"nvim-telescope/telescope-frecency.nvim",
+				"nvim-telescope/telescope-symbols.nvim",
+				"nvim-telescope/telescope-github.nvim",
+				"nvim-telescope/telescope-media-files.nvim",
+				"tom-anders/telescope-vim-bookmarks.nvim",
+				"sudormrfbin/cheatsheet.nvim",
+				"AckslD/nvim-neoclip.lua",
+				"rmagatti/auto-session",
+				"rmagatti/session-lens",
+			},
 			config = function()
+				local config = require("config/telescope")
+				local neoclip = require("config/neoclip")
+
+				config.setup()
+				neoclip.setup()
 				require("session-lens").setup({
 					path_display = { "shorten" },
 					theme_conf = { border = false },
@@ -194,58 +245,32 @@ return require("packer").startup({
 				})
 			end,
 		})
-		use({ "tom-anders/telescope-vim-bookmarks.nvim" })
+
+		-- use {
+		--     'nvim-telescope/telescope-arecibo.nvim',
+		--     rocks = {"openssl", "lua-http-parser"}
+		-- }
+		-- use { 'nvim-telescope/telescope-packer.nvim ' }
 		-- use({ "nvim-telescope/telescope-snippets.nvim" })
-		use({
-			"AckslD/nvim-neoclip.lua",
-			requires = { "tami5/sqlite.lua", module = "sqlite" },
-			config = function()
-				require("neoclip").setup({
-					history = 1000,
-					enable_persistant_history = true,
-					db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
-					filter = function()
-						return true
-					end,
-					preview = true,
-					default_register = '"',
-					content_spec_column = false,
-					on_paste = {
-						set_reg = false,
-					},
-					keys = {
-						telescope = {
-							i = {
-								select = "<cr>",
-								paste = "<c-p>",
-								paste_behind = "<c-P>",
-								custom = {},
-							},
-							n = {
-								select = "<cr>",
-								paste = "p",
-								paste_behind = "P",
-								custom = {},
-							},
-						},
-						fzf = {
-							select = "default",
-							paste = "ctrl-p",
-							paste_behind = "ctrl-P",
-							custom = {},
-						},
-					},
-				})
-			end,
-		})
 
 		-- Better LSP experience
 		-- LSP config
 		use({ "neovim/nvim-lspconfig", "williamboman/nvim-lsp-installer" })
 		-- use({ "glepnir/lspsaga.nvim" })
 		-- use({ "jasonrhansen/lspsaga.nvim", branch = "finder-preview-fixes" })
-		use({ "tami5/lspsaga.nvim" })
-		use({ "onsails/lspkind-nvim" })
+		use({
+			"tami5/lspsaga.nvim",
+			requires = { "neovim/nvim-lspconfig", "williamboman/nvim-lsp-installer" },
+			config = function()
+				require("config/lspsaga").setup()
+			end,
+		})
+		use({
+			"onsails/lspkind-nvim",
+			config = function()
+				require("config/lspkind").setup()
+			end,
+		})
 		use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
 		use({
 			"creativenull/efmls-configs-nvim",
@@ -262,21 +287,31 @@ return require("packer").startup({
 				})
 			end,
 		})
-		use({ "mortepau/codicons.nvim" })
 		-- use {'sbdchd/neoformat'}
-		use({ "mhartington/formatter.nvim" })
+		use({
+			"mhartington/formatter.nvim",
+			config = function()
+				require("config/formatter").setup()
+			end,
+		})
 		use({ "p00f/nvim-ts-rainbow" })
 		use({ "ray-x/lsp_signature.nvim" })
-		use({ "folke/lsp-colors.nvim" })
+		use({
+			"folke/lsp-colors.nvim",
+			config = function()
+				require("config/lspcolors").setup()
+			end,
+		})
 		-- use {'szw/vim-maximizer'}
 		-- use {'dyng/ctrlsf.vim'}
 		-- use {'pechorin/any-jump.vim'}
 		use({ "kshenoy/vim-signature" })
-		use({ "kyazdani42/nvim-web-devicons" })
 		use({
 			"folke/trouble.nvim",
 			requires = "kyazdani42/nvim-web-devicons",
-			config = require("config/trouble").setup,
+			config = function()
+				require("config/trouble").setup()
+			end,
 		})
 		use({
 			"petertriho/nvim-scrollbar",
@@ -290,10 +325,10 @@ return require("packer").startup({
 				require("config/hlslens").setup()
 			end,
 		})
-		use({
-			"wfxr/minimap.vim",
-			run = "cargo install --locked code-minimap",
-		})
+		-- use({
+		-- 	"wfxr/minimap.vim",
+		-- 	run = "cargo install --locked code-minimap",
+		-- })
 		-- use({
 		-- 	"onsails/diaglist.nvim",
 		-- 	config = function()
@@ -343,7 +378,7 @@ return require("packer").startup({
 		use({
 			"github/copilot.vim",
 			config = function()
-				require("config.copilot").setup()
+				require("config/copilot").setup()
 			end,
 		})
 
@@ -397,6 +432,9 @@ return require("packer").startup({
 				"hrsh7th/cmp-nvim-lsp-document-symbol",
 				"David-Kunz/cmp-npm",
 			},
+			config = function()
+				require("config/completion").setup()
+			end,
 		})
 		-- use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
 		-- use {'codota/tabnine-vim'}
@@ -469,7 +507,7 @@ return require("packer").startup({
 		use({
 			"folke/zen-mode.nvim",
 			config = function()
-				require("zen-mode").setup({})
+				require("config/zen").setup()
 			end,
 		})
 		use({
@@ -511,7 +549,13 @@ return require("packer").startup({
 		-- use {'nvim-treesitter/playground'}
 
 		-- UI/UX ... Dashboard, tabline...
-		use({ "akinsho/nvim-bufferline.lua", requires = "kyazdani42/nvim-web-devicons" })
+		use({
+			"akinsho/nvim-bufferline.lua",
+			requires = "kyazdani42/nvim-web-devicons",
+			config = function()
+				require("config/bufferline").setup()
+			end,
+		})
 		-- use {'glepnir/dashboard-nvim'}
 		-- use { 'romgrk/barbar.nvim' }
 		-- use {'zefei/vim-wintabs'}
@@ -556,15 +600,7 @@ return require("packer").startup({
 			requires = { "kyazdani42/nvim-web-devicons" },
 		})
 
-		-- Debugging
-		use({ "puremourning/vimspector" })
-		use({ "nvim-telescope/telescope-vimspector.nvim" })
-
-		-- Telescope fzf
-		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-
 		-- Project
-		use({ "nvim-telescope/telescope-project.nvim" })
 		use({
 			"ahmedkhalf/project.nvim",
 			config = function()
@@ -781,11 +817,16 @@ return require("packer").startup({
 				})
 			end,
 		})
-		use({ "sindrets/diffview.nvim" })
+		use({
+			"sindrets/diffview.nvim",
+			config = function()
+				require("config/diffview").setup()
+			end,
+		})
 		use({
 			"TimUntersberger/neogit",
 			config = function()
-				require("neogit").setup()
+				require("neogit").setup({ integrations = { diffview = true } })
 			end,
 		})
 
@@ -1044,7 +1085,7 @@ return require("packer").startup({
 						},
 						-- You can use lua's arbitrary key notation to map special characters
 						-- move to end of WORD and enter insert mode after that char
-						[";;"] = "<cmd>stopinsert<cr><cmd>w!<cr><cmd>startinsert<cr><cmd>normal W<cr><cmd>startinsert<cr>",
+						[";;"] = "<cmd>stopinsert<cr><cmd>w!<cr><cmd>startinsert<cr><cmd>normal w<cr><cmd>startinsert<cr>",
 						["<Esc>"] = "<cmd>stopinsert<cr>",
 						-- Use `<cmd>` to map commands. Be carful to terminate the command with `<cr>`.
 						-- ff = "<cmd>echo 'commands work too'<cr>",

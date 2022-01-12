@@ -33,7 +33,6 @@ packer.init({
 })
 
 require("plugins")
-require("config")
 require("statusline")
 
 if not Packer_bootstrap == nil then
@@ -42,8 +41,9 @@ end
 
 require("lang")
 require("keymappings")
+require("config/colorschemes")
 
-vim.cmd("au VimEnter * call wilder#setup()")
-vim.cmd("au VimLeavePre * exec BookmarkSave $HOME/.config/nvim/bookmarks")
-vim.cmd("au BufWritePost plugins.lua luafile $HOME/.config/nvim/init.lua")
+vim.cmd([[colorscheme PaperColor]])
+vim.cmd([[au VimLeavePre * BookmarkSave]] .. vim.fn.stdpath("config") .. [[/bookmarks]])
+vim.cmd([[au BufWritePost plugins.lua luafile]] .. vim.fn.stdpath("config") .. [[/init.lua]])
 vim.cmd("au BufWritePost plugins.lua PackerCompile")

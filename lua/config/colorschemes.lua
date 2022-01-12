@@ -176,7 +176,3 @@ onedarkpro.setup({
 vim.g.kat_nvim_commentStyle = "italic"
 vim.g.kat_nvim_integrations = { "lsp", "treesitter", "ts_rainbow", "cmp" } --, "bufferline" }
 vim.g.kat_nvim_stupidFeatures = false
-
-vim.cmd([[
-  colorscheme PaperColor
-]])
