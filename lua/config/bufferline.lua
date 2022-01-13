@@ -24,7 +24,7 @@ function config.setup()
 	end
 
 	function groups.mainFG()
-		return "#000000"
+		return "#F634B1"
 	end
 
 	function groups.mainBG()

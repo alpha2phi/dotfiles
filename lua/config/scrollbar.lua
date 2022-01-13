@@ -5,7 +5,7 @@ function config.setup()
 		show = true,
 		handle = {
 			text = " ",
-			color = "magenta",
+			color = "yellow",
 			hide_if_all_visible = true, -- Hides handle if all lines are visible
 		},
 		marks = {

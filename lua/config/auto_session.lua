@@ -10,8 +10,8 @@ function config.setup()
 		auto_save_enabled = true,
 		auto_restore_enabled = true,
 		auto_session_suppress_dirs = false,
-		-- pre_save_cmds = { "MinimapClose" },
-		-- post_save_cmds = { "Minimap" },
+		pre_save_cmds = { "TroubleToggle" },
+		post_save_cmds = { "TroubleToggle" },
 		-- pre_restore_cmds = { "MinimapClose" },
 		-- post_restore_cmds = { "Minimap" },
 	}

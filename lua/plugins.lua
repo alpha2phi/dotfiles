@@ -363,14 +363,14 @@ return require("packer").startup({
 		-- 			signcolumn = false,
 		-- 		}) end,
 		-- })
-		use({
-			"luukvbaal/stabilize.nvim",
-			config = function()
-				require("stabilize").setup({
-					nested = "QuickFixCmdPost,DiagnosticChanged *",
-				})
-			end,
-		})
+		-- use({
+		-- 	"luukvbaal/stabilize.nvim",
+		-- 	config = function()
+		-- 		require("stabilize").setup({
+		-- 			nested = "QuickFixCmdPost,DiagnosticChanged *",
+		-- 		})
+		-- 	end,
+		-- })
 		-- use({ "RishabhRD/popfix" })
 		-- use({ "RishabhRD/nvim-lsputils" })
 		use({ "RRethy/vim-illuminate" })
@@ -439,6 +439,31 @@ return require("packer").startup({
 		-- use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
 		-- use {'codota/tabnine-vim'}
 
+		use({
+			"abecodes/tabout.nvim",
+			config = function()
+				require("tabout").setup({
+					tabkey = ">>", -- key to trigger tabout, set to an empty string to disable
+					backwards_tabkey = "<<", -- key to trigger backwards tabout, set to an empty string to disable
+					act_as_tab = false, -- shift content if tab out is not possible
+					act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+					enable_backwards = true, -- well ...
+					completion = false, -- if the tabkey is used in a completion pum
+					tabouts = {
+						{ open = "'", close = "'" },
+						{ open = '"', close = '"' },
+						{ open = "`", close = "`" },
+						{ open = "(", close = ")" },
+						{ open = "[", close = "]" },
+						{ open = "{", close = "}" },
+					},
+					ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+					exclude = {}, -- tabout will ignore these filetypes
+				})
+			end,
+			wants = { "nvim-treesitter" }, -- or require if not used so far
+			after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
+		})
 		-- Lua development
 		use({ "folke/lua-dev.nvim" })
 		use({ "rafcamlet/nvim-luapad" })
@@ -915,7 +940,7 @@ return require("packer").startup({
 
 		-- bufutilities
 		use({ "smitajit/bufutils.vim" })
-		-- use {'arithran/vim-delete-hidden-buffers'}
+		use({ "arithran/vim-delete-hidden-buffers" })
 
 		-- timetracking
 		-- use {'git-time-metric/gtm-vim-plugin'}
@@ -1069,7 +1094,7 @@ return require("packer").startup({
 						-- They can also be specified in a tree-like format.
 						j = {
 							-- Here `jk` will escape insert mode.
-							k = "<cmd>stopinsert<cr><cmd>w<cr>",
+							k = "<cmd>stopinsert<cr><cmd>w!<cr>",
 							-- You can have as many layers as you want!
 							-- h = {
 							-- 	g = "<cmd>stopinsert<cr>",
@@ -1085,7 +1110,7 @@ return require("packer").startup({
 						},
 						-- You can use lua's arbitrary key notation to map special characters
 						-- move to end of WORD and enter insert mode after that char
-						[";;"] = "<cmd>stopinsert<cr><cmd>w!<cr><cmd>startinsert<cr><cmd>normal w<cr><cmd>startinsert<cr>",
+						[";;"] = "<cmd>stopinsert<cr><cmd>w!<cr><cmd>startinsert<cr><cmd>normal E<cr><cmd>startinsert<cr>",
 						["<Esc>"] = "<cmd>stopinsert<cr>",
 						-- Use `<cmd>` to map commands. Be carful to terminate the command with `<cr>`.
 						-- ff = "<cmd>echo 'commands work too'<cr>",
