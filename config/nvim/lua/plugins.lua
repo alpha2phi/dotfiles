@@ -89,9 +89,7 @@ function M.setup()
     use { "unblevable/quick-scope", event = "VimEnter" }
     use { "voldikss/vim-floaterm", event = "VimEnter" }
     use {
-      -- "folke/which-key.nvim", -- TODO: fix
-      "zeertzjq/which-key.nvim",
-      branch = "patch-1",
+      "folke/which-key.nvim", 
       config = function()
         require("config.whichkey").setup()
       end,
