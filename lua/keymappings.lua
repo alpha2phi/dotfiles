@@ -1,9 +1,10 @@
 ---@diagnostic disable:undefined-global
+local nest = require("nest")
 local preview = require("goto-preview")
 -- local calltree = require("litee.calltree")
-local nest = require("nest")
 
 nest.applyKeymaps({
+	{ "<Del>", '<cmd>lua require("notify").dismiss()<cr>' },
 	{ "<Esc><Esc>", "<cmd>nohl<CR>" },
 	{ "<CR><CR>", "<Cmd>BResizeZoom<CR>" },
 	{ "<A-h>", "<C-w>7<" },
@@ -325,6 +326,7 @@ nest.applyKeymaps({
 		{
 			{ "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
 			{ "<C-K>", "<cmd>Lspsaga hover_doc<cr>" },
+			{ "<Del>", '<cmd>lua require("notify").dismiss()<cr>' },
 		},
 	},
 })

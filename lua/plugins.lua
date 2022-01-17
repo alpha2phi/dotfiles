@@ -6,18 +6,18 @@ return require("packer").startup({
 		use({ "wbthomason/packer.nvim" })
 
 		--helper libs and deps
+		use({ "nvim-lua/plenary.nvim" })
+		use({ "tami5/sqlite.lua" })
 		use({ "stevearc/dressing.nvim" })
+		use({ "nvim-lua/popup.nvim" })
+		use({ "Olical/aniseed" })
 		use({
 			"rcarriga/nvim-notify",
 			event = "VimEnter",
 			config = function()
-				vim.notify = require("notify")
+				require("config/notify").setup()
 			end,
 		})
-		use({ "nvim-lua/popup.nvim" })
-		use({ "nvim-lua/plenary.nvim" })
-		use({ "tami5/sqlite.lua" })
-		use({ "Olical/aniseed" })
 
 		--keymappings
 		use({ "LionC/nest.nvim" })
