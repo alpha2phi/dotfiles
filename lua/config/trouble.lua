@@ -1,6 +1,6 @@
-local trouble = {}
+local config = {}
 
-function trouble.setup()
+function config.setup()
 	local opts = {
 		position = "bottom", -- position of the list can be: bottom, top, left, right
 		height = 10, -- height of the trouble list when position is top or bottom
@@ -37,7 +37,7 @@ function trouble.setup()
 		auto_close = true, -- automatically close the list when you have no diagnostics
 		auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
 		auto_fold = false, -- automatically fold a file trouble list at creation
-		auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
+		auto_jump = {}, -- for the given modes, automatically jump if there is only a single result
 		signs = {
 			-- icons / text used for a diagnostic
 			error = "",
@@ -52,4 +52,4 @@ function trouble.setup()
 	require("trouble").setup(opts)
 end
 
-return trouble
+return config
