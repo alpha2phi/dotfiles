@@ -178,20 +178,22 @@ return require("packer").startup({
 		})
 
 		-- colorschemes
+		-- use({ "tjdevries/colorbuddy.vim" })
 		use({ "rktjmp/lush.nvim" })
 		use({ "savq/melange" })
 		-- use({ "adisen99/codeschool.nvim" })
 		-- use({ "joehannes-ux/lush-jsx.nvim" })
 		use({ "olimorris/onedarkpro.nvim" })
-
+		-- use({ "Iron-E/nvim-highlite" })
 		-- use({ "navarasu/onedark.nvim" })
 		use({ "NLKNguyen/papercolor-theme" })
 		use({ "sainnhe/everforest" })
+		-- use({ "Th3Whit3Wolf/spacebuddy" })
 		use({ "mhartington/oceanic-next" })
 		use({ "kyoz/purify" })
 		use({ "tanvirtin/monokai.nvim" })
 		use({ "catppuccin/nvim", as = "catppuccin" })
-		use({ "joehannes-ux/kat.nvim" })
+		-- use({ "joehannes-ux/kat.nvim" })
 		use({ "sainnhe/edge" })
 		use({ "rafamadriz/neon" })
 		-- use({
@@ -497,6 +499,7 @@ return require("packer").startup({
 		})
 		use({ "nvim-treesitter/nvim-treesitter-refactor" })
 		use({ "nvim-treesitter/nvim-treesitter-textobjects" })
+		use({ "RRethy/nvim-treesitter-textsubjects" })
 		use({
 			"romgrk/nvim-treesitter-context",
 			config = function()
