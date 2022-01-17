@@ -19,7 +19,7 @@ nmap <leader>dk <Plug>VimspectorStepOut<CR>
 nmap <leader>d<CR> <Plug>VimSpectorRunToCursor<CR>
 
 " Integration with telescope.nvim
-nmap <leader>vc :lua require('telescope').extensions.vimspector.configurations()<CR>
+nmap <leader>dc :lua require('telescope').extensions.vimspector.configurations()<CR>
 
 " Inspection
 nnoremap <leader>dgc :call GotoWindow(g:vimspector_session_windows.code)<CR>
