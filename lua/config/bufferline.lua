@@ -4,106 +4,66 @@ vim.opt.termguicolors = true
 local config = {}
 
 function config.setup()
-	local bgroups = require("bufferline.groups")
 	local gps = require("nvim-gps")
 
-	local autoload = (require("aniseed.autoload")).autoload
-	local colors, groups, main, syntax, ucolors =
-		autoload("katdotnvim.color"),
-		autoload("katdotnvim.highlights.main"),
-		autoload("katdotnvim.main"),
-		autoload("katdotnvim.highlights.syntax"),
-		autoload("katdotnvim.utils.color")
-
-	function groups.fillBG()
-		return "#F634B1"
-	end
-
-	function groups.selectionBG()
-		return "#00C4FC"
-	end
-
-	function groups.mainFG()
-		return "#F634B1"
-	end
-
-	function groups.mainBG()
-		return "#333355"
-	end
-
-	function groups.highlightBG()
-		return "#333355"
-	end
-
-	function groups.warningBG()
-		return "#FF0000"
-	end
-
-	local function tabColor(color)
-		local output = ""
+	local function tabColor()
+		local output = "#F634B1"
 		if vim.opt.background:get() == "light" then
-			output = ucolors.brighten(color or groups.mainFG(), 0.5)
+			output = "#F737C7"
 		else
-			output = color or groups.mainFG()
+			output = "#F73090"
 		end
 		return output
 	end
 
-	local function alternateColor(light, dark)
-		if vim.opt.background:get() == "light" then
-			return light
-		end
-		return dark
-	end
-
 	local highlights = {
-		fill = { guifg = groups.fillBG(), guibg = groups.fillBG() },
-		tab = { guifg = tabColor(), guibg = groups.highlightBG() },
-		tab_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
-		tab_close = { guifg = tabColor(), guibg = groups.fillBG(), gui = "bold,italic" },
-		info = { guifg = tabColor(), guibg = groups.selectionBG() },
-		buffer_visible = {
-			guifg = tabColor(),
-			guibg = groups.mainBG(),
-		},
-		buffer_selected = { guifg = tabColor(), guibg = groups.selectionBG(), gui = "bold,italic" },
-		diagnostic = {
-			guifg = tabColor(),
-			guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
-		},
-		diagnostic_visible = {
-			guifg = tabColor(),
-			guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
-		},
-		diagnostic_selected = { guifg = tabColor(), guibg = groups.selectionBG(), gui = "bold,italic" },
-		close_button = { guifg = tabColor(), guibg = groups.highlightBG(), gui = "bold" },
-		close_button_visible = {
-			guifg = tabColor(),
-			guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
-			gui = "bold",
-		},
-		close_button_selected = { guifg = tabColor(), guibg = groups.selectionBG(), gui = "bold" },
-		modified = { guifg = groups.warningBG(), guibg = groups.highlightBG() },
-		modified_visible = {
-			guifg = groups.warningBG(),
-			guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
-		},
-		modified_selected = { guifg = groups.warningBG(), guibg = groups.selectionBG() },
-		duplicate_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
-		duplicate_visible = {
-			guifg = tabColor(),
-			guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
-		},
-		duplicate = { guifg = tabColor(), guibg = groups.highlightBG() },
-		separator_selected = { guifg = groups.fillBG(), guibg = groups.selectionBG() },
+		fill = { guifg = "#000000", guibg = tabColor() },
+		-- background = { guifg = "#000000", guibg = tabColor() },
+		-- tab = { guibg = tabColor() },
+		-- tab_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
+		-- tab_close = { guifg = tabColor(), guibg = groups.fillBG(), gui = "bold,italic" },
+		-- info = { guifg = tabColor(), guibg = groups.selectionBG() },
+		-- buffer_visible = {
+		-- 	guibg = tabColor(),
+		-- },
+		-- buffer_selected = { guibg = tabColor() },
+		-- diagnostic = {
+		-- 	guifg = tabColor(),
+		-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+		-- },
+		-- diagnostic_visible = {
+		-- 	guifg = tabColor(),
+		-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+		-- },
+		-- diagnostic_selected = { guifg = tabColor(), guibg = groups.selectionBG(), gui = "bold,italic" },
+		-- close_button = { guifg = tabColor(), guibg = groups.highlightBG(), gui = "bold" },
+		-- close_button_visible = {
+		-- 	guifg = tabColor(),
+		-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+		-- 	gui = "bold",
+		-- },
+		-- close_button_selected = { guifg = tabColor(), guibg = groups.selectionBG(), gui = "bold" },
+		-- modified = { guibg = "#F53737" },
+		-- modified_visible = {
+		-- 	guifg = groups.warningBG(),
+		-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+		-- },
+		-- modified_selected = { guifg = groups.warningBG(), guibg = groups.selectionBG() },
+		-- duplicate_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
+		-- duplicate_visible = {
+		-- 	guifg = tabColor(),
+		-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+		-- },
+		-- duplicate = { guifg = tabColor(), guibg = groups.highlightBG() },
+		separator_selected = { guifg = tabColor() },
 		separator_visible = {
-			guifg = groups.fillBG(),
-			guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
+			guifg = tabColor(),
+			-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
 		},
-		separator = { guifg = groups.fillBG(), guibg = groups.highlightBG() },
-		indicator_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
-		pick = { guifg = "#FFFFFF", guibg = groups.mainBG() },
-		background = { guifg = "#FFFFFF", guibg = groups.mainBG() },
+		separator = { guifg = tabColor() },
+		-- indicator_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
+		-- pick = { guifg = "#FFFFFF", guibg = groups.mainBG() },
+		-- background = { guifg = "#FFFFFF", guibg = groups.mainBG() },
 	}
 
 	local opts = {
@@ -189,8 +149,8 @@ function config.setup()
 					local result = {}
 
 					if gps.is_available() then
-						table.insert(result, { text = gps.get_location() .. " ", guifg = "magenta", guibg = "black" })
-						table.insert(result, { text = "   ", guifg = "black", guibg = "#F634B1" })
+						table.insert(result, { text = gps.get_location() .. " ", guifg = tabColor(), guibg = "black" })
+						table.insert(result, { text = "   ", guifg = "black", guibg = tabColor() })
 					end
 
 					return result
