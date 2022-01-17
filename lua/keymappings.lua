@@ -16,7 +16,7 @@ nest.applyKeymaps({
 		{
 			{ "b", "<Cmd>BufferLineCyclePrev<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" },
-			{ "e", "<plug>(ultest-prev-fail)" },
+			{ "e", "<Plug>(ultest-prev-fail)" },
 			{ "q", "<Cmd>cprev<CR>" },
 			{ "t", "<Cmd>FloatermPrev<CR>" },
 			{ "w", "<Cmd>tabprevious<CR>" },
@@ -29,7 +29,7 @@ nest.applyKeymaps({
 		{
 			{ "b", "<Cmd>BufferLineCycleNext<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" },
-			{ "e", "<plug>(ultest-next-fail)" },
+			{ "e", "<Plug>(ultest-next-fail)" },
 			{ "q", "<Cmd>cnext<CR>" },
 			{ "t", "<Cmd>FloatermNext<CR>" },
 			{ "w", "<Cmd>tabnext<CR>" },
@@ -99,10 +99,10 @@ nest.applyKeymaps({
 			{
 				"e",
 				{
-					{ "<C-c>", "<plug>(ultest-stop-file)" },
-					{ "*", "<plug>(ultest-run-file)" },
-					{ ".", "<plug>(ultest-run-nearest)" },
-					{ "h", "<plug>(ultest-run-last)" },
+					{ "<C-c>", "<Plug>(ultest-stop-file)" },
+					{ "*", "<Plug>(ultest-run-file)" },
+					{ ".", "<Plug>(ultest-run-nearest)" },
+					{ "h", "<Plug>(ultest-run-last)" },
 				},
 			},
 			{
@@ -265,7 +265,7 @@ nest.applyKeymaps({
 					{ "C", "<Cmd>TSContextToggle<CR>" },
 					{ "d", "<Cmd>TroubleToggle<CR>" },
 					-- { "D", ":lua require('dapui').toggle()" },
-					{ "e", "<plug>(ultest-summary-toggle)" },
+					{ "e", "<Plug>(ultest-summary-toggle)" },
 					{
 						"f",
 						{
@@ -309,7 +309,7 @@ nest.applyKeymaps({
 			{
 				"w",
 				{
-					{ "e", "<plug>(ultest-summary-jump)" },
+					{ "e", "<Plug>(ultest-summary-jump)" },
 					{ "n", "<Cmd>tabnew<CR>" },
 					{ "q", "<Cmd>tabclose<CR>" },
 					{ "o", "<Cmd>lua require('aerial').focus()<CR>" },
@@ -324,6 +324,7 @@ nest.applyKeymaps({
 		mode = "i",
 		{
 			{ "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
+			{ "<C-K>", "<cmd>Lspsaga hover_doc<cr>" },
 		},
 	},
 })
@@ -383,6 +384,34 @@ nest.applyKeymaps({
 					} },
 				},
 			},
+		},
+	},
+})
+
+nest.applyKeymaps({
+	{
+		mode = "o",
+		{
+			{ "is.", "<Plug>(textobj-sandwich-query-i)" },
+			{ "is*", "<Plug>(textobj-sandwich-auto-i)" },
+			{ "is$", "<Plug>(textobj-sandwich-literal-query-i)" },
+			{ "as.", "<Plug>(textobj-sandwich-query-a)" },
+			{ "as*", "<Plug>(textobj-sandwich-auto-a)" },
+			{ "as$", "<Plug>(textobj-sandwich-literal-query-a)" },
+		},
+	},
+})
+
+nest.applyKeymaps({
+	{
+		mode = "x",
+		{
+			{ "is.", "<Plug>(textobj-sandwich-query-i)" },
+			{ "is*", "<Plug>(textobj-sandwich-auto-i)" },
+			{ "is$", "<Plug>(textobj-sandwich-literal-query-i)" },
+			{ "as.", "<Plug>(textobj-sandwich-query-a)" },
+			{ "as*", "<Plug>(textobj-sandwich-auto-a)" },
+			{ "as$", "<Plug>(textobj-sandwich-literal-query-a)" },
 		},
 	},
 })
