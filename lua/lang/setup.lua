@@ -2,6 +2,7 @@
 local on_attach = require("lang/attach")
 local capabilities = require("lang/capabilities")
 local setup = {}
+local root_pattern = require("lspconfig.util").root_pattern
 
 local sumneko_root_path = vim.fn.stdpath("data") .. "/lsp_servers/sumneko_lua/extension/server/bin"
 local sumneko_binary = sumneko_root_path .. "/lua-language-server"
@@ -179,14 +180,65 @@ function setup.sumneko_lua(server)
 	server:setup(opts)
 end
 
-function setup.efm(server)
+function setup.css(server)
+	local opts = {
+		capabilities = capabilities,
+		on_attach = on_attach.generic,
+		settings = {
+			cmd = { "vscode-css-language-server", "--stdio" },
+			filetypes = { "css", "scss", "less" },
+			root_dir = root_pattern("package.json", ".git") or bufdir,
+			css = {
+				validate = true,
+				lint = {
+					unknownAtRules = "ignore",
+				},
+			},
+			less = {
+				validate = true,
+				lint = {
+					unknownAtRules = "ignore",
+				},
+			},
+			scss = {
+				validate = true,
+				lint = {
+					unknownAtRules = "ignore",
+				},
+			},
+		},
+	}
+
+	server:setup(opts)
+end
+
+function setup.cssmodules(server)
+	local opts = {
+		capabilities = capabilities,
+		on_attach = on_attach.generic,
+		settings = {
+			cmd = { "cssmodules-language-server" },
+			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+			root_dir = root_pattern("package.json", ".git") or bufdir,
+		},
+	}
+
+	server.setup(opts)
+end
+
+function setup.efm(_)
 	local efmls = require("efmls-configs")
+	local stylelint = require("efmls-configs.linters.stylelint")
 
 	efmls.init({
 		default_config = true,
 	})
 
-	efmls.setup()
+	efmls.setup({
+		css = {
+			linter = stylelint,
+		},
+	})
 end
 
 function setup.generic(server)

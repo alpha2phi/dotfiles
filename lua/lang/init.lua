@@ -35,6 +35,10 @@ servers.on_server_ready(function(server)
 		setup_server.jsonls(server)
 	elseif server.name == "efm" then
 		setup_server.efm(server)
+	elseif server.name == "cssls" then
+		setup_server.css(server)
+	elseif server.name == "cssmodules" then
+		setup_server.cssmodules(server)
 	elseif server.name == "tsserver" then
 		setup_server.tsserver(server)
 	elseif server.name == "sumneko_lua" then
