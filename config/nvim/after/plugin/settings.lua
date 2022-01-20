@@ -98,6 +98,11 @@ function M.auto_cmds()
     false
   )
 
+  -- Go to last location
+  vim.cmd [[
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif
+  ]]
+
   -- nnoremap g1 <cmd>!tmux new-window vd <cfile><CR>
   -- nnoremap g1 <cmd>vsplit term://vd <cfile><CR>
   -- nnoremap g2 <cmd>lua require("utils.term").send()<CR>
