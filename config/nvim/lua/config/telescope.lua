@@ -66,6 +66,7 @@ function M.setup()
   require("telescope").load_extension "media_files"
   require("telescope").load_extension "frecency"
   require("telescope").load_extension "gkeep"
+  require("telescope").load_extension "file_browser"
 
   M.search_dotfiles = function()
     require("telescope.builtin").find_files {

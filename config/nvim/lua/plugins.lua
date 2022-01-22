@@ -175,6 +175,7 @@ function M.setup()
         "nvim-telescope/telescope-project.nvim",
         "nvim-telescope/telescope-symbols.nvim",
         "nvim-telescope/telescope-media-files.nvim",
+        "nvim-telescope/telescope-file-browser.nvim",
         "nvim-telescope/telescope-github.nvim",
         "fhill2/telescope-ultisnips.nvim",
         "cljoly/telescope-repo.nvim",
