@@ -37,8 +37,9 @@ function M.setup()
     use { "wbthomason/packer.nvim" }
 
     -- Development
-    use { "tpope/vim-fugitive" }
-    use { "tpope/vim-surround" }
+    use { "tpope/vim-fugitive", event = "BufRead" }
+    use { "tpope/vim-surround", event = "BufRead" }
+    use { "tpope/vim-endwise", event = "InsertEnter" }
     use { "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } }
     use {
       "numToStr/Comment.nvim",

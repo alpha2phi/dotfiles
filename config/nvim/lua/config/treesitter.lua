@@ -16,6 +16,7 @@ function M.setup()
     highlight = {
       enable = true,
       disable = {},
+      additional_vim_regex_highlighting = true,
       -- custom_captures = {["new_import"] = "CustomImportName"}
     },
     incremental_selection = {
