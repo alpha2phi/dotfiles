@@ -21,7 +21,7 @@ function config.setup()
 		--   auto    - aerial window will stay open as long as there is a visible
 		--             buffer to attach to
 		--   global  - same as 'persist', and will always show symbols for the current buffer
-		close_behavior = "global",
+		close_behavior = "auto",
 
 		-- Set to false to remove the default keybindings for the aerial buffer
 		default_bindings = true,
@@ -30,7 +30,7 @@ function config.setup()
 		-- Determines the default direction to open the aerial window. The 'prefer'
 		-- options will open the window in the other direction *if* there is a
 		-- different buffer in the way of the preferred direction
-		default_direction = "left",
+		default_direction = "prefer_right",
 
 		-- Disable aerial on files with this many lines
 		disable_max_lines = 10000,
@@ -58,7 +58,7 @@ function config.setup()
 		-- last          Only the most-recently focused window will have its location
 		--               marked in the aerial buffer.
 		-- none          Do not show the cursor locations in the aerial window.
-		highlight_mode = "split_width",
+		highlight_mode = "full_width",
 
 		-- When jumping to a symbol, highlight the line for this many ms.
 		-- Set to false to disable
@@ -104,7 +104,7 @@ function config.setup()
 
 		-- Set to true to only open aerial at the far right/left of the editor
 		-- Default behavior opens aerial relative to current window
-		placement_editor_edge = false,
+		placement_editor_edge = true,
 
 		-- Run this command after jumping to a symbol (false will disable)
 		post_jump_cmd = "normal! zz",

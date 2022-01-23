@@ -1,13 +1,13 @@
 ---@diagnostic disable: undefined-global
 -- local lush = require("lush")
 local onedarkpro = require("onedarkpro")
--- local odp_utils = require("onedarkpro.utils")
+local odp_utils = require("onedarkpro.utils")
 local catppuccino = require("catppuccin")
 
 -- tokyonight
-vim.g.tokyonight_style = "day"
+vim.g.tokyonight_style = "night"
 vim.g.tokyonight_italic_functions = true
-vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer", "symbols_outline" }
+vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer", "symbols_outline", "aerial", "trouble" }
 
 -- configure catppuccino
 catppuccino.setup({
@@ -80,7 +80,7 @@ vim.g.neon_transparent = true
 
 -- olimorris/onedarkpro.nvim
 local colors = {
-	bg = "#ffefef",
+	bg = "#d3f7d9",
 	fg = "#707070",
 	red = "#e05661",
 	orange = "#ff3377",
@@ -95,29 +95,29 @@ local colors = {
 	highlight = "#efdebd",
 }
 onedarkpro.setup({
-	-- colors = {
-	-- 	bg = colors.bg,
-	-- 	fg = colors.fg,
-	-- 	red = colors.red,
-	-- 	orange = colors.orange,
-	-- 	yellow = colors.yellow,
-	-- 	green = colors.green,
-	-- 	cyan = colors.cyan,
-	-- 	blue = colors.blue,
-	-- 	purple = colors.purple,
-	-- 	white = colors.white,
-	-- 	black = colors.black,
-	-- 	gray = colors.gray,
-	-- 	highlight = colors.highlight,
-	-- 	cursorline = odp_utils.darken(colors.bg, 0.97),
-	-- 	comment = odp_utils.darken(colors.gray, 0.80),
-	-- 	selection = odp_utils.darken(colors.bg, 0.90),
-	-- 	color_column = odp_utils.darken(colors.bg, 0.98),
-	-- 	indentline = odp_utils.darken(colors.bg, 0.93),
-	-- 	menu = odp_utils.darken(colors.bg, 0.95),
-	-- 	menu_scroll = odp_utils.darken(colors.bg, 0.90),
-	-- 	menu_scroll_thumb = odp_utils.lighten(colors.blue, 0.80),
-	-- },
+	colors = {
+		bg = colors.bg,
+		fg = colors.fg,
+		red = colors.red,
+		orange = colors.orange,
+		yellow = colors.yellow,
+		green = colors.green,
+		cyan = colors.cyan,
+		blue = colors.blue,
+		purple = colors.purple,
+		white = colors.white,
+		black = colors.black,
+		gray = colors.gray,
+		highlight = colors.highlight,
+		cursorline = odp_utils.darken(colors.bg, 0.97),
+		comment = odp_utils.darken(colors.gray, 0.80),
+		selection = odp_utils.darken(colors.bg, 0.90),
+		color_column = odp_utils.darken(colors.bg, 0.98),
+		indentline = odp_utils.darken(colors.bg, 0.93),
+		menu = odp_utils.darken(colors.bg, 0.95),
+		menu_scroll = odp_utils.darken(colors.bg, 0.90),
+		menu_scroll_thumb = odp_utils.lighten(colors.blue, 0.80),
+	},
 	-- hlgroups = {
 	-- 	TabLineFill = { bg = odp_utils.lighten(colors.cyan, 0.50), fg = colors.bg },
 	-- 	TabLine = { bg = odp_utils.lighten(colors.cyan, 0.50), fg = colors.bg },
