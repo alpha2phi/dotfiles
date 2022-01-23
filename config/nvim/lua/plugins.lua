@@ -41,7 +41,7 @@ function M.setup()
     use { "tpope/vim-surround", event = "BufRead" }
     use { "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } }
     use {
-      "numToStr/Comment.nvim",
+      "numToSr/Comment.nvim",
       keys = { "gc", "gcc", "gbc" },
       config = function()
         require("config.comment").setup()
@@ -236,7 +236,7 @@ function M.setup()
     -- Completion - use either one of this
     use {
       "hrsh7th/nvim-cmp",
-      after = "nvim-treesitter",
+      event = "InsertEnter",
       opt = true,
       requires = {
         "hrsh7th/cmp-buffer",
@@ -434,7 +434,7 @@ function M.setup()
     }
 
     -- Debugging
-    use { "puremourning/vimspector", event = "BufWinEnter" }
+    use { "puremourning/vimspector", event = "InsertEnter" }
 
     -- DAP
     use { "mfussenegger/nvim-dap", event = "BufWinEnter", as = "nvim-dap" }
