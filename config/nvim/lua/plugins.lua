@@ -39,7 +39,6 @@ function M.setup()
     -- Development
     use { "tpope/vim-fugitive", event = "BufRead" }
     use { "tpope/vim-surround", event = "BufRead" }
-    use { "tpope/vim-endwise", event = "InsertEnter" }
     use { "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } }
     use {
       "numToStr/Comment.nvim",
@@ -52,8 +51,8 @@ function M.setup()
     use { "tpope/vim-unimpaired" }
     use { "tpope/vim-vinegar" }
     use { "tpope/vim-sleuth" }
-    use { "wellle/targets.vim" }
-    use { "easymotion/vim-easymotion" }
+    use { "wellle/targets.vim", event = "BufWinEnter" }
+    use { "easymotion/vim-easymotion", event = "BufRead" }
     use {
       "lewis6991/gitsigns.nvim",
       -- event = "BufReadPre",
