@@ -348,7 +348,9 @@ function M.setup()
           "windwp/nvim-autopairs",
           run = "make",
           config = function()
-            require("nvim-autopairs").setup {}
+            local npairs = require "nvim-autopairs"
+            npairs.add_rules(require "nvim-autopairs.rules.endwise-lua")
+            npairs.setup {}
           end,
         },
         {
