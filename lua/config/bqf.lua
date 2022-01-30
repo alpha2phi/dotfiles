@@ -45,7 +45,7 @@ function config.setup()
 				-- file size greater than 100k can't be previewed automatically
 				if fsize > 100 * 1024 then
 					ret = false
-				elseif bufname:match("^fugitive://") then
+				elseif filename:match("^fugitive://") then
 					-- skip fugitive buffer
 					ret = false
 				end
