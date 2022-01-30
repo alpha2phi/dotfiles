@@ -71,25 +71,54 @@ end
 
 function M.Color(val)
 	return function()
+		local mode_color = {
+			c = "plum3",
+			ce = "plum3",
+			cv = "plum3",
+			i = "chartreuse3",
+			ic = "chartreuse3",
+			n = "DarkGoldenrod2",
+			no = "DarkGoldenrod2",
+			r = "chocolate",
+			rm = "chocolate",
+			R = "purple",
+			Rv = "purple",
+			s = "SkyBlue2",
+			S = "SkyBlue2",
+			t = "gray",
+			V = "gray",
+			v = "gray",
+			["r?"] = "chocolate",
+			[""] = "SkyBlue2",
+			[""] = "gray",
+			["!"] = "plum3",
+		}
+
+		local m_color = "error"
+		if mode_color[vim.fn.mode()] ~= nil then
+			m_color = mode_color[vim.fn.mode()]
+		end
+
 		local dark = {
+			vimode = m_color,
 			bg = "#282c34",
 			bg2 = "#212026",
 			base = "#b2b2b2",
 			comp = "#c56ec3",
 			func = "#bc6ec5",
 			act1 = "#222226",
-			DarkGoldenrod2 = "#eead0e", -- normal / unmodified
+			DarkGoldenrod2 = "#ffff00", -- normal / unmodified
 			chartreuse3 = "#66cd00", --insert
 			SkyBlue2 = "#7ec0ee", -- modified
 			chocolate = "#d2691e", -- replace
 			gray = "#bebebe", -- visual
 			plum3 = "#cd96cd", -- read-only / motion
 			yellow = "#fabd2f",
-			cyan = "#008080",
+			cyan = "#00AFFF",
 			darkblue = "#081633",
 			green = "#afd700",
 			orange = "#FF8800",
-			purple = "#5d4d7a", --act2
+			purple = "#771060",
 			magenta = "#d16d9e",
 			grey = "#c0c0c0",
 			blue = "#0087d7",
@@ -101,24 +130,25 @@ function M.Color(val)
 			info = "#4f97d7", -- keyword
 		}
 		local light = {
+			vimode = m_color,
 			bg = "#fbf8ef",
 			bg2 = "#efeae9",
-			base = "#655370",
+			base = "#B5B3C0",
 			comp = "#6c4173",
-			act1 = "#e7e5eb",
+			act1 = "#57555b",
 			func = "#6c3163",
-			DarkGoldenrod2 = "#eead0e", -- normal / unmodified
+			DarkGoldenrod2 = "#ffff00", -- normal / unmodified
 			chartreuse3 = "#66cd00", --insert
 			SkyBlue2 = "#7ec0ee", -- modified
 			chocolate = "#d2691e", -- replace
 			gray = "#bebebe", -- visual
 			plum3 = "#cd96cd", -- read-only / motion
 			yellow = "#fabd2f",
-			cyan = "#008080",
+			cyan = "#00AFFF",
 			darkblue = "#081633",
 			green = "#afd700",
 			orange = "#FF8800",
-			purple = "#d3d3e7", --act2
+			purple = "#550030", --act2
 			magenta = "#d16d9e",
 			grey = "#c0c0c0",
 			blue = "#0087d7",

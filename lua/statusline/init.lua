@@ -30,7 +30,8 @@ fileType = fileinfo.get_file_type
 fileTypeName = buffer.get_buffer_filetype
 filetTypeSeperator = fileinfo.filetype_seperator
 gitBranch = vcs.get_git_branch_formatted
-gitSeperator = vcs.seperator
+gitSeperatorLeft = vcs.seperatorLeft
+gitSeperatorRight = vcs.seperatorRight
 lineColumn = fileinfo.line_column
 linePercent = fileinfo.current_line_percent
 scrollBar = extension.scrollbar_instance
@@ -58,7 +59,7 @@ gls.left[3] = {
 		condition = u.buffer_not_empty,
 		highlight = { c.Color("base"), c.Color("act1") },
 		separator = i.slant.Right,
-		separator_highlight = { c.Color("act1"), c.Color("DarkGoldenrod2") },
+		separator_highlight = { c.Color("act1"), c.Color("cyan") },
 	},
 }
 
@@ -66,25 +67,24 @@ gls.left[4] = {
 	FileName = {
 		provider = fileName,
 		condition = u.buffer_not_empty,
-		highlight = { c.Color("act1"), c.Color("DarkGoldenrod2"), "bold" },
-		separator = i.slant.Right,
-		separator_highlight = { c.Color("purple"), c.Color("DarkGoldenrod2") },
 	},
 }
 
 gls.left[5] = {
-	FileSeparator = {
-		provider = space,
+	FileNameSeparator = {
+		provider = function()
+			return " " .. i.slant.Right
+		end,
+		highlight = { c.Color("cyan"), c.Color("purple") },
 		condition = u.buffer_not_empty,
-		highlight = { c.Color("purple"), c.Color("act1") },
-		separator = i.slant.Right,
-		separator_highlight = { c.Color("act1"), c.Color("purple") },
 	},
 }
 
 gls.left[6] = {
 	FileType = {
-		provider = fileType,
+		provider = function()
+			return " " .. fileType()
+		end,
 		condition = u.buffer_not_empty,
 		highlight = { c.Color("base"), c.Color("purple") },
 	},
@@ -139,6 +139,12 @@ gls.left[13] = {
 	},
 }
 gls.left[14] = {
+	GitSeperatorLeft = {
+		provider = gitSeperatorLeft,
+		condition = u.buffer_not_empty,
+	},
+}
+gls.left[15] = {
 	DiffAdd = {
 		provider = diffAdd,
 		condition = u.checkwidth,
@@ -146,7 +152,7 @@ gls.left[14] = {
 		highlight = { c.Color("green"), c.Color("purple") },
 	},
 }
-gls.left[15] = {
+gls.left[16] = {
 	DiffModified = {
 		provider = diffModified,
 		condition = u.checkwidth,
@@ -154,7 +160,7 @@ gls.left[15] = {
 		highlight = { c.Color("orange"), c.Color("purple") },
 	},
 }
-gls.left[16] = {
+gls.left[17] = {
 	DiffRemove = {
 		provider = diffRemove,
 		condition = u.checkwidth,
@@ -162,18 +168,11 @@ gls.left[16] = {
 		highlight = { c.Color("red"), c.Color("purple") },
 	},
 }
-gls.left[17] = {
-	GitSeperator = {
-		provider = gitSeperator,
-		condition = u.buffer_not_empty,
-		separator = i.slant.Right,
-		separator_highlight = { c.Color("purple"), c.Color("act1") },
-	},
-}
-gls.left[18] = {
-	Space = {
-		provider = space,
-		highlight = { c.Color("base"), c.Color("purple") },
+gls.left[19] = {
+	ViModeSeperatorAltInverse = {
+		provider = function()
+			return i.slant.Right
+		end,
 	},
 }
 
@@ -182,7 +181,10 @@ gls.right[1] = {
 		provider = fileFormat,
 		highlight = { c.Color("base"), c.Color("purple") },
 		separator = i.slant.Left,
-		separator_highlight = { c.Color("purple"), c.Color("act1") },
+		separator_highlight = function()
+			return { c.Color("purple"), c.Color("vimode") }
+		end,
+		event = "ModeChanged",
 	},
 }
 gls.right[2] = {
@@ -204,12 +206,12 @@ gls.right[3] = {
 gls.right[4] = {
 	ScrollBar = {
 		provider = scrollBar,
-		highlight = { c.Color("yellow"), c.Color("purple") },
+		highlight = { c.Color("DarkGoldenrod2"), c.Color("purple") },
 	},
 }
 
 gls.short_line_left[1] = {
-	BufferType = {
+	BufferTypeAlt = {
 		provider = fileTypeName,
 		separator = i.slant.Right,
 		separator_highlight = { c.Color("purple"), c.Color("DarkGoldenrod2") },
@@ -218,24 +220,24 @@ gls.short_line_left[1] = {
 }
 
 gls.short_line_left[2] = {
-	FileName = {
+	FileNameAlt = {
 		provider = fileName,
 		condition = u.buffer_not_empty,
 		separator = i.slant.Right,
-		separator_highlight = { c.Color("DarkGoldenrod2"), c.Color("act1") },
-		highlight = { c.Color("act1"), c.Color("DarkGoldenrod2"), "bold" },
+		separator_highlight = { c.Color("cyan"), c.Color("act1") },
+		highlight = { c.Color("act1"), c.Color("cyan"), "bold" },
 	},
 }
 
 gls.short_line_left[3] = {
-	Space = {
+	SpaceAlt = {
 		provider = space,
 		highlight = { c.Color("blue"), c.Color("act1") },
 	},
 }
 
 gls.short_line_right[1] = {
-	BufferIcon = {
+	BufferIconAlt = {
 		provider = bufferIcon,
 		separator = i.slant.Left,
 		separator_highlight = { c.Color("purple"), c.Color("bg") },

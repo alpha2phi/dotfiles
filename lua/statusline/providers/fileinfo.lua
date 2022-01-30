@@ -161,14 +161,14 @@ end
 
 -- get file format
 function M.get_file_format()
-	return vim.bo.fileformat
+	return " " .. vim.bo.fileformat
 end
 
 -- show line:column
 function M.line_column()
 	local line = vim.fn.line(".")
 	local column = vim.fn.col(".")
-	return line .. ":" .. column
+	return line .. ":" .. column .. " "
 end
 
 -- show current line percent of all lines
@@ -293,7 +293,7 @@ function M.get_file_type()
 		elseif ft == "json" then
 			return "JavaScript Object Notation"
 		elseif ft == "less" then
-			return "LEaner Style Sheets"
+			return "Leaner Style Sheets"
 		elseif ft == "objc" then
 			return "Objective C"
 		elseif ft == "objcpp" then
