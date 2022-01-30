@@ -9,9 +9,9 @@ function config.setup()
 	local function tabColor()
 		local output = "#F634B1"
 		if vim.opt.background:get() == "light" then
-			output = "#F737C7"
-		else
-			output = "#F73090"
+			output = "#550030"
+		elseif vim.opt.background:get() == "dark" then
+			output = "#771060"
 		end
 		return output
 	end
@@ -70,8 +70,8 @@ function config.setup()
 		highlights = highlights,
 		options = {
 			numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both",
-			close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-			right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+			close_command = "BDelete! %d", -- can be a string | function, see "Mouse actions"
+			right_mouse_command = "BDelete! %d", -- can be a string | function, see "Mouse actions"
 			left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
 			middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
 			-- NOTE: this plugin is designed with this icon in mind,
