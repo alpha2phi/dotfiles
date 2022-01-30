@@ -21,7 +21,7 @@ nest.applyKeymaps({
 			{ "q", "<Cmd>cprev<CR>" },
 			{ "t", "<Cmd>FloatermPrev<CR>" },
 			{ "w", "<Cmd>tabprevious<CR>" },
-			{ ".", "<C-o>" },
+			{ ".", "<C-O>" },
 			{ "M", "<Cmd>BookmarkPrev<CR>" },
 		},
 	},
@@ -34,7 +34,7 @@ nest.applyKeymaps({
 			{ "q", "<Cmd>cnext<CR>" },
 			{ "t", "<Cmd>FloatermNext<CR>" },
 			{ "w", "<Cmd>tabnext<CR>" },
-			{ ".", "<C-i>" },
+			{ ".", "<C-I>" },
 			{ "m", "<Cmd>BookmarkNext<CR>" },
 		},
 	},
@@ -92,10 +92,20 @@ nest.applyKeymaps({
 					{ "m", "<Cmd>SaveBookmarks<CR>" },
 				},
 			},
-			{ "b", {
-				{ "q", ":bp|bd #<CR>" },
-				{ "p", "<Cmd>BufferLinePick<CR>" },
-			} },
+			{
+				"b",
+				{
+					{ "q", ":bp|bd #<CR>" },
+					{ "p", "<Cmd>BufferLinePick<CR>" },
+					{
+						"d",
+						{
+							{ "*", "lua require('close_buffers').delete({type = 'nameless'})<CR>" },
+							{ ".", "lua require('close_buffers').delete({type = 'this'})<CR>" },
+						},
+					},
+				},
+			},
 			{ "D", "<Cmd>DogeGenerate jsdoc<CR>" },
 			{
 				"e",
@@ -324,6 +334,7 @@ nest.applyKeymaps({
 	{
 		mode = "i",
 		{
+			{ "<f20>", "<C-o>" },
 			{ "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
 			{ "<C-K>", "<cmd>Lspsaga hover_doc<cr>" },
 			{ "<C-Del>", '<cmd>lua require("notify").dismiss()<cr>' },
