@@ -19,7 +19,7 @@ return require("packer").startup({
 			end,
 		})
 		use({
-			"joehannes-fun/focus.nvim",
+			"beauwilliams/focus.nvim",
 			config = function()
 				require("focus").setup({
 					excluded_filetypes = { "floaterm", "aerial" },
@@ -217,6 +217,7 @@ return require("packer").startup({
 		-- use({ "adisen99/codeschool.nvim" })
 		-- use({ "joehannes-ux/lush-jsx.nvim" })
 		use({ "olimorris/onedarkpro.nvim" })
+		use({ "pineapplegiant/spaceduck" })
 		-- use({ "Iron-E/nvim-highlite" })
 		-- use({ "navarasu/onedark.nvim" })
 		use({ "NLKNguyen/papercolor-theme" })
@@ -250,6 +251,10 @@ return require("packer").startup({
 			run = "make",
 		})
 		use({
+			"nvim-telescope/telescope-arecibo.nvim",
+			-- rocks = { "openssl", "lua-http-parser" }, -- openssl not available for lua >5.3
+		})
+		use({
 			"nvim-telescope/telescope.nvim",
 			requires = {
 				"nvim-lua/popup.nvim",
@@ -260,7 +265,7 @@ return require("packer").startup({
 				"nvim-telescope/telescope-frecency.nvim",
 				"nvim-telescope/telescope-symbols.nvim",
 				"nvim-telescope/telescope-github.nvim",
-				"nvim-telescope/telescope-media-files.nvim",
+				"joehannes-os/telescope-media-files.nvim",
 				"tom-anders/telescope-vim-bookmarks.nvim",
 				"sudormrfbin/cheatsheet.nvim",
 				"AckslD/nvim-neoclip.lua",
@@ -281,10 +286,6 @@ return require("packer").startup({
 			end,
 		})
 
-		-- use {
-		--     'nvim-telescope/telescope-arecibo.nvim',
-		--     rocks = {"openssl", "lua-http-parser"}
-		-- }
 		-- use { 'nvim-telescope/telescope-packer.nvim ' }
 		-- use({ "nvim-telescope/telescope-snippets.nvim" })
 
@@ -387,20 +388,20 @@ return require("packer").startup({
 		-- use {'gennaro-tedesco/nvim-peekup'}
 		-- use {'lukas-reineke/indent-blankline.nvim' }
 		-- use {'Yggdroot/indentLine' }
-		use({
-			"luukvbaal/stabilize.nvim",
-			config = function()
-				require("stabilize").setup({
-					force = true, -- stabilize window even when current cursor position will be hidden behind new window
-					forcemark = "z", -- set context mark to register on force event which can be jumped to with '<forcemark>
-					ignore = { -- do not manage windows matching these file/buftypes
-						filetype = { "help", "list", "Trouble" },
-						buftype = { "terminal", "quickfix", "loclist" },
-					},
-					nested = "QuickFixCmdPost,DiagnosticChanged *",
-				})
-			end,
-		})
+		-- use({
+		-- 	"luukvbaal/stabilize.nvim",
+		-- 	config = function()
+		-- 		require("stabilize").setup({
+		-- 			force = false, -- stabilize window even when current cursor position will be hidden behind new window
+		-- 			forcemark = "z", -- set context mark to register on force event which can be jumped to with '<forcemark>
+		-- 			ignore = { -- do not manage windows matching these file/buftypes
+		-- 				filetype = { "help", "list", "Trouble" },
+		-- 				buftype = { "terminal", "quickfix", "loclist" },
+		-- 			},
+		-- 			nested = "QuickFixCmdPost,DiagnosticChanged *",
+		-- 		})
+		-- 	end,
+		-- })
 		-- use({ "RishabhRD/popfix" })
 		-- use({ "RishabhRD/nvim-lsputils" })
 		use({ "RRethy/vim-illuminate" })
@@ -473,8 +474,8 @@ return require("packer").startup({
 			"abecodes/tabout.nvim",
 			config = function()
 				require("tabout").setup({
-					tabkey = ";>", -- key to trigger tabout, set to an empty string to disable
-					backwards_tabkey = ";<", -- key to trigger backwards tabout, set to an empty string to disable
+					tabkey = ";l", -- key to trigger tabout, set to an empty string to disable
+					backwards_tabkey = ";h", -- key to trigger backwards tabout, set to an empty string to disable
 					act_as_tab = false, -- shift content if tab out is not possible
 					act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
 					enable_backwards = true, -- well ...
@@ -486,6 +487,7 @@ return require("packer").startup({
 						{ open = "(", close = ")" },
 						{ open = "[", close = "]" },
 						{ open = "{", close = "}" },
+						{ open = "<", close = ">" },
 					},
 					ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
 					exclude = {}, -- tabout will ignore these filetypes
@@ -971,7 +973,25 @@ return require("packer").startup({
 
 		-- bufutilities
 		use({ "smitajit/bufutils.vim" })
-		use({ "arithran/vim-delete-hidden-buffers" })
+		-- use({ "arithran/vim-delete-hidden-buffers" })
+		use({
+			"kazhala/close-buffers.nvim",
+			requires = { "akinsho/nvim-bufferline.lua" },
+			config = function()
+				require("close_buffers").setup({
+					file_glob_ignore = { "src/**/*" },
+					preserve_window_layout = { "this", "nameless" },
+					next_buffer_cmd = function(windows)
+						require("bufferline").cycle(1)
+						local bufnr = vim.api.nvim_get_current_buf()
+
+						for _, window in ipairs(windows) do
+							vim.api.nvim_win_set_buf(window, bufnr)
+						end
+					end,
+				})
+			end,
+		})
 
 		-- timetracking
 		-- use {'git-time-metric/gtm-vim-plugin'}
