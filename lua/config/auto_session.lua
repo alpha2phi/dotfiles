@@ -10,10 +10,10 @@ function config.setup()
 		auto_save_enabled = true,
 		auto_restore_enabled = true,
 		auto_session_suppress_dirs = false,
-		pre_save_cmds = { "TroubleClose", "DeleteHiddenBuffers" },
-		post_save_cmds = { "Trouble" },
-		pre_restore_cmds = { "TroubleClose" },
-		post_restore_cmds = { "DeleteHiddenBuffers", "Trouble" },
+		pre_save_cmds = { "BDelete nameless" },
+		post_save_cmds = {},
+		pre_restore_cmds = {},
+		post_restore_cmds = { "BDelete nameless" },
 	}
 
 	require("auto-session").setup(opts)
