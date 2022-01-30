@@ -135,7 +135,7 @@ function _G.qftf(info)
 		local str
 		if e.valid == 1 then
 			if e.bufnr > 0 then
-				fname = fn.bufname(e.bufnr)
+				fname = vim.fn.bufname(e.bufnr)
 				if fname == "" then
 					fname = "[No Name]"
 				else
