@@ -61,6 +61,12 @@ function config.setup()
 			--     ["show_http_headers"] = false,
 			--     ["show_domain_icons"] = false
 			-- },
+			arecibo = {
+				["selected_engine"] = "google",
+				["url_open_command"] = "open",
+				["show_http_headers"] = false,
+				["show_domain_icons"] = false,
+			},
 			frecency = {
 				db_root = vim.fn.stdpath("data") .. "/databases/",
 				show_scores = false,
@@ -114,7 +120,7 @@ function config.setup()
 	telescope.load_extension("smart_history")
 	telescope.load_extension("aerial")
 	-- require('telescope').load_extension('snippets')
-	-- require('telescope').load_extension('arecibo')
+	telescope.load_extension("arecibo")
 	telescope.load_extension("media_files")
 	telescope.load_extension("frecency")
 end
