@@ -210,5 +210,6 @@ cmd([[
         set background=dark
 				lua require("indent_guides").setup({ even_colors = { fg = "#5d4d7a", bg = "#5d4d7a" }, odd_colors = { fg = "#cdcdcd", bg = "#cdcdcd" }, indent_guide_size = 1 })
     endif
+    lua require("config/bufferline").setup()
 	endfunction
 ]])
