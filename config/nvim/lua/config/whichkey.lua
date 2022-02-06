@@ -103,6 +103,7 @@ local mappings = {
   f = {
     name = "File",
     b = { "<Cmd>Telescope buffers<Cr>", "Search buffers" },
+    c = { "<Cmd>Telescope current_buffer_fuzzy_find<Cr>", "Search current buffer" },
     f = { "<Cmd>Telescope git_files<Cr>", "Git files" },
     g = { "<Cmd>Telescope live_grep<Cr>", "Live grep" },
     h = { "<Cmd>Telescope help_tags<Cr>", "Help" },
