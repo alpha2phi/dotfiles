@@ -78,6 +78,7 @@ function config.setup()
 					["data"] = vim.fn.expand("$HOME") .. "/.local/share",
 					["project"] = vim.fn.expand("$HOME") .. "./.local/git",
 					["wiki"] = vim.fn.expand("$HOME") .. "/wiki",
+					["orb"] = vim.fn.expand("$HOME") .. "/.local/git/orbital",
 				},
 			},
 			media_files = {

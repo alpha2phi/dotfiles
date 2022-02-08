@@ -128,6 +128,7 @@ nest.applyKeymaps({
 					{ "e", "<Cmd>Telescope file_browser<CR>" },
 					{ "f", "<Cmd>Telescope find_files<CR>" },
 					{ "g", "<Cmd>Telescope live_grep<CR>" },
+					{ "h", "<Cmd>Telescope frecency<CR>" },
 					{ "i", "<Cmd>Telescope media_files<CR>" },
 					{ "k", "<Cmd>Telescope help_tags<CR>" },
 					{ "m*", "<Cmd>Telescope vim_bookmarks all<CR>" },
@@ -233,7 +234,7 @@ nest.applyKeymaps({
 			{
 				"p",
 				{
-					{ "d", PeekDefinition },
+					{ "d", "<cmd>Lspsaga preview_definition<CR>" },
 					{ "i", PeekImplementation },
 					{ "r", preview.goto_preview_references },
 					{ "D", PeekDeclaration },
