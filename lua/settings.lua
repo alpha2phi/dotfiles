@@ -12,7 +12,7 @@ o.qftf = "{info -> v:lua.qftf(info)}"
 o.termguicolors = true
 o.hidden = true
 o.ignorecase = true
-o.scrolloff = 0
+o.scrolloff = 21
 o.splitbelow = true
 o.splitright = true
 o.clipboard = "unnamed,unnamedplus"
@@ -56,7 +56,7 @@ set nocompatible
 set hidden
 set encoding=utf-8
 set cmdheight=1
-set updatetime=200
+set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 set mouse=a mousemodel=popup
@@ -181,6 +181,9 @@ vim.api.nvim_exec(
 )
 
 cmd([[
+  let g:python_host_prog = "/usr/bin/python2"
+  let g:python3_host_prog = "/usr/bin/python3"
+
 	let g:minimap_width = 21
 	let g:minimap_auto_start = 0
 	let g:minimap_auto_start_win_enter = 0
