@@ -33,9 +33,10 @@ vim.cmd([[
 function config.setup()
 	require("bqf").setup({
 		auto_enable = true,
+		auto_resize_height = true,
 		preview = {
-			win_height = 12,
-			win_vheight = 12,
+			win_height = 21,
+			win_vheight = 21,
 			delay_syntax = 80,
 			border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
 			should_preview_cb = function(bufnr)
