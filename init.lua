@@ -2,12 +2,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-local packer = require("packer")
-local packer_util = require("packer.util")
 local packer_install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-
-require("global")
-require("settings")
 
 -- Auto install packer.nvim if not exists
 if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
@@ -18,6 +13,16 @@ if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
 		packer_install_path,
 	})
 end
+
+if not Packer_bootstrap == nil then
+	require("packer").sync()
+end
+
+local packer = require("packer")
+local packer_util = require("packer.util")
+
+require("global")
+require("settings")
 
 packer.reset()
 packer.init({
@@ -34,10 +39,6 @@ packer.init({
 
 require("plugins")
 require("statusline")
-
-if not Packer_bootstrap == nil then
-	require("packer").sync()
-end
 
 require("lang")
 require("keymappings")
