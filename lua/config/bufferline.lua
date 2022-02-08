@@ -26,7 +26,8 @@ function config.setup()
 		-- buffer_visible = {
 		-- 	guibg = tabColor(),
 		-- },
-		-- buffer_selected = { guibg = tabColor() },
+		buffer_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold" },
+		tab_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold" },
 		-- diagnostic = {
 		-- 	guifg = tabColor(),
 		-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
@@ -35,34 +36,49 @@ function config.setup()
 		-- 	guifg = tabColor(),
 		-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
 		-- },
-		-- diagnostic_selected = { guifg = tabColor(), guibg = groups.selectionBG(), gui = "bold,italic" },
+		diagnostic = { guifg = "#FF0000", gui = "bold" },
+		diagnostic_visible = { guifg = "#FF0000", gui = "bold" },
+		diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
+		info_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
+		info = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
+		hint_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
+		hint = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
+		warning_selected = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
+		warning = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
+		error_selected = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
+		error = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
+		other_diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
+		hint_diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
+		info_diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
+		warning_diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
+		error_diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
 		-- close_button = { guifg = tabColor(), guibg = groups.highlightBG(), gui = "bold" },
 		-- close_button_visible = {
 		-- 	guifg = tabColor(),
 		-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
 		-- 	gui = "bold",
 		-- },
-		-- close_button_selected = { guifg = tabColor(), guibg = groups.selectionBG(), gui = "bold" },
+		close_button_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold" },
 		-- modified = { guibg = "#F53737" },
 		-- modified_visible = {
 		-- 	guifg = groups.warningBG(),
 		-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
 		-- },
-		-- modified_selected = { guifg = groups.warningBG(), guibg = groups.selectionBG() },
-		-- duplicate_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
+		modified_selected = { guifg = "#000000", guibg = "#00AFFF" },
+		duplicate_selected = { guifg = "#000000", guibg = "#00AFFF" },
 		-- duplicate_visible = {
 		-- 	guifg = tabColor(),
 		-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
 		-- },
 		-- duplicate = { guifg = tabColor(), guibg = groups.highlightBG() },
-		separator_selected = { guifg = tabColor() },
+		separator_selected = { guifg = tabColor(), guibg = "#00AFFF" },
 		separator_visible = {
 			guifg = tabColor(),
 			-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
 		},
 		separator = { guifg = tabColor() },
-		-- indicator_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
-		-- pick = { guifg = "#FFFFFF", guibg = groups.mainBG() },
+		indicator_selected = { guifg = tabColor(), guibg = "#00AFFF" },
+		pick_selected = { guifg = tabColor(), guibg = "#00AFFF" },
 		-- background = { guifg = "#FFFFFF", guibg = groups.mainBG() },
 	}
 
@@ -70,8 +86,8 @@ function config.setup()
 		highlights = highlights,
 		options = {
 			numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both",
-			close_command = "BDelete! %d", -- can be a string | function, see "Mouse actions"
-			right_mouse_command = "BDelete! %d", -- can be a string | function, see "Mouse actions"
+			close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+			right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
 			left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
 			middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
 			-- NOTE: this plugin is designed with this icon in mind,
