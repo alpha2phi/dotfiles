@@ -18,17 +18,17 @@ return require("packer").startup({
 				require("config/notify").setup()
 			end,
 		})
-		use({
-			"beauwilliams/focus.nvim",
-			config = function()
-				require("focus").setup({
-					excluded_filetypes = { "floaterm", "aerial" },
-					width = 130,
-					minwidth = 90,
-					bufnew = false,
-				})
-			end,
-		})
+		-- use({
+		-- 	"beauwilliams/focus.nvim",
+		-- 	config = function()
+		-- 		require("focus").setup({
+		-- 			excluded_filetypes = { "floaterm", "aerial" },
+		-- 			width = 130,
+		-- 			minwidth = 90,
+		-- 			bufnew = false,
+		-- 		})
+		-- 	end,
+		-- })
 		use({
 			"kwkarlwang/bufresize.nvim",
 			config = function()
@@ -230,6 +230,21 @@ return require("packer").startup({
 		use({ "joehannes-ux/kat.nvim" })
 		use({ "sainnhe/edge" })
 		use({ "rafamadriz/neon" })
+		use({
+			"themercorp/themer.lua",
+			config = function()
+				require("themer").setup({
+					styles = {
+						comment = {},
+						["function"] = { style = "italic" },
+						functionbuiltin = { style = "italic,bold" },
+						variable = { style = "italic" },
+						variableBuiltIn = { style = "italic,bold" },
+						parameter = { style = "italic" },
+					},
+				})
+			end,
+		})
 		-- use({
 		-- 	"projekt0n/github-nvim-theme",
 		-- 	config = function()
@@ -392,7 +407,7 @@ return require("packer").startup({
 		-- 	"luukvbaal/stabilize.nvim",
 		-- 	config = function()
 		-- 		require("stabilize").setup({
-		-- 			force = false, -- stabilize window even when current cursor position will be hidden behind new window
+		-- 			force = true, -- stabilize window even when current cursor position will be hidden behind new window
 		-- 			forcemark = "z", -- set context mark to register on force event which can be jumped to with '<forcemark>
 		-- 			ignore = { -- do not manage windows matching these file/buftypes
 		-- 				filetype = { "help", "list", "Trouble" },
@@ -527,7 +542,28 @@ return require("packer").startup({
 				require("config/treesitter").setup()
 			end,
 		})
-		use({ "nvim-treesitter/nvim-treesitter-refactor" })
+		use({
+			"nvim-treesitter/nvim-treesitter-refactor",
+			config = function()
+				require("nvim-treesitter.configs").setup({
+					refactor = {
+						highlight_definitions = {
+							enable = true,
+							-- Set to false if you have an `updatetime` of ~100.
+							clear_on_cursor_move = true,
+						},
+						highlight_current_scope = { enable = true },
+						navigation = {
+							enable = true,
+							keymaps = {
+								goto_previous_usage = "<leader>#",
+								goto_next_usage = "<leader>*",
+							},
+						},
+					},
+				})
+			end,
+		})
 		use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 		use({ "RRethy/nvim-treesitter-textsubjects" })
 		use({
@@ -943,7 +979,7 @@ return require("packer").startup({
 		-- use {'fiatjaf/neuron.vim' }
 
 		-- Pair Programming
-		use({ "Floobits/floobits-neovim" })
+		-- use({ "Floobits/floobits-neovim" })
 		-- -- DAP
 		-- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 		-- use({ "nvim-telescope/telescope-dap.nvim" })
