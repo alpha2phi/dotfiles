@@ -41,7 +41,7 @@ function M.setup()
     use { "tpope/vim-surround", event = "BufRead" }
     use { "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } }
     use {
-      "numToSr/Comment.nvim",
+      "numToStr/Comment.nvim",
       keys = { "gc", "gcc", "gbc" },
       config = function()
         require("config.comment").setup()
@@ -631,6 +631,15 @@ function M.setup()
       end,
     }
     use { "chaoren/vim-wordmotion", opt = true, fn = { "<Plug>WordMotion_w" } }
+
+    use {
+      "hoschi/yode-nvim",
+      module = { "yode-nvim" },
+      cmd = { "YodeCreateSeditorFloating" },
+      config = function()
+        require("yode-nivm").setup {}
+      end,
+    }
     -- use {
     --   "rlch/github-notifications.nvim",
     --   config = [[require('config.github-notifications').setup()]],
