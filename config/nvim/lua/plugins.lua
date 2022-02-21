@@ -632,14 +632,23 @@ function M.setup()
     }
     use { "chaoren/vim-wordmotion", opt = true, fn = { "<Plug>WordMotion_w" } }
 
+    -- Legendary
     use {
-      "hoschi/yode-nvim",
-      module = { "yode-nvim" },
-      cmd = { "YodeCreateSeditorFloating" },
+      "mrjones2014/legendary.nvim",
+      keys = { [[<C-p>]] },
+      wants = { "dressing.nvim" },
       config = function()
-        require("yode-nivm").setup {}
+        require("config.legendary").setup()
       end,
+      requires = { "stevearc/dressing.nvim" },
     }
+    -- use {
+    --   "hoschi/yode-nvim",
+    --   cmd = { "YodeCreateSeditorFloating" },
+    --   config = function()
+    --     require("yode-nivm").setup {}
+    --   end,
+    -- }
     -- use {
     --   "rlch/github-notifications.nvim",
     --   config = [[require('config.github-notifications').setup()]],
