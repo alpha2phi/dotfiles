@@ -636,17 +636,24 @@ function M.setup()
     use {
       "mrjones2014/legendary.nvim",
       keys = { [[<C-p>]] },
-      wants = { "dressing.nvim" },
       config = function()
         require("config.legendary").setup()
       end,
       requires = { "stevearc/dressing.nvim" },
     }
+
+    use {
+      "j-hui/fidget.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("fidget").setup {}
+      end,
+    }
     -- use {
     --   "hoschi/yode-nvim",
-    --   cmd = { "YodeCreateSeditorFloating" },
+    --   cmd = { "YodeCreateSeditorFloating", "YodeFloatToMainWindow", "YodeCloneCurrentIntoFloat" },
     --   config = function()
-    --     require("yode-nivm").setup {}
+    --     require("yode-nvim").setup {}
     --   end,
     -- }
     -- use {
