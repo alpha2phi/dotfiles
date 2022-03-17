@@ -69,12 +69,112 @@ return require("packer").startup({
 			end,
 		})
 
+		-- ui
+		-- gutter
+		use({
+			"lewis6991/gitsigns.nvim",
+			requires = { "nvim-lua/plenary.nvim" },
+			config = function()
+				require("gitsigns").setup({
+					signs = {
+						add = { hl = "GitSignsAdd", text = "+", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+						change = {
+							hl = "GitSignsChange",
+							text = "│",
+							numhl = "GitSignsChangeNr",
+							linehl = "GitSignsChangeLn",
+						},
+						delete = {
+							hl = "GitSignsDelete",
+							text = "_",
+							numhl = "GitSignsDeleteNr",
+							linehl = "GitSignsDeleteLn",
+						},
+						topdelete = {
+							hl = "GitSignsDelete",
+							text = "‾",
+							numhl = "GitSignsDeleteNr",
+							linehl = "GitSignsDeleteLn",
+						},
+						changedelete = {
+							hl = "GitSignsChange",
+							text = "~",
+							numhl = "GitSignsChangeNr",
+							linehl = "GitSignsChangeLn",
+						},
+					},
+					signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+					numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+					linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
+					word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+					watch_gitdir = {
+						interval = 1000,
+						follow_files = true,
+					},
+					attach_to_untracked = true,
+					current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+					current_line_blame_opts = {
+						virt_text = true,
+						virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+						delay = 300,
+						ignore_whitespace = false,
+					},
+					current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+					sign_priority = 6,
+					update_debounce = 100,
+					status_formatter = nil, -- Use default
+					max_file_length = 40000,
+					preview_config = {
+						-- Options passed to nvim_open_win
+						border = "single",
+						style = "minimal",
+						relative = "cursor",
+						row = 0,
+						col = 1,
+					},
+					yadm = {
+						enable = false,
+					},
+					on_attach = function(bufnr)
+						local gs = package.loaded.gitsigns
+
+						local function map(mode, l, r, opts)
+							opts = opts or {}
+							opts.buffer = bufnr
+							vim.keymap.set(mode, l, r, opts)
+						end
+
+						-- Navigation
+						map("n", "[h", "&diff ? '[h' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
+						map("n", "]h", "&diff ? ']h' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
+
+						-- Actions
+						map({ "n", "v" }, "<leader>hs.", ":Gitsigns stage_hunk<CR>")
+						map({ "n", "v" }, "<leader>hr.", ":Gitsigns reset_hunk<CR>")
+						map("n", "<leader>hr*", gs.reset_buffer)
+						map("n", "<leader>hs*", gs.stage_buffer)
+						map("n", "<leader>hS.", gs.undo_stage_hunk)
+						map("n", "<leader>ph", gs.preview_hunk)
+						map("n", "<leader>hd", gs.diffthis)
+						map("n", "<leader>hD", function()
+							gs.diffthis("~")
+						end)
+						map("n", "<leader>tgd", gs.toggle_deleted)
+
+						-- Text object
+						map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+					end,
+				})
+			end,
+		})
+
 		-- Development
 		use({ "junegunn/fzf", run = "-> fzf#install()" })
 		use({ "junegunn/fzf.vim" })
 
 		use({ "tpope/vim-dispatch" })
 		use({ "tpope/vim-commentary" })
+		use({ "tpope/vim-fugitive" })
 		use({ "JoosepAlviste/nvim-ts-context-commentstring" })
 		use({ "haringsrob/nvim_context_vt" })
 		use({ "machakann/vim-sandwich" })
@@ -129,7 +229,7 @@ return require("packer").startup({
 						delay_ms = 21, -- delay before popup displays
 						inc_ms = 5, -- time increments used for fade/resize effects
 						blend = 30, -- starting blend, between 0-100 (fully transparent), see :h winblend
-						width = 50,
+						width = 80,
 						winhl = "PMenu",
 						fader = require("specs").linear_fader,
 						resizer = require("specs").shrink_resizer,
@@ -169,53 +269,12 @@ return require("packer").startup({
 			end,
 		})
 		-- Color
-		use({
-			"glepnir/indent-guides.nvim",
-			branch = "main",
-			config = function()
-				local even_colors = nil
-				local odd_colors = nil
-				if vim.opt.background:get() == "light" then
-					even_colors = { fg = "#FC5C94", bg = "#FC5C94" }
-					odd_colors = { fg = "#333333", bg = "#333333" }
-				else
-					even_colors = { fg = "#5d4d7a", bg = "#5d4d7a" }
-					odd_colors = { fg = "#cdcdcd", bg = "#cdcdcd" }
-				end
-				require("indent_guides").setup({
-					indent_levels = 30,
-					indent_guide_size = 1,
-					indent_start_level = 1,
-					indent_enable = true,
-					indent_space_guides = true,
-					indent_tab_guides = false,
-					indent_soft_pattern = "\\s",
-					exclude_filetypes = {
-						"help",
-						"dashboard",
-						"dashpreview",
-						"NvimTree",
-						"vista",
-						"sagahover",
-						"aerial",
-						"AERIAL",
-						"minimap",
-						"Minimap",
-						"MINIMAP",
-						"-MINIMAP-",
-					},
-					even_colors = even_colors,
-					odd_colors = odd_colors,
-				})
-			end,
-		})
-
 		-- colorschemes
 		-- use({ "tjdevries/colorbuddy.vim" })
 		use({ "rktjmp/lush.nvim" })
 		use({ "savq/melange" })
 		-- use({ "adisen99/codeschool.nvim" })
-		-- use({ "joehannes-ux/lush-jsx.nvim" })
+		use({ "joehannes-ux/lush-jsx.nvim" })
 		use({ "olimorris/onedarkpro.nvim" })
 		use({ "pineapplegiant/spaceduck" })
 		-- use({ "Iron-E/nvim-highlite" })
@@ -245,6 +304,12 @@ return require("packer").startup({
 				})
 			end,
 		})
+		use({
+			"ray-x/starry.nvim",
+			config = function()
+				require("config/starry").setup()
+			end,
+		})
 		-- use({
 		-- 	"projekt0n/github-nvim-theme",
 		-- 	config = function()
@@ -252,6 +317,49 @@ return require("packer").startup({
 		-- 	end,
 		-- })
 		use({ "folke/tokyonight.nvim" })
+
+		-- indent-guide calculates colors based on a ColorScheme set
+		-- please use after at least one Plugin that sets a ColorScheme
+		use({
+			"glepnir/indent-guides.nvim",
+			branch = "main",
+			config = function()
+				local blended_magenta = require("utils").Color.vim.background_blend("#AFFF00", 21)
+				local blended_neutral = nil
+				local even_colors = { fg = blended_magenta, bg = blended_magenta }
+				if vim.opt.background:get() == "light" then
+					blended_neutral = require("utils").Color.vim.background_blend("#000000", 10)
+				else
+					blended_neutral = require("utils").Color.vim.background_blend("#FFFFFF", 10)
+				end
+				local odd_colors = { fg = blended_neutral, bg = blended_neutral }
+				require("indent_guides").setup({
+					indent_levels = 30,
+					indent_guide_size = 1,
+					indent_start_level = 1,
+					indent_enable = true,
+					indent_space_guides = true,
+					indent_tab_guides = false,
+					indent_soft_pattern = "\\s",
+					exclude_filetypes = {
+						"help",
+						"dashboard",
+						"dashpreview",
+						"NvimTree",
+						"vista",
+						"sagahover",
+						"aerial",
+						"AERIAL",
+						"minimap",
+						"Minimap",
+						"MINIMAP",
+						"-MINIMAP-",
+					},
+					even_colors = even_colors,
+					odd_colors = odd_colors,
+				})
+			end,
+		})
 
 		-- Testing
 		use({ "vim-test/vim-test" })
@@ -286,6 +394,7 @@ return require("packer").startup({
 				"AckslD/nvim-neoclip.lua",
 				"rmagatti/auto-session",
 				"rmagatti/session-lens",
+				"Azeirah/nvim-redux",
 			},
 			config = function()
 				local config = require("config/telescope")
@@ -331,10 +440,22 @@ return require("packer").startup({
 			"rmagatti/goto-preview",
 			config = function()
 				require("goto-preview").setup({
-					default_mappings = true,
-					resizing_mappings = true,
-					dismiss_on_move = true,
-					opacity = 10,
+					width = 90, -- Width of the floating window
+					height = 21, -- Height of the floating window
+					border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" }, -- Border characters of the floating window
+					default_mappings = true, -- Bind default mappings
+					debug = false, -- Print debug information
+					opacity = 10, -- 0-100 opacity level of the floating window where 100 is fully transparent.
+					resizing_mappings = true, -- Binds arrow keys to resizing the floating window.
+					post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
+					references = { -- Configure the telescope UI for slowing the references cycling window.
+						telescope = require("telescope.themes").get_dropdown({ hide_preview = false }),
+					},
+					-- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
+					focus_on_open = true, -- Focus the floating window when opening it.
+					dismiss_on_move = false, -- Dismiss the floating window when moving the cursor.
+					force_close = true, -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
+					bufhidden = "wipe", -- the bufhidden option to set on the floating window. See :h bufhidden
 				})
 			end,
 		})
@@ -358,13 +479,6 @@ return require("packer").startup({
 		-- use {'pechorin/any-jump.vim'}
 		use({ "kshenoy/vim-signature" })
 		use({
-			"folke/trouble.nvim",
-			requires = "kyazdani42/nvim-web-devicons",
-			config = function()
-				require("config/trouble").setup()
-			end,
-		})
-		use({
 			"petertriho/nvim-scrollbar",
 			config = function()
 				require("config/scrollbar").setup()
@@ -381,24 +495,44 @@ return require("packer").startup({
 		-- 	run = "cargo install --locked code-minimap",
 		-- })
 		-- use({
-		-- 	"onsails/diaglist.nvim",
+		-- 	"folke/trouble.nvim",
+		-- 	requires = "kyazdani42/nvim-web-devicons",
 		-- 	config = function()
-		-- 		require("diaglist").init({
-		-- 			-- increase for noisy servers
-		-- 			debounce_ms = 1000,
-		-- 			-- use loclist for buf_diag only => false
-		-- 			-- use qflist for buf_diag only => true -> losing all diag list
-		-- 			buf_clients_only = false,
-		-- 		})
+		-- 		require("config/trouble").setup()
 		-- 	end,
 		-- })
 		use({ "mhinz/vim-grepper" })
+		-- use({
+		-- 	"blueyed/vim-qf_resize",
+		-- 	config = function()
+		-- 		vim.g.qf_resize_min_height = 3
+		-- 	end,
+		-- })
+		use({
+			"onsails/diaglist.nvim",
+			config = function()
+				require("diaglist").init({
+					debug = false,
+					-- increase for noisy servers
+					debounce_ms = 300,
+				})
+			end,
+		})
 		use({
 			"kevinhwang91/nvim-bqf",
 			config = function()
 				require("config/bqf").setup()
 			end,
 		})
+		-- use({
+		-- 	"neomake/neomake",
+		-- 	config = function()
+		-- 		vim.cmd([[
+		-- let g:neomake_open_list = 2
+		-- call neomake#configure#automake('nw', 1000)
+		-- ]])
+		-- 	end,
+		-- })
 		-- use({ "junegunn/vim-peekaboo" })
 		-- use {'gennaro-tedesco/nvim-peekup'}
 		-- use {'lukas-reineke/indent-blankline.nvim' }
@@ -489,8 +623,8 @@ return require("packer").startup({
 			"abecodes/tabout.nvim",
 			config = function()
 				require("tabout").setup({
-					tabkey = ";l", -- key to trigger tabout, set to an empty string to disable
-					backwards_tabkey = ";h", -- key to trigger backwards tabout, set to an empty string to disable
+					tabkey = ";L", -- key to trigger tabout, set to an empty string to disable
+					backwards_tabkey = ";H", -- key to trigger backwards tabout, set to an empty string to disable
 					act_as_tab = false, -- shift content if tab out is not possible
 					act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
 					enable_backwards = true, -- well ...
@@ -675,16 +809,24 @@ return require("packer").startup({
 			end,
 		})
 		-- use({
-		-- "ldelossa/litee.nvim",
-		-- config = function()
-		-- 	require("litee.lib").setup()
-		-- end,
+		-- 	"ldelossa/litee.nvim",
+		-- 	config = function()
+		-- 		require("litee.lib").setup({
+		-- 			tree = {
+		-- 				icon_set = "codicons",
+		-- 			},
+		-- 			panel = {
+		-- 				orientation = "left",
+		-- 				panel_size = 30,
+		-- 			},
+		-- 		})
+		-- 	end,
 		-- })
 		-- use({
-		-- "ldelossa/litee-calltree.nvim",
-		-- config = function()
-		-- 	require("litee.calltree").setup()
-		-- end,
+		-- 	"ldelossa/litee-calltree.nvim",
+		-- 	config = function()
+		-- 		require("litee.calltree").setup({})
+		-- 	end,
 		-- })
 		-- Status line
 		use({
@@ -733,7 +875,7 @@ return require("packer").startup({
 		-- Documentation/Help/Bookmarks ...
 		use({ "sunaku/vim-dasht" })
 		-- for persisting global bookmarks
-		use({ "MattesGroeger/vim-bookmarks" })
+		-- use({ "MattesGroeger/vim-bookmarks" })
 		-- for non-persisting grouped bookmarks
 		use({
 			"chentau/marks.nvim",
@@ -743,44 +885,44 @@ return require("packer").startup({
 						delete_bookmark = "md.",
 						set_bookmark0 = "m0",
 						delete_bookmark0 = "md0",
-						next_bookmark0 = "]m0",
-						prev_bookmark0 = "[m0",
+						next_bookmark0 = "]0",
+						prev_bookmark0 = "[0",
 						set_bookmark1 = "m1",
 						delete_bookmark1 = "md1",
-						next_bookmark1 = "]m1",
-						prev_bookmark1 = "[m1",
+						next_bookmark1 = "]1",
+						prev_bookmark1 = "[1",
 						set_bookmark2 = "m2",
 						delete_bookmark2 = "md2",
-						next_bookmark2 = "]m2",
-						prev_bookmark2 = "[m2",
+						next_bookmark2 = "]2",
+						prev_bookmark2 = "[2",
 						set_bookmark3 = "m3",
 						delete_bookmark3 = "md3",
-						next_bookmark3 = "]m3",
-						prev_bookmark3 = "[m3",
+						next_bookmark3 = "]3",
+						prev_bookmark3 = "[3",
 						set_bookmark4 = "m4",
 						delete_bookmark4 = "md4",
-						next_bookmark4 = "]m4",
-						prev_bookmark4 = "[m4",
+						next_bookmark4 = "]4",
+						prev_bookmark4 = "[4",
 						set_bookmark5 = "m5",
 						delete_bookmark5 = "md5",
-						next_bookmark5 = "]m5",
-						prev_bookmark5 = "[m5",
+						next_bookmark5 = "]5",
+						prev_bookmark5 = "[5",
 						set_bookmark6 = "m6",
 						delete_bookmark6 = "md6",
-						next_bookmark6 = "]m6",
-						prev_bookmark6 = "[m6",
+						next_bookmark6 = "]6",
+						prev_bookmark6 = "[6",
 						set_bookmark7 = "m7",
 						delete_bookmark7 = "md7",
-						next_bookmark7 = "]m7",
-						prev_bookmark7 = "[m7",
+						next_bookmark7 = "]7",
+						prev_bookmark7 = "[7",
 						set_bookmark8 = "m8",
 						delete_bookmark8 = "md8",
-						next_bookmark8 = "]m8",
-						prev_bookmark8 = "[m8",
+						next_bookmark8 = "]8",
+						prev_bookmark8 = "[8",
 						set_bookmark9 = "m9",
 						delete_bookmark9 = "md9",
-						next_bookmark9 = "]m9",
-						prev_bookmark9 = "[m9",
+						next_bookmark9 = "]9",
+						prev_bookmark9 = "[9",
 					},
 					bookmark_0 = {
 						sign = "",
@@ -841,76 +983,6 @@ return require("packer").startup({
 		-- use {'powerman/vim-plugin-AnsiEsc'}
 
 		-- Git stuff
-		use({
-			"lewis6991/gitsigns.nvim",
-			requires = { "nvim-lua/plenary.nvim" },
-			config = function()
-				require("gitsigns").setup({
-					signs = {
-						add = { hl = "GitSignsAdd", text = "+", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-						change = {
-							hl = "GitSignsChange",
-							text = "│",
-							numhl = "GitSignsChangeNr",
-							linehl = "GitSignsChangeLn",
-						},
-						delete = {
-							hl = "GitSignsDelete",
-							text = "_",
-							numhl = "GitSignsDeleteNr",
-							linehl = "GitSignsDeleteLn",
-						},
-						topdelete = {
-							hl = "GitSignsDelete",
-							text = "‾",
-							numhl = "GitSignsDeleteNr",
-							linehl = "GitSignsDeleteLn",
-						},
-						changedelete = {
-							hl = "GitSignsChange",
-							text = "~",
-							numhl = "GitSignsChangeNr",
-							linehl = "GitSignsChangeLn",
-						},
-					},
-					numhl = false,
-					linehl = false,
-					keymaps = {
-						-- Default keymap options
-						noremap = true,
-						buffer = true,
-
-						["n ]h"] = {
-							expr = true,
-							"&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'",
-						},
-						["n [h"] = {
-							expr = true,
-							"&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'",
-						},
-
-						["n <leader>hs"] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-						["n <leader>hu"] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-						["n <leader>hr"] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-						["n <leader>hR"] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-						["n <leader>hp"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-						["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
-
-						-- Text objects
-						["o ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-						["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-					},
-					watch_index = {
-						interval = 1000,
-					},
-					current_line_blame = true,
-					sign_priority = 6,
-					update_debounce = 100,
-					status_formatter = nil, -- Use default
-					use_internal_diff = true, -- If luajit is present
-				})
-			end,
-		})
 		use({
 			"sindrets/diffview.nvim",
 			config = function()
@@ -990,7 +1062,12 @@ return require("packer").startup({
 		-- use {'vim-ctrlspace/vim-ctrlspace' }
 
 		-- Embed in browser
-		-- use {'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
+		use({
+			"glacambre/firenvim",
+			run = function()
+				vim.fn["firenvim#install"](0)
+			end,
+		})
 
 		-- OSC 52 yank
 		-- use {'ojroques/vim-oscyank' }
@@ -1015,6 +1092,7 @@ return require("packer").startup({
 			requires = { "akinsho/nvim-bufferline.lua" },
 			config = function()
 				require("close_buffers").setup({
+					filetype_ignore = { "qf" },
 					file_glob_ignore = { "src/**/*" },
 					preserve_window_layout = { "this", "nameless" },
 					next_buffer_cmd = function(windows)
@@ -1168,6 +1246,15 @@ return require("packer").startup({
 		-- 	end,
 		-- })
 
+		use({ "chrisbra/NrrwRgn" })
+		-- use({
+		-- 	"hoschi/yode-nvim",
+		-- 	config = function()
+		-- 		local yode = require("yode-nvim")
+		-- 		yode.setup({})
+		-- 	end,
+		-- })
+
 		use({
 			"Krafi2/jeskape.nvim",
 			config = function()
@@ -1220,5 +1307,8 @@ return require("packer").startup({
 				require("which-key").setup({})
 			end,
 		})
+
+		--colorscheme scheduler/auto-switcher
+		use({ "haystackandroid/night-and-day" })
 	end,
 })

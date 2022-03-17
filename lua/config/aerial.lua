@@ -41,11 +41,15 @@ function config.setup()
 		filter_kind = {
 			"Class",
 			"Constructor",
+			"Constant",
 			"Enum",
+			"Field",
 			"Function",
 			"Interface",
 			"Method",
 			"Struct",
+			"Variable",
+			"Object",
 		},
 
 		-- Enum: split_width, full_width, last, none

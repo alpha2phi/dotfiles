@@ -1,6 +1,5 @@
 ---@diagnostic disable:undefined-global
 local nest = require("nest")
-local preview = require("goto-preview")
 -- local calltree = require("litee.calltree")
 
 nest.applyKeymaps({
@@ -12,17 +11,21 @@ nest.applyKeymaps({
 	{ "<A-j>", "<C-w>7-" },
 	{ "<A-k>", "<C-w>7+" },
 	{ "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
+	{ "<C-p", '<cmd>"0p<CR>' },
+	{ "<C-P", '<cmd>"0P<CR>' },
 	{
 		"[",
 		{
 			{ "b", "<Cmd>BufferLineCyclePrev<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" },
 			{ "e", "<Plug>(ultest-prev-fail)" },
-			{ "q", "<Cmd>cprev<CR>" },
+			{ "l", {
+				{ "l", "<Cmd>lprev<CR>" },
+				{ "q", "<Cmd>cprev<CR>" },
+			} },
 			{ "t", "<Cmd>FloatermPrev<CR>" },
 			{ "w", "<Cmd>tabprevious<CR>" },
-			{ ".", "<C-O>" },
-			{ "M", "<Cmd>BookmarkPrev<CR>" },
+			{ "m", "<Plug>(Marks-Prev)" },
 		},
 	},
 	{
@@ -31,11 +34,13 @@ nest.applyKeymaps({
 			{ "b", "<Cmd>BufferLineCycleNext<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" },
 			{ "e", "<Plug>(ultest-next-fail)" },
-			{ "q", "<Cmd>cnext<CR>" },
+			{ "l", {
+				{ "l", "<Cmd>lnext<CR>" },
+				{ "q", "<Cmd>cnext<CR>" },
+			} },
 			{ "t", "<Cmd>FloatermNext<CR>" },
 			{ "w", "<Cmd>tabnext<CR>" },
-			{ ".", "<C-I>" },
-			{ "m", "<Cmd>BookmarkNext<CR>" },
+			{ "m", "<Plug>(Marks-Next)" },
 		},
 	},
 	{ "*", "*<cmd>lua require('hlslens').start()<CR>" },
@@ -45,20 +50,31 @@ nest.applyKeymaps({
 		{
 			{ "*", "g*<cmd>lua require('hlslens').start()<CR>" },
 			{ "#", "g#<cmd>lua require('hlslens').start()<CR>" },
-			{ "$", "<Cmd>Telescope treesitter<CR>" },
+			{
+				"$",
+				{
+					{ "$", "<Cmd>Telescope treesitter<CR>" },
+					{ "*", "<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>" },
+					{ ".", "<Cmd>lua vim.lsp.buf.document_symbol()<CR>" },
+					{ "r", "<cmd>Lspsaga rename<cr>" },
+				},
+			},
 			{ "a", "<cmd>Lspsaga codeAction<CR>" },
-			{ "d", "<Cmd>lua vim.lsp.buf.definition()<CR>" },
-			{ "D", "<Cmd>lua vim.lsp.buf.declaration()<CR>" },
-			{ "i", "<cmd>lua vim.lsp.buf.implementation()<CR>" },
-			{ "I*", "<cmd>TSLspImportAll<CR>" },
-			{ "I.", "<cmd>TSLspImportCurrent<CR>" },
+			{ "d", "<cmd>split<CR><C-w>T<cmd>vsplit<CR><Cmd>lua vim.lsp.buf.definition()<CR>" },
+			{ "D", "<Cmd>lua vim.lsp.buf.definition()<CR>" },
+			{
+				"I",
+				{
+					{ "I*", "<cmd>TSLspImportAll<CR>" },
+					{ "I.", "<cmd>TSLspImportCurrent<CR>" },
+				},
+			},
 			{ "j", "<C-I>" },
 			{ "k", "<C-O>" },
-			{ "l", "<Cmd>Trouble lsp_references<CR>" },
 			{ "o", "<cmd>Lspsaga show_line_diagnostics<cr>" },
 			{ "O", "<cmd>TSLspOrganize<cr>" },
-			{ "r", "<cmd>Lspsaga rename<cr>" },
-			{ "R", "<cmd>TSLspRenameFile<CR>" },
+			{ "r", "<cmd>split<CR><C-w>T<cmd>vsplit<CR><cmd>Telescope lsp_references<CR>" },
+			{ "R", "<cmd>Telescope lsp_references<CR>" },
 		},
 	},
 	{ "K", "<cmd>Lspsaga hover_doc<cr>" },
@@ -82,14 +98,12 @@ nest.applyKeymaps({
 				"<",
 				{
 					{ "s", "<Cmd>RestoreSession<CR>" },
-					{ "m", "<Cmd>LoadBookmarks<CR>" },
 				},
 			},
 			{
 				">",
 				{
 					{ "s", "<Cmd>SaveSession<CR>" },
-					{ "m", "<Cmd>SaveBookmarks<CR>" },
 				},
 			},
 			{
@@ -102,6 +116,13 @@ nest.applyKeymaps({
 						{
 							{ "*", "lua require('close_buffers').delete({type = 'nameless'})<CR>" },
 							{ ".", "lua require('close_buffers').delete({type = 'this'})<CR>" },
+						},
+					},
+					{
+						"w",
+						{
+							{ "*", ":wa!<CR>" },
+							{ ".", ":w!<CR>" },
 						},
 					},
 				},
@@ -119,10 +140,12 @@ nest.applyKeymaps({
 			{
 				"f",
 				{
-					{ "?", "<Cmd>Telescope Cheatsheet<CR>" },
+					{ "?", "<Cmd>Cheatsheet<CR>" },
+					{ ":", "<Cmd>Telescope commands<CR>" },
 					{ ";", "<Cmd>Telescope git_files<CR>" },
 					{ "/", "<Cmd>TodoTelescope<CR>" },
-					{ "$", "<Cmd>Telescope aerial<CR>" },
+					{ "$", "<Cmd>Telescope lsp_document_symbols<CR>" },
+					{ "'", "<Cmd>Telescope marks<CR>" },
 					{ "b", "<Cmd>Telescope buffers<CR>" },
 					{ "c", "<Cmd>Telescope colorscheme<CR>" },
 					{ "e", "<Cmd>Telescope file_browser<CR>" },
@@ -130,13 +153,22 @@ nest.applyKeymaps({
 					{ "g", "<Cmd>Telescope live_grep<CR>" },
 					{ "h", "<Cmd>Telescope frecency<CR>" },
 					{ "i", "<Cmd>Telescope media_files<CR>" },
+					{ "j", "<Cmd>Telescope jumplist<CR>" },
 					{ "k", "<Cmd>Telescope help_tags<CR>" },
 					{ "m*", "<Cmd>Telescope vim_bookmarks all<CR>" },
 					{ "m.", "<Cmd>Telescope vim_bookmarks current_file<CR>" },
-					{ "n", "<Cmd>Telescope node_modules list" },
+					{ "n", "<Cmd>Telescope node_modules list<CR>" },
 					{ "p", ":lua require'telescope'.extensions.project.project{}<CR>" },
-					{ "s", "<Cmd>Telescope ultisnips ultisnips<CR>" },
-					{ "S", "<Cmd>SearchSession<CR>" },
+					{ "r", "<Cmd>Telescope lsp_references<CR>" },
+					{
+						"R",
+						{
+							{ "<", ":lua require'nvim-redux'.list_actions_in_switch_reducer()<CR>" },
+							{ ">", ":lua require'nvim-redux'.list_dispatch_calls()<CR>" },
+						},
+					},
+					{ "s", "<Cmd>SearchSession<CR>" },
+					{ "w", "<Cmd>Telescope grep_string<CR>" },
 					{ "y", "<Cmd>Telescope neoclip<CR>" },
 					{ "z", "<Cmd>Telescope current_buffer_fuzzy_find<CR>" },
 					{
@@ -216,47 +248,27 @@ nest.applyKeymaps({
 				},
 			},
 			{
-				"l",
+				"m",
 				{
-					{ ":", "<cmd>lua vim.lsp.buf.type_definition()<CR>" },
-					{ "$", "<cmd>lua vim.lsp.buf.document_symbol()<CR>" },
-					{ "a", "<Cmd>Lspsaga code_action<CR>" },
-					{ "d", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>" },
-					{ "D", "<Cmd>Lspsaga preview_definition<CR>" },
-					{ "f", "<Cmd>Lspsaga lsp_finder<CR>" },
-					{ "F", vim.lsp.buf.formatting },
-					{ "k", "<Cmd>Lspsaga signature_help<CR>" },
-					{ "r", "<Cmd>Lspsaga rename<CR>" },
-					{ "R", "<cmd>lua vim.lsp.buf.references()<CR>" },
-					{ "ql", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>" },
-				},
-			},
-			{
-				"p",
-				{
-					{ "d", "<cmd>Lspsaga preview_definition<CR>" },
-					{ "i", PeekImplementation },
-					{ "r", preview.goto_preview_references },
-					{ "D", PeekDeclaration },
+					{ "*", "<cmd>BookmarksListAll<CR>" },
+					{ "0", "<cmd>BookmarksList 0<CR>" },
+					{ "1", "<cmd>BookmarksList 1<CR>" },
+					{ "2", "<cmd>BookmarksList 2<CR>" },
+					{ "3", "<cmd>BookmarksList 3<CR>" },
+					{ "4", "<cmd>BookmarksList 4<CR>" },
+					{ "5", "<cmd>BookmarksList 5<CR>" },
+					{ "6", "<cmd>BookmarksList 6<CR>" },
+					{ "7", "<cmd>BookmarksList 7<CR>" },
+					{ "8", "<cmd>BookmarksList 8<CR>" },
+					{ "9", "<cmd>BookmarksList 9<CR>" },
 				},
 			},
 			{
 				"q",
 				{
-					{ "mm", "<cmd>BookmarkShowAll<CR>" },
-					{ "m0", "<cmd>BookmarksList 0<CR>" },
-					{ "m1", "<cmd>BookmarksList 1<CR>" },
-					{ "m2", "<cmd>BookmarksList 2<CR>" },
-					{ "m3", "<cmd>BookmarksList 3<CR>" },
-					{ "m4", "<cmd>BookmarksList 4<CR>" },
-					{ "m5", "<cmd>BookmarksList 5<CR>" },
-					{ "m6", "<cmd>BookmarksList 6<CR>" },
-					{ "m7", "<cmd>BookmarksList 7<CR>" },
-					{ "m8", "<cmd>BookmarksList 8<CR>" },
-					{ "m9", "<cmd>BookmarksList 9<CR>" },
+					{ "q", "<cmd>FloatermKill<CR>:wqa!<CR>" },
 				},
 			},
-			{ "Q", "<cmd>FloatermKill<CR>:wqa<CR>" },
 			{
 				"s",
 				{
@@ -271,11 +283,18 @@ nest.applyKeymaps({
 						"b",
 						{
 							{ "m", "<Cmd>BResizeZoom<CR>" },
+							{ "o", "<Cmd>lua require('aerial').focus()<CR>" },
 						},
 					},
-					{ "c", "<Cmd>call ToggleBackgroundLightness()<CR>" },
+					{ "c", "<Cmd>lua toggle_bg_mode()<CR>" },
 					{ "C", "<Cmd>TSContextToggle<CR>" },
-					{ "d", "<Cmd>TroubleToggle<CR>" },
+					{
+						"d",
+						{
+							{ "*", "<Cmd>call ToggleDiagFix()<CR>" },
+							{ ".", "<Cmd>call ToggleDiagLoc()<CR>" },
+						},
+					},
 					-- { "D", ":lua require('dapui').toggle()" },
 					{ "e", "<Plug>(ultest-summary-toggle)" },
 					{
@@ -286,31 +305,20 @@ nest.applyKeymaps({
 						},
 					},
 					{ "F", "<Cmd>Twilight<CR>" },
-					{ "m", "<Cmd>BookmarkToggle<CR>" },
-					{ "o", "<Cmd>AerialToggle right<CR>" },
 					{
-						"q",
+						"l",
 						{
-							{ "f", "<Cmd>call ToggleQuickFix()<CR>" },
 							{ "l", "<Cmd>call ToggleQuickLoc()<CR>" },
+							{ "q", "<Cmd>call ToggleQuickFix()<CR>" },
 						},
 					},
+					{ "o", "<Cmd>AerialToggle right<CR>" },
 					{ "t", "<Cmd>FloatermToggle<CR>" },
 					{ "R", "<Cmd>ProjectRoot<CR>" },
 					{ "Z", "<Cmd>ZenMode<CR>" },
 					{
 						"<leader>",
 						{
-							{
-								"d",
-								{
-									{ "*", "<Cmd>Trouble lsp_workspace_diagnostics<CR>" },
-									{ ".", "<Cmd>Trouble lsp_document_diagnostics<CR>" },
-									{ "r", "<Cmd>Trouble lsp_refences<CR>" },
-									{ "q", "<Cmd>Trouble quickfix<CR>" },
-									{ "l", "<Cmd>Trouble loclist<CR>" },
-								},
-							},
 							{ "t", {
 								{ "n", "<Cmd>FloatermNew<CR>" },
 							} },
@@ -321,10 +329,10 @@ nest.applyKeymaps({
 			{
 				"w",
 				{
+					{ "*", "<cmd>wincmd =<cr><cmd>QfResizeWindows<CR>" },
 					{ "e", "<Plug>(ultest-summary-jump)" },
 					{ "n", "<Cmd>tabnew<CR>" },
 					{ "q", "<Cmd>tabclose<CR>" },
-					{ "o", "<Cmd>lua require('aerial').focus()<CR>" },
 				},
 			},
 		},
@@ -391,7 +399,14 @@ nest.applyKeymaps({
 			{ "J", ":m '>+1<CR>gv=gv" },
 			{ "K", ":m '<-2<CR>gv=gv" },
 			{
-				"<leader>",
+				"g",
+				{
+					{ "f", ":NRP<CR>" },
+					{
+						"F",
+						":NRP<CR>:split<CR>:set noea<CR><C-w>k:NRM!<CR>zR:execute 'resize' . line('$')<CR>:set winfixheight<CR><C-w>j",
+					},
+				},
 				{
 					{ "l", {
 						{ "a", ":<C-U>Lspsaga range_code_action<CR>" },

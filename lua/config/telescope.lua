@@ -2,7 +2,7 @@
 local config = {}
 
 function config.setup()
-	local trouble = require("trouble.providers.telescope")
+	-- local trouble = require("trouble.providers.telescope")
 	local telescope = require("telescope")
 	local actions = require("telescope.actions")
 
@@ -101,8 +101,8 @@ function config.setup()
 		},
 		defaults = {
 			mappings = {
-				i = { ["<c-t>"] = trouble.open_with_trouble },
-				n = { ["<c-t>"] = trouble.open_with_trouble },
+				-- i = { ["<c-t>"] = trouble.open_with_trouble },
+				-- n = { ["<c-t>"] = trouble.open_with_trouble },
 			},
 			history = {
 				path = vim.fn.stdpath("data") .. "/databases/telescope_history.sqlite3",

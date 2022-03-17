@@ -23,9 +23,7 @@ function config.setup()
 		-- tab_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
 		-- tab_close = { guifg = tabColor(), guibg = groups.fillBG(), gui = "bold,italic" },
 		-- info = { guifg = tabColor(), guibg = groups.selectionBG() },
-		-- buffer_visible = {
-		-- 	guibg = tabColor(),
-		-- },
+		buffer_visible = { guifg = "#FFFFFF", guibg = "#F634B1", gui = "bold" },
 		buffer_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold" },
 		tab_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold" },
 		-- diagnostic = {
@@ -39,25 +37,24 @@ function config.setup()
 		diagnostic = { guifg = "#FF0000", gui = "bold" },
 		diagnostic_visible = { guifg = "#FF0000", gui = "bold" },
 		diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
-		info_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
-		info = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
-		hint_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
-		hint = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
+		info_selected = { guifg = "#00FF00", guibg = "#00AFFF", gui = "bold,italic" },
+		hint_selected = { guifg = "#FFFF00", guibg = "#00AFFF", gui = "bold,italic" },
 		warning_selected = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
-		warning = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
+		error_visible = { guifg = "#550000", guibg = "#F634B1", gui = "bold,italic" },
 		error_selected = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
-		error = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
-		other_diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
-		hint_diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
-		info_diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
-		warning_diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
-		error_diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
+		warning = { guifg = "#FF0000", gui = "bold,italic" },
+		error = { guifg = "#FF0000", gui = "bold,italic" },
+		hint_diagnostic_selected = { guifg = "#00FF00", guibg = "#00AFFF", gui = "bold,italic" },
+		info_diagnostic_selected = { guifg = "#00FF00", guibg = "#00AFFF", gui = "bold,italic" },
+		warning_diagnostic_selected = { guifg = "#FFFF00", guibg = "#00AFFF", gui = "bold,italic" },
+		error_diagnostic_selected = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
 		-- close_button = { guifg = tabColor(), guibg = groups.highlightBG(), gui = "bold" },
 		-- close_button_visible = {
 		-- 	guifg = tabColor(),
 		-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
 		-- 	gui = "bold",
 		-- },
+		close_button_visible = { guifg = "#FFFFFF", guibg = "#F634B1", gui = "bold" },
 		close_button_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold" },
 		-- modified = { guibg = "#F53737" },
 		-- modified_visible = {
@@ -74,6 +71,7 @@ function config.setup()
 		separator_selected = { guifg = tabColor(), guibg = "#00AFFF" },
 		separator_visible = {
 			guifg = tabColor(),
+			guibg = "#F634B1",
 			-- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
 		},
 		separator = { guifg = tabColor() },
@@ -85,11 +83,11 @@ function config.setup()
 	local opts = {
 		highlights = highlights,
 		options = {
-			numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both",
-			close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-			right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+			numbers = "buffer_id", -- "none" | "ordinal" | "buffer_id" | "both",
+			close_command = "bp | bd! %d", -- can be a string | function, see "Mouse actions"
+			right_mouse_command = "sbuffer %d", -- can be a string | function, see "Mouse actions"
 			left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-			middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
+			middle_mouse_command = "sbuffer %d", -- can be a string | function, see "Mouse actions"
 			-- NOTE: this plugin is designed with this icon in mind,
 			-- and so changing this is NOT recommended, this is intended
 			-- as an escape hatch for people who cannot bear it for whatever reason
@@ -116,7 +114,7 @@ function config.setup()
 			diagnostics_indicator = function(count, level, diagnostics_dict, context)
 				local s = " "
 				for e, n in pairs(diagnostics_dict) do
-					local sym = e == "error" and " " or (e == "warning" and " " or " ")
+					local sym = e == "error" and " " or (e == "warning" and " " or "")
 					s = s .. n .. sym
 				end
 				return s
@@ -165,7 +163,7 @@ function config.setup()
 					local result = {}
 
 					if gps.is_available() then
-						table.insert(result, { text = gps.get_location() .. " ", guifg = tabColor(), guibg = "black" })
+						table.insert(result, { text = gps.get_location() .. " ", guifg = "#FFFF00", guibg = "black" })
 						table.insert(result, { text = "   ", guifg = "black", guibg = tabColor() })
 					end
 

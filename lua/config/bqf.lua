@@ -17,7 +17,7 @@ vim.cmd(([[
         au!
         au User Grepper ++nested %s
     aug END
-]]):format([[call setqflist([], 'r', {'context': {'bqf': {'pattern_hl': '\%#' . getreg('/')}}})]]))
+]]):format([[call setloclist([], 'r', {'context': {'bqf': {'pattern_hl': '\%#' . getreg('/')}}})]]))
 
 -- try `gsiw` under word
 vim.cmd([[
@@ -33,12 +33,15 @@ vim.cmd([[
 function config.setup()
 	require("bqf").setup({
 		auto_enable = true,
+		magic_window = true,
 		auto_resize_height = true,
 		preview = {
-			win_height = 21,
+			auto_preview = true,
+			win_height = 30,
 			win_vheight = 21,
 			delay_syntax = 80,
 			border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
+			wrap = true,
 			should_preview_cb = function(bufnr)
 				local ret = true
 				local filename = vim.api.nvim_buf_get_name(bufnr)
@@ -55,16 +58,44 @@ function config.setup()
 		},
 		-- make `drop` and `tab drop` to become preferred
 		func_map = {
-			drop = "o",
-			openc = "O",
-			split = "<C-s>",
-			tabdrop = "<C-t>",
-			tabc = "",
-			ptogglemode = "z,",
+			open = "<CR>",
+			openc = "o",
+			drop = "O",
+			split = "<C-x>",
+			vsplit = "<C-v>",
+			tab = "t<CR>",
+			tabc = "to",
+			tabb = "<C-t>",
+			tabdrop = "tO",
+			prevfile = "k",
+			nextfile = "j",
+			prevhist = "<",
+			nexthist = ">",
+			lastleave = "gi",
+			stoggleup = "<S-TAB>",
+			stoggledown = "<TAB>",
+			stogglevm = "<TAB>",
+			stogglebuf = "'<TAB>",
+			sclear = "z<TAB>",
+			pscrollup = "<C-u>",
+			pscrolldown = "<C-d>",
+			pscrollorig = "gg",
+			ptogglemode = "<space><CR>",
+			ptoggleitem = "p",
+			ptoggleauto = "P",
+			filter = "zn",
+			filterr = "zN",
+			fzffilter = "f",
 		},
 		filter = {
 			fzf = {
-				action_for = { ["ctrl-s"] = "split", ["ctrl-t"] = "tab drop" },
+				action_for = {
+					["ctrl-t"] = "tabdrop",
+					["ctrl-v"] = "vsplit",
+					["ctrl-x"] = "split",
+					["ctrl-q"] = "signtoggle",
+					["ctrl-c"] = "closeall",
+				},
 				extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
 			},
 		},
