@@ -61,5 +61,15 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 	virtual_text = true,
 	underline = true,
 	signs = true,
-	update_in_insert = true,
+	update_in_insert = false,
 })
+
+-- Litee Calltree Setup
+-- vim.lsp.handlers["callHierarchy/incomingCalls"] = vim.lsp.with(
+-- 	require("litee.calltree.handlers").ch_lsp_handler("from"),
+-- 	{}
+-- )
+-- vim.lsp.handlers["callHierarchy/outgoingCalls"] = vim.lsp.with(
+-- 	require("litee.calltree.handlers").ch_lsp_handler("to"),
+-- 	{}
+-- )

@@ -229,6 +229,7 @@ end
 function setup.efm(_)
 	local efmls = require("efmls-configs")
 	local stylelint = require("efmls-configs.linters.stylelint")
+	local eslint = require("efmls-configs.linters.eslint")
 
 	efmls.init({
 		default_config = true,
@@ -237,6 +238,18 @@ function setup.efm(_)
 	efmls.setup({
 		css = {
 			linter = stylelint,
+		},
+		javascript = {
+			linter = eslint,
+		},
+		javascriptreact = {
+			linter = eslint,
+		},
+		typescript = {
+			linter = eslint,
+		},
+		typescriptreact = {
+			linter = eslint,
 		},
 	})
 end

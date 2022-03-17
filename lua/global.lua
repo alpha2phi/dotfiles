@@ -1,4 +1,5 @@
 ---@diagnostic disable:undefined-global
+--
 local home = os.getenv("HOME")
 local path_sep = _G.is_windows and "\\" or "/"
 
@@ -133,6 +134,9 @@ function _G.qftf(info)
 		local e = items[i]
 		local fname = ""
 		local str
+		if e == nil then
+			break
+		end
 		if e.valid == 1 then
 			if e.bufnr > 0 then
 				fname = vim.fn.bufname(e.bufnr)
@@ -158,4 +162,27 @@ function _G.qftf(info)
 		table.insert(ret, str)
 	end
 	return ret
+end
+
+function _G.toggle_bg_mode(force)
+	local blended_magenta = nil
+	local blended_neutral = nil
+	local current = vim.opt.background:get()
+	local other = current == "light" and "dark" or "light"
+	local future = force and current or other
+
+	if future == "dark" then
+		vim.cmd("set background=dark")
+		blended_neutral = require("utils").Color.vim.background_blend("#000000", 21)
+	else
+		vim.cmd("set background=light")
+		blended_neutral = require("utils").Color.vim.background_blend("#FFFFFF", 21)
+	end
+
+	blended_magenta = require("utils").Color.vim.background_blend("#AFFF00", 37)
+	local even_colors = { fg = blended_magenta, bg = blended_magenta }
+	local odd_colors = { fg = blended_neutral, bg = blended_neutral }
+
+	require("indent_guides").setup({ even_colors = even_colors, odd_colors = odd_colors, indent_guide_size = 1 })
+	require("config/bufferline").setup()
 end

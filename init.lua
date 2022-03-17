@@ -44,7 +44,6 @@ require("lang")
 require("keymappings")
 require("config/colorschemes")
 
-vim.cmd([[colorscheme PaperColor]])
 vim.cmd([[au VimLeavePre * BookmarkSave]] .. vim.fn.stdpath("config") .. [[/bookmarks]])
 vim.cmd([[au BufWritePost plugins.lua luafile]] .. vim.fn.stdpath("config") .. [[/init.lua]])
 vim.cmd("au BufWritePost plugins.lua PackerCompile")

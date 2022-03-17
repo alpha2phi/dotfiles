@@ -30,43 +30,46 @@ opt.softtabstop = indent
 opt.expandtab = true
 
 cmd([[
-set colorcolumn=80,100,120
-set cursorcolumn
-set expandtab smarttab shiftround autoindent smartindent smartcase
-set path+=**
-set wildmode=longest,list,full
-set wildmenu
-set wildignore+=*.pyc
-set wildignore+=*_build/*
-set wildignore+=**/coverage/*
-set wildignore+=**/node_modules/*
-set wildignore+=**/android/*
-set wildignore+=**/ios/*
-set wildignore+=**/.git/*
-set ruler
-set number relativenumber
-set guifont=FiraCode\ Nerd\ Font\ Mono
-set showtabline=2
-set laststatus=2
-set directory=/tmp
-set nobackup
-set nowritebackup
-set noswapfile
-set nocompatible
-set hidden
-set encoding=utf-8
-set cmdheight=1
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
-set mouse=a mousemodel=popup
-set guioptions-=e
+  set colorcolumn=80,100,120
+  set cursorcolumn
+  set expandtab smarttab shiftround autoindent smartindent smartcase
+  set path+=**
+  set wildmode=longest,list,full
+  set wildmenu
+  set wildignore+=*.pyc
+  set wildignore+=*_build/*
+  set wildignore+=**/coverage/*
+  set wildignore+=**/node_modules/*
+  set wildignore+=**/android/*
+  set wildignore+=**/ios/*
+  set wildignore+=**/.git/*
+  set ruler
+  set number relativenumber
+  set guifont=FiraCode\ Nerd\ Font\ Mono
+  set showtabline=2
+  set laststatus=2
+  set directory=/tmp
+  set nobackup
+  set nowritebackup
+  set noswapfile
+  set nocompatible
+  set noequalalways
+  set hidden
+  set encoding=utf-8
+  set cmdheight=2
+  set updatetime=300
+  set shortmess+=c
+  set signcolumn=yes
+  set mouse=a mousemodel=popup
+  set guioptions-=e
 ]])
 
 cmd('let g:Powerline_symbols = "fancy"')
 
 -- Highlight on yank
-cmd("au TextYankPost * lua vim.highlight.on_yank {on_visual = false}")
+cmd([[au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", hlgroup=IncSearch, timeout=300}]])
+
+cmd([[autocmd FileType qf if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif]])
 
 -- Auto format
 vim.api.nvim_exec(
@@ -139,12 +142,28 @@ augroup END
 
 vim.api.nvim_exec(
 	[[
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave *.* mkview
-  autocmd BufWinEnter *.* silent! loadview
-augroup END
-]],
+  augroup remember_folds
+    autocmd!
+    autocmd BufWinLeave *.* mkview
+    autocmd BufWinEnter *.* silent! loadview
+  augroup END
+  ]],
+	false
+)
+
+vim.api.nvim_exec(
+	[[
+  augroup my_scope_and_focus
+    autocmd!
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("GitSignsAddLn", 21, "#AAFFAA")
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("GitSignsChangeLn", 21, "#FFFFAA")
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("GitSignsDeleteLn", 50, "#FFAAAA")
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("TSCurrentScope", 10, "#00AFFF")
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("CursorLine", 21, "#FF00AF")
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("CursorColumn", 21, "#FF00AF")
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("Visual", 21, "#FF00AF")
+  augroup END
+  ]],
 	false
 )
 
@@ -189,30 +208,51 @@ cmd([[
 	let g:minimap_auto_start_win_enter = 0
 	let g:minimap_git_colors = 1
 
+  let g:nd_themes = [
+    \ ['sunrise+0',   'themer_gruvbox', 'dark' ],
+    \ ['sunrise+1/5',   'PaperColor', 'light' ],
+    \ ['sunrise+1/2', 'kat.lightenwim', 'light' ],
+    \ ['sunrise+4/5', 'earlysummer_lighter', 'dark' ],
+    \ ['sunset+0',    'monokai_ristretto', 'dark'  ],
+    \ ['sunset+1/5',    'themer_kurai', 'dark'  ],
+    \ ['sunset+1/2',    'themer_dracula', 'dark'  ],
+    \ ['sunset+2/3',    'themer_rose_pine', 'dark'  ],
+    \ ]
+  let g:nd_latitude = 20
+  let g:nd_timeshift = 34
+
+  set termguicolors
+
 	function! ToggleQuickFix()
     if empty(filter(getwininfo(), 'v:val.quickfix'))
-        copen
+      copen
     else
-        cclose
+      cclose
     endif
 	endfunction
 
 	function! ToggleQuickLoc()
     if empty(filter(getwininfo(), 'v:val.loclist'))
-        lopen
+      lopen
+    else
+      lclose
+    endif
+	endfunction
+
+  function! ToggleDiagFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        lua require("diaglist").open_all_diagnostics()
+    else
+        cclose
+    endif
+	endfunction
+
+	function! ToggleDiagLoc()
+    if empty(filter(getwininfo(), 'v:val.loclist'))
+      lua require("diaglist").open_buffer_diagnostics()
     else
         lclose
     endif
 	endfunction
 
-	function! ToggleBackgroundLightness()
-    if &background ==# 'dark'
-        set background=light
-        lua require("indent_guides").setup({ even_colors = { fg = "#FC5C94", bg = "#FC5C94" }, odd_colors = { fg = "#333333", bg = "#333333" }, indent_guide_size = 1 })
-    else
-        set background=dark
-				lua require("indent_guides").setup({ even_colors = { fg = "#5d4d7a", bg = "#5d4d7a" }, odd_colors = { fg = "#cdcdcd", bg = "#cdcdcd" }, indent_guide_size = 1 })
-    endif
-    lua require("config/bufferline").setup()
-	endfunction
 ]])
