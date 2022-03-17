@@ -37,7 +37,7 @@ catppuccino.setup({
 				information = "underline",
 			},
 		},
-		lsp_trouble = false,
+		lsp_trouble = true,
 		lsp_saga = true,
 		gitgutter = false,
 		gitsigns = true,
@@ -80,7 +80,7 @@ vim.g.neon_transparent = true
 
 -- olimorris/onedarkpro.nvim
 local colors = {
-	bg = "#d3f7d9",
+	bg = "#f9f1ff",
 	fg = "#707070",
 	red = "#e05661",
 	orange = "#ff3377",
@@ -92,7 +92,7 @@ local colors = {
 	white = "#fafafa",
 	black = "#3f3f3f",
 	gray = "#bebebe",
-	highlight = "#efdebd",
+	highlight = "#efffff",
 }
 onedarkpro.setup({
 	colors = {
@@ -125,7 +125,7 @@ onedarkpro.setup({
 	-- },
 	styles = {
 		strings = "NONE", -- Style that is applied to strings
-		comments = "NONE", -- Style that is applied to comments
+		comments = "italic", -- Style that is applied to comments
 		keywords = "bold", -- Style that is applied to keywords
 		functions = "italic,underline", -- Style that is applied to functions
 		variables = "italic,bold", -- Style that is applied to variables
