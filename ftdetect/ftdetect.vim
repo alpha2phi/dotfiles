@@ -599,9 +599,10 @@ au BufNewFile,BufRead *.twig set ft=html.twig
 au BufNewFile,BufRead *.html.twig set ft=html.twig
 au BufNewFile,BufRead *.xml.twig set ft=xml.twig
 
-" typescript
-au BufNewFile,BufRead *.ts set ft=typescript foldmethod=expr
-au BufNewFile,BufRead *.tsx set ft=typescriptreact foldmethod=expr
+" typescript - leaving this for general settings.lua config and treesitter
+" config in order not to override treesitter config or so ...
+" au BufNewFile,BufRead *.ts set ft=typescript foldmethod=expr
+" au BufNewFile,BufRead *.tsx set ft=typescriptreact foldmethod=expr
 
 " v
 au BufNewFile,BufRead *.v set ft=vlang
