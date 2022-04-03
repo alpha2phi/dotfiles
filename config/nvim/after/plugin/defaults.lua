@@ -32,11 +32,9 @@ function M.setup()
   opt.pumblend = 17
   opt.relativenumber = true
   opt.scrolloff = 999
-  opt.scrolloff = 999
   opt.sessionoptions = "blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
   opt.shiftround = true
   opt.shiftwidth = indent
-  opt.sidescrolloff = 999
   opt.sidescrolloff = 999
   opt.smartcase = true
   opt.smartindent = true
