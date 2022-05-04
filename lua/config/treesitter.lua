@@ -6,7 +6,7 @@ local config = {}
 
 function config.setup()
 	require("nvim-treesitter.configs").setup({
-		ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+		ensure_installed = "all", -- maintained is deprecated as of 30/04/2022
 		indent = {
 			enable = true,
 		},
@@ -135,7 +135,7 @@ function config.setup()
 			["container-name"] = "ﭞ ", -- Containers (example: lua tables)
 			["tag-name"] = "炙", -- Tags (example: html tags)
 		},
-		separator = " ﲖ ",
+		separator = " => ",
 	})
 end
 

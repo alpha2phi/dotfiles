@@ -84,6 +84,7 @@ function config.setup()
 		highlights = highlights,
 		options = {
 			numbers = "buffer_id", -- "none" | "ordinal" | "buffer_id" | "both",
+			number_style = "none",
 			close_command = "bp | bd! %d", -- can be a string | function, see "Mouse actions"
 			right_mouse_command = "sbuffer %d", -- can be a string | function, see "Mouse actions"
 			left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
@@ -159,38 +160,48 @@ function config.setup()
 			end,
 			--'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' |
 			custom_areas = {
-				left = function()
-					local result = {}
+				-- left = function()
+				-- 	local result = {}
 
-					if gps.is_available() then
-						table.insert(result, { text = gps.get_location() .. " ", guifg = "#FFFF00", guibg = "black" })
-						table.insert(result, { text = "   ", guifg = "black", guibg = tabColor() })
-					end
+				-- 	if gps.is_available() then
+				-- 		table.insert(result, { text = gps.get_location() .. " ", guifg = "#FFFF00", guibg = "black" })
+				-- 		table.insert(result, { text = "   ", guifg = "black", guibg = tabColor() })
+				-- 	end
 
-					return result
-				end,
+				-- 	return result
+				-- end,
 				right = function()
 					local result = {}
-					local error = vim.diagnostic.get(0, { severity = [[Error]] }).get_count
-					local warning = vim.diagnostic.get(0, { severity = [[Warning]] }).get_count
-					local info = vim.diagnostic.get(0, { severity = [[Information]] }).get_count
-					local hint = vim.diagnostic.get(0, { severity = [[Hint]] }).get_zRunt
+					local seve = vim.diagnostic.severity
+					local error = #vim.diagnostic.get(0, { severity = seve.ERROR })
+					local warning = #vim.diagnostic.get(0, { severity = seve.WARN })
+					local info = #vim.diagnostic.get(0, { severity = seve.INFO })
+					local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
+
+					if gps.is_available() then
+						table.insert(
+							result,
+							{ text = "   " .. gps.get_location() .. " ", guifg = "#FFFF00", guibg = "#00AFFF" }
+						)
+						table.insert(result, { text = "   ", guifg = "#00AFFF", guibg = tabColor() })
+					end
 
 					if error ~= 0 then
-						table.insert(result, { text = "  " .. error, guifg = "#EC5241" })
+						table.insert(result, { text = "  " .. error, guifg = "#EC5241", guisp = "bold" })
 					end
 
 					if warning ~= 0 then
-						table.insert(result, { text = "  " .. warning, guifg = "#EFB839" })
+						table.insert(result, { text = "  " .. warning, guifg = "#EFB839", guisp = "bold" })
 					end
 
 					if hint ~= 0 then
-						table.insert(result, { text = "  " .. hint, guifg = "#A3BA5E" })
+						table.insert(result, { text = "  " .. hint, guifg = "#A3BA5E", guisp = "bold" })
 					end
 
 					if info ~= 0 then
-						table.insert(result, { text = "  " .. info, guifg = "#7EA9A7" })
+						table.insert(result, { text = "  " .. info, guifg = "#7EA9A7", guisp = "bold" })
 					end
+
 					return result
 				end,
 			},
