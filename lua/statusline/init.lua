@@ -131,20 +131,20 @@ gls.left[12] = {
 		highlight = { c.Color("purple"), c.Color("act1") },
 	},
 }
+-- gls.left[13] = {
+-- 	GitBranch = {
+-- 		provider = gitBranch,
+-- 		icon = "  " .. i.git .. " ",
+-- 		condition = u.buffer_not_empty,
+-- 	},
+-- }
 gls.left[13] = {
-	GitBranch = {
-		provider = gitBranch,
-		icon = "  " .. i.git .. " ",
-		condition = u.buffer_not_empty,
-	},
-}
-gls.left[14] = {
 	GitSeperatorLeft = {
 		provider = gitSeperatorLeft,
 		condition = u.buffer_not_empty,
 	},
 }
-gls.left[15] = {
+gls.left[14] = {
 	DiffAdd = {
 		provider = diffAdd,
 		condition = u.checkwidth,
@@ -152,7 +152,7 @@ gls.left[15] = {
 		highlight = { c.Color("green"), c.Color("purple") },
 	},
 }
-gls.left[16] = {
+gls.left[15] = {
 	DiffModified = {
 		provider = diffModified,
 		condition = u.checkwidth,
@@ -160,7 +160,7 @@ gls.left[16] = {
 		highlight = { c.Color("orange"), c.Color("purple") },
 	},
 }
-gls.left[17] = {
+gls.left[16] = {
 	DiffRemove = {
 		provider = diffRemove,
 		condition = u.checkwidth,
@@ -168,7 +168,7 @@ gls.left[17] = {
 		highlight = { c.Color("red"), c.Color("purple") },
 	},
 }
-gls.left[19] = {
+gls.left[17] = {
 	ViModeSeperatorAltInverse = {
 		provider = function()
 			return i.slant.Right
