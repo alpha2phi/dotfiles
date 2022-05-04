@@ -21,7 +21,7 @@ function config.setup()
 		--   auto    - aerial window will stay open as long as there is a visible
 		--             buffer to attach to
 		--   global  - same as 'persist', and will always show symbols for the current buffer
-		close_behavior = "auto",
+		close_behavior = "global",
 
 		-- Set to false to remove the default keybindings for the aerial buffer
 		default_bindings = true,
@@ -30,7 +30,7 @@ function config.setup()
 		-- Determines the default direction to open the aerial window. The 'prefer'
 		-- options will open the window in the other direction *if* there is a
 		-- different buffer in the way of the preferred direction
-		default_direction = "prefer_right",
+		default_direction = "right",
 
 		-- Disable aerial on files with this many lines
 		disable_max_lines = 10000,
@@ -73,7 +73,7 @@ function config.setup()
 		-- default collapsed icon. The default icon set is determined by the
 		-- "nerd_font" option below.
 		-- If you have lspkind-nvim installed, aerial will use it for icons.
-		icons = {},
+		-- icons = {},
 
 		-- When you fold code with za, zo, or zc, update the aerial tree as well.
 		-- Only works when manage_folds = true
@@ -104,7 +104,7 @@ function config.setup()
 
 		-- Automatically open aerial when entering supported buffers.
 		-- This can be a function (see :help aerial-open-automatic)
-		open_automatic = false,
+		open_automatic = true,
 
 		-- Set to true to only open aerial at the far right/left of the editor
 		-- Default behavior opens aerial relative to current window
@@ -120,12 +120,6 @@ function config.setup()
 		float = {
 			-- Controls border appearance. Passed to nvim_open_win
 			border = "rounded",
-
-			-- Controls row offset from cursor. Passed to nvim_open_win
-			row = 1,
-
-			-- Controls col offset from cursor. Passed to nvim_open_win
-			col = 0,
 
 			-- The maximum height of the floating aerial window
 			max_height = 100,
