@@ -17,30 +17,62 @@ nest.applyKeymaps({
 		"[",
 		{
 			{ "b", "<Cmd>BufferLineCyclePrev<CR>" },
+			{ "B", "<Cmd>bprevious<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" },
 			{ "e", "<Plug>(ultest-prev-fail)" },
 			{ "l", {
 				{ "l", "<Cmd>lprev<CR>" },
 				{ "q", "<Cmd>cprev<CR>" },
 			} },
+			{
+				"m",
+				{
+					{ "$", "<Plug>(Marks-prev)" },
+					{ "0", "<Plug>(Marks-prev-bookmark0)" },
+					{ "1", "<Plug>(Marks-prev-bookmark1)" },
+					{ "2", "<Plug>(Marks-prev-bookmark2)" },
+					{ "3", "<Plug>(Marks-prev-bookmark3)" },
+					{ "4", "<Plug>(Marks-prev-bookmark4)" },
+					{ "5", "<Plug>(Marks-prev-bookmark5)" },
+					{ "6", "<Plug>(Marks-prev-bookmark6)" },
+					{ "7", "<Plug>(Marks-prev-bookmark7)" },
+					{ "8", "<Plug>(Marks-prev-bookmark8)" },
+					{ "9", "<Plug>(Marks-prev-bookmark9)" },
+				},
+			},
 			{ "t", "<Cmd>FloatermPrev<CR>" },
 			{ "w", "<Cmd>tabprevious<CR>" },
-			{ "m", "<Plug>(Marks-Prev)" },
 		},
 	},
 	{
 		"]",
 		{
 			{ "b", "<Cmd>BufferLineCycleNext<CR>" },
+			{ "B", "<Cmd>bnext<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" },
 			{ "e", "<Plug>(ultest-next-fail)" },
 			{ "l", {
 				{ "l", "<Cmd>lnext<CR>" },
 				{ "q", "<Cmd>cnext<CR>" },
 			} },
+			{
+				"m",
+				{
+					{ "$", "<Plug>(Marks-next)" },
+					{ "0", "<Plug>(Marks-next-bookmark0)" },
+					{ "1", "<Plug>(Marks-next-bookmark1)" },
+					{ "2", "<Plug>(Marks-next-bookmark2)" },
+					{ "3", "<Plug>(Marks-next-bookmark3)" },
+					{ "4", "<Plug>(Marks-next-bookmark4)" },
+					{ "5", "<Plug>(Marks-next-bookmark5)" },
+					{ "6", "<Plug>(Marks-next-bookmark6)" },
+					{ "7", "<Plug>(Marks-next-bookmark7)" },
+					{ "8", "<Plug>(Marks-next-bookmark8)" },
+					{ "9", "<Plug>(Marks-next-bookmark9)" },
+				},
+			},
 			{ "t", "<Cmd>FloatermNext<CR>" },
 			{ "w", "<Cmd>tabnext<CR>" },
-			{ "m", "<Plug>(Marks-Next)" },
 		},
 	},
 	{ "*", "*<cmd>lua require('hlslens').start()<CR>" },
@@ -65,8 +97,8 @@ nest.applyKeymaps({
 			{
 				"I",
 				{
-					{ "I*", "<cmd>TSLspImportAll<CR>" },
-					{ "I.", "<cmd>TSLspImportCurrent<CR>" },
+					{ "*", "<cmd>TSLspImportAll<CR>" },
+					{ ".", "<cmd>TSLspImportCurrent<CR>" },
 				},
 			},
 			{ "j", "<C-I>" },
@@ -97,13 +129,31 @@ nest.applyKeymaps({
 			{
 				"<",
 				{
-					{ "s", "<Cmd>RestoreSession<CR>" },
+					{
+						"s",
+						{
+							{ "*", "<Cmd>RestoreSession<CR>" },
+							{
+								".",
+								':lua vim.api.nvim_command("RestoreSession " .. vim.fn.stdpath("data") .. "/sessions/" .. require("utils").Git.get_branch():gsub("/","__"))<CR>',
+							},
+						},
+					},
 				},
 			},
 			{
 				">",
 				{
-					{ "s", "<Cmd>SaveSession<CR>" },
+					{
+						"s",
+						{
+							{ "*", "<Cmd>SaveSession<CR>" },
+							{
+								".",
+								':lua vim.api.nvim_command("SaveSession " .. vim.fn.stdpath("data") .. "/sessions/" .. require("utils").Git.get_branch():gsub("/","__"))<CR>',
+							},
+						},
+					},
 				},
 			},
 			{
@@ -250,17 +300,40 @@ nest.applyKeymaps({
 			{
 				"m",
 				{
-					{ "*", "<cmd>BookmarksListAll<CR>" },
-					{ "0", "<cmd>BookmarksList 0<CR>" },
-					{ "1", "<cmd>BookmarksList 1<CR>" },
-					{ "2", "<cmd>BookmarksList 2<CR>" },
-					{ "3", "<cmd>BookmarksList 3<CR>" },
-					{ "4", "<cmd>BookmarksList 4<CR>" },
-					{ "5", "<cmd>BookmarksList 5<CR>" },
-					{ "6", "<cmd>BookmarksList 6<CR>" },
-					{ "7", "<cmd>BookmarksList 7<CR>" },
-					{ "8", "<cmd>BookmarksList 8<CR>" },
-					{ "9", "<cmd>BookmarksList 9<CR>" },
+					{ "0", "<Plug>(Marks-set-bookmark0)" },
+					{ "1", "<Plug>(Marks-set-bookmark1)" },
+					{ "2", "<Plug>(Marks-set-bookmark2)" },
+					{ "3", "<Plug>(Marks-set-bookmark3)" },
+					{ "4", "<Plug>(Marks-set-bookmark4)" },
+					{ "5", "<Plug>(Marks-set-bookmark5)" },
+					{ "6", "<Plug>(Marks-set-bookmark6)" },
+					{ "7", "<Plug>(Marks-set-bookmark7)" },
+					{ "8", "<Plug>(Marks-set-bookmark8)" },
+					{ "9", "<Plug>(Marks-set-bookmark9)" },
+					{
+						"q",
+						{
+							{ "$", "<Plug>(Marks-delete-bookmark)" },
+							{ ".", "<Plug>(Marks-deleteline)" },
+							{ "*", "<Plug>(Marks-deletebuf)" },
+						},
+					},
+					{
+						"l",
+						{
+							{ "*", "<cmd>BookmarksListAll<CR>" },
+							{ "0", "<cmd>BookmarksList 0<CR>" },
+							{ "1", "<cmd>BookmarksList 1<CR>" },
+							{ "2", "<cmd>BookmarksList 2<CR>" },
+							{ "3", "<cmd>BookmarksList 3<CR>" },
+							{ "4", "<cmd>BookmarksList 4<CR>" },
+							{ "5", "<cmd>BookmarksList 5<CR>" },
+							{ "6", "<cmd>BookmarksList 6<CR>" },
+							{ "7", "<cmd>BookmarksList 7<CR>" },
+							{ "8", "<cmd>BookmarksList 8<CR>" },
+							{ "9", "<cmd>BookmarksList 9<CR>" },
+						},
+					},
 				},
 			},
 			{
@@ -312,6 +385,7 @@ nest.applyKeymaps({
 							{ "q", "<Cmd>call ToggleQuickFix()<CR>" },
 						},
 					},
+					{ "m", "<Plug>(Marks-toggle)" },
 					{ "o", "<Cmd>AerialToggle right<CR>" },
 					{ "t", "<Cmd>FloatermToggle<CR>" },
 					{ "R", "<Cmd>ProjectRoot<CR>" },
@@ -324,6 +398,13 @@ nest.applyKeymaps({
 							} },
 						},
 					},
+				},
+			},
+			{
+				"x",
+				{
+					{ ".", "<Cmd>SnipRun<CR>" },
+					{ ";", "<Cmd>SnipClose<CR>" },
 				},
 			},
 			{
@@ -401,18 +482,13 @@ nest.applyKeymaps({
 			{
 				"g",
 				{
-					{ "f", ":NRP<CR>" },
-					{
-						"F",
-						":NRP<CR>:split<CR>:set noea<CR><C-w>k:NRM!<CR>zR:execute 'resize' . line('$')<CR>:set winfixheight<CR><C-w>j",
-					},
-				},
-				{
 					{ "l", {
 						{ "a", ":<C-U>Lspsaga range_code_action<CR>" },
 					} },
+					{ "x", ":'<,'>SnipRun" },
 				},
 			},
+			{ "m", ":lua require('tsht').nodes()<CR>" },
 		},
 	},
 })
@@ -427,6 +503,7 @@ nest.applyKeymaps({
 			{ "as.", "<Plug>(textobj-sandwich-query-a)" },
 			{ "as*", "<Plug>(textobj-sandwich-auto-a)" },
 			{ "as$", "<Plug>(textobj-sandwich-literal-query-a)" },
+			{ "m", ":<C-U>lua require('tsht').nodes()<CR>" },
 		},
 	},
 })
