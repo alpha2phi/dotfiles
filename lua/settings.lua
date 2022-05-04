@@ -211,10 +211,10 @@ cmd([[
   let g:nd_themes = [
     \ ['sunrise+0',   'themer_gruvbox', 'dark' ],
     \ ['sunrise+1/5',   'PaperColor', 'light' ],
-    \ ['sunrise+1/2', 'kat.lightenwim', 'light' ],
-    \ ['sunrise+4/5', 'earlysummer_lighter', 'dark' ],
-    \ ['sunset+0',    'monokai_ristretto', 'dark'  ],
-    \ ['sunset+1/5',    'themer_kurai', 'dark'  ],
+    \ ['sunrise+1/2', 'kat.nvim', 'light' ],
+    \ ['sunrise+4/5', 'lush_jsx', 'light' ],
+    \ ['sunset+0',    'monokai_soda', 'dark'  ],
+    \ ['sunset+1/5',    'kat.nvim', 'dark'  ],
     \ ['sunset+1/2',    'themer_dracula', 'dark'  ],
     \ ['sunset+2/3',    'themer_rose_pine', 'dark'  ],
     \ ]
