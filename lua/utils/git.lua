@@ -171,7 +171,7 @@ function Git.get_branch()
 	api.nvim_buf_set_var(0, "gitbranch_pwd", branch_name)
 	api.nvim_buf_set_var(0, "gitbranch_path", git_root)
 
-	return branch_name .. " "
+	return branch_name
 end
 
 return Git
