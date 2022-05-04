@@ -10,6 +10,7 @@ function config.setup()
 		auto_save_enabled = true,
 		auto_restore_enabled = true,
 		auto_session_suppress_dirs = false,
+		auto_session_use_git_branch = true,
 		pre_save_cmds = {},
 		post_save_cmds = {},
 		pre_restore_cmds = {},
