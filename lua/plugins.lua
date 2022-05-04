@@ -261,6 +261,13 @@ return require("packer").startup({
 		})
 		use({ "lokaltog/neoranger" })
 		use({ "diepm/vim-rest-console" })
+		use({
+			"michaelb/sniprun",
+			run = "bash ./install.sh",
+			config = function()
+				require("config/sniprun").setup()
+			end,
+		})
 		-- use({ "hkupty/iron.nvim" }) --Interactive REPL
 		use({
 			"kosayoda/nvim-lightbulb",
@@ -283,7 +290,7 @@ return require("packer").startup({
 		use({ "sainnhe/everforest" })
 		-- use({ "Th3Whit3Wolf/spacebuddy" })
 		use({ "mhartington/oceanic-next" })
-		use({ "kyoz/purify" })
+		use({ "kyoz/purify", rtp = "vim" })
 		use({ "tanvirtin/monokai.nvim" })
 		use({ "catppuccin/nvim", as = "catppuccin" })
 		use({ "joehannes-ux/kat.nvim" })
@@ -295,11 +302,13 @@ return require("packer").startup({
 				require("themer").setup({
 					styles = {
 						comment = {},
-						["function"] = { style = "italic" },
+						["function"] = { style = "italic,bold" },
 						functionbuiltin = { style = "italic,bold" },
+						operator = { style = "bold" },
 						variable = { style = "italic" },
 						variableBuiltIn = { style = "italic,bold" },
 						parameter = { style = "italic" },
+						conditional = { style = "bold" },
 					},
 				})
 			end,
@@ -318,6 +327,19 @@ return require("packer").startup({
 		-- })
 		use({ "folke/tokyonight.nvim" })
 
+		-- use({
+		-- 	"sunjon/shade.nvim",
+		-- 	config = function()
+		-- 		require("shade").setup({
+		-- 			overlay_opacity = 50,
+		-- 			opacity_step = 3,
+		-- 			keys = {
+		-- 				brightness_up = "<A-Up>",
+		-- 				brightness_down = "<A-Down>",
+		-- 			},
+		-- 		})
+		-- 	end,
+		-- })
 		-- indent-guide calculates colors based on a ColorScheme set
 		-- please use after at least one Plugin that sets a ColorScheme
 		use({
@@ -726,6 +748,7 @@ return require("packer").startup({
 			"SmiteshP/nvim-gps",
 			requires = "nvim-treesitter/nvim-treesitter",
 		})
+		use({ "mfussenegger/nvim-ts-hint-textobject" })
 		use({
 			"mizlan/iswap.nvim",
 			config = function()
@@ -881,49 +904,7 @@ return require("packer").startup({
 			"chentau/marks.nvim",
 			config = function()
 				require("marks").setup({
-					mappings = {
-						delete_bookmark = "md.",
-						set_bookmark0 = "m0",
-						delete_bookmark0 = "md0",
-						next_bookmark0 = "]0",
-						prev_bookmark0 = "[0",
-						set_bookmark1 = "m1",
-						delete_bookmark1 = "md1",
-						next_bookmark1 = "]1",
-						prev_bookmark1 = "[1",
-						set_bookmark2 = "m2",
-						delete_bookmark2 = "md2",
-						next_bookmark2 = "]2",
-						prev_bookmark2 = "[2",
-						set_bookmark3 = "m3",
-						delete_bookmark3 = "md3",
-						next_bookmark3 = "]3",
-						prev_bookmark3 = "[3",
-						set_bookmark4 = "m4",
-						delete_bookmark4 = "md4",
-						next_bookmark4 = "]4",
-						prev_bookmark4 = "[4",
-						set_bookmark5 = "m5",
-						delete_bookmark5 = "md5",
-						next_bookmark5 = "]5",
-						prev_bookmark5 = "[5",
-						set_bookmark6 = "m6",
-						delete_bookmark6 = "md6",
-						next_bookmark6 = "]6",
-						prev_bookmark6 = "[6",
-						set_bookmark7 = "m7",
-						delete_bookmark7 = "md7",
-						next_bookmark7 = "]7",
-						prev_bookmark7 = "[7",
-						set_bookmark8 = "m8",
-						delete_bookmark8 = "md8",
-						next_bookmark8 = "]8",
-						prev_bookmark8 = "[8",
-						set_bookmark9 = "m9",
-						delete_bookmark9 = "md9",
-						next_bookmark9 = "]9",
-						prev_bookmark9 = "[9",
-					},
+					default_mappings = false,
 					bookmark_0 = {
 						sign = "",
 						virt_text = " ( 0) ",
@@ -1246,7 +1227,7 @@ return require("packer").startup({
 		-- 	end,
 		-- })
 
-		use({ "chrisbra/NrrwRgn" })
+		-- use({ "chrisbra/NrrwRgn" })
 		-- use({
 		-- 	"hoschi/yode-nvim",
 		-- 	config = function()
