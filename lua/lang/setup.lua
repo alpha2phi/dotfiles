@@ -71,7 +71,7 @@ function setup.eslint(server)
 	local opts = {
 		capabilities = capabilities,
 		on_attach = function(client, bufnr)
-			client.resolved_capabilities.document_formatting = true
+			client.server_capabilities.document_formatting = true
 			on_attach.generic(client, bufnr)
 		end,
 		settings = {

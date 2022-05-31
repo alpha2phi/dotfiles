@@ -28,8 +28,8 @@ function config.setup()
 				vim_item.menu = ({
 					nvim_lsp = "[LSP]",
 					treesitter = "[TS]",
-					buffer = "[Buffer]",
 					vsnip = "[VSnip]",
+					buffer = "[Buffer]",
 					look = "[Look]",
 					path = "[Path]",
 					spell = "[Spell]",
@@ -117,8 +117,8 @@ function config.setup()
 			-- { name = "cmp_tabnine" },
 			{ name = "nvim_lsp" },
 			{ name = "treesitter" },
-			{ name = "buffer" },
 			{ name = "vsnip" },
+			{ name = "buffer" },
 			{ name = "look" },
 			{ name = "path" },
 			{ name = "calc" },
@@ -133,6 +133,9 @@ function config.setup()
 		},
 		experimental = {
 			ghost_text = true,
+		},
+		view = {
+			entries = { name = "custom", selection_order = "near_cursor" },
 		},
 	})
 

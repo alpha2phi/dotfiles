@@ -14,7 +14,7 @@ function on_attach.generic(client, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- Set autocommands conditional on server_capabilities
-	if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.document_highlight then
 		vim.api.nvim_exec(
 			[[
         hi LspReferenceRead cterm=bold ctermbg=red guibg=LightMagenta
