@@ -47,7 +47,7 @@ cmd([[
   set number relativenumber
   set guifont=FiraCode\ Nerd\ Font\ Mono
   set showtabline=2
-  set laststatus=2
+  set laststatus=3
   set directory=/tmp
   set nobackup
   set nowritebackup
@@ -157,11 +157,12 @@ vim.api.nvim_exec(
     autocmd!
     autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("GitSignsAddLn", 21, "#AAFFAA")
     autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("GitSignsChangeLn", 21, "#FFFFAA")
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("GitSignsDeleteLn", 50, "#FFAAAA")
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("TSCurrentScope", 10, "#00AFFF")
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("CursorLine", 21, "#FF00AF")
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("CursorColumn", 21, "#FF00AF")
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("Visual", 21, "#FF00AF")
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("GitSignsDeleteLn", 21, "#FFAAAA")
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("TSCurrentScope", 37, "#00AFFF")
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("CursorLine", 50, "#FFFF00")
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("CursorColumn", 50, "#FFFF00")
+    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("Visual", 21, "#FFFF00")
+    autocmd ColorScheme * lua toggle_bg_mode(true)
   augroup END
   ]],
 	false
@@ -251,7 +252,7 @@ cmd([[
     if empty(filter(getwininfo(), 'v:val.loclist'))
       lua require("diaglist").open_buffer_diagnostics()
     else
-        lclose
+      lclose
     endif
 	endfunction
 
