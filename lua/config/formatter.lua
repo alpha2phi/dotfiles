@@ -8,36 +8,34 @@ vim.api.nvim_exec(
 	[[
 		augroup FormatAutogroup
 				autocmd!
-				autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx,*.lua mkview | FormatWrite | loadview
+				autocmd BufWritePre *.js,*.ts,*.jsx,*.tsx,*.lua mkview
+				autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx,*.lua FormatWrite | loadview
 		augroup END
 ]],
 	true
 )
 
 function M.setup()
-	local esformatter = util.copyf(defaults.esformatter)
-	local prettiereslint = util.copyf(defaults.prettiereslint)
+	-- local eslint = function()
+	-- 	return {
+	-- 		exe = "./node_modules/.bin/eslint",
+	-- 		args = {
+	-- 			"--stdin-filename",
+	-- 			vim.api.nvim_buf_get_name(0),
+	-- 			"--fix",
+	-- 			"--cache",
+	-- 		},
+	-- 		stdin = false,
+	-- 	}
+	-- end
 
-	local eslint = function()
-		return {
-			exe = "./node_modules/.bin/eslint",
-			args = {
-				"--stdin-filename",
-				vim.api.nvim_buf_get_name(0),
-				"--fix",
-				"--cache",
-			},
-			stdin = false,
-		}
-	end
-
-	local prettier = function()
-		return {
-			exe = "prettier",
-			args = { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) },
-			stdin = true,
-		}
-	end
+	-- local prettier = function()
+	-- 	return {
+	-- 		exe = "prettier",
+	-- 		args = { "--stdin-filepath", util.escape_path(util.get_current_buffer_file_path()) },
+	-- 		stdin = true,
+	-- 	}
+	-- end
 
 	local stylua = function()
 		return {
@@ -48,13 +46,15 @@ function M.setup()
 			stdin = false,
 		}
 	end
+	local ts = require("formatter.filetypes.typescript")
+	local tsx = require("formatter.filetypes.typescriptreact")
 
 	require("formatter").setup({
 		filetype = {
-			typescriptreact = { prettiereslint, prettier, esformatter },
-			typescript = { prettiereslint, prettier, esformatter },
-			javascript = { prettiereslint, prettier, esformatter },
-			javascriptreact = { prettiereslint, prettier, esformatter },
+			javascript = require("formatter.filetypes.javascript"),
+			javascriptreact = require("formatter.filetypes.javascriptreact"),
+			typescript = ts,
+			typescriptreact = { tsx.prettierd, tsx.prettiereslint, tsx.eslint_d, tsx.prettier },
 			lua = { stylua },
 		},
 	})

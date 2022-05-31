@@ -69,7 +69,24 @@ cmd('let g:Powerline_symbols = "fancy"')
 -- Highlight on yank
 cmd([[au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", hlgroup=IncSearch, timeout=300}]])
 
-cmd([[autocmd FileType qf if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif]])
+-- this seems like something I don't need any longer
+-- cmd([[autocmd FileType qf if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif]])
+
+-- https://github.com/mhinz/vim-grepper
+vim.g.grepper = { tools = { "rg", "grep" }, searchreg = 1 }
+
+cmd(([[
+    aug Grepper
+        au!
+        au User Grepper ++nested %s
+    aug END
+]]):format([[call setloclist([], 'r', {'context': {'DocumentGrep': {'pattern_hl': '\%#' . getreg('/')}}})]]))
+
+-- try `gsiw` under word
+cmd([[
+    nmap gs  <plug>(GrepperOperator)
+    xmap gs  <plug>(GrepperOperator)
+]])
 
 -- Auto format
 vim.api.nvim_exec(

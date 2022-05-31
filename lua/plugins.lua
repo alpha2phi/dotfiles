@@ -200,22 +200,37 @@ return require("packer").startup({
 			"b0o/incline.nvim",
 			config = function()
 				require("incline").setup({
+					hide = {
+						only_win = true,
+					},
+					highlight = {
+						groups = {
+							InclineNormal = {
+								default = true,
+								group = "TabLineSel",
+							},
+							InclineNormalNC = {
+								default = true,
+								guibg = "#FF00AF",
+							},
+						},
+					},
 					render = function(props)
 						local gps = require("nvim-gps")
 
 						if props.focused and gps.is_available() then
-							return {
-								{ " " .. gps.get_location() .. " ", guifg = "black", guibg = "#00AFFF" },
-							}
+							return " " .. gps.get_location() .. " "
+							-- guifg = "black",
+							-- guibg = "#00AFFF",
+							-- }
+							-- }
 						end
 
-						return {
-							{
-								" " .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":.:r") .. " ",
-								guifg = props.focused and "black" or "white",
-								guibg = props.focused and "cyan" or "magenta",
-							},
-						}
+						return " " .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":.:r") .. " "
+						-- -- guifg = props.focused and "black" or "white",
+						-- -- guibg = props.focused and "cyan" or "magenta",
+						-- },
+						-- }
 					end,
 					window = {
 						margin = {
@@ -232,6 +247,15 @@ return require("packer").startup({
 							left = 0,
 							right = 0,
 						},
+						winhighlight = {
+							active = {
+								Normal = "InclineNormal",
+							},
+							inactive = {
+								Normal = "InclineNormalNC",
+							},
+						},
+						zindex = 50,
 					},
 				})
 			end,
@@ -596,12 +620,6 @@ return require("packer").startup({
 				vim.g.qf_resize_min_height = 3
 			end,
 		})
-		-- use({
-		-- 	"kevinhwang91/nvim-bqf",
-		-- 	config = function()
-		-- 		require("config/bqf").setup()
-		-- 	end,
-		-- })
 		use({
 			"onsails/diaglist.nvim",
 			config = function()
@@ -658,6 +676,12 @@ return require("packer").startup({
 				require("pqf").setup()
 			end,
 		})
+		-- use({
+		-- 	"kevinhwang91/nvim-bqf",
+		-- 	config = function()
+		-- 		require("config/bqf").setup()
+		-- 	end,
+		-- })
 		-- use({
 		-- 	"neomake/neomake",
 		-- 	config = function()

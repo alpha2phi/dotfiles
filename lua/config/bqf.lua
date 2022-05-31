@@ -2,27 +2,11 @@
 
 local config = {}
 
--- https://github.com/mhinz/vim-grepper
-vim.g.grepper = { tools = { "rg", "grep" }, searchreg = 1 }
-
 vim.cmd([[
     packadd nvim-bqf
     packadd fzf
     packadd nvim-treesitter
     packadd vim-grepper
-]])
-
-vim.cmd(([[
-    aug Grepper
-        au!
-        au User Grepper ++nested %s
-    aug END
-]]):format([[call setloclist([], 'r', {'context': {'bqf': {'pattern_hl': '\%#' . getreg('/')}}})]]))
-
--- try `gsiw` under word
-vim.cmd([[
-    nmap gs  <plug>(GrepperOperator)
-    xmap gs  <plug>(GrepperOperator)
 ]])
 
 vim.cmd([[
@@ -32,9 +16,9 @@ vim.cmd([[
 
 function config.setup()
 	require("bqf").setup({
-		auto_enable = true,
-		magic_window = true,
-		auto_resize_height = true,
+		auto_enable = false,
+		magic_window = false,
+		auto_resize_height = false,
 		preview = {
 			auto_preview = true,
 			win_height = 30,
