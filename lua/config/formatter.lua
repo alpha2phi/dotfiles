@@ -1,17 +1,23 @@
 ---@diagnostic disable:undefined-global
-local config = {}
+local M = {}
+
+local defaults = require("formatter.defaults")
+local util = require("formatter.util")
 
 vim.api.nvim_exec(
 	[[
 		augroup FormatAutogroup
 				autocmd!
-				autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx,*.lua FormatWrite
+				autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx,*.lua mkview | FormatWrite | loadview
 		augroup END
 ]],
 	true
 )
 
-function config.setup()
+function M.setup()
+	local esformatter = util.copyf(defaults.esformatter)
+	local prettiereslint = util.copyf(defaults.prettiereslint)
+
 	local eslint = function()
 		return {
 			exe = "./node_modules/.bin/eslint",
@@ -45,13 +51,13 @@ function config.setup()
 
 	require("formatter").setup({
 		filetype = {
-			typescriptreact = { prettier },
-			typescript = { prettier },
-			javascript = { prettier },
-			javascriptreact = { prettier },
+			typescriptreact = { prettiereslint, prettier, esformatter },
+			typescript = { prettiereslint, prettier, esformatter },
+			javascript = { prettiereslint, prettier, esformatter },
+			javascriptreact = { prettiereslint, prettier, esformatter },
 			lua = { stylua },
 		},
 	})
 end
 
-return config
+return M
