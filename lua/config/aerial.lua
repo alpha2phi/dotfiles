@@ -13,7 +13,7 @@ function config.setup()
 	require("aerial").setup({
 		-- Priority list of preferred backends for aerial.
 		-- This can be a filetype map (see :help aerial-filetype-map)
-		backends = { "lsp", "treesitter", "markdown" },
+		backends = { "treesitter", "lsp", "markdown" },
 
 		-- Enum: persist, close, auto, global
 		--   persist - aerial window will stay open until closed
@@ -30,7 +30,7 @@ function config.setup()
 		-- Determines the default direction to open the aerial window. The 'prefer'
 		-- options will open the window in the other direction *if* there is a
 		-- different buffer in the way of the preferred direction
-		default_direction = "right",
+		default_direction = "left",
 
 		-- Disable aerial on files with this many lines
 		disable_max_lines = 10000,
@@ -39,17 +39,32 @@ function config.setup()
 		-- This can be a filetype map (see :help aerial-filetype-map)
 		-- To see all available values, see :help SymbolKind
 		filter_kind = {
+			"Array",
+			"Boolean",
 			"Class",
-			"Constructor",
 			"Constant",
+			"Constructor",
 			"Enum",
+			"EnumMember",
+			"Event",
 			"Field",
+			"File",
 			"Function",
 			"Interface",
+			"Key",
 			"Method",
-			"Struct",
-			"Variable",
+			"Module",
+			"Namespace",
+			"Null",
+			"Number",
 			"Object",
+			"Operator",
+			"Package",
+			"Property",
+			"String",
+			"Struct",
+			"TypeParameter",
+			"Variable",
 		},
 
 		-- Enum: split_width, full_width, last, none
@@ -64,10 +79,44 @@ function config.setup()
 		-- none          Do not show the cursor locations in the aerial window.
 		highlight_mode = "full_width",
 
+		-- Highlight the closest symbol if the cursor is not exactly on one.
+		highlight_closest = true,
+
+		-- Highlight the symbol in the source buffer when cursor is in the aerial win
+		highlight_on_hover = false,
 		-- When jumping to a symbol, highlight the line for this many ms.
 		-- Set to false to disable
 		highlight_on_jump = 300,
 
+		ignore = {
+			-- Ignore unlisted buffers. See :help buflisted
+			unlisted_buffers = true,
+
+			-- List of filetypes to ignore.
+			filetypes = {},
+
+			-- Ignored buftypes.
+			-- Can be one of the following:
+			-- false or nil - No buftypes are ignored.
+			-- "special"    - All buffers other than normal buffers are ignored.
+			-- table        - A list of buftypes to ignore. See :help buftype for the
+			--                possible values.
+			-- function     - A function that returns true if the buffer should be
+			--                ignored or false if it should not be ignored.
+			--                Takes two arguments, `bufnr` and `buftype`.
+			buftypes = "special",
+
+			-- Ignored wintypes.
+			-- Can be one of the following:
+			-- false or nil - No wintypes are ignored.
+			-- "special"    - All windows other than normal windows are ignored.
+			-- table        - A list of wintypes to ignore. See :help win_gettype() for the
+			--                possible values.
+			-- function     - A function that returns true if the window should be
+			--                ignored or false if it should not be ignored.
+			--                Takes two arguments, `winid` and `wintype`.
+			wintypes = "special",
+		},
 		-- Define symbol icons. You can also specify "<Symbol>Collapsed" to change the
 		-- icon when the tree is collapsed at that symbol, or "Collapsed" to specify a
 		-- default collapsed icon. The default icon set is determined by the
@@ -116,6 +165,23 @@ function config.setup()
 		-- When true, aerial will automatically close after jumping to a symbol
 		close_on_select = false,
 
+		-- Show box drawing characters for the tree hierarchy
+		show_guides = false,
+
+		-- The autocmds that trigger symbols update (not used for LSP backend)
+		update_events = "TextChanged,InsertLeave",
+
+		-- Customize the characters used when show_guides = true
+		guides = {
+			-- When the child item has a sibling below it
+			mid_item = "├─",
+			-- When the child item is the last in the list
+			last_item = "└─",
+			-- When there are nested child guides to the right
+			nested_top = "│ ",
+			-- Raw indentation
+			whitespace = "  ",
+		},
 		-- Options for opening aerial in a floating win
 		float = {
 			-- Controls border appearance. Passed to nvim_open_win
@@ -136,11 +202,13 @@ function config.setup()
 
 			-- Set to false to not update the symbols when there are LSP errors
 			update_when_errors = true,
+
+			update_delay = 100,
 		},
 
 		treesitter = {
 			-- How long to wait (in ms) after a buffer change before updating
-			update_delay = 300,
+			update_delay = 100,
 		},
 
 		markdown = {
