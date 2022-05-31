@@ -1,11 +1,11 @@
 local lush = require("lush")
-local rgb = require("lush.vivid.rgb.convert")
+local rgbConvert = require("lush.vivid.rgb.convert")
 
 local M = {
 	vim = {},
 	rgb = {
-		from_hex = rgb.hex_to_rgb,
-		to_hex = rgb.rgb_to_hex,
+		from_hex = rgbConvert.hex_to_rgb,
+		to_hex = rgbConvert.rgb_to_hex,
 	},
 	hsl = lush.hsl,
 	hsluv = lush.hsluv,

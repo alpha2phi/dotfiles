@@ -1,4 +1,5 @@
 local gl = require("galaxyline")
+local gps = require("nvim-gps")
 local gls = gl.section
 gl.short_line_list = { "LuaTree", "CHADTREE", "OUTLINE" }
 local i = require("statusline.icons")
@@ -131,20 +132,22 @@ gls.left[12] = {
 		highlight = { c.Color("purple"), c.Color("act1") },
 	},
 }
--- gls.left[13] = {
--- 	GitBranch = {
--- 		provider = gitBranch,
--- 		icon = "  " .. i.git .. " ",
--- 		condition = u.buffer_not_empty,
--- 	},
--- }
 gls.left[13] = {
+	GitBranch = {
+		provider = function()
+			return gitBranch() .. "  "
+		end,
+		icon = "  " .. i.git .. " ",
+		condition = u.buffer_not_empty,
+	},
+}
+gls.left[14] = {
 	GitSeperatorLeft = {
 		provider = gitSeperatorLeft,
 		condition = u.buffer_not_empty,
 	},
 }
-gls.left[14] = {
+gls.left[15] = {
 	DiffAdd = {
 		provider = diffAdd,
 		condition = u.checkwidth,
@@ -152,7 +155,7 @@ gls.left[14] = {
 		highlight = { c.Color("green"), c.Color("purple") },
 	},
 }
-gls.left[15] = {
+gls.left[16] = {
 	DiffModified = {
 		provider = diffModified,
 		condition = u.checkwidth,
@@ -160,7 +163,7 @@ gls.left[15] = {
 		highlight = { c.Color("orange"), c.Color("purple") },
 	},
 }
-gls.left[16] = {
+gls.left[17] = {
 	DiffRemove = {
 		provider = diffRemove,
 		condition = u.checkwidth,
@@ -168,11 +171,20 @@ gls.left[16] = {
 		highlight = { c.Color("red"), c.Color("purple") },
 	},
 }
-gls.left[17] = {
+gls.left[18] = {
 	ViModeSeperatorAltInverse = {
 		provider = function()
 			return i.slant.Right
 		end,
+	},
+}
+gls.left[19] = {
+	gps = {
+		provider = function()
+			return "  " .. gps.get_location()
+		end,
+		condition = gps.is_available,
+		highlight = { c.Color("act1"), c.Color("DarkGoldenrod2") },
 	},
 }
 

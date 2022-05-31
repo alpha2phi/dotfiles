@@ -16,9 +16,9 @@ catppuccino.setup({
 	styles = {
 		comments = "italic",
 		functions = "bold,italic",
-		keywords = "italic",
+		keywords = "bold",
 		strings = "NONE",
-		variables = "bold",
+		variables = "italic",
 	},
 	integrations = {
 		treesitter = true,
@@ -65,7 +65,7 @@ catppuccino.setup({
 })
 
 -- configure neon$$
-vim.g.neon_style = "light"
+vim.g.neon_style = "dark"
 vim.g.neon_italic_keyword = true
 vim.g.neon_italic_functions = true
 vim.g.neon_italic_variable = true
@@ -127,8 +127,8 @@ onedarkpro.setup({
 		strings = "NONE", -- Style that is applied to strings
 		comments = "italic", -- Style that is applied to comments
 		keywords = "bold", -- Style that is applied to keywords
-		functions = "italic,underline", -- Style that is applied to functions
-		variables = "italic,bold", -- Style that is applied to variables
+		functions = "italic,bold", -- Style that is applied to functions
+		variables = "italic", -- Style that is applied to variables
 	},
 	options = {
 		bold = true, -- Use the themes opinionated bold styles?
@@ -176,3 +176,13 @@ onedarkpro.setup({
 vim.g.kat_nvim_commentStyle = "italic"
 vim.g.kat_nvim_integrations = { "lsp", "treesitter", "ts_rainbow", "cmp" } --, "bufferline" }
 vim.g.kat_nvim_stupidFeatures = false
+
+--PaperColor
+vim.g.PaperColor_Theme_Options = {
+	theme = {
+		default = {
+			allow_bold = 1,
+			allow_italic = 1,
+		},
+	},
+}
