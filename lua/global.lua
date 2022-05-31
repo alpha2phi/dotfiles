@@ -165,24 +165,21 @@ function _G.qftf(info)
 end
 
 function _G.toggle_bg_mode(force)
-	local blended_magenta = nil
-	local blended_neutral = nil
 	local current = vim.opt.background:get()
 	local other = current == "light" and "dark" or "light"
 	local future = force and current or other
 
-	if future == "dark" then
-		vim.cmd("set background=dark")
-		blended_neutral = require("utils").Color.vim.background_blend("#000000", 21)
+	vim.cmd("set background=" .. future)
+
+	if vim.opt.background:get() == "dark" then
+		require("utils.color").vim.highlight_blend_bg("MyNormalNC", 10, "#F63B41")
+		require("utils.color").vim.highlight_blend_bg("MyNormal", 10, "#00AFFF")
 	else
-		vim.cmd("set background=light")
-		blended_neutral = require("utils").Color.vim.background_blend("#FFFFFF", 21)
+		require("utils.color").vim.highlight_blend_bg("MyNormalNC", 21, "#F63B41")
+		require("utils.color").vim.highlight_blend_bg("MyNormal", 21, "#00AFFF")
 	end
 
-	blended_magenta = require("utils").Color.vim.background_blend("#AFFF00", 37)
-	local even_colors = { fg = blended_magenta, bg = blended_magenta }
-	local odd_colors = { fg = blended_neutral, bg = blended_neutral }
+	vim.cmd("set winhighlight=Normal:MyNormal,NormalNC:MyNormalNC")
 
-	require("indent_guides").setup({ even_colors = even_colors, odd_colors = odd_colors, indent_guide_size = 1 })
 	require("config/bufferline").setup()
 end
