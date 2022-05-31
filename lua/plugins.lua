@@ -590,12 +590,12 @@ return require("packer").startup({
 		-- 	end,
 		-- })
 		use({ "mhinz/vim-grepper" })
-		-- use({
-		-- 	"blueyed/vim-qf_resize",
-		-- 	config = function()
-		-- 		vim.g.qf_resize_min_height = 3
-		-- 	end,
-		-- })
+		use({
+			"blueyed/vim-qf_resize",
+			config = function()
+				vim.g.qf_resize_min_height = 3
+			end,
+		})
 		-- use({
 		-- 	"kevinhwang91/nvim-bqf",
 		-- 	config = function()
@@ -650,6 +650,12 @@ return require("packer").startup({
 					close_other = false, -- Close location list when quickfix list opens
 					pretty = true, -- "Pretty print quickfix lists"
 				})
+			end,
+		})
+		use({
+			"https://gitlab.com/yorickpeterse/nvim-pqf.git",
+			config = function()
+				require("pqf").setup()
 			end,
 		})
 		-- use({
