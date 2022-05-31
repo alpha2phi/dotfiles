@@ -84,7 +84,6 @@ function config.setup()
 		highlights = highlights,
 		options = {
 			numbers = "buffer_id", -- "none" | "ordinal" | "buffer_id" | "both",
-			number_style = "none",
 			close_command = "bp | bd! %d", -- can be a string | function, see "Mouse actions"
 			right_mouse_command = "sbuffer %d", -- can be a string | function, see "Mouse actions"
 			left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
@@ -178,13 +177,13 @@ function config.setup()
 					local info = #vim.diagnostic.get(0, { severity = seve.INFO })
 					local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
 
-					if gps.is_available() then
-						table.insert(
-							result,
-							{ text = "   " .. gps.get_location() .. " ", guifg = "#FFFF00", guibg = "#00AFFF" }
-						)
-						table.insert(result, { text = "   ", guifg = "#00AFFF", guibg = tabColor() })
-					end
+					-- if gps.is_available() then
+					-- 	table.insert(
+					-- 		result,
+					-- 		{ text = "   " .. gps.get_location() .. " ", guifg = "#FFFF00", guibg = "#00AFFF" }
+					-- 	)
+					-- 	table.insert(result, { text = "   ", guifg = "#00AFFF", guibg = tabColor() })
+					-- end
 
 					if error ~= 0 then
 						table.insert(result, { text = "  " .. error, guifg = "#EC5241", guisp = "bold" })
