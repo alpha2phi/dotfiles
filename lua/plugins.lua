@@ -193,8 +193,47 @@ return require("packer").startup({
 		use({
 			"anuvyklack/pretty-fold.nvim",
 			config = function()
-				require("pretty-fold").setup({})
-				require("pretty-fold.preview").setup_keybinding("h")
+				require("pretty-fold").setup()
+			end,
+		})
+		use({
+			"b0o/incline.nvim",
+			config = function()
+				require("incline").setup({
+					render = function(props)
+						local gps = require("nvim-gps")
+
+						if props.focused and gps.is_available() then
+							return {
+								{ " " .. gps.get_location() .. " ", guifg = "black", guibg = "#00AFFF" },
+							}
+						end
+
+						return {
+							{
+								" " .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":.:r") .. " ",
+								guifg = props.focused and "black" or "white",
+								guibg = props.focused and "cyan" or "magenta",
+							},
+						}
+					end,
+					window = {
+						margin = {
+							horizontal = {
+								left = 0,
+								right = 0,
+							},
+							vertical = {
+								bottom = 0,
+								top = 0,
+							},
+						},
+						padding = {
+							left = 0,
+							right = 0,
+						},
+					},
+				})
 			end,
 		})
 		use({
@@ -284,11 +323,29 @@ return require("packer").startup({
 		use({ "joehannes-ux/lush-jsx.nvim" })
 		use({ "olimorris/onedarkpro.nvim" })
 		use({ "pineapplegiant/spaceduck" })
+		use({
+			"https://gitlab.com/__tpb/monokai-pro.nvim",
+			as = "monokaipro",
+			config = function()
+				vim.g.monokaipro_filter = "spectrum"
+				vim.g.monokaipro_italic_functions = true
+				vim.g.monokaipro_sidebars = { "aerial" }
+				vim.g.monokaipro_flat_term = true
+			end,
+		})
 		-- use({ "Iron-E/nvim-highlite" })
 		-- use({ "navarasu/onedark.nvim" })
 		use({ "NLKNguyen/papercolor-theme" })
 		use({ "sainnhe/everforest" })
 		-- use({ "Th3Whit3Wolf/spacebuddy" })
+		use({ "haystackandroid/snow" })
+		use({ "haystackandroid/cosmic_latte" })
+		use({ "haystackandroid/strawberry" })
+		use({ "haystackandroid/stellarized" })
+		use({ "haystackandroid/carbonized" })
+		use({ "haystackandroid/vimspectr" })
+		use({ "haystackandroid/nemo" })
+		use({ "haystackandroid/wonka" })
 		use({ "mhartington/oceanic-next" })
 		use({ "kyoz/purify", rtp = "vim" })
 		use({ "tanvirtin/monokai.nvim" })
@@ -342,43 +399,52 @@ return require("packer").startup({
 		-- })
 		-- indent-guide calculates colors based on a ColorScheme set
 		-- please use after at least one Plugin that sets a ColorScheme
+		-- use({
+		-- 	"glepnir/indent-guides.nvim",
+		-- 	branch = "main",
+		-- 	config = function()
+		-- 		local blended_magenta = require("utils").Color.vim.background_blend("#AFFF00", 21)
+		-- 		local blended_neutral = nil
+		-- 		local even_colors = { fg = blended_magenta, bg = 'transparent' }
+		-- 		if vim.opt.background:get() == "light" then
+		-- 			blended_neutral = require("utils").Color.vim.background_blend("#000000", 10)
+		-- 		else
+		-- 			blended_neutral = require("utils").Color.vim.background_blend("#FFFFFF", 10)
+		-- 		end
+		-- 		local odd_colors = { fg = blended_neutral, bg = 'transparent' }
+		-- 		require("indent_guides").setup({
+		-- 			indent_levels = 30,
+		-- 			indent_guide_size = 1,
+		-- 			indent_start_level = 1,
+		-- 			indent_enable = true,
+		-- 			indent_space_guides = true,
+		-- 			indent_tab_guides = false,
+		-- 			indent_soft_pattern = "\\s",
+		-- 			exclude_filetypes = {
+		-- 				"help",
+		-- 				"dashboard",
+		-- 				"dashpreview",
+		-- 				"NvimTree",
+		-- 				"vista",
+		-- 				"sagahover",
+		-- 				"aerial",
+		-- 				"AERIAL",
+		-- 				"minimap",
+		-- 				"Minimap",
+		-- 				"MINIMAP",
+		-- 				"-MINIMAP-",
+		-- 			},
+		-- 			even_colors = even_colors,
+		-- 			odd_colors = odd_colors,
+		-- 		})
+		-- 	end,
+		-- })
 		use({
-			"glepnir/indent-guides.nvim",
-			branch = "main",
+			"lukas-reineke/indent-blankline.nvim",
 			config = function()
-				local blended_magenta = require("utils").Color.vim.background_blend("#AFFF00", 21)
-				local blended_neutral = nil
-				local even_colors = { fg = blended_magenta, bg = blended_magenta }
-				if vim.opt.background:get() == "light" then
-					blended_neutral = require("utils").Color.vim.background_blend("#000000", 10)
-				else
-					blended_neutral = require("utils").Color.vim.background_blend("#FFFFFF", 10)
-				end
-				local odd_colors = { fg = blended_neutral, bg = blended_neutral }
-				require("indent_guides").setup({
-					indent_levels = 30,
-					indent_guide_size = 1,
-					indent_start_level = 1,
-					indent_enable = true,
-					indent_space_guides = true,
-					indent_tab_guides = false,
-					indent_soft_pattern = "\\s",
-					exclude_filetypes = {
-						"help",
-						"dashboard",
-						"dashpreview",
-						"NvimTree",
-						"vista",
-						"sagahover",
-						"aerial",
-						"AERIAL",
-						"minimap",
-						"Minimap",
-						"MINIMAP",
-						"-MINIMAP-",
-					},
-					even_colors = even_colors,
-					odd_colors = odd_colors,
+				require("indent_blankline").setup({
+					show_current_context = true,
+					show_current_context_start = true,
 				})
 			end,
 		})
@@ -530,20 +596,60 @@ return require("packer").startup({
 		-- 		vim.g.qf_resize_min_height = 3
 		-- 	end,
 		-- })
+		-- use({
+		-- 	"kevinhwang91/nvim-bqf",
+		-- 	config = function()
+		-- 		require("config/bqf").setup()
+		-- 	end,
+		-- })
 		use({
 			"onsails/diaglist.nvim",
 			config = function()
 				require("diaglist").init({
 					debug = false,
 					-- increase for noisy servers
-					debounce_ms = 300,
+					debounce_ms = 150,
 				})
 			end,
 		})
 		use({
-			"kevinhwang91/nvim-bqf",
+			"ten3roberts/qf.nvim",
 			config = function()
-				require("config/bqf").setup()
+				require("qf").setup({
+					l = {
+						auto_close = true, -- Automatically close location/quickfix list if empty
+						auto_follow = "nearest", -- Follow current entry, possible values: prev,next,nearest, or false to disable
+						auto_follow_limit = 21, -- Do not follow if entry is further away than x lines
+						follow_slow = true, -- Only follow on CursorHold
+						auto_open = true, -- Automatically open list on QuickFixCmdPost
+						auto_resize = true, -- Auto resize and shrink location list if less than `max_height`
+						max_height = 10, -- Maximum height of location/quickfix list
+						min_height = 5, -- Minimum height of location/quickfix list
+						wide = false, -- Open list at the very bottom of the screen, stretching the whole width.
+						number = false, -- Show line numbers in list
+						relativenumber = false, -- Show relative line numbers in list
+						unfocus_close = true, -- Close list when window loses focus
+						focus_open = true, -- Auto open list on window focus if it contains items
+					},
+					-- Quickfix list configuration
+					c = {
+						auto_close = true, -- Automatically close location/quickfix list if empty
+						auto_follow = "nearest", -- Follow current entry, possible values: prev,next,nearest, or false to disable
+						auto_follow_limit = 21, -- Do not follow if entry is further away than x lines
+						follow_slow = true, -- Only follow on CursorHold
+						auto_open = true, -- Automatically open list on QuickFixCmdPost
+						auto_resize = true, -- Auto resize and shrink location list if less than `max_height`
+						max_height = 10, -- Maximum height of location/quickfix list
+						min_height = 5, -- Minimum height of location/quickfix list
+						wide = true, -- Open list at the very bottom of the screen, stretching the whole width.
+						number = false, -- Show line numbers in list
+						relativenumber = false, -- Show relative line numbers in list
+						unfocus_close = false, -- Close list when window loses focus
+						focus_open = true, -- Auto open list on window focus if it contains items
+					},
+					close_other = false, -- Close location list when quickfix list opens
+					pretty = true, -- "Pretty print quickfix lists"
+				})
 			end,
 		})
 		-- use({
@@ -901,7 +1007,7 @@ return require("packer").startup({
 		-- use({ "MattesGroeger/vim-bookmarks" })
 		-- for non-persisting grouped bookmarks
 		use({
-			"chentau/marks.nvim",
+			"chentoast/marks.nvim",
 			config = function()
 				require("marks").setup({
 					default_mappings = false,
@@ -1047,6 +1153,12 @@ return require("packer").startup({
 			"glacambre/firenvim",
 			run = function()
 				vim.fn["firenvim#install"](0)
+			end,
+		})
+		use({
+			"subnut/nvim-ghost.nvim",
+			run = function()
+				vim.fn["nvim_ghost#installer#install"]()
 			end,
 		})
 
@@ -1249,7 +1361,7 @@ return require("packer").startup({
 						-- They can also be specified in a tree-like format.
 						j = {
 							-- Here `jk` will escape insert mode.
-							k = "<cmd>stopinsert<cr><cmd>w!<cr>",
+							k = "<cmd>stopinsert<cr><cmd>w<cr>",
 							-- You can have as many layers as you want!
 							-- h = {
 							-- 	g = "<cmd>stopinsert<cr>",
@@ -1265,9 +1377,9 @@ return require("packer").startup({
 						},
 						-- You can use lua's arbitrary key notation to map special characters
 						-- move to end of WORD and enter insert mode after that char
-						[";;"] = "<cmd>stopinsert<cr><cmd>w!<cr><cmd>normal E<cr><cmd>startinsert<cr>",
-						[";l"] = "<cmd>stopinsert<cr><cmd>normal f)a<cr>",
-						[";h"] = "<cmd>stopinsert<cr><cmd>normal F(a<cr>",
+						[";;"] = "<cmd>stopinsert<cr><cmd>w<cr><cmd>normal E<cr><cmd>startinsert<cr>",
+						-- [";l"] = "<cmd>stopinsert<cr><cmd>normal f)a<cr>",
+						-- [";h"] = "<cmd>stopinsert<cr><cmd>normal F(a<cr>",
 						["<Esc>"] = "<cmd>stopinsert<cr>",
 						-- Use `<cmd>` to map commands. Be carful to terminate the command with `<cr>`.
 						-- ff = "<cmd>echo 'commands work too'<cr>",

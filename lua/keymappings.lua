@@ -20,10 +20,13 @@ nest.applyKeymaps({
 			{ "B", "<Cmd>bprevious<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>" },
 			{ "e", "<Plug>(ultest-prev-fail)" },
-			{ "l", {
-				{ "l", "<Cmd>lprev<CR>" },
-				{ "q", "<Cmd>cprev<CR>" },
-			} },
+			{
+				"l",
+				{
+					{ "*", "<cmd>lua require'qf'.above('c')<CR>" },
+					{ ".", "<cmd>lua require'qf'.above('l')<CR>" },
+				},
+			},
 			{
 				"m",
 				{
@@ -51,10 +54,13 @@ nest.applyKeymaps({
 			{ "B", "<Cmd>bnext<CR>" },
 			{ "d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>" },
 			{ "e", "<Plug>(ultest-next-fail)" },
-			{ "l", {
-				{ "l", "<Cmd>lnext<CR>" },
-				{ "q", "<Cmd>cnext<CR>" },
-			} },
+			{
+				"l",
+				{
+					{ "*", "<cmd>lua require'qf'.below('c')<CR>" },
+					{ ".", "<cmd>lua require'qf'.below('l')<CR>" },
+				},
+			},
 			{
 				"m",
 				{
@@ -85,7 +91,7 @@ nest.applyKeymaps({
 			{
 				"$",
 				{
-					{ "$", "<Cmd>Telescope treesitter<CR>" },
+					{ "$", "<Cmd>call aerial#fzf()<CR>" },
 					{ "*", "<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>" },
 					{ ".", "<Cmd>lua vim.lsp.buf.document_symbol()<CR>" },
 					{ "r", "<cmd>Lspsaga rename<cr>" },
@@ -361,13 +367,6 @@ nest.applyKeymaps({
 					},
 					{ "c", "<Cmd>lua toggle_bg_mode()<CR>" },
 					{ "C", "<Cmd>TSContextToggle<CR>" },
-					{
-						"d",
-						{
-							{ "*", "<Cmd>call ToggleDiagFix()<CR>" },
-							{ ".", "<Cmd>call ToggleDiagLoc()<CR>" },
-						},
-					},
 					-- { "D", ":lua require('dapui').toggle()" },
 					{ "e", "<Plug>(ultest-summary-toggle)" },
 					{
@@ -381,8 +380,8 @@ nest.applyKeymaps({
 					{
 						"l",
 						{
-							{ "l", "<Cmd>call ToggleQuickLoc()<CR>" },
-							{ "q", "<Cmd>call ToggleQuickFix()<CR>" },
+							{ "*", "<cmd>lua require'qf'.toggle('c', true)<CR>" },
+							{ ".", "<cmd>lua require'qf'.toggle('l', true)<CR>" },
 						},
 					},
 					{ "m", "<Plug>(Marks-toggle)" },
