@@ -1,75 +1,45 @@
 ---@diagnostic disable: undefined-global
-local servers = require("nvim-lsp-installer")
-local setup_server = require("lang/setup")
+require("nvim-lsp-installer").setup({ automatic_installation = true })
+local lspconfig = require("lspconfig")
+local cfg = require("lang/setup")
 
-servers.settings({
-	pip = {
-		install_args = {
-			"--sync",
-		},
-	},
-})
-
-servers.on_server_ready(function(server)
-	if
-		(
-			server.name == "tsserver"
-			or server.name == "efm"
-			or server.name == "jsonls"
-			or server.name == "sumneko_lua"
-			or server.name == "cssls"
-			or server.name == "html"
-			or server.name == "tailwindcss"
-			or server.name == "vimls"
-			or server.name == "zls"
-		) and not server:is_installed()
-	then
-		server:install()
-	end
-
-	if not server:is_installed() then
-		return
-	end
-
-	if server.name == "jsonls" then
-		setup_server.jsonls(server)
-	elseif server.name == "efm" then
-		setup_server.efm(server)
-	elseif server.name == "cssls" then
-		setup_server.css(server)
-	elseif server.name == "cssmodules" then
-		setup_server.cssmodules(server)
-	elseif server.name == "tsserver" then
-		setup_server.tsserver(server)
-	elseif server.name == "sumneko_lua" then
-		setup_server.sumneko_lua(server)
-	else
-		setup_server.generic(server)
-	end
-
-	vim.cmd([[do User LspAttachBuffers]])
-end)
+local my_servers = {
+  typescript = "tsserver",
+  json = "jsonls",
+  css = "cssls",
+  cssmodules = "cssmodules_ls",
+  lua = "sumneko_lua",
+  diagnostic = "efm",
+  html = "html",
+  graphql = "graphql",
+}
 
 --Some Diagnostic Icons
-vim.fn.sign_define("LspDiagnosticsSignError", { text = "", numhl = "LspDiagnosticsDefaultError" })
+vim.fn.sign_define("LspDiagnosticsSignError", { text = "✘", numhl = "LspDiagnosticsDefaultError" })
 vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", numhl = "LspDiagnosticsDefaultWarning" })
 vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "", numhl = "LspDiagnosticsDefaultInformation" })
 vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", numhl = "LspDiagnosticsDefaultHint" })
 
--- LSP Enable diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	virtual_text = true,
-	underline = true,
-	signs = true,
-	update_in_insert = false,
-})
+for i, server in pairs(my_servers) do
+  if server == "jsonls"
+      or server == "cssls"
+      or server == "cssmodules_ls"
+      or server == "sumneko_lua"
+  -- or server == "diagnosticls"
+  -- or server == "eslint"
+  then
+    lspconfig[server].setup(cfg[server]())
+  elseif server == "tsserver" then
+    require("typescript").setup({
+      disable_commands = false, -- prevent the plugin from creating Vim commands
+      debug = false, -- enable debug logging for commands
+      server = cfg[server](),
+    })
+  elseif server == "efm" then
+    cfg[server]()
+  else
+    lspconfig[server].setup(cfg.generic())
+  end
+end
 
--- Litee Calltree Setup
--- vim.lsp.handlers["callHierarchy/incomingCalls"] = vim.lsp.with(
--- 	require("litee.calltree.handlers").ch_lsp_handler("from"),
--- 	{}
--- )
--- vim.lsp.handlers["callHierarchy/outgoingCalls"] = vim.lsp.with(
--- 	require("litee.calltree.handlers").ch_lsp_handler("to"),
--- 	{}
--- )
+vim.cmd([[do User LspAttachBuffers]])

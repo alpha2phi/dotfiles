@@ -16,9 +16,9 @@ vim.cmd([[
 
 function config.setup()
 	require("bqf").setup({
-		auto_enable = false,
-		magic_window = false,
-		auto_resize_height = false,
+		auto_enable = true,
+		magic_window = true,
+		auto_resize_height = true,
 		preview = {
 			auto_preview = true,
 			win_height = 30,
@@ -80,7 +80,7 @@ function config.setup()
 					["ctrl-q"] = "signtoggle",
 					["ctrl-c"] = "closeall",
 				},
-				extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
+				extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> ", "--delimiter", "|" },
 			},
 		},
 	})
