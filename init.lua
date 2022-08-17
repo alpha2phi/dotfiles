@@ -39,7 +39,7 @@ packer.init({
 })
 
 require("plugins")
-require("statusline")
+-- require("statusline")
 
 require("lang")
 require("keymappings")

@@ -5,12 +5,33 @@ return require("packer").startup({
   function(use)
     use({ "wbthomason/packer.nvim" })
 
-    --helper libs and deps
-    use({ "nvim-lua/plenary.nvim" })
+    use({ "Olical/aniseed" })
+    use({ "junegunn/fzf", run = "-> fzf#install()" })
+    use({ "junegunn/fzf.vim" })
     use({ "tami5/sqlite.lua" })
+    use({ "chrisbra/unicode.vim" })
+    use({ "editorconfig/editorconfig-vim" })
+    use({ "wakatime/vim-wakatime" })
+
+    use({ "nvim-lua/plenary.nvim" })
     use({ "stevearc/dressing.nvim" })
     use({ "nvim-lua/popup.nvim" })
-    use({ "Olical/aniseed" })
+    use({
+      "ellisonleao/glow.nvim",
+      config = function()
+        require("glow").setup({
+          pager = true,
+        })
+      end
+    })
+    use({
+      "kyazdani42/nvim-web-devicons",
+      config = require('config/devicon').setup
+    })
+    use({
+      "mortepau/codicons.nvim",
+      config = require("config/codicons").setup
+    })
     use({
       "rcarriga/nvim-notify",
       event = "VimEnter",
@@ -18,17 +39,6 @@ return require("packer").startup({
         require("config/notify").setup()
       end,
     })
-    -- use({
-    -- 	"beauwilliams/focus.nvim",
-    -- 	config = function()
-    -- 		require("focus").setup({
-    -- 			excluded_filetypes = { "floaterm", "aerial" },
-    -- 			width = 130,
-    -- 			minwidth = 90,
-    -- 			bufnew = false,
-    -- 		})
-    -- 	end,
-    -- })
     use({
       "kwkarlwang/bufresize.nvim",
       config = function()
@@ -55,7 +65,6 @@ return require("packer").startup({
       end,
     })
 
-    -- treesitter related stuff
     use({
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
@@ -67,6 +76,10 @@ return require("packer").startup({
       "nvim-treesitter/nvim-treesitter-refactor",
       config = function()
         require("nvim-treesitter.configs").setup({
+          rainbow = {
+            enable = true,
+            extended_mode = false,
+          },
           autotag = {
             enable = true,
             highlight = {
@@ -118,117 +131,61 @@ return require("packer").startup({
         })
       end,
     })
-    use({
-      "SmiteshP/nvim-gps",
-      requires = "nvim-treesitter/nvim-treesitter",
-    })
-    use({
-      'fgheng/winbar.nvim',
-      requires = "nvi-gps",
-      config = function()
-        require('winbar').setup({
-          enabled = true,
-
-          show_file_path = true,
-          show_symbols = true,
-
-          colors = {
-            path = 'cyan', -- You can customize colors like #c946fd
-            file_name = 'magenta',
-            symbols = 'yellow',
-          },
-
-          icons = {
-            file_icon_default = '',
-            seperator = '>',
-            editor_state = '●',
-            lock_icon = '',
-          },
-
-          exclude_filetype = {
-            'help',
-            'startify',
-            'dashboard',
-            'packer',
-            'neogitstatus',
-            'NvimTree',
-            'Trouble',
-            'alpha',
-            'lir',
-            'Outline',
-            'spectre_panel',
-            'toggleterm',
-            'qf',
-          }
-        })
-      end,
-    })
     use({ "mfussenegger/nvim-ts-hint-textobject" })
+    use({ "wellle/targets.vim" })
     use({
       "mizlan/iswap.nvim",
       config = function()
         require("iswap").setup({})
       end,
     })
-    -- use({
-    --   "ziontee113/syntax-tree-surfer",
-    --   config = function()
-    --     require("syntax-tree-surfer").setup({
-    --       highlight_group = "STS_highlight",
-    --       disable_no_instance_found_report = false,
-    --       default_desired_types = {
-    --         "function",
-    --         "arrow_function",
-    --         "function_definition",
-    --         "if_statement",
-    --         "else_clause",
-    --         "else_statement",
-    --         "elseif_statement",
-    --         "for_statement",
-    --         "while_statement",
-    --         "switch_statement",
-    --       },
-    --       left_hand_side = "fdsawervcxqtzb",
-    --       right_hand_side = "jkl;oiu.,mpy/n",
-    --       icon_dictionary = {
-    --         ["if_statement"] = "",
-    --         ["else_clause"] = "",
-    --         ["else_statement"] = "",
-    --         ["elseif_statement"] = "",
-    --         ["for_statement"] = "ﭜ",
-    --         ["while_statement"] = "ﯩ",
-    --         ["switch_statement"] = "ﳟ",
-    --         ["function"] = "",
-    --         ["function_definition"] = "",
-    --         ["variable_declaration"] = "",
-    --       },
-    --     })
-    --   end,
-    -- })
 
-    --icons
     use({
-      "mortepau/codicons.nvim",
+      "rmagatti/auto-session",
       config = function()
-        require("config/codicons").setup()
-      end,
-    })
-    use({
-      "kyazdani42/nvim-web-devicons",
-      config = function()
-        require("config/devicon").setup()
+        require("config/auto_session").setup()
       end,
     })
 
     -- ui
-    -- gutter
+    use {
+      "jiaoshijie/undotree",
+      requires = {
+        "nvim-lua/plenary.nvim",
+      },
+      config = function()
+        require("undotree").setup({
+          float_diff = true, -- using float window previews diff, set this `true` will disable layout option
+          layout = "left_bottom", -- "left_bottom", "left_left_bottom"
+          ignore_filetype = { 'Undotree', 'UndotreeDiff', 'qf', 'TelescopePrompt', 'spectre_panel', 'tsplayground' },
+          window = {
+            winblend = 30,
+          },
+          keymaps = {
+            ['j'] = "move_next",
+            ['k'] = "move_prev",
+            ['J'] = "move_change_next",
+            ['K'] = "move_change_prev",
+            ['<cr>'] = "action_enter",
+            ['p'] = "enter_diffbuf",
+            ['q'] = "quit",
+          },
+        })
+      end
+    }
+
     use({
       "lewis6991/gitsigns.nvim",
       requires = { "nvim-lua/plenary.nvim" },
       config = function()
         require("gitsigns").setup({
           signs = {
-            add = { hl = "GitSignsAdd", text = "+", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+            add = {
+              hl = "GitSignsAdd",
+              text = "+",
+              numhl = "GitSignsAddNr",
+              linehl = "GitSignsAddLn",
+            },
             change = {
               hl = "GitSignsChange",
               text = "│",
@@ -305,7 +262,7 @@ return require("packer").startup({
             map("n", "<leader>hr*", gs.reset_buffer)
             map("n", "<leader>hs*", gs.stage_buffer)
             map("n", "<leader>hS.", gs.undo_stage_hunk)
-            map("n", "<leader>ph", gs.preview_hunk)
+            map("n", "<leader>hp", gs.preview_hunk)
             map("n", "<leader>hd", gs.diffthis)
             map("n", "<leader>hD", function()
               gs.diffthis("~")
@@ -319,12 +276,15 @@ return require("packer").startup({
       end,
     })
 
-    -- Development
-    use({ "junegunn/fzf", run = "-> fzf#install()" })
-    use({ "junegunn/fzf.vim" })
-
     use({ "tpope/vim-dispatch" })
     use({ "tpope/vim-commentary" })
+    use({
+      "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+        require("todo-comments").setup({})
+      end,
+    })
     use({ "tpope/vim-fugitive" })
     use({ "JoosepAlviste/nvim-ts-context-commentstring" })
     use({ "haringsrob/nvim_context_vt" })
@@ -332,92 +292,72 @@ return require("packer").startup({
     use({ "tpope/vim-unimpaired" })
     use({ "tpope/vim-sleuth" })
     use({ "tpope/vim-repeat" })
+
+    -- Clojure or just FP/Lisp
     -- use {'guns/vim-sexp'}
     -- use {'tpope/vim-sexp-mappings-for-regular-people'}
-    use({
-      "rmagatti/auto-session",
-      config = function()
-        require("config/auto_session").setup()
-      end,
-    })
 
     use({
-      "anuvyklack/pretty-fold.nvim",
+      'kevinhwang91/nvim-ufo',
+      requires = 'kevinhwang91/promise-async',
       config = function()
-        require("pretty-fold").setup()
-      end,
+        vim.o.foldcolumn = '1'
+        vim.o.foldlevel = 99
+        vim.o.foldlevelstart = 99
+        vim.o.foldenable = true
+
+        require('ufo').setup({
+          open_fold_hl_timeout = 150,
+          preview = {
+            win_config = {
+              border = { '', '─', '', '', '', '─', '', '' },
+              winhighlight = 'Normal:Folded',
+              winblend = 0
+            },
+            mappings = {
+              scrollU = '<C-u>',
+              scrollD = '<C-d>'
+            }
+          }, provider_selector = function(bufnr, filetype, buftype)
+            return { 'treesitter', 'indent' }
+          end,
+          fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+            local newVirtText = {}
+            local suffix = ('  %d '):format(endLnum - lnum)
+            local sufWidth = vim.fn.strdisplaywidth(suffix)
+            local targetWidth = width - sufWidth
+            local curWidth = 0
+            for _, chunk in ipairs(virtText) do
+              local chunkText = chunk[1]
+              local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+              if targetWidth > curWidth + chunkWidth then
+                table.insert(newVirtText, chunk)
+              else
+                chunkText = truncate(chunkText, targetWidth - curWidth)
+                local hlGroup = chunk[2]
+                table.insert(newVirtText, { chunkText, hlGroup })
+                chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                -- str width returned from truncate() may less than 2nd argument, need padding
+                if curWidth + chunkWidth < targetWidth then
+                  suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+                end
+                break
+              end
+              curWidth = curWidth + chunkWidth
+            end
+            table.insert(newVirtText, { suffix, 'MoreMsg' })
+            return newVirtText
+          end,
+          enable_fold_end_virt_text = true
+        })
+      end
     })
     -- use({
-    --   "b0o/incline.nvim",
+    --   "gelguy/wilder.nvim",
     --   config = function()
-    --     require("incline").setup({
-    --       hide = {
-    --         only_win = true,
-    --       },
-    --       highlight = {
-    --         groups = {
-    --           InclineNormal = {
-    --             default = true,
-    --             group = "TabLineSel",
-    --           },
-    --           InclineNormalNC = {
-    --             default = true,
-    --             guibg = "#FF00AF",
-    --           },
-    --         },
-    --       },
-    --       render = function(props)
-    --         local gps = require("nvim-gps")
-
-    --         if props.focused and gps.is_available() then
-    --           return " " .. gps.get_location() .. " "
-    --           -- guifg = "black",
-    --           -- guibg = "#00AFFF",
-    --           -- }
-    --           -- }
-    --         end
-
-    --         return " " .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":.:r") .. " "
-    --         -- -- guifg = props.focused and "black" or "white",
-    --         -- -- guibg = props.focused and "cyan" or "magenta",
-    --         -- },
-    --         -- }
-    --       end,
-    --       window = {
-    --         margin = {
-    --           horizontal = {
-    --             left = 0,
-    --             right = 0,
-    --           },
-    --           vertical = {
-    --             bottom = 0,
-    --             top = 0,
-    --           },
-    --         },
-    --         padding = {
-    --           left = 0,
-    --           right = 0,
-    --         },
-    --         winhighlight = {
-    --           active = {
-    --             Normal = "InclineNormal",
-    --           },
-    --           inactive = {
-    --             Normal = "InclineNormalNC",
-    --           },
-    --         },
-    --         zindex = 50,
-    --       },
-    --     })
+    --     require("config/wilder").setup()
     --   end,
     -- })
-    use({
-      "gelguy/wilder.nvim",
-      config = function()
-        require("config/wilder")
-      end,
-    })
-    use({ "wellle/targets.vim" })
     use({
       "phaazon/hop.nvim",
       as = "hop",
@@ -458,7 +398,6 @@ return require("packer").startup({
     use({ "unblevable/quick-scope" })
     use({ "voldikss/vim-floaterm" })
     use({ "windwp/vim-floaterm-repl" })
-    -- use({ "jiangmiao/auto-pairs" })
     use({ "windwp/nvim-ts-autotag" })
     use({
       "windwp/nvim-autopairs",
@@ -468,36 +407,62 @@ return require("packer").startup({
         require("config/autopairs").setup()
       end,
     })
-    use({
-      "norcalli/nvim-colorizer.lua",
-      config = function()
-        require("config/colorizer").setup()
-      end,
-    })
     use({ "lokaltog/neoranger" })
+    use({ 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' })
     -- use({ "diepm/vim-rest-console" })
-    use({
-      "michaelb/sniprun",
-      run = "bash ./install.sh",
-      config = function()
-        require("config/sniprun").setup()
-      end,
-    })
-    -- use({ "hkupty/iron.nvim" }) --Interactive REPL
-    use({
-      "kosayoda/nvim-lightbulb",
-      config = function()
-        require("config/lightbulb").setup()
-      end,
-    })
+    -- use({
+    --   "michaelb/sniprun",
+    --   run = "bash ./install.sh",
+    --   config = function()
+    --     require("config/sniprun").setup()
+    --   end,
+    -- })
+    -- use({
+    --   "kosayoda/nvim-lightbulb",
+    --   config = function()
+    --     require("config/lightbulb").setup()
+    --   end,
+    -- })
     -- Color
     -- colorschemes
-    -- use({ "tjdevries/colorbuddy.vim" })
     use({ "rktjmp/lush.nvim" })
     use({ "savq/melange" })
-    -- use({ "adisen99/codeschool.nvim" })
-    use({ "/Users/joehannes/.local/git/joehannes-ux/lush-jsx.nvim" })
+    use({
+      "/Users/joehannes/.local/git/joehannes-ux/lush-jsx.nvim",
+      config = function()
+        vim.g.lush_jsx_contrast_dark = "hard"
+        vim.g.lush_jsx_contrast_light = "hard"
+        require("lush")(require("lush_jsx").setup({
+          plugins = {
+            "cmp", -- nvim-cmp
+            "gitsigns",
+            "lsp",
+            "lspsaga",
+            "neogit",
+            "telescope",
+            "treesitter",
+          },
+          langs = {
+            "clojure",
+            "css",
+            "html",
+            "js",
+            "json",
+            "jsx",
+            "lua",
+            "markdown",
+            "python",
+            "typescript",
+            "viml",
+            "xml",
+          },
+        }))
+      end
+    })
+    use({ 'Everblush/everblush.nvim', as = 'everblush' })
     use({ "akai54/2077.nvim" })
+    use({ 'shaeinst/roshnivim-cs' })
+    use({ 'martinsione/darkplus.nvim' })
     use({ "olimorris/onedarkpro.nvim" })
     use({ "pineapplegiant/spaceduck" })
     use({
@@ -510,26 +475,13 @@ return require("packer").startup({
         vim.g.monokaipro_flat_term = true
       end,
     })
-    -- use({ "Iron-E/nvim-highlite" })
-    -- use({ "navarasu/onedark.nvim" })
-    use({ "NLKNguyen/papercolor-theme" })
     use({ 'pappasam/papercolor-theme-slim' })
     use({ "sainnhe/everforest" })
-    -- use({ "Th3Whit3Wolf/spacebuddy" })
-    use({ "haystackandroid/snow" })
-    use({ "haystackandroid/cosmic_latte" })
-    use({ "haystackandroid/strawberry" })
-    use({ "haystackandroid/stellarized" })
-    use({ "haystackandroid/carbonized" })
-    use({ "haystackandroid/vimspectr" })
-    use({ "haystackandroid/nemo" })
-    use({ "haystackandroid/wonka" })
     use({ "mhartington/oceanic-next" })
     use({ "kyoz/purify", rtp = "vim" })
     use({ "tanvirtin/monokai.nvim" })
     use({ "catppuccin/nvim", as = "catppuccin" })
     use({ "joehannes-ux/kat.nvim" })
-    -- use({ "sainnhe/edge" })
     use {
       "meijieru/edge.nvim",
       requires = { "rktjmp/lush.nvim" },
@@ -565,62 +517,9 @@ return require("packer").startup({
     -- 	end,
     -- })
     use({ "folke/tokyonight.nvim" })
+    -- use({ 'shaunsingh/oxocarbon.nvim', run = './install.sh' })
+    use({ "B4mbus/oxocarbon-lua.nvim" })
 
-    -- use({
-    -- 	"sunjon/shade.nvim",
-    -- 	config = function()
-    -- 		require("shade").setup({
-    -- 			overlay_opacity = 50,
-    -- 			opacity_step = 3,
-    -- 			keys = {
-    -- 				brightness_up = "<A-Up>",
-    -- 				brightness_down = "<A-Down>",
-    -- 			},
-    -- 		})
-    -- 	end,
-    -- })
-    -- indent-guide calculates colors based on a ColorScheme set
-    -- please use after at least one Plugin that sets a ColorScheme
-    -- use({
-    -- 	"glepnir/indent-guides.nvim",
-    -- 	branch = "main",
-    -- 	config = function()
-    -- 		local blended_magenta = require("utils").Color.vim.background_blend("#AFFF00", 21)
-    -- 		local blended_neutral = nil
-    -- 		local even_colors = { fg = blended_magenta, bg = 'transparent' }
-    -- 		if vim.opt.background:get() == "light" then
-    -- 			blended_neutral = require("utils").Color.vim.background_blend("#000000", 10)
-    -- 		else
-    -- 			blended_neutral = require("utils").Color.vim.background_blend("#FFFFFF", 10)
-    -- 		end
-    -- 		local odd_colors = { fg = blended_neutral, bg = 'transparent' }
-    -- 		require("indent_guides").setup({
-    -- 			indent_levels = 30,
-    -- 			indent_guide_size = 1,
-    -- 			indent_start_level = 1,
-    -- 			indent_enable = true,
-    -- 			indent_space_guides = true,
-    -- 			indent_tab_guides = false,
-    -- 			indent_soft_pattern = "\\s",
-    -- 			exclude_filetypes = {
-    -- 				"help",
-    -- 				"dashboard",
-    -- 				"dashpreview",
-    -- 				"NvimTree",
-    -- 				"vista",
-    -- 				"sagahover",
-    -- 				"aerial",
-    -- 				"AERIAL",
-    -- 				"minimap",
-    -- 				"Minimap",
-    -- 				"MINIMAP",
-    -- 				"-MINIMAP-",
-    -- 			},
-    -- 			even_colors = even_colors,
-    -- 			odd_colors = odd_colors,
-    -- 		})
-    -- 	end,
-    -- })
     use({
       "lukas-reineke/indent-blankline.nvim",
       config = function()
@@ -640,10 +539,6 @@ return require("packer").startup({
     -- use({ "puremourning/vimspector" })
 
     -- Telescope
-    -- use({
-    --   "nvim-telescope/telescope-arecibo.nvim",
-    --   rocks = { "openssl", "lua-http-parser" }, -- openssl not available for lua >5.3
-    -- })
     use({
       "nvim-telescope/telescope.nvim",
       requires = {
@@ -654,10 +549,12 @@ return require("packer").startup({
         "nvim-telescope/telescope-smart-history.nvim",
         "nvim-telescope/telescope-frecency.nvim",
         "nvim-telescope/telescope-symbols.nvim",
+        "nvim-telescope/telescope-node-modules.nvim",
         "nvim-telescope/telescope-github.nvim",
         "nvim-telescope/telescope-arecibo.nvim",
+        "nvim-telescope/telescope-ui-select.nvim",
         "joehannes-os/telescope-media-files.nvim",
-        "tom-anders/telescope-vim-bookmarks.nvim",
+        -- "tom-anders/telescope-vim-bookmarks.nvim",
         "sudormrfbin/cheatsheet.nvim",
         "AckslD/nvim-neoclip.lua",
         "rmagatti/auto-session",
@@ -696,72 +593,71 @@ return require("packer").startup({
       end,
     })
     use({ "neovim/nvim-lspconfig" })
-    -- use({ "glepnir/lspsaga.nvim" })
-    -- use({ "jasonrhansen/lspsaga.nvim", branch = "finder-preview-fixes" })
     use({ "jose-elias-alvarez/typescript.nvim" })
-    -- use({
-    --   "tami5/lspsaga.nvim",
-    --   requires = { "neovim/nvim-lspconfig", "williamboman/nvim-lsp-installer" },
-    --   config = function()
-    --     require("config/lspsaga").setup()
-    --   end,
-    -- })
     use({
       "onsails/lspkind-nvim",
       config = function()
         require("config/lspkind").setup()
       end,
     })
-    -- use({
-    --   "jose-elias-alvarez/null-ls.nvim",
-    --   config = function() require("lang/setup").null_ls() end,
-    -- })
-    -- use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
     use({
       "creativenull/efmls-configs-nvim",
       requires = { "neovim/nvim-lspconfig" },
     })
-    -- use({
-    --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    --   as = "lsp_lines",
-    --   config = function()
-    --     require("lsp_lines").register_lsp_virtual_lines()
-    --   end,
-    -- })
-
     use({
-      "joehannes-os/nvim.diagnostic_virtual_text_config",
+      "Maan2003/lsp_lines.nvim",
       config = function()
-        require("nvim.diagnostic_virtual_text_config").setup()
-      end
+        require("lsp_lines").register_lsp_virtual_lines()
+        vim.diagnostic.config({
+          virtual_text = false,
+        })
+      end,
     })
-    use({ 'lewis6991/hover.nvim', config = function()
-      require('hover').setup {
-        init = function()
-          -- Require providers
-          require('hover.providers.lsp')
-          -- require('hover.providers.gh')
-          -- require('hover.providers.man')
-          -- require('hover.providers.dictionary')
-        end,
-        preview_opts = {
-          border = "rounded"
-        },
-        title = true
-      }
+    -- use({
+    --   'lewis6991/hover.nvim',
+    --   config = function()
+    --     require('hover').setup {
+    --       init = function()
 
-      -- Setup keymaps
-      vim.keymap.set('n', 'K', require('hover').hover, { desc = 'hover.nvim' })
-      vim.keymap.set('n', 'gK', require('hover').hover_select, { desc = 'hover.nvim (select)' })
-    end })
+    --         require('hover.providers.lsp')
+    --         -- require('hover.providers.gh')
+    --         -- require('hover.providers.man')
+    --         require('hover.providers.dictionary')
+    --       end,
+    --       preview_opts = {
+    --         border = "rounded",
+    --         winbar = nil,
+    --       },
+    --       title = true,
+    --       winbar = nil
+    --     }
+
+    --     -- Setup keymaps
+    --     -- vim.keymap.set('n', 'K', require('hover').hover, { desc = 'hover.nvim' })
+    --     -- vim.keymap.set('n', 'gK', require('hover').hover_select, { desc = 'hover.nvim (select)' })
+    --   end
+    -- })
     -- use({
     --   "amrbashir/nvim-docs-view",
+    --   opt = true,
+    --   cmd = { "DocsViewToggle" },
     --   config = function()
     --     require("docs-view").setup({
     --       position = "bottom",
     --       height = 15,
     --     })
     --   end,
+    -- })
+    -- use({
+    --   'JASONews/glow-hover',
+    --   config = function()
+    --     require 'glow-hover'.setup {
+    --       max_width = 70,
+    --       padding = 2,
+    --       border = 'shadow',
+    --       glow_path = 'glow'
+    --     }
+    --   end
     -- })
     use({
       "rmagatti/goto-preview",
@@ -800,19 +696,31 @@ return require("packer").startup({
     -- 	end,
     -- })
     use({ "p00f/nvim-ts-rainbow" })
+    use({ "ray-x/lsp_signature.nvim" })
     use({
-      "ray-x/lsp_signature.nvim",
+      'weilbith/nvim-code-action-menu',
+      cmd = 'CodeActionMenu',
+    })
+    use({
+      "smjonas/inc-rename.nvim",
       config = function()
-        require("lsp_signature").setup({
-          floating_window_above_cur_line = true
-        })
-      end
+        require("inc_rename").setup()
+      end,
     })
     use({
       "folke/lsp-colors.nvim",
       config = function()
         require("config/lspcolors").setup()
       end,
+    })
+    use({
+      'mrshmllow/document-color.nvim',
+      config = function()
+        require("document-color").setup {
+          -- Default options
+          mode = "background", -- "background" | "foreground" | "single"
+        }
+      end
     })
     -- use {'szw/vim-maximizer'}
     -- use {'dyng/ctrlsf.vim'}
@@ -939,7 +847,7 @@ return require("packer").startup({
     -- 		})
     -- 	end,
     -- })
-    -- use({ "RishabhRD/popfix" })
+    -- use({ "RishabhRD/popfix" }
     -- use({ "RishabhRD/nvim-lsputils" })
     use({ "RRethy/vim-illuminate" })
 
@@ -977,18 +885,16 @@ return require("packer").startup({
       "zbirenbaum/copilot.lua",
       event = { "VimEnter" },
       config = function()
-        vim.defer_fn(function()
-          require("copilot").setup({
-            -- server_opts_overrides = {
-            --   settings = {
-            --     advanced = {
-            --       listCount = 10, -- #completions for panel
-            --       inlineSuggestCount = 3, -- #completions for getCompletions
-            --     }
-            --   }
-            -- }
-          })
-        end, 100)
+        require("copilot").setup(
+        -- server_opts_overrides = {
+        --   settings = {
+        --     advanced = {
+        --       listCount = 10, -- #completions for panel
+        --       inlineSuggestCount = 3, -- #completions for getCompletions
+        --     }
+        --   }
+        -- }
+        )
       end,
     }
     use({
@@ -1177,13 +1083,6 @@ return require("packer").startup({
     -- 		require("litee.calltree").setup({})
     -- 	end,
     -- })
-    -- Status line
-    use({
-      -- "glepnir/galaxyline.nvim",
-      -- branch = "main",
-      "NTBBloodbath/galaxyline.nvim",
-      requires = { "kyazdani42/nvim-web-devicons" },
-    })
 
     -- Project
     use({
@@ -1224,26 +1123,8 @@ return require("packer").startup({
       -- stable versions only
       -- tag = "*"
     })
-    use({ "chrisbra/unicode.vim" })
 
-    -- Rust
-    -- use {'rust-lang/rust.vim'}
-
-    -- Database
-    -- use {'tpope/vim-dadbod'}
-    -- use {'kristijanhusak/vim-dadbod-ui'}
-    -- use {'kristijanhusak/vim-dadbod-completion'}
-    -- use {'tpope/vim-dotenv' }
-
-    -- Markdown
-    use({ "npxbr/glow.nvim", run = ":GlowInstall" })
-    -- use {'mzlogin/vim-markdown-toc'}
-    -- use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
-    -- use {'godlygeek/tabular'}
     use({ "plasticboy/vim-markdown" })
-
-    -- Devluas
-    use({ "editorconfig/editorconfig-vim" })
 
     -- Documentation/Help/Bookmarks ...
     use({
@@ -1284,15 +1165,24 @@ return require("packer").startup({
         })
       end
     })
-    -- use({ "sunaku/vim-dasht" })
-    -- for persisting global bookmarks
-    -- use({ "MattesGroeger/vim-bookmarks" })
-    -- for non-persisting grouped bookmarks
     use({
       "chentoast/marks.nvim",
       config = function()
         require("marks").setup({
-          default_mappings = false,
+          default_mappings = true,
+          mappings = {
+            annotate = "m@",
+            m0 = false,
+            m1 = false,
+            m2 = false,
+            m3 = false,
+            m4 = false,
+            m5 = false,
+            m6 = false,
+            m7 = false,
+            m8 = false,
+            m9 = false,
+          },
           bookmark_0 = {
             sign = "",
             virt_text = " ( 0) ",
@@ -1337,20 +1227,6 @@ return require("packer").startup({
       end,
     })
 
-    -- Writing and note taking
-    -- use {'gyim/vim-boxdraw'}
-    -- use {'preservim/vim-pencil'}
-    -- use {'junegunn/goyo.vim'}
-    -- use {'junegunn/limelight.vim'}
-    -- use {'preservim/vim-colors-pencil'}
-    -- use {'dhruvasagar/vim-dotoo'}
-    -- use {'dhruvasagar/vim-table-mode'}
-    -- use {'fmoralesc/vim-pad'}
-    -- use {'vimwiki/vimwiki', branch = 'dev'}
-    -- use {'blindFS/vim-taskwarrior'}
-    -- use {'tools-life/taskwiki'}
-    -- use {'powerman/vim-plugin-AnsiEsc'}
-
     -- Git stuff
     use({
       "sindrets/diffview.nvim",
@@ -1365,25 +1241,6 @@ return require("packer").startup({
       end,
     })
 
-    -- Presentation
-    -- use {'sotte/presenting.vim'}
-    -- use {'vim-pandoc/vim-pandoc'}
-    -- use {'vim-pandoc/vim-pandoc-syntax'}
-    -- use {'vim-pandoc/vim-pandoc-after'}
-
-    -- Testing
-    -- use {'FooSoft/vim-argwrap'}
-    -- use {'preservim/vimux'}
-
-    -- use {'vuciv/vim-bujo'}
-    -- use {'freitass/todo.txt-vim'}
-    use({
-      "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-        require("todo-comments").setup({})
-      end,
-    })
     use({
       "ruifm/gitlinker.nvim",
       requires = "nvim-lua/plenary.nvim",
@@ -1414,21 +1271,15 @@ return require("packer").startup({
         })
       end,
     })
-    -- use {'oberblastmeister/neuron.nvim', branch = 'unstable', run = 'nix-env -if https://github.com/srid/neuron/archive/master.tar.gz' }
-
-    -- use {'oberblastmeister/neuron.nvim' }
-    -- use {'fiatjaf/neuron.vim' }
 
     -- Pair Programming
     -- use({ "Floobits/floobits-neovim" })
-    -- -- DAP
+
+    -- DAP
     -- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
     -- use({ "nvim-telescope/telescope-dap.nvim" })
     -- use({ "theHamsta/nvim-dap-virtual-text" })
     -- use({ "Pocco81/DAPInstall.nvim" })
-
-    -- Project mgmt
-    -- use {'vim-ctrlspace/vim-ctrlspace' }
 
     -- Embed in browser
     use({
@@ -1437,12 +1288,12 @@ return require("packer").startup({
         vim.fn["firenvim#install"](0)
       end,
     })
-    -- use({
-    --   "subnut/nvim-ghost.nvim",
-    --   run = function()
-    --     vim.fn["nvim_ghost#installer#install"]()
-    --   end,
-    -- })
+    use({
+      "subnut/nvim-ghost.nvim",
+      run = function()
+        vim.fn["nvim_ghost#installer#install"]()
+      end,
+    })
 
     -- OSC 52 yank
     -- use {'ojroques/vim-oscyank' }
@@ -1482,9 +1333,6 @@ return require("packer").startup({
       end,
     })
 
-    -- timetracking
-    -- use {'git-time-metric/gtm-vim-plugin'}
-    use({ "wakatime/vim-wakatime" })
 
     -- tmux
     -- use({ "roxma/vim-tmux-clipboard" })
@@ -1687,7 +1535,7 @@ return require("packer").startup({
             },
             -- You can use lua's arbitrary key notation to map special characters
             -- move to end of WORD and enter insert mode after that char
-            [";;"] = "<cmd>stopinsert<cr><cmd>w<cr><cmd>normal E<cr><cmd>startinsert<cr>",
+            [";;"] = "<cmd>stopinsert<cr><cmd>w<cr>W<cmd>startinsert<cr>",
             -- [";l"] = "<cmd>stopinsert<cr><cmd>normal f)a<cr>",
             -- [";h"] = "<cmd>stopinsert<cr><cmd>normal F(a<cr>",
             ["<Esc>"] = "<cmd>stopinsert<cr>",
@@ -1701,6 +1549,42 @@ return require("packer").startup({
       end,
     })
 
+    --colorscheme scheduler/auto-switcher
+    -- use({ "haystackandroid/night-and-day" })
+    --
+    use({
+      "SmiteshP/nvim-navic",
+      requires = "neovim/nvim-lspconfig"
+    })
+    use({
+      "rrethy/vim-hexokinase",
+      run = "make hexokinase",
+      config = function()
+        vim.cmd([[
+          let g:Hexokinase_highlighters = [ 'sign_column', 'foregroundfull' ]
+        ]])
+      end,
+    })
+    use {
+      "max397574/colortils.nvim",
+      cmd = "Colortils",
+      config = function()
+        require("colortils").setup()
+      end,
+    }
+    -- Status line
+    use({
+      "rebelot/heirline.nvim",
+      config = function()
+        require("config/heirline").setup(true)
+      end,
+    })
+    -- use({
+    --   "glepnir/galaxyline.nvim",
+    --   branch = "main",
+    --   -- "NTBBloodbath/galaxyline.nvim",
+    --   requires = { "kyazdani42/nvim-web-devicons" },
+    -- })
     --keymappings
     use({ "LionC/nest.nvim" })
 
@@ -1710,8 +1594,5 @@ return require("packer").startup({
         require("which-key").setup({})
       end,
     })
-
-    --colorscheme scheduler/auto-switcher
-    use({ "haystackandroid/night-and-day" })
   end,
 })
