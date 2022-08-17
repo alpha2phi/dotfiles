@@ -4,79 +4,177 @@ vim.opt.termguicolors = true
 local config = {}
 
 function config.setup()
-  local gps = require("nvim-gps")
+  -- local gps = require("nvim-gps")
 
-  local function tabColor()
-    local output = "#F634B1"
-    if vim.opt.background:get() == "light" then
-      output = "#550030"
-    elseif vim.opt.background:get() == "dark" then
-      output = "#771060"
-    end
-    return output
+  local function vimodeColor()
+    return my_vimode_colors[vim.fn.mode()]
+  end
+
+  local function secondaryVimodeColor()
+    return require("utils.color").vim.background_blend(vimodeColor(), 50)
+  end
+
+  local function tertiaryVimodeColor()
+    return require("utils.color").vim.background_blend(vimodeColor(), 21)
   end
 
   local highlights = {
-    fill = { guifg = "#000000", guibg = tabColor() },
-    -- background = { guifg = "#000000", guibg = tabColor() },
-    -- tab = { guibg = tabColor() },
-    -- tab_selected = { guifg = tabColor(), guibg = groups.selectionBG() },
-    -- tab_close = { guifg = tabColor(), guibg = groups.fillBG(), gui = "bold,italic" },
-    -- info = { guifg = tabColor(), guibg = groups.selectionBG() },
-    buffer_visible = { guifg = "#FFFFFF", guibg = "#F634B1", gui = "bold" },
-    buffer_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold" },
-    tab_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold" },
-    -- diagnostic = {
-    -- 	guifg = tabColor(),
-    -- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
-    -- },
+    background = { guibg = tertiaryVimodeColor() },
+    -- tab = { guibg = vimodeColor() },
+    -- tab_selected = { guifg = vimodeColor(), guibg = groups.selectionBG() },
+    -- tab_close = { guifg = vimodeColor(), guibg = groups.fillBG(), gui = "bold,italic" },
+    -- info = { guifg = vimodeColor(), guibg = groups.selectionBG() },
+    fill = { guibg = my_colors.dark },
+    buffer = { guifg = my_colors.light, guibg = secondaryVimodeColor() },
+    buffer_visible = { guifg = my_colors.light, guibg = secondaryVimodeColor() },
+    buffer_selected = { guifg = my_colors.light, guibg = vimodeColor(), gui = "bold" },
+    tab_selected = { guifg = my_colors.light, guibg = vimodeColor(), gui = "bold" },
+    diagnostic = {
+      guifg = my_colors.dark,
+      guibg = tertiaryVimodeColor()
+    },
     -- diagnostic_visible = {
-    -- 	guifg = tabColor(),
+    -- 	guifg = vimodeColor(),
     -- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
     -- },
-    diagnostic = { guifg = "#FF0000", gui = "bold" },
-    diagnostic_visible = { guifg = "#FF0000", gui = "bold" },
-    diagnostic_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold,italic" },
-    info_selected = { guifg = "#00FF00", guibg = "#00AFFF", gui = "bold,italic" },
-    hint_selected = { guifg = "#FFFF00", guibg = "#00AFFF", gui = "bold,italic" },
-    warning_selected = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
-    error_visible = { guifg = "#550000", guibg = "#F634B1", gui = "bold,italic" },
-    error_selected = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
-    warning = { guifg = "#FF0000", gui = "bold,italic" },
-    error = { guifg = "#FF0000", gui = "bold,italic" },
-    hint_diagnostic_selected = { guifg = "#00FF00", guibg = "#00AFFF", gui = "bold,italic" },
-    info_diagnostic_selected = { guifg = "#00FF00", guibg = "#00AFFF", gui = "bold,italic" },
-    warning_diagnostic_selected = { guifg = "#FFFF00", guibg = "#00AFFF", gui = "bold,italic" },
-    error_diagnostic_selected = { guifg = "#FF0000", guibg = "#00AFFF", gui = "bold,italic" },
-    -- close_button = { guifg = tabColor(), guibg = groups.highlightBG(), gui = "bold" },
+    -- diagnostic = { guifg = my_colors.red, gui = "bold" },
+    diagnostic_visible = { guifg = my_colors.dark, guibg = secondaryVimodeColor(), gui = "bold" },
+    diagnostic_selected = { guifg = my_colors.dark, guibg = vimodeColor(), gui = "bold,italic" },
+    info = {
+      guifg = my_colors.dark,
+      guibg = tertiaryVimodeColor()
+    },
+    info_visible = {
+      guifg = my_colors.dark,
+      guibg = secondaryVimodeColor()
+    },
+    info_selected = {
+      guifg = my_colors.dark,
+      guibg = vimodeColor()
+    },
+    hint = {
+      guifg = my_colors.dark,
+      guibg = tertiaryVimodeColor()
+    },
+    hint_visible = {
+      guifg = my_colors.dark,
+      guibg = secondaryVimodeColor()
+    },
+    hint_selected = {
+      guifg = my_colors.dark,
+      guibg = vimodeColor()
+    },
+    warning = {
+      guifg = my_colors.dark,
+      guibg = tertiaryVimodeColor()
+    },
+    warning_visible = {
+      guifg = my_colors.dark,
+      guibg = secondaryVimodeColor()
+    },
+    warning_selected = {
+      guifg = my_colors.dark,
+      guibg = vimodeColor()
+    },
+    error = {
+      guifg = my_colors.dark,
+      guibg = tertiaryVimodeColor()
+    },
+    error_visible = {
+      guifg = my_colors.dark,
+      guibg = secondaryVimodeColor()
+    },
+    error_selected = {
+      guifg = my_colors.dark,
+      guibg = vimodeColor()
+    },
+    info_diagnostic = {
+      guifg = my_colors.dark,
+      guibg = tertiaryVimodeColor()
+    },
+    info_diagnostic_visible = {
+      guifg = my_colors.dark,
+      guibg = secondaryVimodeColor()
+    },
+    info_diagnostic_selected = {
+      guifg = my_colors.dark,
+      guibg = vimodeColor()
+    },
+    hint_diagnostic = {
+      guifg = my_colors.dark,
+      guibg = tertiaryVimodeColor()
+    },
+    hint_diagnostic_visible = {
+      guifg = my_colors.dark,
+      guibg = secondaryVimodeColor()
+    },
+    hint_diagnostic_selected = {
+      guifg = my_colors.dark,
+      guibg = vimodeColor()
+    },
+    warning_diagnostic = {
+      guifg = my_colors.dark,
+      guibg = tertiaryVimodeColor()
+    },
+    warning_diagnostic_visible = {
+      guifg = my_colors.dark,
+      guibg = secondaryVimodeColor()
+    },
+    warning_diagnostic_selected = {
+      guifg = my_colors.dark,
+      guibg = vimodeColor()
+    },
+    error_diagnostic = {
+      guifg = my_colors.dark,
+      guibg = tertiaryVimodeColor()
+    },
+    error_diagnostic_visible = {
+      guifg = my_colors.dark,
+      guibg = secondaryVimodeColor()
+    },
+    error_diagnostic_selected = {
+      guifg = my_colors.dark,
+      guibg = vimodeColor()
+    },
+    -- hint_selected = { guifg = my_colors.orange, guibg = my_colors.aqua, gui = "bold,italic" },
+    -- warning_selected = { guifg = my_colors.red, guibg = my_colors.aqua, gui = "bold,italic" },
+    -- error_visible = { guifg = "#550000", guibg = "#F634B1", gui = "bold,italic" },
+    -- error_selected = { guifg = my_colors.red, guibg = my_colors.aqua, gui = "bold,italic" },
+    -- warning = { guifg = my_colors.red, gui = "bold,italic" },
+    -- error = { guifg = my_colors.red, gui = "bold,italic" },
+    -- hint_diagnostic_selected = { guifg = my_colors.green, guibg = my_colors.aqua, gui = "bold,italic" },
+    -- info_diagnostic_selected = { guifg = my_colors.green, guibg = my_colors.aqua, gui = "bold,italic" },
+    -- warning_diagnostic_selected = { guifg = my_colors.orange, guibg = my_colors.aqua, gui = "bold,italic" },
+    -- error_diagnostic_selected = { guifg = my_colors.red, guibg = my_colors.aqua, gui = "bold,italic" },
+    close_button = { guifg = my_colors.light, guibg = tertiaryVimodeColor() },
     -- close_button_visible = {
-    -- 	guifg = tabColor(),
+    -- 	guifg = vimodeColor(),
     -- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
     -- 	gui = "bold",
     -- },
-    close_button_visible = { guifg = "#FFFFFF", guibg = "#F634B1", gui = "bold" },
-    close_button_selected = { guifg = "#000000", guibg = "#00AFFF", gui = "bold" },
+    close_button_visible = { guifg = my_colors.light, guibg = secondaryVimodeColor(), gui = "bold" },
+    close_button_selected = { guifg = my_colors.light, guibg = vimodeColor(), gui = "bold" },
     -- modified = { guibg = "#F53737" },
     -- modified_visible = {
     -- 	guifg = groups.warningBG(),
     -- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
     -- },
-    modified_selected = { guifg = "#000000", guibg = "#00AFFF" },
-    duplicate_selected = { guifg = "#000000", guibg = "#00AFFF" },
+    -- modified_selected = { guifg = my_colors.light, guibg = my_colors.aqua },
+    -- duplicate_selected = { guifg = my_colors.light, guibg = my_colors.aqua },
     -- duplicate_visible = {
-    -- 	guifg = tabColor(),
+    -- 	guifg = vimodeColor(),
     -- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
     -- },
-    -- duplicate = { guifg = tabColor(), guibg = groups.highlightBG() },
-    separator_selected = { guifg = tabColor(), guibg = "#00AFFF" },
+    -- duplicate = { guifg = vimodeColor(), guibg = groups.highlightBG() },
+    separator = { guifg = my_colors.dark, guibg = tertiaryVimodeColor() },
+    separator_selected = { guifg = my_colors.dark, guibg = vimodeColor() },
     separator_visible = {
-      guifg = tabColor(),
-      guibg = "#F634B1",
+      guifg = my_colors.dark,
+      guibg = secondaryVimodeColor()
       -- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
     },
-    separator = { guifg = tabColor() },
-    indicator_selected = { guifg = tabColor(), guibg = "#00AFFF" },
-    pick_selected = { guifg = tabColor(), guibg = "#00AFFF" },
+    -- indicator_selected = { guifg = vimodeColor(), guibg = my_colors.aqua },
+    -- pick_selected = { guifg = vimodeColor(), guibg = my_colors.aqua },
     -- background = { guifg = "#FFFFFF", guibg = groups.mainBG() },
   }
 
@@ -163,8 +261,8 @@ function config.setup()
           -- local result = {}
 
           -- 	if gps.is_available() then
-          -- 		table.insert(result, { text = gps.get_location() .. " ", guifg = "#FFFF00", guibg = "black" })
-          -- 		table.insert(result, { text = "   ", guifg = "black", guibg = tabColor() })
+          -- 		table.insert(result, { text = gps.get_location() .. " ", guifg = my_colors.orange, guibg = "black" })
+          -- 		table.insert(result, { text = "   ", guifg = "black", guibg = vimodeColor() })
           -- 	end
 
           -- 	return result
@@ -177,24 +275,24 @@ function config.setup()
           -- if gps.is_available() then
           -- 	table.insert(
           -- 		result,
-          -- 		{ text = "   " .. gps.get_location() .. " ", guifg = "#FFFF00", guibg = "#00AFFF" }
+          -- 		{ text = "   " .. gps.get_location() .. " ", guifg = my_colors.orange, guibg = my_colors.aqua }
           -- 	)
-          -- 	table.insert(result, { text = "   ", guifg = "#00AFFF", guibg = tabColor() })
+          -- 	table.insert(result, { text = "   ", guifg = my_colors.aqua, guibg = vimodeColor() })
           -- end
           if error ~= 0 then
-            table.insert(result, { text = "  " .. error, guifg = "#FE3221", guisp = "bold" })
+            table.insert(result, { text = "  " .. error, guifg = my_colors.red, guisp = "bold" })
           end
 
           if warning ~= 0 then
-            table.insert(result, { text = "  " .. warning, guifg = "#FFD819", guisp = "bold" })
+            table.insert(result, { text = "  " .. warning, guifg = my_colors.orange, guisp = "bold" })
           end
 
           if hint ~= 0 then
-            table.insert(result, { text = "  " .. hint, guifg = "#73FA2E", guisp = "bold" })
+            table.insert(result, { text = "  " .. hint, guifg = my_colors.green, guisp = "bold" })
           end
 
           if info ~= 0 then
-            table.insert(result, { text = "  " .. info, guifg = "#3E79F7", guisp = "bold" })
+            table.insert(result, { text = "  " .. info, guifg = my_colors.blue, guisp = "bold" })
           end
 
           return result
