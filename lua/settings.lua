@@ -25,7 +25,7 @@ o.foldlevelstart = 1
 wo.number = true
 wo.relativenumber = true
 wo.cursorline = true
-wo.signcolumn = "yes"
+wo.signcolumn = "auto:3"
 opt.shiftwidth = indent
 opt.tabstop = indent
 opt.softtabstop = indent
@@ -64,9 +64,9 @@ cmd([[
   set cmdheight=0
   set updatetime=300
   set shortmess+=c
-  set signcolumn=yes
   set mouse=a mousemodel=popup
   set guioptions-=e
+  set viewoptions-=options
   set foldlevelstart=1
 ]])
 
@@ -80,6 +80,17 @@ cmd([[au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", hlgroup=
 
 -- https://github.com/mhinz/vim-grepper
 vim.g.grepper = { tools = { "rg", "grep" }, searchreg = 1 }
+vim.api.nvim_create_augroup("MyColorAugroup", { clear = true })
+vim.api.nvim_create_autocmd("ModeChanged", {
+  pattern = "*",
+  callback = onModeChanged,
+  group = "MyColorAugroup",
+})
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = onColorscheme,
+  group = "MyColorAugroup",
+})
 
 cmd(([[
     aug Grepper
@@ -146,55 +157,19 @@ augroup END
 
 vim.api.nvim_exec(
   [[
-augroup foldMethodSetLocal
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave *.clj setlocal foldmethod=syntax
-  autocmd BufEnter,FocusGained,InsertLeave *.cljc setlocal foldmethod=syntax
-  autocmd BufEnter,FocusGained,InsertLeave *.cljs setlocal foldmethod=syntax
-  autocmd BufEnter,FocusGained,InsertLeave *.json setlocal foldmethod=indent
-augroup END
-]] ,
-  false
-)
-
-vim.api.nvim_exec(
-  [[
   augroup remember_folds
     autocmd!
-    autocmd BufWinEnter,BufEnter *.* loadview
-    autocmd BufWinLeave *.* mkview
+    autocmd BufWinEnter *.ts silent loadview
+    autocmd BufWinEnter *.tsx silent loadview
+    autocmd BufWinEnter *.js silent loadview
+    autocmd BufWinEnter *.jsx silent loadview
+    autocmd BufWinEnter *.json silent loadview
+    autocmd BufWinLeave *.js mkview
+    autocmd BufWinLeave *.jsx mkview
+    autocmd BufWinLeave *.ts mkview
+    autocmd BufWinLeave *.tsx mkview
+    autocmd BufWinLeave *.json mkview
   augroup END
-  ]],
-  false
-)
-
-vim.api.nvim_exec(
-  [[
-  augroup my_scope_and_focus
-    autocmd!
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("GitSignsAddLn", 9, "#AAFFAA")
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("GitSignsChangeLn", 9, "#FFFFAA")
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("GitSignsDeleteLn", 9, "#FFAAAA")
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("TSCurrentScope", 21, "#00AFFF")
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("CursorLine", 75, "#FFFF00")
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("CursorColumn", 75, "#FFFF00")
-    autocmd ColorScheme * lua require"utils".Color.vim.highlight_blend_bg("Visual", 50, "#FFFF00")
-    autocmd ColorScheme * lua toggle_bg_mode(true)
-  augroup END
-  ]],
-  false
-)
-
-vim.api.nvim_exec(
-  [[
-    fun! TrimWhitespace()
-        let l:save = winsaveview()
-        keeppatterns %s/\s\+$//e
-        call winrestview(l:save)
-    endfun
-
-    autocmd FileType go,rust,html,typescript,typescriptreact,javascript,javascriptreact,python autocmd BufWritePre <buffer> call TrimWhitespace()
-
   ]],
   false
 )
@@ -219,25 +194,12 @@ vim.api.nvim_exec(
 
 cmd([[
   let g:python_host_prog = "/usr/bin/python2"
-  let g:python3_host_prog = "/usr/bin/python3"
+  let g:python3_host_prog = "python"
 
 	let g:minimap_width = 21
 	let g:minimap_auto_start = 0
 	let g:minimap_auto_start_win_enter = 0
 	let g:minimap_git_colors = 1
-
-  let g:nd_themes = [
-    \ ['sunrise+0',   'themer_gruvbox', 'dark' ],
-    \ ['sunrise+1/5',   'PaperColor', 'light' ],
-    \ ['sunrise+1/2', 'kat.nvim', 'light' ],
-    \ ['sunrise+4/5', 'lush_jsx', 'light' ],
-    \ ['sunset+0',    'monokai_soda', 'dark'  ],
-    \ ['sunset+1/5',    'kat.nvim', 'dark'  ],
-    \ ['sunset+1/2',    'themer_dracula', 'dark'  ],
-    \ ['sunset+2/3',    'themer_rose_pine', 'dark'  ],
-    \ ]
-  let g:nd_latitude = 20
-  let g:nd_timeshift = 34
 
   set termguicolors
 
