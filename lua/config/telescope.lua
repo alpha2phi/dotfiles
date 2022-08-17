@@ -61,6 +61,9 @@ function config.setup()
       --     ["show_http_headers"] = false,
       --     ["show_domain_icons"] = false
       -- },
+      ["ui-select"] = {
+        require("telescope.themes").get_dropdown {}
+      },
       arecibo = {
         ["selected_engine"] = "google",
         ["url_open_command"] = "open",
@@ -145,9 +148,9 @@ function config.setup()
 
   telescope.load_extension("fzf")
   telescope.load_extension("gh")
-  -- telescope.load_extension("node_modules")
+  telescope.load_extension("node_modules")
   telescope.load_extension("session-lens")
-  telescope.load_extension("vim_bookmarks")
+  -- telescope.load_extension("vim_bookmarks")
   telescope.load_extension("project")
   telescope.load_extension("neoclip")
   telescope.load_extension("smart_history")
@@ -156,6 +159,7 @@ function config.setup()
   telescope.load_extension("arecibo")
   telescope.load_extension("media_files")
   telescope.load_extension("frecency")
+  telescope.load_extension("ui-select")
 end
 
 return config
