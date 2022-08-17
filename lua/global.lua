@@ -1,5 +1,5 @@
 ---@diagnostic disable:undefined-global
---
+local color = require('utils.color')
 local home = os.getenv("HOME")
 local path_sep = _G.is_windows and "\\" or "/"
 
@@ -30,18 +30,40 @@ function _G.load_variables()
 end
 
 _G.my_colors = {
-  red = "#FF0000",
+  red = "#FF0080",
   green = "#00FF80",
-  yellow = "#FFFF00",
+  yellow = "#FFDF00",
   blue = "#0000FF",
-  purple = "#8000FF",
-  aqua = "#00FFFF",
-  orange = "#FF7F00",
-  magenta = "#FF0080",
+  purple = "#A000FF",
+  aqua = "#00DFFF",
+  orange = "#FFAF00",
+  magenta = "#F634B1",
   dark = "#100710",
   light = "#F0FFFD",
 }
 
+_G.my_vimode_colors = {
+  c = my_colors.purple,
+  ce = my_colors.purple,
+  cv = my_colors.purple,
+  i = my_colors.green,
+  ic = my_colors.green,
+  n = my_colors.aqua,
+  no = my_colors.aqua,
+  r = my_colors.blue,
+  rm = my_colors.blue,
+  R = my_colors.red,
+  Rv = my_colors.red,
+  s = my_colors.magenta,
+  S = my_colors.magenta,
+  t = my_colors.red,
+  V = my_colors.yellow,
+  v = my_colors.yellow,
+  ["r?"] = my_colors.red,
+  [""] = my_colors.magenta,
+  [""] = my_colors.yellow,
+  ["!"] = my_colors.purple,
+}
 --- Check if a file or directory exists in this path
 function _G.exists(file)
   if file == "" or file == nil then
@@ -177,6 +199,33 @@ function _G.qftf(info)
   return ret
 end
 
+function _G.onColorscheme()
+  toggle_bg_mode(true)
+
+  color.vim.highlight_blend_bg("CursorLine", 50, my_vimode_colors[vim.fn.mode()])
+  color.vim.highlight_blend_bg("CursorColumn", 50, my_vimode_colors[vim.fn.mode()])
+  color.vim.highlight_blend_bg("Visual", 21, my_vimode_colors[vim.fn.mode()])
+  color.vim.highlight_blend_bg("TSCurrentScope", 12, my_vimode_colors[vim.fn.mode()])
+end
+
+function _G.onModeChanged()
+  vim.api.nvim_set_hl(0, "ScrollbarHandle", { bg = my_vimode_colors[vim.fn.mode()] })
+  if vim.opt.background:get() == "light" then
+    color.vim.highlight_blend_bg("Normal", 21, my_vimode_colors[vim.fn.mode()])
+  else
+    color.vim.highlight_blend_bg("Normal", 15, my_vimode_colors[vim.fn.mode()])
+  end
+
+  color.vim.highlight_blend_bg("CursorLine", 50, my_vimode_colors[vim.fn.mode()])
+  color.vim.highlight_blend_bg("CursorColumn", 50, my_vimode_colors[vim.fn.mode()])
+  color.vim.highlight_blend_bg("Visual", 21, my_vimode_colors[vim.fn.mode()])
+  color.vim.highlight_blend_bg("TSCurrentScope", 21, my_vimode_colors[vim.fn.mode()])
+  require("config/bufferline").setup()
+  if not (require("heirline").statusline == nil) then
+    require("config.heirline").update()
+  end
+end
+
 function _G.toggle_bg_mode(force)
   local current = vim.opt.background:get()
   local other = current == "light" and "dark" or "light"
@@ -184,15 +233,28 @@ function _G.toggle_bg_mode(force)
 
   vim.cmd("set background=" .. future)
 
-  if current == "dark" then
-    require("utils.color").vim.highlight_blend_bg("MyNormalNC", 9, my_colors.magenta)
-    require("utils.color").vim.highlight_blend_bg("MyNormal", 9, my_colors.cyan)
+  local hl_normal = vim.api.nvim_get_hl_by_name("Normal", true)
+  local hl_normal_nc = vim.api.nvim_get_hl_by_name("NormalNC", true)
+  vim.api.nvim_set_hl(0, "NormalNC", { bg = hl_normal_nc.background or hl_normal.background, nocombine = false })
+  color.vim.highlight_blend_bg("NormalNC", 21, my_vimode_colors[vim.opt.background:get()], "Normal")
+  vim.api.nvim_set_hl(0, "MyNormal", { bg = hl_normal.background, nocombine = false })
+
+  if future == "light" then
+    color.vim.highlight_blend_bg("Normal", 21, my_vimode_colors[vim.fn.mode()])
   else
-    require("utils.color").vim.highlight_blend_bg("MyNormalNC", 9, my_colors.magenta)
-    require("utils.color").vim.highlight_blend_bg("MyNormal", 9, my_colors.cyan)
+    color.vim.highlight_blend_bg("Normal", 10, my_vimode_colors[vim.fn.mode()])
   end
 
-  vim.cmd("set winhighlight=Normal:MyNormal,NormalNC:MyNormalNC")
+  for defColor, gitSignsHl in pairs({ [my_colors.green] = "GitSignsAdd", [my_colors.orange] = "GitSignsChange",
+    [my_colors.red] = "GitSignsDelete" }) do
+
+    color.vim.highlight_blend_bg(gitSignsHl, 50, defColor)
+    color.vim.highlight_blend_bg(gitSignsHl .. "Nr", 21, defColor)
+    color.vim.highlight_blend_bg(gitSignsHl .. "Ln", 10, defColor)
+  end
 
   require("config/bufferline").setup()
+  if not (require("heirline").statusline == nil) then
+    require("config.heirline").update()
+  end
 end
