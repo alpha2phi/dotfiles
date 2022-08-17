@@ -1,5 +1,5 @@
 local gl = require("galaxyline")
-local gps = require("nvim-gps")
+local gps = require("nvim-navic")
 local gls = gl.section
 gl.short_line_list = { "LuaTree", "CHADTREE", "OUTLINE" }
 local i = require("statusline.icons")
@@ -68,6 +68,7 @@ gls.left[4] = {
   FileName = {
     provider = fileName,
     condition = u.buffer_not_empty,
+    highlight = { c.Color("base"), c.Color("cyan") },
   },
 }
 
@@ -76,7 +77,7 @@ gls.left[5] = {
     provider = function()
       return " " .. i.slant.Right
     end,
-    highlight = { c.Color("cyan"), c.Color("purple") },
+    highlight = { c.Color("cyan"), c.Color("magenta") },
     condition = u.buffer_not_empty,
   },
 }
@@ -87,7 +88,7 @@ gls.left[6] = {
       return " " .. fileType()
     end,
     condition = u.buffer_not_empty,
-    highlight = { c.Color("base"), c.Color("purple") },
+    highlight = { c.Color("base"), c.Color("magenta") },
   },
 }
 
@@ -129,7 +130,7 @@ gls.left[11] = {
 gls.left[12] = {
   DiagnosticSeperator = {
     provider = diagnosticSeperator,
-    highlight = { c.Color("purple"), c.Color("act1") },
+    highlight = { c.Color("magenta"), c.Color("act1") },
   },
 }
 gls.left[13] = {
@@ -145,6 +146,7 @@ gls.left[14] = {
   GitSeperatorLeft = {
     provider = gitSeperatorLeft,
     condition = u.buffer_not_empty,
+    highlight = { c.Color("magenta"), c.Color("act1") },
   },
 }
 gls.left[15] = {
@@ -152,7 +154,7 @@ gls.left[15] = {
     provider = diffAdd,
     condition = u.checkwidth,
     icon = " " .. i.diff.Add .. " ",
-    highlight = { c.Color("green"), c.Color("purple") },
+    highlight = { c.Color("green"), c.Color("magenta") },
   },
 }
 gls.left[16] = {
@@ -160,7 +162,7 @@ gls.left[16] = {
     provider = diffModified,
     condition = u.checkwidth,
     icon = " " .. i.diff.Modified .. " ",
-    highlight = { c.Color("orange"), c.Color("purple") },
+    highlight = { c.Color("orange"), c.Color("magenta") },
   },
 }
 gls.left[17] = {
@@ -168,7 +170,7 @@ gls.left[17] = {
     provider = diffRemove,
     condition = u.checkwidth,
     icon = " " .. i.diff.Remove .. " ",
-    highlight = { c.Color("red"), c.Color("purple") },
+    highlight = { c.Color("red"), c.Color("magenta") },
   },
 }
 gls.left[18] = {
@@ -184,41 +186,44 @@ gls.left[19] = {
       return "  " .. gps.get_location()
     end,
     condition = gps.is_available,
-    highlight = { c.Color("act1"), c.Color("DarkGoldenrod2") },
+    highlight = { c.Color("act1"), c.Color("vimode") },
   },
 }
 
 gls.right[1] = {
+  ViModeSeperatorAlt = {
+    provider = function() return i.slant.Right end,
+    highlight = { c.Color("magenta"), c.Color("vimode") },
+  },
+}
+
+gls.right[2] = {
   FileFormat = {
-    provider = fileFormat,
-    highlight = { c.Color("base"), c.Color("purple") },
-    separator = i.slant.Left,
-    separator_highlight = function()
-      return { c.Color("purple"), c.Color("vimode") }
-    end,
+    provider = function() return "  " .. fileFormat() end,
+    highlight = { c.Color("base"), c.Color("magenta") },
     event = "ModeChanged",
   },
 }
-gls.right[2] = {
+gls.right[3] = {
   LineInfo = {
     provider = lineColumn,
     separator = " | ",
-    separator_highlight = { c.Color("base"), c.Color("purple") },
-    highlight = { c.Color("base"), c.Color("purple") },
-  },
-}
-gls.right[3] = {
-  PerCent = {
-    provider = linePercent,
-    separator = i.slant.Left,
-    separator_highlight = { c.Color("act1"), c.Color("purple") },
-    highlight = { c.Color("base"), c.Color("act1") },
+    separator_highlight = { c.Color("base"), c.Color("magenta") },
+    highlight = { c.Color("base"), c.Color("magenta") },
   },
 }
 gls.right[4] = {
+  PerCent = {
+    provider = linePercent,
+    separator = i.slant.Left,
+    separator_highlight = { c.Color("act1"), c.Color("magenta") },
+    highlight = { c.Color("base"), c.Color("act1") },
+  },
+}
+gls.right[5] = {
   ScrollBar = {
     provider = scrollBar,
-    highlight = { c.Color("DarkGoldenrod2"), c.Color("purple") },
+    highlight = { c.Color("DarkGoldenrod2"), c.Color("magenta") },
   },
 }
 
@@ -226,8 +231,8 @@ gls.short_line_left[1] = {
   BufferTypeAlt = {
     provider = fileTypeName,
     separator = i.slant.Right,
-    separator_highlight = { c.Color("purple"), c.Color("DarkGoldenrod2") },
-    highlight = { c.Color("base"), c.Color("purple") },
+    separator_highlight = { c.Color("magenta"), c.Color("DarkGoldenrod2") },
+    highlight = { c.Color("base"), c.Color("magenta") },
   },
 }
 
@@ -252,7 +257,7 @@ gls.short_line_right[1] = {
   BufferIconAlt = {
     provider = bufferIcon,
     separator = i.slant.Left,
-    separator_highlight = { c.Color("purple"), c.Color("bg") },
-    highlight = { c.Color("base"), c.Color("purple") },
+    separator_highlight = { c.Color("magenta"), c.Color("bg") },
+    highlight = { c.Color("base"), c.Color("magenta") },
   },
 }
