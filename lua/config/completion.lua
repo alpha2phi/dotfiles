@@ -21,25 +21,29 @@ function config.setup()
 
   cmp.setup({
     formatting = {
-      format = function(entry, vim_item)
-        -- fancy icons and a name of kind
-        vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
-        -- set a name for each source
-        vim_item.menu = ({
-          copilot = "[AI]",
-          nvim_lsp = "[LSP]",
-          treesitter = "[TS]",
-          vsnip = "[VSnip]",
-          buffer = "[Buffer]",
-          look = "[Look]",
-          path = "[Path]",
-          spell = "[Spell]",
-          calc = "[Calc]",
-          emoji = "[Emoji]",
-          nvim_lua = "[Lua]",
-        })[entry.source.name]
-        return vim_item
-      end,
+      format = require "lspkind".cmp_format({
+        mode = "symbol_text",
+        maxwidth = 50,
+      }),
+      -- function(entry, vim_item)
+      --   -- fancy icons and a name of kind
+      --   vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+      --   -- set a name for each source
+      --   vim_item.menu = ({
+      --     copilot = "[AI]",
+      --     nvim_lsp = "[LSP]",
+      --     treesitter = "[TS]",
+      --     vsnip = "[VSnip]",
+      --     buffer = "[Buffer]",
+      --     look = "[Look]",
+      --     path = "[Path]",
+      --     spell = "[Spell]",
+      --     calc = "[Calc]",
+      --     emoji = "[Emoji]",
+      --     nvim_lua = "[Lua]",
+      --   })[entry.source.name]
+      --   return vim_item
+      -- end,
     },
     mapping = {
       ["<Tab>"] = cmp.mapping(function(fallback)
