@@ -1,7 +1,7 @@
 ---@diagnostic disable:undefined-global
-local config = {}
+local M = {}
 
-function config.setup()
+function M.setup()
   local opts = {
     log_level = "error",
     auto_session_enable_last_session = false,
@@ -19,7 +19,7 @@ function config.setup()
 
   vim.defer_fn(function()
     require("auto-session").setup(opts)
-  end, 300)
+  end, 1000)
 end
 
-return config
+return M
