@@ -12,6 +12,8 @@ local my_servers = {
   diagnostic = "efm",
   html = "html",
   graphql = "graphql",
+  python = "pyright",
+  tailwind = "tailwindcss"
 }
 
 --Some Diagnostic Icons
@@ -19,12 +21,17 @@ vim.fn.sign_define("LspDiagnosticsSignError", { text = "✘", numhl = "LspDiagno
 vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", numhl = "LspDiagnosticsDefaultWarning" })
 vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "", numhl = "LspDiagnosticsDefaultInformation" })
 vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", numhl = "LspDiagnosticsDefaultHint" })
+vim.fn.sign_define("DiagnosticSignError", { text = "✘", numhl = "LspDiagnosticsDefaultError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "", numhl = "LspDiagnosticsDefaultWarning" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "", numhl = "LspDiagnosticsDefaultInformation" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "", numhl = "LspDiagnosticsDefaultHint" })
 
-for i, server in pairs(my_servers) do
+for _, server in pairs(my_servers) do
   if server == "jsonls"
       or server == "cssls"
       or server == "cssmodules_ls"
       or server == "sumneko_lua"
+      or server == "pyright"
   -- or server == "diagnosticls"
   -- or server == "eslint"
   then

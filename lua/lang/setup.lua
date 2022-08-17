@@ -139,13 +139,38 @@ function setup.tsserver()
   return opts
 end
 
+function setup.pyright()
+  local opts = {
+    capabilities = capabilities,
+    handlers = {
+      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+      ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+    },
+    on_attach = on_attach.python,
+    settings = {
+      format = { enable = true },
+      pyright = {
+        disableOrganizeImports = false,
+        analysis = {
+          useLibraryCodeForTypes = true,
+          autoSearchPaths = true,
+          diagnosticMode = "workspace",
+          autoImportCompletions = true,
+        }
+      }
+    }
+  }
+
+  return opts
+end
+
 function setup.sumneko_lua()
   local opts = require("lua-dev").setup({
     library = { vimruntime = true, types = true, plugins = true },
     lspconfig = {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
-        on_attach.generic(client, bufnr)
+        on_attach.lua(client, bufnr)
         lsp_format.on_attach(client, bufnr)
       end,
       cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
@@ -258,6 +283,7 @@ function setup.efm()
 
   local stylelint = require("efmls-configs.linters.stylelint")
   local eslint = require("efmls-configs.linters.eslint_d")
+  eslint.lintCommand = eslint.lintCommand .. " --rule 'prettier/prettier: off'"
   -- local luacheck = require("efmls-configs.linters.luacheck")
   local prettier = {
     formatCommand = string.format('%s --stdin --stdin-filepath ${INPUT}' ..
@@ -310,7 +336,7 @@ end
 function setup.generic()
   local opts = {
     capabilities = capabilities,
-    on_attach = on_attach.minimal,
+    on_attach = on_attach.generic,
     settings = {
       format = { enable = false }, -- this will enable formatting
       -- root_dir = root_pattern("tsconfig.json", ".eslintrc.json", "package.json", ".git"),

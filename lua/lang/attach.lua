@@ -8,6 +8,7 @@ end
 
 function on_attach.generic(client, bufnr)
   on_attach.minimal(client, bufnr)
+  require("nvim-navic").attach(client, bufnr)
   -- Set autocommands conditional on server_capabilities
   if client.server_capabilities.document_highlight then
     vim.api.nvim_exec(
@@ -24,6 +25,37 @@ function on_attach.generic(client, bufnr)
       false
     )
   end
+
+  if client.server_capabilities.colorProvider then
+    -- Attach document colour support
+    require("document-color").buf_attach(bufnr)
+  end
+end
+
+function on_attach.python(client, bufnr)
+  on_attach.generic(client, bufnr)
+
+  require("lsp_signature").on_attach({
+    fix_pos             = true,
+    always_trigger      = true,
+    extra_trigger_chars = { "(", "," },
+    transparency        = 10,
+    toggle_key          = "<C-k>",
+    doc_lines           = 21,
+  }, bufnr)
+end
+
+function on_attach.lua(client, bufnr)
+  on_attach.generic(client, bufnr)
+
+  require("lsp_signature").on_attach({
+    fix_pos             = true,
+    always_trigger      = true,
+    extra_trigger_chars = { "(", "," },
+    transparency        = 10,
+    toggle_key          = "<C-k>",
+    doc_lines           = 21,
+  }, bufnr)
 end
 
 function on_attach.tsserver(client, bufnr)
@@ -33,8 +65,8 @@ function on_attach.tsserver(client, bufnr)
     fix_pos             = true,
     always_trigger      = true,
     extra_trigger_chars = { "(", "," },
-    transparency        = 30,
-    toggle_key          = "<A-k>",
+    transparency        = 10,
+    toggle_key          = "<C-k>",
     doc_lines           = 21,
   }, bufnr)
 end
