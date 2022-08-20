@@ -289,9 +289,41 @@ nest.applyKeymaps({
       {
         "g",
         {
-          { "d", "<cmd>DiffviewOpen<CR>" },
-          { "D", "<cmd>DiffviewFileHistory %<CR>" },
-          { "R", "<cmd>DiffviewRefresh<CR>" },
+          { "@", "<Cmd>GBrowse<CR>" },
+          { "<Del>", "<Cmd>Gitsigns toggle_deleted<CR>" },
+          { "\"", "<Cmd>Telescope git_stash<CR>" },
+          { "?", "<Cmd>Telescope git_status<CR>" },
+          { "!", {
+            { "a", "<Cmd>Gwrite<CR>" },
+            { "d", "<Cmd>GDelete<CR>" },
+          } },
+          { "b", "<Cmd>Telescope git_branches<CR>" },
+          { "c", {
+            { ".", "<Cmd>Telescope git_bcommits<CR>" },
+            { "*", "<Cmd>Telescope git_commits<CR>" },
+          } },
+          { "d", {
+            { "*", "<cmd>DiffviewOpen<CR>" },
+            { ".", "<cmd>DiffviewFileHistory %<CR>" },
+            { "R", "<cmd>DiffviewRefresh<CR>" },
+            { "f", "<cmd>DiffviewFocusFiles<CR>" },
+            { "t", "<cmd>DiffviewToggleFiles<CR>" },
+          } },
+          { "D", "<cmd>DiffviewClose<CR>" },
+          { "g", "<Cmd>Neogit<CR>" },
+          { "h", {
+            { "s", "<cmd>Gitsigns stage_hunk<CR>" },
+            { "S", "<cmd>Gitsigns undo_stage_hunk<CR>" },
+            { "p", "<cmd>Gitsigns preview_hunk<CR>" },
+          } },
+          { "s", {
+            { ".", "<cmd>Gitsigns stage_hunk<CR>" },
+            { "*", "<cmd>Gitsigns stage_buffer<CR>" },
+          } },
+          { "S", {
+            { ".", "<cmd>Gitsigns undo_stage_hunk<CR>" },
+            { "*", "<cmd>Gitsigns reset_buffer_index 0<CR>" },
+          } },
           {
             "y",
             {
