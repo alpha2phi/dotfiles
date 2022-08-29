@@ -1,21 +1,29 @@
 --@diagnostic disable: undefined-global
-vim.cmd([[packadd packer.nvim]])
-
-return require("packer").startup({
+require("packer").startup(
   function(use)
     use({ "wbthomason/packer.nvim" })
-
-    use({ "Olical/aniseed" })
-    use({ "junegunn/fzf", run = "-> fzf#install()" })
-    use({ "junegunn/fzf.vim" })
-    use({ "tami5/sqlite.lua" })
-    use({ "chrisbra/unicode.vim" })
-    use({ "editorconfig/editorconfig-vim" })
-    use({ "wakatime/vim-wakatime" })
 
     use({ "nvim-lua/plenary.nvim" })
     use({ "stevearc/dressing.nvim" })
     use({ "nvim-lua/popup.nvim" })
+    use({ "Olical/aniseed" })
+    use({ "tami5/sqlite.lua" })
+    use({ "rktjmp/lush.nvim" })
+    use {
+      "max397574/colortils.nvim",
+      cmd = "Colortils",
+      config = function()
+        require("colortils").setup()
+      end,
+    }
+    -- @TODO double check if something depends on fzf and remove it, I got telescope already
+    -- use({ "junegunn/fzf", run = "-> fzf#install()" })
+    -- use({ "junegunn/fzf.vim" })
+
+    use({ "chrisbra/unicode.vim" })
+    use({ "editorconfig/editorconfig-vim" })
+    use({ "wakatime/vim-wakatime" })
+
     use({
       "ellisonleao/glow.nvim",
       config = function()
@@ -147,6 +155,7 @@ return require("packer").startup({
       end,
     })
 
+    use { 'tversteeg/registers.nvim' }
     -- ui
     use {
       "jiaoshijie/undotree",
@@ -252,23 +261,6 @@ return require("packer").startup({
               vim.keymap.set(mode, l, r, opts)
             end
 
-            -- Navigation
-            map("n", "[h", "&diff ? '[h' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
-            map("n", "]h", "&diff ? ']h' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
-
-            -- Actions
-            map({ "n", "v" }, "<leader>hs.", ":Gitsigns stage_hunk<CR>")
-            map({ "n", "v" }, "<leader>hr.", ":Gitsigns reset_hunk<CR>")
-            map("n", "<leader>hr*", gs.reset_buffer)
-            map("n", "<leader>hs*", gs.stage_buffer)
-            map("n", "<leader>hS.", gs.undo_stage_hunk)
-            map("n", "<leader>hp", gs.preview_hunk)
-            map("n", "<leader>hd", gs.diffthis)
-            map("n", "<leader>hD", function()
-              gs.diffthis("~")
-            end)
-            map("n", "<leader>tgd", gs.toggle_deleted)
-
             -- Text object
             map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
           end,
@@ -301,6 +293,7 @@ return require("packer").startup({
       'kevinhwang91/nvim-ufo',
       requires = 'kevinhwang91/promise-async',
       config = function()
+        vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep:|,foldclose:]]
         vim.o.foldcolumn = '1'
         vim.o.foldlevel = 99
         vim.o.foldlevelstart = 99
@@ -425,14 +418,13 @@ return require("packer").startup({
     -- })
     -- Color
     -- colorschemes
-    use({ "rktjmp/lush.nvim" })
     use({ "savq/melange" })
     use({
       "/Users/joehannes/.local/git/joehannes-ux/lush-jsx.nvim",
       config = function()
         vim.g.lush_jsx_contrast_dark = "hard"
         vim.g.lush_jsx_contrast_light = "hard"
-        require("lush")(require("lush_jsx").setup({
+        require("lush_jsx").setup({
           plugins = {
             "cmp", -- nvim-cmp
             "gitsigns",
@@ -456,7 +448,7 @@ return require("packer").startup({
             "viml",
             "xml",
           },
-        }))
+        })
       end
     })
     use({ 'Everblush/everblush.nvim', as = 'everblush' })
@@ -493,7 +485,7 @@ return require("packer").startup({
         require("themer").setup({
           styles = {
             comment = {},
-            ["function"] = { style = "italic,bold" },
+            ["function"] = { style = "italic" },
             functionbuiltin = { style = "italic,bold" },
             operator = { style = "bold" },
             variable = { style = "italic" },
@@ -574,10 +566,10 @@ return require("packer").startup({
         })
       end,
     })
-    use({
-      "nvim-telescope/telescope-fzf-native.nvim",
-      run = "make",
-    })
+    -- use({
+    --   "nvim-telescope/telescope-fzf-native.nvim",
+    --   run = "make",
+    -- })
 
     -- use { 'nvim-telescope/telescope-packer.nvim ' }
     -- use({ "nvim-telescope/telescope-snippets.nvim" })
@@ -621,7 +613,7 @@ return require("packer").startup({
 
     --         require('hover.providers.lsp')
     --         -- require('hover.providers.gh')
-    --         -- require('hover.providers.man')
+    --         require('hover.providers.man')
     --         require('hover.providers.dictionary')
     --       end,
     --       preview_opts = {
@@ -751,7 +743,7 @@ return require("packer").startup({
     -- })
     use({ "mhinz/vim-grepper" })
     use({
-      "onsails/diaglist.nvim",
+      "joehannes-os/diaglist.nvim",
       config = function()
         require("diaglist").init({
           debug = false,
@@ -760,25 +752,62 @@ return require("packer").startup({
         })
       end,
     })
+    use({
+      "stevearc/qf_helper.nvim",
+      config = function()
+        require 'qf_helper'.setup({
+          prefer_loclist = true, -- Used for QNext/QPrev (see Commands below)
+          sort_lsp_diagnostics = true, -- Sort LSP diagnostic results
+          quickfix = {
+            autoclose = true, -- Autoclose qf if it's the only open window
+            default_bindings = true, -- Set up recommended bindings in qf window
+            default_options = true, -- Set recommended buffer and window options
+            max_height = 10, -- Max qf height when using open() or toggle()
+            min_height = 1, -- Min qf height when using open() or toggle()
+            track_location = 'true', -- 'cursor', -- Keep qf updated with your current location
+            -- Use `true` to update position as well
+          },
+          loclist = { -- The same options, but for the loclist
+            autoclose = true,
+            default_bindings = true,
+            default_options = true,
+            max_height = 10,
+            min_height = 1,
+            track_location = 'true',
+          },
+        })
+      end
+    })
     -- use({
-    --   "ten3roberts/qf.nvim",
+    --   "https://gitlab.com/yorickpeterse/nvim-pqf.git",
+    --   config = function()
+    --     require("pqf").setup()
+    --   end,
+    -- })
+    -- use({
+    --   "kevinhwang91/nvim-bqf",
+    --   config = function()
+    --     require("config/bqf").setup()
+    --   end,
+    -- })
+    -- use({
+    --   "joehannes-os/qf.nvim",
     --   config = function()
     --     require("qf").setup({
     --       l = {
-    --         auto_close = true, -- Automatically close location/quickfix list if empty
+    --         auto_close = false, -- Automatically close location/quickfix list if empty
     --         auto_follow = "nearest", -- Follow current entry, possible values: prev,next,nearest, or false to disable
     --         auto_follow_limit = 21, -- Do not follow if entry is further away than x lines
     --         follow_slow = true, -- Only follow on CursorHold
     --         auto_open = true, -- Automatically open list on QuickFixCmdPost
     --         auto_resize = true, -- Auto resize and shrink location list if less than `max_height`
     --         max_height = 10, -- Maximum height of location/quickfix list
-    --         min_height = 5, -- Minimum height of location/quickfix list
+    --         min_height = 3, -- Minimum height of location/quickfix list
     --         wide = false, -- Open list at the very bottom of the screen, stretching the whole width.
     --         number = false, -- Show line numbers in list
     --         relativenumber = false, -- Show relative line numbers in list
-    --         unfocus_close = true, -- Close list when window loses focus
+    --         unfocus_close = false, -- Close list when window loses focus
     --         focus_open = true, -- Auto open list on window focus if it contains items
-    --         close_other = false,
     --       },
     --       -- Quickfix list configuration
     --       c = {
@@ -786,38 +815,25 @@ return require("packer").startup({
     --         auto_follow = "nearest", -- Follow current entry, possible values: prev,next,nearest, or false to disable
     --         auto_follow_limit = 21, -- Do not follow if entry is further away than x lines
     --         follow_slow = true, -- Only follow on CursorHold
-    --         auto_open = true, -- Automatically open list on QuickFixCmdPost
+    --         auto_open = false, -- Automatically open list on QuickFixCmdPost
     --         auto_resize = true, -- Auto resize and shrink location list if less than `max_height`
     --         max_height = 10, -- Maximum height of location/quickfix list
-    --         min_height = 5, -- Minimum height of location/quickfix list
+    --         min_height = 3, -- Minimum height of location/quickfix list
     --         wide = true, -- Open list at the very bottom of the screen, stretching the whole width.
     --         number = false, -- Show line numbers in list
     --         relativenumber = false, -- Show relative line numbers in list
     --         unfocus_close = false, -- Close list when window loses focus
-    --         focus_open = true, -- Auto open list on window focus if it contains items
-    --         close_other = false,
+    --         focus_open = false, -- Auto open list on window focus if it contains items
     --       },
     --       close_other = false, -- Close location list when quickfix list opens
     --       pretty = true, -- "Pretty print quickfix lists"
     --     })
     --   end,
     -- })
-    -- use({
-    --   "https://gitlab.com/yorickpeterse/nvim-pqf.git",
-    --   config = function()
-    --     require("pqf").setup()
-    --   end,
-    -- })
-    use({
-      "kevinhwang91/nvim-bqf",
-      config = function()
-        require("config/bqf").setup()
-      end,
-    })
     use({
       "blueyed/vim-qf_resize",
       config = function()
-        vim.g.qf_resize_min_height = 3
+        vim.g.qf_resize_min_height = 1
       end,
     })
     -- use({
@@ -935,8 +951,8 @@ return require("packer").startup({
       "abecodes/tabout.nvim",
       config = function()
         require("tabout").setup({
-          tabkey = ";L", -- key to trigger tabout, set to an empty string to disable
-          backwards_tabkey = ";H", -- key to trigger backwards tabout, set to an empty string to disable
+          tabkey = ">>", -- key to trigger tabout, set to an empty string to disable
+          backwards_tabkey = "<<", -- key to trigger backwards tabout, set to an empty string to disable
           act_as_tab = false, -- shift content if tab out is not possible
           act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
           enable_backwards = true, -- well ...
@@ -1052,9 +1068,7 @@ return require("packer").startup({
     -- }
     use({
       "simrat39/symbols-outline.nvim",
-      config = function()
-        require("config/symbols_outline")
-      end,
+      config = require("config/symbols_outline").setup
     })
     -- aerial is an lsp-outline
     -- use({
@@ -1240,7 +1254,22 @@ return require("packer").startup({
         require("neogit").setup({ integrations = { diffview = true } })
       end,
     })
-
+    use { 'akinsho/git-conflict.nvim', tag = "*", config = function()
+      require('git-conflict').setup({
+        default_mappings = true, -- disable buffer local mapping created by this plugin
+        disable_diagnostics = true, -- This will disable the diagnostics in a buffer whilst it is conflicted
+        highlights = { -- They must have background color, otherwise the default color will be used
+          incoming = 'DiffText',
+          current = 'DiffAdd',
+        }
+      })
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'GitConflictDetected',
+        callback = function()
+          vim.notify('Conflict detected in ' .. vim.fn.expand('<afile>'))
+        end
+      })
+    end }
     use({
       "ruifm/gitlinker.nvim",
       requires = "nvim-lua/plenary.nvim",
@@ -1271,7 +1300,6 @@ return require("packer").startup({
         })
       end,
     })
-
     -- Pair Programming
     -- use({ "Floobits/floobits-neovim" })
 
@@ -1535,7 +1563,7 @@ return require("packer").startup({
             },
             -- You can use lua's arbitrary key notation to map special characters
             -- move to end of WORD and enter insert mode after that char
-            [";;"] = "<cmd>stopinsert<cr><cmd>w<cr>W<cmd>startinsert<cr>",
+            -- [";;"] = "<cmd>stopinsert<cr><cmd>w<cr><cmd>normal W<cr><cmd>startinsert<cr>",
             -- [";l"] = "<cmd>stopinsert<cr><cmd>normal f)a<cr>",
             -- [";h"] = "<cmd>stopinsert<cr><cmd>normal F(a<cr>",
             ["<Esc>"] = "<cmd>stopinsert<cr>",
@@ -1560,18 +1588,9 @@ return require("packer").startup({
       "rrethy/vim-hexokinase",
       run = "make hexokinase",
       config = function()
-        vim.cmd([[
-          let g:Hexokinase_highlighters = [ 'sign_column', 'foregroundfull' ]
-        ]])
+        vim.api.nvim_set_var("Hexokinase_highlighters", { "sign_column", "foregroundfull" })
       end,
     })
-    use {
-      "max397574/colortils.nvim",
-      cmd = "Colortils",
-      config = function()
-        require("colortils").setup()
-      end,
-    }
     -- Status line
     use({
       "rebelot/heirline.nvim",
@@ -1594,5 +1613,9 @@ return require("packer").startup({
         require("which-key").setup({})
       end,
     })
-  end,
-})
+
+    if packer_bootstrap then
+      require("packer").sync()
+    end
+  end
+)

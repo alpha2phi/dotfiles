@@ -8,7 +8,7 @@ local indent = 2
 cmd("syntax enable")
 cmd("filetype plugin indent on")
 
-o.qftf = "{info -> v:lua.qftf(info)}"
+o.qftf = "{info -> v:lua..y.ui.qftf(info)}"
 o.termguicolors = true
 o.hidden = true
 o.ignorecase = true
@@ -50,7 +50,7 @@ cmd([[
   set ruler
   set number relativenumber
   set guifont=FiraCode\ Nerd\ Font\ Mono
-  set showtabline=2
+  set showtabline=1
   set laststatus=3
   set directory=/tmp
   set nobackup
@@ -73,31 +73,35 @@ cmd([[
 cmd('let g:Powerline_symbols = "fancy"')
 
 -- Highlight on yank
-cmd([[au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", hlgroup=IncSearch, timeout=300}]])
-
--- this seems like something I don't need any longer
--- cmd([[autocmd FileType qf if (getwininfo(win_getid())[0].loclist != 1) | wincmd J | endif]])
+cmd([[au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", hlgroup="IncSearch", timeout=300}]])
 
 -- https://github.com/mhinz/vim-grepper
 vim.g.grepper = { tools = { "rg", "grep" }, searchreg = 1 }
 vim.api.nvim_create_augroup("MyColorAugroup", { clear = true })
 vim.api.nvim_create_autocmd("ModeChanged", {
   pattern = "*",
-  callback = onModeChanged,
+  callback = my.fn.onModeChanged,
   group = "MyColorAugroup",
 })
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
-  callback = onColorscheme,
+  callback = my.fn.onColorscheme,
   group = "MyColorAugroup",
 })
 
-cmd(([[
-    aug Grepper
-        au!
-        au User Grepper ++nested %s
-    aug END
-]]):format([[call setloclist([], 'r', {'context': {'bqf': {'pattern_hl': '\%#' . getreg('/')}}})]]))
+cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
+-- cmd(([[
+--     aug Grepper
+--         au!
+--         au User Grepper ++nested %s
+--     aug END
+-- ]]):format([[call setloclist([], 'r', {'context': {'bqf': {'pattern_hl': '\%#' . getreg('/')}}})]]))
 
 -- Auto format
 vim.api.nvim_exec(
@@ -192,18 +196,12 @@ vim.api.nvim_exec(
   false
 )
 
+cmd("let g:python_host_prog = '" .. my.fs.path.python2:gsub("%s+", "") .. "'")
+cmd("let g:python3_host_prog = '" .. my.fs.path.python3:gsub("%s+", "") .. "'")
+
+cmd("set termguicolors")
 cmd([[
-  let g:python_host_prog = "/usr/bin/python2"
-  let g:python3_host_prog = "python"
-
-	let g:minimap_width = 21
-	let g:minimap_auto_start = 0
-	let g:minimap_auto_start_win_enter = 0
-	let g:minimap_git_colors = 1
-
-  set termguicolors
-
-	function! ToggleQuickFix()
+  function! ToggleQuickFix()
     if empty(filter(getwininfo(), 'v:val.quickfix'))
       copen
     else
