@@ -88,12 +88,12 @@ function config.setup()
         filetypes = { "png", "webp", "jpg", "jpeg", "mp4", "webm", "pdf" },
         find_cmd = "rg",
       },
-      fzf = {
-        fuzzy = true,
-        override_generic_sorter = true,
-        override_file_sorter = true,
-        case_mode = "smart_case",
-      },
+      -- fzf = {
+      --   fuzzy = true,
+      --   override_generic_sorter = true,
+      --   override_file_sorter = true,
+      --   case_mode = "smart_case",
+      -- },
       project = {
         base_dirs = {
           { path = "~/.config/nvim" },
@@ -146,7 +146,7 @@ function config.setup()
     },
   })
 
-  telescope.load_extension("fzf")
+  -- telescope.load_extension("fzf")
   telescope.load_extension("gh")
   telescope.load_extension("node_modules")
   telescope.load_extension("session-lens")
