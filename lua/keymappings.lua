@@ -12,8 +12,8 @@ nest.applyKeymaps({
   { "<A-l>", [[<cmd>lua require("tmux").resize_right()<cr>]] },
   { "<A-j>", [[<cmd>lua require("tmux").resize_down()<cr>]] },
   { "<A-k>", [[<cmd>lua require("tmux").resize_top()<cr>]] },
-  { "<C-p>", '<cmd>normal! "0p<CR>' },
-  { "<C-P>", '<cmd>normal! "0P<CR>' },
+  { "<Esc>p", '<cmd>normal! "0p<CR>' },
+  { "<Esc>P", '<cmd>normal! "0P<CR>' },
   {
     "[",
     {
@@ -21,11 +21,13 @@ nest.applyKeymaps({
       { "B", "<Cmd>bprevious<CR>" },
       { "d", "<cmd>lua vim.diagnostic.goto_prev()<CR>" },
       { "e", "<Plug>(ultest-prev-fail)" },
+      { "h", "<cmd>Gitsigns prev_hunk<CR>" },
       {
         "l",
         {
-          { "*", "<cmd>lua require'qf'.above('c')<CR>" },
-          { ".", "<cmd>lua require'qf'.above('l')<CR>" },
+          { "<CR>", "<cmd>QPrev!<CR>" },
+          { "*", "<cmd>QFPrev!<CR>" },
+          { ".", "<cmd>LLPrev!<CR>" },
         },
       },
       {
@@ -44,6 +46,7 @@ nest.applyKeymaps({
           { "9", "<Plug>(Marks-prev-bookmark9)" },
         },
       },
+      { "q", "<cmd>QPrev!<CR>" },
       { "t", "<Cmd>FloatermPrev<CR>" },
       { "w", "<Cmd>tabprevious<CR>" },
     },
@@ -55,11 +58,13 @@ nest.applyKeymaps({
       { "B", "<Cmd>bnext<CR>" },
       { "d", "<cmd>lua vim.diagnostic.goto_next()<CR>" },
       { "e", "<Plug>(ultest-next-fail)" },
+      { "h", "<cmd>Gitsigns next_hunk<CR>" },
       {
         "l",
         {
-          { "*", "<cmd>lua require'qf'.below('c')<CR>" },
-          { ".", "<cmd>lua require'qf'.below('l')<CR>" },
+          { "<CR>", "<cmd>QNext!<CR>" },
+          { "*", "<cmd>QFNext!<CR>" },
+          { ".", "<cmd>LLNext!<CR>" },
         },
       },
       {
@@ -78,6 +83,7 @@ nest.applyKeymaps({
           { "9", "<Plug>(Marks-next-bookmark9)" },
         },
       },
+      { "q", "<cmd>QNext!<CR>" },
       { "t", "<Cmd>FloatermNext<CR>" },
       { "w", "<Cmd>tabnext<CR>" },
     },
@@ -107,6 +113,7 @@ nest.applyKeymaps({
       { "D", "<Cmd>lua vim.lsp.buf.definition()<CR>" },
       { "j", "<C-I>" },
       { "k", "<C-O>" },
+      { "K", "<Cmd>lua require('hover').hover_select()<CR>" },
       { "n",
         "<cmd>lua require('neoscroll').scroll(vim.api.nvim_win_get_height(0) - 7, true, 250, 'sine')<cr><cmd>silent! call repeat#set('gn', v:count)<cr><cmd>lua vim.api.nvim_buf_set_keymap(0, 'n', ',', 'gN', {})<cr>" },
       { "N",
@@ -158,7 +165,7 @@ nest.applyKeymaps({
               { "*", "<Cmd>RestoreSession<CR>" },
               {
                 ".",
-                ':lua vim.api.nvim_command("RestoreSession " .. vim.fn.stdpath("data") .. "/sessions/" .. require("utils").Git.get_branch():gsub("/","__"))<CR>',
+                '<Cmd>lua vim.api.nvim_command("RestoreSession " .. vim.fn.stdpath("data") .. "/sessions/" .. my.git.get_branch():gsub("/","__"))<CR>',
               },
             },
           },
@@ -173,7 +180,7 @@ nest.applyKeymaps({
               { "*", "<Cmd>SaveSession<CR>" },
               {
                 ".",
-                ':lua vim.api.nvim_command("SaveSession " .. vim.fn.stdpath("data") .. "/sessions/" .. require("utils").Git.get_branch():gsub("/","__"))<CR>',
+                '<Cmd>lua vim.api.nvim_command("SaveSession " .. vim.fn.stdpath("data") .. "/sessions/" .. my.git.get_branch():gsub("/","__"))<CR>',
               },
             },
           },
@@ -235,6 +242,7 @@ nest.applyKeymaps({
           { "k", "<Cmd>Telescope help_tags<CR>" },
           { "m*", "<Cmd>Telescope vim_bookmarks all<CR>" },
           { "m.", "<Cmd>Telescope vim_bookmarks current_file<CR>" },
+          { "M", "<Cmd>Telescope marks<CR>" },
           { "n", "<Cmd>Telescope node_modules list<CR>" },
           { "p", ":lua require'telescope'.extensions.project.project{}<CR>" },
           { "r", "<Cmd>Telescope lsp_references<CR>" },
@@ -295,7 +303,12 @@ nest.applyKeymaps({
           { "?", "<Cmd>Telescope git_status<CR>" },
           { "!", {
             { "a", "<Cmd>Gwrite<CR>" },
-            { "d", "<Cmd>GDelete<CR>" },
+            { "c", "<Cmd>Git commit<CR>" },
+            { "C", "<Cmd>Git commit --amend<CR>" },
+            { "d!", "<Cmd>GDelete<CR>" },
+            { "f", "<Cmd>Git fetch<CR>" },
+            { "p", "<Cmd>Git pull<CR>" },
+            { "P", "<Cmd>Git push<CR>" },
           } },
           { "b", "<Cmd>Telescope git_branches<CR>" },
           { "c", {
@@ -325,19 +338,19 @@ nest.applyKeymaps({
             { "*", "<cmd>Gitsigns reset_buffer_index 0<CR>" },
           } },
           {
-            "y",
-            {
-              ".",
-              '<cmd>lua require"gitlinker".get_buf_range_url("n")<cr>',
-            },
-            {
-              "*",
-              '<cmd>lua require"gitlinker".get_repo_url()<cr>',
-            },
+            "y", {
+              {
+                ".",
+                '<cmd>lua require"gitlinker".get_buf_range_url("n")<cr>'
+              },
+              {
+                "*",
+                '<cmd>lua require"gitlinker".get_repo_url()<cr>'
+              }
+            }
           },
         },
       },
-      { "G", "<Cmd>Neogit<CR>" },
       {
         "j",
         {
@@ -359,6 +372,36 @@ nest.applyKeymaps({
           { ".", "<Cmd>DashWord<CR>" },
         },
       },
+      { "l", {
+        {
+          ".", {
+            { "<CR>", "<Cmd>LLOpen!<CR>" },
+            { "d", "<Cmd>lua require('diaglist').populate_llist()<CR><cmd>LLOpen!<CR>" },
+            { "g", {
+              { ".",
+                "<Cmd>lua require('gitsigns.actions').setqflist(0, { open = false, use_location_list = true })<CR><cmd>LLOpen!<CR>" },
+              { "$",
+                "<Cmd>lua require('gitsigns.actions').setqflist('attached', { open = false, use_location_list = true })<CR><cmd>LLOpen!<CR>" },
+              { "*",
+                "<Cmd>lua require('gitsigns.actions').setqflist('all', { open = false, use_location_list = true })<CR><cmd>LLOpen!<CR>" },
+            } },
+          }
+        },
+        {
+          "*", {
+            { "<CR>", "<Cmd>QFOpen!<CR>" },
+            { "d", "<Cmd>lua require('diaglist').populate_qflist()<CR><cmd>QFOpen!<CR>" },
+            { "g", {
+              { ".",
+                "<Cmd>lua require('gitsigns.actions').setqflist(0, { open = false, use_location_list = false })<CR><cmd>QFOpen!<CR>" },
+              { "$",
+                "<Cmd>lua require('gitsigns.actions').setqflist('attached', { open = false, use_location_list = false})<CR><cmd>QFOpen!<CR>" },
+              { "*",
+                "<Cmd>lua require('gitsigns.actions').setqflist('all', { open = false, use_location_list = false })<CR><cmd>QFOpen!<CR>" },
+            } },
+          }
+        },
+      } },
       {
         "m",
         {
@@ -397,7 +440,7 @@ nest.applyKeymaps({
               -- { "o", "<Cmd>lua require('aerial').focus()<CR>" },
             },
           },
-          { "c", "<Cmd>lua toggle_bg_mode()<CR>" },
+          { "c", "<Cmd>lua my.toggle_bg_mode()<CR>" },
           { "C", "<Cmd>TSContextToggle<CR>" },
           -- { "D", ":lua require('dapui').toggle()" },
           { "e", "<Plug>(ultest-summary-toggle)" },
@@ -412,8 +455,8 @@ nest.applyKeymaps({
           {
             "l",
             {
-              { "*", ":call ToggleDiagFix()<CR>" },
-              { ".", ":call ToggleDiagLoc()<CR>" },
+              { "*", "<Cmd>QFToggle!<CR>" },
+              { ".", "<Cmd>LLToggle!<CR>" },
             },
           },
           { "m", "<Plug>(Marks-toggle)" },
@@ -449,7 +492,7 @@ nest.applyKeymaps({
         },
       },
     },
-  },
+  }
 })
 
 nest.applyKeymaps({
