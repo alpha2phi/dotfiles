@@ -5,7 +5,7 @@ function config.setup()
     show = true,
     handle = {
       text = " ",
-      color = my_vimode_colors[vim.fn.mode()],
+      color = my.color.my.vimode[vim.fn.mode()],
       hide_if_all_visible = true, -- Hides handle if all lines are visible
     },
     marks = {

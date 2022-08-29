@@ -5,27 +5,27 @@ local utils = require("heirline.utils")
 local function setup_colors()
   local dark_mode = vim.opt.background:get() == "dark"
   return {
-    vimode = my_vimode_colors[vim.fn.mode()] or my_vimode_colors["n"],
-    light = my_colors.light,
-    dark = my_colors.dark,
-    current_bg = dark_mode and my_colors.dark or my_colors.light,
-    current_fg = dark_mode and my_colors.light or my_colors.dark,
-    red = my_colors.red,
-    magenta = my_colors.magenta,
-    green = my_colors.green,
-    blue = my_colors.blue,
+    vimode = my.color.my.vimode[vim.fn.mode()] or my.color.my.vimode["n"],
+    light = my.color.my.light,
+    dark = my.color.my.dark,
+    current_bg = dark_mode and my.color.my.dark or my.color.my.light,
+    current_fg = dark_mode and my.color.my.light or my.color.my.dark,
+    red = my.color.my.red,
+    magenta = my.color.my.magenta,
+    green = my.color.my.green,
+    blue = my.color.my.blue,
     gray = utils.get_highlight("NonText").fg,
-    yellow = my_colors.yellow,
-    orange = my_colors.orange,
-    purple = my_colors.purple,
-    aqua = my_colors.aqua,
-    diag_warn = my_colors.orange,
-    diag_error = my_colors.red,
-    diag_hint = my_colors.yellow,
-    diag_info = my_colors.aqua,
-    git_del = my_colors.red,
-    git_add = my_colors.green,
-    git_change = my_colors.yellow
+    yellow = my.color.my.yellow,
+    orange = my.color.my.orange,
+    purple = my.color.my.purple,
+    aqua = my.color.my.aqua,
+    diag_warn = my.color.my.orange,
+    diag_error = my.color.my.red,
+    diag_hint = my.color.my.yellow,
+    diag_info = my.color.my.aqua,
+    git_del = my.color.my.red,
+    git_add = my.color.my.green,
+    git_change = my.color.my.yellow
   }
 end
 
@@ -260,7 +260,7 @@ local LSPActive = {
   on_click = {
     name = "heirline_LSP",
     callback = function()
-      vim.fn.defer_fn(function()
+      vim.defer_fn(function()
         vim.cmd("LspInfo")
       end, 100)
     end,
@@ -385,7 +385,7 @@ local Git = {
 
   on_click = {
     callback = function(self, minwid, nclicks, button)
-      vim.fn.defer_fn(function()
+      vim.defer_fn(function()
         vim.cmd("Lazygit %:p:h")
       end, 100)
     end,
@@ -736,7 +736,7 @@ local StatusLines = {
   static = {
     mode_color = function(self)
       local mode = conditions.is_active() and vim.fn.mode() or "n"
-      local current_mode_color = my_vimode_colors[mode]
+      local current_mode_color = my.color.my.vimode[mode]
 
       vim.api.nvim_set_hl(0, "StatusLine", { bg = current_mode_color })
       return current_mode_color
@@ -783,7 +783,7 @@ local WinBar = {
     end
   end,
   {
-    hl = { fg = my_colors.dark, bg = my_colors.magenta, force = true },
+    hl = { fg = my.color.my.dark, bg = my.color.my.magenta, force = true },
     Space,
     FileNameBlock,
     Space,
@@ -830,11 +830,11 @@ local WinBar = {
     Space,
   },
   {
-    hl = { fg = my_colors.magenta },
+    hl = { fg = my.color.my.magenta },
     provider = ""
   },
   {
-    hl = { fg = my_colors.dark, bg = my_colors.magenta },
+    hl = { fg = my.color.my.dark, bg = my.color.my.magenta },
     provider = function(self)
       return " #" .. self.winnr
     end
@@ -872,9 +872,9 @@ function M.update()
     self._win_stl = nil
   end)
   vim.api.nvim_set_hl(0, "StatusLine",
-    { bg = my_vimode_colors[vim.fn.mode() or "n"] }
+    { bg = my.color.my.vimode[vim.fn.mode() or "n"] }
   )
-  vim.api.nvim_set_hl(0, "ScrollbarHandle", { bg = my_vimode_colors[vim.fn.mode() or "n"] })
+  vim.api.nvim_set_hl(0, "ScrollbarHandle", { bg = my.color.my.vimode[vim.fn.mode() or "n"] })
 
 end
 
@@ -898,14 +898,6 @@ function M.aucmds()
     pattern = "*",
     callback = M.update,
     group = "Heirline",
-  })
-  vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-    callback = function()
-      vim.opt.winbar = "%{%v:lua.require'heirline'.eval_winbar()%}"
-      vim.api.nvim_exec_autocmds('User', { pattern = 'HeirlineInitWinbar', modeline = false })
-    end,
-    group = "Heirline",
-    desc = "Heirline: set window-local winbar",
   })
 end
 

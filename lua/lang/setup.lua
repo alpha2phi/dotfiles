@@ -253,7 +253,7 @@ end
 
 function setup.efm()
   local efmls = require("efmls-configs")
-  local fs = require("efmls-configs.fs")
+  local efm_fs = require("efmls-configs.fs")
   local root_path = vim.api.nvim_call_function("getcwd", {})
 
   local eslint_cfg_path   = table.foreach({
@@ -263,7 +263,7 @@ function setup.efm()
     ".eslintrc.yml",
     ".eslintrc.json",
   }, function(_, value)
-    return exists(root_path .. "/" .. value) and root_path .. "/" .. value or nil
+    return my.fs.exists(root_path .. "/" .. value) and root_path .. "/" .. value or nil
   end) or root_path .. "/package.json"
   local prettier_cfg_path = table.foreach({
     ".prettierrc",
@@ -277,7 +277,7 @@ function setup.efm()
     ".prettierrc.config.cjs",
     ".prettierrc.toml",
   }, function(_, value)
-    return exists(root_path .. "/" .. value) and root_path .. "/" .. value or nil
+    return my.fs.exists(root_path .. "/" .. value) and root_path .. "/" .. value or nil
   end) or root_path .. "/package.json"
 
 
@@ -288,7 +288,7 @@ function setup.efm()
   local prettier = {
     formatCommand = string.format('%s --stdin --stdin-filepath ${INPUT}' ..
       ' --eslint-config-path ' .. eslint_cfg_path .. ' --config ' .. prettier_cfg_path,
-      fs.executable('prettier-eslint', fs.Scope.NODE)),
+      efm_fs.executable('prettier-eslint', efm_fs.Scope.NODE)),
     formatStdin = true,
   }
 
@@ -336,7 +336,7 @@ end
 function setup.generic()
   local opts = {
     capabilities = capabilities,
-    on_attach = on_attach.generic,
+    on_attach = on_attach.minimal,
     settings = {
       format = { enable = false }, -- this will enable formatting
       -- root_dir = root_pattern("tsconfig.json", ".eslintrc.json", "package.json", ".git"),
