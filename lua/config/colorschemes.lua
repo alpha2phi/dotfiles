@@ -138,7 +138,7 @@ onedarkpro.setup({
     cursorline = true,
     transparency = false, -- Use a transparent background?
     terminal_colors = true,
-    window_unfocussed_color = true,
+    window_unfocused_color = true,
   },
 })
 -- onedarkpro.load("onelight")
