@@ -1,6 +1,6 @@
 local api, fn, cmd, g, ft = vim.api, vim.fn, vim.cmd, vim.g, vim.bo.filetype
 
-local Git = {}
+local M = {}
 
 local function get_dir_contains(path, dirname)
   -- return parent path for specified entry (either file or directory)
@@ -29,7 +29,7 @@ local function get_dir_contains(path, dirname)
     if path == nil then
       path = "."
     end
-    return isdir(path .. "/" .. specified_dir)
+    return my.fs.isdir(path .. "/" .. specified_dir)
   end
 
   -- Set default path to current directory
@@ -52,7 +52,7 @@ local function get_dir_contains(path, dirname)
 end
 
 -- adapted from from clink-completions' git.lua
-function Git.get_root_dir(path)
+function M.get_root_dir(path)
   -- return parent path for specified entry (either file or directory)
   local function pathname(path)
     local prefix = ""
@@ -67,7 +67,7 @@ function Git.get_root_dir(path)
   -- Checks if provided directory contains git directory
   local function has_git_dir(dir)
     local git_dir = dir .. "/.git"
-    if isdir(git_dir) then
+    if my.fs.isdir(git_dir) then
       return git_dir
     end
   end
@@ -96,10 +96,10 @@ function Git.get_root_dir(path)
   return has_git_dir(path)
       or has_git_file(path)
       -- Otherwise go up one level and make a recursive call
-      or (parent_path ~= path and Git.get_root_dir(parent_path) or nil)
+      or (parent_path ~= path and M.get_root_dir(parent_path) or nil)
 end
 
-function Git.check_workspace()
+function M.check_workspace()
   local current_file = fn.expand("%:p")
   if current_file == "" or current_file == nil then
     return false
@@ -112,14 +112,14 @@ function Git.check_workspace()
   else
     current_dir = fn.expand("%:p:h")
   end
-  local result = Git.get_root_dir(current_dir)
+  local result = M.get_root_dir(current_dir)
   if not result then
     return false
   end
   return true
 end
 
-function Git.get_branch()
+function M.get_branch()
   if ft == "help" then
     return
   end
@@ -134,16 +134,16 @@ function Git.get_branch()
     current_dir = fn.expand("%:p:h")
   end
 
-  local _, gitbranch_pwd = pcall(api.nvim_buf_get_var, 0, "gitbranch_pwd")
-  local _, gitbranch_path = pcall(api.nvim_buf_get_var, 0, "gitbranch_path")
-  if gitbranch_path and gitbranch_pwd then
+  local ok_gpwd, gitbranch_pwd = pcall(api.nvim_buf_get_var, 0, "gitbranch_pwd")
+  local ok_gpath, gitbranch_path = pcall(api.nvim_buf_get_var, 0, "gitbranch_path")
+  if ok_gpwd and ok_gpath then
     if gitbranch_path:find(current_dir) and string.len(gitbranch_pwd) ~= 0 then
       return gitbranch_pwd
     end
   end
-  local git_dir = Git.get_root_dir(current_dir)
+  local git_dir = M.get_root_dir(current_dir)
   if not git_dir then
-    return
+    return ""
   end
   local git_root
   if not git_dir:find("/.git") then
@@ -155,7 +155,7 @@ function Git.get_branch()
   -- or something went wrong. The same is when head_file is nil
   local head_file = git_dir and io.open(git_dir .. "/HEAD")
   if not head_file then
-    return
+    return ""
   end
 
   local HEAD = head_file:read()
@@ -165,7 +165,7 @@ function Git.get_branch()
   -- otherwise it is a detached commit
   local branch_name = HEAD:match("ref: refs/heads/(.+)")
   if branch_name == nil then
-    return
+    return ""
   end
 
   api.nvim_buf_set_var(0, "gitbranch_pwd", branch_name)
@@ -174,4 +174,4 @@ function Git.get_branch()
   return branch_name or ""
 end
 
-return Git
+return M
