@@ -128,7 +128,7 @@ function config.setup()
       { name = "npm", keyworld_length = 3 },
       { name = "nvim_lua" },
       { name = "buffer" },
-      { name = "look" },
+      -- { name = "look" },
       { name = "calc" },
       { name = "spell" },
       { name = "emoji" },
