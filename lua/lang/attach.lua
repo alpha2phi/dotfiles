@@ -13,9 +13,9 @@ function on_attach.generic(client, bufnr)
   if client.server_capabilities.document_highlight then
     vim.api.nvim_exec(
       [[
-        hi LspReferenceRead cterm=bold ctermbg=red guibg=my_colors.yellow
-        hi LspReferenceText cterm=bold ctermbg=red guibg=my_colors.yellow
-        hi LspReferenceWrite cterm=bold ctermbg=red guibg=my_colors.yellow
+        hi LspReferenceRead cterm=bold ctermbg=red guibg=yellow
+        hi LspReferenceText cterm=bold ctermbg=red guibg=yellow
+        hi LspReferenceWrite cterm=bold ctermbg=red guibg=yellow
         augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
