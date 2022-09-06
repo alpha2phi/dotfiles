@@ -1,157 +1,190 @@
 ---@diagnostic disable:undefined-global
-local nest = require("nest")
+--p
+--p
 -- local calltree = require("litee.calltree")
 -- @TODO: add vim-repeat to all movement commands, plus remap , or ; everytime to opposite movement
+Apply_keymaps = function(mode, keymaps, lhs)
+  lhs = lhs or ""
 
+  for k, v in ipairs(keymaps) do
+    if not (type(v) == "table") and k > 2 then
+      return
+    elseif type(v) == "table" then
+      if #keymaps > 2 and type(keymaps[1]) == "string" and type(keymaps[2]) == "table" and type(keymaps[3]) == "string" then
+        vim.keymap.set(mode, lhs, "<Nop>", { silent = true, remap = true, noremap = false, desc = keymaps[3] })
+      end
+      Apply_keymaps(mode, v, lhs)
+    elseif type(v) == "string" and k == 1 then
+      lhs = lhs .. v
+    elseif k == 2 and (type(v) == "string" or type(v) == "function") then
+      my.io.map(mode, lhs, v, { desc = (#keymaps > 2) and keymaps[3] or lhs }, (#keymaps > 3) and keymaps[4] or nil)
+    else
+      vim.notify_once("Error in keymapping:" .. mode .. ":<" .. lhs .. ">, <= lhs is a function, should be a string!")
+    end
+  end
+end
 
-nest.applyKeymaps({
-  { "<Del>", '<cmd>lua require("notify").dismiss()<cr>' },
-  { "<Esc><Esc>", "<cmd>nohl<CR>" },
-  { "<CR><CR>", "<Cmd>BResizeZoom<CR>" },
-  { "<A-h>", [[<cmd>lua require("tmux").resize_left()<cr>]] },
-  { "<A-l>", [[<cmd>lua require("tmux").resize_right()<cr>]] },
-  { "<A-j>", [[<cmd>lua require("tmux").resize_down()<cr>]] },
-  { "<A-k>", [[<cmd>lua require("tmux").resize_top()<cr>]] },
-  { "<Esc>p", '<cmd>normal! "0p<CR>' },
-  { "<Esc>P", '<cmd>normal! "0P<CR>' },
+Apply_keymaps('n', {
+  { "<C-h>", '<Cmd>call WinMove("h")<CR>', "left win", "<C-l>" },
+  { "<C-l>", '<Cmd>call WinMove("l")<CR>', "right win", "<C-h>" },
+  { "<C-k>", '<Cmd>call WinMove("k")<CR>', "up win", "<C-j>" },
+  { "<C-j>", '<Cmd>call WinMove("j")<CR>', "down win", "<C-k>" },
+  { "<Del>", '<cmd>lua require("notify").dismiss()<cr>', "dismiss notifications" },
+  { "<CR><Esc>", "<cmd>nohl<CR>", "dismiss hl" },
+  { "<CR><CR>", "<Cmd>BResizeZoom<CR>", "toggle max win" },
+  -- { "<A-h>", [[<cmd>lua require("tmux").resize_left()<cr>]] },
+  -- { "<A-l>", [[<cmd>lua require("tmux").resize_right()<cr>]] },
+  -- { "<A-j>", [[<cmd>lua require("tmux").resize_down()<cr>]] },
+  -- { "<A-k>", [[<cmd>lua require("tmux").resize_top()<cr>]] },
+  { "<CR>p", '<cmd>normal! "0p<CR>', "last y-yanked" },
+  { "<CR>P", '<cmd>normal! "0P<CR>', "last y-yanked" },
   {
     "[",
     {
-      { "b", "<Cmd>BufferLineCyclePrev<CR>" },
-      { "B", "<Cmd>bprevious<CR>" },
-      { "d", "<cmd>lua vim.diagnostic.goto_prev()<CR>" },
-      { "e", "<Plug>(ultest-prev-fail)" },
-      { "h", "<cmd>Gitsigns prev_hunk<CR>" },
+      { "b", "<Cmd>BufferLineCyclePrev<CR>", "buf to left" },
+      { "B", "<Cmd>bprevious<CR>", "prev buf" },
+      { "d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "diag" },
+      { "e", "<Plug>(ultest-prev-fail)", "failed test" },
+      { "h", "<cmd>Gitsigns prev_hunk<CR>", "hunk" },
       {
         "l",
         {
-          { "<CR>", "<cmd>QPrev!<CR>" },
-          { "*", "<cmd>QFPrev!<CR>" },
-          { ".", "<cmd>LLPrev!<CR>" },
+          { "<CR>", "<cmd>QPrev!<CR>", "smart list => item" },
+          { "*", "<cmd>QFPrev!<CR>", "qf list" },
+          { ".", "<cmd>LLPrev!<CR>", "loc list" },
         },
+        options = { desc = "list (qf|loc) => item" }
       },
       {
         "m",
         {
-          { "$", "<Plug>(Marks-prev)" },
-          { "0", "<Plug>(Marks-prev-bookmark0)" },
-          { "1", "<Plug>(Marks-prev-bookmark1)" },
-          { "2", "<Plug>(Marks-prev-bookmark2)" },
-          { "3", "<Plug>(Marks-prev-bookmark3)" },
-          { "4", "<Plug>(Marks-prev-bookmark4)" },
-          { "5", "<Plug>(Marks-prev-bookmark5)" },
-          { "6", "<Plug>(Marks-prev-bookmark6)" },
-          { "7", "<Plug>(Marks-prev-bookmark7)" },
-          { "8", "<Plug>(Marks-prev-bookmark8)" },
-          { "9", "<Plug>(Marks-prev-bookmark9)" },
+          { "$", "<Plug>(Marks-prev)", "mark" },
+          { "0", "<Plug>(Marks-prev-bookmark0)", "bookmark group 0" },
+          { "1", "<Plug>(Marks-prev-bookmark1)", "bookmark group 1" },
+          { "2", "<Plug>(Marks-prev-bookmark2)", "bookmark group 2" },
+          { "3", "<Plug>(Marks-prev-bookmark3)", "bookmark group 3" },
+          { "4", "<Plug>(Marks-prev-bookmark4)", "bookmark group 4" },
+          { "5", "<Plug>(Marks-prev-bookmark5)", "bookmark group 5" },
+          { "6", "<Plug>(Marks-prev-bookmark6)", "bookmark group 6" },
+          { "7", "<Plug>(Marks-prev-bookmark7)", "bookmark group 7" },
+          { "8", "<Plug>(Marks-prev-bookmark8)", "bookmark group 8" },
+          { "9", "<Plug>(Marks-prev-bookmark9)", "bookmark group 9" },
         },
+        options = { desc = "marks|bookmarks" }
       },
-      { "q", "<cmd>QPrev!<CR>" },
-      { "t", "<Cmd>FloatermPrev<CR>" },
-      { "w", "<Cmd>tabprevious<CR>" },
+      { "q", "<cmd>QPrev!<CR>", "smar list => item" },
+      { "t", "<Cmd>FloatermPrev<CR>", "float-term" },
+      { "w", "<Cmd>tabprevious<CR>", "tab/winLayout" },
     },
   },
   {
     "]",
     {
-      { "b", "<Cmd>BufferLineCycleNext<CR>" },
-      { "B", "<Cmd>bnext<CR>" },
-      { "d", "<cmd>lua vim.diagnostic.goto_next()<CR>" },
-      { "e", "<Plug>(ultest-next-fail)" },
-      { "h", "<cmd>Gitsigns next_hunk<CR>" },
+      { "b", "<Cmd>BufferLineCycleNext<CR>", "buf to right" },
+      { "B", "<Cmd>bnext<CR>", "next buf" },
+      { "d", "<cmd>lua vim.diagnostic.goto_next()<CR>", "diag" },
+      { "e", "<Plug>(ultest-next-fail)", "failed test" },
+      { "h", "<cmd>Gitsigns next_hunk<CR>", "hunk" },
       {
         "l",
         {
-          { "<CR>", "<cmd>QNext!<CR>" },
-          { "*", "<cmd>QFNext!<CR>" },
-          { ".", "<cmd>LLNext!<CR>" },
+          { "<CR>", "<cmd>QNext!<CR>", "smart list => item" },
+          { "*", "<cmd>QFNext!<CR>", "qf list" },
+          { ".", "<cmd>LLNext!<CR>", "loc list" },
         },
       },
       {
         "m",
         {
-          { "$", "<Plug>(Marks-next)" },
-          { "0", "<Plug>(Marks-next-bookmark0)" },
-          { "1", "<Plug>(Marks-next-bookmark1)" },
-          { "2", "<Plug>(Marks-next-bookmark2)" },
-          { "3", "<Plug>(Marks-next-bookmark3)" },
-          { "4", "<Plug>(Marks-next-bookmark4)" },
-          { "5", "<Plug>(Marks-next-bookmark5)" },
-          { "6", "<Plug>(Marks-next-bookmark6)" },
-          { "7", "<Plug>(Marks-next-bookmark7)" },
-          { "8", "<Plug>(Marks-next-bookmark8)" },
-          { "9", "<Plug>(Marks-next-bookmark9)" },
+          { "$", "<Plug>(Marks-next)", "mark" },
+          { "0", "<Plug>(Marks-next-bookmark0)", "bookmark group 0" },
+          { "1", "<Plug>(Marks-next-bookmark1)", "bookmark group 1" },
+          { "2", "<Plug>(Marks-next-bookmark2)", "bookmark group 2" },
+          { "3", "<Plug>(Marks-next-bookmark3)", "bookmark group 3" },
+          { "4", "<Plug>(Marks-next-bookmark4)", "bookmark group 4" },
+          { "5", "<Plug>(Marks-next-bookmark5)", "bookmark group 5" },
+          { "6", "<Plug>(Marks-next-bookmark6)", "bookmark group 6" },
+          { "7", "<Plug>(Marks-next-bookmark7)", "bookmark group 7" },
+          { "8", "<Plug>(Marks-next-bookmark8)", "bookmark group 8" },
+          { "9", "<Plug>(Marks-next-bookmark9)", "bookmark group 9" },
         },
+        options = { desc = "marks|bookmarks" }
       },
-      { "q", "<cmd>QNext!<CR>" },
-      { "t", "<Cmd>FloatermNext<CR>" },
-      { "w", "<Cmd>tabnext<CR>" },
+      { "q", "<cmd>QNext!<CR>", "smart list => item" },
+      { "t", "<Cmd>FloatermNext<CR>", "float-term" },
+      { "w", "<Cmd>tabnext<CR>", "tab/winLayout" },
     },
   },
-  { "*", "*<cmd>lua require('hlslens').start()<CR>zz" },
-  { "#", "#<cmd>lua require('hlslens').start()<CR>zz" },
+  { "*", "*<cmd>lua require('hlslens').start()<CR>zz", "next occurrence with hl" },
+  { "#", "#<cmd>lua require('hlslens').start()<CR>zz", "prev occurrence with hl" },
   {
     "g",
     {
-      { "*", "g*<cmd>lua require('hlslens').start()<CR>zz" },
-      { "#", "g#<cmd>lua require('hlslens').start()<CR>zz" },
+      { "*", "g*<cmd>lua require('hlslens').start()<CR>zz", "next occurrence with hl" },
+      { "#", "g#<cmd>lua require('hlslens').start()<CR>zz", "prev occurrence with hl" },
       {
         "$",
         {
-          { "$", "<Cmd>Telescope lsp_implementations<CR>" },
-          { "*", "<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>" },
-          { ".", "<Cmd>lua vim.lsp.buf.document_symbol()<CR>" },
-          { "f", "<cmd>TypescriptFixAll<CR>" },
-          { "i", "<cmd>TypescriptAddMissingImports<CR>" },
-          { "I", "<cmd>TypescriptOrganizeImports<CR>" },
-          { "r", "<cmd>lua require('inc_rename').rename({ default = vim.fn.expand('<cword>') })<cr>" },
-          { "R", "<cmd>TypescriptRenameFile<CR>" },
+          { "$", "<Cmd>Telescope lsp_implementations<CR>", "symbol implementations" },
+          { "*", "<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "symbol in workspace" },
+          { ".", "<Cmd>lua vim.lsp.buf.document_symbol()<CR>", "symbol in buf" },
+          { "f", "<cmd>TypescriptFixAll<CR>", "typescript fixall/refactoring" },
+          { "i", "<cmd>TypescriptAddMissingImports<CR>", "typescript add imports" },
+          { "I", "<cmd>TypescriptOrganizeImports<CR>", "typescript organize imports" },
+          { "r", "<cmd>lua require('inc_rename').rename({ default = vim.fn.expand('<cword>') })<cr>",
+            "symbol refactor/rename" },
+          { "R", "<cmd>TypescriptRenameFile<CR>", "typescript file refactor/rename" },
         },
+        options = { desc = "lsp [symbol] <task>" }
       },
-      { "a", "<cmd>CodeActionMenu<CR>" },
-      { "d", "<cmd>split<CR><C-w>T<cmd>vsplit<CR><Cmd>lua vim.lsp.buf.definition()<CR>" },
-      { "D", "<Cmd>lua vim.lsp.buf.definition()<CR>" },
-      { "j", "<C-I>" },
-      { "k", "<C-O>" },
-      { "K", "<Cmd>lua require('hover').hover_select()<CR>" },
+      { "a", "<cmd>CodeActionMenu<CR>", "lsp code action menu" },
+      { "d", "<cmd>split<CR><C-w>T<cmd>vsplit<CR><Cmd>lua vim.lsp.buf.definition()<CR>",
+        "definition in new tab(curFile & definitionFile)" },
+      { "D", "<Cmd>lua vim.lsp.buf.definition()<CR>", "definition in place" },
+      { "j", "<C-i>", "next cursor hold/pos/edit", "<C-o>" },
+      { "k", "<C-o>", "prev cursor hold/pos/edit", "<C-i>" },
       { "n",
-        "<cmd>lua require('neoscroll').scroll(vim.api.nvim_win_get_height(0) - 7, true, 250, 'sine')<cr><cmd>silent! call repeat#set('gn', v:count)<cr><cmd>lua vim.api.nvim_buf_set_keymap(0, 'n', ',', 'gN', {})<cr>" },
+        function() require('neoscroll').scroll(vim.api.nvim_win_get_height(0) - 7, true, 250, 'sine') end,
+        "scroll down: almost full page", "gN" },
       { "N",
-        "<cmd>lua require('neoscroll').scroll(-vim.api.nvim_win_get_height(0) + 7, true, 250, 'sine')<cr><cmd>silent! call repeat#set('gN', v:count)<cr><cmd>lua vim.api.nvim_buf_set_keymap(0, 'n', ',', 'gn', {})<cr>" },
-      { "o", "<plug>(GrepperOperator)" },
-      { "r", "<cmd>split<CR><C-w>T<cmd>vsplit<CR><cmd>Telescope lsp_references<CR>" },
-      { "R", "<cmd>Telescope lsp_references<CR>" },
+        function() require('neoscroll').scroll(-vim.api.nvim_win_get_height(0) + 7, true, 250, 'sine') end,
+        "scroll up: almost full page", "gn" },
+      { "o", "<plug>(GrepperOperator)", "grep && pop qf" },
+      { "r", "<cmd>split<CR><C-w>T<cmd>vsplit<CR><cmd>Telescope lsp_references<CR>",
+        "reference in new tab(curFile & referenceFile)" },
+      { "R", "<cmd>Telescope lsp_references<CR>", "reference in place" },
       { "s",
-        [[<cmd>lua require('neoscroll').scroll(vim.wo.scroll, true, 250, 'sine')<cr><cmd>silent! call repeat#set('gs', v:count)<cr><cmd>lua vim.api.nvim_buf_set_keymap(0, 'n', ',', "gS", {})<cr>]] },
+        function() require('neoscroll').scroll(vim.wo.scroll, true, 250, 'sine') end,
+        "scroll down: regular", "gS" },
       { "S",
-        [[<cmd>lua require('neoscroll').scroll(-vim.wo.scroll, true, 250, 'sine')<cr><cmd>silent! call repeat#set('gS', v:count)<cr><cmd>lua vim.api.nvim_buf_set_keymap(0, 'n', ',', 'gs', {})<cr>]] },
+        function() require('neoscroll').scroll(-vim.wo.scroll, true, 250, 'sine') end,
+        "scroll up: regular", "gs" },
     },
+    options = { desc = "quickly move ..." }
   },
-  { "K", "<Cmd>lua vim.lsp.buf.hover()<CR>" },
-  { "n", "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>" },
-  { "N", "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>" },
+  { "K", function() vim.lsp.buf.hover() end, "lsp help/doc" },
+  { "n", "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>",
+    "continue prev word-search forwards" },
+  { "N", "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>",
+    "continue prev word-search backwards" },
   -- { "T", calltree.hover_calltree },
   { "z", {
-    { "0", "<cmd>set foldlevel=0<CR>" },
-    { "1", "<cmd>set foldlevel=1<CR>" },
-    { "2", "<cmd>set foldlevel=2<CR>" },
-    { "3", "<cmd>set foldlevel=3<CR>" },
-    { "4", "<cmd>set foldlevel=4<CR>" },
-    { "5", "<cmd>set foldlevel=5<CR>" },
-    { "l", "<cmd>loadview<CR>" },
-    { "M", "<cmd>lua require('ufo').closeAllFolds()<CR>" },
-    { "p", "<cmd>lua require('ufo').peekFoldedLinesUnderCursor()<CR>" },
-    { "R", "<cmd>lua require('ufo').openAllFolds()<CR>" },
-  } },
+    { "0", "<cmd>set foldlevel=0<CR>", "level 0" },
+    { "1", "<cmd>set foldlevel=1<CR>", "level 1" },
+    { "2", "<cmd>set foldlevel=2<CR>", "level 2" },
+    { "3", "<cmd>set foldlevel=3<CR>", "level 3" },
+    { "4", "<cmd>set foldlevel=4<CR>", "level 4" },
+    { "5", "<cmd>set foldlevel=5<CR>", "level 5" },
+    { "l", "<cmd>loadview<CR>", "load prev saved folds" },
+    { "M", "<cmd>lua require('ufo').closeAllFolds()<CR>", "close all" },
+    { "p", "<cmd>lua require('ufo').peekFoldedLinesUnderCursor()<CR>", "peek" },
+    { "R", "<cmd>lua require('ufo').openAllFolds()<CR>", "open all" },
+  }, options = { desc = "folds-ops" } },
   {
     "<leader>",
     {
-      { "<esc>", "<Cmd>set relativenumber!<CR>" },
-      { "<CR>", "<Cmd>ZenMode<CR>" },
-      { "H", '<Cmd>call WinMove("h")<CR>' },
-      { "L", '<Cmd>call WinMove("l")<CR>' },
-      { "K", '<Cmd>call WinMove("k")<CR>' },
-      { "J", '<Cmd>call WinMove("j")<CR>' },
+      { "<esc>", "<Cmd>set relativenum(er!<CR>", "toggle rel linenrs" },
+      { "<CR>", "<Cmd>ZenMode<CR>", "toggle zen-mode" },
       { "%", {
         { "l", ":luafile %<CR>" },
         { "i", ":luafile ~/.config/nvim/init.lua<CR>" },
@@ -165,7 +198,7 @@ nest.applyKeymaps({
               { "*", "<Cmd>RestoreSession<CR>" },
               {
                 ".",
-                '<Cmd>lua vim.api.nvim_command("RestoreSession " .. vim.fn.stdpath("data") .. "/sessions/" .. my.git.get_branch():gsub("/","__"))<CR>',
+                '<Cmd>lua vim.api.nvim_command("RestoreSession " .. vim.fn.stdpath("data") .. "/sessions/" .. my.git.get_)ranch():gsub("/","__"))<CR>',
               },
             },
           },
@@ -190,7 +223,7 @@ nest.applyKeymaps({
         "b",
         {
           { "q", ":bp|bd #<CR>" },
-          { "p", "<Cmd>BufferLinePick<CR>" },
+          { "p", "BufferLinePick" },
           {
             "d",
             {
@@ -440,7 +473,7 @@ nest.applyKeymaps({
               -- { "o", "<Cmd>lua require('aerial').focus()<CR>" },
             },
           },
-          { "c", "<Cmd>lua my.toggle_bg_mode()<CR>" },
+          { "c", "<Cmd>lua my.fn.toggle_bg_mode()<CR>" },
           { "C", "<Cmd>TSContextToggle<CR>" },
           -- { "D", ":lua require('dapui').toggle()" },
           { "e", "<Plug>(ultest-summary-toggle)" },
@@ -495,49 +528,39 @@ nest.applyKeymaps({
   }
 })
 
-nest.applyKeymaps({
-  {
-    mode = "i",
-    {
-      { "<f20>", "<C-o>" },
-      { "<C-Del>", '<cmd>lua require("notify").dismiss()<cr>' },
-      { "<C-l>", "<cmd>lua require('neogen').jump_next()<CR>" },
-      { "<C-h>", "<cmd>lua require('neogen').jump_prev()<CR>" },
-    },
-  },
+Apply_keymaps('i', {
+  { "<f20>", "<C-o>" },
+  { "<C-Del>", '<cmd>lua require("notify").dismiss()<cr>' },
+  { "<C-l>", "<cmd>lua require('neogen').jump_next()<CR>" },
+  { "<C-h>", "<cmd>lua require('neogen').jump_prev()<CR>" },
 })
 
-nest.applyKeymaps({
+Apply_keymaps('t', {
   {
-    mode = "t",
+    "[",
+    {
+      { "t", "<C-\\><C-n>:FloatermPrev<CR>" },
+    },
+  },
+  {
+    "]",
+    {
+      { "t", "<C-\\><C-n>:FloatermNext<CR>" },
+    },
+  },
+  {
+    "<leader>",
     {
       {
-        "[",
+        "t",
         {
-          { "t", "<C-\\><C-n>:FloatermPrev<CR>" },
-        },
-      },
-      {
-        "]",
-        {
-          { "t", "<C-\\><C-n>:FloatermNext<CR>" },
-        },
-      },
-      {
-        "<leader>",
-        {
+          { "t", "<C-\\><C-n>:FloatermToggle<CR>" },
           {
-            "t",
+            "<leader>",
             {
-              { "t", "<C-\\><C-n>:FloatermToggle<CR>" },
-              {
-                "<leader>",
-                {
-                  { "t", {
-                    { "n", "<C-\\><C-n>:FloatermNew<CR>" },
-                  } },
-                },
-              },
+              { "t", {
+                { "n", "<C-\\><C-n>:FloatermNew<CR>" },
+              } },
             },
           },
         },
@@ -546,53 +569,38 @@ nest.applyKeymaps({
   },
 })
 
-nest.applyKeymaps({
+Apply_keymaps("v", {
+  { "<lt>", "<gv" },
+  { "<gt>", ">gv" },
+  { "J", ":m '>+1<CR>gv=gv<CR>" },
+  { "K", ":m '<-2<CR>gv=gv<CR>" },
   {
-    mode = "v",
+    "g",
     {
-      { "<lt>", "<gv" },
-      { "<gt>", ">gv" },
-      { "J", ":m '>+1<CR>gv=gv" },
-      { "K", ":m '<-2<CR>gv=gv" },
-      {
-        "g",
-        {
-          { "l", {
-            { "a", ":<C-U>Lspsaga range_code_action<CR>" },
-          } },
-          { "x", ":'<,'>SnipRun" },
-        },
-      },
-      { "m", ":lua require('tsht').nodes()<CR>" },
+      { "l", {
+        { "a", ":<C-U>Lspsaga range_code_action<CR>" },
+      } },
+      { "x", ":'<,'>SnipRun<CR>" },
     },
   },
+  { "m", ":lua require('tsht').nodes()<CR>" },
 })
 
-nest.applyKeymaps({
-  {
-    mode = "o",
-    {
-      { "is.", "<Plug>(textobj-sandwich-query-i)" },
-      { "is*", "<Plug>(textobj-sandwich-auto-i)" },
-      { "is$", "<Plug>(textobj-sandwich-literal-query-i)" },
-      { "as.", "<Plug>(textobj-sandwich-query-a)" },
-      { "as*", "<Plug>(textobj-sandwich-auto-a)" },
-      { "as$", "<Plug>(textobj-sandwich-literal-query-a)" },
-      { "m", ":<C-U>lua require('tsht').nodes()<CR>" },
-    },
-  },
+Apply_keymaps("o", {
+  { "is.", "<Plug>(textobj-sandwich-query-i)" },
+  { "is*", "<Plug>(textobj-sandwich-auto-i)" },
+  { "is$", "<Plug>(textobj-sandwich-literal-query-i)" },
+  { "as.", "<Plug>(textobj-sandwich-query-a)" },
+  { "as*", "<Plug>(textobj-sandwich-auto-a)" },
+  { "as$", "<Plug>(textobj-sandwich-literal-query-a)" },
+  { "m", ":<C-U>lua require('tsht').nodes()<CR>" },
 })
 
-nest.applyKeymaps({
-  {
-    mode = "x",
-    {
-      { "is.", "<Plug>(textobj-sandwich-query-i)" },
-      { "is*", "<Plug>(textobj-sandwich-auto-i)" },
-      { "is$", "<Plug>(textobj-sandwich-literal-query-i)" },
-      { "as.", "<Plug>(textobj-sandwich-query-a)" },
-      { "as*", "<Plug>(textobj-sandwich-auto-a)" },
-      { "as$", "<Plug>(textobj-sandwich-literal-query-a)" },
-    },
-  },
+Apply_keymaps("x", {
+  { "is.", "<Plug>(textobj-sandwich-query-i)" },
+  { "is*", "<Plug>(textobj-sandwich-auto-i)" },
+  { "is$", "<Plug>(textobj-sandwich-literal-query-i)" },
+  { "as.", "<Plug>(textobj-sandwich-query-a)" },
+  { "as*", "<Plug>(textobj-sandwich-auto-a)" },
+  { "as$", "<Plug>(textobj-sandwich-literal-query-a)" },
 })
