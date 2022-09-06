@@ -743,7 +743,7 @@ local StatusLines = {
     end,
   },
 
-  init = utils.pick_child_on_condition,
+  fallthrough = false,
 
   GitStatusline,
   SpecialStatusline,
@@ -842,7 +842,7 @@ local WinBar = {
 }
 
 local WinBars = {
-  init = utils.pick_child_on_condition,
+  fallthrough = false,
   {
     condition = function()
       vim.api.nvim_get_current_buf()
