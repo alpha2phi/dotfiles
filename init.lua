@@ -1,7 +1,10 @@
 --@diagnostic disable:undefined-global
-require("global")
+vim.cmd('set shell=/bin/zsh')
+
+require("utils")
+
 vim.api.nvim_set_var("mapleader", " ")
-vim.api.nvim_set_var("maplocalleader", ",")
+vim.api.nvim_set_var("maplocalleader", ";")
 
 local packer_install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
@@ -24,7 +27,7 @@ local packer_util = require("packer.util")
 packer.reset()
 
 packer.init({
-  compile_path = packer_util.join_paths(vim.fn.stdpath("config"), "plugin", "packer_compiled.lua"),
+  compile_path = packer_util.join_paths(vim.fn.stdpath("config"), "lua", "packer_compiled.lua"),
   compile_on_sync = true,
   git = {
     clone_timeout = false,
@@ -36,12 +39,12 @@ packer.init({
   opt_default = false,
 })
 
+require("packer_compiled")
+
 require("settings")
-
 require("plugins")
-
 require("lang")
 require("keymappings")
+require("colorschemes")
 
-require("config/colorschemes")
-vim.cmd("colo themer_monokai")
+vim.cmd("colo oxocarbon-lua")
