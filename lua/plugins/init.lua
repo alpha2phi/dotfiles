@@ -16,9 +16,6 @@ require("packer").startup(
         require("colortils").setup()
       end,
     }
-    -- @TODO double check if something depends on fzf and remove it, I got telescope already
-    -- use({ "junegunn/fzf", run = "-> fzf#install()" })
-    -- use({ "junegunn/fzf.vim" })
 
     use({ "chrisbra/unicode.vim" })
     use({ "editorconfig/editorconfig-vim" })
@@ -34,17 +31,17 @@ require("packer").startup(
     })
     use({
       "kyazdani42/nvim-web-devicons",
-      config = require('config/devicon').setup
+      config = require('plugins/devicon').setup
     })
     use({
       "mortepau/codicons.nvim",
-      config = require("config/codicons").setup
+      config = require("plugins/codicons").setup
     })
     use({
       "rcarriga/nvim-notify",
       event = "VimEnter",
       config = function()
-        require("config/notify").setup()
+        require("plugins/notify").setup()
       end,
     })
     use({
@@ -77,7 +74,7 @@ require("packer").startup(
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       config = function()
-        require("config/treesitter").setup()
+        require("plugins/treesitter").setup()
       end,
     })
     use({
@@ -151,7 +148,7 @@ require("packer").startup(
     use({
       "rmagatti/auto-session",
       config = function()
-        require("config/auto_session").setup()
+        require("plugins/auto_session").setup()
       end,
     })
 
@@ -286,8 +283,8 @@ require("packer").startup(
     use({ "tpope/vim-repeat" })
 
     -- Clojure or just FP/Lisp
-    -- use {'guns/vim-sexp'}
-    -- use {'tpope/vim-sexp-mappings-for-regular-people'}
+    use { 'guns/vim-sexp' }
+    use { 'tpope/vim-sexp-mappings-for-regular-people' }
 
     use({
       'kevinhwang91/nvim-ufo',
@@ -341,16 +338,86 @@ require("packer").startup(
             table.insert(newVirtText, { suffix, 'MoreMsg' })
             return newVirtText
           end,
-          enable_fold_end_virt_text = true
+          enable_get_fold_virt_text = true
         })
       end
     })
-    -- use({
-    --   "gelguy/wilder.nvim",
-    --   config = function()
-    --     require("config/wilder").setup()
-    --   end,
-    -- })
+    use({
+      "gelguy/wilder.nvim",
+      config = function()
+        require("plugins/wilder").setup()
+      end,
+    })
+    use({
+      "cbochs/portal.nvim",
+      config = function()
+        require("portal").setup({
+          jump = {
+            -- The default queries used when searching the jumplist. An entry can
+            -- be a name of a registered query item, an anonymous predicate, or
+            -- a well-formed query item. See Queries section for more information.
+            -- @type Portal.QueryLike[]
+            query = { "modified", "different", "valid" },
+
+            labels = {
+              -- An ordered list of keys that will be used for labelling
+              -- available jumps. Labels will be applied in same order as
+              -- `jump.query`
+              select = { "j", "k", "h", "l" },
+
+              -- Keys which will exit portal selection
+              escape = {
+                ["<esc>"] = true
+              },
+            },
+
+            --- Keys used for jumping forward and backward
+            keys = {
+              forward = "<c-i>",
+              backward = "<c-o>"
+            }
+          },
+          window = {
+            title = {
+              --- When a portal is empty, render an default portal title
+              render_empty = true,
+
+              --- The raw window options used for the title window
+              options = {
+                relative = "cursor",
+                width = 80,
+                height = 1,
+                col = 2,
+                style = "minimal",
+                focusable = false,
+                border = "single",
+                noautocmd = true,
+                zindex = 98,
+              },
+            },
+
+            portal = {
+              -- When a portal is empty, render an empty buffer body
+              render_empty = false,
+
+              --- The raw window options used for the portal window
+              options = {
+                relative = "cursor",
+                width = 80,
+                height = 3,
+                col = 2,
+                focusable = false,
+                border = "single",
+                noautocmd = true,
+                zindex = 99,
+              },
+            },
+          }, -- Your configuration goes here
+          -- Leave empty to use the default configuration
+          -- Please see the Configuration section below for more information
+        })
+      end
+    })
     use({
       "phaazon/hop.nvim",
       as = "hop",
@@ -363,7 +430,7 @@ require("packer").startup(
     use({
       "karb94/neoscroll.nvim",
       config = function()
-        require("config/scroll").setup()
+        require("plugins/scroll").setup()
       end,
     })
     use({
@@ -397,27 +464,63 @@ require("packer").startup(
       ensureDependencies = true,
       requires = { "windwp/nvim-ts-autotag" },
       config = function()
-        require("config/autopairs").setup()
+        require("plugins/autopairs").setup()
       end,
     })
     use({ "lokaltog/neoranger" })
-    use({ 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' })
+    -- Python Jupyter Notebook magma
+    -- use({ 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' })
     -- use({ "diepm/vim-rest-console" })
-    -- use({
-    --   "michaelb/sniprun",
-    --   run = "bash ./install.sh",
-    --   config = function()
-    --     require("config/sniprun").setup()
-    --   end,
-    -- })
-    -- use({
-    --   "kosayoda/nvim-lightbulb",
-    --   config = function()
-    --     require("config/lightbulb").setup()
-    --   end,
-    -- })
+    use({
+      "michaelb/sniprun",
+      run = "bash ./install.sh",
+      config = function()
+        require("plugins/sniprun").setup()
+      end,
+    })
     -- Color
+    use({
+      "nvim-zh/colorful-winsep.nvim",
+      config = function()
+        require('colorful-winsep').setup({
+          highlight = {
+            guibg = my.color.my.magenta,
+            guifg = my.color.my.aqua,
+          }
+        })
+      end
+    })
+    use({
+      "rrethy/vim-hexokinase",
+      run = "make hexokinase",
+      config = function()
+        vim.api.nvim_set_var("Hexokinase_highlighters", { "sign_column", "foregroundfull" })
+      end,
+    })
     -- colorschemes
+    use({
+      "themercorp/themer.lua",
+      config = function()
+        require("themer").setup({
+          styles = {
+            comment = {},
+            ["function"] = { style = "italic" },
+            functionbuiltin = { style = "italic,bold" },
+            operator = { style = "bold" },
+            variable = { style = "italic" },
+            variableBuiltIn = { style = "italic,bold" },
+            parameter = { style = "italic" },
+            conditional = { style = "bold" },
+          },
+        })
+      end,
+    })
+    use({
+      "ray-x/starry.nvim",
+      config = function()
+        require("plugins/starry").setup()
+      end,
+    })
     use({ "savq/melange" })
     use({
       "/Users/joehannes/.local/git/joehannes-ux/lush-jsx.nvim",
@@ -469,6 +572,7 @@ require("packer").startup(
     })
     use({ 'pappasam/papercolor-theme-slim' })
     use({ "sainnhe/everforest" })
+    use({ "Tsuzat/NeoSolarized.nvim" })
     use({ "mhartington/oceanic-next" })
     use({ "kyoz/purify", rtp = "vim" })
     use({ "tanvirtin/monokai.nvim" })
@@ -479,29 +583,6 @@ require("packer").startup(
       requires = { "rktjmp/lush.nvim" },
     }
     use({ "rafamadriz/neon" })
-    use({
-      "themercorp/themer.lua",
-      config = function()
-        require("themer").setup({
-          styles = {
-            comment = {},
-            ["function"] = { style = "italic" },
-            functionbuiltin = { style = "italic,bold" },
-            operator = { style = "bold" },
-            variable = { style = "italic" },
-            variableBuiltIn = { style = "italic,bold" },
-            parameter = { style = "italic" },
-            conditional = { style = "bold" },
-          },
-        })
-      end,
-    })
-    use({
-      "ray-x/starry.nvim",
-      config = function()
-        require("config/starry").setup()
-      end,
-    })
     -- use({
     -- 	"projekt0n/github-nvim-theme",
     -- 	config = function()
@@ -545,7 +626,7 @@ require("packer").startup(
         "nvim-telescope/telescope-github.nvim",
         "nvim-telescope/telescope-arecibo.nvim",
         "nvim-telescope/telescope-ui-select.nvim",
-        "joehannes-os/telescope-media-files.nvim",
+        "~/.local/git/joehannes-os/telescope-media-files.nvim",
         -- "tom-anders/telescope-vim-bookmarks.nvim",
         "sudormrfbin/cheatsheet.nvim",
         "AckslD/nvim-neoclip.lua",
@@ -554,8 +635,8 @@ require("packer").startup(
         "Azeirah/nvim-redux",
       },
       config = function()
-        local config = require("config/telescope")
-        local neoclip = require("config/neoclip")
+        local config = require("plugins/telescope")
+        local neoclip = require("plugins/neoclip")
 
         config.setup()
         neoclip.setup()
@@ -589,7 +670,7 @@ require("packer").startup(
     use({
       "onsails/lspkind-nvim",
       config = function()
-        require("config/lspkind").setup()
+        require("plugins/lspkind").setup()
       end,
     })
     use({
@@ -597,9 +678,9 @@ require("packer").startup(
       requires = { "neovim/nvim-lspconfig" },
     })
     use({
-      "Maan2003/lsp_lines.nvim",
+      "~/.local/git/joehannes-nvim/lsp_lines.nvim",
       config = function()
-        require("lsp_lines").register_lsp_virtual_lines()
+        require("lsp_lines").setup()
         vim.diagnostic.config({
           virtual_text = false,
         })
@@ -629,17 +710,17 @@ require("packer").startup(
     --     -- vim.keymap.set('n', 'gK', require('hover').hover_select, { desc = 'hover.nvim (select)' })
     --   end
     -- })
-    -- use({
-    --   "amrbashir/nvim-docs-view",
-    --   opt = true,
-    --   cmd = { "DocsViewToggle" },
-    --   config = function()
-    --     require("docs-view").setup({
-    --       position = "bottom",
-    --       height = 15,
-    --     })
-    --   end,
-    -- })
+    use({
+      "amrbashir/nvim-docs-view",
+      opt = true,
+      cmd = { "DocsViewToggle" },
+      config = function()
+        require("docs-view").setup({
+          position = "bottom",
+          height = 15,
+        })
+      end,
+    })
     -- use({
     --   'JASONews/glow-hover',
     --   config = function()
@@ -680,13 +761,6 @@ require("packer").startup(
         require("lsp-format").setup {} --sync = true
       end
     })
-    -- use {'sbdchd/neoformat'}
-    -- use({
-    -- 	"mhartington/formatter.nvim",
-    -- 	config = function()
-    -- 		require("config/formatter").setup()
-    -- 	end,
-    -- })
     use({ "p00f/nvim-ts-rainbow" })
     use({ "ray-x/lsp_signature.nvim" })
     use({
@@ -702,7 +776,7 @@ require("packer").startup(
     use({
       "folke/lsp-colors.nvim",
       config = function()
-        require("config/lspcolors").setup()
+        require("plugins/lspcolors").setup()
       end,
     })
     use({
@@ -721,14 +795,12 @@ require("packer").startup(
     use({
       "petertriho/nvim-scrollbar",
       config = function()
-        require("config/scrollbar").setup()
+        require("plugins/scrollbar").setup()
       end,
     })
     use({
       "kevinhwang91/nvim-hlslens",
-      config = function()
-        require("config/hlslens").setup()
-      end,
+      config = require("plugins/hlslens").setup,
     })
     -- use({
     -- 	"wfxr/minimap.vim",
@@ -738,7 +810,7 @@ require("packer").startup(
     --   "folke/trouble.nvim",
     --   requires = "kyazdani42/nvim-web-devicons",
     --   config = function()
-    --     require("config/trouble").setup()
+    --     require("plugins/trouble").setup()
     --   end,
     -- })
     use({ "mhinz/vim-grepper" })
@@ -787,7 +859,7 @@ require("packer").startup(
     -- use({
     --   "kevinhwang91/nvim-bqf",
     --   config = function()
-    --     require("config/bqf").setup()
+    --     require("plugins/bqf").setup()
     --   end,
     -- })
     -- use({
@@ -870,7 +942,7 @@ require("packer").startup(
     -- use({
     --   "github/copilot.vim",
     --   config = function()
-    --     require("config/copilot").setup()
+    --     require("plugins/copilot").setup()
     --   end,
     -- })
 
@@ -940,7 +1012,7 @@ require("packer").startup(
         "windwp/nvim-autopairs",
       },
       config = function()
-        require("config/completion").setup()
+        require("plugins/completion").setup()
         require("cmp-npm").setup({})
       end,
     })
@@ -974,7 +1046,12 @@ require("packer").startup(
       after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
     })
     -- Lua development
-    use({ "folke/lua-dev.nvim" })
+    use({
+      "folke/neodev.nvim",
+      config = function()
+        require("neodev").setup({})
+      end
+    })
     use({ "rafcamlet/nvim-luapad" })
     -- use {'tjdevries/nlua.nvim'}
     -- use {'metakirby5/codi.vim'}
@@ -989,8 +1066,8 @@ require("packer").startup(
     -- use({ "Olical/conjure", tag = "v4.20.0" })
     -- use({ "dense-analysis/ale" })
     use({ "eraserhd/parinfer-rust", run = "cargo build --release" })
-    -- use({ "dmac/vim-cljfmt", run = "go get github.com/cespare/goclj/cljfmt" })
-    -- use({ "clojure-vim/async-clj-omni" })
+    use({ "dmac/vim-cljfmt", run = "go get github.com/cespare/goclj/cljfmt" })
+    use({ "clojure-vim/async-clj-omni" })
 
     -- Better syntax
     use({ "sheerun/vim-polyglot" }) -- don't know it obsolete because of treesitter
@@ -1001,7 +1078,7 @@ require("packer").startup(
     use({
       "folke/zen-mode.nvim",
       config = function()
-        require("config/zen").setup()
+        require("plugins/zen").setup()
       end,
     })
     use({
@@ -1047,7 +1124,7 @@ require("packer").startup(
       "akinsho/nvim-bufferline.lua",
       requires = "kyazdani42/nvim-web-devicons",
       config = function()
-        require("config/bufferline").setup()
+        require("plugins/bufferline").setup()
       end,
     })
     -- use {'glepnir/dashboard-nvim'}
@@ -1068,13 +1145,13 @@ require("packer").startup(
     -- }
     use({
       "simrat39/symbols-outline.nvim",
-      config = require("config/symbols_outline").setup
+      config = require("plugins/symbols_outline").setup
     })
     -- aerial is an lsp-outline
     -- use({
     --   "stevearc/aerial.nvim",
     --   config = function()
-    --     require("config/aerial").setup()
+    --     require("plugins/aerial").setup()
     --   end,
     -- })
     -- use({
@@ -1107,7 +1184,6 @@ require("packer").startup(
         })
       end,
     })
-    -- use({ "airblade/vim-rooter" })
     -- use {'tpope/vim-projectionist'}
 
     -- Development workflow
@@ -1120,6 +1196,16 @@ require("packer").startup(
           enabled = true,
           input_after_comment = true,
           languages = {
+            javascript = {
+              template = {
+                annotation_convention = "jsdoc",
+              }
+            },
+            javascriptreact = {
+              template = {
+                annotation_convention = "jsdoc",
+              }
+            },
             typescript = {
               template = {
                 annotation_convention = "tsdoc",
@@ -1245,7 +1331,7 @@ require("packer").startup(
     use({
       "sindrets/diffview.nvim",
       config = function()
-        require("config/diffview").setup()
+        require("plugins/diffview").setup()
       end,
     })
     use({
@@ -1365,32 +1451,32 @@ require("packer").startup(
     -- tmux
     -- use({ "roxma/vim-tmux-clipboard" })
     -- use {'christoomey/vim-tmux-navigator'}
-    use({
-      "aserowy/tmux.nvim",
-      config = function()
-        require("tmux").setup({
-          -- overwrite default configuration
-          -- here, e.g. to enable default bindings
-          copy_sync = {
-            -- enables copy sync and overwrites all register actions to
-            -- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
-            enable = true,
-          },
-          navigation = {
-            -- enables default keybindings (C-hjkl) for normal mode
-            enable_default_keybindings = true,
-            cycle_navigation = false,
-            persist_zoom = false,
-          },
-          resize = {
-            -- enables default keybindings (A-hjkl) for normal mode
-            enable_default_keybindings = true,
-            resize_step_x = 10,
-            resize_step_y = 5,
-          }
-        })
-      end
-    })
+    -- use({
+    --   "aserowy/tmux.nvim",
+    --   config = function()
+    --     require("tmux").setup({
+    --       -- overwrite default configuration
+    --       -- here, e.g. to enable default bindings
+    --       copy_sync = {
+    --         -- enables copy sync and overwrites all register actions to
+    --         -- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
+    --         enable = true,
+    --       },
+    --       navigation = {
+    --         -- enables default keybindings (C-hjkl) for normal mode
+    --         enable_default_keybindings = true,
+    --         cycle_navigation = false,
+    --         persist_zoom = false,
+    --       },
+    --       resize = {
+    --         -- enables default keybindings (A-hjkl) for normal mode
+    --         enable_default_keybindings = true,
+    --         resize_step_x = 10,
+    --         resize_step_y = 5,
+    --       }
+    --     })
+    --   end
+    -- })
 
     -- use({
     -- 	"pwntester/octo.nvim",
@@ -1584,29 +1670,15 @@ require("packer").startup(
       "SmiteshP/nvim-navic",
       requires = "neovim/nvim-lspconfig"
     })
-    use({
-      "rrethy/vim-hexokinase",
-      run = "make hexokinase",
-      config = function()
-        vim.api.nvim_set_var("Hexokinase_highlighters", { "sign_column", "foregroundfull" })
-      end,
-    })
     -- Status line
     use({
       "rebelot/heirline.nvim",
       config = function()
-        require("config/heirline").setup(true)
+        require("plugins/heirline").setup(true)
       end,
     })
-    -- use({
-    --   "glepnir/galaxyline.nvim",
-    --   branch = "main",
-    --   -- "NTBBloodbath/galaxyline.nvim",
-    --   requires = { "kyazdani42/nvim-web-devicons" },
-    -- })
-    --keymappings
-    use({ "LionC/nest.nvim" })
 
+    --keymappings
     use({
       "folke/which-key.nvim",
       config = function()

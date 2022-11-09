@@ -1,3 +1,0 @@
-nnoremap <silent> <leader>f. :lua require('config.telescope').search_dotfiles()<CR>
-nnoremap <silent> <leader>fP :lua require('config.telescope').switch_projects()<CR>
-

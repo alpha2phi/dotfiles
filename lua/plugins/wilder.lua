@@ -56,8 +56,8 @@ function M.setup()
   })
 
   wilder.set_option('renderer', wilder.renderer_mux({
-    [':'] = wildmenu_renderer,
-    ['/'] = wildmenu_renderer,
+    [':'] = palette_renderer,
+    ['/'] = popupmenu_renderer,
     substitute = wildmenu_renderer,
   }))
 end

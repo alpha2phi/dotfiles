@@ -2,10 +2,14 @@ local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 -- local constructors = require("heirline.constructors")
 
+local function vimode_color()
+  return my.color.my.vimode[vim.fn.mode()] or my.color.my.vimode["n"]
+end
+
 local function setup_colors()
   local dark_mode = vim.opt.background:get() == "dark"
   return {
-    vimode = my.color.my.vimode[vim.fn.mode()] or my.color.my.vimode["n"],
+    vimode = vimode_color(),
     light = my.color.my.light,
     dark = my.color.my.dark,
     current_bg = dark_mode and my.color.my.dark or my.color.my.light,
@@ -91,7 +95,7 @@ local ViMode = {
     },
   },
   provider = function(self)
-    return "%2(" .. self.mode_names[self.mode] .. "%) "
+    return self.mode_names[self.mode]
   end,
   hl = function(self)
     return { fg = "dark", bg = "magenta", bold = true }
@@ -137,16 +141,12 @@ local FileName = {
     end
   end,
   hl = { fg = "dark", bg = "magenta" },
-
-  utils.make_flexible_component(2, {
-    provider = function(self)
-      return self.lfilename
-    end,
-  }, {
-    provider = function(self)
-      return vim.fn.pathshorten(self.lfilename)
-    end,
-  }),
+  provider = function(self)
+    return self.lfilename
+  end,
+  --provider = function(self)
+  --  return vim.fn.pathshorten(self.lfilename)
+  --end,
 }
 
 local FileFlags = {
@@ -246,7 +246,7 @@ local LSPActive = {
   condition = conditions.lsp_attached,
   update = { "LspAttach", "LspDetach" },
 
-  provider = " [LSP]",
+  provider = " LSP",
 
   -- Or complicate things a bit and get the servers names
   -- provider  = function(self)
@@ -256,7 +256,7 @@ local LSPActive = {
   --     end
   --     return " [" .. table.concat(names, " ") .. "]"
   -- end,
-  hl = { fg = "green", bold = true },
+  hl = { fg = "green", bg = "magenta", bold = true },
   on_click = {
     name = "heirline_LSP",
     callback = function()
@@ -270,59 +270,95 @@ local LSPActive = {
 local Navic = {
   condition = require("nvim-navic").is_available,
   static = {
+    -- create a type highlight map
     type_hl = {
       File = "Directory",
-      Module = "Include",
-      Namespace = "TSNamespace",
-      Package = "Include",
-      Class = "Struct",
-      Method = "Method",
-      Property = "TSProperty",
-      Field = "TSField",
-      Constructor = "TSConstructor ",
-      Enum = "TSField",
-      Interface = "Type",
-      Function = "Function",
-      Variable = "TSVariable",
-      Constant = "Constant",
-      String = "String",
-      Number = "Number",
-      Boolean = "Boolean",
-      Array = "TSField",
-      Object = "Type",
-      Key = "TSKeyword",
-      Null = "Comment",
-      EnumMember = "TSField",
-      Struct = "Struct",
-      Event = "Keyword",
-      Operator = "Operator",
-      TypeParameter = "Type",
+      Module = "@include",
+      Namespace = "@namespace",
+      Package = "@include",
+      Class = "@structure",
+      Method = "@method",
+      Property = "@property",
+      Field = "@field",
+      Constructor = "@constructor",
+      Enum = "@field",
+      Interface = "@type",
+      Function = "@function",
+      Variable = "@variable",
+      Constant = "@constant",
+      String = "@string",
+      Number = "@number",
+      Boolean = "@boolean",
+      Array = "@field",
+      Object = "@type",
+      Key = "@keyword",
+      Null = "@comment",
+      EnumMember = "@field",
+      Struct = "@structure",
+      Event = "@keyword",
+      Operator = "@operator",
+      TypeParameter = "@type",
     },
+    -- bit operation dark magic, see below...
+    enc = function(line, col, winnr)
+      return bit.bor(bit.lshift(line, 16), bit.lshift(col, 6), winnr)
+    end,
+    -- line: 16 bit (65535); col: 10 bit (1023); winnr: 6 bit (63)
+    dec = function(c)
+      local line = bit.rshift(c, 16)
+      local col = bit.band(bit.rshift(c, 6), 1023)
+      local winnr = bit.band(c, 63)
+      return line, col, winnr
+    end
   },
   init = function(self)
     local data = require("nvim-navic").get_data() or {}
     local children = {}
+    -- create a child for each level
     for i, d in ipairs(data) do
+      -- encode line and column numbers into a single integer
+      local pos = self.enc(d.scope.start.line, d.scope.start.character, self.winnr)
       local child = {
         {
-          provider = d.icon .. " ",
-          -- hl = self.type_hl[d.type],
+          provider = d.icon,
+          hl = self.type_hl[d.type],
         },
         {
-          provider = d.name,
+          -- escape `%`s (elixir) and buggy default separators
+          provider = d.name:gsub("%%", "%%%%"):gsub("%s*->%s*", ''),
+          -- highlight icon only or location name as well
           -- hl = self.type_hl[d.type],
+
+          on_click = {
+            -- pass the encoded position through minwid
+            minwid = pos,
+            callback = function(_, minwid)
+              -- decode
+              local line, col, winnr = self.dec(minwid)
+              vim.api.nvim_win_set_cursor(vim.fn.win_getid(winnr), { line, col })
+            end,
+            name = "heirline_navic",
+          },
         },
       }
+      -- add a separator only if needed
       if #data > 1 and i < #data then
         table.insert(child, {
           provider = " > ",
+          hl = { fg = 'bright_fg' },
         })
       end
       table.insert(children, child)
     end
-    self[1] = self:new(children, 1)
+    -- instantiate the new child, overwriting the previous one
+    self.child = self:new(children, 1)
   end,
-  hl = { fg = "dark" },
+  -- evaluate the children containing navic components
+  provider = function(self)
+    return self.child:eval()
+  end,
+  hl = { fg = my.color.my.dark },
+  update = { "CursorMoved", "ModeChanged" }
 }
 
 local Diagnostics = {
@@ -331,16 +367,17 @@ local Diagnostics = {
   update = { "DiagnosticChanged", "BufEnter" },
   on_click = {
     callback = function()
-      require("trouble").toggle({ mode = "document_diagnostics" })
+      require('diaglist').populate_llist()
+      vim.cmd("LLOpen!")
     end,
     name = "heirline_diagnostics",
   },
 
   static = {
-    error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
-    warn_icon = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
-    info_icon = vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text,
-    hint_icon = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text,
+    error_icon = vim.fn.sign_getdefined("DiagnosticSignError").text,
+    warn_icon = vim.fn.sign_getdefined("DiagnosticSignWarn").text,
+    info_icon = vim.fn.sign_getdefined("DiagnosticSignInfo").text,
+    hint_icon = vim.fn.sign_getdefined("DiagnosticSignHint").text,
   },
 
   init = function(self)
@@ -352,27 +389,27 @@ local Diagnostics = {
 
   {
     provider = function(self)
-      return self.errors > 0 and (self.error_icon .. self.errors .. " ")
+      return self.errors > 0 and ((self.error_icon or " ") .. self.errors .. " ")
     end,
-    hl = { fg = "red" },
+    hl = { fg = my.color.util.darken(my.color.my.red, 33) },
   },
   {
     provider = function(self)
-      return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
+      return self.warnings > 0 and ((self.warn_icon or " ") .. self.warnings .. " ")
     end,
-    hl = { fg = "orange" },
+    hl = { fg = my.color.util.darken(my.color.my.orange, 33) },
   },
   {
     provider = function(self)
-      return self.info > 0 and (self.info_icon .. self.info .. " ")
+      return self.info > 0 and ((self.info_icon or "") .. self.info .. " ")
     end,
-    hl = { fg = "aqua" },
+    hl = { fg = my.color.util.darken(my.color.my.aqua, 33) },
   },
   {
     provider = function(self)
-      return self.hints > 0 and (self.hint_icon .. self.hints)
+      return self.hints > 0 and ((self.hint_icon or "") .. self.hints)
     end,
-    hl = { fg = "green" },
+    hl = { fg = my.color.util.darken(my.color.my.green, 33) },
   },
 }
 
@@ -385,9 +422,7 @@ local Git = {
 
   on_click = {
     callback = function(self, minwid, nclicks, button)
-      vim.defer_fn(function()
-        vim.cmd("Lazygit %:p:h")
-      end, 100)
+      vim.cmd("Neogit")
     end,
     name = "heirline_git",
     update = false,
@@ -518,25 +553,24 @@ local WorkDir = {
   hl = { fg = "dark", bold = true },
   on_click = {
     callback = function()
-      vim.cmd('NvimTreeToggle')
+      vim.cmd('Ranger')
     end,
     name = "heirline_workdir",
   },
 
-  utils.make_flexible_component(1, {
+  {
     provider = function(self)
       local trail = self.cwd:sub(-1) == "/" and "" or "/"
-      return self.icon .. self.cwd .. trail .. " "
+      return self.icon .. self.cwd:gsub("~/.local/git", "") .. trail .. " "
     end,
-  }, {
-    provider = function(self)
-      local cwd = vim.fn.pathshorten(self.cwd)
-      local trail = self.cwd:sub(-1) == "/" and "" or "/"
-      return self.icon .. cwd .. trail .. " "
-    end,
-  }, {
-    provider = "",
-  }),
+  },
+  --{
+  --  provider = function(self)
+  --    local cwd = vim.fn.pathshorten(self.cwd)
+  --    local trail = self.cwd:sub(-1) == "/" and "" or "/"
+  --    return self.icon .. cwd .. trail .. " "
+  --  end,
+  --},
 }
 
 local HelpFilename = {
@@ -616,34 +650,31 @@ local DefaultStatusline = {
   },
   Space,
   {
-    hl = { bg = "magenta" },
     condition = conditions.has_diagnostics,
     SlantLeftRight,
-    Space,
-    Diagnostics,
-    Space,
-    SlantRightRight,
-    { hl = { fg = "current_fg", bg = "vimode" }, Space }
+    { hl = { bg = "magenta", force = true }, Space, Diagnostics, Space },
+    { hl = { bg = "vimode", force = true }, SlantRightRight },
+    { hl = { fg = "current_fg", bg = "vimode", force = true }, Space }
   },
   {
     hl = { bg = "magenta", bold = true },
     SlantLeftRight,
     Space,
-    utils.make_flexible_component(2, { hl = { fg = "light", bold = true, force = true }, Navic }, { provider = "" }),
+    { hl = { fg = "dark", bold = true, force = true }, Navic },
     Space,
     SlantRightRight,
   },
   Space,
   Align,
   -- DAPMessages,
+  SlantLeftLeft,
   {
-    hl = { bg = "magenta" },
-    SlantLeftLeft,
+    hl = { bg = "magenta", force = true },
     Space,
     LSPActive,
     Space,
-    SlantRightLeft,
   },
+  SlantRightLeft,
   -- UltTest,
   Space,
   {
@@ -658,7 +689,9 @@ local DefaultStatusline = {
   {
     hl = { bg = "magenta" },
     SlantLeftLeft,
-    utils.make_flexible_component(3, { Space, FileEncoding, FileLastModified }),
+    Space,
+    FileEncoding,
+    FileLastModified,
     Space,
     SlantRightLeft,
   },
@@ -792,8 +825,8 @@ local WinBar = {
     hl = { fg = "magenta" },
     provider = ""
   },
-  Space,
   {
+    -- flexible = 1,
     condition = function()
       if require('nvim-navic').is_available() then
         local data = require('nvim-navic').get_data()
@@ -809,25 +842,33 @@ local WinBar = {
       return false
     end,
     hl = function()
-      if conditions.is_active() then
+      if conditions.is_active() and vim.fn.mode() ~= "n" then
         return { fg = "dark", force = true }
       end
 
-      return { fg = "current_fg", force = true }
+      return { fg = "magenta", bold = true, force = true }
     end,
-    utils.make_flexible_component(2, { Space, Navic, Space }, { provider = "" }),
+    Space,
+    Navic,
+    Space,
     {
       provider = "",
     },
   },
-  Space,
   Align,
   {
-    hl = { fg = "current_fg", force = true },
     condition = conditions.has_diagnostics,
+    hl = function(self)
+      if (not conditions.is_active()) then
+        return { fg = "light", bg = nil, force = true }
+      end
+
+      return { bg = nil, force = true }
+    end,
     Space,
     Diagnostics,
     Space,
+    update = { "CursorMoved", "ModeChanged" }
   },
   {
     hl = { fg = my.color.my.magenta },
@@ -838,7 +879,8 @@ local WinBar = {
     provider = function(self)
       return " #" .. self.winnr
     end
-  }
+  },
+  update = { "CursorMoved", "ModeChanged" }
 }
 
 local WinBars = {

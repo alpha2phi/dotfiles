@@ -11,7 +11,7 @@ function config.setup()
   end
 
   local function secondaryVimodeColor()
-    return my.color.fn.background_blend(vimodeColor(), 50)
+    return my.color.fn.background_blend(vimodeColor(), 70)
   end
 
   local function tertiaryVimodeColor()
@@ -22,15 +22,15 @@ function config.setup()
     background = { guibg = tertiaryVimodeColor() },
     -- tab = { guibg = vimodeColor() },
     -- tab_selected = { guifg = vimodeColor(), guibg = groups.selectionBG() },
-    -- tab_close = { guifg = vimodeColor(), guibg = groups.fillBG(), gui = "bold,italic" },
+    tab_close = { guifg = my.color.my.dark, guibg = vimodeColor(), gui = "bold" },
     -- info = { guifg = vimodeColor(), guibg = groups.selectionBG() },
-    fill = { guibg = my.color.my.dark },
+    fill = { guibg = my.color.my.magenta},
     buffer = { guifg = my.color.my.light, guibg = secondaryVimodeColor() },
     buffer_visible = { guifg = my.color.my.light, guibg = secondaryVimodeColor() },
     buffer_selected = { guifg = my.color.my.light, guibg = vimodeColor(), gui = "bold" },
     tab_selected = { guifg = my.color.my.light, guibg = vimodeColor(), gui = "bold" },
     diagnostic = {
-      guifg = my.color.my.dark,
+      guifg = my.color.my.red,
       guibg = tertiaryVimodeColor()
     },
     -- diagnostic_visible = {
@@ -38,102 +38,102 @@ function config.setup()
     -- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
     -- },
     -- diagnostic = { guifg = my.color.my.red, gui = "bold" },
-    diagnostic_visible = { guifg = my.color.my.dark, guibg = secondaryVimodeColor(), gui = "bold" },
-    diagnostic_selected = { guifg = my.color.my.dark, guibg = vimodeColor(), gui = "bold,italic" },
+    diagnostic_visible = { guifg = my.color.my.red, guibg = secondaryVimodeColor(), gui = "bold" },
+    diagnostic_selected = { guifg = my.color.my.red, guibg = vimodeColor(), gui = "bold,italic" },
     info = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.blue, 66),
       guibg = tertiaryVimodeColor()
     },
     info_visible = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.blue, 66),
       guibg = secondaryVimodeColor()
     },
     info_selected = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.blue, 66),
       guibg = vimodeColor()
     },
     hint = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.yellow, 66),
       guibg = tertiaryVimodeColor()
     },
     hint_visible = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.yellow, 66),
       guibg = secondaryVimodeColor()
     },
     hint_selected = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.yellow, 66),
       guibg = vimodeColor()
     },
     warning = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.orange, 66),
       guibg = tertiaryVimodeColor()
     },
     warning_visible = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.orange, 66),
       guibg = secondaryVimodeColor()
     },
     warning_selected = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.orange, 66),
       guibg = vimodeColor()
     },
     error = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.red, 66),
       guibg = tertiaryVimodeColor()
     },
     error_visible = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.red, 66),
       guibg = secondaryVimodeColor()
     },
     error_selected = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.red, 66),
       guibg = vimodeColor()
     },
     info_diagnostic = {
-      guifg = my.color.my.dark,
+      guifg = my.color.my.blue,
       guibg = tertiaryVimodeColor()
     },
     info_diagnostic_visible = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.blue, 21),
       guibg = secondaryVimodeColor()
     },
     info_diagnostic_selected = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.blue, 33),
       guibg = vimodeColor()
     },
     hint_diagnostic = {
-      guifg = my.color.my.dark,
+      guifg = my.color.my.yellow,
       guibg = tertiaryVimodeColor()
     },
     hint_diagnostic_visible = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.yellow, 21),
       guibg = secondaryVimodeColor()
     },
     hint_diagnostic_selected = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.yellow, 33),
       guibg = vimodeColor()
     },
     warning_diagnostic = {
-      guifg = my.color.my.dark,
+      guifg = my.color.my.orange,
       guibg = tertiaryVimodeColor()
     },
     warning_diagnostic_visible = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.orange, 21),
       guibg = secondaryVimodeColor()
     },
     warning_diagnostic_selected = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.orange, 33),
       guibg = vimodeColor()
     },
     error_diagnostic = {
-      guifg = my.color.my.dark,
+      guifg = my.color.my.red,
       guibg = tertiaryVimodeColor()
     },
     error_diagnostic_visible = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.red, 21),
       guibg = secondaryVimodeColor()
     },
     error_diagnostic_selected = {
-      guifg = my.color.my.dark,
+      guifg = my.color.util.darken(my.color.my.red, 33),
       guibg = vimodeColor()
     },
     -- hint_selected = { guifg = my.color.my.orange, guibg = my.color.my.aqua, gui = "bold,italic" },
@@ -146,30 +146,27 @@ function config.setup()
     -- info_diagnostic_selected = { guifg = my.color.my.green, guibg = my.color.my.aqua, gui = "bold,italic" },
     -- warning_diagnostic_selected = { guifg = my.color.my.orange, guibg = my.color.my.aqua, gui = "bold,italic" },
     -- error_diagnostic_selected = { guifg = my.color.my.red, guibg = my.color.my.aqua, gui = "bold,italic" },
-    close_button = { guifg = my.color.my.light, guibg = tertiaryVimodeColor() },
+    close_button = { guifg = my.color.my.dark, guibg = tertiaryVimodeColor() },
     -- close_button_visible = {
     -- 	guifg = vimodeColor(),
     -- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
     -- 	gui = "bold",
     -- },
-    close_button_visible = { guifg = my.color.my.light, guibg = secondaryVimodeColor(), gui = "bold" },
-    close_button_selected = { guifg = my.color.my.light, guibg = vimodeColor(), gui = "bold" },
-    -- modified = { guibg = "#F53737" },
-    -- modified_visible = {
-    -- 	guifg = groups.warningBG(),
-    -- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
-    -- },
-    -- modified_selected = { guifg = my.color.my.light, guibg = my.color.my.aqua },
+    close_button_visible = { guifg = my.color.my.dark, guibg = secondaryVimodeColor(), gui = "bold" },
+    close_button_selected = { guifg = my.color.my.dark, guibg = vimodeColor(), gui = "bold" },
+    modified = { guifg = my.color.my.red, guibg = tertiaryVimodeColor() },
+    modified_visible = { guifg = my.color.my.red, guibg = secondaryVimodeColor() },
+    modified_selected = { guifg = my.color.my.red, guibg = vimodeColor() },
     -- duplicate_selected = { guifg = my.color.my.light, guibg = my.color.my.aqua },
     -- duplicate_visible = {
     -- 	guifg = vimodeColor(),
     -- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
     -- },
     -- duplicate = { guifg = vimodeColor(), guibg = groups.highlightBG() },
-    separator = { guifg = my.color.my.dark, guibg = tertiaryVimodeColor() },
-    separator_selected = { guifg = my.color.my.dark, guibg = vimodeColor() },
+    separator = { guifg = my.color.my.magenta, guibg = tertiaryVimodeColor() },
+    separator_selected = { guifg = my.color.my.magenta, guibg = vimodeColor() },
     separator_visible = {
-      guifg = my.color.my.dark,
+      guifg = my.color.my.magenta,
       guibg = secondaryVimodeColor()
       -- 	guibg = ucolors.blendColors(groups.selectionBG(), groups.mainBG(), 0.8),
     },

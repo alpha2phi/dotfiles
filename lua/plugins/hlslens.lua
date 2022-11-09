@@ -1,6 +1,6 @@
-local config = {}
+local M = {}
 
-function config.setup()
+function M.setup()
 	require("hlslens").setup({
 		auto_enable = true,
 		enable_incsearch = true,
@@ -23,4 +23,4 @@ function config.setup()
   ]])
 end
 
-return config
+return M
