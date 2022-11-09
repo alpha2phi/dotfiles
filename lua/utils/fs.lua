@@ -4,7 +4,7 @@ function M.which(executable)
   if jit.os == "Windows" then
     return vim.fn.system({ "(gcm " .. executable .. ").Source" })
   else
-    return vim.fn.system({ "which", executable })
+    return vim.fn.system({ "which", executable }):gsub("%\n$", "")
   end
 end
 
@@ -20,7 +20,7 @@ M.dir = {
 M.path = {
   python2 = M.which("python2"),
   python3 = M.which("python3"),
-  python = M.which("python"),
+  python = M.which("python3"),
   node = M.which("neovim-node-host")
 }
 

@@ -81,4 +81,19 @@ function M.fn.highlight_blend_bg(hl_name, strength, color, base_hl)
   end
 end
 
+M.util = {
+  lighten = function(hexColor, percentage)
+    return M.hsl(hexColor).lighten(percentage).hex
+  end,
+  darken = function(hexColor, percentage)
+    return M.hsl(hexColor).darken(percentage).hex
+  end,
+  saturate = function(hexColor, percentage)
+    return M.hsl(hexColor).saturate(percentage).hex
+  end,
+  desaturate = function(hexColor, percentage)
+    return M.hsl(hexColor).desaturate(percentage).hex
+  end,
+}
+
 return M
