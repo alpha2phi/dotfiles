@@ -8,7 +8,10 @@ end
 
 function on_attach.generic(client, bufnr)
   on_attach.minimal(client, bufnr)
+  -- if client.server_capabilities.documentSymbolProvider then
   require("nvim-navic").attach(client, bufnr)
+  -- end
+
   -- Set autocommands conditional on server_capabilities
   if client.server_capabilities.document_highlight then
     vim.api.nvim_exec(
@@ -32,9 +35,24 @@ function on_attach.generic(client, bufnr)
   end
 end
 
+function on_attach.clojure(client, bufnr)
+  on_attach.generic(client, bufnr)
+
+  require("lsp-format").on_attach(client)
+  require("lsp_signature").on_attach({
+    fix_pos             = true,
+    always_trigger      = true,
+    extra_trigger_chars = { "(", "," },
+    transparency        = 10,
+    toggle_key          = "<C-k>",
+    doc_lines           = 21,
+  }, bufnr)
+end
+
 function on_attach.python(client, bufnr)
   on_attach.generic(client, bufnr)
 
+  require("lsp-format").on_attach(client)
   require("lsp_signature").on_attach({
     fix_pos             = true,
     always_trigger      = true,
@@ -48,6 +66,7 @@ end
 function on_attach.lua(client, bufnr)
   on_attach.generic(client, bufnr)
 
+  require("lsp-format").on_attach(client)
   require("lsp_signature").on_attach({
     fix_pos             = true,
     always_trigger      = true,
@@ -58,7 +77,7 @@ function on_attach.lua(client, bufnr)
   }, bufnr)
 end
 
-function on_attach.tsserver(client, bufnr)
+function on_attach.typescript(client, bufnr)
   on_attach.generic(client, bufnr)
 
   require("lsp_signature").on_attach({
@@ -71,7 +90,7 @@ function on_attach.tsserver(client, bufnr)
   }, bufnr)
 end
 
-function on_attach.null_ls(client, bufnr)
+function on_attach.null(client, bufnr)
   local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 
   if client.supports_method("textDocument/formatting") then

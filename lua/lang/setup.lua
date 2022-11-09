@@ -8,7 +8,7 @@ local setup = {}
 local sumneko_root_path = vim.fn.stdpath("data") .. "/lsp_servers/sumneko_lua/extension/server/bin"
 local sumneko_binary = sumneko_root_path .. "/lua-language-server"
 
-function setup.diagnosticls()
+function setup.diagnostic()
   local opts = {
     capabilities = capabilities,
     on_attach = on_attach.minimal,
@@ -78,7 +78,7 @@ function setup.eslint()
   return opts
 end
 
-function setup.jsonls()
+function setup.json()
   local opts = {
     capabilities = capabilities,
     on_attach = on_attach.generic,
@@ -125,21 +125,37 @@ function setup.jsonls()
   return opts
 end
 
-function setup.tsserver()
+function setup.typescript()
   local opts = {
     capabilities = capabilities,
     handlers = {
       ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
       ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
     },
-    on_attach = on_attach.tsserver,
+    on_attach = on_attach.typescript,
     settings = { format = { enable = true } }
   }
 
   return opts
 end
 
-function setup.pyright()
+function setup.clojure()
+  local opts = {
+    capabilities = capabilities,
+    handlers = {
+      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+      ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+    },
+    on_attach = on_attach.clojure,
+    settings = {
+      format = { enable = true },
+    }
+  }
+
+  return opts
+end
+
+function setup.python()
   local opts = {
     capabilities = capabilities,
     handlers = {
@@ -164,48 +180,48 @@ function setup.pyright()
   return opts
 end
 
-function setup.sumneko_lua()
-  local opts = require("lua-dev").setup({
-    library = { vimruntime = true, types = true, plugins = true },
-    lspconfig = {
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        on_attach.lua(client, bufnr)
-        lsp_format.on_attach(client, bufnr)
-      end,
-      cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
-      settings = {
-        format = { enable = true }, -- this will enable formatting
-        Lua = {
-          runtime = {
-            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-            version = "LuaJIT",
-            -- Setup your lua path
-            path = vim.split(package.path, ";"),
-          },
-          diagnostics = {
-            -- Get the language server to recognize the `vim` global
-            globals = { "vim" },
-          },
-          workspace = {
-            -- Make the server aware of Neovim runtime files
-            library = {
-              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-              [vim.fn.expand("$VIMRUNTIME/lua/config")] = true,
-              [vim.fn.expand("$VIMRUNTIME/lua/lang")] = true,
-              [vim.fn.expand("$VIMRUNTIME/lua/statusline")] = true,
-              [vim.fn.expand("$VIMRUNTIME/lua/utils")] = true,
-            },
+function setup.lua()
+  local opts = {
+    -- require("neodev").setup({
+    -- library = { vimruntime = true, types = true, plugins = true },
+    -- lspconfig = {
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      on_attach.lua(client, bufnr)
+      lsp_format.on_attach(client, bufnr)
+    end,
+    cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
+    settings = {
+      format = { enable = true }, -- this will enable formatting
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = "LuaJIT",
+          -- Setup your lua path
+          path = vim.split(package.path, ";"),
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { "vim" },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = {
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/config")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/lang")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/statusline")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/utils")] = true,
           },
         },
       },
     },
-  })
+  }
 
   return opts
 end
 
-function setup.cssls()
+function setup.css()
   local opts = {
     capabilities = capabilities,
     on_attach = on_attach.minimal,
@@ -237,7 +253,7 @@ function setup.cssls()
   return opts
 end
 
-function setup.cssmodules_ls()
+function setup.cssmodules()
   local opts = {
     capabilities = capabilities,
     on_attach = on_attach.minimal,
@@ -279,18 +295,18 @@ function setup.efm()
   }, function(_, value)
     return my.fs.exists(root_path .. "/" .. value) and root_path .. "/" .. value or nil
   end) or root_path .. "/package.json"
-
-
-  local stylelint = require("efmls-configs.linters.stylelint")
-  local eslint = require("efmls-configs.linters.eslint_d")
-  eslint.lintCommand = eslint.lintCommand .. " --rule 'prettier/prettier: off'"
+  local stylelint         = require("efmls-configs.linters.stylelint")
+  local eslint            = require("efmls-configs.linters.eslint_d")
+  eslint.lintCommand      = eslint.lintCommand .. " --rule 'prettier/prettier: off'"
   -- local luacheck = require("efmls-configs.linters.luacheck")
-  local prettier = {
+  local prettier_default  = require 'efmls-configs.formatters.prettier'
+  local prettier          = {
     formatCommand = string.format('%s --stdin --stdin-filepath ${INPUT}' ..
       ' --eslint-config-path ' .. eslint_cfg_path .. ' --config ' .. prettier_cfg_path,
       efm_fs.executable('prettier-eslint', efm_fs.Scope.NODE)),
     formatStdin = true,
   }
+  local joker             = require 'efmls-configs.formatters.joker'
 
   local handlers = {
     ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -313,6 +329,11 @@ function setup.efm()
   efmls.setup({
     css = {
       linter = stylelint,
+      formatter = prettier_default,
+    },
+    scss = {
+      linter = stylelint,
+      formatter = prettier_default,
     },
     javascript = {
       linter = eslint,
@@ -329,6 +350,12 @@ function setup.efm()
     typescriptreact = {
       linter = eslint,
       formatter = prettier,
+    },
+    clojure = {
+      formatter = joker,
+    },
+    clojurescript = {
+      formatter = joker,
     }
   })
 end
@@ -347,7 +374,7 @@ function setup.generic()
   return opts
 end
 
-function setup.null_ls()
+function setup.null()
   local ls = require("null-ls")
 
   ls.setup({

@@ -9,11 +9,12 @@ local my_servers = {
   css = "cssls",
   cssmodules = "cssmodules_ls",
   lua = "sumneko_lua",
-  diagnostic = "efm",
+  efm = "efm",
   html = "html",
   graphql = "graphql",
   python = "pyright",
-  tailwind = "tailwindcss"
+  tailwind = "tailwindcss",
+  clojure = "clojure_lsp",
 }
 
 --Some Diagnostic Icons
@@ -26,17 +27,18 @@ vim.fn.sign_define("DiagnosticSignWarn", { text = "", numhl = "LspDiagnostics
 vim.fn.sign_define("DiagnosticSignInfo", { text = "", numhl = "LspDiagnosticsDefaultInformation" })
 vim.fn.sign_define("DiagnosticSignHint", { text = "", numhl = "LspDiagnosticsDefaultHint" })
 
-for _, server in pairs(my_servers) do
-  if server == "jsonls"
-      or server == "cssls"
-      or server == "cssmodules_ls"
-      or server == "sumneko_lua"
-      or server == "pyright"
+for server, name in pairs(my_servers) do
+  if server == "json"
+      or server == "css"
+      or server == "cssmodules"
+      or server == "lua"
+      or server == "python"
+      or server == "clojure"
   -- or server == "diagnosticls"
   -- or server == "eslint"
   then
-    lspconfig[server].setup(cfg[server]())
-  elseif server == "tsserver" then
+    lspconfig[name].setup(cfg[server]())
+  elseif server == "typescript" then
     require("typescript").setup({
       disable_commands = false, -- prevent the plugin from creating Vim commands
       debug = false, -- enable debug logging for commands
@@ -45,7 +47,7 @@ for _, server in pairs(my_servers) do
   elseif server == "efm" then
     cfg[server]()
   else
-    lspconfig[server].setup(cfg.generic())
+    lspconfig[name].setup(cfg.generic())
   end
 end
 
