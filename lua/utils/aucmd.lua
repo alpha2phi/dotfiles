@@ -13,12 +13,15 @@ function M.onColorscheme()
   my.color.fn.highlight_blend_bg("CursorColumn", 50, mode_color)
   my.color.fn.highlight_blend_bg("Visual", 21, mode_color)
   my.color.fn.highlight_blend_bg("TSCurrentScope", 12, mode_color)
+  my.color.fn.highlight_blend_bg("TreesitterContext", 50, mode_color)
 end
 
 function M.onModeChanged()
   local mode_color = my.color.my.vimode[vim.fn.mode()]
 
   vim.api.nvim_set_hl(0, "ScrollbarHandle", { bg = mode_color })
+  vim.api.nvim_set_hl(0, "TreesitterContextBottom",
+    { underline = true, underdouble = true, fg = my.color.my.magenta, sp = my.color.my.magenta })
 
   -- if vim.opt.background:get() == "light" then
   --   my.color.fn.highlight_blend_bg("Normal", 21, mode_color)
@@ -28,8 +31,9 @@ function M.onModeChanged()
 
   my.color.fn.highlight_blend_bg("CursorLine", 50, mode_color)
   my.color.fn.highlight_blend_bg("CursorColumn", 50, mode_color)
-  my.color.fn.highlight_blend_bg("Visual", 21, mode_color)
-  my.color.fn.highlight_blend_bg("TSCurrentScope", 12, mode_color)
+  my.color.fn.highlight_blend_bg("Visual", 37, mode_color)
+  my.color.fn.highlight_blend_bg("TSCurrentScope", 21, mode_color)
+  my.color.fn.highlight_blend_bg("TreesitterContext", 50, mode_color)
 
   require("plugins/bufferline").setup()
   if not (require("heirline").statusline == nil) then
@@ -66,9 +70,9 @@ function M.toggle_bg_mode(force)
   for defColor, gitSignsHl in pairs({ [my.color.my.green] = "GitSignsAdd", [my.color.my.orange] = "GitSignsChange",
     [my.color.my.red] = "GitSignsDelete" }) do
 
-    my.color.fn.highlight_blend_bg(gitSignsHl, 50, defColor)
-    my.color.fn.highlight_blend_bg(gitSignsHl .. "Nr", 21, defColor)
-    my.color.fn.highlight_blend_bg(gitSignsHl .. "Ln", 10, defColor)
+    my.color.fn.highlight_blend_bg(gitSignsHl, 90, defColor)
+    my.color.fn.highlight_blend_bg(gitSignsHl .. "Nr", 73, defColor)
+    my.color.fn.highlight_blend_bg(gitSignsHl .. "Ln", 50, defColor)
   end
 
   require("plugins/bufferline").setup()
