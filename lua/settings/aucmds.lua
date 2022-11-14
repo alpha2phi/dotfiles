@@ -108,7 +108,10 @@ local M = {
       {
         pattern = "*.lua,*.clj,*.cljs,*.ts,*.tsx,*.js,*.jsx,*.json",
         callback = function()
-          vim.cmd("silent! loadview")
+          vim.cmd([[
+            edit
+            silent! loadview
+          ]])
         end,
       },
     },
@@ -116,7 +119,7 @@ local M = {
       {
         pattern = "*.lua,*.clj,*.cljs,*.ts,*.tsx,*.js,*.jsx,*.json",
         callback = function()
-          vim.cmd("silent! mkview")
+          vim.cmd("mkview")
         end,
       },
     }
