@@ -889,8 +889,8 @@ local WinBars = {
     condition = function()
       vim.api.nvim_get_current_buf()
       return (not conditions.buffer_matches({
-        filetype = { "lua", "clj", "cljs", "ts", "tsx", "typescript", "typescriptreact", "js", "jsx", "javascript",
-          "javascriptreact", "html", "css", "json", "md", "sass", "less", "yml", "yaml" },
+        filetype = { "lua", "clojure", "clojurescript", "clj", "cljs", "ts", "tsx", "typescript", "typescriptreact", "js",
+          "jsx", "javascript", "javascriptreact", "html", "css", "json", "md", "sass", "less", "yml", "yaml" },
       }))
           or conditions.buffer_matches({
             buftype = { ".*git.*", "terminal", "nofile", "prompt", "help", "quickfix" },
@@ -912,6 +912,9 @@ function M.update()
   require("heirline").load_colors(setup_colors())
   require("heirline").statusline:broadcast(function(self)
     self._win_stl = nil
+  end)
+  require("heirline").winbar:broadcast(function(self)
+    self._win_cache = nil
   end)
   vim.api.nvim_set_hl(0, "StatusLine",
     { bg = my.color.my.vimode[vim.fn.mode() or "n"] }
