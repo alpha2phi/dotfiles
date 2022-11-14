@@ -251,7 +251,7 @@ au BufNewFile,BufRead .babelrc set ft=json
 au BufNewFile,BufRead .watchmanconfig set ft=json
 au BufNewFile,BufRead .buckconfig set ft=toml
 au BufNewFile,BufRead .flowconfig set ft=ini
-au BufNewFile,BufRead *.{js,mjs,cjs,jsm,es,es6} set ft=javascript
+au BufNewFile,BufRead *.{js,mjs,cjs,jsm,es,es6} set ft=javascript foldmethod=expr
 au BufNewFile,BufRead .tern-{project,port} set ft=json
 au BufNewFile,BufRead *.postman_collection set ft=json
 
@@ -284,7 +284,7 @@ au BufNewFile,BufRead *.hamljs set ft=jst
 au BufNewFile,BufRead *.ect set ft=jst
 
 " jsx
-au BufNewFile,BufRead *.jsx set ft=javascriptreact
+au BufNewFile,BufRead *.jsx set ft=javascriptreact foldmethod=expr
 
 " julia
 au BufNewFile,BufRead *.jl set ft=julia
@@ -323,6 +323,7 @@ au BufNewFile,BufRead *_log set ft=log
 
 " lua
 au BufNewFile *.lua     0put =\"#!/usr/bin/env lua\<nl>\<nl>\"|$
+au BufNewFile,BufRead *.lua set ft=lua foldmethod=expr
 
 " mako
 au BufNewFile *.*.mako execute "do BufNewFile filetypedetect " . expand("<afile>:r") | let b:mako_outer_lang = &filetype
@@ -599,10 +600,9 @@ au BufNewFile,BufRead *.twig set ft=html.twig
 au BufNewFile,BufRead *.html.twig set ft=html.twig
 au BufNewFile,BufRead *.xml.twig set ft=xml.twig
 
-" typescript - leaving this for general settings.lua config and treesitter
-" config in order not to override treesitter config or so ...
-" au BufNewFile,BufRead *.ts set ft=typescript foldmethod=expr
-" au BufNewFile,BufRead *.tsx set ft=typescriptreact foldmethod=expr
+" typescript
+au BufNewFile,BufRead *.ts set ft=typescript foldmethod=expr
+au BufNewFile,BufRead *.tsx set ft=typescriptreact foldmethod=expr
 
 " v
 au BufNewFile,BufRead *.v set ft=vlang
