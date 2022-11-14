@@ -115,25 +115,9 @@ require("packer").startup(
     use({ "nvim-treesitter/nvim-treesitter-textobjects" })
     use({ "RRethy/nvim-treesitter-textsubjects" })
     use({
-      "romgrk/nvim-treesitter-context",
+      "nvim-treesitter/nvim-treesitter-context",
       config = function()
-        require("treesitter-context").setup({
-          enable = true,
-          throttle = true,
-          max_lines = 0,
-          patterns = {
-            default = {
-              "class",
-              "function",
-              "method",
-              "for",
-              "while",
-              "if",
-              "switch",
-              "case",
-            },
-          },
-        })
+        require("treesitter-context").setup()
       end,
     })
     use({ "mfussenegger/nvim-ts-hint-textobject" })
@@ -153,6 +137,12 @@ require("packer").startup(
     })
 
     use { 'tversteeg/registers.nvim' }
+    use({
+      "tenxsoydev/karen-yank.nvim",
+      config = function()
+        require("karen-yank").setup()
+      end
+    })
     -- ui
     use {
       "jiaoshijie/undotree",
@@ -285,63 +275,68 @@ require("packer").startup(
     -- Clojure or just FP/Lisp
     use { 'guns/vim-sexp' }
     use { 'tpope/vim-sexp-mappings-for-regular-people' }
+    -- use { 'anuvyklack/pretty-fold.nvim',
+    --   config = function()
+    --     require('pretty-fold').setup()
+    --   end
+    -- }
+    -- use({
+    --   'kevinhwang91/nvim-ufo',
+    --   requires = 'kevinhwang91/promise-async',
+    --   config = function()
+    --     vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep:|,foldclose:]]
+    --     vim.o.foldcolumn = '1'
+    --     -- vim.o.foldlevel = 99
+    --     -- vim.o.foldlevelstart = 99
+    --     vim.o.foldenable = true
 
-    use({
-      'kevinhwang91/nvim-ufo',
-      requires = 'kevinhwang91/promise-async',
-      config = function()
-        vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep:|,foldclose:]]
-        vim.o.foldcolumn = '1'
-        vim.o.foldlevel = 99
-        vim.o.foldlevelstart = 99
-        vim.o.foldenable = true
-
-        require('ufo').setup({
-          open_fold_hl_timeout = 150,
-          preview = {
-            win_config = {
-              border = { '', '─', '', '', '', '─', '', '' },
-              winhighlight = 'Normal:Folded',
-              winblend = 0
-            },
-            mappings = {
-              scrollU = '<C-u>',
-              scrollD = '<C-d>'
-            }
-          }, provider_selector = function(bufnr, filetype, buftype)
-            return { 'treesitter', 'indent' }
-          end,
-          fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
-            local newVirtText = {}
-            local suffix = ('  %d '):format(endLnum - lnum)
-            local sufWidth = vim.fn.strdisplaywidth(suffix)
-            local targetWidth = width - sufWidth
-            local curWidth = 0
-            for _, chunk in ipairs(virtText) do
-              local chunkText = chunk[1]
-              local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-              if targetWidth > curWidth + chunkWidth then
-                table.insert(newVirtText, chunk)
-              else
-                chunkText = truncate(chunkText, targetWidth - curWidth)
-                local hlGroup = chunk[2]
-                table.insert(newVirtText, { chunkText, hlGroup })
-                chunkWidth = vim.fn.strdisplaywidth(chunkText)
-                -- str width returned from truncate() may less than 2nd argument, need padding
-                if curWidth + chunkWidth < targetWidth then
-                  suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
-                end
-                break
-              end
-              curWidth = curWidth + chunkWidth
-            end
-            table.insert(newVirtText, { suffix, 'MoreMsg' })
-            return newVirtText
-          end,
-          enable_get_fold_virt_text = true
-        })
-      end
-    })
+    --     require('ufo').setup({
+    --       open_fold_hl_timeout = 150,
+    --       preview = {
+    --         win_config = {
+    --           border = { '', '─', '', '', '', '─', '', '' },
+    --           winhighlight = 'Normal:Folded',
+    --           winblend = 0
+    --         },
+    --         mappings = {
+    --           scrollU = '<C-u>',
+    --           scrollD = '<C-d>'
+    --         }
+    --       },
+    --       provider_selector = function(bufnr, filetype, buftype)
+    --         return { 'treesitter', 'indent' }
+    --       end,
+    --       fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+    --         local newVirtText = {}
+    --         local suffix = ('  %d '):format(endLnum - lnum)
+    --         local sufWidth = vim.fn.strdisplaywidth(suffix)
+    --         local targetWidth = width - sufWidth
+    --         local curWidth = 0
+    --         for _, chunk in ipairs(virtText) do
+    --           local chunkText = chunk[1]
+    --           local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+    --           if targetWidth > curWidth + chunkWidth then
+    --             table.insert(newVirtText, chunk)
+    --           else
+    --             chunkText = truncate(chunkText, targetWidth - curWidth)
+    --             local hlGroup = chunk[2]
+    --             table.insert(newVirtText, { chunkText, hlGroup })
+    --             chunkWidth = vim.fn.strdisplaywidth(chunkText)
+    --             -- str width returned from truncate() may less than 2nd argument, need padding
+    --             if curWidth + chunkWidth < targetWidth then
+    --               suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+    --             end
+    --             break
+    --           end
+    --           curWidth = curWidth + chunkWidth
+    --         end
+    --         table.insert(newVirtText, { suffix, 'MoreMsg' })
+    --         return newVirtText
+    --       end,
+    --       enable_get_fold_virt_text = true
+    --     })
+    --   end
+    -- })
     use({
       "gelguy/wilder.nvim",
       config = function()
@@ -527,6 +522,7 @@ require("packer").startup(
       config = function()
         vim.g.lush_jsx_contrast_dark = "hard"
         vim.g.lush_jsx_contrast_light = "hard"
+
         require("lush_jsx").setup({
           plugins = {
             "cmp", -- nvim-cmp
@@ -758,7 +754,7 @@ require("packer").startup(
     use({
       "lukas-reineke/lsp-format.nvim",
       config = function()
-        require("lsp-format").setup {} --sync = true
+        require("lsp-format").setup { sync = true } --sync = true
       end
     })
     use({ "p00f/nvim-ts-rainbow" })
@@ -1633,7 +1629,7 @@ require("packer").startup(
             -- They can also be specified in a tree-like format.
             j = {
               -- Here `jk` will escape insert mode.
-              k = "<cmd>stopinsert<cr><cmd>w<cr>",
+              k = "<cmd>stopinsert<cr>",
               -- You can have as many layers as you want!
               -- h = {
               -- 	g = "<cmd>stopinsert<cr>",
@@ -1653,6 +1649,9 @@ require("packer").startup(
             -- [";l"] = "<cmd>stopinsert<cr><cmd>normal f)a<cr>",
             -- [";h"] = "<cmd>stopinsert<cr><cmd>normal F(a<cr>",
             ["<Esc>"] = "<cmd>stopinsert<cr>",
+            ["<leader>"] = {
+              ["<leader>"] = "<cmd>w<cr>",
+            }
             -- Use `<cmd>` to map commands. Be carful to terminate the command with `<cr>`.
             -- ff = "<cmd>echo 'commands work too'<cr>",
           },
