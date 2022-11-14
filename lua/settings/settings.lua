@@ -36,7 +36,6 @@ local M = [[
   set mouse=a mousemodel=popup
   set guioptions-=e
   set viewoptions-=options
-  set foldlevelstart=1
 ]]
 
 return M

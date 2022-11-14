@@ -14,6 +14,11 @@ for key, value in pairs(vim_options) do
 end
 
 vim.opt.listchars:append("eol:↴")
+vim.opt.fillchars:append("fold:•")
+vim.opt.fillchars:append("foldopen:")
+vim.opt.fillchars:append("foldsep:|")
+vim.opt.fillchars:append("foldclose:")
+vim.opt.fillchars:append("foldopen:")
 
 for group, group_v in pairs(vim_aucmds) do
   vim.api.nvim_create_augroup(group, { clear = true })

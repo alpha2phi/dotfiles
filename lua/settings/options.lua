@@ -15,6 +15,7 @@ local M = {
   sessionoptions = "globals,resize,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal",
   undofile = true,
   foldlevelstart = 1,
+  foldcolumn = '1',
   number = true,
   relativenumber = true,
   cursorline = true,
