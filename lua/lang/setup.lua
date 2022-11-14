@@ -1,6 +1,5 @@
 ---@diagnostic disable:undefined-global
 local root_pattern = require("lspconfig.util").root_pattern
-local lsp_format = require("lsp-format")
 local on_attach = require("lang/attach")
 local capabilities = require("lang/capabilities")
 
@@ -188,7 +187,7 @@ function setup.lua()
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       on_attach.lua(client, bufnr)
-      lsp_format.on_attach(client, bufnr)
+      require("lsp-format").on_attach(client)
     end,
     cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
     settings = {
@@ -317,9 +316,8 @@ function setup.efm()
     })
   }
 
-
   efmls.init({
-    on_attach = lsp_format.on_attach,
+    on_attach = on_attach.minimal,
     handlers = handlers,
     init_options = {
       documentFormatting = true,
