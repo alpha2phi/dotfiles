@@ -6,9 +6,9 @@ local M = {
   { "<C-l>", '<Cmd>call WinMove("l")<CR>', "right win", "<C-h>" },
   { "<C-k>", '<Cmd>call WinMove("k")<CR>', "up win", "<C-j>" },
   { "<C-j>", '<Cmd>call WinMove("j")<CR>', "down win", "<C-k>" },
+  { "<Esc><Esc>", "<Cmd>nohl<CR>", "remove highlights" },
   { "<Del>", {
     { "<Del>", '<Cmd>lua require("notify").dismiss()<cr>', "notifications" },
-    { "<Esc>", "<Cmd>nohl<CR>", "highlights" },
   }, "+dismiss" },
   { "<CR><CR>", "<Cmd>BResizeZoom<CR>", "toggle max win" },
   -- { "<A-h>", [[<cmd>lua require("tmux").resize_left()<cr>]] },
@@ -121,8 +121,8 @@ local M = {
       { "D", "<Cmd>lua vim.lsp.buf.definition()<CR>", "definition in place" },
       { "j", "<cmd>lua require'portal'.jump_forward()<CR>", "next cursor hold/pos/edit",
         "<cmd>lua require'portal'.jump_backward()<CR>" },
-      { "k", "lua require('portal').jump_backward()<CR>", "prev cursor hold/pos/edit",
-        "lua require('portal').jump_forward()<CR>" },
+      { "k", "<CMD>lua require('portal').jump_backward()<CR>", "prev cursor hold/pos/edit",
+        "<CMD>lua require('portal').jump_forward()<CR>" },
       { "n",
         "<CMD>lua require('neoscroll').scroll(vim.api.nvim_win_get_height(0) - 7, true, 250, 'sine')<CR>",
         "scroll down: almost full page", "gN" },
@@ -155,10 +155,14 @@ local M = {
     { "3", "<cmd>set foldlevel=3<CR>", "level 3" },
     { "4", "<cmd>set foldlevel=4<CR>", "level 4" },
     { "5", "<cmd>set foldlevel=5<CR>", "level 5" },
+    { "6", "<cmd>set foldlevel=6<CR>", "level 6" },
+    { "7", "<cmd>set foldlevel=7<CR>", "level 7" },
+    { "8", "<cmd>set foldlevel=8<CR>", "level 8" },
+    { "9", "<cmd>set foldlevel=9<CR>", "level 9" },
     { "l", "<cmd>loadview<CR>", "load prev saved folds" },
-    { "M", "<cmd>lua require('ufo').closeAllFolds()<CR>", "close all" },
-    { "p", "<cmd>lua require('ufo').peekFoldedLinesUnderCursor()<CR>", "peek" },
-    { "R", "<cmd>lua require('ufo').openAllFolds()<CR>", "open all" },
+    -- { "M", "<cmd>lua require('ufo').closeAllFolds()<CR>", "close all" },
+    -- { "p", "<cmd>lua require('ufo').peekFoldedLinesUnderCursor()<CR>", "peek" },
+    -- { "R", "<cmd>lua require('ufo').openAllFolds()<CR>", "open all" },
   }, "+folds-ops" },
   {
     "<leader>",
@@ -508,14 +512,6 @@ local M = {
         "+toggle"
       },
       {
-        "x",
-        {
-          { ".", "<Cmd>SnipRun<CR>", "run snippet" },
-          { "d", "<Cmd>SnipClose<CR>", "close snippet" },
-        },
-        "+REPL"
-      },
-      {
         "w",
         {
           { "*", "<cmd>wincmd =<cr><cmd>QfResizeWindows<CR>", "fit layout" },
@@ -524,6 +520,14 @@ local M = {
           { "q", "<Cmd>tabclose<CR>", "close tab" },
         },
         "+window/layout"
+      },
+      {
+        "x",
+        {
+          { ".", "<Cmd>SnipRun<CR>", "run snippet" },
+          { "d", "<Cmd>SnipClose<CR>", "close snippet" },
+        },
+        "+REPL"
       },
     },
   }
