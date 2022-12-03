@@ -1,4 +1,4 @@
---@diagnostic disable: undefined-global
+---@diagnostic disable: undefined-global
 require("packer").startup(
   function(use)
     use({ "wbthomason/packer.nvim" })
@@ -682,6 +682,11 @@ require("packer").startup(
         })
       end,
     })
+    use {
+      'kosayoda/nvim-lightbulb',
+      requires = 'antoinemadec/FixCursorHold.nvim',
+      config = require("plugins.lightbulb").setup,
+    }
     -- use({
     --   'lewis6991/hover.nvim',
     --   config = function()
@@ -758,7 +763,7 @@ require("packer").startup(
       end
     })
     use({ "p00f/nvim-ts-rainbow" })
-    use({ "ray-x/lsp_signature.nvim" })
+    -- use({ "ray-x/lsp_signature.nvim" })
     use({
       'weilbith/nvim-code-action-menu',
       cmd = 'CodeActionMenu',
@@ -802,50 +807,50 @@ require("packer").startup(
     -- 	"wfxr/minimap.vim",
     -- 	run = "cargo install --locked code-minimap",
     -- })
-    -- use({
-    --   "folke/trouble.nvim",
-    --   requires = "kyazdani42/nvim-web-devicons",
-    --   config = function()
-    --     require("plugins/trouble").setup()
-    --   end,
-    -- })
-    use({ "mhinz/vim-grepper" })
     use({
-      "joehannes-os/diaglist.nvim",
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
       config = function()
-        require("diaglist").init({
-          debug = false,
-          -- increase for noisy servers
-          debounce_ms = 150,
-        })
+        require("plugins/trouble").setup()
       end,
     })
-    use({
-      "stevearc/qf_helper.nvim",
-      config = function()
-        require 'qf_helper'.setup({
-          prefer_loclist = true, -- Used for QNext/QPrev (see Commands below)
-          sort_lsp_diagnostics = true, -- Sort LSP diagnostic results
-          quickfix = {
-            autoclose = true, -- Autoclose qf if it's the only open window
-            default_bindings = true, -- Set up recommended bindings in qf window
-            default_options = true, -- Set recommended buffer and window options
-            max_height = 10, -- Max qf height when using open() or toggle()
-            min_height = 1, -- Min qf height when using open() or toggle()
-            track_location = 'true', -- 'cursor', -- Keep qf updated with your current location
-            -- Use `true` to update position as well
-          },
-          loclist = { -- The same options, but for the loclist
-            autoclose = true,
-            default_bindings = true,
-            default_options = true,
-            max_height = 10,
-            min_height = 1,
-            track_location = 'true',
-          },
-        })
-      end
-    })
+    use({ "mhinz/vim-grepper" })
+    -- use({
+    --   "/Users/joehannes/.local/git/joehannes-os/diaglist.nvim",
+    --   config = function()
+    --     require("diaglist").init({
+    --       debug = false,
+    --       -- increase for noisy servers
+    --       debounce_ms = 150,
+    --     })
+    --   end,
+    -- })
+    -- use({
+    --   "stevearc/qf_helper.nvim",
+    --   config = function()
+    --     require 'qf_helper'.setup({
+    --       prefer_loclist = true, -- Used for QNext/QPrev (see Commands below)
+    --       sort_lsp_diagnostics = true, -- Sort LSP diagnostic results
+    --       quickfix = {
+    --         autoclose = true, -- Autoclose qf if it's the only open window
+    --         default_bindings = true, -- Set up recommended bindings in qf window
+    --         default_options = true, -- Set recommended buffer and window options
+    --         max_height = 10, -- Max qf height when using open() or toggle()
+    --         min_height = 1, -- Min qf height when using open() or toggle()
+    --         track_location = 'true', -- 'cursor', -- Keep qf updated with your current location
+    --         -- Use `true` to update position as well
+    --       },
+    --       loclist = { -- The same options, but for the loclist
+    --         autoclose = true,
+    --         default_bindings = true,
+    --         default_options = true,
+    --         max_height = 10,
+    --         min_height = 1,
+    --         track_location = 'true',
+    --       },
+    --     })
+    --   end
+    -- })
     -- use({
     --   "https://gitlab.com/yorickpeterse/nvim-pqf.git",
     --   config = function()
@@ -898,12 +903,12 @@ require("packer").startup(
     --     })
     --   end,
     -- })
-    use({
-      "blueyed/vim-qf_resize",
-      config = function()
-        vim.g.qf_resize_min_height = 1
-      end,
-    })
+    -- use({
+    --   "blueyed/vim-qf_resize",
+    --   config = function()
+    --     vim.g.qf_resize_min_height = 1
+    --   end,
+    -- })
     -- use({
     -- 	"neomake/neomake",
     -- 	config = function()
@@ -1004,6 +1009,7 @@ require("packer").startup(
         "ray-x/cmp-treesitter",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-nvim-lsp-document-symbol",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
         "David-Kunz/cmp-npm",
         "windwp/nvim-autopairs",
       },
@@ -1117,7 +1123,7 @@ require("packer").startup(
 
     -- UI/UX ... Dashboard, tabline...
     use({
-      "akinsho/nvim-bufferline.lua",
+      "akinsho/bufferline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
       config = function()
         require("plugins/bufferline").setup()
@@ -1398,12 +1404,12 @@ require("packer").startup(
         vim.fn["firenvim#install"](0)
       end,
     })
-    use({
-      "subnut/nvim-ghost.nvim",
-      run = function()
-        vim.fn["nvim_ghost#installer#install"]()
-      end,
-    })
+    -- use({
+    --   "subnut/nvim-ghost.nvim",
+    --   run = function()
+    --     vim.fn["nvim_ghost#installer#install"]()
+    --   end,
+    -- })
 
     -- OSC 52 yank
     -- use {'ojroques/vim-oscyank' }
@@ -1425,7 +1431,7 @@ require("packer").startup(
     -- use({ "arithran/vim-delete-hidden-buffers" })
     use({
       "kazhala/close-buffers.nvim",
-      requires = { "akinsho/nvim-bufferline.lua" },
+      requires = { "akinsho/bufferline.nvim" },
       config = function()
         require("close_buffers").setup({
           filetype_ignore = { "qf" },
@@ -1665,6 +1671,25 @@ require("packer").startup(
     --colorscheme scheduler/auto-switcher
     -- use({ "haystackandroid/night-and-day" })
     --
+    use {
+      'f-person/auto-dark-mode.nvim',
+      config = function()
+        local auto_dark_mode = require('auto-dark-mode')
+
+        auto_dark_mode.setup({
+          update_interval = 1000,
+          set_dark_mode = function()
+            vim.api.nvim_set_option('background', 'dark')
+            vim.cmd('colorscheme gruvbox')
+          end,
+          set_light_mode = function()
+            vim.api.nvim_set_option('background', 'light')
+            vim.cmd('colorscheme gruvbox')
+          end,
+        })
+        auto_dark_mode.init()
+      end
+    }
     use({
       "SmiteshP/nvim-navic",
       requires = "neovim/nvim-lspconfig"
