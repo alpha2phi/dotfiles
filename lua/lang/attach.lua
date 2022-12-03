@@ -39,55 +39,55 @@ function on_attach.clojure(client, bufnr)
   on_attach.generic(client, bufnr)
 
   require("lsp-format").on_attach(client)
-  require("lsp_signature").on_attach({
-    fix_pos             = true,
-    always_trigger      = true,
-    extra_trigger_chars = { "(", "," },
-    transparency        = 10,
-    toggle_key          = "<C-k>",
-    doc_lines           = 21,
-  }, bufnr)
+  -- require("lsp_signature").on_attach({
+  --   fix_pos             = true,
+  --   always_trigger      = true,
+  --   extra_trigger_chars = { "(", "," },
+  --   transparency        = 10,
+  --   toggle_key          = "<C-k>",
+  --   doc_lines           = 21,
+  -- }, bufnr)
 end
 
 function on_attach.python(client, bufnr)
   on_attach.generic(client, bufnr)
 
   require("lsp-format").on_attach(client)
-  require("lsp_signature").on_attach({
-    fix_pos             = true,
-    always_trigger      = true,
-    extra_trigger_chars = { "(", "," },
-    transparency        = 10,
-    toggle_key          = "<C-k>",
-    doc_lines           = 21,
-  }, bufnr)
+  -- require("lsp_signature").on_attach({
+  --   fix_pos             = true,
+  --   always_trigger      = true,
+  --   extra_trigger_chars = { "(", "," },
+  --   transparency        = 10,
+  --   toggle_key          = "<C-k>",
+  --   doc_lines           = 21,
+  -- }, bufnr)
 end
 
 function on_attach.lua(client, bufnr)
   on_attach.generic(client, bufnr)
 
-  require("lsp_signature").on_attach({
-    fix_pos             = true,
-    always_trigger      = true,
-    extra_trigger_chars = { "(", "," },
-    transparency        = 10,
-    toggle_key          = "<C-k>",
-    doc_lines           = 21,
-  }, bufnr)
+  -- require("lsp_signature").on_attach({
+  --   fix_pos             = true,
+  --   always_trigger      = true,
+  --   extra_trigger_chars = { "(", "," },
+  --   transparency        = 10,
+  --   toggle_key          = "<C-k>",
+  --   doc_lines           = 21,
+  -- }, bufnr)
 end
 
 function on_attach.typescript(client, bufnr)
   on_attach.generic(client, bufnr)
 
   require("lsp-format").on_attach(client)
-  require("lsp_signature").on_attach({
-    fix_pos             = true,
-    always_trigger      = true,
-    extra_trigger_chars = { "(", "," },
-    transparency        = 10,
-    toggle_key          = "<C-k>",
-    doc_lines           = 21,
-  }, bufnr)
+  -- require("lsp_signature").on_attach({
+  --   fix_pos             = true,
+  --   always_trigger      = true,
+  --   extra_trigger_chars = { "(", "," },
+  --   transparency        = 10,
+  --   toggle_key          = "<C-k>",
+  --   doc_lines           = 21,
+  -- }, bufnr)
 end
 
 function on_attach.null(client, bufnr)
