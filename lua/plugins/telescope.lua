@@ -2,7 +2,7 @@
 local config = {}
 
 function config.setup()
-  -- local trouble = require("trouble.providers.telescope")
+  local trouble = require("trouble.providers.telescope")
   local telescope = require("telescope")
   local actions = require("telescope.actions")
 
@@ -136,8 +136,14 @@ function config.setup()
     },
     defaults = {
       mappings = {
-        i = { ["<c-q>"] = actions.smart_send_to_qflist },
-        n = { ["<c-q>"] = actions.smart_send_to_qflist },
+        i = {
+          ["<c-q>"] = actions.smart_send_to_qflist,
+          ["<c-l>"] = trouble.open_with_trouble,
+        },
+        n = {
+          ["<c-q>"] = actions.smart_send_to_qflist,
+          ["<c-l>"] = trouble.open_with_trouble,
+        },
       },
       history = {
         path = vim.fn.stdpath("data") .. "/databases/telescope_history.sqlite3",
