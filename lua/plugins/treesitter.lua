@@ -1,4 +1,4 @@
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.go.foldexpr = "nvim_treesitter#foldexpr()"
 
 local M = {}
 
