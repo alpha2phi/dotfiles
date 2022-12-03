@@ -132,7 +132,10 @@ function setup.typescript()
       ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
     },
     on_attach = on_attach.typescript,
-    settings = { format = { enable = true } }
+    settings = {
+      format = { enable = true },
+      filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    }
   }
 
   return opts
@@ -305,6 +308,8 @@ function setup.efm()
       efm_fs.executable('prettier-eslint', efm_fs.Scope.NODE)),
     formatStdin = true,
   }
+  -- local clj_kondo         = require 'efmls-configs.linters.clj_kondo'
+  local clj_kondo         = require 'plugins/config/clj_kondo'
   local joker             = require 'efmls-configs.formatters.joker'
 
   local handlers = {
@@ -349,12 +354,10 @@ function setup.efm()
       linter = eslint,
       formatter = prettier,
     },
-    clojure = {
-      formatter = joker,
-    },
-    clojurescript = {
-      formatter = joker,
-    }
+    -- clojure = {
+    --   linter = clj_kondo,
+    --   formatter = joker,
+    -- },
   })
 end
 
