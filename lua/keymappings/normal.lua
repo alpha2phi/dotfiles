@@ -405,41 +405,50 @@ local M = {
         "+dash docs"
       },
       { "l", {
+        { ">", "<Cmd>lua require'trouble'.next({skip_groups = true, jump = true})<CR>", "trouble next item" },
+        { "<", "<Cmd>lua require'trouble'.previous({skip_groups = true, jump = true})<CR>", "trouble prev item" },
+        { "<CR>", "<Cmd>Trouble<CR>", "trouble open" },
+        { "$", {
+          { "$", "<Cmd>Trouble telescope<CR>", "trouble telescope" },
+          { "d", "<Cmd>Trouble lsp_definitions<CR>", "trouble defs" },
+          { "r", "<Cmd>Trouble lsp_references<CR>", "trouble refs" },
+        } },
         {
           ".", {
-            { "<CR>", "<Cmd>LLOpen!<CR>", "loclist open" },
-            { "d", "<Cmd>lua require('diaglist').populate_llist()<CR><cmd>LLOpen!<CR>", "diagLocList open" },
-            { "g", {
+            { "<CR>", "<Cmd>Trouble loclist<CR>", "loclist open" },
+            { "a", {
               { ".",
-                "<Cmd>lua require('gitsigns.actions').setqflist(0, { open = false, use_location_list = true })<CR><cmd>LLOpen!<CR>",
-                "bufferLocList open" },
+                "<Cmd>lua require('gitsigns.actions').setqflist(0, { open = false, use_location_list = true })<CR><Cmd>Trouble loclist<CR>",
+                "trouble actions local" },
               { "$",
-                "<Cmd>lua require('gitsigns.actions').setqflist('attached', { open = false, use_location_list = true })<CR><cmd>LLOpen!<CR>",
-                "attachedBufferLocList open" },
+                "<Cmd>lua require('gitsigns.actions').setqflist('attached', { open = false, use_location_list = true })<CR><cmd>Trouble loclist<CR>",
+                "trouble actions attached" },
               { "*",
-                "<Cmd>lua require('gitsigns.actions').setqflist('all', { open = false, use_location_list = true })<CR><cmd>LLOpen!<CR>",
-                "allLocList open" },
+                "<Cmd>lua require('gitsigns.actions').setqflist('all', { open = false, use_location_list = true })<CR><cmd>Trouble loclist<CR>",
+                "trouble actions workspace" },
             }, "+git alterations" },
+            { "d", "<Cmd>Trouble document_diagnostics<CR>", "trouble doc diag" },
           }, "+LocList"
         },
         {
           "*", {
-            { "<CR>", "<Cmd>QFOpen!<CR>", "quickfix Open" },
-            { "d", "<Cmd>lua require('diaglist').populate_qflist()<CR><cmd>QFOpen!<CR>", "diagQuickFix open" },
-            { "g", {
+            { "<CR>", "<Cmd>Trouble quickfix<CR>", "trouble quickfix" },
+            { "a", {
               { ".",
-                "<Cmd>lua require('gitsigns.actions').setqflist(0, { open = false, use_location_list = false })<CR><cmd>QFOpen!<CR>",
-                "bufferQuickFix open" },
+                "<Cmd>lua require('gitsigns.actions').setqflist(0, { open = false, use_location_list = false })<CR><Cmd>Trouble quickfix<CR>",
+                "trouble actions local" },
               { "$",
-                "<Cmd>lua require('gitsigns.actions').setqflist('attached', { open = false, use_location_list = false})<CR><cmd>QFOpen!<CR>",
-                "attachedBufferQuickFix open" },
+                "<Cmd>lua require('gitsigns.actions').setqflist('attached', { open = false, use_location_list = false })<CR><cmd>Trouble quickfix<CR>",
+                "trouble actions attached" },
               { "*",
-                "<Cmd>lua require('gitsigns.actions').setqflist('all', { open = false, use_location_list = false })<CR><cmd>QFOpen!<CR>",
-                "allQuickFix open" },
+                "<Cmd>lua require('gitsigns.actions').setqflist('all', { open = false, use_location_list = false })<CR><cmd>Trouble quickfix<CR>",
+                "trouble actions workspace" },
             }, "+git alterations" },
+            { "d", "<Cmd>Trouble workspace_diagnostics<CR>", "trouble proj diag" },
           }, "+QuickFix"
         },
-      } },
+        { "q", "<Cmd>TroubleClose<CR>", "trouble close" },
+      }, "+Trouble" },
       {
         "m",
         {
