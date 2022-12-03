@@ -13,6 +13,20 @@ local M = {
         vim.highlight.on_yank { higroup = "IncSearch", hlgroup = "IncSearch", timeout = 500 }
       end,
     },
+    ["CursorHold"] = {
+      pattern = "*",
+      callback = function()
+        local opts = {
+          focusable = false,
+          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+          border = 'rounded',
+          source = 'always',
+          prefix = ' ',
+          scope = 'cursor',
+        }
+        vim.diagnostic.open_float(nil, opts)
+      end,
+    }
     -- ["BufEnter"] = {
     --   {
     --     pattern = "*",
