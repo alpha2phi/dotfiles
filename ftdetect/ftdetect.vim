@@ -322,7 +322,7 @@ au BufNewFile,BufRead *.log set ft=log
 au BufNewFile,BufRead *_log set ft=log
 
 " lua
-au BufNewFile *.lua     0put =\"#!/usr/bin/env lua\<nl>\<nl>\"|$
+" au BufNewFile *.lua     0put =\"#!/usr/bin/env lua\<nl>\<nl>\"|$
 au BufNewFile,BufRead *.lua set ft=lua foldmethod=expr
 
 " mako
