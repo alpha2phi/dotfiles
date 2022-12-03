@@ -47,4 +47,4 @@ require("lang")
 require("keymappings")
 require("colorschemes")
 
-vim.cmd("colo oxocarbon-lua")
+vim.cmd("colo lush_jsx")
