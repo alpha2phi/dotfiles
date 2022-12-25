@@ -207,6 +207,7 @@ function setup.lua()
           globals = { "vim" },
         },
         workspace = {
+          checkThirdParty = false,
           -- Make the server aware of Neovim runtime files
           library = {
             [vim.fn.expand("$VIMRUNTIME/lua")] = true,
@@ -299,7 +300,7 @@ function setup.efm()
   end) or root_path .. "/package.json"
   local stylelint         = require("efmls-configs.linters.stylelint")
   local eslint            = require("efmls-configs.linters.eslint_d")
-  eslint.lintCommand      = eslint.lintCommand .. " --rule 'prettier/prettier: off'"
+  -- eslint.lintCommand      = eslint.lintCommand .. " --rule 'prettier/prettier: off'"
   -- local luacheck = require("efmls-configs.linters.luacheck")
   local prettier_default  = require 'efmls-configs.formatters.prettier'
   local prettier          = {
@@ -314,7 +315,7 @@ function setup.efm()
 
   local handlers = {
     ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      virutal_text = false,
+      virutal_text = true,
       underline = true,
       signs = true,
       update_in_insert = false,

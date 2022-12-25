@@ -28,6 +28,7 @@ function M.map(mode, lhs, rhs, opts, reverse_repeat)
       my.struc.table_merge(default_opts, { expr = true })
 
   local function repeat_cmd(forward, cmd, _opts, desc)
+    local C = {}
     local wording = forward and "repeat" or "reverse"
     desc = desc and (wording .. ": " .. desc) or (wording .. " last action")
     local isExpr = type(cmd) == "function"
@@ -36,12 +37,12 @@ function M.map(mode, lhs, rhs, opts, reverse_repeat)
     _opts = my.struc.table_merge(_opts or {}, additional_opts)
 
     if (not forward) and type(cmd) == "string" and string.match(cmd, "<%a%-%w+>") then
-      function Cmd()
+      function C.Cmd()
         vim.fn.execute("normal " .. vim.api.nvim_replace_termcodes(cmd, true, true, true))
       end
     end
 
-    vim.keymap.set("n", forward and "." or ",", Cmd or cmd, _opts)
+    vim.keymap.set("n", forward and "." or ",", C.Cmd or cmd, _opts)
   end
 
   local function compile_cmd()

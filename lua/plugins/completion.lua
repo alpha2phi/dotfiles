@@ -19,12 +19,40 @@ end
 function config.setup()
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
+  local source_mapping = {
+    buffer = "[Buffer]",
+    nvim_lsp = "[LSP]",
+    nvim_lua = "[Lua]",
+    cmp_tabnine = "[TN]",
+    path = "[Path]",
+  }
+
   cmp.setup({
     formatting = {
-      format = require "lspkind".cmp_format({
-        mode = "symbol_text",
-        maxwidth = 50,
-      }),
+      format = function(entry, vim_item)
+        -- if you have lspkind installed, you can use it like
+        -- in the following line:
+        vim_item.kind = require "lspkind".symbolic(vim_item.kind, { mode = "symbol" })
+        vim_item.menu = source_mapping[entry.source.name]
+        if entry.source.name == "cmp_tabnine" then
+          local detail = (entry.completion_item.data or {}).detail
+          vim_item.kind = ""
+          if detail and detail:find('.*%%.*') then
+            vim_item.kind = vim_item.kind .. ' ' .. detail
+          end
+
+          if (entry.completion_item.data or {}).multiline then
+            vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
+          end
+        end
+        local maxwidth = 80
+        vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+        return vim_item
+      end,
+      -- format = require "lspkind".cmp_format({
+      --   mode = "symbol_text",
+      --   maxwidth = 50,
+      -- }),
       -- function(entry, vim_item)
       --   -- fancy icons and a name of kind
       --   vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
@@ -119,8 +147,8 @@ function config.setup()
       end,
     },
     sources = {
-      -- { name = "cmp_tabnine" },
-      { name = "copilot" },
+      { name = "cmp_tabnine" },
+      -- { name = "copilot" },
       { name = "nvim_lsp" },
       { name = "treesitter" },
       { name = "vsnip" },
@@ -144,29 +172,29 @@ function config.setup()
     view = {
       entries = { name = "custom", selection_order = "near_cursor" },
     },
-    sorting = {
-      priiority_weight = 2,
-      comparators = {
-        require("copilot_cmp.comparators").prioritize,
-        require("copilot_cmp.comparators").score,
-        -- Below is the default comparitor list and order for nvim-cmp
-        cmp.config.compare.offset,
-        -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-        cmp.config.compare.exact,
-        cmp.config.compare.score,
-        cmp.config.compare.recently_used,
-        cmp.config.compare.locality,
-        cmp.config.compare.kind,
-        cmp.config.compare.sort_text,
-        cmp.config.compare.length,
-        cmp.config.compare.order,
-      }
-    }
+    -- sorting = {
+    --   priiority_weight = 2,
+    --   comparators = {
+    --     -- require("copilot_cmp.comparators").prioritize,
+    --     -- require("copilot_cmp.comparators").score,
+    --     -- Below is the default comparitor list and order for nvim-cmp
+    --     cmp.config.compare.offset,
+    --     -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+    --     cmp.config.compare.exact,
+    --     cmp.config.compare.score,
+    --     cmp.config.compare.recently_used,
+    --     cmp.config.compare.locality,
+    --     cmp.config.compare.kind,
+    --     cmp.config.compare.sort_text,
+    --     cmp.config.compare.length,
+    --     cmp.config.compare.order,
+    --   }
+    -- }
   })
 
   -- cmdline
   cmp.setup.cmdline(":", {
-    completion = { autocomplete = false },
+    completion = { autocomplete = {} },
     sources = cmp.config.sources({
       { name = "path" },
       { name = "cmdline" },
@@ -174,7 +202,7 @@ function config.setup()
   })
   -- lsp_document_symbols
   cmp.setup.cmdline("/", {
-    completion = { autocomplete = false },
+    completion = { autocomplete = {} },
     sources = cmp.config.sources({
       { name = "nvim_lsp_document_symbol" },
     }, {

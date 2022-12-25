@@ -154,6 +154,7 @@ function config.setup()
 
   -- telescope.load_extension("fzf")
   telescope.load_extension("gh")
+  telescope.load_extension("dap")
   telescope.load_extension("node_modules")
   telescope.load_extension("session-lens")
   -- telescope.load_extension("vim_bookmarks")

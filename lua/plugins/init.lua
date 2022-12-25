@@ -16,6 +16,10 @@ require("packer").startup(
         require("colortils").setup()
       end,
     }
+    use { 'junegunn/fzf', run = function()
+      vim.fn['fzf#install']()
+    end
+    }
 
     use({ "chrisbra/unicode.vim" })
     use({ "editorconfig/editorconfig-vim" })
@@ -29,6 +33,7 @@ require("packer").startup(
         })
       end
     })
+
     use({
       "kyazdani42/nvim-web-devicons",
       config = require('plugins/devicon').setup
@@ -68,6 +73,24 @@ require("packer").startup(
           },
         })
       end,
+    })
+
+    -- use({
+    --   'terror/chatgpt.nvim',
+    --   run = 'pip3 install -r requirements.txt'
+    -- })
+    use({
+      "jackMort/ChatGPT.nvim",
+      config = function()
+        require("chatgpt").setup({
+          -- optional configuration
+        })
+      end,
+      requires = {
+        "MunifTanjim/nui.nvim",
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim"
+      }
     })
 
     use({
@@ -453,6 +476,10 @@ require("packer").startup(
     use({ "unblevable/quick-scope" })
     use({ "voldikss/vim-floaterm" })
     use({ "windwp/vim-floaterm-repl" })
+    use({
+      "skywind3000/asynctasks.vim",
+      requires = { "skywind3000/asyncrun.vim" },
+    })
     use({ "windwp/nvim-ts-autotag" })
     use({
       "windwp/nvim-autopairs",
@@ -622,6 +649,7 @@ require("packer").startup(
         "nvim-telescope/telescope-github.nvim",
         "nvim-telescope/telescope-arecibo.nvim",
         "nvim-telescope/telescope-ui-select.nvim",
+        "nvim-telescope/telescope-dap.nvim",
         "~/.local/git/joehannes-os/telescope-media-files.nvim",
         -- "tom-anders/telescope-vim-bookmarks.nvim",
         "sudormrfbin/cheatsheet.nvim",
@@ -857,12 +885,12 @@ require("packer").startup(
     --     require("pqf").setup()
     --   end,
     -- })
-    -- use({
-    --   "kevinhwang91/nvim-bqf",
-    --   config = function()
-    --     require("plugins/bqf").setup()
-    --   end,
-    -- })
+    use({
+      "kevinhwang91/nvim-bqf",
+      config = function()
+        require("plugins/bqf").setup()
+      end,
+    })
     -- use({
     --   "joehannes-os/qf.nvim",
     --   config = function()
@@ -970,26 +998,28 @@ require("packer").startup(
     -- use({ "norcalli/snippets.nvim" })
 
     -- Completion
-    use {
-      "zbirenbaum/copilot.lua",
-      event = { "VimEnter" },
-      config = function()
-        require("copilot").setup(
-        -- server_opts_overrides = {
-        --   settings = {
-        --     advanced = {
-        --       listCount = 10, -- #completions for panel
-        --       inlineSuggestCount = 3, -- #completions for getCompletions
-        --     }
-        --   }
-        -- }
-        )
-      end,
-    }
-    use({
-      "zbirenbaum/copilot-cmp",
-      module = "copilot_cmp",
-    })
+    -- use {
+    --   "zbirenbaum/copilot.lua",
+    --   event = { "InsertEnter" },
+    --   config = function()
+    --     vim.schedule(function()
+    --       require("copilot").setup(
+    --       -- server_opts_overrides = {
+    --       --   settings = {
+    --       --     advanced = {
+    --       --       listCount = 10, -- #completions for panel
+    --       --       inlineSuggestCount = 3, -- #completions for getCompletions
+    --       --     }
+    --       --   }
+    --       -- }
+    --       )
+    --     end)
+    --   end
+    -- }
+    -- use({
+    --   "zbirenbaum/copilot-cmp",
+    --   module = "copilot_cmp",
+    -- })
 
     use({
       "hrsh7th/nvim-cmp",
@@ -1018,7 +1048,28 @@ require("packer").startup(
         require("cmp-npm").setup({})
       end,
     })
-    -- use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
+    use({
+      "tzachar/cmp-tabnine",
+      run = "./install.sh",
+      requires = "hrsh7th/nvim-cmp",
+      config = function()
+        local tabnine = require('cmp_tabnine.config')
+
+        tabnine:setup({
+          max_lines = 50,
+          max_num_results = 3,
+          sort = true,
+          run_on_every_keystroke = true,
+          snippet_placeholder = '..',
+          ignored_file_types = {
+            -- default is not to ignore
+            -- uncomment to ignore in lua:
+            -- lua = true
+          },
+          show_prediction_strength = false
+        })
+      end
+    })
     -- use {'codota/tabnine-vim'}
 
     use({
@@ -1106,18 +1157,18 @@ require("packer").startup(
       end,
     })
     -- use({
-    -- 	"sunjon/shade.nvim",
-    -- 	config = function()
-    -- 		require("shade").setup({
-    -- 			overlay_opacity = 50,
-    -- 			opacity_step = 1,
-    -- 			keys = {
-    -- 				brightness_up = "<C-Up>",
-    -- 				brightness_down = "<C-Down>",
-    -- 				toggle = "<Leader><Leader>",
-    -- 			},
-    -- 		})
-    -- 	end,
+    --   "sunjon/shade.nvim",
+    --   config = function()
+    --     require("shade").setup({
+    --       overlay_opacity = 70,
+    --       opacity_step = 1,
+    --       keys = {
+    --         brightness_up = "<C-Up>",
+    --         brightness_down = "<C-Down>",
+    --         toggle = "<Leader><Leader>",
+    --       },
+    --     })
+    --   end,
     -- })
     -- use {'nvim-treesitter/playground'}
 
@@ -1392,10 +1443,31 @@ require("packer").startup(
     -- use({ "Floobits/floobits-neovim" })
 
     -- DAP
-    -- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-    -- use({ "nvim-telescope/telescope-dap.nvim" })
-    -- use({ "theHamsta/nvim-dap-virtual-text" })
-    -- use({ "Pocco81/DAPInstall.nvim" })
+    use({ "mfussenegger/nvim-dap" })
+    use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+    use({ "nvim-telescope/telescope-dap.nvim" })
+    use({ "theHamsta/nvim-dap-virtual-text" })
+    use({ "ravenxrz/DAPInstall.nvim" })
+    use({
+      "microsoft/vscode-js-debug",
+      opt = true,
+      run = "npm install --legacy-peer-deps && npm run compile"
+    })
+    use({
+      "microsoft/vscode-chrome-debug",
+      opt = true,
+      run = "npm install --legacy-peer-deps && npm run build"
+    })
+    use({
+      "firefox-devtools/vscode-firefox-debug",
+      opt = true,
+      run = "npm install --legacy-peer-deps && npm run build"
+    })
+    use({
+      "mxsdev/nvim-dap-vscode-js",
+      requires = { "mfussenegger/nvim-dap" },
+      config = require("plugins.dap").setup
+    })
 
     -- Embed in browser
     use({
@@ -1428,7 +1500,7 @@ require("packer").startup(
 
     -- bufutilities
     use({ "smitajit/bufutils.vim" })
-    -- use({ "arithran/vim-delete-hidden-buffers" })
+    use({ "arithran/vim-delete-hidden-buffers" })
     use({
       "kazhala/close-buffers.nvim",
       requires = { "akinsho/bufferline.nvim" },
@@ -1452,6 +1524,7 @@ require("packer").startup(
 
     -- tmux
     -- use({ "roxma/vim-tmux-clipboard" })
+    -- use({ "numToStr/Navigator.nvim" })
     -- use {'christoomey/vim-tmux-navigator'}
     -- use({
     --   "aserowy/tmux.nvim",
@@ -1473,11 +1546,11 @@ require("packer").startup(
     --       resize = {
     --         -- enables default keybindings (A-hjkl) for normal mode
     --         enable_default_keybindings = true,
-    --         resize_step_x = 10,
-    --         resize_step_y = 5,
+    --         resize_step_x = 21,
+    --         resize_step_y = 10,
     --       }
-    --     })
-    --   end
+    -- })
+    -- end
     -- })
 
     -- use({
@@ -1680,11 +1753,9 @@ require("packer").startup(
           update_interval = 1000,
           set_dark_mode = function()
             vim.api.nvim_set_option('background', 'dark')
-            vim.cmd('colorscheme gruvbox')
           end,
           set_light_mode = function()
             vim.api.nvim_set_option('background', 'light')
-            vim.cmd('colorscheme gruvbox')
           end,
         })
         auto_dark_mode.init()
@@ -1710,6 +1781,32 @@ require("packer").startup(
       end,
     })
 
+    -- use({
+    --   "levouh/tint.nvim",
+    --   config = function()
+    --     local tint = require("tint")
+    --     local transforms = require("tint.transforms")
+    --     tint.setup({
+    --       tint = -45, -- Darken colors, use a positive value to brighten
+    --       saturation = 0.6, -- Saturation to preserve
+    --       transforms = {
+    --         -- transforms.saturate(0.5),
+    --         transforms.tint_with_threshold(-100, "#000000", 100)
+    --       }, -- Showing default behavior, but value here can be predefined set of transforms
+    --       tint_background_colors = true, -- Tint background portions of highlight groups
+    --       highlight_ignore_patterns = { "WinSeparator", "StatusLine", "StatusLineNC", "WinBar",
+    --         "WinBarNC", "HeirLine" },
+    --       window_ignore_function = function(winid)
+    --         local bufid = vim.api.nvim_win_get_buf(winid)
+    --         local buftype = vim.api.nvim_buf_get_option(bufid, "buftype")
+    --         local floating = vim.api.nvim_win_get_config(winid).relative ~= ""
+
+    --         -- Do not tint `terminal` or floating windows, tint everything else
+    --         return buftype == "terminal" or floating
+    --       end
+    --     })
+    --   end
+    -- })
     if packer_bootstrap then
       require("packer").sync()
     end

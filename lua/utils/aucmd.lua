@@ -6,6 +6,9 @@ end
 
 function M.onColorscheme()
   local mode_color = my.color.my.vimode[vim.fn.mode()]
+  local ok, tint = pcall(require, "tint")
+  local lines = require("heirline")
+  local heirline = require("plugins.heirline")
 
   my.fn.toggle_bg_mode(true)
 
@@ -14,6 +17,14 @@ function M.onColorscheme()
   my.color.fn.highlight_blend_bg("Visual", 21, mode_color)
   my.color.fn.highlight_blend_bg("TSCurrentScope", 12, mode_color)
   my.color.fn.highlight_blend_bg("TreesitterContext", 50, mode_color)
+
+  if ok then
+    tint.refresh()
+
+    lines.reset_highlights()
+    heirline.load_colors()
+    heirline.setup(false)
+  end
 end
 
 function M.onModeChanged()
@@ -37,7 +48,7 @@ function M.onModeChanged()
 
   require("plugins/bufferline").setup()
   if not (require("heirline").statusline == nil) then
-    require("plugins/heirline").update()
+    require("plugins/heirline").setup(false)
   end
 end
 

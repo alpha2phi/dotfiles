@@ -2,12 +2,12 @@
 local M = {
   { ">>", ">>", "shift-indent right", "<cmd>normal! <lt><lt><CR>" },
   { "<<", "<<", "shift-indent left", "<cmd>normal! >><CR>" },
-  { "<C-h>", '<Cmd>call WinMove("h")<CR>', "left win", "<C-l>" },
-  { "<C-l>", '<Cmd>call WinMove("l")<CR>', "right win", "<C-h>" },
-  { "<C-k>", '<Cmd>call WinMove("k")<CR>', "up win", "<C-j>" },
-  { "<C-j>", '<Cmd>call WinMove("j")<CR>', "down win", "<C-k>" },
+  { "<C-h>", '<Cmd>call WinMove("h")<CR>', "left win", '<Cmd>call WinMove("l")<CR>' },
+  { "<C-l>", '<Cmd>call WinMove("l")<CR>', "right win", '<Cmd>call WinMove("h")<CR>' },
+  { "<C-k>", '<Cmd>call WinMove("k")<CR>', "up win", '<Cmd>call WinMove("j")<CR>' },
+  { "<C-j>", '<Cmd>call WinMove("j")<CR>', "down win", '<Cmd>call WinMove("k")<CR>' },
   { "<Esc><Esc>", "<Cmd>nohl<CR>", "remove highlights" },
-  { "<Del>", {
+  { "<De>", {
     { "<Del>", '<Cmd>lua require("notify").dismiss()<cr>', "notifications" },
   }, "+dismiss" },
   { "<CR><CR>", "<Cmd>BResizeZoom<CR>", "toggle max win" },
@@ -28,11 +28,10 @@ local M = {
       {
         "l",
         {
-          { "<CR>", "<cmd>QPrev!<CR>", "smart list => item" },
-          { "*", "<cmd>QFPrev!<CR>", "qf list" },
-          { ".", "<cmd>LLPrev!<CR>", "loc list" },
+          { "*", "<cmd>silent cprevious<CR>", "qf list prev", "<Cmd>silent cnext<CR>" },
+          { ".", "<cmd>silent lprevious<CR>", "loc list prev", "<Cmd>silent lnext<CR>" },
         },
-        "list (qf|loc) => item",
+        "list (qf|loc) => prev item",
       },
       {
         "m",
@@ -51,7 +50,7 @@ local M = {
         },
         "+marks|bookmarks",
       },
-      { "q", "<cmd>QPrev!<CR>", "smart list => item" },
+      { "q", "<cmd>silent cprevious<CR>", "quickfix => prev next", "<Cmd>silent cnext<CR>" },
       { "t", "<Cmd>FloatermPrev<CR>", "float-term" },
       { "w", "<Cmd>tabprevious<CR>", "tab/winLayout" },
     },
@@ -67,10 +66,10 @@ local M = {
       {
         "l",
         {
-          { "<CR>", "<cmd>QNext!<CR>", "smart list => item" },
-          { "*", "<cmd>QFNext!<CR>", "qf list" },
-          { ".", "<cmd>LLNext!<CR>", "loc list" },
+          { "*", "<cmd>silent cnext<CR>", "qf list next", "<cmd>silent cprevious<CR>" },
+          { ".", "<cmd>silent lnext<CR>", "loc list next", "<Cmd>silent lprevious<CR>" },
         },
+        "list (qf|loc) => next item",
       },
       {
         "m",
@@ -89,7 +88,7 @@ local M = {
         },
         "+marks|bookmarks",
       },
-      { "q", "<cmd>QNext!<CR>", "smart list => item" },
+      { "q", "<cmd>silent cnext<CR>", "quickfix => next item", "<cmd>silent cprevious<CR>" },
       { "t", "<Cmd>FloatermNext<CR>", "float-term" },
       { "w", "<Cmd>tabnext<CR>", "tab/winLayout" },
     },
@@ -533,6 +532,15 @@ local M = {
       {
         "x",
         {
+          { "<CR>", {
+            { "?", ":AsyncTaskProfile ", "toggle npm/yarn" },
+            { "<CR>", "<Cmd>AsyncTask node -task=start<CR>", "npmR start" },
+            { ";", "<Cmd>AsyncTask node -task=dev<CR>", "npmR dev" },
+            { "%", "<Cmd>AsyncTask node -task=test<CR>", "npmR test" },
+            { "$", ":AsyncTask node -task=", "npmR ?" },
+            { "s", ":AsyncTask npmS -package=", "npmS ?" },
+            { "d", ":AsyncTask npmD -package=", "npmD ?" },
+          }, "+npm/yarn run" },
           { ".", "<Cmd>SnipRun<CR>", "run snippet" },
           { "d", "<Cmd>SnipClose<CR>", "close snippet" },
         },

@@ -1,4 +1,6 @@
 local M = {
+  asyncrun_open = 6,
+  asynctasks_profile = 'npm',
   floaterm_height = 0.9,
   floaterm_width = 0.9,
   floaterm_wintype = "floating",

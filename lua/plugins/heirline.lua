@@ -8,6 +8,7 @@ end
 
 local function setup_colors()
   local dark_mode = vim.opt.background:get() == "dark"
+
   return {
     vimode = vimode_color(),
     light = my.color.my.light,
@@ -944,6 +945,10 @@ function M.aucmds()
     callback = M.update,
     group = "Heirline",
   })
+end
+
+function M.load_colors()
+  require("heirline").load_colors(setup_colors())
 end
 
 function M.setup(my_aucmds)
